@@ -1,0 +1,167 @@
+priority,domain,execution_policy,method,clean_url,path,suggested_base_var,flags,source_file,name
+P0-001,auth,token_required,GET,{{api_url}}/member/facebook_link,/member/facebook_link,{{api_url}},,前台/会员信息/facebook oauth链接-ducky.bru,facebook oauth链接-ducky
+P0-002,auth,token_required,GET,{{api_url}}/member/google_link,/member/google_link,{{api_url}},,前台/会员信息/google oauth链接-ducky.bru,google oauth链接-ducky
+P0-003,auth,token_required,GET,{{api_url}}/member/logout,/member/logout,{{api_url}},,前台/会员登陆注册验证/退出登陆-seven.bru,退出登陆-seven
+P0-004,auth,token_required,GET,{{api_url}}/member/refresh/token,/member/refresh/token,{{api_url}},,前台/会员登陆注册验证/刷新token-seven.bru,刷新token-seven
+P0-005,auth,manual_review,POST,{{admin_url}}/admin/finance/lazada/send/sms,/admin/finance/lazada/send/sms,{{admin_url}},,后台/财务管理/lazada订单/lazada-重新发货-owen.bru,lazada-重新发货-owen
+P0-006,auth,manual_review,POST,{{api_url}}/finance/lazadaminiapp/login,/finance/lazadaminiapp/login,{{api_url}},,前台/lazada mini/登陆-owen.bru,登陆-owen
+P0-007,auth,manual_review,POST,{{api_url}}/member/auth/mail,/member/auth/mail,{{api_url}},,前台/会员信息/邮箱验证码验证-ducky.bru,邮箱验证码验证-ducky
+P0-008,auth,manual_review,POST,{{api_url}}/member/auth/sms,/member/auth/sms,{{api_url}},,前台/会员登陆注册验证/短信验证码前置检查-seven.bru,短信验证码前置检查-seven
+P0-009,auth,manual_review,POST,{{api_url}}/member/bind/facebook,/member/bind/facebook,{{api_url}},,前台/会员信息/facebook oauth绑定-ducky.bru,facebook oauth绑定-ducky
+P0-010,auth,manual_review,POST,{{api_url}}/member/bind/google,/member/bind/google,{{api_url}},,前台/会员信息/google oauth绑定-ducky.bru,google oauth绑定-ducky
+P0-011,auth,manual_review,POST,{{api_url}}/member/facebook/login,/member/facebook/login,{{api_url}},,前台/会员登陆注册验证/facebook oauth登录-ducky.bru,facebook oauth登录-ducky
+P0-012,auth,manual_review,POST,{{api_url}}/member/fb/login,/member/fb/login,{{api_url}},hardcoded_env,前台/三方登录/注册接口.bru,注册接口
+P0-013,auth,manual_review,POST,{{api_url}}/member/google/login,/member/google/login,{{api_url}},,前台/会员登陆注册验证/google oauth登录-ducky.bru,google oauth登录-ducky
+P0-014,auth,manual_review,POST,{{api_url}}/member/login,/member/login,{{api_url}},,前台/会员登陆注册验证/密码登陆-seven.bru,密码登陆-seven
+P0-015,auth,manual_review,POST,{{api_url}}/member/otp/login,/member/otp/login,{{api_url}},,前台/会员登陆注册验证/otp登陆-seven.bru,otp登陆-seven
+P0-016,auth,manual_review,POST,{{api_url}}/member/otp/login/v2,/member/otp/login/v2,{{api_url}},url_v2,前台/会员登陆注册验证/otp登陆V2-seven.bru,otp登陆V2-seven
+P0-017,auth,manual_review,POST,{{api_url}}/member/password/update,/member/password/update,{{api_url}},,前台/会员信息/密码修改-seven.bru,密码修改-seven
+P0-018,auth,manual_review,POST,{{api_url}}/member/register,/member/register,{{api_url}},hardcoded_env,前台/会员登陆注册验证/注册.bru,注册
+P0-019,auth,manual_review,POST,{{api_url}}/member/retrieve/password,/member/retrieve/password,{{api_url}},,前台/会员登陆注册验证/重置密码-seven.bru,重置密码-seven
+P0-020,auth,manual_review,POST,{{api_url}}/member/retrieve/passwordbyemail,/member/retrieve/passwordbyemail,{{api_url}},,前台/会员信息/通过邮箱修改密码-ducky.bru,通过邮箱修改密码-ducky
+P0-021,auth,manual_review,POST,{{api_url}}/member/sms,/member/sms,{{api_url}},,前台/会员登陆注册验证/短信发送-seven.bru,短信发送-seven
+P0-022,auth,manual_review,POST,{{api_url}}/member/v2/login,/member/v2/login,{{api_url}},url_v2,前台/会员登陆注册验证/密码登陆v2-ducky.bru,密码登陆v2-ducky
+P0-023,auth,manual_review,POST,{{api_url}}/member/wallet/checkpassword,/member/wallet/checkpassword,{{api_url}},,前台/会员信息/校验钱包密码-ducky.bru,校验钱包密码-ducky
+P0-024,auth,manual_review,POST,{{api_url}}/member/wallet/password,/member/wallet/password,{{api_url}},,前台/会员信息/钱包密码设置-ducky.bru,钱包密码设置-ducky
+P0-025,auth,manual_review,POST,{{api_url}}/member/wallet/password/update,/member/wallet/password/update,{{api_url}},,前台/会员信息/设置新钱包密码-ducky.bru,设置新钱包密码-ducky
+P0-026,auth,review_only,POST,{{api_url}}/member/auth/password,/member/auth/password,{{api_url}},old_or_copy,前台/会员登陆注册验证/旧密码前置验证-seven.bru,旧密码前置验证-seven
+P0-027,finance,safe_smoke,GET,{{api_url}}/finance/channel/list?mode=2&source=huawei,/finance/channel/list,{{api_url}},,前台/财务/获取支付通道列表-wesley.bru,获取支付通道列表-wesley
+P0-028,finance,safe_smoke,GET,{{api_url}}/finance/deposit/list?status=PENDING&time_flag=0&page=1&page_size=10,/finance/deposit/list,{{api_url}},,前台/财务/充值记录-wesley.bru,充值记录-wesley
+P0-029,finance,safe_smoke,GET,{{api_url}}/finance/payment/tab/list,/finance/payment/tab/list,{{api_url}},hardcoded_env,前台/财务/提现tab.bru,提现tab
+P0-030,finance,safe_smoke,GET,{{api_url}}/finance/transaction/list?time_flag=15&page=1&page_size=20,/finance/transaction/list,{{api_url}},,前台/财务/获取交易记录- wesley-alex.bru,获取交易记录- wesley/alex
+P0-031,finance,safe_smoke,GET,{{api_url}}/finance/transaction/types,/finance/transaction/types,{{api_url}},,前台/财务/账变字典.bru,账变字典
+P0-032,finance,safe_smoke,GET,{{api_url}}/finance/wallet,/finance/wallet,{{api_url}},,前台/财务/会员钱包-wesley.bru,会员钱包-wesley
+P0-033,finance,safe_smoke,GET,{{api_url}}/finance/withdraw/list?time_flag=0&page=1&page_size=10,/finance/withdraw/list,{{api_url}},,前台/财务/提现记录-wesley.bru,提现记录-wesley
+P0-034,finance,token_required,GET,{{admin_url}}/admin/finance/payment/bank/list,/admin/finance/payment/bank/list,{{admin_url}},hardcoded_env,后台/财务管理/银行卡/银行卡列表.bru,银行卡列表
+P0-035,finance,token_required,GET,{{admin_url}}/admin/finance/payment/channel/list?page=1&page_size=10&name&state=1&payment_name=paycools&name,/admin/finance/payment/channel/list,{{admin_url}},,后台/财务管理/支付渠道/支付渠道通道列表.bru,支付渠道通道列表
+P0-036,finance,token_required,GET,{{admin_url}}/admin/finance/payment/list?page=1&page_size=10&name=paycools&state=1&id,/admin/finance/payment/list,{{admin_url}},,后台/财务管理/支付渠道/x-支付渠道列表-cold.bru,x-支付渠道列表-cold
+P0-037,finance,token_required,GET,{{admin_url}}/admin/finance/payment/platform/list?page=1&page_size=10&mode=deposit,/admin/finance/payment/platform/list,{{admin_url}},hardcoded_env,后台/财务管理/支付渠道/支付平台列表.bru,支付平台列表
+P0-038,finance,token_required,GET,{{admin_url}}/admin/finance/transaction/types,/admin/finance/transaction/types,{{admin_url}},,后台/财务管理/会员钱包账变/账变类型- wesley.bru,账变类型- wesley
+P0-039,finance,token_required,GET,{{admin_url}}/agency/finance/transaction/types,/agency/finance/transaction/types,{{admin_url}},,代理管理后台/财务管理/财务报表/账变类型- wesley.bru,账变类型- wesley
+P0-040,finance,token_required,GET,{{admin_url}}/cmpl/finance/deposit/list,/cmpl/finance/deposit/list,{{admin_url}},,合规/财务管理/财务记录/充值记录-wesley.bru,充值记录-wesley
+P0-041,finance,token_required,GET,{{admin_url}}/cmpl/finance/withdraw/list,/cmpl/finance/withdraw/list,{{admin_url}},,合规/财务管理/财务记录/提现记录-wesley.bru,提现记录-wesley
+P0-042,finance,token_required,GET,{{api_url}}/finance/account/list,/finance/account/list,{{api_url}},hardcoded_env,前台/财务/提款账户列表-wesley.bru,提款账户列表-wesley
+P0-043,finance,token_required,GET,{{api_url}}/finance/channel/product/list?mode=1&pid=1,/finance/channel/product/list,{{api_url}},hardcoded_env,前台/财务/获取支付通道商品列表.bru,获取支付通道商品列表
+P0-044,finance,token_required,GET,{{api_url}}/finance/member/buyfeatures,/finance/member/buyfeatures,{{api_url}},hardcoded_env,前台/财务/购买免费旋转游戏列表.bru,购买免费旋转游戏列表
+P0-045,finance,token_required,GET,{{api_url}}/finance/payment/bank/list?page=2&page_size=10,/finance/payment/bank/list,{{api_url}},hardcoded_env,前台/财务/银行列表.bru,银行列表
+P0-046,finance,token_required,GET,{{api_url}}/promo/task/transaction,/promo/task/transaction,{{api_url}},,前台/任务中心/代币明细-seven.bru,代币明细-seven
+P0-047,finance,manual_review,POST,"{{admin_url}}/admin/finance/adjust/list?uid=1&operator_uid=2&action=1,2&page=1&page_size=10&bill_no=&amount_min=1&amount_max=100&phone=",/admin/finance/adjust/list,{{admin_url}},,代理管理后台/财务管理/财务报表/系统调整.bru,系统调整
+P0-048,finance,manual_review,POST,{{admin_url}}/admin/finance/deposit/export,/admin/finance/deposit/export,{{admin_url}},,后台/财务管理/存款记录/充值记录导出-wesley.bru,充值记录导出-wesley
+P0-049,finance,manual_review,POST,{{admin_url}}/admin/finance/deposit/list,/admin/finance/deposit/list,{{admin_url}},,后台/财务管理/存款记录/充值列表-wesley.bru,充值列表-wesley
+P0-050,finance,manual_review,GET,{{admin_url}}/admin/finance/deposit/manual/success,/admin/finance/deposit/manual/success,{{admin_url}},,后台/风控管理/存-提审核/充值补单-wesley.bru,充值补单-wesley
+P0-051,finance,manual_review,GET,{{admin_url}}/admin/finance/deposit/risk/list,/admin/finance/deposit/risk/list,{{admin_url}},,后台/风控管理/存-提审核/充值列表-wesley.bru,充值列表-wesley
+P0-052,finance,manual_review,POST,{{admin_url}}/admin/finance/deposit/sync?id=110214866785715045,/admin/finance/deposit/sync,{{admin_url}},,后台/财务管理/存款记录/充值同步状态-wesley.bru,充值同步状态-wesley
+P0-053,finance,manual_review,POST,{{admin_url}}/admin/finance/lazada/order/list,/admin/finance/lazada/order/list,{{admin_url}},,后台/财务管理/lazada订单/lazada-订单列表-owen.bru,lazada-订单列表-owen
+P0-054,finance,manual_review,GET,{{admin_url}}/admin/finance/payment/Delete?id=998,/admin/finance/payment/Delete,{{admin_url}},,后台/财务管理/支付渠道/x-删除支付渠道-cold.bru,x-删除支付渠道-cold
+P0-055,finance,manual_review,POST,{{admin_url}}/admin/finance/payment/bank/enable,/admin/finance/payment/bank/enable,{{admin_url}},hardcoded_env,后台/财务管理/银行卡/开启关闭按钮.bru,开启关闭按钮
+P0-056,finance,manual_review,POST,{{admin_url}}/admin/finance/payment/bank/insert,/admin/finance/payment/bank/insert,{{admin_url}},hardcoded_env,后台/财务管理/银行卡/银行卡添加.bru,银行卡添加
+P0-057,finance,manual_review,POST,{{admin_url}}/admin/finance/payment/bank/update,/admin/finance/payment/bank/update,{{admin_url}},hardcoded_env,后台/财务管理/银行卡/银行卡编辑.bru,银行卡编辑
+P0-058,finance,manual_review,GET,{{admin_url}}/admin/finance/payment/channel/delete?id=888,/admin/finance/payment/channel/delete,{{admin_url}},,后台/财务管理/支付渠道/删除支付渠道通道.bru,删除支付渠道通道
+P0-059,finance,manual_review,POST,{{admin_url}}/admin/finance/payment/channel/insert,/admin/finance/payment/channel/insert,{{admin_url}},,后台/财务管理/支付渠道/添加支付渠道通道.bru,添加支付渠道通道
+P0-060,finance,manual_review,POST,{{admin_url}}/admin/finance/payment/channel/update,/admin/finance/payment/channel/update,{{admin_url}},,后台/财务管理/支付渠道/更新支付渠道通道.bru,更新支付渠道通道
+P0-061,finance,manual_review,GET,{{admin_url}}/admin/finance/payment/deposit/channels,/admin/finance/payment/deposit/channels,{{admin_url}},,后台/财务管理/存款记录/支付渠道列表-cold.bru,支付渠道列表-cold
+P0-062,finance,manual_review,POST,{{admin_url}}/admin/finance/payment/insert,/admin/finance/payment/insert,{{admin_url}},,后台/财务管理/支付渠道/x-添加支付渠道-cold.bru,x-添加支付渠道-cold
+P0-063,finance,manual_review,POST,{{admin_url}}/admin/finance/payment/platform/enable,/admin/finance/payment/platform/enable,{{admin_url}},,后台/财务管理/支付渠道/支付平台开关.bru,支付平台开关
+P0-064,finance,manual_review,POST,{{admin_url}}/admin/finance/payment/platform/insert,/admin/finance/payment/platform/insert,{{admin_url}},,后台/财务管理/支付渠道/添加支付平台.bru,添加支付平台
+P0-065,finance,manual_review,POST,{{admin_url}}/admin/finance/payment/platform/update,/admin/finance/payment/platform/update,{{admin_url}},,后台/财务管理/支付渠道/更新支付平台.bru,更新支付平台
+P0-066,finance,manual_review,POST,{{admin_url}}/admin/finance/payment/update,/admin/finance/payment/update,{{admin_url}},,后台/财务管理/支付渠道/x-更新支付渠道-cold.bru,x-更新支付渠道-cold
+P0-067,finance,manual_review,GET,{{admin_url}}/admin/finance/payment/withdraw/channels,/admin/finance/payment/withdraw/channels,{{admin_url}},,合规/财务管理/财务记录/提现渠道列表-cold.bru,提现渠道列表-cold
+P0-068,finance,manual_review,GET,{{admin_url}}/admin/finance/payment/withdraw/channels,/admin/finance/payment/withdraw/channels,{{admin_url}},,后台/财务管理/提现记录/提现渠道列表-cold.bru,提现渠道列表-cold
+P0-069,finance,manual_review,POST,{{admin_url}}/admin/finance/transaction/list?cash_type=2001&page=1&page_size=5,/admin/finance/transaction/list,{{admin_url}},,后台/财务管理/会员钱包账变/账变列表- wesley.bru,账变列表- wesley
+P0-070,finance,manual_review,POST,{{admin_url}}/admin/finance/withdraw/agree,/admin/finance/withdraw/agree,{{admin_url}},,后台/风控管理/存-提审核/提现同意-wesley.bru,提现同意-wesley
+P0-071,finance,manual_review,POST,{{admin_url}}/admin/finance/withdraw/batch/agree,/admin/finance/withdraw/batch/agree,{{admin_url}},,后台/风控管理/存-提审核/批量提现同意-cold.bru,批量提现同意-cold
+P0-072,finance,manual_review,POST,{{admin_url}}/admin/finance/withdraw/batch/reject,/admin/finance/withdraw/batch/reject,{{admin_url}},,后台/风控管理/存-提审核/批量提现拒绝-cold.bru,批量提现拒绝-cold
+P0-073,finance,manual_review,POST,{{admin_url}}/admin/finance/withdraw/export,/admin/finance/withdraw/export,{{admin_url}},,后台/财务管理/提现记录/提现记录导出-wesley.bru,提现记录导出-wesley
+P0-074,finance,manual_review,POST,{{admin_url}}/admin/finance/withdraw/fail,/admin/finance/withdraw/fail,{{admin_url}},,后台/风控管理/存-提审核/出款失败-wesley.bru,出款失败-wesley
+P0-075,finance,manual_review,POST,{{admin_url}}/admin/finance/withdraw/list,/admin/finance/withdraw/list,{{admin_url}},,后台/财务管理/提现记录/提现列表-wesley.bru,提现列表-wesley
+P0-076,finance,manual_review,POST,{{admin_url}}/admin/finance/withdraw/reject?id=2,/admin/finance/withdraw/reject,{{admin_url}},,后台/风控管理/存-提审核/提现拒绝-wesley.bru,提现拒绝-wesley
+P0-077,finance,manual_review,POST,{{admin_url}}/admin/finance/withdraw/risk/audit/export,/admin/finance/withdraw/risk/audit/export,{{admin_url}},hardcoded_env,后台/风控管理/存-提审核/提现审核列表导出.bru,提现审核列表导出
+P0-078,finance,manual_review,GET,{{admin_url}}/admin/finance/withdraw/risk/audit/list,/admin/finance/withdraw/risk/audit/list,{{admin_url}},,后台/风控管理/存-提审核/提现审核列表-wesley.bru,提现审核列表-wesley
+P0-079,finance,manual_review,POST,{{admin_url}}/admin/finance/withdraw/success,/admin/finance/withdraw/success,{{admin_url}},,后台/风控管理/存-提审核/出款成功-wesley.bru,出款成功-wesley
+P0-080,finance,manual_review,POST,{{admin_url}}/admin/finance/withdraw/sync?id=3,/admin/finance/withdraw/sync,{{admin_url}},,后台/财务管理/提现记录/提现同步状态-wesley.bru,提现同步状态-wesley
+P0-081,finance,manual_review,POST,{{agency_url}}/agency/finance/transaction/list?cash_type=2001&page=1&page_size=5,/agency/finance/transaction/list,{{agency_url}},hardcoded_env,代理管理后台/财务管理/财务报表/账变列表- wesley.bru,账变列表- wesley
+P0-082,finance,manual_review,POST,{{admin_url}}/cmpl/finance/deposit/export,/cmpl/finance/deposit/export,{{admin_url}},,合规/财务管理/财务记录/充值记录导出-wesley.bru,充值记录导出-wesley
+P0-083,finance,manual_review,GET,{{admin_url}}/cmpl/finance/payment/deposit/channels,/cmpl/finance/payment/deposit/channels,{{admin_url}},,合规/财务管理/财务记录/支付渠道列表-cold.bru,支付渠道列表-cold
+P0-084,finance,manual_review,POST,{{admin_url}}/cmpl/finance/withdraw/export,/cmpl/finance/withdraw/export,{{admin_url}},,合规/财务管理/财务记录/提现记录导出-wesley.bru,提现记录导出-wesley
+P0-085,finance,manual_review,POST,{{api_url}}/cmpl/wallet/information?api_id=gotech-stg-001&hash_code=12345&from_date=2026-01-02 15:04:05&to_date=2026-03-02 15:04:05&page_number=1&page_size=10,/cmpl/wallet/information,{{api_url}},hardcoded_env,前台/mx/information.bru,information
+P0-086,finance,manual_review,POST,{{api_url}}/cmpl/wallet/playerid?api_id=gotech-stg-001&hash_code=123456&player_id=61663536069274602,/cmpl/wallet/playerid,{{api_url}},hardcoded_env,前台/mx/playerid.bru,playerid
+P0-087,finance,manual_review,POST,{{api_url}}/finance/account/bank/delete,/finance/account/bank/delete,{{api_url}},hardcoded_env,前台/财务/删除银行卡.bru,删除银行卡
+P0-088,finance,manual_review,POST,{{api_url}}/finance/account/bank/update,/finance/account/bank/update,{{api_url}},hardcoded_env,前台/财务/编辑银行卡.bru,编辑银行卡
+P0-089,finance,manual_review,GET,{{api_url}}/finance/account/delete?id=1904879468120199168,/finance/account/delete,{{api_url}},,前台/财务/提款账号删除-wesley.bru,提款账号删除-wesley
+P0-090,finance,manual_review,POST,{{api_url}}/finance/account/insert,/finance/account/insert,{{api_url}},hardcoded_env,前台/财务/创建提现账户-wesley.bru,创建提现账户-wesley
+P0-091,finance,manual_review,GET,{{api_url}}/finance/deposit/detail?id=12942305654052566,/finance/deposit/detail,{{api_url}},,前台/财务/充值详情.bru,充值详情
+P0-092,finance,manual_review,POST,{{api_url}}/finance/lazada/exchange,/finance/lazada/exchange,{{api_url}},,前台/财务/lazada兑换-owen.bru,lazada兑换-owen
+P0-093,finance,manual_review,POST,{{api_url}}/finance/lazada/product/list,/finance/lazada/product/list,{{api_url}},,前台/财务/lazada商品列表-owen.bru,lazada商品列表-owen
+P0-094,finance,manual_review,POST,{{api_url}}/finance/payment/callback/deposit/pisopay,/finance/payment/callback/deposit/pisopay,{{api_url}},hardcoded_env,前台/支付/pisopay回调.bru,pisopay回调
+P0-095,finance,manual_review,GET,{{api_url}}/finance/payment/deposit?pid=10&amount=998&device=web&source=huawei&product_id=123,/finance/payment/deposit,{{api_url}},,前台/财务/充值-wesley-cold.bru,充值-wesley/cold
+P0-096,finance,manual_review,GET,{{api_url}}/finance/payment/withdraw?amount=100&account_id=47939180401525317,/finance/payment/withdraw,{{api_url}},hardcoded_env,前台/财务/提现-wesley-cold.bru,提现-wesley/cold
+P0-097,finance,manual_review,POST,{{api_url}}/finance/wallet/pwd/check,/finance/wallet/pwd/check,{{api_url}},hardcoded_env,前台/财务/钱包密码/验证钱包密码.bru,验证钱包密码
+P0-098,finance,manual_review,POST,{{api_url}}/finance/wallet/pwd/set,/finance/wallet/pwd/set,{{api_url}},hardcoded_env,前台/财务/钱包密码/设置钱包密码.bru,设置钱包密码
+P0-099,finance,manual_review,POST,{{api_url}}/finance/wallet/pwd/update,/finance/wallet/pwd/update,{{api_url}},hardcoded_env,前台/财务/钱包密码/修改密码.bru,修改密码
+P0-100,finance,manual_review,GET,{{api_url}}/finance/withdraw/detail?id=12959392294586045,/finance/withdraw/detail,{{api_url}},,前台/财务/提现详情.bru,提现详情
+P0-101,finance,manual_review,POST,{{admin_url}}/finance/withdraw/risk/list,/finance/withdraw/risk/list,{{admin_url}},odd_relative_url,后台/风控管理/存-提审核/提现订单.bru,提现订单
+P0-102,game,safe_smoke,GET,{{api_url}}/member/game/bet/list?page=1&page_size=10&time_flag=30&status=1,/member/game/bet/list,{{api_url}},,前台/游戏/游戏记录-wesley.bru,游戏记录-wesley
+P0-103,game,safe_smoke,GET,{{api_url}}/member/game/list/history,/member/game/list/history,{{api_url}},,前台/游戏/历史游戏列表-light.bru,历史游戏列表-light
+P0-104,game,safe_smoke,GET,{{api_url}}/member/game/list/recent?page=1&page_size=10,/member/game/list/recent,{{api_url}},,前台/游戏/最近游戏-benjie.bru,最近游戏-benjie
+P0-105,game,safe_smoke,GET,{{api_url}}/member/game/list/recommend,/member/game/list/recommend,{{api_url}},hardcoded_env,前台/游戏/推荐列表-benjie.bru,推荐列表-benjie
+P0-106,game,safe_smoke,GET,{{api_url}}/member/game/listRw?page=1&page_size=10&venues=op&sort=4,/member/game/listRw,{{api_url}},hardcoded_env,前台/游戏/游戏查询语句组合-benjie.bru,游戏查询语句组合-benjie
+P0-107,game,safe_smoke,GET,{{api_url}}/member/v2/index,/member/v2/index,{{api_url}},"url_v2,hardcoded_env",前台/游戏/首页缓存v2-owen.bru,首页缓存v2-owen
+P0-108,game,token_required,GET,{{api_url}}/member/fav/list?page=1&page_size=10,/member/fav/list,{{api_url}},,前台/游戏/游戏收藏列表-light.bru,游戏收藏列表-light
+P0-109,game,manual_review,GET,{{api_url}}/member/fav/delete?id=0,/member/fav/delete,{{api_url}},,前台/游戏/删除游戏收藏-light.bru,删除游戏收藏-light
+P0-110,game,manual_review,GET,{{api_url}}/member/fav/insert?id=0,/member/fav/insert,{{api_url}},,前台/游戏/添加游戏收藏-light.bru,添加游戏收藏-light
+P0-111,game,review_only,GET,{{api_url}}/member/game/list?page=1&page_size=10&game_type=0&is_hot=0&is_new=0&platform_id=0&venue_id=0&w&sorting&maintained=1,/member/game/list,{{api_url}},,前台/游戏/游戏列表-light.bru,游戏列表-light
+P0-112,kyc,safe_smoke,GET,{{api_url}}/member/kyc/detail,/member/kyc/detail,{{api_url}},,前台/kyc/获取 kyc 详情 -- double-cold.bru,获取 kyc 详情 -- double/cold
+P0-113,kyc,token_required,GET,/aa,/aa,,,活动/后台-活动管理/KYC通过送免费旋转/活动编辑.bru,活动编辑
+P0-114,kyc,token_required,GET,{{admin_url}}/admin/kyc/config/info,/admin/kyc/config/info,{{admin_url}},hardcoded_env,后台/kyc/获取ekyc相关配置.bru,获取ekyc相关配置
+P0-115,kyc,token_required,GET,{{admin_url}}/admin/kyc/detail,/admin/kyc/detail,{{admin_url}},,后台/kyc/获取 kyc 详情 - double.bru,获取 kyc 详情 - double
+P0-116,kyc,token_required,GET,{{admin_url}}/admin/kyc/detail,/admin/kyc/detail,{{admin_url}},,后台/会员列表/kyc详情.bru,kyc详情
+P0-117,kyc,token_required,GET,{{admin_url}}/admin/kyc/ekyc/log?uid=62368292488145898,/admin/kyc/ekyc/log,{{admin_url}},hardcoded_env,后台/kyc/异动记录.bru,异动记录
+P0-118,kyc,token_required,GET,{{admin_url}}/admin/kyc/pending/count,/admin/kyc/pending/count,{{admin_url}},,后台/kyc/获取 kyc 待审批数量.bru,获取 kyc 待审批数量
+P0-119,kyc,token_required,GET,{{admin_url}}/admin/promo/rotate/kyc/export?topic_id=1234567,/admin/promo/rotate/kyc/export,{{admin_url}},hardcoded_env,活动/后台-活动管理/KYC通过送免费旋转/导出.bru,导出
+P0-120,kyc,token_required,GET,{{admin_url}}/admin/promo/rotate/kyc/list,/admin/promo/rotate/kyc/list,{{admin_url}},hardcoded_env,活动/后台-活动管理/KYC通过送免费旋转/列表.bru,列表
+P0-121,kyc,token_required,GET,{{admin_url}}/cmpl/kyc/detail,/cmpl/kyc/detail,{{admin_url}},,合规/kyc/获取 kyc 详情 - owen.bru,获取 kyc 详情 - owen
+P0-122,kyc,token_required,GET,{{admin_url}}/cmpl/kyc/detail,/cmpl/kyc/detail,{{admin_url}},,合规/会员列表/kyc详情 - owen.bru,kyc详情 - owen
+P0-123,kyc,token_required,GET,{{admin_url}}/cmpl/kyc/pending/count,/cmpl/kyc/pending/count,{{admin_url}},,合规/kyc/获取 kyc 待审批数量.bru,获取 kyc 待审批数量
+P0-124,kyc,token_required,GET,{{api_url}}/member/kyc/ekyc/get_results?signature_id=26fbea1d1671b7cc,/member/kyc/ekyc/get_results,{{api_url}},hardcoded_env,前台/kyc/获取ekyc结果.bru,获取ekyc结果
+P0-125,kyc,token_required,GET,{{api_url}}/member/kyc/ekyc/info,/member/kyc/ekyc/info,{{api_url}},hardcoded_env,前台/kyc/ekyc 配置.bru,ekyc 配置
+P0-126,kyc,token_required,GET,{{api_url}}/member/kyc/ekyc/url?language=en&prefers_color_scheme&iframe_enabled=true,/member/kyc/ekyc/url,{{api_url}},hardcoded_env,前台/kyc/获取ekyc的url.bru,获取ekyc的url
+P0-127,kyc,token_required,GET,{{api_url}}/promo/rotate/kyc/detail,/promo/rotate/kyc/detail,{{api_url}},hardcoded_env,活动/kyc送免费旋转/详情.bru,详情
+P0-128,kyc,token_required,GET,{{api_url}}/promo/rotate/kyc/popup,/promo/rotate/kyc/popup,{{api_url}},hardcoded_env,活动/kyc送免费旋转/弹窗上报.bru,弹窗上报
+P0-129,kyc,token_required,GET,/promo/rotate/reg/detail?pid=11,/promo/rotate/reg/detail,,,活动/注册kyc送旋转活动/活动详情.bru,活动详情
+P0-130,kyc,manual_review,POST,{{admin_url}}/admin/kyc/approve,/admin/kyc/approve,{{admin_url}},,后台/kyc/kyc 审核通过 - double.bru,kyc 审核通过 - double
+P0-131,kyc,manual_review,GET,{{admin_url}}/admin/kyc/approved/count,/admin/kyc/approved/count,{{admin_url}},,后台/kyc/统计每天审核通过数量.bru,统计每天审核通过数量
+P0-132,kyc,manual_review,POST,{{admin_url}}/admin/kyc/config/edit,/admin/kyc/config/edit,{{admin_url}},hardcoded_env,后台/kyc/ekyc配置编辑.bru,ekyc配置编辑
+P0-133,kyc,manual_review,POST,{{admin_url}}/admin/kyc/details,/admin/kyc/details,{{admin_url}},,后台/kyc/uid数组查询详情页.bru,uid数组查询详情页
+P0-134,kyc,manual_review,POST,{{admin_url}}/admin/kyc/edit,/admin/kyc/edit,{{admin_url}},hardcoded_env,后台/kyc/ekyc编辑.bru,ekyc编辑
+P0-135,kyc,manual_review,POST,{{admin_url}}/admin/kyc/list?phone=9876667334&created_end_time=1774972799999&created_start_time=1772294400000&source=default,/admin/kyc/list,{{admin_url}},hardcoded_env,后台/kyc/获取 kyc 列表 - double-owen.bru,获取 kyc 列表 - double/owen
+P0-136,kyc,manual_review,POST,{{admin_url}}/admin/kyc/reject,/admin/kyc/reject,{{admin_url}},,后台/kyc/kyc 审核驳回 - double.bru,kyc 审核驳回 - double
+P0-137,kyc,manual_review,POST,{{admin_url}}/admin/kyc/update,/admin/kyc/update,{{admin_url}},,后台/kyc/更新 kyc - double.bru,更新 kyc - double
+P0-138,kyc,manual_review,GET,/admin/promo/update,/admin/promo/update,,,活动/后台-活动管理/KYC通过送免费旋转/编辑.bru,编辑
+P0-139,kyc,manual_review,POST,{{admin_url}}/cmpl/kyc/approve,/cmpl/kyc/approve,{{admin_url}},,合规/kyc/kyc 审核通过 - owen.bru,kyc 审核通过 - owen
+P0-140,kyc,manual_review,POST,{{admin_url}}/cmpl/kyc/list,/cmpl/kyc/list,{{admin_url}},,合规/kyc/获取 kyc 列表 - owen.bru,获取 kyc 列表 - owen
+P0-141,kyc,manual_review,POST,{{admin_url}}/cmpl/kyc/reject,/cmpl/kyc/reject,{{admin_url}},,合规/kyc/kyc 审核驳回 - owen.bru,kyc 审核驳回 - owen
+P0-142,kyc,manual_review,POST,{{admin_url}}/cmpl/kyc/update,/cmpl/kyc/update,{{admin_url}},,合规/kyc/更新 kyc - owen.bru,更新 kyc - owen
+P0-143,kyc,manual_review,POST,{{api_url}}/member/flutter/ocr/checkresult,/member/flutter/ocr/checkresult,{{api_url}},,前台/ocr-flutter/获取身份验证进程的运行状态和相关的验证结果.bru,获取身份验证进程的运行状态和相关的验证结果-double
+P0-144,kyc,manual_review,POST,{{api_url}}/member/flutter/ocr/setup,/member/flutter/ocr/setup,{{api_url}},,前台/ocr-flutter/初始化ZOLOZ中的身份验证进程.bru,初始化ZOLOZ中的身份验证进程-double
+P0-145,kyc,manual_review,POST,{{api_url}}/member/kyc/base,/member/kyc/base,{{api_url}},,前台/kyc/提交 kyc 基础信息 -- double-cold.bru,提交 kyc 基础信息 -- double/cold
+P0-146,kyc,manual_review,POST,{{api_url}}/member/kyc/ekyc/callback,/member/kyc/ekyc/callback,{{api_url}},hardcoded_env,前台/kyc/ekyc回调.bru,ekyc回调
+P0-147,kyc,manual_review,POST,{{api_url}}/member/kyc/insert,/member/kyc/insert,{{api_url}},,前台/kyc/提交 kyc -- double-cold-owen.bru,提交 kyc -- double/cold/owen
+P0-148,kyc,manual_review,POST,{{api_url}}/member/kyc/shops,/member/kyc/shops,{{api_url}},,前台/kyc/获取门店列表 -- owen.bru,获取门店列表 -- owen
+P0-149,kyc,manual_review,POST,{{api_url}}/member/kyc/v2/insert,/member/kyc/v2/insert,{{api_url}},"url_v2,hardcoded_env",前台/kyc/v2/insert.bru,提交 kyc v2 -- double/cold/owen
+P0-150,kyc,manual_review,POST,{{api_url}}/member/ocr/checkresult,/member/ocr/checkresult,{{api_url}},,前台/ocr/获取身份验证进程的运行状态和相关的验证结果-double-owen.bru,获取身份验证进程的运行状态和相关的验证结果-double/owen
+P0-151,kyc,manual_review,POST,{{api_url}}/member/ocr/setup,/member/ocr/setup,{{api_url}},,前台/ocr/初始化ZOLOZ中的身份验证进程.bru,初始化ZOLOZ中的身份验证进程-double
+P0-152,kyc,manual_review,POST,{{admin_url}}/member/oss/upload,/member/oss/upload,{{admin_url}},,前台/oss/上传 kyc 相关图片 - double.bru,上传 kyc 相关图片 - double
+P0-153,kyc,review_only,GET,{{api_url}}/promo/rotate/bet/detail?pid=13&is_welfare=1,/promo/rotate/bet/detail,{{api_url}},"old_or_copy,hardcoded_env",活动/kyc送免费旋转/详情(老页面).bru,详情(老页面)
+P0-154,member,safe_smoke,GET,{{api_url}}/member/detail,/member/detail,{{api_url}},hardcoded_env,前台/会员信息/获取会员信息-seven-aliang(20260424).bru,获取会员信息-seven-aliang(20260424)
+P0-155,member,safe_smoke,GET,{{api_url}}/member/vip/level/detail,/member/vip/level/detail,{{api_url}},hardcoded_env,前台/VIP/会员vip等级详情.bru,会员vip等级详情
+P0-156,member,safe_smoke,GET,{{api_url}}/promo/vip/config,/promo/vip/config,{{api_url}},hardcoded_env,活动/Vip/vip配置.bru,vip配置
+P0-157,member,safe_smoke,GET,{{api_url}}/promo/vip/sign/in/config,/promo/vip/sign/in/config,{{api_url}},hardcoded_env,活动/Vip/签到配置.bru,签到配置
+P0-158,member,token_required,GET,{{api_url}}/member/agency/audit/results,/member/agency/audit/results,{{api_url}},hardcoded_env,前台/代理/代理审核结果.bru,代理审核结果
+P0-159,member,token_required,GET,{{api_url}}/member/agency/problem/list,/member/agency/problem/list,{{api_url}},hardcoded_env,前台/代理/代理申请问题列表.bru,代理申请问题列表
+P0-160,member,manual_review,POST,{{api_url}}/member/agency/apply,/member/agency/apply,{{api_url}},,前台/会员信息/代理申请.bru,代理申请
+P0-161,member,manual_review,POST,{{api_url}}/member/agency/apply/material,/member/agency/apply/material,{{api_url}},hardcoded_env,前台/代理/申请资料提交.bru,申请资料提交
+P0-162,member,manual_review,POST,{{api_url}}/member/card/list,/member/card/list,{{api_url}},,前台/会员信息/会员卡片列表查询-owen.bru,会员卡片列表查询-owen
+P0-163,member,manual_review,POST,{{api_url}}/member/card/update,/member/card/update,{{api_url}},,前台/会员信息/会员卡片列表更新-owen.bru,会员卡片列表更新-owen
+P0-164,member,manual_review,POST,{{api_url}}/member/detail/update,/member/detail/update,{{api_url}},,前台/会员信息/会员信息修改-seven.bru,会员信息修改-seven
+P0-165,member,review_only,GET,{{api_url}}/member/vip,/member/vip,{{api_url}},,前台/会员信息/会员vip信息-seven.bru,会员vip信息-seven
+P0-166,member,review_only,GET,{{api_url}}/member/vip/rule,/member/vip/rule,{{api_url}},todo,前台/VIP/VIP配置规则-todo.bru,VIP配置规则-todo
