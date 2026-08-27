@@ -490,7 +490,7 @@ def main() -> None:
             print(f"{row['priority']} {row['method']} {row['clean_url']} :: {row['source_file']}")
         return
 
-    results = auth_results + [request_once(row, args.timeout, args.insecure) for row in rows]
+    results = auth_results + [request_once(row, args.timeout, args.insecure, body_format=args.body_format) for row in rows]
     for row, result in zip(rows, results[len(auth_results) :]):
         assertions = row.get("assertions", "")
         if assertions:
@@ -508,6 +508,8 @@ def main() -> None:
         label = item.get("case_id") or item["priority"]
         verdict = item.get("assertion_passed", item["ok"])
         print(f"{label} {item['status']} {item['elapsed_ms']}ms pass={verdict} {item['url']}")
+    if passed != total:
+        raise SystemExit(1)
 
 
 if __name__ == "__main__":

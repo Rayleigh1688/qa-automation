@@ -38,18 +38,20 @@
    - 配置化 CSS selector。
    - 对自定义 SVG/div 控件，可使用 DOM 派生定位：先从语义文本找到容器，再计算目标元素位置点击。不要写死屏幕坐标。
 7. 登录态、storage state、截图、视频、trace、token、cookie、账号和 OTP 不提交仓库。UI 原始结果写入 `ui/results/`，默认忽略。
-8. UI 失败时先判断是：
+8. UI 可读报告写入 `ui/reports/`，原始 JSON、截图、trace、视频写入 `ui/results/`；Playwright HTML 和测试附件分别写入 `playwright-report/`、`test-results/`。
+9. UI 结果目录只保留最近一次执行产物。npm UI 命令会先执行 `python3 scripts/clean-test-artifacts.py ui`，不要在工作区按时间戳或次数累积报告。
+10. UI 失败时先判断是：
    - 页面选择器变化。
    - 接口返回异常。
    - 测试数据状态不满足。
    - 环境网络或证书问题。
    - 第三方 iframe、支付页、KYC SDK 等外部依赖。
-9. 对稳定 UI 用例，断言应该同时覆盖：
+11. 对稳定 UI 用例，断言应该同时覆盖：
    - 页面关键元素出现。
    - 核心文案或数据正确。
    - 关键 API 请求成功。
    - 用户下一步操作可继续。
-10. 正例断言不能只看 Playwright 动作不报错。必须证明业务结果，例如：
+12. 正例断言不能只看 Playwright 动作不报错。必须证明业务结果，例如：
     - 登录正例必须离开登录页，并捕获 `/member/otp/login/v2`、`/member/detail` 或钱包接口。
     - 提现专项不能只点按钮，要捕获按钮状态、禁用原因、前置校验和提现接口请求。
     - 游戏专项先证明进入游戏或启动接口，不默认执行真实下注。
@@ -63,11 +65,15 @@
 - `ui/data/`
 - `ui/elements/`
 - `ui/framework/`
-- `ui/reports/client-locator-inventory.md`
-- `ui/reports/client-ui-p0-test-points.md`
-- `ui/reports/client-main-flow-ui-report.md`
-- `ui/reports/client-game-bet-smoke-report.md`
-- `ui/reports/client-p0-positive-negative-report.md`
+- `ui/README.md`
+
+最近一次生成物：
+
+- `ui/reports/*.md`
+- `ui/results/*.json`
+- `ui/results/screenshots/`
+- `playwright-report/`
+- `test-results/`
 
 常用命令：
 
@@ -84,7 +90,7 @@ npm run test:ui:game-bet
 ## 当前基线
 
 - 定位资产扫描已跑通：`npm run test:ui:inventory`。
-- P0 UI 测试点报告已生成：`npm run ui:p0-points`，测试点源数据为 `ui/data/client-p0-test-points.json`。
+- P0 UI 测试点报告可通过 `npm run ui:p0-points` 生成，测试点源数据为 `ui/data/client-p0-test-points.json`。
 - 客户端登录正反例已跑通：`npm run test:ui:login`。
   - OTP 登录成功。
   - 空手机号不能登录。

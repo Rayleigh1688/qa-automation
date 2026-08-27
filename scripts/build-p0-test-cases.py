@@ -94,6 +94,39 @@ FLOW_STAGES = {
     "/promo/vip/sign/in/config": "07_related_data_check",
 }
 
+SCENARIO_IDS = {
+    "/member/kyc/detail": "MF-010",
+    "/member/kyc/ekyc/info": "MF-052",
+    "/finance/channel/list": "MF-014",
+    "/finance/deposit/list": "MF-019",
+    "/member/game/list/history": "MF-023",
+    "/member/game/list/recent": "MF-023",
+    "/member/game/list/recommend": "MF-023",
+    "/member/game/listRw": "MF-022",
+    "/member/v2/index": "MF-021",
+    "/member/game/bet/list": "MF-027",
+    "/finance/account/list": "MF-048",
+    "/finance/payment/bank/list": "MF-049",
+    "/finance/payment/tab/list": "MF-030",
+    "/finance/withdraw/list": "MF-035",
+    "/finance/transaction/list": "MF-038",
+    "/finance/transaction/types": "MF-038",
+    "/finance/wallet": "MF-037",
+    "/promo/task/transaction": "MF-050",
+    "/member/fav/list": "MF-051",
+    "/member/agency/audit/results": "MF-053",
+    "/member/agency/problem/list": "MF-054",
+    "/member/detail": "MF-039",
+    "/member/vip/level/detail": "MF-039",
+    "/promo/vip/config": "MF-039",
+    "/promo/vip/sign/in/config": "MF-039",
+    "/admin/me/detail": "MF-042",
+    "/admin/finance/payment/bank/list": "MF-043",
+    "/admin/finance/transaction/types": "MF-043",
+    "/admin/kyc/pending/count": "MF-044",
+    "/admin/kyc/config/info": "MF-044",
+}
+
 
 FLOW_STAGE_LABELS = {
     "01_register_login": "注册登录",
@@ -195,6 +228,7 @@ def write_csv(rows: list[dict[str, str]], path: Path) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     fieldnames = [
         "case_id",
+        "scenario_id",
         "priority",
         "domain",
         "flow_stage",
@@ -272,7 +306,6 @@ def write_markdown(rows: list[dict[str, str]], path: Path, csv_path: Path) -> No
 def main() -> None:
     source = Path("api/p0/interface-shortlist.csv")
     csv_path = Path("api/p0/test-cases.csv")
-    md_path = Path("api/p0/test-cases.md")
 
     cases = []
     for row in read_rows(source):
@@ -284,6 +317,7 @@ def main() -> None:
         cases.append(
             {
                 "case_id": f"TC-{len(cases) + 1:03d}",
+                "scenario_id": SCENARIO_IDS.get(row["path"], ""),
                 "priority": row["priority"],
                 "domain": row["domain"],
                 "flow_stage": FLOW_STAGES.get(row["path"], "07_related_data_check"),
@@ -306,11 +340,10 @@ def main() -> None:
     cases.extend(ADMIN_CASES)
     for index, row in enumerate(cases, start=1):
         row["case_id"] = f"TC-{index:03d}"
+        row.setdefault("scenario_id", SCENARIO_IDS.get(row["path"], ""))
 
     write_csv(cases, csv_path)
-    write_markdown(cases, md_path, csv_path)
     print(f"wrote {csv_path.resolve()}")
-    print(f"wrote {md_path.resolve()}")
 
 
 if __name__ == "__main__":

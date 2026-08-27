@@ -219,7 +219,6 @@ def write_markdown(rows: list[dict[str, str]], output: Path, csv_output: Path) -
 def main() -> None:
     inventory = Path("api/inventory/interfaces.csv")
     csv_output = Path("api/p0/interface-shortlist.csv")
-    md_output = Path("api/p0/interface-shortlist.md")
 
     rows = []
     for row in read_inventory(inventory):
@@ -252,9 +251,7 @@ def main() -> None:
         row["priority"] = f"P0-{index:03d}"
 
     write_csv(rows, csv_output)
-    write_markdown(rows, md_output, csv_output)
     print(f"wrote {csv_output.resolve()}")
-    print(f"wrote {md_output.resolve()}")
 
 
 if __name__ == "__main__":

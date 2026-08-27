@@ -14,6 +14,7 @@
 请求必须满足：
 
 - `content-type` 使用 CBOR runner 时为 `application/cbor`。
+- FAT 测试环境后台登录的 `google_code` 当前固定使用 `111111`。
 - `google_code` 必须按数字发送，不要按字符串发送。
 - `google_secret` 字段需要保留，当前可为空字符串。
 - `x-device-id` 需要从浏览器真实请求或环境变量注入。
@@ -29,14 +30,18 @@
 ADMIN_URL=https://admin-fat.filbet2025.com
 ADMIN_EMAIL=<admin email>
 ADMIN_PASSWORD=<admin password>
-ADMIN_GOOGLE_CODE=<google code>
+ADMIN_GOOGLE_CODE=111111
 ADMIN_DEVICE_ID=<x-device-id from browser request>
 ADMIN_GOOGLE_SECRET=
+ADMIN_APPROVAL_TOTP_SECRET=<real approval totp secret>
+ADMIN_APPROVAL_TOTP_ALGORITHM=SHA256
 ADMIN_LANG_HEADER=en
 ADMIN_CLIENT_ID=123
 ADMIN_CLIENT_VERSION=Chrome/151.0.0.0
 ADMIN_TOKEN_PREFIX=
 ```
+
+注意：`ADMIN_GOOGLE_CODE` 只用于后台登录。充值补单、提现审核、KYC 审核等管理后台审核动作仍需要真实 Google Authenticator 动态验证码，不能用 `111111` 代替。当前 AI 后台账号二维码使用 SHA256 算法，自动生成审核码时需要设置 `ADMIN_APPROVAL_TOTP_ALGORITHM=SHA256`。
 
 `ADMIN_TOKEN_PREFIX` 默认留空。前端真实请求里的后台业务接口使用裸 token：
 
@@ -53,7 +58,7 @@ t: t:<admin token>
 ## 已验证命令
 
 ```bash
-ADMIN_EMAIL=<admin email> ADMIN_PASSWORD=<admin password> ADMIN_GOOGLE_CODE=<google code> ADMIN_DEVICE_ID=<x-device-id> \
+ADMIN_EMAIL=<admin email> ADMIN_PASSWORD=<admin password> ADMIN_GOOGLE_CODE=111111 ADMIN_DEVICE_ID=<x-device-id> \
 python3 scripts/api-smoke-runner.py \
   --admin-login \
   --execute \
@@ -93,6 +98,6 @@ python3 scripts/api-smoke-runner.py \
 后台 P0 接口进入正式用例前，先按以下顺序推进：
 
 1. 只纳入只读接口，例如当前用户、报表、列表、配置、待审数量。
-2. 审批通过、审批拒绝、配置修改、补单、同步状态等接口继续保持 `do_not_auto_run_yet`。
+2. 审批通过、审批拒绝、配置修改、补单、同步状态等接口需要真实审核令牌，继续保持受控调试，不混入默认只读 smoke。
 3. 后台报表类 POST 查询接口需要先确认请求体字段，再用只读断言纳入。
 4. 后台接口单独成组执行，避免和客户端 P0 混在同一个最小 smoke 集里造成定位困难。

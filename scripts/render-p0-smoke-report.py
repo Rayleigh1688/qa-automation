@@ -49,7 +49,7 @@ def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--result", default="api/results/p0-smoke-result.json")
     parser.add_argument("--cases", default="api/p0/test-cases.csv")
-    parser.add_argument("--out", default="api/p0/smoke-report.md")
+    parser.add_argument("--out", default="api/results/p0-smoke-report.md")
     parser.add_argument("--title", default="P0 API Smoke Report")
     parser.add_argument("--scope", default="FAT")
     parser.add_argument("--include-known-replacements", action="store_true")

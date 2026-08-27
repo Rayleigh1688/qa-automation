@@ -19,8 +19,9 @@
 3. P0 统一管理在 `api/p0/`：
    - 用例：`api/p0/test-cases.csv`
    - 场景：`api/p0/main-flow-scenarios.csv`
-   - 报告：`api/p0/smoke-report.md`、`api/p0/write-smoke-report.md`
-   - 只包含 API 资产；UI 报告和结果必须放在 `ui/reports/`、`ui/results/`。
+   - 说明：`api/p0/README.md`
+   - 报告：`api/results/*.md`、`api/results/*.json`
+   - 只包含 API 资产和 API 执行结果；UI 报告和结果必须放在 `ui/reports/`、`ui/results/`，不得写入 `api/results/`。
 4. 每条用例不能只看 HTTP 200，至少要断言：
    - 响应可解码。
    - 业务 `status=true`。
@@ -30,7 +31,9 @@
 6. FAT 当前本机证书链需要临时 `--insecure`，只允许用于测试环境。
 7. 真实账号、OTP、Google code、token、cookie、设备 id 只能通过环境变量或 CI secret 注入，不写入仓库。
 8. `api/results/*.json` 是最近一次 API 原始执行结果，每次覆盖刷新，不做历史累计，且不提交。
-9. `api/p0/*.md` 是 API Markdown 结论，每次覆盖刷新，可提交作为当前状态。
+9. `api/results/*.md` 是 API Markdown 结论，每次覆盖刷新，不提交；同名 CSV 说明 Markdown 不再保留。
+10. 执行 API 套件优先使用 `python3 scripts/run-api-tests.py <level...>`，不要直接散跑底层脚本；统一入口会先清空 `api/results/` 再写入本次结果。
+11. 需要清理生成物时使用 `python3 scripts/clean-test-artifacts.py api` 或 `all`。
 
 ## 接口准入
 
@@ -52,7 +55,8 @@
 ## 当前基线
 
 - P0 只读 smoke：30 条，客户端 25 条 + 后台 5 条。
-- P0 主流程写操作：注册通过、充值订单创建通过、提现申请未调通。
+- P0 API 反例 smoke：12 条。
+- P0 主流程写操作：注册通过、充值流程已走通；提现受测试账号活动流水限制。
 - 已知老接口：
   - `/member/game/list` 不作为通过标准，优先使用 `/member/v2/index`、`/member/game/listRw`、`/member/game/list/recommend`。
   - `/member/vip` 不作为通过标准，优先使用 `/promo/vip/config`、`/promo/vip/sign/in/config`。

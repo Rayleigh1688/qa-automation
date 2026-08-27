@@ -47,6 +47,8 @@
 - 冒烟脚本默认不点击真实投注，必须显式设置 `EXECUTE_BET=true`。
 - 是否投注成功不只看截图，至少结合第三方 `/b/server` 的 `command: play` 请求、钱包余额或投注记录接口判断。
 - UI 可读报告统一写入 `ui/reports/`；原始 JSON、截图统一写入 `ui/results/`，不再写入 `api/`。
+- UI 结果目录只保留最近一次执行产物。每次执行可以覆盖或清空 `ui/results/`、`ui/reports/`、`playwright-report/`、`test-results/`；不要按时间戳或次数在工作区累积报告。
+- 如果发现历史 UI 产物在 `api/results/`，需要迁移到 `ui/results/`，避免 API 和 UI 执行结果混放。
 
 ### P0 UI 正反例套件
 

@@ -45,7 +45,7 @@
 已定位原因：
 
 - 缺少 `x-device-id`。
-- `google_code` 被作为字符串发送，后端期望数字。
+- FAT 后台登录 `google_code` 固定为 `111111`，但仍必须按数字发送，后端不接受字符串形式。
 - 曾误加 `t:` token 前缀，前端实际使用裸 token。
 - 曾把业务失败响应里的字符串误判为 token。
 
@@ -54,6 +54,7 @@
 - 使用 `api/runbooks/ADMIN.md` 的后台登录规范。
 - 确保 `ADMIN_DEVICE_ID` 从浏览器真实请求注入。
 - runner 只在 `status=true` 时提取 token。
+- 管理后台审核动作使用真实动态 Google 令牌，不复用登录固定码 `111111`。
 
 ## FAT 偶发 502
 
@@ -68,6 +69,25 @@
 - 记录发生时间和接口。
 - 连续失败再判定环境或服务问题。
 
+## FAT 客户端手机号限制
+
+现象：
+
+- `/member/sms` HTTP 200。
+- 业务返回 `status=false`。
+- `data` 为 `This mobile number has been restricted. Please contact customer support.`。
+
+影响：
+
+- 客户端登录前置无法获取新的 `otp_id`。
+- API 正例 smoke、反例 runner 和 UI 登录都会受影响。
+
+处理：
+
+- CI 使用稳定的专用客户端账号，避免频繁触发短信限制。
+- 反例 runner 在 `api_all` 流程中可复用刚刚正例 smoke 的客户端 token，减少重复短信请求。
+- 如果正例 smoke 一开始就无法登录，需要更换客户端测试账号或解除该手机号限制。
+
 ## 敏感信息风险
 
 风险：
@@ -77,6 +97,6 @@
 
 处理：
 
-- `api/*-smoke-result.json` 不提交。
+- `api/results/`、`ui/results/`、`ui/reports/`、`playwright-report/`、`test-results/` 只保留最近一次生成物，不提交历史报告。
 - `.env` 不提交。
 - 文档只写占位符，不写真实凭据、cookie、token、设备 id。

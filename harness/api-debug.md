@@ -74,14 +74,17 @@ python3 scripts/api-smoke-runner.py \
 
 ## 报告刷新
 
-结果 JSON 和报告 MD 都是覆盖刷新：
+结果 JSON 和报告 MD 都是覆盖刷新，只保留最近一次执行产物。执行前允许清空 `api/results/`；API runner 必须写固定文件名，不按时间戳或次数累积新文件：
 
 - `api/results/p0-smoke-result.json`
-- `api/p0/smoke-report.md`
+- `api/results/p0-smoke-report.md`
+- `api/results/p0-negative-result.json`
+- `api/results/p0-negative-report.md`
+- `api/results/p0-main-flow-report.md`
 - `api/results/controlled-write-result.json`
-- `api/p0/write-smoke-report.md`
+- `api/results/main-positive-flow-result.json`
 
-原始 JSON 不提交，Markdown 报告作为最近一次结论。
+原始 JSON 和 Markdown 报告都不提交，最近一次结论以当前工作区生成物为准；历史记录交给 CI 归档系统。
 
 ## P0 主流程写操作冒烟
 

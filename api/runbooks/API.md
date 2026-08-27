@@ -17,15 +17,14 @@
 | `api/inventory/interfaces.csv` | Bruno 全量接口资产清单，包含原始 URL、清洗 URL、标记、P0 候选 |
 | `api/inventory/interfaces.md` | 接口资产摘要 |
 | `api/p0/interface-shortlist.csv` | P0 候选接口清单 |
-| `api/p0/interface-shortlist.md` | P0 候选摘要 |
 | `api/p0/main-flow-scenarios.csv` | P0 主流程正反例场景矩阵 |
-| `api/p0/main-flow-scenarios.md` | P0 主流程正反例说明，给功能测试和 AI 共用 |
+| `api/p0/README.md` | P0 API 资产说明和执行规则 |
 | `api/runbooks/ADMIN.md` | 后台 API 登录、鉴权、只读探针调试规范 |
 | `api/p0/test-cases.csv` | P0 可执行测试用例，runner 直接读取 |
-| `api/p0/test-cases.md` | P0 测试用例说明 |
-| `api/p0/smoke-report.md` | 最近一次统一 P0 只读 smoke 结论 |
-| `api/p0/write-smoke-report.md` | 最近一次 P0 主流程写操作冒烟结论 |
 | `api/results/*.json` | 本地原始执行结果，每次覆盖刷新，不提交仓库 |
+| `api/results/*.md` | 本地 Markdown 执行报告，每次覆盖刷新，不提交仓库 |
+| `scripts/run-api-tests.py` | 按等级统一执行 API 测试的入口 |
+| `scripts/clean-test-artifacts.py` | 清空 API/UI 生成物目录，只保留 `.gitkeep` |
 | `scripts/api-smoke-runner.py` | 登录、请求、CBOR 编解码、断言执行器 |
 | `scripts/render-p0-smoke-report.py` | 将 JSON 执行结果渲染为 Markdown 报告 |
 
@@ -44,6 +43,21 @@ LANG_HEADER=en_US
 后台登录已经验证可用，后台接口登录规范见 `api/runbooks/ADMIN.md`。
 
 ## 执行命令
+
+推荐按等级统一执行：
+
+```bash
+python3 scripts/run-api-tests.py p0
+python3 scripts/run-api-tests.py p0 p1
+python3 scripts/run-api-tests.py p0 --include-write
+```
+
+统一入口会在执行前清空 `api/results/`，然后覆盖写入本次结果。需要只清理生成物时执行：
+
+```bash
+python3 scripts/clean-test-artifacts.py api
+python3 scripts/clean-test-artifacts.py all
+```
 
 FAT 测试环境当前需要临时跳过本机 TLS 证书校验：
 
@@ -80,7 +94,7 @@ P0 主流程正向调试，包含客户端登录、钱包前后检查、充值�
 
 ```bash
 CLIENT_PHONE=<client phone> CLIENT_OTP=<otp code> \
-ADMIN_EMAIL=<admin email> ADMIN_PASSWORD=<admin password> ADMIN_GOOGLE_CODE=<google code> ADMIN_DEVICE_ID=<x-device-id> \
+ADMIN_EMAIL=<admin email> ADMIN_PASSWORD=<admin password> ADMIN_GOOGLE_CODE=111111 ADMIN_DEVICE_ID=<x-device-id> \
 python3 scripts/api-controlled-flow-runner.py \
   --main-positive-flow \
   --approval-code <approval code> \
@@ -91,8 +105,8 @@ python3 scripts/api-controlled-flow-runner.py \
   --out api/results/main-positive-flow-result.json
 ```
 
-注意：后台充值补单当前需要额外验证码，`ADMIN_GOOGLE_CODE` 不一定等于补单验证码。若返回 `invalid verification code`，应抓后台真实补单请求确认字段和值来源。
-`scripts/api-controlled-flow-runner.py` 的审批动作优先使用 `--approval-code`，未传时会用本地 `.env` 中的 `ADMIN_APPROVAL_TOTP_SECRET` 动态生成当前验证码。后台登录仍使用 `ADMIN_GOOGLE_CODE`。
+注意：FAT 后台登录的 `ADMIN_GOOGLE_CODE` 固定为 `111111`。管理后台审核动作需要真实 Google Authenticator 动态验证码，充值补单、提现审核、KYC 审核等都不能用 `111111`。如果使用 `ADMIN_APPROVAL_TOTP_SECRET` 自动生成审核码，需要按二维码参数设置 `ADMIN_APPROVAL_TOTP_ALGORITHM`，当前 AI 后台账号为 `SHA256`。
+`scripts/api-controlled-flow-runner.py` 的审批动作优先使用 `--approval-code`，未传时会用本地 `.env` 中的 `ADMIN_APPROVAL_TOTP_SECRET` 动态生成当前验证码。
 
 生成 Markdown 报告：
 
@@ -100,7 +114,7 @@ python3 scripts/api-controlled-flow-runner.py \
 python3 scripts/render-p0-smoke-report.py \
   --result api/results/p0-smoke-result.json \
   --cases api/p0/test-cases.csv \
-  --out api/p0/smoke-report.md
+  --out api/results/p0-smoke-report.md
 ```
 
 ## 通过标准
@@ -166,9 +180,9 @@ python3 scripts/render-p0-smoke-report.py \
 ## 给 AI 的操作顺序
 
 1. 先读本文件。
-2. 再读 `api/p0/main-flow-scenarios.csv` 和 `api/p0/test-cases.csv`。
+2. 再读 `api/p0/README.md`、`api/p0/main-flow-scenarios.csv` 和 `api/p0/test-cases.csv`。
 3. 确认环境变量存在，不要把凭据写入仓库。
-4. 执行 runner。统一 P0 只读 smoke 默认 30 条，主流程写操作用 `api-controlled-flow-runner.py`。
+4. 优先执行 `python3 scripts/run-api-tests.py p0`。需要受控写流程时加 `--include-write`。
 5. 渲染报告。
 6. 如果失败，优先看 `assertion_failures`，再看 `decoded_body`。
 7. 不要自动执行 `manual_review` 或 `review_only` 接口。
