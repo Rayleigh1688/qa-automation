@@ -47,9 +47,12 @@ def body_hint(item: dict[str, object]) -> str:
 
 def main() -> None:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--result", default="api/p0-smoke-result.json")
-    parser.add_argument("--cases", default="api/p0-test-cases.csv")
-    parser.add_argument("--out", default="api/p0-smoke-report.md")
+    parser.add_argument("--result", default="api/results/p0-smoke-result.json")
+    parser.add_argument("--cases", default="api/p0/test-cases.csv")
+    parser.add_argument("--out", default="api/p0/smoke-report.md")
+    parser.add_argument("--title", default="P0 API Smoke Report")
+    parser.add_argument("--scope", default="FAT")
+    parser.add_argument("--include-known-replacements", action="store_true")
     args = parser.parse_args()
 
     results = json.loads(Path(args.result).read_text(encoding="utf-8"))
@@ -97,14 +100,24 @@ def main() -> None:
             ]
         )
 
-    report = f"""# P0 API Smoke Report
+    known_replacements = """
+
+## 已知替代关系
+
+| 老接口 | 状态 | 替代接口 |
+| --- | --- | --- |
+| `GET /member/game/list` | HTTP 200 但业务 `status=false` | `GET /member/v2/index`、`GET /member/game/listRw`、`GET /member/game/list/recommend` |
+| `GET /member/vip` | HTTP 200 但业务失败 | `GET /promo/vip/config`、`GET /promo/vip/sign/in/config` |
+""" if args.include_known_replacements else ""
+
+    report = f"""# {args.title}
 
 生成时间：`{datetime.now().astimezone().isoformat()}`
 
 ## 执行范围
 
-- 环境：FAT
-- 用例来源：`api/p0-test-cases.csv`
+- 环境：{args.scope}
+- 用例来源：`{args.cases}`
 - 请求编码：CBOR
 - 响应解码：CBOR/JSON
 - TLS：测试环境临时使用 `--insecure`
@@ -124,13 +137,7 @@ def main() -> None:
 ## 用例明细
 
 {table(detail_rows)}
-
-## 已知替代关系
-
-| 老接口 | 状态 | 替代接口 |
-| --- | --- | --- |
-| `GET /member/game/list` | HTTP 200 但业务 `status=false` | `GET /member/v2/index`、`GET /member/game/listRw`、`GET /member/game/list/recommend` |
-| `GET /member/vip` | HTTP 200 但业务失败 | `GET /promo/vip/config`、`GET /promo/vip/sign/in/config` |
+{known_replacements}
 """
     Path(args.out).write_text(report, encoding="utf-8")
     print(f"wrote {Path(args.out).resolve()}")

@@ -1,0 +1,23 @@
+{
+  "viewport": {
+    "width": 1366,
+    "height": 768
+  },
+  "games": [
+    {
+      "id": "lucky_penny",
+      "name": "Lucky Penny",
+      "path": "/s-game-page/17453858840928",
+      "readyWaitMs": 25000,
+      "postClickWaitMs": 8000,
+      "spinButton": {
+        "xRatio": 0.925,
+        "yRatio": 0.56
+      },
+      "expectedFrameText": [
+        "bng.games",
+        "lucky_penny"
+      ]
+    }
+  ]
+}

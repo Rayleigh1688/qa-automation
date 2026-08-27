@@ -2,36 +2,38 @@
 
 来源：接口文档、当前 P0 可执行用例、已验证 FAT 行为、以及主流程测试设计。
 
-这份文件是场景层资产，不替代 `api/p0-test-cases.csv`。它负责回答“主流程应该测什么、正反例边界在哪里、哪些现在能自动化、哪些需要测试数据或人工确认”。
+这份文件是场景层资产，不替代 `api/p0/test-cases.csv`。它负责回答“主流程应该测什么、正反例边界在哪里、哪些现在能自动化、哪些需要测试数据或人工确认”。
 
 ## 总览
 
 | 项目 | 数量 |
 | --- | --- |
-| 主流程场景 | 47 |
-| 已实现或作为 runner 前置实现 | 15 |
+| 主流程场景 | 55 |
+| 已实现、前置实现或受控写操作实现 | 24 |
 | 可调试候选 | 16 |
 | 需人工确认 | 7 |
-| 受测试数据阻塞 | 5 |
-| 暂不自动执行 | 4 |
+| 受测试数据或业务规则阻塞 | 6 |
+| 暂不自动执行 | 2 |
 
 ## 使用原则
 
-1. `api/interface-inventory.csv` 保持接口文档原始扫描顺序，不按业务流程重排。
-2. `api/p0-test-cases.csv` 按玩家和后台业务流程排序，方便功能测试和 AI 阅读。
+1. `api/inventory/interfaces.csv` 保持接口文档原始扫描顺序，不按业务流程重排。
+2. `api/p0/test-cases.csv` 按玩家和后台业务流程排序，方便功能测试和 AI 阅读。
 3. 登录注册既是 runner 前置动作，也应该逐步沉淀为独立 P0 auth 用例。
-4. 充值、提现、KYC 提交、审批、回调、奖励领取等写操作，默认先做人工调试和数据策略，不直接进自动化。
+4. 主流程写操作属于 P0，但和只读 P0 门禁分开执行。注册、充值、提现使用 `scripts/api-controlled-flow-runner.py` 做 P0 主流程写操作冒烟。
 5. 反例不是“可有可无”。验证码规则、三方登录、权限、金额边界、旧接口替代关系，都必须体现在 P0 场景资产里。
 
 ## 自动化状态说明
 
 | 状态 | 含义 |
 | --- | --- |
-| `implemented` | 已在 `api/p0-test-cases.csv` 中作为普通用例执行 |
+| `implemented` | 已在 `api/p0/test-cases.csv` 中作为普通用例执行 |
 | `implemented_as_setup` | 已在 runner 前置流程中执行，例如客户端或后台登录 |
+| `implemented_controlled` | 已在 P0 主流程写操作冒烟中执行，不放入只读门禁 |
 | `candidate` | 适合下一步调试，通过后可进入 P0 可执行用例 |
 | `manual_review` | 需要人工确认业务规则、三方依赖或环境配置 |
 | `blocked_by_test_data` | 需要固定账号、订单、余额、KYC 状态或造数能力 |
+| `blocked_by_rule` | 已调试但被业务规则、隐藏参数或风控前置阻塞 |
 | `do_not_auto_run_yet` | 会改业务数据或触发资金/审批/回调，暂不自动执行 |
 
 ## 01 注册登录
@@ -39,6 +41,7 @@
 | ID | 正反例 | 场景 | 状态 | 重点断言 |
 | --- | --- | --- | --- | --- |
 | MF-001 | 正例 | 客户端 OTP 登录成功 | implemented_as_setup | 登录成功，返回 token，后续受保护接口可访问 |
+| MF-055 | 正例 | 新增测试用户注册成功 | implemented_controlled | 返回 token，`is_reg=1` |
 | MF-002 | 反例 | OTP 错误时登录失败 | candidate | 不返回有效 token，错误信息明确 |
 | MF-003 | 反例 | 缺少 OTP 或 otp_id 时登录失败 | candidate | 参数校验失败，不创建登录态 |
 | MF-004 | 反例 | 过期或已使用 OTP 不能重复登录 | blocked_by_test_data | 不返回新 token，错误原因可识别 |
@@ -56,13 +59,14 @@
 | MF-011 | 反例 | 未登录查询 KYC 详情失败 | candidate | 不返回会员 KYC 数据 |
 | MF-012 | 反例 | KYC 提交缺少必填字段失败 | do_not_auto_run_yet | 字段校验失败，不生成待审记录 |
 | MF-013 | 反例 | 已通过 KYC 的会员不能重复提交 | blocked_by_test_data | 状态不允许，原 KYC 状态不变 |
+| MF-052 | 正例 | 查询 eKYC 配置成功 | implemented | `data.state`、`data.signature_id` 存在 |
 
 ## 03 充值
 
 | ID | 正反例 | 场景 | 状态 | 重点断言 |
 | --- | --- | --- | --- | --- |
 | MF-014 | 正例 | 获取充值渠道列表成功 | implemented | `status=true`，`data` 为列表 |
-| MF-015 | 正例 | 创建充值订单成功 | do_not_auto_run_yet | 返回订单号、金额、支付信息，后台可查 |
+| MF-015 | 正例 | 创建充值订单成功 | implemented_controlled | 返回 `order_id` 和支付链接，报告脱敏支付链接 |
 | MF-016 | 反例 | 充值金额低于通道最小限额失败 | manual_review | 不生成有效订单 |
 | MF-017 | 反例 | 充值金额高于通道最大限额失败 | manual_review | 不生成有效订单 |
 | MF-018 | 反例 | 禁用或不存在的充值通道不能下单 | manual_review | 通道不可用，不生成订单 |
@@ -93,10 +97,12 @@
 | ID | 正反例 | 场景 | 状态 | 重点断言 |
 | --- | --- | --- | --- | --- |
 | MF-030 | 正例 | 查询提现 tab 配置成功 | implemented | `status=true`，`data` 为列表 |
-| MF-031 | 正例 | 创建提现申请成功 | do_not_auto_run_yet | 生成提现单，余额或冻结金额变化正确 |
+| MF-031 | 正例 | 创建提现申请成功 | blocked_by_rule | 已调试但业务失败且错误信息为空，需要确认资金密码、流水、风控或隐藏参数 |
 | MF-032 | 反例 | 余额不足不能提现 | blocked_by_test_data | 不生成待审提现单 |
 | MF-033 | 反例 | 未完成 KYC 不能提现 | blocked_by_test_data | 不冻结余额 |
 | MF-034 | 反例 | 缺少或错误资金密码不能提现 | manual_review | 不生成提现单 |
+| MF-048 | 正例 | 查询提款账户列表成功 | implemented | `status=true`，`data` 为列表 |
+| MF-049 | 正例 | 查询客户端银行列表成功 | implemented | `data.d`、`data.t`、`data.s` 存在 |
 | MF-035 | 正例 | 查询提现记录成功 | implemented | `data.d`、`data.t`、`data.s` 存在 |
 | MF-036 | 反例 | 非法提现记录筛选参数被拒绝或安全降级 | candidate | 不出现 5xx，结构稳定 |
 
@@ -109,6 +115,10 @@
 | MF-039 | 正例 | 查询会员基础信息和 VIP 信息成功 | implemented | 会员、VIP、活动配置关键字段存在 |
 | MF-040 | 反例 | 旧 VIP 接口业务失败时不能判定为通过 | candidate | HTTP 200 但 `status=false` 必须失败 |
 | MF-041 | 反例 | 钱包响应缺少关键字段必须失败 | implemented | runner `keys` 断言失败并报告缺失字段 |
+| MF-050 | 正例 | 查询代币明细成功 | implemented | `data.d`、`data.t`、`data.s` 存在 |
+| MF-051 | 正例 | 查询游戏收藏列表成功 | implemented | `data.d`、`data.t`、`data.s` 存在 |
+| MF-053 | 正例 | 查询代理审核结果成功 | implemented | `data` 为对象 |
+| MF-054 | 正例 | 查询代理申请问题列表成功 | implemented | `data.problem1` 到 `data.problem4` 存在 |
 
 ## 08 后台报表展示和审批
 
@@ -123,7 +133,7 @@
 
 ## 下一步准入规则
 
-一个新 P0 接口进入 `api/p0-test-cases.csv` 前，至少要满足：
+一个新 P0 接口进入 `api/p0/test-cases.csv` 前，至少要满足：
 
 1. 能归入上面某个主流程场景。
 2. 明确是正例、反例、数据检查，还是只读报表。

@@ -1,0 +1,338 @@
+{
+  "scope": "client_p0_main_flow",
+  "principles": [
+    "P0 UI 只覆盖接口自动化无法完整证明的客户端主流程状态、入口、前置校验和第三方页面链路",
+    "接口文档可稳定覆盖的纯接口断言继续放在 API P0，UI 不重复堆断言",
+    "活动、运营位、Rewards 和 Filcoin 的玩法细节变化频繁，只做页面可达和 Network 可见性，不纳入稳定回归细节",
+    "真实投注、真实充值、真实提现属于资金变更动作，不进入默认 P0；必须通过显式开关或人工确认执行",
+    "所有 UI 用例必须数据驱动，路由、弹窗、游戏点击点、测试点清单分别维护在 ui/data 下"
+  ],
+  "testPoints": [
+    {
+      "id": "UI-P0-001",
+      "module": "登录注册",
+      "priority": "P0",
+      "type": "positive",
+      "executionMode": "default_auto",
+      "title": "手机号 OTP 登录成功",
+      "route": "/",
+      "assertions": [
+        "首页登录入口可访问",
+        "手机号、OTP、条款控件可定位并可操作",
+        "提交后进入已登录态，不再展示 Register / Login",
+        "Network 捕获会员登录、会员详情或钱包相关接口"
+      ],
+      "automationStatus": "implemented",
+      "spec": "ui/cases/client-login.spec.mjs"
+    },
+    {
+      "id": "UI-P0-002",
+      "module": "登录注册",
+      "priority": "P0",
+      "type": "negative",
+      "executionMode": "default_auto",
+      "title": "空手机号不能提交登录",
+      "route": "/",
+      "assertions": [
+        "手机号为空时 Login 按钮不可用，或提交后仍停留登录态",
+        "不能进入会员态",
+        "不能出现会员详情或钱包成功响应"
+      ],
+      "automationStatus": "implemented",
+      "spec": "ui/cases/client-login.spec.mjs"
+    },
+    {
+      "id": "UI-P0-003",
+      "module": "登录注册",
+      "priority": "P0",
+      "type": "negative",
+      "executionMode": "default_auto",
+      "title": "无效手机号不能登录",
+      "route": "/",
+      "assertions": [
+        "无效手机号提交后仍停留登录或游客态",
+        "页面不进入会员态",
+        "不能出现会员详情或钱包成功响应"
+      ],
+      "automationStatus": "implemented",
+      "spec": "ui/cases/client-login.spec.mjs"
+    },
+    {
+      "id": "UI-P0-004",
+      "module": "登录注册",
+      "priority": "P0",
+      "type": "negative",
+      "executionMode": "default_auto",
+      "title": "未填写 OTP 不能登录",
+      "route": "/",
+      "assertions": [
+        "已填写手机号但 OTP 为空时不能完成登录",
+        "Login 按钮不可用或点击后仍停留登录态",
+        "不能出现会员详情或钱包成功响应"
+      ],
+      "automationStatus": "implemented",
+      "spec": "ui/cases/client-p0-positive-negative.spec.mjs"
+    },
+    {
+      "id": "UI-P0-005",
+      "module": "登录注册",
+      "priority": "P0",
+      "type": "negative",
+      "executionMode": "default_auto",
+      "title": "未勾选登录条款不能登录",
+      "route": "/",
+      "assertions": [
+        "手机号和 OTP 已填写但未同意条款时不能完成登录",
+        "Login 按钮不可用或点击后仍停留登录态",
+        "不能出现会员详情或钱包成功响应"
+      ],
+      "automationStatus": "implemented",
+      "spec": "ui/cases/client-p0-positive-negative.spec.mjs"
+    },
+    {
+      "id": "UI-P0-006",
+      "module": "首页",
+      "priority": "P0",
+      "type": "positive",
+      "executionMode": "default_auto",
+      "title": "首页可打开且主导航存在",
+      "route": "/",
+      "assertions": [
+        "首页加载成功且不出现 Page not found",
+        "登录入口或会员态信息可见",
+        "Game、Rewards、Filcoin、My 至少能通过导航或配置路由到达"
+      ],
+      "automationStatus": "implemented",
+      "spec": "ui/cases/client-main-flow.spec.mjs"
+    },
+    {
+      "id": "UI-P0-007",
+      "module": "Game",
+      "priority": "P0",
+      "type": "positive",
+      "executionMode": "default_auto",
+      "title": "登录后进入 Game 页面",
+      "route": "/s-game-category-v2/gameType/3",
+      "assertions": [
+        "Game 页面可达",
+        "不出现 Page not found",
+        "捕获游戏列表、游戏配置或游戏启动相关 Network"
+      ],
+      "automationStatus": "implemented",
+      "spec": "ui/cases/client-main-flow.spec.mjs"
+    },
+    {
+      "id": "UI-P0-008",
+      "module": "Rewards",
+      "priority": "P0",
+      "type": "positive",
+      "executionMode": "default_auto",
+      "title": "Rewards 页面可达",
+      "route": "/welfare",
+      "assertions": [
+        "Rewards 页面可打开",
+        "不出现 Page not found",
+        "活动细节只记录可见性和 Network，不做稳定细节断言"
+      ],
+      "automationStatus": "implemented",
+      "spec": "ui/cases/client-main-flow.spec.mjs"
+    },
+    {
+      "id": "UI-P0-009",
+      "module": "Filcoin",
+      "priority": "P0",
+      "type": "positive",
+      "executionMode": "default_auto",
+      "title": "Filcoin 页面可达",
+      "route": "/s-points-v2",
+      "assertions": [
+        "Filcoin 页面可打开",
+        "不出现 Page not found",
+        "积分活动细节只记录可见性和 Network，不做稳定细节断言"
+      ],
+      "automationStatus": "implemented",
+      "spec": "ui/cases/client-main-flow.spec.mjs"
+    },
+    {
+      "id": "UI-P0-010",
+      "module": "My",
+      "priority": "P0",
+      "type": "positive",
+      "executionMode": "default_auto",
+      "title": "登录后 My 页面展示会员身份和主入口",
+      "route": "/my",
+      "assertions": [
+        "My 页面可打开",
+        "会员账号、KYC、充值、提现或钱包入口至少可见一组",
+        "Network 捕获会员详情或钱包相关接口"
+      ],
+      "automationStatus": "implemented",
+      "spec": "ui/cases/client-p0-positive-negative.spec.mjs"
+    },
+    {
+      "id": "UI-P0-011",
+      "module": "My",
+      "priority": "P0",
+      "type": "negative",
+      "executionMode": "default_auto",
+      "title": "未登录访问 My 不应展示会员敏感信息",
+      "route": "/my",
+      "assertions": [
+        "新浏览器上下文直接访问 My",
+        "未登录时应展示登录入口、游客态或跳回首页",
+        "不能展示会员账号、UID、KYC Approved、钱包余额等敏感会员信息"
+      ],
+      "automationStatus": "implemented",
+      "spec": "ui/cases/client-p0-positive-negative.spec.mjs"
+    },
+    {
+      "id": "UI-P0-012",
+      "module": "钱包",
+      "priority": "P0",
+      "type": "positive",
+      "executionMode": "default_auto",
+      "title": "登录后钱包余额、充值、提现入口可见",
+      "route": "/my",
+      "assertions": [
+        "余额或钱包入口可见",
+        "充值入口可见或可通过 My 页面进入",
+        "提现入口可见或可通过 My 页面进入",
+        "钱包相关接口返回成功"
+      ],
+      "automationStatus": "implemented",
+      "spec": "ui/cases/client-p0-positive-negative.spec.mjs"
+    },
+    {
+      "id": "UI-P0-013",
+      "module": "充值",
+      "priority": "P0",
+      "type": "positive",
+      "executionMode": "manual_or_next_auto",
+      "title": "充值页可打开并展示渠道和金额",
+      "route": "/my",
+      "assertions": [
+        "充值入口可打开",
+        "充值渠道、金额输入或金额快捷选项可定位",
+        "创建订单前置参数可从 Network 捕获",
+        "默认 P0 不提交真实充值订单"
+      ],
+      "automationStatus": "planned",
+      "spec": ""
+    },
+    {
+      "id": "UI-P0-014",
+      "module": "充值",
+      "priority": "P0",
+      "type": "negative",
+      "executionMode": "manual_or_next_auto",
+      "title": "充值缺少金额或渠道时不能提交",
+      "route": "/my",
+      "assertions": [
+        "未选择渠道或未填写金额时提交按钮不可用",
+        "提交后展示明确校验提示",
+        "不能生成有效充值订单"
+      ],
+      "automationStatus": "planned",
+      "spec": ""
+    },
+    {
+      "id": "UI-P0-015",
+      "module": "投注",
+      "priority": "P0",
+      "type": "positive",
+      "executionMode": "default_auto",
+      "title": "登录后进入可控游戏并验证启动成功",
+      "route": "/s-game-page/17453858840928",
+      "assertions": [
+        "游戏页可打开",
+        "出现第三方游戏 frame 或游戏域名",
+        "默认不点击真实投注按钮",
+        "Network 捕获游戏启动相关请求"
+      ],
+      "automationStatus": "implemented",
+      "spec": "ui/cases/client-game-bet-smoke.spec.mjs"
+    },
+    {
+      "id": "UI-P0-016",
+      "module": "投注",
+      "priority": "P0",
+      "type": "positive",
+      "executionMode": "gated_auto",
+      "title": "固定视口下点击 Lucky Penny Spin 并捕获投注请求",
+      "route": "/s-game-page/17453858840928",
+      "assertions": [
+        "必须显式设置 EXECUTE_BET=true",
+        "固定视口 1366x768",
+        "点击配置的相对坐标后捕获 play、spin、bet、wager 或 process 请求",
+        "最终资金结果以后续投注记录或钱包账变接口为准"
+      ],
+      "automationStatus": "implemented_gated",
+      "spec": "ui/cases/client-game-bet-smoke.spec.mjs"
+    },
+    {
+      "id": "UI-P0-017",
+      "module": "投注",
+      "priority": "P0",
+      "type": "negative",
+      "executionMode": "default_auto",
+      "title": "无效游戏页不能启动三方游戏",
+      "route": "/s-game-page/invalid-p0-game-id",
+      "assertions": [
+        "无效游戏页不应出现有效第三方游戏 frame",
+        "页面应展示 Page not found、错误态或保持客户端壳页",
+        "不能触发真实投注请求"
+      ],
+      "automationStatus": "implemented",
+      "spec": "ui/cases/client-p0-positive-negative.spec.mjs"
+    },
+    {
+      "id": "UI-P0-018",
+      "module": "提现",
+      "priority": "P0",
+      "type": "positive",
+      "executionMode": "manual_or_next_auto",
+      "title": "提现页可打开并展示前置规则",
+      "route": "/my",
+      "assertions": [
+        "提现入口可打开",
+        "账户、金额、钱包密码或前置校验控件可定位",
+        "展示可提现余额、手续费或限制信息",
+        "默认 P0 不提交真实提现申请"
+      ],
+      "automationStatus": "planned",
+      "spec": ""
+    },
+    {
+      "id": "UI-P0-019",
+      "module": "提现",
+      "priority": "P0",
+      "type": "negative",
+      "executionMode": "manual_or_next_auto",
+      "title": "提现缺少金额、账号或钱包密码时不能提交",
+      "route": "/my",
+      "assertions": [
+        "缺少必要参数时按钮不可用或展示明确校验提示",
+        "不能产生有效提现申请",
+        "失败原因需要同步沉淀到接口测试参数规则"
+      ],
+      "automationStatus": "planned",
+      "spec": ""
+    },
+    {
+      "id": "UI-P0-020",
+      "module": "KYC",
+      "priority": "P0",
+      "type": "positive",
+      "executionMode": "default_auto",
+      "title": "My 或 Account Center 展示 KYC 状态",
+      "route": "/my",
+      "assertions": [
+        "登录后可进入 My 或 Account Center",
+        "KYC 状态可见或会员详情接口可返回 KYC 状态",
+        "不在 UI 默认用例内提交 KYC 资料"
+      ],
+      "automationStatus": "covered",
+      "spec": "ui/cases/client-p0-positive-negative.spec.mjs"
+    }
+  ]
+}

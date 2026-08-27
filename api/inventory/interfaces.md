@@ -2,7 +2,7 @@
 
 扫描来源：`/Users/rayleigh/API/FB/filbet`
 
-全量明细：`/Users/rayleigh/qa-automation/api/interface-inventory.csv`
+全量明细：`/Users/rayleigh/qa-automation/api/inventory/interfaces.csv`
 
 ## 总览
 

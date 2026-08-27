@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Run a small P0 API smoke set from api/p0-interface-shortlist.csv."""
+"""Run a P0 API smoke set from api/p0/test-cases.csv."""
 
 from __future__ import annotations
 
@@ -181,15 +181,25 @@ def resolve_url(clean_url: str) -> str:
 
 
 def headers_for(row: dict[str, str]) -> dict[str, str]:
-    headers = {
-        "accept": "application/json",
-        "d": os.environ.get("DEVICE", "25"),
-        "lang": os.environ.get("LANG_HEADER", "en_US"),
-    }
-    token = ""
     base_var = row["suggested_base_var"]
+    is_admin = base_var == "{{admin_url}}"
+    headers = {
+        "accept": "application/json, text/plain, */*" if is_admin else "application/json",
+        "d": os.environ.get("DEVICE", "25"),
+        "lang": os.environ.get("ADMIN_LANG_HEADER" if is_admin else "LANG_HEADER", "en" if is_admin else "en_US"),
+    }
+    if is_admin:
+        headers["client-id"] = os.environ.get("ADMIN_CLIENT_ID", "123")
+        headers["client-version"] = os.environ.get("ADMIN_CLIENT_VERSION", "Chrome/151.0.0.0")
+        device_id = os.environ.get("ADMIN_DEVICE_ID") or os.environ.get("X_DEVICE_ID")
+        if device_id:
+            headers["x-device-id"] = device_id
+    token = ""
     if base_var == "{{admin_url}}":
         token = os.environ.get("ADMIN_TOKEN", "")
+        prefix = os.environ.get("ADMIN_TOKEN_PREFIX", "")
+        if token and prefix and not token.startswith(prefix):
+            token = prefix + token
     elif base_var == "{{agency_url}}":
         token = os.environ.get("AGENCY_TOKEN", "")
     else:
@@ -342,6 +352,8 @@ def extract_token(result: dict[str, object]) -> str:
     decoded = result.get("decoded_body")
     if not isinstance(decoded, dict):
         return ""
+    if decoded.get("status") is not True:
+        return ""
     data = decoded.get("data")
     if isinstance(data, str):
         return data
@@ -413,9 +425,11 @@ def admin_login(args: argparse.Namespace) -> tuple[list[dict[str, object]], str]
     login_body = {
         "email": email,
         "password": password,
-        "google_code": google_code,
-        "cmpl": int(os.environ.get("ADMIN_CMPL", "2")),
+        "google_code": int(google_code) if google_code.isdigit() else google_code,
+        "google_secret": os.environ.get("ADMIN_GOOGLE_SECRET", ""),
     }
+    if os.environ.get("ADMIN_CMPL"):
+        login_body["cmpl"] = int(os.environ["ADMIN_CMPL"])
     login_result = request_once(login_row_data, args.timeout, args.insecure, login_body, args.body_format)
     token = extract_token(login_result)
     if token:
@@ -435,7 +449,7 @@ def run_admin_login(args: argparse.Namespace) -> None:
 
 def main() -> None:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--list", default="api/p0-interface-shortlist.csv")
+    parser.add_argument("--list", default="api/p0/interface-shortlist.csv")
     parser.add_argument("--env", default=".env")
     parser.add_argument("--limit", type=int, default=10)
     parser.add_argument("--timeout", type=float, default=10)
@@ -447,7 +461,7 @@ def main() -> None:
     parser.add_argument("--with-client-login", action="store_true")
     parser.add_argument("--with-admin-login", action="store_true")
     parser.add_argument("--cases", default="", help="Run executable case CSV instead of shortlist CSV")
-    parser.add_argument("--out", default="api/p0-smoke-result.json")
+    parser.add_argument("--out", default="api/results/p0-smoke-result.json")
     args = parser.parse_args()
 
     load_env_file(Path(args.env))

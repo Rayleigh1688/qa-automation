@@ -6,4 +6,81 @@
 
 ## 调试记录
 
-待补充。
+### Playwright 与当前客户端定位方式
+
+- 当前客户端大量控件是自定义 `div/svg/button` 组合，不是标准表单控件。
+- Playwright 不适合直接套 Selenium 式 XPath 大量硬找节点；优先使用 role、text、placeholder、name、aria-label 和配置化 selector。
+- 如果控件没有稳定语义属性，可以用 DOM 派生定位：先找到稳定文本所在容器，再点其内部目标元素。不要写死绝对坐标。
+
+### PAGCOR 弹窗
+
+- 弹窗 DOM：`[data-family-name="pagcor"]`。
+- `I agree to all ...` 不是标准 checkbox input，而是 SVG 自定义控件。
+- 处理方式：在 modal 内找到 `innerText` 以 `I agree to all` 开头的容器，点击该容器的第一个子元素，再点击 `Proceed`。
+- 如果 `Proceed` 明明可见可用但被 `role=alert` 遮挡，先正常 click，失败后允许对按钮执行 DOM click 兜底。
+- 不要把 `PAGCOR` 作为弹窗 detectText。首页/页脚也可能出现 PAGCOR，容易误判弹窗仍存在。
+
+### 登录入口
+
+- 首页 `/` 是主要入口，但不一定直接展示登录表单。
+- 登录封装先进入首页并处理弹窗，再点击 `Register / Login` / `Login` / `Register`。
+- 只有出现手机号输入框或 `SMS OTP` tab 才认为登录页打开成功。
+- `/login` 在当前 FAT 客户端会返回 404，不要把候选路径列表的最后一个地址当作最终可用路由。
+- 登录提交成功后不要立刻再次自动处理营销/合规弹窗。已验证这会让主流程扫描偶发进入 PWA 错误页。
+
+### 主导航扫描
+
+- 客户端 PWA 的主导航优先点击页面上的导航文案，不要直接用旧接口文档或旧路由猜地址。
+- 当前扫描识别到的新版主路由：
+  - Game: `/s-game-category-v2/gameType/3`
+  - Rewards: `/welfare`
+  - Filcoin: `/s-points-v2`
+  - My: `/my`
+- `/slots`、`/bonus`、`/coin`、`/user` 等旧候选路径会进入 `Page not found` 壳页，只能作为历史参考。
+- 普通 role/link/button 定位失败时，可以使用 DOM 派生文本点击，查找可见文本元素后执行原生 click。
+
+### 游戏内投注
+
+- 三方游戏在 iframe/canvas 内渲染，Playwright 基本拿不到稳定 DOM locator。
+- 当前策略：Playwright 负责登录、打开游戏、等待 frame ready、截图和 Network；游戏内 Spin/Bet 使用固定视口下的相对坐标点击。
+- Lucky Penny 已验证固定视口 `1366x768`，点击点 `{ xRatio: 0.925, yRatio: 0.56 }` 可触发 `BET 1.00`。
+- 冒烟脚本默认不点击真实投注，必须显式设置 `EXECUTE_BET=true`。
+- 是否投注成功不只看截图，至少结合第三方 `/b/server` 的 `command: play` 请求、钱包余额或投注记录接口判断。
+- UI 可读报告统一写入 `ui/reports/`；原始 JSON、截图统一写入 `ui/results/`，不再写入 `api/`。
+
+### P0 UI 正反例套件
+
+- `npm run test:ui:p0` 是客户端 P0 UI 默认套件，覆盖登录正反例、主流程扫描、游戏启动冒烟和页面状态正反例。
+- `npm run test:ui:p0:scan` 只跑主流程页面扫描。
+- `npm run test:ui:p0:pn` 只跑正反例补充用例。
+- 默认 P0 不执行真实下注、真实充值、真实提现。真实下注必须显式设置 `EXECUTE_BET=true`。
+- P0 UI 测试点源数据是 `ui/data/client-p0-test-points.json`，可读报告由 `npm run ui:p0-points` 生成到 `ui/reports/client-ui-p0-test-points.md`。
+- 正反例执行报告写入 `ui/reports/client-p0-positive-negative-report.md`，原始 JSON 写入 `ui/results/client-p0-positive-negative.json`。
+
+### 登录页条款
+
+- 登录页的 `I agree to the Terms of Use ... confirm that I am 21 years old` 也是自定义控件。
+- 处理方式：找到该文案容器，点击容器左侧区域，再验证 `Login` 按钮是否启用。
+
+### Get Code 定位
+
+- 不要使用 `/Get Code|Send|OTP|Code/i` 这种过宽正则。
+- 过宽正则会优先命中 `SMS OTP` tab，导致没有真正请求 OTP。
+- 当前使用精确匹配：`/^Get Code$|^Send$|^发送$|^获取$/i`。
+
+### 登录正例断言
+
+- 不能只断言页面操作无异常。
+- 必须断言离开 `/login`，并捕获关键接口：
+  - `/member/sms`
+  - `/member/otp/login/v2`
+  - `/member/detail`
+  - `/finance/wallet`
+
+### 已跑通命令
+
+```bash
+npm run test:ui:inventory
+npm run ui:p0-points
+npm run test:ui:login
+```

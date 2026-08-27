@@ -1,0 +1,155 @@
+{
+  "basePath": "/",
+  "pages": [
+    {
+      "id": "login_register",
+      "name": "登录注册",
+      "auth": "guest",
+      "entry": {
+        "paths": [
+          "/",
+          "/user/login",
+          "/login"
+        ],
+        "selectors": [
+          "button:has-text(\"Register / Login\")"
+        ],
+        "texts": [
+          "Register / Login",
+          "Login",
+          "Register"
+        ]
+      }
+    },
+    {
+      "id": "home",
+      "name": "首页",
+      "auth": "guest",
+      "entry": {
+        "paths": [
+          "/"
+        ]
+      }
+    },
+    {
+      "id": "game",
+      "name": "Game",
+      "auth": "optional",
+      "entry": {
+        "paths": [
+          "/s-game-category-v2/gameType/3",
+          "/game",
+          "/casino",
+          "/slots"
+        ],
+        "preEntry": [
+          {
+            "selectors": [
+              "button[aria-label=\"Menu\"]"
+            ],
+            "texts": [
+              "Menu"
+            ]
+          }
+        ],
+        "texts": [
+          "Game",
+          "Casino",
+          "Slots",
+          "Popular"
+        ]
+      }
+    },
+    {
+      "id": "rewards",
+      "name": "Rewards",
+      "auth": "optional",
+      "entry": {
+        "paths": [
+          "/welfare",
+          "/rewards",
+          "/reward",
+          "/promotion",
+          "/promotions",
+          "/bonus"
+        ],
+        "preEntry": [
+          {
+            "selectors": [
+              "button[aria-label=\"Menu\"]"
+            ],
+            "texts": [
+              "Menu"
+            ]
+          }
+        ],
+        "texts": [
+          "Rewards",
+          "Bonus",
+          "Promo",
+          "Promotion"
+        ]
+      }
+    },
+    {
+      "id": "filcoin",
+      "name": "Filcoin",
+      "auth": "optional",
+      "entry": {
+        "paths": [
+          "/s-points-v2",
+          "/filcoin",
+          "/filcoin/rewards",
+          "/coin"
+        ],
+        "preEntry": [
+          {
+            "selectors": [
+              "button[aria-label=\"Menu\"]"
+            ],
+            "texts": [
+              "Menu"
+            ]
+          }
+        ],
+        "texts": [
+          "Filcoin",
+          "FILCOIN",
+          "Filcoin Rewards"
+        ]
+      }
+    },
+    {
+      "id": "my",
+      "name": "My",
+      "auth": "member",
+      "entry": {
+        "paths": [
+          "/my",
+          "/mine",
+          "/account",
+          "/profile",
+          "/user"
+        ],
+        "preEntry": [
+          {
+            "selectors": [
+              "button[aria-label=\"Menu\"]"
+            ],
+            "texts": [
+              "Menu"
+            ]
+          }
+        ],
+        "texts": [
+          "My",
+          "Mine",
+          "Me",
+          "Account",
+          "Profile",
+          "Wallet"
+        ]
+      }
+    }
+  ]
+}

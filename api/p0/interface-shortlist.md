@@ -1,16 +1,16 @@
 # P0 接口候选清单
 
-来源：`api/interface-inventory.csv`
+来源：`api/inventory/interfaces.csv`
 
-全量清单：`/Users/rayleigh/qa-automation/api/p0-interface-shortlist.csv`
+全量清单：`/Users/rayleigh/qa-automation/api/p0/interface-shortlist.csv`
 
 ## 总览
 
 | 指标 | 数量 |
 | --- | --- |
 | P0 shortlist 接口 | 166 |
-| 可直接冒烟 safe_smoke | 18 |
-| 需要 token token_required | 37 |
+| 可直接冒烟 safe_smoke | 25 |
+| 需要 token token_required | 30 |
 | 需要人工复核 manual_review | 106 |
 | 仅复核 review_only | 5 |
 
@@ -30,24 +30,31 @@
 
 | 优先级 | 领域 | 方法 | Clean URL | 来源 |
 | --- | --- | --- | --- | --- |
-| P0-027 | finance | GET | {{api_url}}/finance/channel/list?mode=2&source=huawei | 前台/财务/获取支付通道列表-wesley.bru |
-| P0-028 | finance | GET | {{api_url}}/finance/deposit/list?status=PENDING&time_flag=0&page=1&page_size=10 | 前台/财务/充值记录-wesley.bru |
-| P0-029 | finance | GET | {{api_url}}/finance/payment/tab/list | 前台/财务/提现tab.bru |
-| P0-030 | finance | GET | {{api_url}}/finance/transaction/list?time_flag=15&page=1&page_size=20 | 前台/财务/获取交易记录- wesley-alex.bru |
-| P0-031 | finance | GET | {{api_url}}/finance/transaction/types | 前台/财务/账变字典.bru |
-| P0-032 | finance | GET | {{api_url}}/finance/wallet | 前台/财务/会员钱包-wesley.bru |
-| P0-033 | finance | GET | {{api_url}}/finance/withdraw/list?time_flag=0&page=1&page_size=10 | 前台/财务/提现记录-wesley.bru |
-| P0-102 | game | GET | {{api_url}}/member/game/bet/list?page=1&page_size=10&time_flag=30&status=1 | 前台/游戏/游戏记录-wesley.bru |
-| P0-103 | game | GET | {{api_url}}/member/game/list/history | 前台/游戏/历史游戏列表-light.bru |
-| P0-104 | game | GET | {{api_url}}/member/game/list/recent?page=1&page_size=10 | 前台/游戏/最近游戏-benjie.bru |
-| P0-105 | game | GET | {{api_url}}/member/game/list/recommend | 前台/游戏/推荐列表-benjie.bru |
-| P0-106 | game | GET | {{api_url}}/member/game/listRw?page=1&page_size=10&venues=op&sort=4 | 前台/游戏/游戏查询语句组合-benjie.bru |
-| P0-107 | game | GET | {{api_url}}/member/v2/index | 前台/游戏/首页缓存v2-owen.bru |
+| P0-027 | finance | GET | {{api_url}}/finance/account/list | 前台/财务/提款账户列表-wesley.bru |
+| P0-028 | finance | GET | {{api_url}}/finance/channel/list?mode=2&source=huawei | 前台/财务/获取支付通道列表-wesley.bru |
+| P0-029 | finance | GET | {{api_url}}/finance/deposit/list?status=PENDING&time_flag=0&page=1&page_size=10 | 前台/财务/充值记录-wesley.bru |
+| P0-030 | finance | GET | {{api_url}}/finance/payment/bank/list?page=2&page_size=10 | 前台/财务/银行列表.bru |
+| P0-031 | finance | GET | {{api_url}}/finance/payment/tab/list | 前台/财务/提现tab.bru |
+| P0-032 | finance | GET | {{api_url}}/finance/transaction/list?time_flag=15&page=1&page_size=20 | 前台/财务/获取交易记录- wesley-alex.bru |
+| P0-033 | finance | GET | {{api_url}}/finance/transaction/types | 前台/财务/账变字典.bru |
+| P0-034 | finance | GET | {{api_url}}/finance/wallet | 前台/财务/会员钱包-wesley.bru |
+| P0-035 | finance | GET | {{api_url}}/finance/withdraw/list?time_flag=0&page=1&page_size=10 | 前台/财务/提现记录-wesley.bru |
+| P0-036 | finance | GET | {{api_url}}/promo/task/transaction | 前台/任务中心/代币明细-seven.bru |
+| P0-102 | game | GET | {{api_url}}/member/fav/list?page=1&page_size=10 | 前台/游戏/游戏收藏列表-light.bru |
+| P0-103 | game | GET | {{api_url}}/member/game/bet/list?page=1&page_size=10&time_flag=30&status=1 | 前台/游戏/游戏记录-wesley.bru |
+| P0-104 | game | GET | {{api_url}}/member/game/list/history | 前台/游戏/历史游戏列表-light.bru |
+| P0-105 | game | GET | {{api_url}}/member/game/list/recent?page=1&page_size=10 | 前台/游戏/最近游戏-benjie.bru |
+| P0-106 | game | GET | {{api_url}}/member/game/list/recommend | 前台/游戏/推荐列表-benjie.bru |
+| P0-107 | game | GET | {{api_url}}/member/game/listRw?page=1&page_size=10&venues=op&sort=4 | 前台/游戏/游戏查询语句组合-benjie.bru |
+| P0-108 | game | GET | {{api_url}}/member/v2/index | 前台/游戏/首页缓存v2-owen.bru |
 | P0-112 | kyc | GET | {{api_url}}/member/kyc/detail | 前台/kyc/获取 kyc 详情 -- double-cold.bru |
-| P0-154 | member | GET | {{api_url}}/member/detail | 前台/会员信息/获取会员信息-seven-aliang(20260424).bru |
-| P0-155 | member | GET | {{api_url}}/member/vip/level/detail | 前台/VIP/会员vip等级详情.bru |
-| P0-156 | member | GET | {{api_url}}/promo/vip/config | 活动/Vip/vip配置.bru |
-| P0-157 | member | GET | {{api_url}}/promo/vip/sign/in/config | 活动/Vip/签到配置.bru |
+| P0-113 | kyc | GET | {{api_url}}/member/kyc/ekyc/info | 前台/kyc/ekyc 配置.bru |
+| P0-154 | member | GET | {{api_url}}/member/agency/audit/results | 前台/代理/代理审核结果.bru |
+| P0-155 | member | GET | {{api_url}}/member/agency/problem/list | 前台/代理/代理申请问题列表.bru |
+| P0-156 | member | GET | {{api_url}}/member/detail | 前台/会员信息/获取会员信息-seven-aliang(20260424).bru |
+| P0-157 | member | GET | {{api_url}}/member/vip/level/detail | 前台/VIP/会员vip等级详情.bru |
+| P0-158 | member | GET | {{api_url}}/promo/vip/config | 活动/Vip/vip配置.bru |
+| P0-159 | member | GET | {{api_url}}/promo/vip/sign/in/config | 活动/Vip/签到配置.bru |
 
 ## P0 shortlist
 
@@ -79,26 +86,26 @@
 | P0-024 | manual_review | auth | POST | {{api_url}}/member/wallet/password |  | 前台/会员信息/钱包密码设置-ducky.bru |
 | P0-025 | manual_review | auth | POST | {{api_url}}/member/wallet/password/update |  | 前台/会员信息/设置新钱包密码-ducky.bru |
 | P0-026 | review_only | auth | POST | {{api_url}}/member/auth/password | old_or_copy | 前台/会员登陆注册验证/旧密码前置验证-seven.bru |
-| P0-027 | safe_smoke | finance | GET | {{api_url}}/finance/channel/list?mode=2&source=huawei |  | 前台/财务/获取支付通道列表-wesley.bru |
-| P0-028 | safe_smoke | finance | GET | {{api_url}}/finance/deposit/list?status=PENDING&time_flag=0&page=1&page_size=10 |  | 前台/财务/充值记录-wesley.bru |
-| P0-029 | safe_smoke | finance | GET | {{api_url}}/finance/payment/tab/list | hardcoded_env | 前台/财务/提现tab.bru |
-| P0-030 | safe_smoke | finance | GET | {{api_url}}/finance/transaction/list?time_flag=15&page=1&page_size=20 |  | 前台/财务/获取交易记录- wesley-alex.bru |
-| P0-031 | safe_smoke | finance | GET | {{api_url}}/finance/transaction/types |  | 前台/财务/账变字典.bru |
-| P0-032 | safe_smoke | finance | GET | {{api_url}}/finance/wallet |  | 前台/财务/会员钱包-wesley.bru |
-| P0-033 | safe_smoke | finance | GET | {{api_url}}/finance/withdraw/list?time_flag=0&page=1&page_size=10 |  | 前台/财务/提现记录-wesley.bru |
-| P0-034 | token_required | finance | GET | {{admin_url}}/admin/finance/payment/bank/list | hardcoded_env | 后台/财务管理/银行卡/银行卡列表.bru |
-| P0-035 | token_required | finance | GET | {{admin_url}}/admin/finance/payment/channel/list?page=1&page_size=10&name&state=1&payment_name=paycools&name |  | 后台/财务管理/支付渠道/支付渠道通道列表.bru |
-| P0-036 | token_required | finance | GET | {{admin_url}}/admin/finance/payment/list?page=1&page_size=10&name=paycools&state=1&id |  | 后台/财务管理/支付渠道/x-支付渠道列表-cold.bru |
-| P0-037 | token_required | finance | GET | {{admin_url}}/admin/finance/payment/platform/list?page=1&page_size=10&mode=deposit | hardcoded_env | 后台/财务管理/支付渠道/支付平台列表.bru |
-| P0-038 | token_required | finance | GET | {{admin_url}}/admin/finance/transaction/types |  | 后台/财务管理/会员钱包账变/账变类型- wesley.bru |
-| P0-039 | token_required | finance | GET | {{admin_url}}/agency/finance/transaction/types |  | 代理管理后台/财务管理/财务报表/账变类型- wesley.bru |
-| P0-040 | token_required | finance | GET | {{admin_url}}/cmpl/finance/deposit/list |  | 合规/财务管理/财务记录/充值记录-wesley.bru |
-| P0-041 | token_required | finance | GET | {{admin_url}}/cmpl/finance/withdraw/list |  | 合规/财务管理/财务记录/提现记录-wesley.bru |
-| P0-042 | token_required | finance | GET | {{api_url}}/finance/account/list | hardcoded_env | 前台/财务/提款账户列表-wesley.bru |
-| P0-043 | token_required | finance | GET | {{api_url}}/finance/channel/product/list?mode=1&pid=1 | hardcoded_env | 前台/财务/获取支付通道商品列表.bru |
-| P0-044 | token_required | finance | GET | {{api_url}}/finance/member/buyfeatures | hardcoded_env | 前台/财务/购买免费旋转游戏列表.bru |
-| P0-045 | token_required | finance | GET | {{api_url}}/finance/payment/bank/list?page=2&page_size=10 | hardcoded_env | 前台/财务/银行列表.bru |
-| P0-046 | token_required | finance | GET | {{api_url}}/promo/task/transaction |  | 前台/任务中心/代币明细-seven.bru |
+| P0-027 | safe_smoke | finance | GET | {{api_url}}/finance/account/list | hardcoded_env | 前台/财务/提款账户列表-wesley.bru |
+| P0-028 | safe_smoke | finance | GET | {{api_url}}/finance/channel/list?mode=2&source=huawei |  | 前台/财务/获取支付通道列表-wesley.bru |
+| P0-029 | safe_smoke | finance | GET | {{api_url}}/finance/deposit/list?status=PENDING&time_flag=0&page=1&page_size=10 |  | 前台/财务/充值记录-wesley.bru |
+| P0-030 | safe_smoke | finance | GET | {{api_url}}/finance/payment/bank/list?page=2&page_size=10 | hardcoded_env | 前台/财务/银行列表.bru |
+| P0-031 | safe_smoke | finance | GET | {{api_url}}/finance/payment/tab/list | hardcoded_env | 前台/财务/提现tab.bru |
+| P0-032 | safe_smoke | finance | GET | {{api_url}}/finance/transaction/list?time_flag=15&page=1&page_size=20 |  | 前台/财务/获取交易记录- wesley-alex.bru |
+| P0-033 | safe_smoke | finance | GET | {{api_url}}/finance/transaction/types |  | 前台/财务/账变字典.bru |
+| P0-034 | safe_smoke | finance | GET | {{api_url}}/finance/wallet |  | 前台/财务/会员钱包-wesley.bru |
+| P0-035 | safe_smoke | finance | GET | {{api_url}}/finance/withdraw/list?time_flag=0&page=1&page_size=10 |  | 前台/财务/提现记录-wesley.bru |
+| P0-036 | safe_smoke | finance | GET | {{api_url}}/promo/task/transaction |  | 前台/任务中心/代币明细-seven.bru |
+| P0-037 | token_required | finance | GET | {{admin_url}}/admin/finance/payment/bank/list | hardcoded_env | 后台/财务管理/银行卡/银行卡列表.bru |
+| P0-038 | token_required | finance | GET | {{admin_url}}/admin/finance/payment/channel/list?page=1&page_size=10&name&state=1&payment_name=paycools&name |  | 后台/财务管理/支付渠道/支付渠道通道列表.bru |
+| P0-039 | token_required | finance | GET | {{admin_url}}/admin/finance/payment/list?page=1&page_size=10&name=paycools&state=1&id |  | 后台/财务管理/支付渠道/x-支付渠道列表-cold.bru |
+| P0-040 | token_required | finance | GET | {{admin_url}}/admin/finance/payment/platform/list?page=1&page_size=10&mode=deposit | hardcoded_env | 后台/财务管理/支付渠道/支付平台列表.bru |
+| P0-041 | token_required | finance | GET | {{admin_url}}/admin/finance/transaction/types |  | 后台/财务管理/会员钱包账变/账变类型- wesley.bru |
+| P0-042 | token_required | finance | GET | {{admin_url}}/agency/finance/transaction/types |  | 代理管理后台/财务管理/财务报表/账变类型- wesley.bru |
+| P0-043 | token_required | finance | GET | {{admin_url}}/cmpl/finance/deposit/list |  | 合规/财务管理/财务记录/充值记录-wesley.bru |
+| P0-044 | token_required | finance | GET | {{admin_url}}/cmpl/finance/withdraw/list |  | 合规/财务管理/财务记录/提现记录-wesley.bru |
+| P0-045 | token_required | finance | GET | {{api_url}}/finance/channel/product/list?mode=1&pid=1 | hardcoded_env | 前台/财务/获取支付通道商品列表.bru |
+| P0-046 | token_required | finance | GET | {{api_url}}/finance/member/buyfeatures | hardcoded_env | 前台/财务/购买免费旋转游戏列表.bru |
 | P0-047 | manual_review | finance | POST | {{admin_url}}/admin/finance/adjust/list?uid=1&operator_uid=2&action=1,2&page=1&page_size=10&bill_no=&amount_min=1&amount_max=100&phone= |  | 代理管理后台/财务管理/财务报表/系统调整.bru |
 | P0-048 | manual_review | finance | POST | {{admin_url}}/admin/finance/deposit/export |  | 后台/财务管理/存款记录/充值记录导出-wesley.bru |
 | P0-049 | manual_review | finance | POST | {{admin_url}}/admin/finance/deposit/list |  | 后台/财务管理/存款记录/充值列表-wesley.bru |

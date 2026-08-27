@@ -1,0 +1,22 @@
+{
+  "name": "qa-automation",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test:ui": "playwright test",
+    "test:ui:p0": "playwright test ui/cases/client-login.spec.mjs ui/cases/client-main-flow.spec.mjs ui/cases/client-game-bet-smoke.spec.mjs ui/cases/client-p0-positive-negative.spec.mjs",
+    "test:ui:p0:scan": "playwright test ui/cases/client-main-flow.spec.mjs",
+    "test:ui:p0:pn": "playwright test ui/cases/client-p0-positive-negative.spec.mjs",
+    "test:ui:inventory": "playwright test ui/cases/client-locator-inventory.spec.mjs",
+    "test:ui:login": "playwright test ui/cases/client-login.spec.mjs",
+    "test:ui:game-bet": "playwright test ui/cases/client-game-bet-smoke.spec.mjs",
+    "test:ui:modal-debug": "playwright test ui/cases/client-modal-debug.spec.mjs",
+    "ui:p0-points": "node scripts/render-ui-p0-test-points.mjs",
+    "test:ui:headed": "playwright test --headed"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.57.0",
+    "playwright": "^1.57.0"
+  }
+}

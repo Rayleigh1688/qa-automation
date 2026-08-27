@@ -380,12 +380,12 @@ def main() -> None:
     )
     parser.add_argument(
         "--csv",
-        default="api/interface-inventory.csv",
+        default="api/inventory/interfaces.csv",
         help="CSV output path",
     )
     parser.add_argument(
         "--md",
-        default="api/interface-inventory.md",
+        default="api/inventory/interfaces.md",
         help="Markdown summary output path",
     )
     args = parser.parse_args()

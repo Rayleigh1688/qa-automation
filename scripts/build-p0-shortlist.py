@@ -30,9 +30,16 @@ SAFE_GET_HINTS = [
     "/finance/transaction/types",
     "/finance/channel/list",
     "/finance/payment/tab/list",
+    "/finance/account/list",
+    "/finance/payment/bank/list",
     "/member/kyc/detail",
+    "/member/kyc/ekyc/info",
     "/member/vip",
     "/member/detail",
+    "/member/fav/list",
+    "/member/agency/audit/results",
+    "/member/agency/problem/list",
+    "/promo/task/transaction",
     "/promo/vip/config",
     "/promo/vip/sign/in/config",
 ]
@@ -183,7 +190,7 @@ def write_markdown(rows: list[dict[str, str]], output: Path, csv_output: Path) -
     output.write_text(
         f"""# P0 接口候选清单
 
-来源：`api/interface-inventory.csv`
+来源：`api/inventory/interfaces.csv`
 
 全量清单：`{csv_output.resolve()}`
 
@@ -210,9 +217,9 @@ def write_markdown(rows: list[dict[str, str]], output: Path, csv_output: Path) -
 
 
 def main() -> None:
-    inventory = Path("api/interface-inventory.csv")
-    csv_output = Path("api/p0-interface-shortlist.csv")
-    md_output = Path("api/p0-interface-shortlist.md")
+    inventory = Path("api/inventory/interfaces.csv")
+    csv_output = Path("api/p0/interface-shortlist.csv")
+    md_output = Path("api/p0/interface-shortlist.md")
 
     rows = []
     for row in read_inventory(inventory):

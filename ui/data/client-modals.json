@@ -1,0 +1,25 @@
+{
+  "modals": [
+    {
+      "name": "responsible_gaming_pagcor",
+      "detectText": [
+        "Responsible Gaming Guidelines",
+        "I agree to all"
+      ],
+      "accept": {
+        "checkboxTexts": [
+          "I agree to all"
+        ],
+        "checkboxSelectors": [
+          "input[type=\"checkbox\"]"
+        ],
+        "buttonTexts": [
+          "Proceed"
+        ],
+        "fallbackButtonTexts": [
+          "Exit"
+        ]
+      }
+    }
+  ]
+}
