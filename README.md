@@ -2,6 +2,10 @@
 
 这是一个用于逐步建设测试自动化体系的工作区。
 
+## 新对话 / 新 AI 入口
+
+开始新的对话或交接给另一位 AI 时，先阅读 [AI-HANDOFF.md](AI-HANDOFF.md)。它记录当前进度、阻塞、文档阅读顺序、敏感信息边界，以及下一阶段的具体工作；本文件继续作为项目总说明书。
+
 ## 目录结构
 
 ```text
@@ -47,6 +51,7 @@ scripts/         辅助脚本
 ## AI 参考手册分工
 
 - `README.md`：项目总说明书，记录当前阶段、最高优先级、统一命令、CI 门禁和全局规则。
+- `AI-HANDOFF.md`：新对话和新 AI 的交接入口，记录当前进度、环境阻塞、接力顺序和下一阶段工作；方向变化时必须同步更新。
 - `testing-plan/`：测试自动化路线图，记录阶段目标、优先级定义、建设边界和验收标准。
 - `api/p0/README.md`：P0 API 固定资产说明，解释 shortlist、main-flow、test-cases 的关系。
 - `api/runbooks/`：API 执行手册，记录客户端/后台登录、鉴权、环境变量、受控写操作和调试命令。
@@ -85,10 +90,10 @@ python3 scripts/run-api-tests.py p0
 python3 scripts/run-api-tests.py p0 p1
 ```
 
-P0 包含受控写流程：
+P0 只读快速检查：
 
 ```bash
-python3 scripts/run-api-tests.py p0 --include-write
+python3 scripts/run-api-tests.py p0 --safe-only
 ```
 
 UI P0：
@@ -103,20 +108,15 @@ API + UI P0：
 npm run test:p0
 ```
 
-受控写操作 P0：
-
-```bash
-python3 scripts/run-api-tests.py p0 --include-write
-```
-
 说明：
 
-- `python3 scripts/run-api-tests.py p0` 执行 P0 正例只读 smoke 和 P0 反例保护性规则，并按 `main-flow-scenarios.csv` 生成主流程报告。
+- `python3 scripts/run-api-tests.py p0` 执行当前 P0 主流程：正例/反例读接口、注册、充值审核、提现申请和后台提现成功标记，并生成 Markdown 与 HTML 主流程报告。
 - `python3 scripts/run-api-tests.py p0 p1` 按等级依次执行；当前 P1 资产不存在时会跳过并提示。
-- `--include-write` 用于受控主流程调试，包含注册、充值、后台补单、提现申请、后台提现审核同意和标记成功；提现以后台成功记录为验收，不校验项目外收款账户或真实到账，只应在测试环境或专用 UAT 测试数据下执行。
+- `--safe-only` 跳过注册、充值、提现和审核等受控写操作，只执行只读/反例检查。`--include-write` 保留为旧命令兼容参数；P0 默认已包含受控写主流程。提现以后台成功记录为验收，不校验项目外收款账户或真实到账，只应在测试环境或专用 UAT 测试数据下执行。
 - `test:ui:p0` 默认不执行真实投注。需要点击三方游戏内投注区域时，必须显式设置 `EXECUTE_BET=true`。
 - 后台登录固定码和审核动态码是两套东西：`ADMIN_GOOGLE_CODE=111111` 只用于 FAT 后台登录，审核/补单/KYC 审批使用 `ADMIN_APPROVAL_TOTP_SECRET` 生成真实动态码。
 - API 执行会覆盖 `api/results/` 下同名结果和报告；UI 执行会覆盖 `ui/results/` 和 `ui/reports/` 下同名产物。需要历史记录时，以 CI 归档为准，不在仓库工作区内累积。
+- 每次 P0 API 执行还会生成 `api/results/p0-api-report.html`：可离线打开的静态主流程报告，包含放行结论、流程状态卡和可展开场景细则。
 - 需要单独清空生成物时，执行 `python3 scripts/clean-test-artifacts.py all`；只清 API 或 UI 时分别用 `api`、`ui` 参数。
 - FAT 主流程正例当前使用稳定充值通道 Gcash `pid=47870534954254469`、金额 `50`；充值/补单账号和提现账号必须拆开，避免充值补单产生的流水影响提现。
 - 本地或 CI 推荐通过 `WRITE_CLIENT_PHONE`、`WRITE_CLIENT_OTP` 注入受控写/充值账号，通过 `WITHDRAW_CLIENT_PHONE`、`WITHDRAW_CLIENT_OTP` 注入专用提现账号；也可以在命令中传 `--write-client-phone`、`--write-client-otp`、`--withdraw-client-phone`、`--withdraw-client-otp`。
@@ -128,15 +128,15 @@ Jenkinsfile 已支持参数化执行：
 | 参数 | 推荐值 | 用途 |
 | --- | --- | --- |
 | `TARGET_ENV` | `fat` / `uat` | `fat` 用于发布 UAT 前测试环境验证，`uat` 用于发布 UAT 后验证 |
-| `P0_SCOPE` | `api_all` | 执行 API 正例 P0 + API 反例 P0 |
+| `P0_SCOPE` | `api_all` | 执行 API 只读正例和默认安全反例；不创建测试订单 |
 | `EXECUTE_BET` | `false` | 默认不做真实投注点击 |
 
 推荐发布流程：
 
 1. 发布 UAT 前，在测试环境执行：`TARGET_ENV=fat`、`P0_SCOPE=api_all`。
 2. 发布 UAT 后，在 UAT 执行：`TARGET_ENV=uat`、`P0_SCOPE=api_all`。
-3. UI 自动化作为补充检查，需要同时验证接口与前端时执行 `P0_SCOPE=api_and_ui`；只执行 UI 时使用 `ui_only`。
-4. 涉及充值、提现、审核链路专项验证时，人工触发 `P0_SCOPE=api_write`，并确认测试账号、活动流水、审核令牌和资金影响可控。
+3. UI 自动化作为补充检查，需要同时验证安全 API 检查与前端时执行 `P0_SCOPE=api_and_ui`；只执行 UI 时使用 `ui_only`。
+4. 涉及注册、充值、提现和审核链路验证时，人工触发 `P0_SCOPE=api_write`。该 scope 执行完整受控主流程，必须确认测试账号、活动流水、审核令牌和资金影响可控。
 
 CI 需要通过 Jenkins 环境变量或凭据注入：
 
@@ -166,6 +166,7 @@ CI 归档产物：
 - `api/p0/README.md`
 - `api/results/*.md`
 - `api/results/*.json`
+- `api/results/*.html`
 - `ui/reports/*.md`
 - `ui/results/**/*.json`
 - `ui/results/screenshots/**/*`

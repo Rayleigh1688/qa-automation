@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import argparse
 import csv
+import html
 import json
 import re
 from collections import Counter
@@ -31,6 +32,73 @@ def table(rows: list[list[str]]) -> str:
     for row in rows[1:]:
         lines.append("| " + " | ".join(item.replace("|", "\\|").replace("\n", " ") for item in row) + " |")
     return "\n".join(lines)
+
+
+def release_verdict(counter: Counter[str]) -> tuple[str, str]:
+    if counter["失败"] or counter["未通过"]:
+        return "BLOCKED", "存在产品缺陷或自动化失败，不能作为 P0 放行结论。"
+    if counter["未自动执行"] or counter["未执行"] or counter["未映射"]:
+        return "PARTIAL", "已执行场景通过，但仍有未自动化或未执行的 P0 场景。"
+    return "PASS", "所有已纳入 P0 的场景均通过。"
+
+
+def status_class(status: str) -> str:
+    if status == "通过":
+        return "pass"
+    if status in {"失败", "未通过"}:
+        return "fail"
+    return "pending"
+
+
+def render_html_report(
+    scope: str,
+    scenarios_path: str,
+    verdict: str,
+    verdict_detail: str,
+    counter: Counter[str],
+    details: list[dict[str, str]],
+) -> str:
+    stages: dict[str, list[dict[str, str]]] = {}
+    for item in details:
+        stages.setdefault(item["flow_stage_label"], []).append(item)
+    cards = "".join(
+        f'<div class="metric {status_class(name)}"><span>{html.escape(name)}</span><strong>{count}</strong></div>'
+        for name, count in counter.most_common()
+    )
+    flow_items = []
+    for stage, items in stages.items():
+        stage_status = next((item["runtime_status"] for item in items if item["runtime_status"] in {"失败", "未通过"}), "")
+        stage_status = stage_status or next((item["runtime_status"] for item in items if item["runtime_status"] != "通过"), "通过")
+        flow_items.append(
+            f'<a href="#{html.escape(stage)}" class="flow {status_class(stage_status)}">'
+            f'{html.escape(stage)}<small>{len(items)}</small></a>'
+        )
+    sections = []
+    for stage, items in stages.items():
+        rows = []
+        for item in items:
+            rows.append(
+                "<details class=\"case\">"
+                f"<summary><span class=\"badge {status_class(item['runtime_status'])}\">{html.escape(item['runtime_status'])}</span>"
+                f"<b>{html.escape(item['scenario_id'])}</b><span>{html.escape(item['scenario_name'])}</span>"
+                f"<em>{html.escape(item['polarity'])}</em></summary>"
+                "<div class=\"case-body\">"
+                f"<dl><dt>自动化状态</dt><dd>{html.escape(item['automation_status'])}</dd>"
+                f"<dt>运行结论</dt><dd>{html.escape(item['runtime_detail'])}</dd>"
+                f"<dt>接口/资产</dt><dd>{html.escape(item['endpoints_or_assets'])}</dd>"
+                f"<dt>预置条件</dt><dd>{html.escape(item['precondition'])}</dd>"
+                f"<dt>预期断言</dt><dd>{html.escape(item['expected_assertions'])}</dd></dl>"
+                "</div></details>"
+            )
+        sections.append(f'<section id="{html.escape(stage)}"><h2>{html.escape(stage)} <small>{len(items)} 个场景</small></h2>{"".join(rows)}</section>')
+    generated_at = datetime.now().astimezone().isoformat()
+    return f"""<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>P0 API 主流程报告</title><style>
+:root{{--ink:#17232d;--muted:#64727d;--line:#d9e1e5;--panel:#fff;--bg:#f3f6f5;--pass:#16754b;--fail:#bd3434;--pending:#a76508}}
+*{{box-sizing:border-box}}body{{margin:0;background:var(--bg);color:var(--ink);font:14px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}}
+main{{max-width:1180px;margin:auto;padding:28px 20px 56px}}header{{display:flex;justify-content:space-between;gap:24px;align-items:start;border-bottom:1px solid var(--line);padding-bottom:22px}}h1{{font-size:26px;margin:0 0 5px}}h2{{font-size:18px;margin:30px 0 10px}}h2 small,.meta{{font-size:13px;font-weight:400;color:var(--muted)}}.verdict{{min-width:220px;border:1px solid var(--line);background:var(--panel);padding:14px 16px;border-left:5px solid var(--pending)}}.verdict.fail{{border-left-color:var(--fail)}}.verdict.pass{{border-left-color:var(--pass)}}.verdict strong{{display:block;font-size:22px;letter-spacing:0;margin-bottom:3px}}.metrics{{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin:20px 0}}.metric{{background:var(--panel);border:1px solid var(--line);padding:12px}}.metric span{{color:var(--muted);display:block}}.metric strong{{font-size:24px}}.flow-grid{{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:8px}}.flow{{color:var(--ink);text-decoration:none;background:var(--panel);border:1px solid var(--line);padding:10px 12px;border-left:4px solid var(--pending)}}.flow.pass{{border-left-color:var(--pass)}}.flow.fail{{border-left-color:var(--fail)}}.flow small{{float:right;color:var(--muted)}}.case{{background:var(--panel);border:1px solid var(--line);margin:6px 0}}summary{{display:grid;grid-template-columns:74px 84px 1fr 70px;gap:10px;align-items:center;padding:11px 12px;cursor:pointer;list-style:none}}summary::-webkit-details-marker{{display:none}}.badge{{font-size:12px;font-weight:600}}.badge.pass{{color:var(--pass)}}.badge.fail{{color:var(--fail)}}.badge.pending{{color:var(--pending)}}summary em{{color:var(--muted);font-style:normal;text-align:right}}.case-body{{border-top:1px solid var(--line);padding:12px 16px;background:#fbfcfc}}dl{{display:grid;grid-template-columns:105px 1fr;gap:7px 14px;margin:0}}dt{{color:var(--muted)}}dd{{margin:0;word-break:break-word}}@media(max-width:640px){{header{{display:block}}.verdict{{margin-top:16px}}summary{{grid-template-columns:68px 1fr}}summary em{{display:none}}dl{{grid-template-columns:1fr}}dt{{margin-top:8px}}}}
+</style></head><body><main><header><div><h1>P0 API 主流程报告</h1><div class="meta">环境：{html.escape(scope)} · 生成时间：{html.escape(generated_at)} · 场景：{html.escape(scenarios_path)}</div></div><div class="verdict {status_class('失败' if verdict == 'BLOCKED' else '通过' if verdict == 'PASS' else '未执行')}"><strong>{verdict}</strong><span>{html.escape(verdict_detail)}</span></div></header><div class="metrics">{cards}</div><nav class="flow-grid">{''.join(flow_items)}</nav>{''.join(sections)}</main></body></html>"""
 
 
 def scenario_case_ids(scenario: dict[str, str], cases_by_scenario: dict[str, list[str]]) -> list[str]:
@@ -126,6 +194,7 @@ def main() -> None:
     parser.add_argument("--negative-result", default="api/results/p0-negative-result.json")
     parser.add_argument("--controlled-result", default="api/results/main-positive-flow-result.json")
     parser.add_argument("--out", default="api/results/p0-main-flow-report.md")
+    parser.add_argument("--html-out", default="")
     parser.add_argument("--scope", default="FAT")
     args = parser.parse_args()
 
@@ -152,6 +221,7 @@ def main() -> None:
     controlled_results = [item for item in controlled_items if isinstance(item, dict)] if isinstance(controlled_items, list) else []
 
     detail_rows = [["场景ID", "优先级", "流程", "正反例", "场景", "自动化状态", "运行结论", "说明"]]
+    details: list[dict[str, str]] = []
     runtime_counter: Counter[str] = Counter()
     stage_counter: Counter[str] = Counter()
     for scenario in scenarios:
@@ -176,6 +246,7 @@ def main() -> None:
                 detail[:160],
             ]
         )
+        details.append({**scenario, "runtime_status": runtime_status, "runtime_detail": detail})
 
     summary_rows = [["指标", "数量"]] + [[key, str(value)] for key, value in runtime_counter.most_common()]
     stage_rows = [["流程", "场景数"]] + [[key, str(value)] for key, value in stage_counter.most_common()]
@@ -209,6 +280,13 @@ def main() -> None:
 """
     Path(args.out).write_text(report, encoding="utf-8")
     print(f"wrote {Path(args.out).resolve()}")
+    if args.html_out:
+        verdict, verdict_detail = release_verdict(runtime_counter)
+        Path(args.html_out).write_text(
+            render_html_report(args.scope, args.scenarios, verdict, verdict_detail, runtime_counter, details),
+            encoding="utf-8",
+        )
+        print(f"wrote {Path(args.html_out).resolve()}")
 
 
 if __name__ == "__main__":

@@ -88,27 +88,6 @@ npm run test:ui:p0:pn
 npm run test:ui:game-bet
 ```
 
-## 当前基线
+## 当前方向
 
-- 定位资产扫描已跑通：`npm run test:ui:inventory`。
-- P0 UI 测试点报告可通过 `npm run ui:p0-points` 生成，测试点源数据为 `ui/data/client-p0-test-points.json`。
-- 客户端登录正反例已跑通：`npm run test:ui:login`。
-  - OTP 登录成功。
-  - 空手机号不能登录。
-  - 无效手机号停留登录页。
-- 客户端 P0 默认套件命令：`npm run test:ui:p0`。
-- 客户端主流程扫描命令：`npm run test:ui:p0:scan`。
-- P0 UI 正反例补充套件命令：`npm run test:ui:p0:pn`。
-  - 未填写 OTP 不能登录。
-  - 未勾选条款不能登录。
-  - 未登录访问 My 不暴露会员敏感信息。
-  - 登录后 My 展示会员、钱包、充值、提现或 KYC 入口。
-  - 无效游戏页不启动第三方游戏。
-- Lucky Penny 游戏投注冒烟已跑通：`EXECUTE_BET=true npm run test:ui:game-bet`。
-
-## 下一步
-
-1. 做钱包、充值、提现入口专项扫描。
-2. 用提现页真实 UI 状态反推接口层 `/finance/payment/withdraw` 失败原因。
-3. 将投注冒烟的 UI 点击结果接入投注记录、钱包账变 API 断言。
-4. 补充第二个可控游戏，验证固定视口和相对坐标策略是否可复用。
+当前 UI 工作先通过窗口化 Playwright 捕获客户端主流程的真实 Network，再将已确认的接口契约补入 API P0。实时完成度和下一步只维护在 `AI-HANDOFF.md` 与 `ui/README.md`，避免本 Skill 与项目说明重复。

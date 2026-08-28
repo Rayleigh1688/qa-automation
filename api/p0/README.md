@@ -23,7 +23,7 @@ P0 只保留必要资产，避免 CSV 和 Markdown 重复维护。
 
 ## 推荐命令
 
-执行 P0 API 正反例：
+执行完整当前 P0 主流程（默认包含受控读写）：
 
 ```bash
 python3 scripts/run-api-tests.py p0
@@ -35,16 +35,16 @@ python3 scripts/run-api-tests.py p0
 python3 scripts/run-api-tests.py p0 p1
 ```
 
-执行 P0 并包含受控写流程：
+只执行只读/反例快速检查：
 
 ```bash
-python3 scripts/run-api-tests.py p0 --include-write
+python3 scripts/run-api-tests.py p0 --safe-only
 ```
 
 需要显式指定专用提现账号时：
 
 ```bash
-python3 scripts/run-api-tests.py p0 --include-write \
+python3 scripts/run-api-tests.py p0 \
   --write-client-phone <controlled write/deposit phone> \
   --write-client-otp <otp code> \
   --withdraw-client-phone <withdraw dedicated phone> \
@@ -58,7 +58,8 @@ python3 scripts/run-api-tests.py p0 --include-write \
 - `api/results/p0-negative-result.json`
 - `api/results/p0-negative-report.md`
 - `api/results/p0-main-flow-report.md`
-- `api/results/main-positive-flow-result.json`，仅 `--include-write` 时生成
+- `api/results/p0-api-report.html`，静态可视化主流程报告
+- `api/results/main-positive-flow-result.json`，完整 P0 默认生成；`--safe-only` 时不生成
 
 这些文件都是可再生成产物，不属于 P0 固定资产；清理旧报告时可以直接删除。
 

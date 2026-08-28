@@ -94,14 +94,15 @@ API 主流程自动化默认不依赖数据库读取权限。优先通过客户�
 - `api/results/p0-negative-result.json`
 - `api/results/p0-negative-report.md`
 - `api/results/p0-main-flow-report.md`
+- `api/results/p0-api-report.html`
 - `api/results/controlled-write-result.json`
 - `api/results/main-positive-flow-result.json`
 
 原始 JSON 和 Markdown 报告都不提交，最近一次结论以当前工作区生成物为准；历史记录交给 CI 归档系统。
 
-## P0 主流程写操作冒烟
+## 单阶段受控写调试
 
-注册、充值、提现属于 P0 主流程。它们不进入只读 P0 门禁，但使用独立 runner 执行：
+日常完整执行使用 `python3 scripts/run-api-tests.py p0`。只有定位单一写阶段时才直接运行底层 runner；不要把下面命令当作常规入口。
 
 ```bash
 CLIENT_PHONE=<client phone> CLIENT_OTP=<otp code> \

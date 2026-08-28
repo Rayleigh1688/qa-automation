@@ -4,7 +4,7 @@
 Examples:
     python3 scripts/run-api-tests.py p0
     python3 scripts/run-api-tests.py p0 p1
-    python3 scripts/run-api-tests.py p0 --include-write
+    python3 scripts/run-api-tests.py p0 --safe-only
 """
 
 from __future__ import annotations
@@ -22,6 +22,21 @@ def run(command: list[str]) -> None:
 
 def clean_api_results() -> None:
     run(["python3", "scripts/clean-test-artifacts.py", "api"])
+
+
+def render_p0_main_report(args: argparse.Namespace) -> None:
+    run(
+        [
+            "python3",
+            "scripts/render-main-flow-report.py",
+            "--scope",
+            args.scope,
+            "--out",
+            "api/results/p0-main-flow-report.md",
+            "--html-out",
+            "api/results/p0-api-report.html",
+        ]
+    )
 
 
 def run_p0(args: argparse.Namespace) -> None:
@@ -76,39 +91,36 @@ def run_p0(args: argparse.Namespace) -> None:
             *(["--insecure"] if args.insecure else []),
         ]
     )
-    if args.include_write:
-        run(
-            [
-                "python3",
-                "scripts/api-controlled-flow-runner.py",
-                "--main-positive-flow",
-                "--body-format",
-                args.body_format,
-                *(["--client-phone", args.write_client_phone] if args.write_client_phone else []),
-                *(["--client-otp", args.write_client_otp] if args.write_client_otp else []),
-                "--deposit-pid",
-                args.deposit_pid,
-                "--deposit-amount",
-                args.deposit_amount,
-                "--withdraw-amount",
-                args.withdraw_amount,
-                *(["--withdraw-client-phone", args.withdraw_client_phone] if args.withdraw_client_phone else []),
-                *(["--withdraw-client-otp", args.withdraw_client_otp] if args.withdraw_client_otp else []),
-                "--out",
-                "api/results/main-positive-flow-result.json",
-                *(["--insecure"] if args.insecure else []),
-            ]
-        )
-    run(
-        [
-            "python3",
-            "scripts/render-main-flow-report.py",
-            "--scope",
-            args.scope,
-            "--out",
-            "api/results/p0-main-flow-report.md",
-        ]
-    )
+    write_error: subprocess.CalledProcessError | None = None
+    if not args.safe_only:
+        try:
+            run(
+                [
+                    "python3",
+                    "scripts/api-controlled-flow-runner.py",
+                    "--main-positive-flow",
+                    "--body-format",
+                    args.body_format,
+                    *(["--client-phone", args.write_client_phone] if args.write_client_phone else []),
+                    *(["--client-otp", args.write_client_otp] if args.write_client_otp else []),
+                    "--deposit-pid",
+                    args.deposit_pid,
+                    "--deposit-amount",
+                    args.deposit_amount,
+                    "--withdraw-amount",
+                    args.withdraw_amount,
+                    *(["--withdraw-client-phone", args.withdraw_client_phone] if args.withdraw_client_phone else []),
+                    *(["--withdraw-client-otp", args.withdraw_client_otp] if args.withdraw_client_otp else []),
+                    "--out",
+                    "api/results/main-positive-flow-result.json",
+                    *(["--insecure"] if args.insecure else []),
+                ]
+            )
+        except subprocess.CalledProcessError as error:
+            write_error = error
+    render_p0_main_report(args)
+    if write_error:
+        raise write_error
 
 
 def run_generic_level(level: str, args: argparse.Namespace) -> None:
@@ -158,7 +170,8 @@ def main() -> None:
     parser.add_argument("--scope", default="FAT")
     parser.add_argument("--body-format", choices=["json", "cbor"], default="cbor")
     parser.add_argument("--insecure", action=argparse.BooleanOptionalAction, default=True)
-    parser.add_argument("--include-write", action="store_true", help="include controlled write-flow probes")
+    parser.add_argument("--include-write", action="store_true", help="compatibility flag; P0 already includes controlled writes by default")
+    parser.add_argument("--safe-only", action="store_true", help="skip controlled P0 writes and run only read/negative checks")
     parser.add_argument("--deposit-pid", default="47870534954254469")
     parser.add_argument("--deposit-amount", default="50")
     parser.add_argument("--withdraw-amount", default="1000")
@@ -168,11 +181,20 @@ def main() -> None:
     parser.add_argument("--withdraw-client-otp", default="")
     args = parser.parse_args()
 
+    if args.safe_only and args.include_write:
+        raise SystemExit("--safe-only and --include-write cannot be used together")
+
     clean_api_results()
 
     for level in [item.lower() for item in args.levels]:
         if level == "p0":
-            run_p0(args)
+            try:
+                run_p0(args)
+            except subprocess.CalledProcessError:
+                # A failing smoke/negative/write step must still leave a P0
+                # verdict artifact for local inspection and CI archiving.
+                render_p0_main_report(args)
+                raise
         elif level in {"p1", "p2"}:
             run_generic_level(level, args)
         else:

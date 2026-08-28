@@ -8,7 +8,7 @@
 
 - 客户端只读 P0：登录前置、KYC、充值/提现资料、投注、钱包、账变、会员、VIP、代理资料。
 - 后台只读 P0：后台登录前置、当前用户、银行卡、账变类型、KYC 待审数量、eKYC 配置。
-- 主流程写操作 P0：新增测试用户、创建充值订单、提现申请调试。
+- 主流程受控写 P0：新增测试用户、充值下单和后台补单、提现申请及后台审核同意/成功标记。
 
 ## 资产入口
 
@@ -23,6 +23,7 @@
 | `api/p0/test-cases.csv` | P0 可执行测试用例，runner 直接读取 |
 | `api/results/*.json` | 本地原始执行结果，每次覆盖刷新，不提交仓库 |
 | `api/results/*.md` | 本地 Markdown 执行报告，每次覆盖刷新，不提交仓库 |
+| `api/results/*.html` | 本地静态可视化报告，每次覆盖刷新，不提交仓库 |
 | `scripts/run-api-tests.py` | 按等级统一执行 API 测试的入口 |
 | `scripts/clean-test-artifacts.py` | 清空 API/UI 生成物目录，只保留 `.gitkeep` |
 | `scripts/api-smoke-runner.py` | 登录、请求、CBOR 编解码、断言执行器 |
@@ -49,7 +50,7 @@ LANG_HEADER=en_US
 ```bash
 python3 scripts/run-api-tests.py p0
 python3 scripts/run-api-tests.py p0 p1
-python3 scripts/run-api-tests.py p0 --include-write
+python3 scripts/run-api-tests.py p0 --safe-only
 ```
 
 统一入口会在执行前清空 `api/results/`，然后覆盖写入本次结果。需要只清理生成物时执行：
@@ -58,6 +59,8 @@ python3 scripts/run-api-tests.py p0 --include-write
 python3 scripts/clean-test-artifacts.py api
 python3 scripts/clean-test-artifacts.py all
 ```
+
+统一入口会额外生成 `api/results/p0-api-report.html`。这是不依赖服务端的单文件静态报告：首屏显示 `PASS`、`PARTIAL` 或 `BLOCKED`，并按主流程分组展开场景的接口、前置条件、断言和运行结论。
 
 FAT 测试环境当前需要临时跳过本机 TLS 证书校验：
 
@@ -115,7 +118,7 @@ python3 scripts/api-controlled-flow-runner.py \
 - 充值正例优先使用 Gcash 通道 `pid=47870534954254469`，金额 `50`。COINS 通道曾返回 `Failed to load payment channels, please contact customer service!`，不适合作为稳定主流程正例。
 - 充值补单会给当前客户端账号产生新的流水/锁定金额，因此提现正例不要复用同一个客户端账号。
 - 提现正例使用已 KYC、无未完成流水、已绑定提款账户的专用账号，金额建议大于 `500`。主流程随后在 FAT/UAT 后台审核同意并标记成功，验收以后台成功记录为准，不校验项目外账户或真实到账。
-- `scripts/run-api-tests.py p0 --include-write` 默认使用 GCash `pid=47870534954254469`、充值金额 `50`、提现金额 `1000`；受控写/充值账号用 `WRITE_CLIENT_PHONE`/`WRITE_CLIENT_OTP` 或 `--write-client-phone`/`--write-client-otp` 注入，专用提现账号用 `WITHDRAW_CLIENT_PHONE`/`WITHDRAW_CLIENT_OTP` 或命令行参数注入。
+- `scripts/run-api-tests.py p0` 默认使用 GCash `pid=47870534954254469`、充值金额 `50`、提现金额 `1000`；受控写/充值账号用 `WRITE_CLIENT_PHONE`/`WRITE_CLIENT_OTP` 或 `--write-client-phone`/`--write-client-otp` 注入，专用提现账号用 `WITHDRAW_CLIENT_PHONE`/`WITHDRAW_CLIENT_OTP` 或命令行参数注入。只读诊断需显式增加 `--safe-only`。
 - `--main-positive-flow` 默认创建提现单、查询待审列表、审核同意并标记成功；不会访问第三方出款渠道。仍需要真实审核动态码。单独调试时，可用 `--approve-withdraw --withdraw-mark-success` 显式执行相同步骤。
 - 默认只读客户端账号如果返回 `This mobile number has been restricted`，说明测试环境短信触发限频；不要直接判定主流程失败，先切到 `WRITE_CLIENT_PHONE` 或更换专用只读账号。
 - 只读 smoke 账号必须是成熟账号：能登录、已绑定提款账户，最好已 KYC。新注册零余额账号可用于充值写流程，但不适合作为完整 P0 smoke 账号。
@@ -132,13 +135,15 @@ python3 scripts/render-p0-smoke-report.py \
 
 ## 通过标准
 
-每条用例至少满足：
+正例用例至少满足：
 
 - HTTP 状态为 `200`。
 - 响应可解码为 CBOR 或 JSON。
 - 业务字段 `status=true`。
 - `data` 类型符合用例要求。
 - 关键字段存在，例如钱包接口必须包含 `uid`、`balance`、`withdrawable`、`locked`。
+
+反例用例以场景断言为准：必须得到预期的业务拒绝或安全降级，不能只因 HTTP `200` 或 `status=false` 自动判通过；写操作反例还要验证没有产生不应有的订单、冻结或状态变化。
 
 数据库只读权限不是 P0 API 默认执行前置。只有在确认状态枚举、字段含义、账号前置或落库一致性时才使用；CI 门禁仍以 API 和后台只读接口断言为准。
 
@@ -168,7 +173,7 @@ python3 scripts/render-p0-smoke-report.py \
 - 派彩：投注记录、派彩记录、账变核对。
 - 提现：提现配置、提现申请、余额/KYC/资金密码限制、记录检查。
 - 相关数据检查：钱包、账变、会员、VIP、活动配置。
-- 后台：报表展示、审批列表和详情、权限、审批动作跳过。
+- 后台：报表展示、审批列表和详情、权限，以及本次专用测试单的受控审批动作。
 
 写接口自动化时，不能只根据接口文档生成用例。接口文档负责发现接口，主流程场景负责决定测试价值和正反例边界。
 
@@ -197,7 +202,7 @@ python3 scripts/render-p0-smoke-report.py \
 1. 先读本文件。
 2. 再读 `api/p0/README.md`、`api/p0/main-flow-scenarios.csv` 和 `api/p0/test-cases.csv`。
 3. 确认环境变量存在，不要把凭据写入仓库。
-4. 优先执行 `python3 scripts/run-api-tests.py p0`。需要受控写流程时加 `--include-write`。
+4. 优先执行 `python3 scripts/run-api-tests.py p0`，它默认覆盖当前受控读写主流程；只读诊断时加 `--safe-only`。
 5. 渲染报告。
 6. 如果失败，优先看 `assertion_failures`，再看 `decoded_body`。
 7. 不要自动执行 `manual_review` 或 `review_only` 接口。

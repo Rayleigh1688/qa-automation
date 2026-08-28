@@ -8,7 +8,7 @@ pipeline {
 
     parameters {
         choice(name: 'TARGET_ENV', choices: ['fat', 'uat'], description: 'fat runs before UAT release; uat runs after UAT release.')
-        choice(name: 'P0_SCOPE', choices: ['api_all', 'api_and_ui', 'ui_only', 'api_write'], description: 'P0 execution scope.')
+        choice(name: 'P0_SCOPE', choices: ['api_all', 'api_and_ui', 'ui_only', 'api_write'], description: 'api_all/api_and_ui run safe API checks; api_write runs the controlled API main flow.')
         booleanParam(name: 'EXECUTE_BET', defaultValue: false, description: 'Allow UI game smoke to click the in-game bet area.')
     }
 
@@ -65,7 +65,7 @@ pipeline {
             steps {
                 sh '''
                     set -eu
-                    python3 scripts/run-api-tests.py p0 --scope "${TARGET_ENV}"
+                    python3 scripts/run-api-tests.py p0 --scope "${TARGET_ENV}" --safe-only
                 '''
             }
         }
@@ -77,7 +77,7 @@ pipeline {
             steps {
                 sh '''
                     set -eu
-                    python3 scripts/run-api-tests.py p0 --scope "${TARGET_ENV}" --include-write
+                    python3 scripts/run-api-tests.py p0 --scope "${TARGET_ENV}"
                 '''
             }
         }
@@ -100,7 +100,7 @@ pipeline {
 
     post {
         always {
-            archiveArtifacts artifacts: 'api/p0/README.md,api/results/*.json,api/results/*.md,ui/reports/*.md,ui/results/**/*.json,ui/results/screenshots/**/*,playwright-report/**/*,test-results/**/*', allowEmptyArchive: true
+            archiveArtifacts artifacts: 'api/p0/README.md,api/results/*.json,api/results/*.md,api/results/*.html,ui/reports/*.md,ui/reports/*.html,ui/results/**/*.json,ui/results/screenshots/**/*,playwright-report/**/*,test-results/**/*', allowEmptyArchive: true
         }
     }
 }
