@@ -7,8 +7,6 @@
 "MF-005","P0","01_register_login","注册登录","negative","非法手机号或区号不能发送 OTP","client","OTP 发送接口","无","非法手机号、非法 country_code","提交非法手机号或区号发送 OTP","业务 status=false；返回参数校验错误；不触发短信发送","candidate","需要先从接口文档确认 OTP 发送接口路径"
 "MF-006","P0","01_register_login","注册登录","negative","未登录访问受保护接口被拒绝","client","任一受保护只读接口，如 /member/detail","不携带 Authorization 或 token header","无 token","直接请求受保护接口","HTTP 401/403 或业务 status=false；不能返回会员敏感数据","implemented_negative","已由 P0 API 反例 runner 覆盖"
 "MF-007","P0","01_register_login","注册登录","negative","无效 token 访问受保护接口被拒绝","client","任一受保护只读接口，如 /finance/wallet","携带伪造或过期 token","invalid token","用无效 token 请求接口","HTTP 401/403 或业务 status=false；不能返回会员敏感数据","implemented_negative","已由 P0 API 反例 runner 覆盖"
-"MF-008","P1","01_register_login","注册登录","positive","第三方登录绑定或登录成功","client","第三方登录相关接口","三方沙箱账号可用","三方授权 code/token","发起三方登录；完成授权回调；生成会员登录态","业务 status=true；生成 token；会员绑定关系正确","manual_review","如果新增三方登录，这是 auth 专项，不建议只靠接口文档生成"
-"MF-009","P1","01_register_login","注册登录","negative","第三方登录授权失败不创建登录态","client","第三方登录相关接口","三方沙箱可返回失败授权","无效授权 code/token","提交无效三方授权","业务 status=false；不创建会员；不返回登录 token","manual_review","依赖三方沙箱和回调链路"
 "MF-010","P0","02_kyc","KYC","positive","查询会员 KYC 详情成功","client","/member/kyc/detail","已登录会员","正常测试会员","请求 KYC 详情","HTTP 200；status=true；data 为对象；包含 uid、phone","implemented","对应当前 TC-001"
 "MF-011","P0","02_kyc","KYC","negative","未登录查询 KYC 详情失败","client","/member/kyc/detail","无 token","无","请求 KYC 详情","不能返回会员 KYC 数据；鉴权失败明确","implemented_negative","已由 P0 API 反例 runner 覆盖"
 "MF-012","P0","02_kyc","KYC","negative","KYC 提交缺少必填字段失败","client","KYC 提交接口","已登录会员","空请求体","提交缺字段 KYC 请求","业务 status=false；返回字段校验错误；不生成待审记录","implemented_negative","已验证空请求返回 first name and last name cannot be empty，由 P0 API 反例 runner 覆盖"

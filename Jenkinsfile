@@ -8,7 +8,7 @@ pipeline {
 
     parameters {
         choice(name: 'TARGET_ENV', choices: ['fat', 'uat'], description: 'fat runs before UAT release; uat runs after UAT release.')
-        choice(name: 'P0_SCOPE', choices: ['api_all', 'api_ui', 'ui_only', 'api_write'], description: 'P0 execution scope.')
+        choice(name: 'P0_SCOPE', choices: ['api_all', 'api_and_ui', 'ui_only', 'api_write'], description: 'P0 execution scope.')
         booleanParam(name: 'EXECUTE_BET', defaultValue: false, description: 'Allow UI game smoke to click the in-game bet area.')
     }
 
@@ -60,7 +60,7 @@ pipeline {
 
         stage('P0 API') {
             when {
-                expression { params.P0_SCOPE in ['api_all', 'api_ui'] }
+                expression { params.P0_SCOPE in ['api_all', 'api_and_ui'] }
             }
             steps {
                 sh '''
@@ -84,7 +84,7 @@ pipeline {
 
         stage('P0 UI Smoke') {
             when {
-                expression { params.P0_SCOPE in ['api_ui', 'ui_only'] }
+                expression { params.P0_SCOPE in ['api_and_ui', 'ui_only'] }
             }
             environment {
                 EXECUTE_BET = "${params.EXECUTE_BET}"

@@ -135,7 +135,7 @@ Jenkinsfile 已支持参数化执行：
 
 1. 发布 UAT 前，在测试环境执行：`TARGET_ENV=fat`、`P0_SCOPE=api_all`。
 2. 发布 UAT 后，在 UAT 执行：`TARGET_ENV=uat`、`P0_SCOPE=api_all`。
-3. UI 自动化作为补充检查，需要确认前端页面或三方游戏链路时再执行 `P0_SCOPE=api_ui` 或 `ui_only`。
+3. UI 自动化作为补充检查，需要同时验证接口与前端时执行 `P0_SCOPE=api_and_ui`；只执行 UI 时使用 `ui_only`。
 4. 涉及充值、提现、审核链路专项验证时，人工触发 `P0_SCOPE=api_write`，并确认测试账号、活动流水、审核令牌和资金影响可控。
 
 CI 需要通过 Jenkins 环境变量或凭据注入：

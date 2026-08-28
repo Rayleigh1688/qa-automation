@@ -8,11 +8,11 @@ P0 只保留必要资产，避免 CSV 和 Markdown 重复维护。
 | --- | --- |
 | `interface-shortlist.csv` | 从全量接口清单筛出的 P0 候选接口池，不直接作为门禁执行 |
 | `main-flow-scenarios.csv` | P0 主流程正反例矩阵，决定哪些场景有测试价值 |
-| `test-cases.csv` | P0 可执行正例用例，runner 直接读取 |
+| `test-cases.csv` | P0 可执行接口用例索引；当前安全正例由 smoke runner 读取，反例执行逻辑待迁移为同一 CSV 驱动 |
 
 ## 执行规则
 
-- `test-cases.csv` 是当前等级的可执行用例，不是所有等级混在一起的总表。
+- `test-cases.csv` 是当前等级的可执行用例索引，不是所有等级混在一起的总表。当前反例仍由 `api-p0-negative-runner.py` 内的映射驱动，这是待收敛的技术债，禁止再新增第二份反例清单。
 - 后续 P1、P2 各自使用 `api/p1/test-cases.csv`、`api/p2/test-cases.csv`。
 - `main-flow-scenarios.csv` 是业务场景矩阵，用来管理登录注册、KYC 查询前置、充值、投注、派彩结果、提现和后台数据展示；统一执行入口会用它生成 `api/results/p0-main-flow-report.md`。
 - `test-cases.csv` 中每条可执行用例都要带 `scenario_id`，这样执行结果能回填到主流程报告。
