@@ -14,6 +14,7 @@ import json
 import os
 import time
 from dataclasses import dataclass
+from decimal import Decimal, InvalidOperation
 from datetime import datetime
 from pathlib import Path
 from types import ModuleType
@@ -51,10 +52,14 @@ CASES = [
     Case("NTC-006", "MF-025", "game", "04_bet", "非法游戏列表参数不导致 5xx", "no_5xx,decoded"),
     Case("NTC-007", "MF-040", "member", "07_related_data_check", "旧 VIP 接口业务失败不能判定通过", "http_200,business_not_true"),
     Case("NTC-008", "MF-018", "finance", "03_deposit", "不存在的充值通道不能下单", "business_not_true"),
-    Case("NTC-009", "MF-034", "finance", "06_withdraw", "低于最小金额或缺少前置时不能提现", "business_not_true"),
+    Case("NTC-009", "MF-034", "finance", "06_withdraw", "低于最小金额或非法提款账户不能提现", "business_not_true"),
     Case("NTC-010", "MF-036", "finance", "06_withdraw_check", "非法提现记录筛选参数不导致 5xx", "no_5xx,decoded"),
     Case("NTC-011", "MF-045", "admin", "08_admin_report_approval", "无效后台 token 不能查询当前用户", "protected_rejected"),
     Case("NTC-012", "MF-047", "admin", "08_admin_report_approval", "后台报表非法时间范围不导致 5xx", "no_5xx,decoded"),
+    Case("NTC-013", "MF-012", "kyc", "02_kyc", "KYC 提交缺少必填字段失败", "business_not_true"),
+    Case("NTC-014", "MF-016", "finance", "03_deposit", "充值金额低于通道最小限额失败", "business_not_true"),
+    Case("NTC-015", "MF-017", "finance", "03_deposit", "充值金额高于通道最大限额失败", "business_not_true"),
+    Case("NTC-016", "MF-020", "finance", "03_deposit_check", "非法充值记录筛选参数不导致 5xx", "no_5xx,decoded"),
 ]
 
 
@@ -237,6 +242,37 @@ def choose_withdraw_account(args: argparse.Namespace) -> str:
     return ""
 
 
+def choose_deposit_channel(args: argparse.Namespace) -> tuple[str, str, str]:
+    result = smoke.request_once(
+        row("GET", "{{api_url}}/finance/channel/list?mode=1&source=huawei"),
+        args.timeout,
+        args.insecure,
+        None,
+        args.body_format,
+    )
+    channels = data_of(result)
+    if not isinstance(channels, list):
+        return "", "", ""
+    for channel in channels:
+        if not isinstance(channel, dict):
+            continue
+        channel_id = channel.get("id")
+        minimum = channel.get("min_amount")
+        maximum = channel.get("max_amount")
+        if channel_id is not None and minimum is not None and maximum is not None:
+            return str(channel_id), str(minimum), str(maximum)
+    return "", "", ""
+
+
+def outside_limit_amount(limit: str, direction: str) -> str:
+    try:
+        value = Decimal(limit)
+    except InvalidOperation:
+        return ""
+    amount = value - 1 if direction == "below" else value + 1
+    return format(max(amount, Decimal("0")), "f")
+
+
 def run_cases(args: argparse.Namespace) -> list[dict[str, object]]:
     phone = os.environ.get("CLIENT_PHONE", "")
     if not phone:
@@ -274,10 +310,14 @@ def run_cases(args: argparse.Namespace) -> list[dict[str, object]]:
         )
     )
 
-    client_token = os.environ.get("API_TOKEN", "") or token_from_latest_positive_result()
-    if not client_token and otp_id != "invalid-otp-id":
+    # The SMS request above gives this run a fresh OTP id. Prefer its token over
+    # an inherited token, which may be expired or belong to another account.
+    client_token = ""
+    if otp_id != "invalid-otp-id":
         valid_login = login_with_code(args, phone, otp_id, os.environ.get("CLIENT_OTP", ""))
         client_token = smoke.extract_token(valid_login)
+    if not client_token:
+        client_token = token_from_latest_positive_result() or os.environ.get("API_TOKEN", "")
     if not client_token:
         raise SystemExit("client token is required; run python3 scripts/run-api-tests.py p0 first or provide API_TOKEN")
     os.environ["API_TOKEN"] = client_token
@@ -315,36 +355,71 @@ def run_cases(args: argparse.Namespace) -> list[dict[str, object]]:
             ),
         )
     )
-    account_id = choose_withdraw_account(args)
-    if account_id:
-        low_amount = os.environ.get("P0_NEGATIVE_WITHDRAW_AMOUNT", "1")
-        records.append(
-            record(
-                case_by_id["NTC-009"],
-                smoke.request_once(
-                    row("GET", f"{{{{api_url}}}}/finance/payment/withdraw?amount={low_amount}&account_id={account_id}"),
-                    args.timeout,
-                    args.insecure,
-                ),
-                {"account_id": account_id, "amount": low_amount},
-            )
+    low_amount = os.environ.get("P0_NEGATIVE_WITHDRAW_AMOUNT", "1")
+    invalid_account_id = os.environ.get("P0_NEGATIVE_WITHDRAW_ACCOUNT_ID", "99999999999999999")
+    records.append(
+        record(
+            case_by_id["NTC-009"],
+            smoke.request_once(
+                row("GET", f"{{{{api_url}}}}/finance/payment/withdraw?amount={low_amount}&account_id={invalid_account_id}"),
+                args.timeout,
+                args.insecure,
+            ),
+            {"account_id": invalid_account_id, "amount": low_amount},
         )
-    else:
-        records.append(
-            {
-                "case_id": "NTC-009",
-                "scenario_id": "MF-034",
-                "domain": "finance",
-                "flow": "06_withdraw",
-                "name": "低于最小金额或缺少前置时不能提现",
-                "assertion_passed": False,
-                "assertion_failures": ["no withdraw account available"],
-            }
-        )
+    )
     records.append(
         record(
             case_by_id["NTC-010"],
             smoke.request_once(row("GET", "{{api_url}}/finance/withdraw/list?time_flag=-999&page=-1&page_size=-1"), args.timeout, args.insecure),
+        )
+    )
+
+    records.append(
+        record(
+            case_by_id["NTC-013"],
+            smoke.request_once(
+                row("POST", "{{api_url}}/member/kyc/insert"),
+                args.timeout,
+                args.insecure,
+                {},
+                args.body_format,
+            ),
+        )
+    )
+    if args.include_deposit_limit_contract:
+        deposit_channel_id, min_amount, max_amount = choose_deposit_channel(args)
+        if not deposit_channel_id:
+            raise SystemExit("unable to find a deposit channel with min_amount and max_amount")
+        for case_id, amount, bound in [
+            ("NTC-014", outside_limit_amount(min_amount, "below"), "min_amount"),
+            ("NTC-015", outside_limit_amount(max_amount, "above"), "max_amount"),
+        ]:
+            records.append(
+                record(
+                    case_by_id[case_id],
+                    smoke.request_once(
+                        row(
+                            "GET",
+                            "{{api_url}}/finance/payment/deposit?"
+                            f"pid={deposit_channel_id}&amount={amount}&device=web&source=huawei&cashback_flag=0&rotation_flag=0",
+                        ),
+                        args.timeout,
+                        args.insecure,
+                        None,
+                        args.body_format,
+                    ),
+                    {"channel_id": deposit_channel_id, "amount": amount, "limit": bound},
+                )
+            )
+    records.append(
+        record(
+            case_by_id["NTC-016"],
+            smoke.request_once(
+                row("GET", "{{api_url}}/finance/deposit/list?status=INVALID&time_flag=-999&page=-1&page_size=999999"),
+                args.timeout,
+                args.insecure,
+            ),
         )
     )
 
@@ -461,6 +536,7 @@ def main() -> None:
     parser.add_argument("--out", default="api/results/p0-negative-result.json")
     parser.add_argument("--report", default="api/results/p0-negative-report.md")
     parser.add_argument("--scope", default="FAT")
+    parser.add_argument("--include-deposit-limit-contract", action="store_true")
     args = parser.parse_args()
 
     smoke.load_env_file(Path(args.env))

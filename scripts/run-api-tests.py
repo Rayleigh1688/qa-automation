@@ -84,10 +84,16 @@ def run_p0(args: argparse.Namespace) -> None:
                 "--main-positive-flow",
                 "--body-format",
                 args.body_format,
+                *(["--client-phone", args.write_client_phone] if args.write_client_phone else []),
+                *(["--client-otp", args.write_client_otp] if args.write_client_otp else []),
+                "--deposit-pid",
+                args.deposit_pid,
                 "--deposit-amount",
                 args.deposit_amount,
                 "--withdraw-amount",
                 args.withdraw_amount,
+                *(["--withdraw-client-phone", args.withdraw_client_phone] if args.withdraw_client_phone else []),
+                *(["--withdraw-client-otp", args.withdraw_client_otp] if args.withdraw_client_otp else []),
                 "--out",
                 "api/results/main-positive-flow-result.json",
                 *(["--insecure"] if args.insecure else []),
@@ -153,8 +159,13 @@ def main() -> None:
     parser.add_argument("--body-format", choices=["json", "cbor"], default="cbor")
     parser.add_argument("--insecure", action=argparse.BooleanOptionalAction, default=True)
     parser.add_argument("--include-write", action="store_true", help="include controlled write-flow probes")
-    parser.add_argument("--deposit-amount", default="10")
-    parser.add_argument("--withdraw-amount", default="100")
+    parser.add_argument("--deposit-pid", default="47870534954254469")
+    parser.add_argument("--deposit-amount", default="50")
+    parser.add_argument("--withdraw-amount", default="1000")
+    parser.add_argument("--write-client-phone", default="")
+    parser.add_argument("--write-client-otp", default="")
+    parser.add_argument("--withdraw-client-phone", default="")
+    parser.add_argument("--withdraw-client-otp", default="")
     args = parser.parse_args()
 
     clean_api_results()

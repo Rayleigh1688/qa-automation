@@ -30,6 +30,7 @@
 | `/member/kyc/ekyc/url` | 当前测试账号返回 `Account Disabled` | 不纳入 P0 safe smoke，需账号/SDK 状态确认 |
 | `/finance/payment/deposit` | 使用提现通道或不可用通道会返回 `Payment channel unavailable` 或 `Deposit failed` | 使用 `mode=1` 充值通道和标准档位 |
 | `/finance/payment/withdraw` | 当前测试账号提现申请业务失败，部分场景错误信息为空 | 需要确认资金密码、流水、通道风控或隐藏参数 |
+| `/finance/payment/deposit` | FAT 在 `amount=49`（通道最小 `50`）及 `amount=1000001`（通道最大 `1000000`）时仍返回成功并创建未审核充值单 | P0 限额校验缺陷；默认 CI 不执行该会创建订单的契约探针，修复后执行 `api-p0-negative-runner.py --include-deposit-limit-contract` 复验 |
 | `/admin/finance/deposit/risk/list` | 接口文档标 GET，实际 GET 返回 405；POST 无 body 会出现 CBOR EOF 或业务失败 | 使用 POST + CBOR body 传查询参数 |
 | `/admin/finance/withdraw/risk/audit/list` | 接口文档标 GET，实际 GET 返回 405；POST 无 body 会出现 CBOR EOF 或业务失败 | 使用 POST + CBOR body 传查询参数 |
 | `/admin/finance/deposit/manual/success` | 接口文档标 GET，实际 GET 返回 405；POST 后业务返回 `invalid verification code`；已接入本地 TOTP 后仍失败 | 需要抓后台真实补单请求，确认验证码字段、校验通道或前置流程 |

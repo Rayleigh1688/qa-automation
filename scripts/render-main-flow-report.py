@@ -76,6 +76,14 @@ def controlled_status(scenario: dict[str, str], controlled_results: list[dict[st
         result = names.get("deposit_create")
     elif scenario_id == "MF-031":
         result = names.get("withdraw_create")
+    elif scenario_id == "MF-046":
+        agree = names.get("admin_withdraw_agree")
+        success = names.get("admin_withdraw_success")
+        if agree and success and agree.get("business_status") is True and success.get("business_status") is True:
+            return "通过", "后台审核同意并标记成功；不校验第三方到账"
+        if not agree or not success:
+            return "未执行", "缺少后台提现审核或成功状态结果"
+        return "未通过", str(success.get("body_sample") or success.get("data") or agree.get("body_sample") or agree.get("data") or "")
     else:
         result = None
     if not result:
@@ -103,6 +111,8 @@ def scenario_runtime_status(
         return "通过", scenario.get("notes", "")
     if automation_status == "implemented_controlled":
         return controlled_status(scenario, controlled_results)
+    if automation_status == "known_defect":
+        return "失败", scenario.get("notes", "")
     if automation_status in {"blocked_by_test_data", "blocked_by_rule", "manual_review", "do_not_auto_run_yet", "candidate"}:
         return "未自动执行", scenario.get("notes", "")
     return "未知", automation_status

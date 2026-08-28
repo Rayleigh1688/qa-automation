@@ -72,6 +72,19 @@ python3 scripts/api-smoke-runner.py \
   --out /tmp/admin-login.json
 ```
 
+## 数据库只读权限边界
+
+API 主流程自动化默认不依赖数据库读取权限。优先通过客户端 API、后台只读 API 和受控写 runner 完成前置、执行和断言。
+
+数据库只读权限适合用于：
+
+- 对照 KYC、充值、提现、投注、账变等状态枚举和字段含义。
+- 确认后台列表/详情字段与落库字段的映射关系。
+- 排查 API 返回为空或状态不符合预期时，是数据前置问题、环境问题还是业务逻辑问题。
+- 为专用测试账号矩阵确认账号状态，例如已 KYC、未 KYC、低余额、无活动流水限制、有投注账变数据。
+
+数据库只读权限不应成为默认门禁依赖；CI 默认仍以 API 返回和后台只读接口为准。
+
 ## 报告刷新
 
 结果 JSON 和报告 MD 都是覆盖刷新，只保留最近一次执行产物。执行前允许清空 `api/results/`；API runner 必须写固定文件名，不按时间戳或次数累积新文件：
@@ -112,3 +125,16 @@ python3 scripts/api-controlled-flow-runner.py \
 ```
 
 `api/results/controlled-write-result.json` 每次覆盖刷新，且不提交仓库。
+
+## 主流程正例调试结论
+
+- 充值下单和提现申请都已通过接口正例探针跑通。
+- 充值正例使用 Gcash 通道 `pid=47870534954254469`、金额 `50` 更稳定。
+- COINS 通道 `pid=55278060248820714` 曾返回 `Failed to load payment channels, please contact customer service!`，不要作为当前稳定正例通道。
+- 提现金额 `100` 会低于免审阈值 `500`，可能自动出款后失败，接口最终返回 `Service is busy, please try again later！`，但数据库中可看到提现单和账变先发生再冲回。
+- 提现正例使用大于 `500` 的金额，并使用无未完成流水、已 KYC、已绑定提款账户的专用账号。FAT/UAT 通过后台审核同意和标记成功验证闭环，不校验第三方收款账户或实际到账。
+- 充值补单会产生新的流水锁定，因此充值补单账号和提现正例账号需要拆开。
+- 受控写流程账号需要三类分层：`CLIENT_PHONE` 用于只读 smoke，`WRITE_CLIENT_PHONE` 用于注册/充值/补单等写流程，`WITHDRAW_CLIENT_PHONE` 用于提现正例。
+- FAT 默认客户端手机号可能因为频繁请求短信返回 `This mobile number has been restricted. Please contact customer support.`；出现该错误时优先更换只读或写流程专用账号，不要直接判定接口链路失败。
+- 新注册零余额账号可以登录和充值，但没有提款账户时 `/finance/account/list` 可能返回 `data=null`，不能作为完整 P0 只读 smoke 账号。
+- 专用提现账号连续执行提现正例后会消耗可提现余额；余额不足时 `/finance/payment/withdraw` 返回 `Insufficient balance`。后续应通过后台接口补资或维护提现账号池。

@@ -29,11 +29,11 @@ scripts/         辅助脚本
 当前阶段：P0 核心自动化已形成可执行基线
 
 - P0 只读 smoke：30 条，客户端 25 条 + 后台 5 条。
-- P0 API 反例 smoke：12 条，覆盖登录鉴权、旧接口替代、非法参数、无效 token、无效充值通道、低额提现和后台鉴权。
-- P0 主流程写操作：注册通过、充值流程已走通；提现失败已确认是测试账号活动流水限制导致，属于正常业务前置。
+- P0 API 反例 smoke：14 条默认安全用例，覆盖登录鉴权、KYC 缺字段、旧接口替代、非法参数、无效 token、无效充值通道、低额提现和后台鉴权。
+- P0 主流程写操作：注册、充值、后台补单、提现申请、后台提现审核同意和成功标记已形成受控脚本；提现以后台成功记录为验收，不校验第三方到账。
 - 客户端 UI 自动化：登录注册、充值、投注、派彩结果链路已跑通；KYC 因业务逻辑和资料准备复杂，第一轮暂时略过。
 - UI 定位策略：对难以稳定抓取的三方游戏/canvas 场景，采用固定视口下的 Playwright + 坐标定位组合策略。
-- 当前主要风险：客户端自动化账号可能因频繁请求短信被 FAT 限制；CI 需要使用稳定的专用客户端账号或预置 token 策略。管理后台审核类动作需要真实 Google Authenticator 动态令牌；后台登录在 FAT 使用固定 `ADMIN_GOOGLE_CODE=111111`。
+- 当前主要风险：客户端自动化账号可能因频繁请求短信被 FAT 限制；CI 需要使用稳定的专用客户端账号或预置 token 策略。充值通道限额后端校验在 FAT 存在已知缺陷，越界契约探针不默认进入 CI。管理后台审核类动作使用已配置的真实 Google Authenticator 动态令牌；后台登录在 FAT 使用固定 `ADMIN_GOOGLE_CODE=111111`。
 
 ## 执行规则
 
@@ -51,9 +51,11 @@ scripts/         辅助脚本
 - `api/p0/README.md`：P0 API 固定资产说明，解释 shortlist、main-flow、test-cases 的关系。
 - `api/runbooks/`：API 执行手册，记录客户端/后台登录、鉴权、环境变量、受控写操作和调试命令。
 - `ui/README.md`：UI 自动化小项目说明，记录 Playwright 目录、执行命令、结果目录和定位策略。
-- `harness/`：调试经验和已知问题，记录失败归因、flaky、环境限制、历史坑位。
+- `harness/`：调试经验和已知问题，记录失败归因、flaky、环境限制、历史坑位；数据库只读字段观察记录在 `harness/database-debug.md`。
 - `skills/`：给 AI 的长期操作准则，记录 API/UI 测试方法和业务规则，帮助下一段对话快速接续。
 - `api/results/`、`ui/results/`、`ui/reports/`、`playwright-report/`、`test-results/`：仅保存最近一次执行产物，不作为参考手册。
+
+接口新旧版本交替时，版本替代关系维护在 `api/p0/README.md`；具体失败响应和环境现象维护在 `harness/known-errors.md`。
 
 ## P0 主流程优先级
 
@@ -111,11 +113,13 @@ python3 scripts/run-api-tests.py p0 --include-write
 
 - `python3 scripts/run-api-tests.py p0` 执行 P0 正例只读 smoke 和 P0 反例保护性规则，并按 `main-flow-scenarios.csv` 生成主流程报告。
 - `python3 scripts/run-api-tests.py p0 p1` 按等级依次执行；当前 P1 资产不存在时会跳过并提示。
-- `--include-write` 用于受控主流程调试，包含注册、充值、提现/审核相关探针，只应在测试环境或专用 UAT 测试数据下执行。
+- `--include-write` 用于受控主流程调试，包含注册、充值、后台补单、提现申请、后台提现审核同意和标记成功；提现以后台成功记录为验收，不校验项目外收款账户或真实到账，只应在测试环境或专用 UAT 测试数据下执行。
 - `test:ui:p0` 默认不执行真实投注。需要点击三方游戏内投注区域时，必须显式设置 `EXECUTE_BET=true`。
 - 后台登录固定码和审核动态码是两套东西：`ADMIN_GOOGLE_CODE=111111` 只用于 FAT 后台登录，审核/补单/KYC 审批使用 `ADMIN_APPROVAL_TOTP_SECRET` 生成真实动态码。
 - API 执行会覆盖 `api/results/` 下同名结果和报告；UI 执行会覆盖 `ui/results/` 和 `ui/reports/` 下同名产物。需要历史记录时，以 CI 归档为准，不在仓库工作区内累积。
 - 需要单独清空生成物时，执行 `python3 scripts/clean-test-artifacts.py all`；只清 API 或 UI 时分别用 `api`、`ui` 参数。
+- FAT 主流程正例当前使用稳定充值通道 Gcash `pid=47870534954254469`、金额 `50`；充值/补单账号和提现账号必须拆开，避免充值补单产生的流水影响提现。
+- 本地或 CI 推荐通过 `WRITE_CLIENT_PHONE`、`WRITE_CLIENT_OTP` 注入受控写/充值账号，通过 `WITHDRAW_CLIENT_PHONE`、`WITHDRAW_CLIENT_OTP` 注入专用提现账号；也可以在命令中传 `--write-client-phone`、`--write-client-otp`、`--withdraw-client-phone`、`--withdraw-client-otp`。
 
 ## CI 门禁
 
@@ -145,6 +149,10 @@ UAT_ADMIN_URL=<uat admin url>
 UAT_CLIENT_BASE_URL=<uat client url>
 CLIENT_PHONE=<client phone>
 CLIENT_OTP=<otp>
+WRITE_CLIENT_PHONE=<controlled write/deposit client phone>
+WRITE_CLIENT_OTP=<otp>
+WITHDRAW_CLIENT_PHONE=<dedicated withdraw client phone>
+WITHDRAW_CLIENT_OTP=<otp>
 ADMIN_EMAIL=<admin email>
 ADMIN_PASSWORD=<admin password>
 ADMIN_DEVICE_ID=<x-device-id>

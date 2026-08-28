@@ -165,6 +165,54 @@ def client_login(args: argparse.Namespace) -> list[dict[str, object]]:
     ]
 
 
+def relabel(records: list[dict[str, object]], prefix: str) -> list[dict[str, object]]:
+    renamed = []
+    for record in records:
+        item = dict(record)
+        item["name"] = f"{prefix}_{item.get('name', '')}"
+        renamed.append(item)
+    return renamed
+
+
+def use_withdraw_client(args: argparse.Namespace) -> tuple[str | None, str | None, str | None]:
+    phone = args.withdraw_client_phone or os.environ.get("WITHDRAW_CLIENT_PHONE", "")
+    if not phone:
+        return None, None, None
+    previous_phone = os.environ.get("CLIENT_PHONE")
+    previous_otp = os.environ.get("CLIENT_OTP")
+    previous_token = os.environ.get("API_TOKEN")
+    os.environ["CLIENT_PHONE"] = phone
+    otp = args.withdraw_client_otp or os.environ.get("WITHDRAW_CLIENT_OTP", "")
+    if otp:
+        os.environ["CLIENT_OTP"] = otp
+    os.environ.pop("API_TOKEN", None)
+    return previous_phone, previous_otp, previous_token
+
+
+def restore_client(previous_phone: str | None, previous_otp: str | None, previous_token: str | None) -> None:
+    if previous_phone is None:
+        os.environ.pop("CLIENT_PHONE", None)
+    else:
+        os.environ["CLIENT_PHONE"] = previous_phone
+    if previous_otp is None:
+        os.environ.pop("CLIENT_OTP", None)
+    else:
+        os.environ["CLIENT_OTP"] = previous_otp
+    if previous_token is None:
+        os.environ.pop("API_TOKEN", None)
+    else:
+        os.environ["API_TOKEN"] = previous_token
+
+
+def apply_primary_client_override(args: argparse.Namespace) -> None:
+    phone = args.client_phone or os.environ.get("WRITE_CLIENT_PHONE", "")
+    otp = args.client_otp or os.environ.get("WRITE_CLIENT_OTP", "")
+    if phone:
+        os.environ["CLIENT_PHONE"] = phone
+    if otp:
+        os.environ["CLIENT_OTP"] = otp
+
+
 def query_wallet(args: argparse.Namespace, name: str) -> dict[str, object]:
     result = smoke.request_once(
         row("GET", "{{api_url}}/finance/wallet"),
@@ -399,6 +447,11 @@ def find_withdraw_order(args: argparse.Namespace, withdraw_id: str = "") -> tupl
     return record, target
 
 
+def check_admin_withdraw_list(args: argparse.Namespace, withdraw_id: str = "") -> list[dict[str, object]]:
+    list_record, _ = find_withdraw_order(args, withdraw_id)
+    return [list_record]
+
+
 def approve_withdraw(args: argparse.Namespace, withdraw_order: dict[str, object] | None) -> list[dict[str, object]]:
     if not withdraw_order:
         return [{"name": "admin_withdraw_agree", "skipped": True, "reason": "no under_review withdraw order found"}]
@@ -416,13 +469,14 @@ def approve_withdraw(args: argparse.Namespace, withdraw_order: dict[str, object]
     records = [result_record("admin_withdraw_agree", agree_result)]
     records[0]["withdraw_id"] = withdraw_id
     if args.withdraw_mark_success:
+        external_order_id = args.withdraw_external_order_id or f"p0-automation-{withdraw_id}"
         success_result = smoke.request_once(
             row("POST", "{{admin_url}}/admin/finance/withdraw/success", "{{admin_url}}"),
             args.timeout,
             args.insecure,
             {
                 **body,
-                "external_order_id": args.withdraw_external_order_id,
+                "external_order_id": external_order_id,
             },
             args.body_format,
         )
@@ -444,7 +498,10 @@ def main() -> None:
     parser.add_argument("--approve-deposit", action="store_true")
     parser.add_argument("--withdraw", action="store_true")
     parser.add_argument("--approve-withdraw", action="store_true")
+    parser.add_argument("--check-admin-withdraw-list", action="store_true")
     parser.add_argument("--main-positive-flow", action="store_true")
+    parser.add_argument("--client-phone", default="")
+    parser.add_argument("--client-otp", default="")
     parser.add_argument("--register-phone", default="")
     parser.add_argument("--deposit-pid", default="")
     parser.add_argument("--deposit-amount", default="")
@@ -453,6 +510,8 @@ def main() -> None:
     parser.add_argument("--deposit-status", default="")
     parser.add_argument("--withdraw-account-id", default="")
     parser.add_argument("--withdraw-amount", default="")
+    parser.add_argument("--withdraw-client-phone", default="")
+    parser.add_argument("--withdraw-client-otp", default="")
     parser.add_argument("--withdraw-status", default="")
     parser.add_argument("--withdraw-mark-success", action="store_true")
     parser.add_argument("--withdraw-external-order-id", default="")
@@ -461,21 +520,29 @@ def main() -> None:
     args = parser.parse_args()
 
     smoke.load_env_file(Path(args.env))
+    apply_primary_client_override(args)
     records: list[dict[str, object]] = []
 
     if args.main_positive_flow:
+        args.register = True
         args.deposit = True
         args.approve_deposit = True
         args.withdraw = True
+        args.check_admin_withdraw_list = True
+        # FAT accepts an internally completed withdrawal as the test boundary.
+        # No third-party payout account or settlement check is part of P0.
         args.approve_withdraw = True
+        args.withdraw_mark_success = True
 
     if args.register:
         records.extend(register_new_user(args))
 
-    if args.deposit or args.withdraw:
+    separate_withdraw_client = bool(args.withdraw and (args.withdraw_client_phone or os.environ.get("WITHDRAW_CLIENT_PHONE")))
+
+    if args.deposit or (args.withdraw and not separate_withdraw_client):
         records.extend(client_login(args))
         records.append(query_wallet(args, "wallet_before"))
-    if args.approve_deposit or args.approve_withdraw:
+    if args.approve_deposit or args.approve_withdraw or args.check_admin_withdraw_list:
         records.extend(admin_login(args))
     if args.deposit:
         deposit_records = run_deposit(args)
@@ -487,16 +554,36 @@ def main() -> None:
             list_record, order = find_deposit_order(args, deposit_id)
             records.append(list_record)
             records.extend(approve_deposit(args, order, deposit_id, deposit_external_order_id))
-    if args.withdraw:
+    if args.withdraw and separate_withdraw_client:
+        previous_phone, previous_otp, previous_token = use_withdraw_client(args)
+        try:
+            records.extend(relabel(client_login(args), "withdraw"))
+            records.append(query_wallet(args, "withdraw_wallet_before"))
+            withdraw_records = run_withdraw(args)
+            records.extend(withdraw_records)
+            withdraw_data = withdraw_records[-1].get("data")
+            withdraw_id = str(withdraw_data.get("id") or withdraw_data.get("order_no") or "") if isinstance(withdraw_data, dict) else ""
+            if args.check_admin_withdraw_list:
+                records.extend(check_admin_withdraw_list(args, withdraw_id))
+            if args.approve_withdraw:
+                list_record, order = find_withdraw_order(args, withdraw_id)
+                records.append(list_record)
+                records.extend(approve_withdraw(args, order))
+            records.append(query_wallet(args, "withdraw_wallet_after"))
+        finally:
+            restore_client(previous_phone, previous_otp, previous_token)
+    elif args.withdraw:
         withdraw_records = run_withdraw(args)
         records.extend(withdraw_records)
         withdraw_data = withdraw_records[-1].get("data")
-        withdraw_id = str(withdraw_data.get("id") or "") if isinstance(withdraw_data, dict) else ""
+        withdraw_id = str(withdraw_data.get("id") or withdraw_data.get("order_no") or "") if isinstance(withdraw_data, dict) else ""
+        if args.check_admin_withdraw_list:
+            records.extend(check_admin_withdraw_list(args, withdraw_id))
         if args.approve_withdraw:
             list_record, order = find_withdraw_order(args, withdraw_id)
             records.append(list_record)
             records.extend(approve_withdraw(args, order))
-    if args.deposit or args.withdraw:
+    if args.deposit or (args.withdraw and not separate_withdraw_client):
         records.append(query_wallet(args, "wallet_after"))
 
     output = Path(args.out)
