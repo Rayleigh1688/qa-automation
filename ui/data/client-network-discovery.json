@@ -1,0 +1,148 @@
+{
+  "device": {
+    "name": "Pixel 7",
+    "viewport": {
+      "width": 412,
+      "height": 915
+    }
+  },
+  "stepTimeoutMs": 5000,
+  "financeEntrypoints": [
+    {
+      "id": "deposit",
+      "name": "充值",
+      "basePath": "/my",
+      "texts": [
+        "Deposit"
+      ],
+      "notes": "充值入口；仅发现页面和 Network，不默认创建充值订单。"
+    },
+    {
+      "id": "withdraw",
+      "name": "提现",
+      "basePath": "/my",
+      "texts": [
+        "Withdraw"
+      ],
+      "notes": "提现入口；账号需已 KYC、已绑定提款账户且无流水限制。"
+    },
+    {
+      "id": "transaction",
+      "name": "充值/提现/账变记录",
+      "basePath": "/my",
+      "texts": [
+        "Transaction"
+      ],
+      "notes": "Transaction 内可查看充值、提现和账变记录。"
+    },
+    {
+      "id": "bet_history",
+      "name": "投注记录",
+      "basePath": "/my",
+      "texts": [
+        "Bet History"
+      ],
+      "notes": "投注记录入口。"
+    },
+    {
+      "id": "account",
+      "name": "账户/银行卡",
+      "basePath": "/my",
+      "texts": [
+        "Account"
+      ],
+      "notes": "账户与提款账户相关入口。"
+    },
+    {
+      "id": "kyc",
+      "name": "KYC",
+      "basePath": "/my",
+      "texts": [
+        "KYC",
+        "Verify Now",
+        "Verify",
+        "Verification",
+        "Identity"
+      ],
+      "notes": "新账号进入首页会默认弹出 KYC 验证引导；已通过 KYC 的账号可能不会展示提交流程。"
+    }
+  ],
+  "kycFlow": [
+    {
+      "id": "kyc_entry_prompt",
+      "name": "KYC 首页引导",
+      "expectedText": [
+        "Your current account type is a basic account",
+        "Verify Now"
+      ],
+      "actionText": "Verify Now"
+    },
+    {
+      "id": "kyc_upgrade_confirm",
+      "name": "KYC 二次确认",
+      "expectedText": [
+        "Upgrade Your Filbet Account",
+        "Upgrade Now For Free",
+        "Verify Now"
+      ],
+      "actionText": "Verify Now"
+    },
+    {
+      "id": "kyc_upload_identity",
+      "name": "KYC Step 1 上传证件",
+      "routeHint": "/s-kyc-v2?step=form_1",
+      "expectedText": [
+        "Upload Identification",
+        "ID Type",
+        "Front Side of ID",
+        "Back Side of ID",
+        "Next"
+      ],
+      "notes": "FAT 未开启 eKYC 校验时，ID 类型和图片内容可使用测试素材。"
+    },
+    {
+      "id": "kyc_address",
+      "name": "KYC Step 2 地址信息",
+      "expectedText": [
+        "Permanent Address",
+        "Current Address",
+        "Nearest Branch",
+        "Nature of Work",
+        "Source of Income",
+        "Next"
+      ]
+    },
+    {
+      "id": "kyc_personal_info",
+      "name": "KYC Step 3 个人信息",
+      "routeHint": "/s-kyc-v2?step=form_0",
+      "expectedText": [
+        "First Name",
+        "Last Name",
+        "Gender",
+        "Date of Birth",
+        "Nationality",
+        "Place of Birth",
+        "Next"
+      ]
+    },
+    {
+      "id": "kyc_review_submit",
+      "name": "KYC Step 4 核对提交",
+      "expectedText": [
+        "Check Your Information",
+        "Submit"
+      ]
+    },
+    {
+      "id": "kyc_success",
+      "name": "KYC 提交成功",
+      "routeHint": "/s-kyc-v2?step=result_0",
+      "expectedText": [
+        "KYC successful",
+        "Return to Homepage"
+      ],
+      "notes": "成功提示表示已提交并等待处理，不等于后台审核通过。"
+    }
+  ]
+}

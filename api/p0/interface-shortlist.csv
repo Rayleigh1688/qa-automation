@@ -26,8 +26,8 @@ P0-024,auth,manual_review,POST,{{api_url}}/member/wallet/password,/member/wallet
 P0-025,auth,manual_review,POST,{{api_url}}/member/wallet/password/update,/member/wallet/password/update,{{api_url}},,前台/会员信息/设置新钱包密码-ducky.bru,设置新钱包密码-ducky
 P0-026,auth,review_only,POST,{{api_url}}/member/auth/password,/member/auth/password,{{api_url}},old_or_copy,前台/会员登陆注册验证/旧密码前置验证-seven.bru,旧密码前置验证-seven
 P0-027,finance,safe_smoke,GET,{{api_url}}/finance/account/list,/finance/account/list,{{api_url}},hardcoded_env,前台/财务/提款账户列表-wesley.bru,提款账户列表-wesley
-P0-028,finance,safe_smoke,GET,{{api_url}}/finance/channel/list?mode=2&source=huawei,/finance/channel/list,{{api_url}},,前台/财务/获取支付通道列表-wesley.bru,获取支付通道列表-wesley
-P0-029,finance,safe_smoke,GET,{{api_url}}/finance/deposit/list?status=PENDING&time_flag=0&page=1&page_size=10,/finance/deposit/list,{{api_url}},,前台/财务/充值记录-wesley.bru,充值记录-wesley
+P0-028,finance,safe_smoke,GET,{{api_url}}/finance/channel/list?mode=1,/finance/channel/list,{{api_url}},frontend_network,前台/财务/获取支付通道列表-wesley.bru,获取支付通道列表-wesley
+P0-029,finance,safe_smoke,GET,{{api_url}}/finance/deposit/list?page=1&page_size=10&time_flag=0,/finance/deposit/list,{{api_url}},frontend_network,前台/财务/充值记录-wesley.bru,充值记录-wesley
 P0-030,finance,safe_smoke,GET,{{api_url}}/finance/payment/bank/list?page=2&page_size=10,/finance/payment/bank/list,{{api_url}},hardcoded_env,前台/财务/银行列表.bru,银行列表
 P0-031,finance,safe_smoke,GET,{{api_url}}/finance/payment/tab/list,/finance/payment/tab/list,{{api_url}},hardcoded_env,前台/财务/提现tab.bru,提现tab
 P0-032,finance,safe_smoke,GET,{{api_url}}/finance/transaction/list?time_flag=15&page=1&page_size=20,/finance/transaction/list,{{api_url}},,前台/财务/获取交易记录- wesley-alex.bru,获取交易记录- wesley/alex
@@ -44,7 +44,7 @@ P0-042,finance,token_required,GET,{{admin_url}}/agency/finance/transaction/types
 P0-043,finance,token_required,GET,{{admin_url}}/cmpl/finance/deposit/list,/cmpl/finance/deposit/list,{{admin_url}},,合规/财务管理/财务记录/充值记录-wesley.bru,充值记录-wesley
 P0-044,finance,token_required,GET,{{admin_url}}/cmpl/finance/withdraw/list,/cmpl/finance/withdraw/list,{{admin_url}},,合规/财务管理/财务记录/提现记录-wesley.bru,提现记录-wesley
 P0-045,finance,token_required,GET,{{api_url}}/finance/channel/product/list?mode=1&pid=1,/finance/channel/product/list,{{api_url}},hardcoded_env,前台/财务/获取支付通道商品列表.bru,获取支付通道商品列表
-P0-046,finance,token_required,GET,{{api_url}}/finance/member/buyfeatures,/finance/member/buyfeatures,{{api_url}},hardcoded_env,前台/财务/购买免费旋转游戏列表.bru,购买免费旋转游戏列表
+P0-046,finance,safe_smoke,GET,{{api_url}}/finance/member/buyfeatures,/finance/member/buyfeatures,{{api_url}},frontend_network,前台/财务/购买免费旋转游戏列表.bru,购买免费旋转游戏列表
 P0-047,finance,manual_review,POST,"{{admin_url}}/admin/finance/adjust/list?uid=1&operator_uid=2&action=1,2&page=1&page_size=10&bill_no=&amount_min=1&amount_max=100&phone=",/admin/finance/adjust/list,{{admin_url}},,代理管理后台/财务管理/财务报表/系统调整.bru,系统调整
 P0-048,finance,manual_review,POST,{{admin_url}}/admin/finance/deposit/export,/admin/finance/deposit/export,{{admin_url}},,后台/财务管理/存款记录/充值记录导出-wesley.bru,充值记录导出-wesley
 P0-049,finance,manual_review,POST,{{admin_url}}/admin/finance/deposit/list,/admin/finance/deposit/list,{{admin_url}},,后台/财务管理/存款记录/充值列表-wesley.bru,充值列表-wesley
@@ -101,7 +101,7 @@ P0-099,finance,manual_review,POST,{{api_url}}/finance/wallet/pwd/update,/finance
 P0-100,finance,manual_review,GET,{{api_url}}/finance/withdraw/detail?id=12959392294586045,/finance/withdraw/detail,{{api_url}},,前台/财务/提现详情.bru,提现详情
 P0-101,finance,manual_review,POST,{{admin_url}}/finance/withdraw/risk/list,/finance/withdraw/risk/list,{{admin_url}},odd_relative_url,后台/风控管理/存-提审核/提现订单.bru,提现订单
 P0-102,game,safe_smoke,GET,{{api_url}}/member/fav/list?page=1&page_size=10,/member/fav/list,{{api_url}},,前台/游戏/游戏收藏列表-light.bru,游戏收藏列表-light
-P0-103,game,safe_smoke,GET,{{api_url}}/member/game/bet/list?page=1&page_size=10&time_flag=30&status=1,/member/game/bet/list,{{api_url}},,前台/游戏/游戏记录-wesley.bru,游戏记录-wesley
+P0-103,game,safe_smoke,GET,{{api_url}}/member/game/bet/list?page_size=10&time_flag=0&page=1,/member/game/bet/list,{{api_url}},frontend_network,前台/游戏/游戏记录-wesley.bru,游戏记录-wesley
 P0-104,game,safe_smoke,GET,{{api_url}}/member/game/list/history,/member/game/list/history,{{api_url}},,前台/游戏/历史游戏列表-light.bru,历史游戏列表-light
 P0-105,game,safe_smoke,GET,{{api_url}}/member/game/list/recent?page=1&page_size=10,/member/game/list/recent,{{api_url}},,前台/游戏/最近游戏-benjie.bru,最近游戏-benjie
 P0-106,game,safe_smoke,GET,{{api_url}}/member/game/list/recommend,/member/game/list/recommend,{{api_url}},hardcoded_env,前台/游戏/推荐列表-benjie.bru,推荐列表-benjie
@@ -125,7 +125,7 @@ P0-123,kyc,token_required,GET,{{admin_url}}/cmpl/kyc/detail,/cmpl/kyc/detail,{{a
 P0-124,kyc,token_required,GET,{{admin_url}}/cmpl/kyc/pending/count,/cmpl/kyc/pending/count,{{admin_url}},,合规/kyc/获取 kyc 待审批数量.bru,获取 kyc 待审批数量
 P0-125,kyc,token_required,GET,{{api_url}}/member/kyc/ekyc/get_results?signature_id=26fbea1d1671b7cc,/member/kyc/ekyc/get_results,{{api_url}},hardcoded_env,前台/kyc/获取ekyc结果.bru,获取ekyc结果
 P0-126,kyc,token_required,GET,{{api_url}}/member/kyc/ekyc/url?language=en&prefers_color_scheme&iframe_enabled=true,/member/kyc/ekyc/url,{{api_url}},hardcoded_env,前台/kyc/获取ekyc的url.bru,获取ekyc的url
-P0-127,kyc,token_required,GET,{{api_url}}/promo/rotate/kyc/detail,/promo/rotate/kyc/detail,{{api_url}},hardcoded_env,活动/kyc送免费旋转/详情.bru,详情
+P0-127,kyc,safe_smoke,GET,{{api_url}}/promo/rotate/kyc/detail,/promo/rotate/kyc/detail,{{api_url}},frontend_network,活动/kyc送免费旋转/详情.bru,详情
 P0-128,kyc,token_required,GET,{{api_url}}/promo/rotate/kyc/popup,/promo/rotate/kyc/popup,{{api_url}},hardcoded_env,活动/kyc送免费旋转/弹窗上报.bru,弹窗上报
 P0-129,kyc,token_required,GET,/promo/rotate/reg/detail?pid=11,/promo/rotate/reg/detail,,,活动/注册kyc送旋转活动/活动详情.bru,活动详情
 P0-130,kyc,manual_review,POST,{{admin_url}}/admin/kyc/approve,/admin/kyc/approve,{{admin_url}},,后台/kyc/kyc 审核通过 - double.bru,kyc 审核通过 - double
@@ -151,7 +151,7 @@ P0-149,kyc,manual_review,POST,{{api_url}}/member/kyc/v2/insert,/member/kyc/v2/in
 P0-150,kyc,manual_review,POST,{{api_url}}/member/ocr/checkresult,/member/ocr/checkresult,{{api_url}},,前台/ocr/获取身份验证进程的运行状态和相关的验证结果-double-owen.bru,获取身份验证进程的运行状态和相关的验证结果-double/owen
 P0-151,kyc,manual_review,POST,{{api_url}}/member/ocr/setup,/member/ocr/setup,{{api_url}},,前台/ocr/初始化ZOLOZ中的身份验证进程.bru,初始化ZOLOZ中的身份验证进程-double
 P0-152,kyc,manual_review,POST,{{admin_url}}/member/oss/upload,/member/oss/upload,{{admin_url}},,前台/oss/上传 kyc 相关图片 - double.bru,上传 kyc 相关图片 - double
-P0-153,kyc,review_only,GET,{{api_url}}/promo/rotate/bet/detail?pid=13&is_welfare=1,/promo/rotate/bet/detail,{{api_url}},"old_or_copy,hardcoded_env",活动/kyc送免费旋转/详情(老页面).bru,详情(老页面)
+P0-153,promo,safe_smoke,GET,{{api_url}}/promo/rotate/bet/detail?pid=13&is_welfare=1,/promo/rotate/bet/detail,{{api_url}},frontend_network,活动/kyc送免费旋转/详情(老页面).bru,详情(老页面)
 P0-154,member,safe_smoke,GET,{{api_url}}/member/agency/audit/results,/member/agency/audit/results,{{api_url}},hardcoded_env,前台/代理/代理审核结果.bru,代理审核结果
 P0-155,member,safe_smoke,GET,{{api_url}}/member/agency/problem/list,/member/agency/problem/list,{{api_url}},hardcoded_env,前台/代理/代理申请问题列表.bru,代理申请问题列表
 P0-156,member,safe_smoke,GET,{{api_url}}/member/detail,/member/detail,{{api_url}},hardcoded_env,前台/会员信息/获取会员信息-seven-aliang(20260424).bru,获取会员信息-seven-aliang(20260424)
@@ -164,4 +164,14 @@ P0-162,member,manual_review,POST,{{api_url}}/member/card/list,/member/card/list,
 P0-163,member,manual_review,POST,{{api_url}}/member/card/update,/member/card/update,{{api_url}},,前台/会员信息/会员卡片列表更新-owen.bru,会员卡片列表更新-owen
 P0-164,member,manual_review,POST,{{api_url}}/member/detail/update,/member/detail/update,{{api_url}},,前台/会员信息/会员信息修改-seven.bru,会员信息修改-seven
 P0-165,member,review_only,GET,{{api_url}}/member/vip,/member/vip,{{api_url}},,前台/会员信息/会员vip信息-seven.bru,会员vip信息-seven
-P0-166,member,review_only,GET,{{api_url}}/member/vip/rule,/member/vip/rule,{{api_url}},todo,前台/VIP/VIP配置规则-todo.bru,VIP配置规则-todo
+P0-166,member,safe_smoke,GET,{{api_url}}/member/vip/rule,/member/vip/rule,{{api_url}},frontend_network,前台/VIP/VIP配置规则-todo.bru,VIP配置规则-todo
+P0-167,member,safe_smoke,GET,{{api_url}}/member/message/popup_list,/member/message/popup_list,{{api_url}},frontend_network,frontend-network/client-network-discovery,登录后弹窗列表
+P0-168,promo,safe_smoke,GET,{{api_url}}/promo/blindbox/query/bonus,/promo/blindbox/query/bonus,{{api_url}},frontend_network,frontend-network/client-network-discovery,盲盒奖励信息
+P0-169,promo,safe_smoke,GET,{{api_url}}/promo/deposit/ladder/deposit/conf,/promo/deposit/ladder/deposit/conf,{{api_url}},frontend_network,frontend-network/client-network-discovery,充值活动配置
+P0-170,promo,safe_smoke,GET,{{api_url}}/promo/deposit/ladder/detail?pid=20,/promo/deposit/ladder/detail,{{api_url}},frontend_network,frontend-network/client-network-discovery,充值活动详情
+P0-171,member,safe_smoke,GET,{{api_url}}/member/filcoin/balance,/member/filcoin/balance,{{api_url}},frontend_network,frontend-network/client-network-discovery,Filcoin余额
+P0-172,member,token_required,GET,{{api_url}}/member/system,/member/system,{{api_url}},frontend_network,frontend-network/client-network-discovery,客户端系统配置
+P0-173,member,token_required,GET,{{api_url}}/member/fb/list,/member/fb/list,{{api_url}},frontend_network,frontend-network/client-network-discovery,FB活动列表
+P0-174,member,token_required,GET,{{api_url}}/member/home/sections?brand=filbet,/member/home/sections,{{api_url}},frontend_network,frontend-network/client-network-discovery,首页分区配置
+P0-175,member,token_required,GET,{{api_url}}/member/bigprize/list,/member/bigprize/list,{{api_url}},frontend_network,frontend-network/client-network-discovery,大奖列表
+P0-176,member,token_required,GET,{{api_url}}/member/materials/list?platform_code=filbet&material_type_code=homepagebanner,/member/materials/list,{{api_url}},frontend_network,frontend-network/client-network-discovery,素材列表

@@ -86,16 +86,16 @@ test.describe("Client game bet smoke", () => {
     const modalConfig = loadJson("ui/data/client-modals.json");
     const gameConfig = loadJson("ui/data/client-game-actions.json");
     const game = selectGame(gameConfig);
-    const viewport = gameConfig.viewport || { width: 1366, height: 768 };
+    const viewport = gameConfig.viewport || page.viewportSize() || { width: 412, height: 915 };
     const network = attachNetworkRecorder(page, { hostPattern: /filbet|pwa|game|luck|jili|spribe|pg|cq9|bng|neurorestorativeals|playpoint|cloudfront/i });
     const app = new ClientAppPage(page, { pageConfig, modalConfig });
 
     await app.loginWithOtp(requiredEnv("CLIENT_PHONE"), requiredEnv("CLIENT_OTP"));
     await expect(page.locator("body")).not.toContainText("Register / Login");
 
-    await page.setViewportSize(viewport);
+    expect(page.viewportSize()).toEqual(viewport);
     await page.goto(process.env.CLIENT_GAME_PAGE_PATH || game.path, { waitUntil: "domcontentloaded" });
-    await page.waitForLoadState("networkidle", { timeout: 30_000 }).catch(() => {});
+    await page.waitForLoadState("networkidle", { timeout: 5000 }).catch(() => {});
     await page.waitForTimeout(Number(process.env.CLIENT_GAME_READY_WAIT_MS || game.readyWaitMs || 25_000));
 
     const screenshotDir = path.resolve("ui/results/screenshots");

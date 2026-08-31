@@ -262,7 +262,7 @@
       "route": "/s-game-page/17453858840928",
       "assertions": [
         "必须显式设置 EXECUTE_BET=true",
-        "固定视口 1366x768",
+        "固定 Pixel 7 视口 412x915",
         "点击配置的相对坐标后捕获 play、spin、bet、wager 或 process 请求",
         "最终资金结果以后续投注记录或钱包账变接口为准"
       ],

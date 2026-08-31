@@ -27,6 +27,7 @@ export default defineConfig({
       name: "client-mobile-chromium",
       use: {
         ...devices["Pixel 7"],
+        viewport: { width: 412, height: 915 },
         channel: process.env.PLAYWRIGHT_CHANNEL || undefined,
       },
     },

@@ -21,5 +21,37 @@
         ]
       }
     }
+  ],
+  "clientOverlays": [
+    {
+      "name": "post_login_notice",
+      "detectText": [
+        "Notice",
+        "Playing in open and public places is prohibited"
+      ],
+      "buttonTexts": [
+        "Agree"
+      ],
+      "maxPasses": 1
+    },
+    {
+      "name": "activity_popup",
+      "detectText": [
+        "Welcome To Filbet",
+        "First Deposit",
+        "Bonus"
+      ],
+      "close": true,
+      "maxPasses": 2
+    },
+    {
+      "name": "download_app_banner",
+      "detectText": [
+        "Download Filbet APP",
+        "Open App"
+      ],
+      "close": true,
+      "maxPasses": 1
+    }
   ]
 }

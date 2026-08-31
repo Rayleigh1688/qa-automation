@@ -12,6 +12,7 @@
     "test:p0": "npm run test:api && npm run test:ui:p0",
     "test:ui:p0": "npm run clean:ui-results && playwright test ui/cases/client-login.spec.mjs ui/cases/client-main-flow.spec.mjs ui/cases/client-game-bet-smoke.spec.mjs ui/cases/client-p0-positive-negative.spec.mjs",
     "test:ui:p0:scan": "npm run clean:ui-results && playwright test ui/cases/client-main-flow.spec.mjs",
+    "test:ui:network-discovery": "npm run clean:ui-results && playwright test ui/cases/client-network-discovery.spec.mjs",
     "test:ui:p0:pn": "npm run clean:ui-results && playwright test ui/cases/client-p0-positive-negative.spec.mjs",
     "test:ui:inventory": "npm run clean:ui-results && playwright test ui/cases/client-locator-inventory.spec.mjs",
     "test:ui:login": "npm run clean:ui-results && playwright test ui/cases/client-login.spec.mjs",

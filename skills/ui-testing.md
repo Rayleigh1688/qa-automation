@@ -37,7 +37,7 @@
    - 稳定属性：`data-testid`、`data-test-id`、`name`、`placeholder`、`aria-label`。
    - 配置化 CSS selector。
    - 对自定义 SVG/div 控件，可使用 DOM 派生定位：先从语义文本找到容器，再计算目标元素位置点击。
-   - 三方游戏 iframe/canvas 无稳定 DOM 时，允许固定 `1366x768` 视口下的相对坐标；坐标必须配置在 `ui/data/client-game-actions.json`，不得散落在用例代码。
+   - 三方游戏 iframe/canvas 无稳定 DOM 时，允许 Pixel 7 `412x915` 固定视口下的相对坐标；坐标必须配置在 `ui/data/client-game-actions.json`，不得散落在用例代码。
 7. 登录态、storage state、截图、视频、trace、token、cookie、账号和 OTP 不提交仓库。UI 原始结果写入 `ui/results/`，默认忽略。
 8. UI 可读报告写入 `ui/reports/`，原始 JSON、截图、trace、视频写入 `ui/results/`；Playwright HTML 和测试附件分别写入 `playwright-report/`、`test-results/`。
 9. UI 结果目录只保留最近一次执行产物。npm UI 命令会先执行 `python3 scripts/clean-test-artifacts.py ui`，不要在工作区按时间戳或次数累积报告。

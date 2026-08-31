@@ -71,14 +71,14 @@ python3 scripts/api-smoke-runner.py \
   --cases api/p0/test-cases.csv \
   --with-client-login \
   --with-admin-login \
-  --limit 30 \
+  --limit 39 \
   --execute \
   --insecure \
   --body-format cbor \
   --out api/results/p0-smoke-result.json
 ```
 
-如果只需要快速跑客户端前 25 条，可以临时使用 `--limit 25` 且只传 `--with-client-login`。这只是执行策略，不代表后台 P0 被拆成另一套资产。
+如果只需要快速跑旧核心客户端集，可以临时使用 `--limit 25` 且只传 `--with-client-login`；完整 safe smoke 使用 `--limit 39` 并保留后台登录。这只是执行策略，不代表后台 P0 被拆成另一套资产。
 
 P0 主流程写操作冒烟：
 
@@ -123,6 +123,9 @@ python3 scripts/api-controlled-flow-runner.py \
 - 默认只读客户端账号如果返回 `This mobile number has been restricted`，说明测试环境短信触发限频；不要直接判定主流程失败，先切到 `WRITE_CLIENT_PHONE` 或更换专用只读账号。
 - 只读 smoke 账号必须是成熟账号：能登录、已绑定提款账户，最好已 KYC。新注册零余额账号可用于充值写流程，但不适合作为完整 P0 smoke 账号。
 - 提现账号会被成功创建的提现单持续消耗可提现余额；如果出现 `Insufficient balance`，需要通过接口补资或切换提现账号池，不要直接改库。
+- 测试账号池规则维护在 `api/p0/test-account-pool.csv`。KYC 新账号优先使用 `090XXXXXXXX`，从 `09000000001` 开始；测试环境登录 OTP 固定为 `111111`。
+- `9888888050` 当前已知存在提现流水限制，不作为提现正例默认账号；可切换无流水限制的提现账号，或由后台解除该账号流水限制后再复验。
+- 充值页面的 `Multiple Deposit Bonus` 活动开关默认关闭/不参加。参加活动会产生提现流水限制；做无流水限制提现验证前必须确认该开关未开启，或明确接受该账号后续不能直接提现。
 
 生成 Markdown 报告：
 
@@ -168,11 +171,11 @@ python3 scripts/render-p0-smoke-report.py \
 
 - 注册登录：OTP、token、三方登录、验证码规则、鉴权失败。
 - KYC：查询、提交校验、重复提交、状态限制。
-- 充值：渠道、下单、金额边界、通道不可用、记录检查。
-- 投注：新版游戏列表、旧接口替代、非法参数、维护游戏。
+- 充值：渠道、活动配置、可购买免费旋转配置、下单、金额边界、通道不可用、记录检查。
+- 投注：新版游戏列表、投注旋转活动、旧接口替代、非法参数、维护游戏。
 - 派彩：投注记录、派彩记录、账变核对。
 - 提现：提现配置、提现申请、余额/KYC/资金密码限制、记录检查。
-- 相关数据检查：钱包、账变、会员、VIP、活动配置。
+- 相关数据检查：钱包、账变、会员、VIP、弹窗、活动配置、Filcoin。
 - 后台：报表展示、审批列表和详情、权限，以及本次专用测试单的受控审批动作。
 
 写接口自动化时，不能只根据接口文档生成用例。接口文档负责发现接口，主流程场景负责决定测试价值和正反例边界。

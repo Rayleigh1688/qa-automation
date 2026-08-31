@@ -33,7 +33,7 @@ KYC 提交和审核流程资料复杂，第一轮暂缓；UI 层只保留入口�
 
 1. 先增加窗口化 Playwright 的脱敏 Network 摘要、HAR 和 trace 捕获，将原始证据保存在 `ui/results/`。
 2. 以已跑通的登录、充值和游戏启动为基础，依次探索 KYC 入口/状态、提现入口、真实下注、下注结果和派彩展示。
-3. 三方游戏内部操作继续使用固定 `1366x768` 视口下的 Playwright + 相对坐标；每次操作同时保存截图和 Network 证据，便于定位接口版本变化。
+3. 三方游戏内部操作继续使用 Pixel 7 `412x915` 固定视口下的 Playwright + 相对坐标；每次操作同时保存截图和 Network 证据，便于定位接口版本变化。
 4. API 不替代真实下注操作：UI 证明三方游戏内可完成真实交互，API 负责核对游戏入口、投注记录、账变和派彩结果。
 
 ## 定位策略
@@ -41,13 +41,14 @@ KYC 提交和审核流程资料复杂，第一轮暂缓；UI 层只保留入口�
 - 优先使用 role、text、placeholder、label、aria-label 和稳定属性。
 - 自定义 `div/svg/button` 控件可以通过文本容器做 DOM 派生定位。
 - 三方游戏 iframe/canvas 内部操作使用固定视口下的 Playwright + 相对坐标点击。
-- 当前固定视口基线为 `1366x768`；坐标配置放在 `ui/data/client-game-actions.json`。
+- 客户端页面和三方游戏页固定使用 Pixel 7 手机浏览器格式 `412x915`；三方游戏 iframe/canvas 点击坐标配置放在 `ui/data/client-game-actions.json`。
 
 ## 执行命令
 
 ```bash
 npm run test:ui:p0
 npm run test:ui:p0:scan
+npm run test:ui:network-discovery
 npm run test:ui:p0:pn
 npm run test:ui:inventory
 npm run test:ui:login
@@ -56,6 +57,8 @@ npm run ui:p0-points
 ```
 
 所有 npm UI 命令执行前都会清空 UI 生成物目录，只保留最近一次结果。
+
+- `npm run test:ui:network-discovery`：窗口化 Playwright Network 发现入口，固定 Pixel 7 手机浏览器格式，登录后探索首页、Game、Rewards、Filcoin、My、充值、提现、Transaction、Bet History、KYC、账户入口；输出脱敏 JSON、HAR、trace 和 Markdown 报告，只用于接口发现，不纳入默认 CI 门禁。
 
 需要单独清理 UI 产物：
 
@@ -72,3 +75,15 @@ python3 scripts/clean-test-artifacts.py ui
 - Playwright 测试附件：`test-results/`。
 
 这些目录不提交历史报告；需要历史追踪时使用 CI 归档。
+
+## Network 发现协作规则
+
+- 自动化优先捕获同一 Playwright browser context 内页面、iframe、弹窗和新标签页请求；只有普通 Playwright 事件无法说明问题时，再用 DevTools 或人工浏览器补充。
+- `ui/results/client-network-discovery.json` 保存脱敏后的原始事件和 endpoint 汇总，`ui/reports/client-network-discovery-report.md` 保存可读候选接口表。
+- 若自动化未能打开充值、提现、KYC、银行卡或记录入口，由熟悉业务的同学指出真实入口文案、页面路径或固定视口下可点击区域，再沉淀到 `ui/data/`。
+- 第三方页面、资料上传、真实资金动作和真实投注不默认执行；需要执行时必须显式开启对应环境变量或单独专项用例。
+- 测试环境页面加载最多等待 5 秒；超过 5 秒记录为加载过慢 warning，除非登录成功或关键入口存在等硬前置不满足。
+- My 页 `Withdraw` 为提现入口，`Deposit` 为充值入口，`Transaction` 可查看充值、提现和账变记录，`Bet History` 为投注记录入口。
+- 充值页 `Multiple Deposit Bonus` 活动开关默认不参加；参加活动会产生提现流水限制。
+- KYC 是 P0 主流程 UI 专项：新账号首页默认弹出 KYC 引导，二次确认后进入 `/s-kyc-v2`，依次完成证件/图片、地址、个人信息、核对提交并看到 `KYC successful`。成功提示只表示已提交等待处理，不等于后台审核通过。
+- KYC 新账号池使用 `090XXXXXXXX`，首个账号从 `09000000001` 开始，测试环境 OTP 固定 `111111`；已驳回/未通过 KYC 的账号可再次提交。

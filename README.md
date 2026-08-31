@@ -30,12 +30,12 @@ scripts/         辅助脚本
 
 ## 当前状态
 
-当前阶段：P0 核心自动化已形成可执行基线
+当前阶段：P0 核心自动化已形成可执行基线，客户端真实接口已完成一轮反向修复
 
-- P0 只读 smoke：30 条，客户端 25 条 + 后台 5 条。
+- P0 safe smoke：39 条，客户端 34 条 + 后台 5 条；新增覆盖来自真实 UI Network 的 KYC 奖励、登录后弹窗、活动配置、充值活动、Filcoin、VIP 规则和可购买免费旋转配置。
 - P0 API 反例 smoke：14 条默认安全用例，覆盖登录鉴权、KYC 缺字段、旧接口替代、非法参数、无效 token、无效充值通道、低额提现和后台鉴权。
 - P0 主流程写操作：注册、充值、后台补单、提现申请、后台提现审核同意和成功标记已形成受控脚本；提现以后台成功记录为验收，不校验第三方到账。
-- 客户端 UI 自动化：登录注册、充值、投注、派彩结果链路已跑通；KYC 因业务逻辑和资料准备复杂，第一轮暂时略过。
+- 客户端 UI 自动化：登录注册、充值、提现入口、Transaction、Bet History 和游戏链路已跑通 Network 发现；发现到的主要客户端接口已同步到 `api/p0/`，并通过 39/39 API smoke 验证。KYC 已确认为 P0 主流程，下一步使用新账号或已驳回账号补 UI 提交和 API/后台状态核对。
 - UI 定位策略：对难以稳定抓取的三方游戏/canvas 场景，采用固定视口下的 Playwright + 坐标定位组合策略。
 - 当前主要风险：客户端自动化账号可能因频繁请求短信被 FAT 限制；CI 需要使用稳定的专用客户端账号或预置 token 策略。充值通道限额后端校验在 FAT 存在已知缺陷，越界契约探针不默认进入 CI。管理后台审核类动作使用已配置的真实 Google Authenticator 动态令牌；后台登录在 FAT 使用固定 `ADMIN_GOOGLE_CODE=111111`。
 
@@ -75,6 +75,10 @@ scripts/         辅助脚本
 7. 上述行为完成后，管理后台相关数据展示、列表、报表和待审记录查询。
 
 其它功能等这些主流程相关能力稳定通过后再继续扩展。
+
+KYC 作为主流程需要 UI 和 API 双重验证：UI 证明真实新账号能从首页引导进入 KYC、完成资料上传/地址/个人信息/核对提交并看到成功提示；API 证明提交后的 KYC 状态、后台待审记录、审核结果和前台状态刷新正确。
+
+客户端接口反向修复以 `npm run test:ui:network-discovery` 的脱敏报告为准。已修正充值渠道为 `/finance/channel/list?mode=1`、充值记录为 `/finance/deposit/list?page=1&page_size=10&time_flag=0`、投注记录为 `/member/game/bet/list?page_size=10&time_flag=0&page=1`，并把真实前端使用的 KYC、弹窗、活动和充值支撑只读接口纳入 P0 safe smoke。
 
 ## P0 自动化执行
 
@@ -119,6 +123,8 @@ npm run test:p0
 - 每次 P0 API 执行还会生成 `api/results/p0-api-report.html`：可离线打开的静态主流程报告，包含放行结论、流程状态卡和可展开场景细则。
 - 需要单独清空生成物时，执行 `python3 scripts/clean-test-artifacts.py all`；只清 API 或 UI 时分别用 `api`、`ui` 参数。
 - FAT 主流程正例当前使用稳定充值通道 Gcash `pid=47870534954254469`、金额 `50`；充值/补单账号和提现账号必须拆开，避免充值补单产生的流水影响提现。
+- 充值页 `Multiple Deposit Bonus` 活动开关默认不参加；参加活动会产生提现流水限制。`9888888050` 已知存在提现流水限制，提现正例需换无流水限制账号或先后台解除限制。
+- KYC 新账号池使用 `090XXXXXXXX`，首个账号从 `09000000001` 开始；测试环境 OTP 固定为 `111111`，已驳回/未通过 KYC 的账号可再次提交。
 - 本地或 CI 推荐通过 `WRITE_CLIENT_PHONE`、`WRITE_CLIENT_OTP` 注入受控写/充值账号，通过 `WITHDRAW_CLIENT_PHONE`、`WITHDRAW_CLIENT_OTP` 注入专用提现账号；也可以在命令中传 `--write-client-phone`、`--write-client-otp`、`--withdraw-client-phone`、`--withdraw-client-otp`。
 
 ## CI 门禁
@@ -196,6 +202,7 @@ PLAYWRIGHT_CHANNEL=
 ```bash
 npm run test:ui:p0
 npm run test:ui:p0:scan
+npm run test:ui:network-discovery
 npm run test:ui:p0:pn
 npm run test:ui:inventory
 npm run test:ui:login
@@ -205,6 +212,7 @@ npm run ui:p0-points
 
 - `npm run test:ui:p0`：执行客户端 P0 UI 默认套件，包含登录正反例、主流程扫描、游戏启动冒烟、页面状态正反例；默认不做真实资金动作。
 - `npm run test:ui:p0:scan`：只执行 Playwright P0 客户端主流程扫描用例。
+- `npm run test:ui:network-discovery`：窗口化 Playwright Network 发现入口，固定 Pixel 7 手机浏览器格式，登录后探索 P0 页面、充值、提现、Transaction、Bet History 等入口，生成脱敏 JSON、HAR、trace 与 Markdown 报告；只用于接口发现和人工确认，不纳入默认 CI 门禁。
 - `npm run test:ui:p0:pn`：只执行客户端 P0 UI 正反例补充用例。
 - `npm run test:ui:inventory`：按 `ui/data/client-pages.json` 扫描客户端页面定位资产，输出 `ui/reports/client-locator-inventory.md`。
 - `npm run test:ui:login`：执行客户端登录正反例。
