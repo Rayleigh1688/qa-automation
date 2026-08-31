@@ -6,8 +6,10 @@ import { loadJson } from "../framework/data-loader.mjs";
 import { loadEnv, requiredEnv } from "../framework/env.mjs";
 import { pageSnapshot } from "../framework/locator-assets.mjs";
 import { attachNetworkRecorder } from "../framework/network-recorder.mjs";
+import { p0StorageStatePath, reuseP0Auth } from "../framework/auth-state.mjs";
 
 loadEnv();
+if (reuseP0Auth) test.use({ storageState: p0StorageStatePath });
 
 function compactUrl(value = "") {
   return String(value).replace(/^https?:\/\/[^/]+/i, "");
@@ -66,7 +68,11 @@ test.describe("P0 client main flow UI scan", () => {
     const network = attachNetworkRecorder(page);
     const app = new ClientAppPage(page, { pageConfig, modalConfig });
 
-    await app.loginWithOtp(phone, otp);
+    await app.gotoHome();
+    const initialBodyText = await page.locator("body").innerText();
+    if (initialBodyText.includes("Register / Login")) {
+      await app.loginWithOtp(phone, otp);
+    }
 
     const bodyText = await page.locator("body").innerText();
     expect(bodyText).not.toContain("Register / Login");

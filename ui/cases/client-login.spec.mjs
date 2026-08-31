@@ -5,6 +5,7 @@ import { loadEnv, requiredEnv } from "../framework/env.mjs";
 import { attachNetworkRecorder } from "../framework/network-recorder.mjs";
 import { loadJson } from "../framework/data-loader.mjs";
 import { ClientAppPage } from "../elements/client-app.page.mjs";
+import { p0StorageStatePath, reuseP0Auth } from "../framework/auth-state.mjs";
 
 loadEnv();
 
@@ -25,18 +26,30 @@ async function visibleState(page) {
 }
 
 test.describe("Client login P0", () => {
-  test("positive: OTP login succeeds", async ({ page }, testInfo) => {
+  test.describe("positive session", () => {
+    if (reuseP0Auth) test.use({ storageState: p0StorageStatePath });
+
+    test("positive: reusable authenticated session succeeds", async ({ page }, testInfo) => {
     const network = attachNetworkRecorder(page);
-    const app = await openLogin(page);
-    await app.chooseOtpMode();
-    await app.fillPhone(requiredEnv("CLIENT_PHONE"));
-    await app.requestOtp();
-    const visibleInputs = page.locator("input:visible");
-    const inputCount = await visibleInputs.count();
-    if (inputCount >= 2) await visibleInputs.nth(inputCount - 1).fill(requiredEnv("CLIENT_OTP"));
-    await app.acceptLoginTerms();
-    const login = page.getByRole("button", { name: /^Login$/i }).first();
-    if (await login.isEnabled().catch(() => false)) await login.click();
+    let app;
+    if (reuseP0Auth) {
+      app = new ClientAppPage(page, {
+        pageConfig: loadJson("ui/data/client-pages.json"),
+        modalConfig: loadJson("ui/data/client-modals.json"),
+      });
+      await app.gotoHome();
+    } else {
+      app = await openLogin(page);
+      await app.chooseOtpMode();
+      await app.fillPhone(requiredEnv("CLIENT_PHONE"));
+      await app.requestOtp();
+      const visibleInputs = page.locator("input:visible");
+      const inputCount = await visibleInputs.count();
+      if (inputCount >= 2) await visibleInputs.nth(inputCount - 1).fill(requiredEnv("CLIENT_OTP"));
+      await app.acceptLoginTerms();
+      const login = page.getByRole("button", { name: /^Login$/i }).first();
+      if (await login.isEnabled().catch(() => false)) await login.click();
+    }
     await page.waitForTimeout(5000);
 
     const state = await visibleState(page);
@@ -47,7 +60,9 @@ test.describe("Client login P0", () => {
     await testInfo.attach("client-login-positive", { body: JSON.stringify(result, null, 2), contentType: "application/json" });
 
     expect(state.url).not.toMatch(/\/login|\/user\/login/);
+    expect(state.text).not.toContain("Register / Login");
     expect(network.some((item) => item.kind === "response" && /\/member\/(login|detail|v2\/index|index)/.test(item.url))).toBeTruthy();
+  });
   });
 
   test("negative: empty phone does not login", async ({ page }) => {

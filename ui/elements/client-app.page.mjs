@@ -86,6 +86,31 @@ export class ClientAppPage {
     return clicked;
   }
 
+  async loginWithPassword(phone, password) {
+    await this.openLogin();
+    await this.useOtherAccountIfRemembered(phone);
+
+    const passwordMode = this.page.getByRole("button", { name: /^Password$/i }).first();
+    if (await passwordMode.isVisible({ timeout: 5000 }).catch(() => false)) {
+      await passwordMode.click({ timeout: 3000 });
+    }
+
+    await this.fillPhone(phone);
+    const passwordInput = this.page.locator('input[type="password"]:visible').first();
+    await passwordInput.waitFor({ state: "visible", timeout: 8000 });
+    await passwordInput.fill(password);
+    await this.acceptLoginTerms();
+    const clicked = await this.submitLogin();
+    if (await this.acceptLoginConfirmation()) {
+      await this.acceptLoginTerms();
+      await this.submitLogin().catch(() => {});
+    }
+    await this.waitForLoggedIn(15_000);
+    await this.ensureNotFoundPageRecovered();
+    await this.handlePostLoginOverlays();
+    return clicked;
+  }
+
   async submitLogin() {
     const buttons = this.page.getByRole("button", { name: /^Login$/i });
     for (let index = (await buttons.count()) - 1; index >= 0; index -= 1) {

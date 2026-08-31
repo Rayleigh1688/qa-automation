@@ -40,7 +40,6 @@ python3 scripts/api-smoke-runner.py \
   --cases api/p0/test-cases.csv \
   --with-client-login \
   --with-admin-login \
-  --limit 30 \
   --execute \
   --insecure \
   --body-format cbor \
@@ -58,7 +57,7 @@ python3 scripts/api-smoke-runner.py \
 - `client-id=123`。
 - token 裸值放入 `t` header。
 
-快速只跑客户端前 25 条时，可以只传 `--with-client-login --limit 25`。这只是执行提速，不是拆分 P0 资产。
+定位客户端子集时可以临时使用 `--limit`。这只是执行提速，不是拆分 P0 资产；完整 P0 不设置该参数，避免新增 safe smoke 后被静默截断。
 
 后台登录探针：
 
@@ -96,7 +95,7 @@ API 主流程自动化默认不依赖数据库读取权限。优先通过客户�
 - `api/results/p0-main-flow-report.md`
 - `api/results/p0-api-report.html`
 - `api/results/controlled-write-result.json`
-- `api/results/main-positive-flow-result.json`
+- `api/results/fund-flow-seed-result.json`
 
 原始 JSON 和 Markdown 报告都不提交，最近一次结论以当前工作区生成物为准；历史记录交给 CI 归档系统。
 
@@ -130,12 +129,11 @@ python3 scripts/api-controlled-flow-runner.py \
 ## 主流程正例调试结论
 
 - 充值下单和提现申请都已通过接口正例探针跑通。
-- 充值正例使用 Gcash 通道 `pid=47870534954254469`、金额 `50` 更稳定。
+- 充值通道使用 Gcash `pid=47870534954254469`；当前资金主流程金额为 1200。
 - COINS 通道 `pid=55278060248820714` 曾返回 `Failed to load payment channels, please contact customer service!`，不要作为当前稳定正例通道。
 - 提现金额 `100` 会低于免审阈值 `500`，可能自动出款后失败，接口最终返回 `Service is busy, please try again later！`，但数据库中可看到提现单和账变先发生再冲回。
-- 提现正例使用大于 `500` 的金额，并使用无未完成流水、已 KYC、已绑定提款账户的专用账号。FAT/UAT 通过后台审核同意和标记成功验证闭环，不校验第三方收款账户或实际到账。
-- 充值补单会产生新的流水锁定，因此充值补单账号和提现正例账号需要拆开。
-- 受控写流程账号需要三类分层：`CLIENT_PHONE` 用于只读 smoke，`WRITE_CLIENT_PHONE` 用于注册/充值/补单等写流程，`WITHDRAW_CLIENT_PHONE` 用于提现正例。
+- 资金主流程使用同一个已 KYC、已绑定提款账户的 `fund_flow_account`：充值补单后必须完成真实投注并等待流水统计，再测试限制和正向提现。
+- `CLIENT_PHONE` 仍用于只读 smoke；`WRITE_CLIENT_PHONE` 为资金主流程账号，BET/WITHDRAW 兼容变量可指向同一账号。
 - FAT 默认客户端手机号可能因为频繁请求短信返回 `This mobile number has been restricted. Please contact customer support.`；出现该错误时优先更换只读或写流程专用账号，不要直接判定接口链路失败。
 - 新注册零余额账号可以登录和充值，但没有提款账户时 `/finance/account/list` 可能返回 `data=null`，不能作为完整 P0 只读 smoke 账号。
-- 专用提现账号连续执行提现正例后会消耗可提现余额；余额不足时 `/finance/payment/withdraw` 返回 `Insufficient balance`。后续应通过后台接口补资或维护提现账号池。
+- 提现会消耗可提现余额；余额不足时 `/finance/payment/withdraw` 返回 `Insufficient balance`。不能把该结果误判为已经命中流水限制文案。

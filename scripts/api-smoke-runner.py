@@ -15,6 +15,8 @@ from urllib.error import HTTPError, URLError
 from urllib.parse import quote
 from urllib.request import Request, urlopen
 
+from p0_session import load_session, write_session
+
 
 VAR_DEFAULTS = {
     "{{api_url}}": "https://client-fat.filbet2025.com",
@@ -209,16 +211,40 @@ def headers_for(row: dict[str, str]) -> dict[str, str]:
     return headers
 
 
-def read_rows(path: Path, limit: int) -> list[dict[str, str]]:
+def read_rows(path: Path, limit: int, base: str = "all") -> list[dict[str, str]]:
+    base_markers = {
+        "client": "{{api_url}}",
+        "admin": "{{admin_url}}",
+        "agency": "{{agency_url}}",
+    }
     with path.open(encoding="utf-8", newline="") as handle:
         reader = csv.DictReader(handle)
         rows = []
         for row in reader:
             if "case_id" in row:
-                rows.append(row)
+                include = row.get("execution_policy") == "safe_smoke"
             elif row["execution_policy"] == "safe_smoke":
+                include = True
+            else:
+                include = False
+            if include and (base == "all" or row.get("suggested_base_var") == base_markers[base]):
                 rows.append(row)
-    return rows[:limit]
+    return rows[:limit] if limit > 0 else rows
+
+
+def request_body_for(row: dict[str, str]) -> dict[str, object] | None:
+    raw = row.get("request_body") or ""
+    if not raw:
+        return None
+    parsed = json.loads(raw)
+    if not isinstance(parsed, dict):
+        raise ValueError(f"request_body must be a JSON object for {row.get('case_id') or row.get('priority')}")
+    now = int(time.time())
+    dynamic_values = {
+        "{{now_minus_2d}}": now - 2 * 86400,
+        "{{now_plus_5m}}": now + 300,
+    }
+    return {key: dynamic_values.get(value, value) for key, value in parsed.items()}
 
 
 def get_nested(value: object, path: str) -> object:
@@ -269,6 +295,11 @@ def assertion_result(result: dict[str, object], assertions: str) -> tuple[bool, 
             for key in keys:
                 if not has_nested(body, key):
                     failures.append(f"missing key {key}")
+        elif rule.startswith("non_empty:"):
+            key = rule.removeprefix("non_empty:")
+            value = get_nested(body, key)
+            if value is None or value == "" or value == [] or value == {}:
+                failures.append(f"empty value {key}")
 
     return not failures, failures
 
@@ -451,7 +482,8 @@ def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--list", default="api/p0/interface-shortlist.csv")
     parser.add_argument("--env", default=".env")
-    parser.add_argument("--limit", type=int, default=10)
+    parser.add_argument("--limit", type=int, default=0, help="Maximum cases to run; 0 runs all selected cases")
+    parser.add_argument("--base", choices=["all", "client", "admin", "agency"], default="all")
     parser.add_argument("--timeout", type=float, default=10)
     parser.add_argument("--execute", action="store_true")
     parser.add_argument("--insecure", action="store_true", help="Disable TLS verification for test environments only")
@@ -462,9 +494,13 @@ def main() -> None:
     parser.add_argument("--with-admin-login", action="store_true")
     parser.add_argument("--cases", default="", help="Run executable case CSV instead of shortlist CSV")
     parser.add_argument("--out", default="api/results/p0-smoke-result.json")
+    parser.add_argument("--session-out", default="", help="Write ignored reusable client/admin tokens for later P0 stages")
+    parser.add_argument("--session-in", default="", help="Reuse an ignored P0 client/admin token session")
     args = parser.parse_args()
 
     load_env_file(Path(args.env))
+    if args.session_in:
+        load_session(args.session_in, os.environ.get("CLIENT_PHONE", ""))
     if args.client_login:
         run_client_login(args)
         return
@@ -473,24 +509,56 @@ def main() -> None:
         return
     auth_results: list[dict[str, object]] = []
     if args.with_client_login:
-        client_results, client_token = client_login(args)
-        auth_results.extend(client_results)
+        client_token = os.environ.get("API_TOKEN", "")
         if client_token:
-            os.environ["API_TOKEN"] = client_token
+            validation = request_once(login_row("{{api_url}}/member/detail", "{{api_url}}", method="GET"), args.timeout, args.insecure)
+            body = validation.get("decoded_body")
+            if not (isinstance(body, dict) and body.get("status") is True):
+                client_token = ""
+                os.environ.pop("API_TOKEN", None)
+        if not client_token:
+            client_results, client_token = client_login(args)
+            auth_results.extend(client_results)
+            if client_token:
+                os.environ["API_TOKEN"] = client_token
     if args.with_admin_login:
-        admin_results, admin_token = admin_login(args)
-        auth_results.extend(admin_results)
+        admin_token = os.environ.get("ADMIN_TOKEN", "")
         if admin_token:
-            os.environ["ADMIN_TOKEN"] = admin_token
+            validation = request_once(login_row("{{admin_url}}/admin/me/detail", "{{admin_url}}", method="GET"), args.timeout, args.insecure)
+            body = validation.get("decoded_body")
+            if not (isinstance(body, dict) and body.get("status") is True):
+                admin_token = ""
+                os.environ.pop("ADMIN_TOKEN", None)
+        if not admin_token:
+            admin_results, admin_token = admin_login(args)
+            auth_results.extend(admin_results)
+            if admin_token:
+                os.environ["ADMIN_TOKEN"] = admin_token
+    if args.session_out:
+        write_session(
+            args.session_out,
+            client_token=os.environ.get("API_TOKEN", ""),
+            admin_token=os.environ.get("ADMIN_TOKEN", ""),
+            client_phone=os.environ.get("CLIENT_PHONE", ""),
+        )
     list_path = Path(args.cases or args.list)
-    rows = read_rows(list_path, args.limit)
+    rows = read_rows(list_path, args.limit, args.base)
     if not args.execute:
         print("dry-run; add --execute to send requests")
         for row in rows:
             print(f"{row['priority']} {row['method']} {row['clean_url']} :: {row['source_file']}")
         return
 
-    results = auth_results + [request_once(row, args.timeout, args.insecure, body_format=args.body_format) for row in rows]
+    results = auth_results + [
+        request_once(
+            row,
+            args.timeout,
+            args.insecure,
+            request_body_for(row),
+            args.body_format,
+        )
+        for row in rows
+    ]
     for row, result in zip(rows, results[len(auth_results) :]):
         assertions = row.get("assertions", "")
         if assertions:

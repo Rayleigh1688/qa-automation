@@ -53,12 +53,16 @@ def run_p0(args: argparse.Namespace) -> None:
             "--with-client-login",
             "--with-admin-login",
             "--limit",
-            "30",
+            "0",
             "--execute",
             "--body-format",
             args.body_format,
             "--out",
             "api/results/p0-smoke-result.json",
+            "--session-out",
+            "api/results/p0-api-session.json",
+            "--session-in",
+            "api/results/p0-api-session.json",
             *(["--insecure"] if args.insecure else []),
         ]
     )
@@ -88,6 +92,8 @@ def run_p0(args: argparse.Namespace) -> None:
             "api/results/p0-negative-result.json",
             "--report",
             "api/results/p0-negative-report.md",
+            "--session-in",
+            "api/results/p0-api-session.json",
             *(["--insecure"] if args.insecure else []),
         ]
     )
@@ -98,21 +104,23 @@ def run_p0(args: argparse.Namespace) -> None:
                 [
                     "python3",
                     "scripts/api-controlled-flow-runner.py",
-                    "--main-positive-flow",
+                    "--deposit",
+                    "--approve-deposit",
                     "--body-format",
                     args.body_format,
+                    *(["--register-phone", args.register_phone] if args.register_phone else []),
                     *(["--client-phone", args.write_client_phone] if args.write_client_phone else []),
                     *(["--client-otp", args.write_client_otp] if args.write_client_otp else []),
                     "--deposit-pid",
                     args.deposit_pid,
                     "--deposit-amount",
                     args.deposit_amount,
-                    "--withdraw-amount",
-                    args.withdraw_amount,
-                    *(["--withdraw-client-phone", args.withdraw_client_phone] if args.withdraw_client_phone else []),
-                    *(["--withdraw-client-otp", args.withdraw_client_otp] if args.withdraw_client_otp else []),
                     "--out",
-                    "api/results/main-positive-flow-result.json",
+                    "api/results/fund-flow-seed-result.json",
+                    "--session-in",
+                    "api/results/p0-api-session.json",
+                    "--session-out",
+                    "api/results/p0-api-session.json",
                     *(["--insecure"] if args.insecure else []),
                 ]
             )
@@ -170,15 +178,16 @@ def main() -> None:
     parser.add_argument("--scope", default="FAT")
     parser.add_argument("--body-format", choices=["json", "cbor"], default="cbor")
     parser.add_argument("--insecure", action=argparse.BooleanOptionalAction, default=True)
-    parser.add_argument("--include-write", action="store_true", help="compatibility flag; P0 already includes controlled writes by default")
+    parser.add_argument("--include-write", action="store_true", help="compatibility flag; P0 already includes controlled deposit seeding by default")
     parser.add_argument("--safe-only", action="store_true", help="skip controlled P0 writes and run only read/negative checks")
     parser.add_argument("--deposit-pid", default="47870534954254469")
-    parser.add_argument("--deposit-amount", default="50")
+    parser.add_argument("--deposit-amount", default="1200")
     parser.add_argument("--withdraw-amount", default="1000")
     parser.add_argument("--write-client-phone", default="")
     parser.add_argument("--write-client-otp", default="")
     parser.add_argument("--withdraw-client-phone", default="")
     parser.add_argument("--withdraw-client-otp", default="")
+    parser.add_argument("--register-phone", default="")
     args = parser.parse_args()
 
     if args.safe_only and args.include_write:

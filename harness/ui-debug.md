@@ -42,10 +42,11 @@
 ### 游戏内投注
 
 - 三方游戏在 iframe/canvas 内渲染，Playwright 基本拿不到稳定 DOM locator。
-- 当前策略：Playwright 负责登录、打开游戏、等待 frame ready、截图和 Network；游戏内 Spin/Bet 使用固定视口下的相对坐标点击。
-- Lucky Penny 已验证固定视口 `1366x768`，点击点 `{ xRatio: 0.925, yRatio: 0.56 }` 可触发 `BET 1.00`。
+- 当前策略：项目内 Playwright 自行启动 Chromium，负责登录、打开游戏、等待 frame ready、截图和 Network；不依赖 Codex 内置浏览器是否已有可连接实例。
+- 客户端和三方游戏统一使用 Pixel 7 `412x915`。游戏、调额和 Spin 的有效相对坐标只维护在 `ui/data/client-game-actions.json`，本文件不再复制坐标值。
 - 冒烟脚本默认不点击真实投注，必须显式设置 `EXECUTE_BET=true`。
 - 是否投注成功不只看截图，至少结合第三方 `/b/server` 的 `command: play` 请求、钱包余额或投注记录接口判断。
+- Beanstalk 已验证可把业务单注固定为 1000；`scripts/run-turnover-bet.py` 根据只读流水汇总计算点击次数，并在投注后复查总剩余流水。
 - UI 可读报告统一写入 `ui/reports/`；原始 JSON、截图统一写入 `ui/results/`，不再写入 `api/`。
 - UI 结果目录只保留最近一次执行产物。每次执行可以覆盖或清空 `ui/results/`、`ui/reports/`、`playwright-report/`、`test-results/`；不要按时间戳或次数在工作区累积报告。
 - 如果发现历史 UI 产物在 `api/results/`，需要迁移到 `ui/results/`，避免 API 和 UI 执行结果混放。
@@ -63,6 +64,13 @@
 
 - 登录页的 `I agree to the Terms of Use ... confirm that I am 21 years old` 也是自定义控件。
 - 处理方式：找到该文案容器，点击容器左侧区域，再验证 `Login` 按钮是否启用。
+- 反例必须显式保持未勾选，不能为了让按钮可点而调用正例的条款点击 helper。2026-08-31 FAT 实测未勾选仍能完成 OTP 登录，当前作为产品缺陷保留失败。
+
+### 登录会话复用
+
+- 默认 P0 固定 1 worker。主账号只在无有效 storage state 时登录一次；后续用例加载 `ui/results/client-p0-storage-state.json`。
+- API/UI 交替时使用 `export-browser-p0-session.py`、`import-api-p0-session.py` 同步同一个 token，不得重新登录。
+- 清理结果时必须保留忽略的 UI storage state 和 API session；否则清理动作会意外触发新登录并使另一进程 token 失效。
 
 ### Get Code 定位
 

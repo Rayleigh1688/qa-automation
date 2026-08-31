@@ -13,11 +13,16 @@ TARGETS = {
     "ui": [Path("ui/results"), Path("ui/reports"), Path("playwright-report"), Path("test-results")],
 }
 
+PRESERVE = {
+    Path("api/results"): {"p0-api-session.json"},
+    Path("ui/results"): {"client-p0-storage-state.json"},
+}
+
 
 def clean_dir(root: Path) -> None:
     root.mkdir(parents=True, exist_ok=True)
     for child in root.iterdir():
-        if child.name == ".gitkeep":
+        if child.name == ".gitkeep" or child.name in PRESERVE.get(root, set()):
             continue
         if child.is_dir() and not child.is_symlink():
             shutil.rmtree(child)

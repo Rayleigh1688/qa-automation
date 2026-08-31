@@ -13,12 +13,18 @@ import hashlib
 import hmac
 import importlib.util
 import json
+import mimetypes
 import os
+import ssl
 import struct
 import time
+import uuid
 from pathlib import Path
 from types import ModuleType
 from urllib.parse import parse_qs, urlencode, urlparse
+from urllib.request import Request, urlopen
+
+from p0_session import load_session, write_session
 
 
 def load_smoke_runner() -> ModuleType:
@@ -146,6 +152,15 @@ def extract_deposit_external_order_id(data: object) -> str:
 
 
 def admin_login(args: argparse.Namespace) -> list[dict[str, object]]:
+    if os.environ.get("ADMIN_TOKEN"):
+        probe = smoke.request_once(
+            row("GET", "{{admin_url}}/admin/me/detail", "{{admin_url}}"),
+            args.timeout,
+            args.insecure,
+        )
+        if business_ok(probe):
+            return [result_record("admin_token_reuse", probe)]
+        os.environ.pop("ADMIN_TOKEN", None)
     login_results, token = smoke.admin_login(args)
     if not token:
         raise SystemExit("admin login failed; cannot run admin approval probes")
@@ -156,6 +171,19 @@ def admin_login(args: argparse.Namespace) -> list[dict[str, object]]:
 
 
 def client_login(args: argparse.Namespace) -> list[dict[str, object]]:
+    # Controlled phases may run back-to-back on the same FAT account. Reuse a
+    # freshly obtained token when supplied, but validate it before any write so
+    # repeated SMS requests do not trigger the test-environment phone limiter.
+    if os.environ.get("API_TOKEN"):
+        probe = smoke.request_once(
+            row("GET", "{{api_url}}/member/detail"),
+            args.timeout,
+            args.insecure,
+        )
+        if business_ok(probe):
+            return [result_record("client_token_reuse", probe)]
+        os.environ.pop("API_TOKEN", None)
+
     login_results, token = smoke.client_login(args)
     if not token:
         raise SystemExit("client login failed; cannot run controlled write probes")
@@ -223,7 +251,9 @@ def query_wallet(args: argparse.Namespace, name: str) -> dict[str, object]:
 
 
 def register_new_user(args: argparse.Namespace) -> list[dict[str, object]]:
-    phone = args.register_phone or os.environ.get("REGISTER_PHONE") or f"99{int(time.time()) % 100000000:08d}"
+    phone = args.register_phone or os.environ.get("REGISTER_PHONE", "")
+    if not phone:
+        raise SystemExit("REGISTER_PHONE or --register-phone is required; use an allocated 090XXXXXXXX KYC test account")
     password = os.environ.get("REGISTER_PASSWORD", "Qa123456")
     code = os.environ.get("REGISTER_OTP") or os.environ.get("CLIENT_OTP")
     if not code:
@@ -271,6 +301,142 @@ def register_new_user(args: argparse.Namespace) -> list[dict[str, object]]:
     return records
 
 
+def upload_kyc_attachment(args: argparse.Namespace, image_path: Path, field_name: str) -> dict[str, object]:
+    boundary = f"----qa-kyc-{uuid.uuid4().hex}"
+    content_type = mimetypes.guess_type(image_path.name)[0] or "application/octet-stream"
+    filename = f"{field_name}_{int(time.time() * 1000)}{image_path.suffix.lower()}"
+    prefix = (
+        f"--{boundary}\r\n"
+        f'Content-Disposition: form-data; name="file"; filename="{filename}"\r\n'
+        f"Content-Type: {content_type}\r\n\r\n"
+    ).encode("utf-8")
+    payload = prefix + image_path.read_bytes() + f"\r\n--{boundary}--\r\n".encode("utf-8")
+    upload_row = row("POST", "{{api_url}}/member/oss/upload")
+    url = smoke.resolve_url(upload_row["clean_url"])
+    headers = smoke.headers_for(upload_row)
+    headers["content-type"] = f"multipart/form-data; boundary={boundary}"
+    request = Request(url, data=payload, method="POST", headers=headers)
+    context = ssl._create_unverified_context() if args.insecure else None
+    started = time.monotonic()
+    try:
+        with urlopen(request, timeout=args.timeout, context=context) as response:
+            body_bytes = response.read()
+            decoded, sample = smoke.decode_body_sample(body_bytes)
+            result = {
+                "priority": "CONTROLLED",
+                "method": "POST",
+                "url": url,
+                "status": response.status,
+                "elapsed_ms": int((time.monotonic() - started) * 1000),
+                "decoded_body": decoded,
+                "body_sample": sample,
+            }
+    except Exception as error:
+        raise SystemExit(f"KYC attachment upload failed for {field_name}: {error}") from error
+    data = data_of(result)
+    object_key = str(data.get("object_key") or "") if isinstance(data, dict) else ""
+    if not business_ok(result) or not object_key:
+        raise SystemExit(f"KYC attachment upload rejected for {field_name}: {result.get('body_sample')}")
+    return {
+        "name": f"kyc_upload_{field_name}",
+        "url": result.get("url"),
+        "http_status": result.get("status"),
+        "business_status": True,
+        "object_key": object_key,
+        "elapsed_ms": result.get("elapsed_ms"),
+    }
+
+
+def submit_kyc(args: argparse.Namespace) -> list[dict[str, object]]:
+    image_path = Path(args.kyc_image)
+    if not image_path.is_file():
+        raise SystemExit(f"KYC image does not exist: {image_path}")
+
+    detail_before = smoke.request_once(
+        row("GET", "{{api_url}}/member/kyc/detail"), args.timeout, args.insecure
+    )
+    profile = data_of(detail_before)
+    if not isinstance(profile, dict):
+        raise SystemExit("cannot read KYC profile before submission")
+    if int(profile.get("kyc_status") or 0) != 0:
+        raise SystemExit(f"KYC account is not submit-ready: kyc_status={profile.get('kyc_status')}")
+
+    shops_result = smoke.request_once(
+        row("POST", "{{api_url}}/member/kyc/shops"), args.timeout, args.insecure
+    )
+    shops_data = data_of(shops_result)
+    shops = list_rows(shops_data)
+    if not shops and isinstance(shops_data, list):
+        shops = [item for item in shops_data if isinstance(item, dict)]
+    def branch_label(item: dict[str, object]) -> str:
+        return str(item.get("label") or item.get("name") or item.get("address") or "")
+
+    branch = next(
+        (
+            item
+            for item in shops
+            if branch_label(item) == args.kyc_nearest_branch
+            or str(item.get("value") or "") == args.kyc_nearest_branch
+        ),
+        None,
+    )
+    if branch is None and "Taft Ave" in args.kyc_nearest_branch:
+        branch = next((item for item in shops if "Taft Ave, Pasay" in branch_label(item)), None)
+    if branch is None:
+        preview = [str(item.get("label") or item.get("name") or item.get("address") or "") for item in shops[:5]]
+        raise SystemExit(f"KYC branch is not available: {args.kyc_nearest_branch}; available={preview}")
+
+    uploads = [
+        upload_kyc_attachment(args, image_path, "front_side_of_id"),
+        upload_kyc_attachment(args, image_path, "back_side_of_id"),
+        upload_kyc_attachment(args, image_path, "selfie_with_id_card"),
+    ]
+    attachment_keys = [str(item["object_key"]) for item in uploads]
+    uid = str(profile.get("uid") or "")
+    body = {
+        "attachments": {
+            "face": attachment_keys[0],
+            "idPhoto": attachment_keys[1],
+            "selfieWithIDPhotoPath": attachment_keys[2],
+        },
+        "birthday": args.kyc_birthday,
+        "country_code": str(profile.get("country_code") or "63"),
+        "current_address": args.kyc_current_address,
+        "first_name": args.kyc_first_name,
+        "middle_name": args.kyc_middle_name,
+        "last_name": args.kyc_last_name,
+        "nationality": args.kyc_nationality,
+        "gender": args.kyc_gender,
+        "id_number": args.kyc_id_number or uid,
+        "id_type": args.kyc_id_type,
+        "nature_of_work": args.kyc_nature_of_work,
+        "nearest_branch": branch_label(branch),
+        "shop_id": int(branch.get("value") or branch.get("id") or branch.get("shop_id") or 0),
+        "occupation": args.kyc_nature_of_work,
+        "permanent_address": args.kyc_permanent_address,
+        "phone": str(profile.get("phone") or ""),
+        "place_of_birth": args.kyc_place_of_birth,
+        "source_of_income": args.kyc_source_of_income,
+    }
+    submit_result = smoke.request_once(
+        row("POST", "{{api_url}}/member/kyc/insert"),
+        args.timeout,
+        args.insecure,
+        body,
+        args.body_format,
+    )
+    detail_after = smoke.request_once(
+        row("GET", "{{api_url}}/member/kyc/detail"), args.timeout, args.insecure
+    )
+    return [
+        result_record("kyc_detail_before", detail_before),
+        result_record("kyc_shops", shops_result),
+        *uploads,
+        result_record("kyc_submit", submit_result),
+        result_record("kyc_detail_after", detail_after),
+    ]
+
+
 def choose_deposit_channel(args: argparse.Namespace) -> tuple[str, str]:
     channels_result = smoke.request_once(
         row("GET", "{{api_url}}/finance/channel/list?mode=1&source=huawei"),
@@ -302,7 +468,10 @@ def choose_deposit_channel(args: argparse.Namespace) -> tuple[str, str]:
 
 def run_deposit(args: argparse.Namespace) -> list[dict[str, object]]:
     pid, amount = choose_deposit_channel(args)
-    query = f"pid={pid}&amount={amount}&device=web&source=huawei&cashback_flag=0&rotation_flag=0"
+    query = (
+        f"pid={pid}&amount={amount}&device=web&source=huawei"
+        f"&cashback_flag={args.deposit_cashback_flag}&rotation_flag={args.deposit_rotation_flag}"
+    )
     if args.deposit_product_id:
         query += f"&product_id={args.deposit_product_id}"
     deposit_result = smoke.request_once(
@@ -314,6 +483,8 @@ def run_deposit(args: argparse.Namespace) -> list[dict[str, object]]:
     deposit_data = data_of(deposit_result)
     record["pid"] = pid
     record["amount"] = amount
+    record["cashback_flag"] = args.deposit_cashback_flag
+    record["rotation_flag"] = args.deposit_rotation_flag
     external_order_id = args.deposit_external_order_id or extract_deposit_external_order_id(deposit_data)
     if external_order_id:
         record["external_order_id"] = external_order_id
@@ -421,26 +592,40 @@ def find_withdraw_order(args: argparse.Namespace, withdraw_id: str = "") -> tupl
     start_time, end_time = now_window()
     params = {
         "status": args.withdraw_status or "under_review",
-        "start_time": start_time,
-        "end_time": end_time,
+        "start_time": start_time * 1000,
+        "end_time": end_time * 1000,
         "page": 1,
         "page_size": 10,
     }
     if withdraw_id:
         params["id"] = withdraw_id
-    result = smoke.request_once(
-        row("POST", "{{admin_url}}/admin/finance/withdraw/risk/audit/list", "{{admin_url}}"),
-        args.timeout,
-        args.insecure,
-        params,
-        args.body_format,
-    )
-    result["url"] = result.get("url", "") + "?" + urlencode(params)
+    def request_list(body: dict[str, object]) -> dict[str, object]:
+        response = smoke.request_once(
+            row("POST", "{{admin_url}}/admin/finance/withdraw/risk/audit/list", "{{admin_url}}"),
+            args.timeout,
+            args.insecure,
+            body,
+            args.body_format,
+        )
+        response["url"] = response.get("url", "") + "?" + urlencode(body)
+        return response
+
+    result = request_list(params)
     rows = list_rows(data_of(result))
+    if withdraw_id and not rows:
+        # The FAT endpoint currently returns an empty page when id and time
+        # filters are combined. Retry the same status page without those
+        # filters, then match the controlled order id locally.
+        result = request_list({
+            "status": args.withdraw_status or "under_review",
+            "page": 1,
+            "page_size": 10,
+        })
+        rows = list_rows(data_of(result))
     target = None
     if withdraw_id:
         target = next((item for item in rows if str(item.get("id")) == str(withdraw_id)), None)
-    if target is None and rows:
+    elif rows:
         target = rows[0]
     record = result_record("admin_withdraw_risk_audit_list", result)
     record["matched_order"] = target
@@ -469,6 +654,14 @@ def approve_withdraw(args: argparse.Namespace, withdraw_order: dict[str, object]
     records = [result_record("admin_withdraw_agree", agree_result)]
     records[0]["withdraw_id"] = withdraw_id
     if args.withdraw_mark_success:
+        if not business_ok(agree_result):
+            records.append({
+                "name": "admin_withdraw_success",
+                "skipped": True,
+                "reason": "withdraw agree failed; success transition is not allowed",
+                "withdraw_id": withdraw_id,
+            })
+            return records
         external_order_id = args.withdraw_external_order_id or f"p0-automation-{withdraw_id}"
         success_result = smoke.request_once(
             row("POST", "{{admin_url}}/admin/finance/withdraw/success", "{{admin_url}}"),
@@ -493,7 +686,10 @@ def main() -> None:
     parser.add_argument("--insecure", action="store_true")
     parser.add_argument("--body-format", choices=["json", "cbor"], default="cbor")
     parser.add_argument("--out", default="api/results/controlled-write-result.json")
+    parser.add_argument("--session-in", default="", help="Reuse an ignored P0 client/admin token session when account hashes match")
+    parser.add_argument("--session-out", default="", help="Persist the current P0 client/admin token session to an ignored file")
     parser.add_argument("--register", action="store_true")
+    parser.add_argument("--submit-kyc", action="store_true")
     parser.add_argument("--deposit", action="store_true")
     parser.add_argument("--approve-deposit", action="store_true")
     parser.add_argument("--withdraw", action="store_true")
@@ -503,12 +699,31 @@ def main() -> None:
     parser.add_argument("--client-phone", default="")
     parser.add_argument("--client-otp", default="")
     parser.add_argument("--register-phone", default="")
+    parser.add_argument("--kyc-image", default="21000000008072.webp")
+    parser.add_argument("--kyc-first-name", default="Codex")
+    parser.add_argument("--kyc-middle-name", default="")
+    parser.add_argument("--kyc-last-name", default="001")
+    parser.add_argument("--kyc-birthday", default="1993-08-31")
+    parser.add_argument("--kyc-gender", choices=["male", "female"], default="male")
+    parser.add_argument("--kyc-nationality", default="Philippines")
+    parser.add_argument("--kyc-place-of-birth", default="Manila")
+    parser.add_argument("--kyc-current-address", default="Manila")
+    parser.add_argument("--kyc-permanent-address", default="Manila")
+    parser.add_argument("--kyc-nearest-branch", default="2040 Taft Ave, Pasay, Metro Mani")
+    parser.add_argument("--kyc-nature-of-work", default="Employed – Permanent/Contractual")
+    parser.add_argument("--kyc-source-of-income", default="Employment Income")
+    parser.add_argument("--kyc-id-type", default="COUNTRY_ID")
+    parser.add_argument("--kyc-id-number", default="")
     parser.add_argument("--deposit-pid", default="")
     parser.add_argument("--deposit-amount", default="")
     parser.add_argument("--deposit-product-id", default="")
+    parser.add_argument("--deposit-id", default="")
+    parser.add_argument("--deposit-cashback-flag", choices=["0", "1"], default="0")
+    parser.add_argument("--deposit-rotation-flag", choices=["0", "1"], default="0")
     parser.add_argument("--deposit-external-order-id", default="")
     parser.add_argument("--deposit-status", default="")
     parser.add_argument("--withdraw-account-id", default="")
+    parser.add_argument("--withdraw-id", default="")
     parser.add_argument("--withdraw-amount", default="")
     parser.add_argument("--withdraw-client-phone", default="")
     parser.add_argument("--withdraw-client-otp", default="")
@@ -521,23 +736,31 @@ def main() -> None:
 
     smoke.load_env_file(Path(args.env))
     apply_primary_client_override(args)
+    if args.session_in:
+        load_session(args.session_in, os.environ.get("CLIENT_PHONE", ""))
     records: list[dict[str, object]] = []
 
     if args.main_positive_flow:
         args.register = True
         args.deposit = True
         args.approve_deposit = True
-        args.withdraw = True
-        args.check_admin_withdraw_list = True
-        # FAT accepts an internally completed withdrawal as the test boundary.
-        # No third-party payout account or settlement check is part of P0.
-        args.approve_withdraw = True
-        args.withdraw_mark_success = True
+        # Stop at the deposit checkpoint. A real game bet and asynchronous
+        # turnover reconciliation must happen before any withdrawal attempt.
 
     if args.register:
         records.extend(register_new_user(args))
 
-    separate_withdraw_client = bool(args.withdraw and (args.withdraw_client_phone or os.environ.get("WITHDRAW_CLIENT_PHONE")))
+    if args.submit_kyc:
+        records.extend(client_login(args))
+        records.extend(submit_kyc(args))
+
+    withdraw_phone = args.withdraw_client_phone or os.environ.get("WITHDRAW_CLIENT_PHONE", "")
+    current_phone = os.environ.get("CLIENT_PHONE", "")
+    separate_withdraw_client = bool(
+        args.withdraw
+        and withdraw_phone
+        and "".join(filter(str.isdigit, withdraw_phone)) != "".join(filter(str.isdigit, current_phone))
+    )
 
     if args.deposit or (args.withdraw and not separate_withdraw_client):
         records.extend(client_login(args))
@@ -554,6 +777,10 @@ def main() -> None:
             list_record, order = find_deposit_order(args, deposit_id)
             records.append(list_record)
             records.extend(approve_deposit(args, order, deposit_id, deposit_external_order_id))
+    elif args.approve_deposit and args.deposit_id:
+        list_record, order = find_deposit_order(args, args.deposit_id)
+        records.append(list_record)
+        records.extend(approve_deposit(args, order, args.deposit_id, args.deposit_external_order_id))
     if args.withdraw and separate_withdraw_client:
         previous_phone, previous_otp, previous_token = use_withdraw_client(args)
         try:
@@ -583,11 +810,22 @@ def main() -> None:
             list_record, order = find_withdraw_order(args, withdraw_id)
             records.append(list_record)
             records.extend(approve_withdraw(args, order))
+    elif args.approve_withdraw and args.withdraw_id:
+        list_record, order = find_withdraw_order(args, args.withdraw_id)
+        records.append(list_record)
+        records.extend(approve_withdraw(args, order))
     if args.deposit or (args.withdraw and not separate_withdraw_client):
         records.append(query_wallet(args, "wallet_after"))
 
     output = Path(args.out)
     output.write_text(json.dumps(records, ensure_ascii=False, indent=2), encoding="utf-8")
+    if args.session_out:
+        write_session(
+            args.session_out,
+            client_token=os.environ.get("API_TOKEN", ""),
+            admin_token=os.environ.get("ADMIN_TOKEN", ""),
+            client_phone=os.environ.get("CLIENT_PHONE", ""),
+        )
     print(f"wrote {output.resolve()}")
     for item in records:
         status = item.get("business_status")

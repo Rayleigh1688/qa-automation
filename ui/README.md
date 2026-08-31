@@ -27,14 +27,14 @@ UI 自动化用于补足 API 无法证明的真实用户路径、页面集成状
 - 钱包、充值、提现入口与状态。
 - My/个人中心。
 
-KYC 提交和审核流程资料复杂，第一轮暂缓；UI 层只保留入口、状态和可见性检查。
+KYC 在默认 UI 门禁中只验证入口和状态可见；真实资料提交由受控专项完成，后台审核和审核后状态刷新由 API 证明。证件/OCR/eKYC/驳回重提矩阵归 P1。
 
-## 下一周期重点
+## 当前收口重点
 
-1. 先增加窗口化 Playwright 的脱敏 Network 摘要、HAR 和 trace 捕获，将原始证据保存在 `ui/results/`。
-2. 以已跑通的登录、充值和游戏启动为基础，依次探索 KYC 入口/状态、提现入口、真实下注、下注结果和派彩展示。
-3. 三方游戏内部操作继续使用 Pixel 7 `412x915` 固定视口下的 Playwright + 相对坐标；每次操作同时保存截图和 Network 证据，便于定位接口版本变化。
-4. API 不替代真实下注操作：UI 证明三方游戏内可完成真实交互，API 负责核对游戏入口、投注记录、账变和派彩结果。
+1. 默认 UI 套件补齐充值页和提现页的安全前置校验，不在默认门禁创建真实订单。
+2. 真实投注继续使用 Pixel 7 `412x915` 固定视口和配置化相对坐标；固定业务单注为 1000，投注次数由流水查询结果决定。
+3. UI 证明三方游戏内真实交互；API/数据库只读核对投注记录、账变、流水和提现订单，不能用启动请求代替业务金额断言。
+4. Network discovery、HAR 和 trace 只用于接口版本发现与排障，不作为默认 P0 通过条件。
 
 ## 定位策略
 
@@ -52,13 +52,17 @@ npm run test:ui:network-discovery
 npm run test:ui:p0:pn
 npm run test:ui:inventory
 npm run test:ui:login
+npm run test:ui:deposit-contract
 npm run test:ui:game-bet
 npm run ui:p0-points
 ```
 
 所有 npm UI 命令执行前都会清空 UI 生成物目录，只保留最近一次结果。
 
+`npm run test:ui:p0` 固定 `--workers=1`。全局准备只在没有有效 storage state 时使用密码登录一次；以后复用 `ui/results/client-p0-storage-state.json`。该文件被 Git 忽略且不会被 UI 清理器删除。禁止另开进程用同一账号重新登录。
+
 - `npm run test:ui:network-discovery`：窗口化 Playwright Network 发现入口，固定 Pixel 7 手机浏览器格式，登录后探索首页、Game、Rewards、Filcoin、My、充值、提现、Transaction、Bet History、KYC、账户入口；输出脱敏 JSON、HAR、trace 和 Markdown 报告，只用于接口发现，不纳入默认 CI 门禁。
+- `npm run test:ui:deposit-contract`：验证充值页、支付方式和金额控件；默认不创建订单，只有显式 `EXECUTE_DEPOSIT_CONTRACT=true` 时才提交并捕获非活动充值请求。
 
 需要单独清理 UI 产物：
 
@@ -85,5 +89,5 @@ python3 scripts/clean-test-artifacts.py ui
 - 测试环境页面加载最多等待 5 秒；超过 5 秒记录为加载过慢 warning，除非登录成功或关键入口存在等硬前置不满足。
 - My 页 `Withdraw` 为提现入口，`Deposit` 为充值入口，`Transaction` 可查看充值、提现和账变记录，`Bet History` 为投注记录入口。
 - 充值页 `Multiple Deposit Bonus` 活动开关默认不参加；参加活动会产生提现流水限制。
-- KYC 是 P0 主流程 UI 专项：新账号首页默认弹出 KYC 引导，二次确认后进入 `/s-kyc-v2`，依次完成证件/图片、地址、个人信息、核对提交并看到 `KYC successful`。成功提示只表示已提交等待处理，不等于后台审核通过。
+- KYC 最小 UI 提交保留在 P0：新账号首页默认弹出 KYC 引导，二次确认后进入 `/s-kyc-v2`，依次完成证件/图片、地址、个人信息、核对提交并看到 `KYC successful`。扩展证件、OCR/eKYC 和驳回重提矩阵归 P1。
 - KYC 新账号池使用 `090XXXXXXXX`，首个账号从 `09000000001` 开始，测试环境 OTP 固定 `111111`；已驳回/未通过 KYC 的账号可再次提交。

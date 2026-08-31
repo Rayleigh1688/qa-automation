@@ -1,5 +1,7 @@
 # P0 API AI Runbook
 
+上级入口：[`api/p0/README.md`](../p0/README.md)。涉及后台登录、权限或审批时继续阅读 [`ADMIN.md`](ADMIN.md)；出现环境或响应异常时从 [`harness/README.md`](../../harness/README.md) 选择排障分支。
+
 ## 目标
 
 这套资产用于让任意 AI 代理或自动化执行器在不依赖对话上下文的情况下，完成 P0 API 冒烟验证。
@@ -71,14 +73,14 @@ python3 scripts/api-smoke-runner.py \
   --cases api/p0/test-cases.csv \
   --with-client-login \
   --with-admin-login \
-  --limit 39 \
+  --limit 0 \
   --execute \
   --insecure \
   --body-format cbor \
   --out api/results/p0-smoke-result.json
 ```
 
-如果只需要快速跑旧核心客户端集，可以临时使用 `--limit 25` 且只传 `--with-client-login`；完整 safe smoke 使用 `--limit 39` 并保留后台登录。这只是执行策略，不代表后台 P0 被拆成另一套资产。
+完整 safe smoke 使用 `--limit 0`，runner 会按 `test-cases.csv` 的 `case_order` 执行全部 31 条 `safe_smoke`。需要只跑客户端或后台时分别使用 `--base client`、`--base admin`，不要再用数字 limit 表示某个业务范围。
 
 P0 主流程写操作冒烟：
 
@@ -86,6 +88,7 @@ P0 主流程写操作冒烟：
 CLIENT_PHONE=<client phone> CLIENT_OTP=<otp code> REGISTER_OTP=<otp code> \
 python3 scripts/api-controlled-flow-runner.py \
   --register \
+  --register-phone <allocated 090XXXXXXXX KYC phone> \
   --deposit \
   --withdraw \
   --insecure \
@@ -93,33 +96,61 @@ python3 scripts/api-controlled-flow-runner.py \
   --out api/results/controlled-write-result.json
 ```
 
-P0 主流程正向调试，包含客户端登录、钱包前后检查、充值下单、后台登录、充值补单尝试、提现申请、提现审核列表：
+P0 资金主流程阶段 B 调试，只执行客户端登录、充值下单、后台补单和钱包检查：
 
 ```bash
 CLIENT_PHONE=<client phone> CLIENT_OTP=<otp code> \
 ADMIN_EMAIL=<admin email> ADMIN_PASSWORD=<admin password> ADMIN_GOOGLE_CODE=111111 ADMIN_DEVICE_ID=<x-device-id> \
 python3 scripts/api-controlled-flow-runner.py \
-  --main-positive-flow \
-  --client-phone <controlled write/deposit phone> \
-  --withdraw-client-phone <withdraw dedicated phone> \
+  --deposit \
+  --approve-deposit \
+  --client-phone <fund flow phone> \
   --insecure \
   --body-format cbor \
   --deposit-pid 47870534954254469 \
-  --deposit-amount 50 \
-  --withdraw-amount 1000 \
-  --out api/results/main-positive-flow-result.json
+  --deposit-amount 1200 \
+  --out api/results/fund-flow-seed-result.json
 ```
+
+P0 KYC 新号提交专项（受控写；三项附件可复用同一张测试图片）：
+
+```bash
+CLIENT_PHONE=<new 090XXXXXXXX phone> CLIENT_OTP=111111 \
+python3 scripts/api-controlled-flow-runner.py \
+  --submit-kyc \
+  --client-phone <new 090XXXXXXXX phone> \
+  --client-otp 111111 \
+  --kyc-image 21000000008072.webp \
+  --kyc-first-name Codex \
+  --kyc-middle-name '-' \
+  --kyc-last-name 001 \
+  --kyc-birthday 1993-08-31 \
+  --kyc-gender male \
+  --kyc-nationality Philippines \
+  --kyc-place-of-birth Manila \
+  --kyc-current-address Manila \
+  --kyc-permanent-address Manila \
+  --kyc-nearest-branch '2040 Taft Ave, Pasay, Metro Mani' \
+  --kyc-nature-of-work 'Employed – Permanent/Contractual' \
+  --kyc-source-of-income 'Employment Income' \
+  --kyc-id-type COUNTRY_ID \
+  --insecure \
+  --body-format cbor \
+  --out api/results/kyc-submit-result.json
+```
+
+runner 会按当前客户端契约依次查询 KYC 前置和动态分行、上传三项附件、调用 `/member/kyc/insert`，再查询提交后详情。KYC 手机号由登录账号自动带出，不能在表单中覆盖；成功提交只代表进入 `Under Review`，不会自动执行后台通过或驳回。
 
 注意：FAT 后台登录的 `ADMIN_GOOGLE_CODE` 固定为 `111111`。管理后台审核动作需要真实 Google Authenticator 动态验证码，充值补单、提现审核、KYC 审核等都不能用 `111111`。如果使用 `ADMIN_APPROVAL_TOTP_SECRET` 自动生成审核码，需要按二维码参数设置 `ADMIN_APPROVAL_TOTP_ALGORITHM`，当前 AI 后台账号为 `SHA256`。
 `scripts/api-controlled-flow-runner.py` 的审批动作优先使用 `--approval-code`，未传时会用本地 `.env` 中的 `ADMIN_APPROVAL_TOTP_SECRET` 动态生成当前验证码。
 
 当前 FAT 正例经验：
 
-- 充值正例优先使用 Gcash 通道 `pid=47870534954254469`，金额 `50`。COINS 通道曾返回 `Failed to load payment channels, please contact customer service!`，不适合作为稳定主流程正例。
-- 充值补单会给当前客户端账号产生新的流水/锁定金额，因此提现正例不要复用同一个客户端账号。
-- 提现正例使用已 KYC、无未完成流水、已绑定提款账户的专用账号，金额建议大于 `500`。主流程随后在 FAT/UAT 后台审核同意并标记成功，验收以后台成功记录为准，不校验项目外账户或真实到账。
-- `scripts/run-api-tests.py p0` 默认使用 GCash `pid=47870534954254469`、充值金额 `50`、提现金额 `1000`；受控写/充值账号用 `WRITE_CLIENT_PHONE`/`WRITE_CLIENT_OTP` 或 `--write-client-phone`/`--write-client-otp` 注入，专用提现账号用 `WITHDRAW_CLIENT_PHONE`/`WITHDRAW_CLIENT_OTP` 或命令行参数注入。只读诊断需显式增加 `--safe-only`。
-- `--main-positive-flow` 默认创建提现单、查询待审列表、审核同意并标记成功；不会访问第三方出款渠道。仍需要真实审核动态码。单独调试时，可用 `--approve-withdraw --withdraw-mark-success` 显式执行相同步骤。
+- 充值正例优先使用 Gcash 通道 `pid=47870534954254469`。当前同账号资金主流程使用金额 1200；COINS 通道曾返回 `Failed to load payment channels, please contact customer service!`，不适合作为稳定主流程正例。
+- 注册不再临时生成手机号。执行完整写流程必须通过 `REGISTER_PHONE` 或 `--register-phone` 指定已分配的 `090XXXXXXXX` KYC 测试池账号，避免生成无法追踪、无法继续 KYC 的孤立账号。
+- 充值补单产生的流水/锁定金额属于主流程验证目标。同一个 `fund_flow_account` 必须先经过真实投注和流水轮询，再发起提现。
+- `scripts/run-api-tests.py p0` 默认执行到充值与补单检查点并停止。建议资金参数为充值 `1200`、首次 UI 投注 `1000`、提现探针 `1000`；跨 API、UI 和数据库的放行规则见 `api/p0/README.md`。
+- `--main-positive-flow` 仅保留为兼容别名，现在也会停在充值检查点。提现和后台审核仅可在流水检查点通过后用显式 `--withdraw --check-admin-withdraw-list --approve-withdraw --withdraw-mark-success` 执行。
 - 默认只读客户端账号如果返回 `This mobile number has been restricted`，说明测试环境短信触发限频；不要直接判定主流程失败，先切到 `WRITE_CLIENT_PHONE` 或更换专用只读账号。
 - 只读 smoke 账号必须是成熟账号：能登录、已绑定提款账户，最好已 KYC。新注册零余额账号可用于充值写流程，但不适合作为完整 P0 smoke 账号。
 - 提现账号会被成功创建的提现单持续消耗可提现余额；如果出现 `Insufficient balance`，需要通过接口补资或切换提现账号池，不要直接改库。
@@ -167,7 +198,7 @@ python3 scripts/render-p0-smoke-report.py \
 
 ## 场景设计原则
 
-`api/p0/main-flow-scenarios.csv` 是上层场景资产，用来沉淀主流程正反例。新增接口进入可执行 P0 前，先判断它属于哪个场景：
+`api/p0/main-flow-scenarios.csv` 只维护 8 条端到端主流程；正反例明细统一维护在 `test-cases.csv`。新增接口进入可执行 P0 前，先判断它属于哪个主流程：
 
 - 注册登录：OTP、token、三方登录、验证码规则、鉴权失败。
 - KYC：查询、提交校验、重复提交、状态限制。
@@ -178,7 +209,7 @@ python3 scripts/render-p0-smoke-report.py \
 - 相关数据检查：钱包、账变、会员、VIP、弹窗、活动配置、Filcoin。
 - 后台：报表展示、审批列表和详情、权限，以及本次专用测试单的受控审批动作。
 
-写接口自动化时，不能只根据接口文档生成用例。接口文档负责发现接口，主流程场景负责决定测试价值和正反例边界。
+写接口自动化时，不能只根据接口文档生成用例或决定顺序。接口文档只负责发现；真实客户端 Network 决定当前版本路径，业务状态依赖决定访问顺序，`test-cases.csv` 决定正反例和账号 lane。
 
 ## 写操作边界
 

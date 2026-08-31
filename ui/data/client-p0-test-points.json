@@ -207,7 +207,7 @@
       "module": "充值",
       "priority": "P0",
       "type": "positive",
-      "executionMode": "manual_or_next_auto",
+      "executionMode": "default_auto",
       "title": "充值页可打开并展示渠道和金额",
       "route": "/my",
       "assertions": [
@@ -216,8 +216,8 @@
         "创建订单前置参数可从 Network 捕获",
         "默认 P0 不提交真实充值订单"
       ],
-      "automationStatus": "planned",
-      "spec": ""
+      "automationStatus": "implemented",
+      "spec": "ui/cases/client-deposit-contract.spec.mjs"
     },
     {
       "id": "UI-P0-014",

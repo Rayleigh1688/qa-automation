@@ -1,5 +1,7 @@
 # Admin API Runbook
 
+上级入口：[`API.md`](API.md) 和 [`api/p0/README.md`](../p0/README.md)。本文件只说明后台鉴权与受控审批，不维护当前执行状态；实时状态看 [`AI-HANDOFF.md`](../../AI-HANDOFF.md)。
+
 ## 目标
 
 记录后台接口自动化的登录、鉴权和调试规范。后台接口和客户端接口一样使用 CBOR 请求/响应，但登录字段和 header 更敏感，不能只照接口文档裸跑。
@@ -83,6 +85,29 @@ python3 scripts/api-smoke-runner.py \
 | `GET /admin/finance/transaction/types` | 通过 | `status_true,data_list` |
 | `GET /admin/kyc/pending/count` | 通过 | `status_true` |
 | `GET /admin/kyc/config/info` | 通过 | `status_true,data_object` |
+| `GET /admin/priv/list?pid=0` | 通过 | `status_true,data_list` |
+| `GET /admin/group/list?page=1&page_size=20` | 通过 | `status_true,data_object,keys:data.d\|data.t\|data.s` |
+| `POST /admin/kyc/list` | 通过 | `status_true,data_object,keys:data.d\|data.t\|data.s` |
+| `POST /admin/finance/deposit/risk/list` | 通过 | `status_true,data_object,keys:data.d\|data.t\|data.s\|data.summary` |
+| `POST /admin/finance/withdraw/risk/audit/list` | 通过 | `status_true,data_object,keys:data.d\|data.t\|data.s\|data.summary` |
+| `POST /admin/finance/deposit/list` | 通过 | `status_true,data_object,keys:data.d\|data.t\|data.s\|data.summary` |
+| `POST /admin/finance/withdraw/list` | 通过 | `status_true,data_object,keys:data.d\|data.t\|data.s\|data.summary` |
+| `POST /admin/finance/transaction/list` | 通过 | `status_true,data_object,keys:data.d\|data.t\|data.s` |
+
+当前 FAT 后台测试账号的 `/admin/me/detail` 中 `roles` 可为空字符串，不能以 `roles` 非空作为登录或权限成功标准；权限断言使用 `group_id`、`button_permission_ids` 字段存在，且 `button_permission_ids` 非空，再结合 `/admin/priv/list` 权限树查询。
+
+只执行后台 13 条 safe smoke：
+
+```bash
+python3 scripts/api-smoke-runner.py \
+  --cases api/p0/test-cases.csv \
+  --with-admin-login \
+  --base admin \
+  --execute --insecure --body-format cbor \
+  --out /tmp/admin-p0-smoke.json
+```
+
+后台列表 POST 请求不能发送空 body。充值/提现待审列表和财务记录使用 `start_time`、`end_time`、`page`、`page_size`；当前实测为秒级时间戳。`test-cases.csv` 使用动态时间标记，由 smoke runner 在发送前替换。
 
 ## 已定位的问题
 
@@ -97,7 +122,7 @@ python3 scripts/api-smoke-runner.py \
 
 后台 P0 接口进入正式用例前，先按以下顺序推进：
 
-1. 只纳入只读接口，例如当前用户、报表、列表、配置、待审数量。
-2. 审批通过、审批拒绝、配置修改、补单、同步状态等接口需要真实审核令牌，继续保持受控调试，不混入默认只读 smoke。
-3. 后台报表类 POST 查询接口需要先确认请求体字段，再用只读断言纳入。
-4. 后台接口单独成组执行，避免和客户端 P0 混在同一个最小 smoke 集里造成定位困难。
+1. KYC UI/API 提交后，用 uid/phone 在 `/admin/kyc/list` 定位本次记录，再补详情和通过/驳回的受控 runner。
+2. 审批通过、审批拒绝、配置修改、补单、同步状态等接口需要真实审核令牌；只允许操作本次自动化创建的记录，不混入默认只读 smoke。
+3. 在 controlled flow 中补齐订单级核对：前后台 uid、订单号、金额、状态、账变方向一致，并检查无重复账变。
+4. 后台 safe smoke 可用 `--base admin` 单独执行，便于把后台失败与客户端登录/SMS 环境问题隔离。

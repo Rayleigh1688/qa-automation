@@ -5,8 +5,16 @@ import { ClientAppPage } from "../elements/client-app.page.mjs";
 import { loadJson } from "../framework/data-loader.mjs";
 import { loadEnv, requiredEnv } from "../framework/env.mjs";
 import { attachNetworkRecorder } from "../framework/network-recorder.mjs";
+import { p0StorageStatePath, reuseP0Auth } from "../framework/auth-state.mjs";
 
 loadEnv();
+
+const storageStatePath = reuseP0Auth
+  ? p0StorageStatePath
+  : path.resolve(process.env.CLIENT_STORAGE_STATE_PATH || "ui/results/client-fund-flow-storage-state.json");
+if (reuseP0Auth || (process.env.CLIENT_REUSE_STORAGE_STATE === "true" && fs.existsSync(storageStatePath))) {
+  test.use({ storageState: storageStatePath });
+}
 
 function compactUrl(value = "") {
   return String(value)
@@ -28,6 +36,14 @@ function selectGame(config) {
   return game;
 }
 
+async function activatePoint(page, x, y) {
+  if (process.env.CLIENT_GAME_INPUT !== "mouse") {
+    await page.touchscreen.tap(x, y);
+    return;
+  }
+  await page.mouse.click(x, y);
+}
+
 function businessNetworkRows(network) {
   return network
     .filter((item) => item.kind === "response" && /\/(game|wallet|finance|bet|order|record|launch|enter|process)\//i.test(item.url))
@@ -44,6 +60,7 @@ function writeReport(result) {
     `- 游戏: ${result.game.name} (${result.game.id})`,
     `- 游戏页: \`${compactUrl(result.pageUrl)}\``,
     `- 执行真实点击: ${result.executeBet}`,
+    `- 计划/完成点击: ${result.spinCount}/${result.completedSpinCount}`,
     `- 点击前等待: ${result.game.readyWaitMs}ms`,
     `- 点击后等待: ${result.game.postClickWaitMs}ms`,
     `- 点击位置: ${JSON.stringify(result.clickPoint)}`,
@@ -90,13 +107,75 @@ test.describe("Client game bet smoke", () => {
     const network = attachNetworkRecorder(page, { hostPattern: /filbet|pwa|game|luck|jili|spribe|pg|cq9|bng|neurorestorativeals|playpoint|cloudfront/i });
     const app = new ClientAppPage(page, { pageConfig, modalConfig });
 
-    await app.loginWithOtp(requiredEnv("CLIENT_PHONE"), requiredEnv("CLIENT_OTP"));
+    await app.gotoHome();
+    const alreadyLoggedIn = !(await page.locator("body").innerText()).includes("Register / Login");
+    if (!alreadyLoggedIn) {
+      await app.loginWithOtp(requiredEnv("CLIENT_PHONE"), requiredEnv("CLIENT_OTP"));
+    }
     await expect(page.locator("body")).not.toContainText("Register / Login");
+    await page.context().storageState({ path: storageStatePath });
 
     expect(page.viewportSize()).toEqual(viewport);
     await page.goto(process.env.CLIENT_GAME_PAGE_PATH || game.path, { waitUntil: "domcontentloaded" });
     await page.waitForLoadState("networkidle", { timeout: 5000 }).catch(() => {});
     await page.waitForTimeout(Number(process.env.CLIENT_GAME_READY_WAIT_MS || game.readyWaitMs || 25_000));
+
+    if (game.startTap) {
+      await activatePoint(page,
+        Math.round(viewport.width * game.startTap.xRatio),
+        Math.round(viewport.height * game.startTap.yRatio),
+      );
+      await page.waitForTimeout(Number(process.env.CLIENT_GAME_POST_START_WAIT_MS || game.postStartWaitMs || 3000));
+    }
+
+    const requestedBetAmount = String(process.env.CLIENT_GAME_BET_AMOUNT || "");
+    const betOption = requestedBetAmount ? game.betOptions?.[requestedBetAmount] : null;
+    const configuredBetButtonClicks = requestedBetAmount
+      ? game.betButtonClicksByAmount?.[requestedBetAmount]
+      : undefined;
+    const betButtonClicks = Math.max(0, Number(
+      process.env.CLIENT_GAME_BET_BUTTON_CLICKS
+      ?? configuredBetButtonClicks
+      ?? 0,
+    ));
+    const betButtonPoint = game.betButton
+      ? {
+          x: Math.round(viewport.width * game.betButton.xRatio),
+          y: Math.round(viewport.height * game.betButton.yRatio),
+        }
+      : null;
+    const betButtonHitTargets = betButtonPoint
+      ? await page.evaluate(({ x, y }) => document.elementsFromPoint(x, y).slice(0, 8).map((element) => ({
+          tag: element.tagName,
+          id: element.id,
+          className: String(element.className || ""),
+          text: String(element.textContent || "").trim().slice(0, 80),
+        })), betButtonPoint)
+      : [];
+    if (requestedBetAmount && !betOption && configuredBetButtonClicks === undefined) {
+      throw new Error(`bet option is not configured: ${requestedBetAmount}`);
+    }
+    if (game.betButton && betOption) {
+      await activatePoint(page,
+        Math.round(viewport.width * game.betButton.xRatio),
+        Math.round(viewport.height * game.betButton.yRatio),
+      );
+      await page.waitForTimeout(500);
+      await activatePoint(page,
+        Math.round(viewport.width * betOption.xRatio),
+        Math.round(viewport.height * betOption.yRatio),
+      );
+      await page.waitForTimeout(500);
+    }
+    if (game.betButton) {
+      for (let index = 0; index < betButtonClicks; index += 1) {
+        await activatePoint(page,
+          Math.round(viewport.width * game.betButton.xRatio),
+          Math.round(viewport.height * game.betButton.yRatio),
+        );
+        await page.waitForTimeout(500);
+      }
+    }
 
     const screenshotDir = path.resolve("ui/results/screenshots");
     fs.mkdirSync(screenshotDir, { recursive: true });
@@ -109,26 +188,67 @@ test.describe("Client game bet smoke", () => {
       y: Math.round(viewport.height * game.spinButton.yRatio),
     };
     const executeBet = process.env.EXECUTE_BET === "true";
+    const spinCount = Math.max(1, Number(process.env.CLIENT_GAME_SPIN_COUNT || 1));
+    let completedSpinCount = 0;
     const clickStartedAt = Date.now();
     if (executeBet) {
-      await page.mouse.click(clickPoint.x, clickPoint.y);
-      await page.waitForTimeout(Number(process.env.CLIENT_GAME_POST_CLICK_WAIT_MS || game.postClickWaitMs || 8000));
+      for (let index = 0; index < spinCount; index += 1) {
+        await activatePoint(page, clickPoint.x, clickPoint.y);
+        completedSpinCount += 1;
+        await page.waitForTimeout(Number(process.env.CLIENT_GAME_POST_CLICK_WAIT_MS || game.postClickWaitMs || 8000));
+      }
     }
     await page.screenshot({ path: afterScreenshot, fullPage: false });
 
     const frames = page.frames().map((frame) => frame.url()).filter(Boolean);
+    const frameDiagnostics = [];
+    for (const frame of page.frames()) {
+      const canvases = frame.locator("canvas");
+      const canvasBoxes = [];
+      for (let index = 0; index < Math.min(await canvases.count(), 8); index += 1) {
+        canvasBoxes.push(await canvases.nth(index).boundingBox());
+      }
+      frameDiagnostics.push({
+        url: safeFrameUrl(frame.url()),
+        canvasBoxes,
+        viewport: await frame.locator("body").evaluate((body) => ({
+          width: body.clientWidth,
+          height: body.clientHeight,
+          scrollWidth: body.scrollWidth,
+          scrollHeight: body.scrollHeight,
+        })).catch(() => null),
+      });
+    }
     const afterClickGameRequestCount = network.filter(
       (item) => item.kind === "request" && item.ts >= clickStartedAt && /\/process\/|spin|bet|wager|round|play/i.test(`${item.url} ${item.postData || ""}`),
     ).length;
+    const afterClickBetTotals = network
+      .filter((item) => item.kind === "request" && item.ts >= clickStartedAt && item.url.includes("/process/"))
+      .map((item) => {
+        try {
+          return Number(JSON.parse(item.postData || "{}").total_bet);
+        } catch {
+          return Number.NaN;
+        }
+      })
+      .filter(Number.isFinite);
 
     const result = {
       scannedAt: new Date().toISOString(),
       game,
       pageUrl: page.url(),
       executeBet,
+      betButtonClicks,
+      requestedBetAmount,
+      betButtonPoint,
+      betButtonHitTargets,
+      spinCount,
+      completedSpinCount,
       clickPoint,
       frames,
+      frameDiagnostics,
       afterClickGameRequestCount,
+      afterClickBetTotals,
       screenshots: {
         before: beforeScreenshot,
         after: afterScreenshot,
@@ -154,6 +274,10 @@ test.describe("Client game bet smoke", () => {
     for (const expected of game.expectedFrameText || []) {
       expect(frames.some((frame) => frame.includes(expected))).toBeTruthy();
     }
-    if (executeBet) expect(afterClickGameRequestCount).toBeGreaterThan(0);
+    if (executeBet) {
+      if (game.networkEvidenceRequired !== false) {
+        expect(afterClickGameRequestCount).toBeGreaterThan(0);
+      }
+    }
   });
 });

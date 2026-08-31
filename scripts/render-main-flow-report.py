@@ -152,6 +152,25 @@ def controlled_status(scenario: dict[str, str], controlled_results: list[dict[st
         if not agree or not success:
             return "未执行", "缺少后台提现审核或成功状态结果"
         return "未通过", str(success.get("body_sample") or success.get("data") or agree.get("body_sample") or agree.get("data") or "")
+    elif scenario_id == "MF-064":
+        required = [names.get("deposit_create"), names.get("admin_deposit_risk_list"), names.get("admin_deposit_manual_success")]
+        if any(item is None for item in required):
+            return "未执行", "缺少充值创建、后台待审定位或补单结果"
+        if all(item.get("business_status") is True for item in required if item):
+            return "通过", "本次充值单已创建、在后台定位并完成补单"
+        return "未通过", "充值创建、后台待审定位或补单存在业务失败"
+    elif scenario_id == "MF-065":
+        required = [
+            names.get("withdraw_create"),
+            names.get("admin_withdraw_risk_audit_list"),
+            names.get("admin_withdraw_agree"),
+            names.get("admin_withdraw_success"),
+        ]
+        if any(item is None for item in required):
+            return "未执行", "缺少提现创建、后台待审定位、审核或成功标记结果"
+        if all(item.get("business_status") is True for item in required if item):
+            return "通过", "本次提现单已创建、在后台定位、审核同意并标记成功"
+        return "未通过", "提现创建、后台待审定位、审核或成功标记存在业务失败"
     else:
         result = None
     if not result:
@@ -186,13 +205,81 @@ def scenario_runtime_status(
     return "未知", automation_status
 
 
+def aggregate_flow_status(
+    flow_cases: list[dict[str, str]],
+    positive_by_case: dict[str, dict[str, object]],
+    negative_by_case: dict[str, dict[str, object]],
+    controlled_results: list[dict[str, object]],
+) -> tuple[str, str]:
+    failures: list[str] = []
+    missing: list[str] = []
+    pending: list[str] = []
+    controlled_by_name = {str(item.get("name", "")): item for item in controlled_results}
+    controlled_map = {
+        "CTC-001": ["register"],
+        "CTC-005": ["deposit_create"],
+        "CTC-006": ["admin_deposit_manual_success"],
+        "CTC-009": ["withdraw_create"],
+        "CTC-010": ["admin_withdraw_agree", "admin_withdraw_success"],
+    }
+    for case in flow_cases:
+        case_id = case["case_id"]
+        policy = case["execution_policy"]
+        if policy == "safe_smoke":
+            result = positive_by_case.get(case_id)
+            if result is None:
+                missing.append(case_id)
+            elif result.get("assertion_passed") is not True:
+                failures.append(case_id)
+        elif policy == "negative_smoke":
+            result = negative_by_case.get(case_id)
+            if result is None:
+                missing.append(case_id)
+            elif result.get("assertion_passed") is not True:
+                failures.append(case_id)
+        elif case_id in controlled_map:
+            names = controlled_map[case_id]
+            results = [controlled_by_name.get(name) for name in names]
+            if any(result is None for result in results):
+                missing.append(case_id)
+            elif any(result.get("business_status") is not True for result in results if result):
+                failures.append(case_id)
+        elif policy == "setup":
+            continue
+        else:
+            pending.append(case_id)
+    if failures:
+        return "失败", "失败用例：" + ", ".join(failures)
+    if missing:
+        detail = "缺少执行结果：" + ", ".join(missing)
+        if pending:
+            detail += "；待实现/待数据：" + ", ".join(pending)
+        return "未执行", detail
+    if pending:
+        return "部分通过", "已执行项通过；待实现/待数据：" + ", ".join(pending)
+    return "通过", "该主流程所有已登记用例均通过"
+
+
+def render_flow_html(scope: str, rows: list[dict[str, str]], verdict: str) -> str:
+    cards = "".join(
+        f'<section><b>{html.escape(row["scenario_id"])} · {html.escape(row["flow_stage_label"])}</b>'
+        f'<span class="{status_class(row["runtime_status"])}">{html.escape(row["runtime_status"])}</span>'
+        f'<p>{html.escape(row["runtime_detail"])}</p></section>'
+        for row in rows
+    )
+    return f"""<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>P0 主流程报告</title><style>body{{max-width:980px;margin:auto;padding:28px;font:14px/1.6 sans-serif;background:#f4f6f5;color:#17232d}}header,section{{background:#fff;border:1px solid #d9e1e5;padding:16px;margin:10px 0}}b{{font-size:17px}}span{{float:right}}.pass{{color:#16754b}}.fail{{color:#bd3434}}.pending{{color:#a76508}}p{{margin:8px 0 0;color:#64727d}}</style></head>
+<body><header><h1>P0 主流程报告</h1><p>环境：{html.escape(scope)} · 结论：{html.escape(verdict)}</p></header>{cards}</body></html>"""
+
+
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--scenarios", default="api/p0/main-flow-scenarios.csv")
     parser.add_argument("--cases", default="api/p0/test-cases.csv")
     parser.add_argument("--positive-result", default="api/results/p0-smoke-result.json")
     parser.add_argument("--negative-result", default="api/results/p0-negative-result.json")
-    parser.add_argument("--controlled-result", default="api/results/main-positive-flow-result.json")
+    parser.add_argument("--controlled-result", default="api/results/fund-flow-seed-result.json")
+    parser.add_argument("--withdraw-result", default="api/results/withdraw-result.json")
     parser.add_argument("--out", default="api/results/p0-main-flow-report.md")
     parser.add_argument("--html-out", default="")
     parser.add_argument("--scope", default="FAT")
@@ -203,45 +290,43 @@ def main() -> None:
     positive_items = load_json(Path(args.positive_result))
     negative_items = load_json(Path(args.negative_result))
     controlled_items = load_json(Path(args.controlled_result))
+    withdraw_items = load_json(Path(args.withdraw_result))
     positive_by_case = {
         str(item.get("case_id")): item
         for item in positive_items
         if isinstance(item, dict) and item.get("case_id")
     }
-    negative_by_scenario = {
-        str(item.get("scenario_id")): item
+    negative_by_case = {
+        str(item.get("case_id")): item
         for item in negative_items
-        if isinstance(item, dict) and item.get("scenario_id")
+        if isinstance(item, dict) and item.get("case_id")
     }
-    cases_by_scenario: dict[str, list[str]] = {}
+    cases_by_scenario: dict[str, list[dict[str, str]]] = {}
     for case in cases:
         scenario_id = case.get("scenario_id", "")
         if scenario_id:
-            cases_by_scenario.setdefault(scenario_id, []).append(case["case_id"])
+            cases_by_scenario.setdefault(scenario_id, []).append(case)
     controlled_results = [item for item in controlled_items if isinstance(item, dict)] if isinstance(controlled_items, list) else []
+    if isinstance(withdraw_items, list):
+        controlled_results.extend(item for item in withdraw_items if isinstance(item, dict))
 
-    detail_rows = [["场景ID", "优先级", "流程", "正反例", "场景", "自动化状态", "运行结论", "说明"]]
+    detail_rows = [["顺序", "场景ID", "主流程", "用例数", "正例", "反例", "运行结论", "说明"]]
     details: list[dict[str, str]] = []
     runtime_counter: Counter[str] = Counter()
     stage_counter: Counter[str] = Counter()
     for scenario in scenarios:
-        runtime_status, detail = scenario_runtime_status(
-            scenario,
-            positive_by_case,
-            cases_by_scenario,
-            negative_by_scenario,
-            controlled_results,
-        )
+        flow_cases = cases_by_scenario.get(scenario["scenario_id"], [])
+        runtime_status, detail = aggregate_flow_status(flow_cases, positive_by_case, negative_by_case, controlled_results)
         runtime_counter[runtime_status] += 1
         stage_counter[scenario["flow_stage_label"]] += 1
         detail_rows.append(
             [
+                scenario["flow_order"],
                 scenario["scenario_id"],
-                scenario["priority"],
                 scenario["flow_stage_label"],
-                scenario["polarity"],
-                scenario["scenario_name"],
-                scenario["automation_status"],
+                str(len(flow_cases)),
+                str(sum(case.get("polarity") == "positive" for case in flow_cases)),
+                str(sum(case.get("polarity") == "negative" for case in flow_cases)),
                 runtime_status,
                 detail[:160],
             ]
@@ -249,7 +334,7 @@ def main() -> None:
         details.append({**scenario, "runtime_status": runtime_status, "runtime_detail": detail})
 
     summary_rows = [["指标", "数量"]] + [[key, str(value)] for key, value in runtime_counter.most_common()]
-    stage_rows = [["流程", "场景数"]] + [[key, str(value)] for key, value in stage_counter.most_common()]
+    stage_rows = [["流程", "主流程数"]] + [[key, str(value)] for key, value in stage_counter.items()]
 
     report = f"""# P0 API Main Flow Report
 
@@ -264,7 +349,7 @@ def main() -> None:
 - 反例结果：`{args.negative_result}`
 - 受控写结果：`{args.controlled_result}`
 
-这份报告以 `main-flow-scenarios.csv` 为主视角，汇总 P0 主流程场景的执行状态。底层请求仍由正例 smoke、反例 runner 和受控写 runner 执行。
+这份报告按真实业务依赖顺序汇总 8 条 P0 主流程。`test-cases.csv` 是完整正反例索引；接口候选池不决定这里的范围或顺序。
 
 ## 结果概览
 
@@ -281,9 +366,9 @@ def main() -> None:
     Path(args.out).write_text(report, encoding="utf-8")
     print(f"wrote {Path(args.out).resolve()}")
     if args.html_out:
-        verdict, verdict_detail = release_verdict(runtime_counter)
+        verdict = "BLOCKED" if runtime_counter["失败"] else "PARTIAL" if runtime_counter["未执行"] or runtime_counter["部分通过"] else "PASS"
         Path(args.html_out).write_text(
-            render_html_report(args.scope, args.scenarios, verdict, verdict_detail, runtime_counter, details),
+            render_flow_html(args.scope, details, verdict),
             encoding="utf-8",
         )
         print(f"wrote {Path(args.html_out).resolve()}")

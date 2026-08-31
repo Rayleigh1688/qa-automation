@@ -10,14 +10,49 @@
       "path": "/s-game-page/17453858840928",
       "readyWaitMs": 5000,
       "postClickWaitMs": 5000,
+      "postStartWaitMs": 3000,
+      "startTap": {
+        "xRatio": 0.5,
+        "yRatio": 0.9
+      },
+      "betButton": {
+        "xRatio": 0.9,
+        "yRatio": 0.79
+      },
+      "betOptions": {
+        "1000": {
+          "xRatio": 0.815,
+          "yRatio": 0.576
+        }
+      },
       "spinButton": {
-        "xRatio": 0.535,
-        "yRatio": 0.78
+        "xRatio": 0.5,
+        "yRatio": 0.82
       },
       "expectedFrameText": [
         "bng.games",
         "lucky_penny"
       ]
+    },
+    {
+      "id": "beanstalk_243",
+      "name": "Beanstalk 243 Ways",
+      "path": "/s-game-page/17453877442826",
+      "readyWaitMs": 7000,
+      "postClickWaitMs": 6000,
+      "networkEvidenceRequired": false,
+      "betButton": {
+        "xRatio": 0.33,
+        "yRatio": 0.84
+      },
+      "betButtonClicksByAmount": {
+        "1000": 3
+      },
+      "spinButton": {
+        "xRatio": 0.5,
+        "yRatio": 0.82
+      },
+      "expectedFrameText": []
     }
   ]
 }

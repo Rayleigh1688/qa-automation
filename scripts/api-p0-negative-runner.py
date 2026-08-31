@@ -9,6 +9,7 @@ They should not create valid payments, approvals, KYC records, or config changes
 from __future__ import annotations
 
 import argparse
+import csv
 import importlib.util
 import json
 import os
@@ -17,6 +18,8 @@ from dataclasses import dataclass
 from decimal import Decimal, InvalidOperation
 from datetime import datetime
 from pathlib import Path
+
+from p0_session import load_session
 from types import ModuleType
 
 
@@ -43,24 +46,19 @@ class Case:
     assertion: str
 
 
-CASES = [
-    Case("NTC-001", "MF-002", "auth", "01_register_login", "OTP 错误时登录失败", "business_not_true,no_token"),
-    Case("NTC-002", "MF-003", "auth", "01_register_login", "缺少 OTP 时登录失败", "business_not_true,no_token"),
-    Case("NTC-003", "MF-006", "auth", "01_register_login", "未登录查询会员详情失败", "protected_rejected,no_key:data.uid"),
-    Case("NTC-004", "MF-011", "kyc", "02_kyc", "未登录查询 KYC 详情失败", "protected_rejected,no_key:data.uid"),
-    Case("NTC-005", "MF-007", "finance", "07_related_data_check", "无效 token 查询钱包失败", "protected_rejected,no_key:data.uid"),
-    Case("NTC-006", "MF-025", "game", "04_bet", "非法游戏列表参数不导致 5xx", "no_5xx,decoded"),
-    Case("NTC-007", "MF-040", "member", "07_related_data_check", "旧 VIP 接口业务失败不能判定通过", "http_200,business_not_true"),
-    Case("NTC-008", "MF-018", "finance", "03_deposit", "不存在的充值通道不能下单", "business_not_true"),
-    Case("NTC-009", "MF-034", "finance", "06_withdraw", "低于最小金额或非法提款账户不能提现", "business_not_true"),
-    Case("NTC-010", "MF-036", "finance", "06_withdraw_check", "非法提现记录筛选参数不导致 5xx", "no_5xx,decoded"),
-    Case("NTC-011", "MF-045", "admin", "08_admin_report_approval", "无效后台 token 不能查询当前用户", "protected_rejected"),
-    Case("NTC-012", "MF-047", "admin", "08_admin_report_approval", "后台报表非法时间范围不导致 5xx", "no_5xx,decoded"),
-    Case("NTC-013", "MF-012", "kyc", "02_kyc", "KYC 提交缺少必填字段失败", "business_not_true"),
-    Case("NTC-014", "MF-016", "finance", "03_deposit", "充值金额低于通道最小限额失败", "business_not_true"),
-    Case("NTC-015", "MF-017", "finance", "03_deposit", "充值金额高于通道最大限额失败", "business_not_true"),
-    Case("NTC-016", "MF-020", "finance", "03_deposit_check", "非法充值记录筛选参数不导致 5xx", "no_5xx,decoded"),
-]
+def load_cases(path: Path = Path("api/p0/test-cases.csv")) -> list[Case]:
+    with path.open(encoding="utf-8", newline="") as handle:
+        rows = [row for row in csv.DictReader(handle) if row.get("execution_policy") == "negative_smoke"]
+    return [
+        Case(
+            row["case_id"], row["scenario_id"], row["domain"], row["flow_stage"],
+            row["case_name"], row["assertions"],
+        )
+        for row in rows
+    ]
+
+
+CASES = load_cases()
 
 
 def row(method: str, clean_url: str, base_var: str = "{{api_url}}") -> dict[str, str]:
@@ -282,8 +280,18 @@ def run_cases(args: argparse.Namespace) -> list[dict[str, object]]:
     sms_result = client_sms(args, phone)
     otp_id = otp_id_from(sms_result) or os.environ.get("P0_NEGATIVE_OTP_ID", "invalid-otp-id")
 
-    admin_token = ""
-    if os.environ.get("ADMIN_EMAIL") and os.environ.get("ADMIN_PASSWORD") and os.environ.get("ADMIN_GOOGLE_CODE"):
+    admin_token = os.environ.get("ADMIN_TOKEN", "")
+    if admin_token:
+        probe = smoke.request_once(
+            row("GET", "{{admin_url}}/admin/me/detail", "{{admin_url}}"),
+            args.timeout,
+            args.insecure,
+        )
+        body = probe.get("decoded_body")
+        if not (isinstance(body, dict) and body.get("status") is True):
+            admin_token = ""
+            os.environ.pop("ADMIN_TOKEN", None)
+    if not admin_token and os.environ.get("ADMIN_EMAIL") and os.environ.get("ADMIN_PASSWORD") and os.environ.get("ADMIN_GOOGLE_CODE"):
         admin_login_results, admin_token = smoke.admin_login(args)
         if admin_token:
             os.environ["ADMIN_TOKEN"] = admin_token
@@ -310,14 +318,9 @@ def run_cases(args: argparse.Namespace) -> list[dict[str, object]]:
         )
     )
 
-    # The SMS request above gives this run a fresh OTP id. Prefer its token over
-    # an inherited token, which may be expired or belong to another account.
-    client_token = ""
-    if otp_id != "invalid-otp-id":
-        valid_login = login_with_code(args, phone, otp_id, os.environ.get("CLIENT_OTP", ""))
-        client_token = smoke.extract_token(valid_login)
-    if not client_token:
-        client_token = token_from_latest_positive_result() or os.environ.get("API_TOKEN", "")
+    # Never perform a second successful login here: it would invalidate the
+    # shared P0 token. Reuse the session created by the single auth stage.
+    client_token = os.environ.get("API_TOKEN", "") or token_from_latest_positive_result()
     if not client_token:
         raise SystemExit("client token is required; run python3 scripts/run-api-tests.py p0 first or provide API_TOKEN")
     os.environ["API_TOKEN"] = client_token
@@ -344,7 +347,6 @@ def run_cases(args: argparse.Namespace) -> list[dict[str, object]]:
             ),
         )
     )
-    records.append(record(case_by_id["NTC-007"], smoke.request_once(row("GET", "{{api_url}}/member/vip"), args.timeout, args.insecure)))
     records.append(
         record(
             case_by_id["NTC-008"],
@@ -537,9 +539,12 @@ def main() -> None:
     parser.add_argument("--report", default="api/results/p0-negative-report.md")
     parser.add_argument("--scope", default="FAT")
     parser.add_argument("--include-deposit-limit-contract", action="store_true")
+    parser.add_argument("--session-in", default="", help="Reuse ignored P0 client/admin tokens")
     args = parser.parse_args()
 
     smoke.load_env_file(Path(args.env))
+    if args.session_in:
+        load_session(args.session_in, os.environ.get("CLIENT_PHONE", ""))
     records = run_cases(args)
     output = Path(args.out)
     output.parent.mkdir(parents=True, exist_ok=True)

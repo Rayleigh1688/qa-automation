@@ -5,10 +5,12 @@ import { ClientAppPage } from "../elements/client-app.page.mjs";
 import { loadJson } from "../framework/data-loader.mjs";
 import { loadEnv, requiredEnv } from "../framework/env.mjs";
 import { attachNetworkRecorder } from "../framework/network-recorder.mjs";
+import { p0StorageStatePath, reuseP0Auth } from "../framework/auth-state.mjs";
 
 loadEnv();
 
 const p0Results = [];
+const p0ResultDir = path.resolve("ui/results/client-p0-positive-negative-cases");
 
 function compactUrl(value = "") {
   return String(value)
@@ -51,6 +53,8 @@ function isRestrictedAccount(state) {
 
 async function writeResult(testInfo, result) {
   p0Results.push(result);
+  fs.mkdirSync(p0ResultDir, { recursive: true });
+  fs.writeFileSync(path.join(p0ResultDir, `${result.name}.json`), JSON.stringify(result, null, 2));
   await testInfo.attach(result.name, {
     body: JSON.stringify(result, null, 2),
     contentType: "application/json",
@@ -59,6 +63,9 @@ async function writeResult(testInfo, result) {
 
 async function loginWithOtpOrSkip(page, testInfo, network, app) {
   try {
+    await app.gotoHome();
+    const current = await visibleState(page);
+    if (looksLoggedIn(current) || hasMemberSuccess(network)) return;
     await app.loginWithOtp(requiredEnv("CLIENT_PHONE"), requiredEnv("CLIENT_OTP"));
     return;
   } catch (error) {
@@ -79,39 +86,26 @@ async function loginWithOtpOrSkip(page, testInfo, network, app) {
   }
 }
 
-async function clickLoginTermsRow(page) {
-  const box = await page.waitForFunction(() => {
-    const candidates = Array.from(document.querySelectorAll("div")).filter((element) =>
-      element.innerText?.trim().startsWith("I agree to the"),
-    );
-    const row = candidates.find((element) => element.innerText.includes("confirm that I am 21 years old")) || candidates[0];
-    if (!row) return false;
-    const rect = row.getBoundingClientRect();
-    return {
-      x: rect.x + Math.min(16, rect.width / 3),
-      y: rect.y + rect.height / 2,
-      width: rect.width,
-      height: rect.height,
-    };
-  }, null, { timeout: 5000 }).then((handle) => handle.jsonValue()).catch(() => null);
-  if (box && box.width > 0 && box.height > 0) await page.mouse.click(box.x, box.y);
-}
-
 test.describe("Client P0 positive and negative UI checkpoints", () => {
   test.afterAll(async () => {
+    const persistedResults = fs.existsSync(p0ResultDir)
+      ? fs.readdirSync(p0ResultDir)
+        .filter((name) => name.endsWith(".json"))
+        .map((name) => JSON.parse(fs.readFileSync(path.join(p0ResultDir, name), "utf8")))
+      : p0Results;
     const out = path.resolve("ui/results/client-p0-positive-negative.json");
     fs.mkdirSync(path.dirname(out), { recursive: true });
-    fs.writeFileSync(out, JSON.stringify({ executedAt: new Date().toISOString(), results: p0Results }, null, 2));
+    fs.writeFileSync(out, JSON.stringify({ executedAt: new Date().toISOString(), results: persistedResults }, null, 2));
 
     const report = [
       "# 客户端 P0 UI 正反例执行报告",
       "",
       `- 执行时间: ${new Date().toISOString()}`,
-      `- 用例数: ${p0Results.length}`,
+      `- 用例数: ${persistedResults.length}`,
       "",
       "| 用例 | 结果 | URL | 关键说明 |",
       "|---|---|---|---|",
-      ...p0Results.map((item) => `| ${item.name} | ${item.status} | \`${compactUrl(item.state?.url || "")}\` | ${item.note || ""} |`),
+      ...persistedResults.map((item) => `| ${item.name} | ${item.status} | \`${compactUrl(item.state?.url || "")}\` | ${item.note || ""} |`),
       "",
     ].join("\n");
 
@@ -126,8 +120,7 @@ test.describe("Client P0 positive and negative UI checkpoints", () => {
 
     await app.openLogin();
     await app.chooseOtpMode();
-    await app.fillPhone(requiredEnv("CLIENT_PHONE"));
-    await app.requestOtp();
+    await app.fillPhone(process.env.UNVERIFIED_CLIENT_PHONE || requiredEnv("CLIENT_PHONE"));
 
     const login = page.getByRole("button", { name: /^Login$/i }).first();
     if (await login.isEnabled().catch(() => false)) {
@@ -155,7 +148,7 @@ test.describe("Client P0 positive and negative UI checkpoints", () => {
 
     await app.openLogin();
     await app.chooseOtpMode();
-    await app.fillPhone(requiredEnv("CLIENT_PHONE"));
+    await app.fillPhone(process.env.UNVERIFIED_CLIENT_PHONE || requiredEnv("CLIENT_PHONE"));
     await app.requestOtp();
     await page.waitForFunction(() => document.querySelectorAll("input").length >= 2, null, { timeout: 5000 }).catch(() => {});
 
@@ -164,11 +157,6 @@ test.describe("Client P0 positive and negative UI checkpoints", () => {
     if (inputCount >= 2) await visibleInputs.nth(inputCount - 1).fill(requiredEnv("CLIENT_OTP"));
 
     const login = page.getByRole("button", { name: /^Login$/i }).first();
-    if (await login.isEnabled().catch(() => false)) {
-      await clickLoginTermsRow(page);
-      await page.waitForTimeout(500);
-    }
-
     if (await login.isEnabled().catch(() => false)) {
       await login.click({ timeout: 3000 }).catch(() => {});
       await page.waitForTimeout(2500);
@@ -207,6 +195,9 @@ test.describe("Client P0 positive and negative UI checkpoints", () => {
     expect(state.text).not.toMatch(sensitivePattern);
   });
 
+  test.describe("authenticated checkpoints", () => {
+    if (reuseP0Auth) test.use({ storageState: p0StorageStatePath });
+
   test("positive: logged-in My exposes wallet and member checkpoints", async ({ page }, testInfo) => {
     const network = attachNetworkRecorder(page);
     const app = createApp(page);
@@ -241,7 +232,13 @@ test.describe("Client P0 positive and negative UI checkpoints", () => {
 
     const state = await visibleState(page);
     const launchedFrame = state.frames.some((frame) => /bng\.games|neurorestorativeals|playpoint|spribe|jili|cq9/i.test(frame));
-    const betRequest = network.some((item) => item.kind === "request" && /\/process\/|spin|bet|wager|round|play/i.test(`${item.url} ${item.postData || ""}`));
+    const betRequest = network.some((item) => {
+      if (item.kind !== "request") return false;
+      const target = new URL(item.url);
+      if (target.origin === new URL(page.url()).origin) return false;
+      const wageringData = `${target.pathname} ${target.search} ${item.postData || ""}`;
+      return /\/process\/|(?:^|[\/?&=_-])(spin|bet|wager|round)(?:[\/?&=_-]|$)/i.test(wageringData);
+    });
     const result = {
       name: "negative_invalid_game_page",
       status: launchedFrame || betRequest ? "failed" : "passed",
@@ -253,5 +250,6 @@ test.describe("Client P0 positive and negative UI checkpoints", () => {
 
     expect(launchedFrame).toBeFalsy();
     expect(betRequest).toBeFalsy();
+  });
   });
 });
