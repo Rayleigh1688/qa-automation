@@ -180,6 +180,7 @@ def main() -> None:
     parser.add_argument("--insecure", action=argparse.BooleanOptionalAction, default=True)
     parser.add_argument("--include-write", action="store_true", help="compatibility flag; P0 already includes controlled deposit seeding by default")
     parser.add_argument("--safe-only", action="store_true", help="skip controlled P0 writes and run only read/negative checks")
+    parser.add_argument("--no-clean", action="store_true", help="preserve existing controlled-flow evidence while refreshing repeatable gates")
     parser.add_argument("--deposit-pid", default="47870534954254469")
     parser.add_argument("--deposit-amount", default="1200")
     parser.add_argument("--withdraw-amount", default="1000")
@@ -193,7 +194,8 @@ def main() -> None:
     if args.safe_only and args.include_write:
         raise SystemExit("--safe-only and --include-write cannot be used together")
 
-    clean_api_results()
+    if not args.no_clean:
+        clean_api_results()
 
     for level in [item.lower() for item in args.levels]:
         if level == "p0":

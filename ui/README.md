@@ -31,7 +31,7 @@ KYC 在默认 UI 门禁中只验证入口和状态可见；真实资料提交由
 
 ## 当前收口重点
 
-1. 默认 UI 套件补齐充值页和提现页的安全前置校验，不在默认门禁创建真实订单。
+1. 默认 UI 套件补齐充值页安全前置，不创建真实资金订单；Maya 合法提现和未 KYC 提现拦截均使用独立受控 UI 用例。
 2. 真实投注继续使用 Pixel 7 `412x915` 固定视口和配置化相对坐标；固定业务单注为 1000，投注次数由流水查询结果决定。
 3. UI 证明三方游戏内真实交互；API/数据库只读核对投注记录、账变、流水和提现订单，不能用启动请求代替业务金额断言。
 4. Network discovery、HAR 和 trace 只用于接口版本发现与排障，不作为默认 P0 通过条件。
@@ -54,8 +54,22 @@ npm run test:ui:inventory
 npm run test:ui:login
 npm run test:ui:deposit-contract
 npm run test:ui:game-bet
+npm run test:ui:withdraw-contract
+npm run test:ui:unverified-withdraw
 npm run ui:p0-points
+npm run test:p0
+npm run test:p0:full
 ```
+
+`npm run test:p0` 为 API safe/negative + 默认 UI 的可重复门禁；`npm run test:p0:full` 才会显式执行真实资金主流程。完整入口先用新号执行 KYC 前提现拦截，再提交 KYC；资金账号统一复用 API session 与 UI storage state，并在投注后轮询流水，归零后才提交提现。
+
+完整资金链在 UI 投注和流水归零后恢复由 API 创建提现订单并完成后台关联。Maya UI 提现独立证明客户端可选择渠道、输入金额和生成订单，不作为 API CTC-009 的替代结果。
+
+提现金额下限属于 API 业务契约：使用有效提款账户传入小于通道最小值的金额，并断言不能生成订单。UI 不重复承担该后端边界矩阵，只验证合法金额输入、提交动作以及本次提现订单确实生成。
+
+受控提现 UI 使用独立命令 `npm run test:ui:withdraw-contract`。FAT 默认先选择 `CLIENT_WITHDRAW_CHANNEL=Maya`，GCash 当前会返回 `Payment channel unavailable`。默认只验证非法金额不会发请求；显式设置 `EXECUTE_WITHDRAW_UI=true` 时还需要本地 `CLIENT_WALLET_PASSWORD`，脚本通过页面数字键盘输入后提交合法金额。钱包密码只能放在忽略的 `.env` 或 CI 凭据中。
+
+永久未 KYC 账号的提现拦截使用 `npm run test:ui:unverified-withdraw`。账号通过 `PRE_KYC_CLIENT_PHONE` 注入，优先使用 `PRE_KYC_CLIENT_PASSWORD`，否则使用 `PRE_KYC_CLIENT_OTP`；该账号绝不提交 KYC 或设置钱包密码。用例断言 Security Requirements 同时要求钱包密码和 KYC，且没有创建提现请求。
 
 所有 npm UI 命令执行前都会清空 UI 生成物目录，只保留最近一次结果。
 

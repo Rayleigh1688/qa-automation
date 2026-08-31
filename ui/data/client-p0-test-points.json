@@ -220,22 +220,6 @@
       "spec": "ui/cases/client-deposit-contract.spec.mjs"
     },
     {
-      "id": "UI-P0-014",
-      "module": "充值",
-      "priority": "P0",
-      "type": "negative",
-      "executionMode": "manual_or_next_auto",
-      "title": "充值缺少金额或渠道时不能提交",
-      "route": "/my",
-      "assertions": [
-        "未选择渠道或未填写金额时提交按钮不可用",
-        "提交后展示明确校验提示",
-        "不能生成有效充值订单"
-      ],
-      "automationStatus": "planned",
-      "spec": ""
-    },
-    {
       "id": "UI-P0-015",
       "module": "投注",
       "priority": "P0",
@@ -290,36 +274,20 @@
       "module": "提现",
       "priority": "P0",
       "type": "positive",
-      "executionMode": "manual_or_next_auto",
-      "title": "提现页可打开并展示前置规则",
+      "executionMode": "gated_auto",
+      "title": "提现页输入合法金额并生成提现订单",
       "route": "/my",
       "assertions": [
         "提现入口可打开",
-        "账户、金额、钱包密码或前置校验控件可定位",
-        "展示可提现余额、手续费或限制信息",
-        "默认 P0 不提交真实提现申请"
+        "提款账户和金额输入框可定位",
+        "只在完整受控 P0 显式开启时输入合法金额并提交",
+        "捕获提现请求并确认业务成功或在客户端提现记录中定位本次订单"
       ],
-      "automationStatus": "planned",
-      "spec": ""
+      "automationStatus": "implemented_gated",
+      "spec": "ui/cases/client-withdraw-contract.spec.mjs"
     },
     {
       "id": "UI-P0-019",
-      "module": "提现",
-      "priority": "P0",
-      "type": "negative",
-      "executionMode": "manual_or_next_auto",
-      "title": "提现缺少金额、账号或钱包密码时不能提交",
-      "route": "/my",
-      "assertions": [
-        "缺少必要参数时按钮不可用或展示明确校验提示",
-        "不能产生有效提现申请",
-        "失败原因需要同步沉淀到接口测试参数规则"
-      ],
-      "automationStatus": "planned",
-      "spec": ""
-    },
-    {
-      "id": "UI-P0-020",
       "module": "KYC",
       "priority": "P0",
       "type": "positive",
@@ -333,6 +301,23 @@
       ],
       "automationStatus": "covered",
       "spec": "ui/cases/client-p0-positive-negative.spec.mjs"
+    },
+    {
+      "id": "UI-P0-020",
+      "module": "提现",
+      "priority": "P0",
+      "type": "negative",
+      "executionMode": "gated_auto",
+      "title": "新号未设置钱包密码且未完成 KYC 时不能提现",
+      "route": "/my",
+      "assertions": [
+        "登录后可关闭基础账号 KYC 引导并进入 My",
+        "点击 Withdraw 后展示 Security Requirements",
+        "同时提示 Set Wallet Password 和 KYC Verify",
+        "不能发出创建提现订单请求"
+      ],
+      "automationStatus": "implemented_gated",
+      "spec": "ui/cases/client-unverified-withdraw.spec.mjs"
     }
   ]
 }

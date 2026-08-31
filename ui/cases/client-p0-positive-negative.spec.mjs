@@ -120,7 +120,7 @@ test.describe("Client P0 positive and negative UI checkpoints", () => {
 
     await app.openLogin();
     await app.chooseOtpMode();
-    await app.fillPhone(process.env.UNVERIFIED_CLIENT_PHONE || requiredEnv("CLIENT_PHONE"));
+    await app.fillPhone(requiredEnv("CLIENT_PHONE"));
 
     const login = page.getByRole("button", { name: /^Login$/i }).first();
     if (await login.isEnabled().catch(() => false)) {
@@ -148,7 +148,7 @@ test.describe("Client P0 positive and negative UI checkpoints", () => {
 
     await app.openLogin();
     await app.chooseOtpMode();
-    await app.fillPhone(process.env.UNVERIFIED_CLIENT_PHONE || requiredEnv("CLIENT_PHONE"));
+    await app.fillPhone(requiredEnv("CLIENT_PHONE"));
     await app.requestOtp();
     await page.waitForFunction(() => document.querySelectorAll("input").length >= 2, null, { timeout: 5000 }).catch(() => {});
 

@@ -358,16 +358,18 @@ def run_cases(args: argparse.Namespace) -> list[dict[str, object]]:
         )
     )
     low_amount = os.environ.get("P0_NEGATIVE_WITHDRAW_AMOUNT", "1")
-    invalid_account_id = os.environ.get("P0_NEGATIVE_WITHDRAW_ACCOUNT_ID", "99999999999999999")
+    withdraw_account_id = choose_withdraw_account(args)
+    if not withdraw_account_id:
+        raise SystemExit("NTC-009 requires a valid bound withdraw account on CLIENT_PHONE")
     records.append(
         record(
             case_by_id["NTC-009"],
             smoke.request_once(
-                row("GET", f"{{{{api_url}}}}/finance/payment/withdraw?amount={low_amount}&account_id={invalid_account_id}"),
+                row("GET", f"{{{{api_url}}}}/finance/payment/withdraw?amount={low_amount}&account_id={withdraw_account_id}"),
                 args.timeout,
                 args.insecure,
             ),
-            {"account_id": invalid_account_id, "amount": low_amount},
+            {"account_id": withdraw_account_id, "amount": low_amount},
         )
     )
     records.append(

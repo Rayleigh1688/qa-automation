@@ -8,7 +8,7 @@ pipeline {
 
     parameters {
         choice(name: 'TARGET_ENV', choices: ['fat', 'uat'], description: 'fat runs before UAT release; uat runs after UAT release.')
-        choice(name: 'P0_SCOPE', choices: ['api_all', 'api_and_ui', 'ui_only', 'api_write'], description: 'api_all/api_and_ui run safe API checks; api_write runs the controlled API main flow.')
+        choice(name: 'P0_SCOPE', choices: ['api_all', 'api_and_ui', 'ui_only', 'api_write'], description: 'api_all/api_and_ui run safe API checks; api_write runs the full controlled API/UI main flow.')
         booleanParam(name: 'EXECUTE_BET', defaultValue: false, description: 'Allow UI game smoke to click the in-game bet area.')
     }
 
@@ -70,14 +70,14 @@ pipeline {
             }
         }
 
-        stage('P0 API Controlled Write') {
+        stage('P0 Full Controlled Flow') {
             when {
                 expression { params.P0_SCOPE == 'api_write' }
             }
             steps {
                 sh '''
                     set -eu
-                    python3 scripts/run-api-tests.py p0 --scope "${TARGET_ENV}"
+                    npm run test:p0:full -- --scope "${TARGET_ENV}"
                 '''
             }
         }

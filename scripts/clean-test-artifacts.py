@@ -18,6 +18,8 @@ PRESERVE = {
     Path("ui/results"): {"client-p0-storage-state.json"},
 }
 
+PLACEHOLDER_DIRS = {Path("api/results"), Path("ui/results"), Path("ui/reports")}
+
 
 def clean_dir(root: Path) -> None:
     root.mkdir(parents=True, exist_ok=True)
@@ -28,7 +30,8 @@ def clean_dir(root: Path) -> None:
             shutil.rmtree(child)
         else:
             child.unlink()
-    (root / ".gitkeep").touch()
+    if root in PLACEHOLDER_DIRS:
+        (root / ".gitkeep").touch()
 
 
 def main() -> None:

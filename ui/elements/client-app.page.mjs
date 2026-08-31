@@ -295,6 +295,38 @@ export class ClientAppPage {
     await this.closeActivityFloat();
   }
 
+  async closeBasicAccountKycGate() {
+    const marker = this.page.getByText(/Your current account type is a basic account/i).first();
+    if (!(await marker.isVisible({ timeout: 5000 }).catch(() => false))) return false;
+
+    const semantic = this.page.getByRole("button", { name: /^(Close|X|×)$/i }).first();
+    if (await semantic.isVisible({ timeout: 1000 }).catch(() => false)) {
+      await semantic.click({ timeout: 3000 });
+      await marker.waitFor({ state: "hidden", timeout: 5000 }).catch(() => {});
+      return true;
+    }
+
+    const clicked = await this.page.evaluate(() => {
+      const viewport = { width: window.innerWidth, height: window.innerHeight };
+      const candidates = Array.from(document.querySelectorAll("button, [role='button'], svg, div, span"));
+      const target = candidates
+        .map((element) => ({
+          element,
+          rect: element.getBoundingClientRect(),
+          text: element.innerText?.trim() || element.getAttribute("aria-label") || "",
+        }))
+        .filter(({ rect }) => rect.width > 0 && rect.height > 0)
+        .filter(({ rect }) => rect.left > viewport.width * 0.68 && rect.top < viewport.height * 0.2)
+        .filter(({ text, rect }) => /^(×|X|Close)$/i.test(text) || (rect.width <= 56 && rect.height <= 56))
+        .sort((a, b) => b.rect.right - a.rect.right || a.rect.top - b.rect.top)[0]?.element;
+      if (!target) return false;
+      target.click();
+      return true;
+    }).catch(() => false);
+    if (clicked) await marker.waitFor({ state: "hidden", timeout: 5000 }).catch(() => {});
+    return clicked;
+  }
+
   async handleConfiguredClientOverlay(name) {
     const overlay = (this.modalConfig.clientOverlays || []).find((item) => item.name === name);
     if (!overlay) return false;

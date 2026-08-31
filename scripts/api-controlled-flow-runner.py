@@ -437,6 +437,69 @@ def submit_kyc(args: argparse.Namespace) -> list[dict[str, object]]:
     ]
 
 
+def find_kyc_record(args: argparse.Namespace, uid: str) -> tuple[dict[str, object], dict[str, object] | None]:
+    def request_list(body: dict[str, object]) -> dict[str, object]:
+        return smoke.request_once(
+            row("POST", "{{admin_url}}/admin/kyc/list", "{{admin_url}}"),
+            args.timeout,
+            args.insecure,
+            body,
+            args.body_format,
+        )
+
+    query: dict[str, object] = {"page": 1, "page_size": 50, "source": "default"}
+    if uid:
+        query["uid"] = uid
+    result = request_list(query)
+    rows = list_rows(data_of(result))
+    target = next((item for item in rows if str(item.get("uid") or item.get("id") or "") == uid), None)
+    if uid and target is None:
+        result = request_list({"page": 1, "page_size": 100, "source": "default"})
+        rows = list_rows(data_of(result))
+        target = next((item for item in rows if str(item.get("uid") or item.get("id") or "") == uid), None)
+    record = result_record("admin_kyc_list", result)
+    record["matched_record"] = target
+    return record, target
+
+
+def approve_kyc(args: argparse.Namespace, uid: str) -> list[dict[str, object]]:
+    list_record, target = find_kyc_record(args, uid)
+    records = [list_record]
+    if not target:
+        records.append({
+            "name": "admin_kyc_approve",
+            "business_status": False,
+            "reason": f"KYC record not found for uid={uid or '<missing>'}",
+        })
+        return records
+    target_uid = str(target.get("uid") or uid)
+    body = add_approval_code({"uid": target_uid, "desc": args.approval_desc}, args)
+    result = smoke.request_once(
+        row("POST", "{{admin_url}}/admin/kyc/approve", "{{admin_url}}"),
+        args.timeout,
+        args.insecure,
+        body,
+        args.body_format,
+    )
+    approve_record = result_record("admin_kyc_approve", result)
+    approve_record["uid"] = target_uid
+    records.append(approve_record)
+    if not business_ok(result):
+        return records
+
+    detail = smoke.request_once(
+        row("GET", "{{api_url}}/member/kyc/detail"), args.timeout, args.insecure
+    )
+    detail_record = result_record("kyc_detail_after_approval", detail)
+    profile = data_of(detail)
+    approved = isinstance(profile, dict) and int(profile.get("kyc_status") or 0) == 5
+    detail_record["business_status"] = approved
+    detail_record["expected_kyc_status"] = 5
+    detail_record["actual_kyc_status"] = profile.get("kyc_status") if isinstance(profile, dict) else None
+    records.append(detail_record)
+    return records
+
+
 def choose_deposit_channel(args: argparse.Namespace) -> tuple[str, str]:
     channels_result = smoke.request_once(
         row("GET", "{{api_url}}/finance/channel/list?mode=1&source=huawei"),
@@ -588,6 +651,18 @@ def run_withdraw(args: argparse.Namespace) -> list[dict[str, object]]:
     return [record]
 
 
+def check_client_withdraw_list(args: argparse.Namespace) -> list[dict[str, object]]:
+    result = smoke.request_once(
+        row("GET", "{{api_url}}/finance/withdraw/list?time_flag=0&page=1&page_size=10"),
+        args.timeout,
+        args.insecure,
+    )
+    rows = list_rows(data_of(result))
+    record = result_record("client_withdraw_list", result)
+    record["matched_order"] = rows[0] if rows else None
+    return [record]
+
+
 def find_withdraw_order(args: argparse.Namespace, withdraw_id: str = "") -> tuple[dict[str, object], dict[str, object] | None]:
     start_time, end_time = now_window()
     params = {
@@ -690,10 +765,13 @@ def main() -> None:
     parser.add_argument("--session-out", default="", help="Persist the current P0 client/admin token session to an ignored file")
     parser.add_argument("--register", action="store_true")
     parser.add_argument("--submit-kyc", action="store_true")
+    parser.add_argument("--approve-kyc", action="store_true")
+    parser.add_argument("--complete-kyc", action="store_true", help="Submit when ready, approve pending record, then verify client status")
     parser.add_argument("--deposit", action="store_true")
     parser.add_argument("--approve-deposit", action="store_true")
     parser.add_argument("--withdraw", action="store_true")
     parser.add_argument("--approve-withdraw", action="store_true")
+    parser.add_argument("--check-client-withdraw-list", action="store_true")
     parser.add_argument("--check-admin-withdraw-list", action="store_true")
     parser.add_argument("--main-positive-flow", action="store_true")
     parser.add_argument("--client-phone", default="")
@@ -714,6 +792,7 @@ def main() -> None:
     parser.add_argument("--kyc-source-of-income", default="Employment Income")
     parser.add_argument("--kyc-id-type", default="COUNTRY_ID")
     parser.add_argument("--kyc-id-number", default="")
+    parser.add_argument("--kyc-uid", default="")
     parser.add_argument("--deposit-pid", default="")
     parser.add_argument("--deposit-amount", default="")
     parser.add_argument("--deposit-product-id", default="")
@@ -750,9 +829,70 @@ def main() -> None:
     if args.register:
         records.extend(register_new_user(args))
 
-    if args.submit_kyc:
+    if args.complete_kyc:
+        records.extend(client_login(args))
+        records.append({
+            "name": "register",
+            "business_status": True,
+            "skipped": True,
+            "reason": "allocated KYC pool account already exists and authenticated",
+        })
+        current_detail = smoke.request_once(
+            row("GET", "{{api_url}}/member/kyc/detail"), args.timeout, args.insecure
+        )
+        current_profile = data_of(current_detail)
+        current_status = int(current_profile.get("kyc_status") or 0) if isinstance(current_profile, dict) else -1
+        if current_status == 0:
+            records.extend(submit_kyc(args))
+            submitted = records[-1].get("data") if records else None
+            current_status = int(submitted.get("kyc_status") or 0) if isinstance(submitted, dict) else 0
+        else:
+            records.append(result_record("kyc_detail_existing", current_detail))
+            if current_status != 5:
+                records.append({
+                    "name": "kyc_submit",
+                    "business_status": True,
+                    "skipped": True,
+                    "reason": f"existing submitted KYC status={current_status}",
+                    "data": current_profile,
+                })
+        kyc_uid = args.kyc_uid or os.environ.get("KYC_CLIENT_UID", "")
+        if not kyc_uid and isinstance(current_profile, dict):
+            kyc_uid = str(current_profile.get("uid") or "")
+        if not kyc_uid:
+            raise SystemExit("KYC uid is required for controlled approval")
+        if current_status == 5:
+            existing = result_record("kyc_detail_after_approval", current_detail)
+            existing["business_status"] = True
+            existing["expected_kyc_status"] = 5
+            existing["actual_kyc_status"] = 5
+            records.extend([
+                {"name": "kyc_submit", "business_status": True, "skipped": True, "reason": "KYC pool account is already approved"},
+                {"name": "admin_kyc_approve", "business_status": True, "skipped": True, "reason": "KYC already approved"},
+                existing,
+            ])
+        else:
+            records.extend(admin_login(args))
+            records.extend(approve_kyc(args, kyc_uid))
+
+    if args.submit_kyc and not args.complete_kyc:
         records.extend(client_login(args))
         records.extend(submit_kyc(args))
+
+    if args.approve_kyc and not args.complete_kyc:
+        if not args.submit_kyc:
+            records.extend(client_login(args))
+        kyc_uid = args.kyc_uid or os.environ.get("KYC_CLIENT_UID", "")
+        if not kyc_uid:
+            detail = smoke.request_once(
+                row("GET", "{{api_url}}/member/kyc/detail"), args.timeout, args.insecure
+            )
+            profile = data_of(detail)
+            kyc_uid = str(profile.get("uid") or "") if isinstance(profile, dict) else ""
+        if not kyc_uid:
+            raise SystemExit("KYC uid is required for controlled approval")
+        records.extend(admin_login(args))
+        records.extend(approve_kyc(args, kyc_uid))
 
     withdraw_phone = args.withdraw_client_phone or os.environ.get("WITHDRAW_CLIENT_PHONE", "")
     current_phone = os.environ.get("CLIENT_PHONE", "")
@@ -765,6 +905,8 @@ def main() -> None:
     if args.deposit or (args.withdraw and not separate_withdraw_client):
         records.extend(client_login(args))
         records.append(query_wallet(args, "wallet_before"))
+    elif args.check_client_withdraw_list:
+        records.extend(client_login(args))
     if args.approve_deposit or args.approve_withdraw or args.check_admin_withdraw_list:
         records.extend(admin_login(args))
     if args.deposit:
@@ -814,6 +956,10 @@ def main() -> None:
         list_record, order = find_withdraw_order(args, args.withdraw_id)
         records.append(list_record)
         records.extend(approve_withdraw(args, order))
+    elif args.check_admin_withdraw_list:
+        records.extend(check_admin_withdraw_list(args, args.withdraw_id))
+    if args.check_client_withdraw_list:
+        records.extend(check_client_withdraw_list(args))
     if args.deposit or (args.withdraw and not separate_withdraw_client):
         records.append(query_wallet(args, "wallet_after"))
 

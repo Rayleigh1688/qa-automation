@@ -12,6 +12,7 @@ import json
 import math
 import os
 import subprocess
+import time
 from decimal import Decimal
 from pathlib import Path
 
@@ -67,6 +68,8 @@ def main() -> None:
     parser.add_argument("--otp", default="")
     parser.add_argument("--bet-unit", type=int, default=1000)
     parser.add_argument("--max-spins", type=int, default=20)
+    parser.add_argument("--poll-interval", type=float, default=5)
+    parser.add_argument("--poll-timeout", type=float, default=60)
     parser.add_argument("--game-id", default="beanstalk_243")
     parser.add_argument("--game-page", default="/s-game-page/17453877442826")
     parser.add_argument("--execute", action="store_true")
@@ -82,15 +85,24 @@ def main() -> None:
         raise SystemExit("bet unit and max spins must be positive")
 
     before = unfinished_turnover(phone)
-    planned_spins = math.ceil(before / Decimal(args.bet_unit)) if before > 0 else 0
-    if planned_spins > args.max_spins:
+    initial_planned_spins = math.ceil(before / Decimal(args.bet_unit)) if before > 0 else 0
+    if initial_planned_spins > args.max_spins:
         raise SystemExit(
-            f"planned spins {planned_spins} exceed safety cap {args.max_spins}; "
+            f"planned spins {initial_planned_spins} exceed safety cap {args.max_spins}; "
             "raise --max-spins only after reviewing balance and turnover"
         )
 
-    completed = False
-    if args.execute and planned_spins > 0:
+    executed = False
+    total_planned = 0
+    total_completed = 0
+    batches: list[dict[str, object]] = []
+    current = before
+    while args.execute and current > 0:
+        batch_spins = math.ceil(current / Decimal(args.bet_unit))
+        if total_planned + batch_spins > args.max_spins:
+            raise SystemExit(
+                f"total planned spins {total_planned + batch_spins} exceed safety cap {args.max_spins}"
+            )
         ui_env = os.environ.copy()
         ui_env.update({
             "CLIENT_PHONE": phone,
@@ -98,29 +110,58 @@ def main() -> None:
             "CLIENT_GAME_ID": args.game_id,
             "CLIENT_GAME_PAGE_PATH": args.game_page,
             "CLIENT_GAME_BET_AMOUNT": str(args.bet_unit),
-            "CLIENT_GAME_SPIN_COUNT": str(planned_spins),
+            "CLIENT_GAME_SPIN_COUNT": str(batch_spins),
             "EXECUTE_BET": "true",
             "CLIENT_REUSE_P0_AUTH": "true",
             "CLIENT_AUTH_MODE": "password",
         })
-        subprocess.run(["npm", "run", "test:ui:game-bet"], env=ui_env, check=True)
-        completed = True
+        batch_before = current
+        command = ["npm", "run", "test:ui:game-bet"]
+        if os.environ.get("PRESERVE_UI_RESULTS") == "true":
+            command = [
+                "npx", "playwright", "test",
+                "ui/cases/client-game-bet-smoke.spec.mjs", "--workers=1",
+            ]
+        subprocess.run(command, env=ui_env, check=True)
+        game_result = json.loads(Path("ui/results/client-game-bet-smoke.json").read_text(encoding="utf-8"))
+        completed_spins = int(game_result.get("completedSpinCount") or 0)
+        total_planned += batch_spins
+        total_completed += completed_spins
+        executed = True
 
-    after = unfinished_turnover(phone) if completed else before
+        deadline = time.monotonic() + args.poll_timeout
+        observed = unfinished_turnover(phone)
+        while observed > 0 and time.monotonic() < deadline:
+            time.sleep(max(0.5, args.poll_interval))
+            observed = unfinished_turnover(phone)
+        batches.append({
+            "turnover_before": str(batch_before),
+            "planned_spins": batch_spins,
+            "completed_spins": completed_spins,
+            "turnover_after_poll": str(observed),
+        })
+        if observed >= batch_before:
+            current = observed
+            break
+        current = observed
+
+    after = current if executed else before
     result = {
         "phone_suffix": phone[-4:],
         "bet_unit": args.bet_unit,
         "turnover_before": str(before),
-        "planned_spins": planned_spins,
-        "executed": completed,
+        "planned_spins": total_planned if executed else initial_planned_spins,
+        "completed_spins": total_completed,
+        "executed": executed,
         "turnover_after": str(after),
         "turnover_cleared": after == 0,
+        "batches": batches,
     }
     output = Path(args.out)
     output.parent.mkdir(parents=True, exist_ok=True)
     output.write_text(json.dumps(result, ensure_ascii=False, indent=2), encoding="utf-8")
     print(json.dumps(result, ensure_ascii=False))
-    if completed and after > 0:
+    if executed and after > 0:
         raise SystemExit(f"turnover remains after UI bets: {after}")
 
 

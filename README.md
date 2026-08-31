@@ -43,14 +43,14 @@ scripts/         辅助脚本
 
 当前阶段：P0 核心自动化已形成可执行基线，管理后台 P0 只读骨架已补齐
 
-- P0 资产已重排为 8 条端到端主流程和 60 条整体用例；其中 31 条 safe smoke（客户端 18、后台 13）、15 条登记反例（默认执行 13 条），其余为受控写、UI 协作或测试数据阻塞项。
+- P0 资产已重排为 8 条端到端主流程和 57 条整体用例：31 条 safe smoke（客户端 18、后台 13）、15 条 API 登记反例（默认执行 13 条）、10 条受控写/UI 协作项和 1 条已实现状态 UI 反例。
 - `test-cases.csv` 已成为正反例统一索引，并按真实业务依赖排序；接口文档扫描清单只用于发现，不再决定 P0 范围或访问顺序。
 - P0 资金写操作按阶段执行：API 充值与后台补单后必须停在检查点，UI 完成真实投注，API/数据库确认投注和流水，再由 API 提现；后台审核仍只处理本次创建的订单。
 - 客户端 UI 自动化：登录注册、充值、提现入口、Transaction、Bet History 和游戏链路已跑通 Network 发现；发现到的主要客户端接口已同步到 `api/p0/`。KYC 保留最小 P0 闭环，扩展证件组合、OCR/eKYC、驳回重提矩阵归 P1。
 - 管理后台 API：已把“用户与权限、KYC 最小审核闭环、充值补单、提现审核、财务报表、资金记录与核对”纳入 P0。补单、提现同意/成功仍只处理本次 controlled flow 创建的订单。
 - UI 定位策略：对难以稳定抓取的三方游戏/canvas 场景，采用固定视口下的 Playwright + 坐标定位组合策略。
 - 当前主要风险：客户端自动化账号可能因频繁请求短信被 FAT 限制；CI 需要使用稳定的专用客户端账号或预置 token 策略。充值通道限额后端校验在 FAT 存在已知缺陷，越界契约探针不默认进入 CI。管理后台审核类动作使用已配置的真实 Google Authenticator 动态令牌；后台登录在 FAT 使用固定 `ADMIN_GOOGLE_CODE=111111`。
-- 2026-08-31 FAT safe smoke 已通过 31/31，默认安全反例通过 13/13。本轮资金账号按单注 1000 完成 2 注，总剩余流水从 1800 降为 0；Maya 提现 1000 创建成功并能在后台定位。当前阶段接受“提现单成功提交并进入后台”为 P0 提现验收，真实转账成功保留为环境恢复后的增强复验。KYC 已完成新号提交并进入待审，最小闭环仍需后台审核和前台状态刷新。
+- 2026-08-31 P0 快速门禁连续 3 轮稳定：每轮 FAT safe smoke 31/31、默认反例 13/13；UI 前两轮仅保留已确认条款缺陷，第三轮 11/11。完整受控链路已完成 KYC 审批与前台刷新、充值 1200、固定单注 1000 的流水驱动投注、提现 1000 和前后台订单关联核对；统一核对结果 PASS。
 
 ## 执行规则
 
@@ -128,13 +128,22 @@ API + UI P0：
 npm run test:p0
 ```
 
+完整受控 P0 验收（会执行 KYC 状态闭环、充值补单、真实投注、流水轮询、提现提交和前后台关联核对）：
+
+```bash
+npm run test:p0:full
+```
+
 说明：
 
-- `python3 scripts/run-api-tests.py p0` 执行 safe/negative 检查并将资金链推进到充值与补单检查点；不会跳过真实投注直接提现。后续按 [`api/p0/README.md`](api/p0/README.md) 的跨执行面资金链放行规则继续。
+- `npm run test:p0` 是可重复快速门禁：API safe/negative + 默认 UI，不创建新的充值、投注或提现记录，并保留最近一次完整资金链证据。
+- `npm run test:p0:full` 是显式受控写入口，严格按永久未 KYC 账号提现拦截 → 独立 KYC 账号闭环 → 充值 → UI 投注 → 流水核对 → API 提现建单 → 后台按订单 ID 关联执行；任一阶段业务失败立即停止。
+- `python3 scripts/run-api-tests.py p0` 是 API 子流程入口，执行 safe/negative 并将资金链推进到充值与补单检查点；不会跳过真实投注直接提现。
 - 只复验后台 safe smoke 时，可执行：`python3 scripts/api-smoke-runner.py --cases api/p0/test-cases.csv --with-admin-login --base admin --execute --insecure --body-format cbor --out /tmp/admin-p0-smoke.json`。
 - `python3 scripts/run-api-tests.py p0 p1` 按等级依次执行；当前 P1 资产不存在时会跳过并提示。
 - `--safe-only` 跳过注册、充值、提现和审核等受控写操作，只执行只读/反例检查。`--include-write` 保留为旧命令兼容参数；P0 默认包含受控写的充值检查点。提现以后台成功记录为验收，不校验项目外收款账户或真实到账，只应在测试环境或专用 UAT 测试数据下执行。
 - `test:ui:p0` 默认不执行真实投注。需要点击三方游戏内投注区域时，必须显式设置 `EXECUTE_BET=true`。
+- API 和 UI P0 分别执行、分别判定。Maya UI 提现使用 `npm run test:ui:withdraw-contract` 独立验证客户端建单；未 KYC 提现前置使用 `npm run test:ui:unverified-withdraw`。两者不会替代 API 提现契约。
 - 正向资金链固定业务单注为 1000；`scripts/run-turnover-bet.py` 只读获取未完成流水并按 `ceil(remaining/1000)` 计算次数。投注后再次核对流水，归零才进入提现。
 - 后台登录固定码和审核动态码是两套东西：`ADMIN_GOOGLE_CODE=111111` 只用于 FAT 后台登录，审核/补单/KYC 审批使用 `ADMIN_APPROVAL_TOTP_SECRET` 生成真实动态码。
 - API 执行会覆盖 `api/results/` 下同名结果和报告；UI 执行会覆盖 `ui/results/` 和 `ui/reports/` 下同名产物。需要历史记录时，以 CI 归档为准，不在仓库工作区内累积。
@@ -143,7 +152,7 @@ npm run test:p0
 - FAT 主流程使用同一普通会员完成不参加活动的充值、投注和提现；充值参数固定 `cashback_flag=0&rotation_flag=0` 且不传活动 `product_id`。普通存款基础流水在提现前正常完成，但不在主链路中测试流水限制拒绝。
 - 充值页 `Multiple Deposit Bonus` 活动开关默认不参加；参加活动会产生提现流水限制。`9888888050` 已知存在提现流水限制，提现正例需换无流水限制账号或先后台解除限制。
 - KYC 新账号池使用 `090XXXXXXXX`，首个账号从 `09000000001` 开始；测试环境 OTP 固定为 `111111`，已驳回/未通过 KYC 的账号可再次提交。
-- 本地或 CI 通过 `WRITE_CLIENT_PHONE`、`WRITE_CLIENT_OTP` 注入 `fund_flow_account`；兼容变量 `BET_CLIENT_PHONE` 和 `WITHDRAW_CLIENT_PHONE` 可指向同一账号。独立 `RESTRICTED_CLIENT_PHONE` 只用于活动流水专项，暂不阻塞主流程。
+- 本地或 CI 通过 `WRITE_CLIENT_PHONE`、`WRITE_CLIENT_OTP` 注入 `fund_flow_account`；兼容变量 `BET_CLIENT_PHONE` 和 `WITHDRAW_CLIENT_PHONE` 可指向同一账号。未 KYC 提现反例固定使用永久不提交 KYC 的 `PRE_KYC_CLIENT_PHONE`；最低提现金额走成熟账号 API 反例，不准备低余额账号。`RESTRICTED_CLIENT_PHONE` 仅预留给 P1 活动流水专项。
 
 ## CI 门禁
 
@@ -181,6 +190,10 @@ BET_CLIENT_PHONE=<controlled bet/payout client phone>
 BET_CLIENT_OTP=<otp>
 WITHDRAW_CLIENT_PHONE=<dedicated withdraw client phone>
 WITHDRAW_CLIENT_OTP=<otp>
+CLIENT_WALLET_PASSWORD=<numeric wallet password for Maya UI withdrawal>
+PRE_KYC_CLIENT_PHONE=<permanent BASIC account; never submit KYC>
+PRE_KYC_CLIENT_PASSWORD=<optional local password; omit to use OTP>
+PRE_KYC_CLIENT_OTP=<fat otp>
 RESTRICTED_CLIENT_PHONE=<active turnover-restricted client phone>
 RESTRICTED_CLIENT_OTP=<otp>
 ADMIN_EMAIL=<admin email>

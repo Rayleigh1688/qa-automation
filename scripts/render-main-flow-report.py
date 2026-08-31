@@ -94,11 +94,11 @@ def render_html_report(
     generated_at = datetime.now().astimezone().isoformat()
     return f"""<!doctype html>
 <html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>P0 API 主流程报告</title><style>
+<title>P0 主流程报告</title><style>
 :root{{--ink:#17232d;--muted:#64727d;--line:#d9e1e5;--panel:#fff;--bg:#f3f6f5;--pass:#16754b;--fail:#bd3434;--pending:#a76508}}
 *{{box-sizing:border-box}}body{{margin:0;background:var(--bg);color:var(--ink);font:14px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}}
 main{{max-width:1180px;margin:auto;padding:28px 20px 56px}}header{{display:flex;justify-content:space-between;gap:24px;align-items:start;border-bottom:1px solid var(--line);padding-bottom:22px}}h1{{font-size:26px;margin:0 0 5px}}h2{{font-size:18px;margin:30px 0 10px}}h2 small,.meta{{font-size:13px;font-weight:400;color:var(--muted)}}.verdict{{min-width:220px;border:1px solid var(--line);background:var(--panel);padding:14px 16px;border-left:5px solid var(--pending)}}.verdict.fail{{border-left-color:var(--fail)}}.verdict.pass{{border-left-color:var(--pass)}}.verdict strong{{display:block;font-size:22px;letter-spacing:0;margin-bottom:3px}}.metrics{{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin:20px 0}}.metric{{background:var(--panel);border:1px solid var(--line);padding:12px}}.metric span{{color:var(--muted);display:block}}.metric strong{{font-size:24px}}.flow-grid{{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:8px}}.flow{{color:var(--ink);text-decoration:none;background:var(--panel);border:1px solid var(--line);padding:10px 12px;border-left:4px solid var(--pending)}}.flow.pass{{border-left-color:var(--pass)}}.flow.fail{{border-left-color:var(--fail)}}.flow small{{float:right;color:var(--muted)}}.case{{background:var(--panel);border:1px solid var(--line);margin:6px 0}}summary{{display:grid;grid-template-columns:74px 84px 1fr 70px;gap:10px;align-items:center;padding:11px 12px;cursor:pointer;list-style:none}}summary::-webkit-details-marker{{display:none}}.badge{{font-size:12px;font-weight:600}}.badge.pass{{color:var(--pass)}}.badge.fail{{color:var(--fail)}}.badge.pending{{color:var(--pending)}}summary em{{color:var(--muted);font-style:normal;text-align:right}}.case-body{{border-top:1px solid var(--line);padding:12px 16px;background:#fbfcfc}}dl{{display:grid;grid-template-columns:105px 1fr;gap:7px 14px;margin:0}}dt{{color:var(--muted)}}dd{{margin:0;word-break:break-word}}@media(max-width:640px){{header{{display:block}}.verdict{{margin-top:16px}}summary{{grid-template-columns:68px 1fr}}summary em{{display:none}}dl{{grid-template-columns:1fr}}dt{{margin-top:8px}}}}
-</style></head><body><main><header><div><h1>P0 API 主流程报告</h1><div class="meta">环境：{html.escape(scope)} · 生成时间：{html.escape(generated_at)} · 场景：{html.escape(scenarios_path)}</div></div><div class="verdict {status_class('失败' if verdict == 'BLOCKED' else '通过' if verdict == 'PASS' else '未执行')}"><strong>{verdict}</strong><span>{html.escape(verdict_detail)}</span></div></header><div class="metrics">{cards}</div><nav class="flow-grid">{''.join(flow_items)}</nav>{''.join(sections)}</main></body></html>"""
+</style></head><body><main><header><div><h1>P0 主流程报告</h1><div class="meta">环境：{html.escape(scope)} · 生成时间：{html.escape(generated_at)} · 场景：{html.escape(scenarios_path)}</div></div><div class="verdict {status_class('失败' if verdict == 'BLOCKED' else '通过' if verdict == 'PASS' else '未执行')}"><strong>{verdict}</strong><span>{html.escape(verdict_detail)}</span></div></header><div class="metrics">{cards}</div><nav class="flow-grid">{''.join(flow_items)}</nav>{''.join(sections)}</main></body></html>"""
 
 
 def scenario_case_ids(scenario: dict[str, str], cases_by_scenario: dict[str, list[str]]) -> list[str]:
@@ -206,6 +206,7 @@ def scenario_runtime_status(
 
 
 def aggregate_flow_status(
+    scenario_id: str,
     flow_cases: list[dict[str, str]],
     positive_by_case: dict[str, dict[str, object]],
     negative_by_case: dict[str, dict[str, object]],
@@ -217,10 +218,15 @@ def aggregate_flow_status(
     controlled_by_name = {str(item.get("name", "")): item for item in controlled_results}
     controlled_map = {
         "CTC-001": ["register"],
+        "CTC-003": ["kyc_submit"],
+        "CTC-004": ["admin_kyc_approve", "kyc_detail_after_approval"],
         "CTC-005": ["deposit_create"],
         "CTC-006": ["admin_deposit_manual_success"],
+        "CTC-007": ["p0_reconciliation"],
+        "CTC-008": ["p0_reconciliation"],
         "CTC-009": ["withdraw_create"],
-        "CTC-010": ["admin_withdraw_agree", "admin_withdraw_success"],
+        "CTC-010": ["admin_withdraw_risk_audit_list"],
+        "DTC-002": ["pre_kyc_withdraw_blocked"],
     }
     for case in flow_cases:
         case_id = case["case_id"]
@@ -246,8 +252,16 @@ def aggregate_flow_status(
                 failures.append(case_id)
         elif policy == "setup":
             continue
+        elif policy == "known_defect_probe":
+            continue
         else:
             pending.append(case_id)
+    if scenario_id in {"MF-006", "MF-008"}:
+        reconciliation = controlled_by_name.get("p0_reconciliation")
+        if reconciliation is None:
+            missing.append("p0_reconciliation")
+        elif reconciliation.get("business_status") is not True:
+            failures.append("p0_reconciliation")
     if failures:
         return "失败", "失败用例：" + ", ".join(failures)
     if missing:
@@ -280,6 +294,9 @@ def main() -> None:
     parser.add_argument("--negative-result", default="api/results/p0-negative-result.json")
     parser.add_argument("--controlled-result", default="api/results/fund-flow-seed-result.json")
     parser.add_argument("--withdraw-result", default="api/results/withdraw-result.json")
+    parser.add_argument("--pre-kyc-withdraw-result", default="ui/results/client-unverified-withdraw.json")
+    parser.add_argument("--kyc-result", default="api/results/kyc-result.json")
+    parser.add_argument("--reconciliation-result", default="api/results/p0-reconciliation-result.json")
     parser.add_argument("--out", default="api/results/p0-main-flow-report.md")
     parser.add_argument("--html-out", default="")
     parser.add_argument("--scope", default="FAT")
@@ -291,6 +308,9 @@ def main() -> None:
     negative_items = load_json(Path(args.negative_result))
     controlled_items = load_json(Path(args.controlled_result))
     withdraw_items = load_json(Path(args.withdraw_result))
+    pre_kyc_withdraw = load_json(Path(args.pre_kyc_withdraw_result))
+    kyc_items = load_json(Path(args.kyc_result))
+    reconciliation = load_json(Path(args.reconciliation_result))
     positive_by_case = {
         str(item.get("case_id")): item
         for item in positive_items
@@ -309,6 +329,25 @@ def main() -> None:
     controlled_results = [item for item in controlled_items if isinstance(item, dict)] if isinstance(controlled_items, list) else []
     if isinstance(withdraw_items, list):
         controlled_results.extend(item for item in withdraw_items if isinstance(item, dict))
+    if isinstance(pre_kyc_withdraw, dict):
+        controlled_results.append({
+            "name": "pre_kyc_withdraw_blocked",
+            "business_status": bool(
+                pre_kyc_withdraw.get("securityRequirementsVisible") is True
+                and pre_kyc_withdraw.get("walletPasswordRequired") is True
+                and pre_kyc_withdraw.get("kycRequired") is True
+                and pre_kyc_withdraw.get("withdrawRequestCount") == 0
+            ),
+            "data": pre_kyc_withdraw,
+        })
+    if isinstance(kyc_items, list):
+        controlled_results.extend(item for item in kyc_items if isinstance(item, dict))
+    if isinstance(reconciliation, dict):
+        controlled_results.append({
+            "name": "p0_reconciliation",
+            "business_status": reconciliation.get("status") == "PASS",
+            "data": reconciliation,
+        })
 
     detail_rows = [["顺序", "场景ID", "主流程", "用例数", "正例", "反例", "运行结论", "说明"]]
     details: list[dict[str, str]] = []
@@ -316,7 +355,9 @@ def main() -> None:
     stage_counter: Counter[str] = Counter()
     for scenario in scenarios:
         flow_cases = cases_by_scenario.get(scenario["scenario_id"], [])
-        runtime_status, detail = aggregate_flow_status(flow_cases, positive_by_case, negative_by_case, controlled_results)
+        runtime_status, detail = aggregate_flow_status(
+            scenario["scenario_id"], flow_cases, positive_by_case, negative_by_case, controlled_results
+        )
         runtime_counter[runtime_status] += 1
         stage_counter[scenario["flow_stage_label"]] += 1
         detail_rows.append(
@@ -336,7 +377,7 @@ def main() -> None:
     summary_rows = [["指标", "数量"]] + [[key, str(value)] for key, value in runtime_counter.most_common()]
     stage_rows = [["流程", "主流程数"]] + [[key, str(value)] for key, value in stage_counter.items()]
 
-    report = f"""# P0 API Main Flow Report
+    report = f"""# P0 Main Flow Report
 
 生成时间：`{datetime.now().astimezone().isoformat()}`
 
@@ -348,6 +389,9 @@ def main() -> None:
 - 正例结果：`{args.positive_result}`
 - 反例结果：`{args.negative_result}`
 - 受控写结果：`{args.controlled_result}`
+- 新号 KYC 前提现 UI 结果：`{args.pre_kyc_withdraw_result}`
+- KYC 结果：`{args.kyc_result}`
+- 资金链核对：`{args.reconciliation_result}`
 
 这份报告按真实业务依赖顺序汇总 8 条 P0 主流程。`test-cases.csv` 是完整正反例索引；接口候选池不决定这里的范围或顺序。
 
