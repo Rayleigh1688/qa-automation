@@ -1,4 +1,7 @@
 import { defineConfig, devices } from "@playwright/test";
+import { loadEnv } from "./ui/framework/env.mjs";
+
+loadEnv();
 
 const clientDevice = process.env.CLIENT_BROWSER_PROFILE === "desktop"
   ? devices["Desktop Chrome"]

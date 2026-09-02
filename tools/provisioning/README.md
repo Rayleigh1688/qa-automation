@@ -29,7 +29,7 @@ python3 tools/provisioning/member-bootstrap.py \
   --kyc-image 21000000008072.webp
 ```
 
-起始手机号优先读取 `--start-phone`，其次读取 `REGISTER_PHONE`，最后读取 `PROVISION_PHONE_START`。工具先用已知会员验证后台手机号筛选确实生效，再从起始号码向后查找第一个不存在的会员。
+起始手机号优先读取 `--start-phone`，其次读取 `REGISTER_PHONE`，再读取 `PROVISION_PHONE_START`；均未配置时默认从 `9000000001` 开始。工具不依赖数据库：先用已知会员验证管理后台 `POST /admin/member/list` 的手机号精确筛选确实生效，再逐号递增查询，返回第一个不存在的会员。
 
 UAT 动态验证码使用：
 

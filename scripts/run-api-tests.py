@@ -16,6 +16,34 @@ import sys
 from pathlib import Path
 
 
+SENSITIVE_COMMAND_FLAGS = {
+    "--approval-code",
+    "--client-otp",
+    "--client-phone",
+    "--deposit-id",
+    "--register-phone",
+    "--withdraw-client-otp",
+    "--withdraw-client-phone",
+    "--withdraw-id",
+    "--withdraw-external-order-id",
+    "--write-client-otp",
+    "--write-client-phone",
+}
+
+
+def display_command(command: list[str]) -> str:
+    visible: list[str] = []
+    redact_next = False
+    for value in command:
+        if redact_next:
+            visible.append("<redacted>")
+            redact_next = False
+            continue
+        visible.append(value)
+        redact_next = value in SENSITIVE_COMMAND_FLAGS
+    return " ".join(visible)
+
+
 def load_env(path: Path) -> dict[str, str]:
     env = os.environ.copy()
     if not path.is_file():
@@ -31,7 +59,7 @@ def load_env(path: Path) -> dict[str, str]:
 
 
 def run(command: list[str], env: dict[str, str]) -> None:
-    print("+ " + " ".join(command), flush=True)
+    print("+ " + display_command(command), flush=True)
     subprocess.run(command, env=env, check=True)
 
 
@@ -216,7 +244,11 @@ def main() -> None:
     parser.add_argument("--include-write", action="store_true", help="compatibility flag; P0 already includes controlled deposit seeding by default")
     parser.add_argument("--safe-only", action="store_true", help="skip controlled P0 writes and run only read/negative checks")
     parser.add_argument("--no-clean", action="store_true", help="preserve existing controlled-flow evidence while refreshing repeatable gates")
-    parser.add_argument("--deposit-pid", default="47870534954254469")
+    parser.add_argument(
+        "--deposit-pid",
+        default=os.environ.get("P0_DEPOSIT_PID", ""),
+        help="Optional environment-specific deposit channel; empty selects a current mode=1 channel",
+    )
     parser.add_argument("--deposit-amount", default="1200")
     parser.add_argument("--withdraw-amount", default="1000")
     parser.add_argument("--write-client-phone", default="")

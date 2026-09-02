@@ -33,6 +33,24 @@ class MemberBootstrapTest(unittest.TestCase):
             with patch.object(bootstrap, "exact_member_exists", side_effect=exists):
                 self.assertEqual(bootstrap.find_unused_phone(args), "9110000002")
 
+    def test_find_unused_phone_defaults_to_9000000001(self) -> None:
+        args = argparse.Namespace(start_phone="", scan_limit=10)
+
+        def exists(_args: argparse.Namespace, phone: str) -> bool:
+            return phone in {"9888888000", "9000000001", "9000000002"}
+
+        with patch.dict(
+            os.environ,
+            {
+                "CLIENT_PHONE": "9888888000",
+                "REGISTER_PHONE": "",
+                "PROVISION_PHONE_START": "",
+            },
+            clear=False,
+        ):
+            with patch.object(bootstrap, "exact_member_exists", side_effect=exists):
+                self.assertEqual(bootstrap.find_unused_phone(args), "9000000003")
+
     def test_required_business_record_blocks_false_status(self) -> None:
         records = [{"name": "register", "business_status": False}]
         with self.assertRaises(bootstrap.ProvisioningError):

@@ -129,7 +129,7 @@ python3 scripts/api-controlled-flow-runner.py \
 ## 主流程正例调试结论
 
 - 充值下单和提现申请都已通过接口正例探针跑通。
-- 充值通道使用 Gcash `pid=47870534954254469`；当前资金主流程金额为 1200。
+- 充值通道从当前环境的 `mode=1` 列表动态选择；当前资金主流程金额为 1200，环境间不得复用通道 PID。
 - COINS 通道 `pid=55278060248820714` 曾返回 `Failed to load payment channels, please contact customer service!`，不要作为当前稳定正例通道。
 - 提现金额 `100` 会低于免审阈值 `500`，可能自动出款后失败，接口最终返回 `Service is busy, please try again later！`，但数据库中可看到提现单和账变先发生再冲回。
 - 资金主流程使用同一个已 KYC、已绑定提款账户的 `fund_flow_account`：充值补单后必须完成真实投注并等待流水统计，再测试限制和正向提现。

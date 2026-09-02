@@ -29,6 +29,8 @@
 | `/finance/channel/product/list?mode=1&pid=1` | 业务返回 `Payment channel unavailable` | 不纳入 P0 safe smoke，等可用支付通道数据 |
 | `/member/kyc/ekyc/url` | 当前测试账号返回 `Account Disabled` | 不纳入 P0 safe smoke，需账号/SDK 状态确认 |
 | `/finance/payment/deposit` | 使用提现通道或不可用通道会返回 `Payment channel unavailable` 或 `Deposit failed` | 使用 `mode=1` 充值通道和标准档位 |
+| `/finance/payment/deposit`（UAT） | 2026-09-02 GCash 在 1200/1000、QRPH/PESONET 在 1000 均返回 `Payment channel unavailable`；Maya 随后成功创建 1200 订单，后台同订单补单后钱包 193→1393 | UAT 充值正例固定使用已确认的 Maya PID；保留其他通道失败作为通道级异常，不再判定整个充值层阻塞 |
+| UAT 游戏启动 | 固定 `/s-game-page/17453859148937` 曾进入错误厂商/游戏；开发修复后同一 ID 已恢复 BNG `Coins` | 仍保留投注前厂商/游戏硬门禁；再次不匹配时直接报产品/环境 BUG，不寻找替代游戏 |
 | `/finance/payment/withdraw` | 资金账号流水清零后，GCash 仍返回 `Payment channel unavailable`；Maya 可成功创建提现单 | GCash 属于 FAT 通道不可用；当前正例创建阶段使用 Maya |
 | `/finance/payment/deposit` | FAT 在 `amount=49`（通道最小 `50`）及 `amount=1000001`（通道最大 `1000000`）时仍返回成功并创建未审核充值单 | P0 限额校验缺陷；默认 CI 不执行该会创建订单的契约探针，修复后执行 `api-p0-negative-runner.py --include-deposit-limit-contract` 复验 |
 | `/admin/finance/deposit/risk/list` | 接口文档标 GET，实际 GET 返回 405；POST 无 body 会出现 CBOR EOF 或业务失败 | 使用 POST + CBOR body 传查询参数 |
@@ -91,17 +93,22 @@
 - 当前 runner 已改为强制复用 `p0-api-session.json`，负例阶段不再执行第二次成功登录；同一账号的 UI 套件也固定串行复用 storage state。
 - 如果正例 smoke 一开始就无法登录，需要更换客户端测试账号或解除该手机号限制。
 
-## 未勾选登录条款仍可登录
+## FAT/UAT 未勾选登录条款仍可登录
 
 现象：
 
 - FAT 登录页保持条款未勾选，填写有效 OTP 后仍请求 `/member/otp/login/v2`。
-- 接口返回成功并进入会员态。
+- 2026-09-02 UAT 使用永久 BASIC 账号的密码登录复现：未勾选条款仍请求 `/member/v2/login`，随后 `/member/detail` 与 `/finance/wallet` 均成功，页面进入会员态并出现 BASIC/KYC 引导。
+- 两个环境的接口均返回成功并进入会员态。
 
 判断：
 
 - 不是定位器误点；Playwright Network 和登录后 KYC 引导页均已确认。
 - P0 UI 反例必须继续失败，不能通过自动勾选条款或放宽断言隐藏该问题。
+
+处理：
+
+- 默认仍作为 UI 缺陷保留失败，不放宽断言。2026-09-02 用户明确接受本轮临时例外后继续 UAT 受控资金链；报告必须显示 UI 10/11 和该例外，不能写成 UI 全通过。
 
 ## 提款账户列表返回空数据
 
@@ -131,11 +138,13 @@
 
 - 游戏启动或会话 `/process/` 请求中的 `total_bet` 与页面最终选择的单次投注金额不一致。
 - UI 已选择 1000 且钱包、投注账变均扣除 1000，但该请求字段不能提供相同断言。
+- 2026-09-02 FAT Lucky Penny 实测页面单注和账变均为 1000，而第三方请求值为 100000，属于协议内部缩放，不是实际下注 100000。
 
 处理：
 
 - 网络字段只作为观察信息，不作为金额硬断言。
 - 以投注前后页面、钱包变化、Bet History、资金账变和流水累计交叉确认本次投注。
+- `ui/data/client-game-actions.json` 对 Lucky Penny 和 UAT BNG Coins 设置 `assertRequestedBetAmount=false`；厂商请求中的缩放值不作为最终业务金额断言，真实金额继续由投注记录、钱包、账变和流水交叉证明。
 
 ## 流水提现被更早的业务校验拦截
 

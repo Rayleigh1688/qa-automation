@@ -70,7 +70,7 @@ function responseFieldNames(body = "") {
   return [];
 }
 
-export function attachNetworkRecorder(target, { hostPattern = /filbet2025\.com/ } = {}) {
+export function attachNetworkRecorder(target, { hostPattern = /filbet(?:2025)?\.(?:com|zone)/i } = {}) {
   const records = [];
   const eventSource = typeof target.context === "function" ? target.context() : target;
 

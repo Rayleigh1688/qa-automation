@@ -46,7 +46,7 @@
 - 客户端和三方游戏统一使用 Pixel 7 `412x915`。游戏、调额和 Spin 的有效相对坐标只维护在 `ui/data/client-game-actions.json`，本文件不再复制坐标值。
 - 冒烟脚本默认不点击真实投注，必须显式设置 `EXECUTE_BET=true`。
 - 是否投注成功不只看截图，至少结合第三方 `/b/server` 的 `command: play` 请求、钱包余额或投注记录接口判断。
-- Beanstalk 已验证可把业务单注固定为 1000；`scripts/run-turnover-bet.py` 根据只读流水汇总计算点击次数，并在投注后复查总剩余流水。
+- FAT Lucky Penny 已校准 100 与 1000 档位，当前与 UAT 统一使用业务单注 100；其第三方请求使用缩放金额，最终投注金额以钱包/账变/投注记录为准。`scripts/run-turnover-bet.py` 根据只读流水汇总计算点击次数，并在投注后复查总剩余流水。
 - UI 可读报告统一写入 `ui/reports/`；原始 JSON、截图统一写入 `ui/results/`，不再写入 `api/`。
 - UI 结果目录只保留最近一次执行产物。每次执行可以覆盖或清空 `ui/results/`、`ui/reports/`、`playwright-report/`、`test-results/`；不要按时间戳或次数在工作区累积报告。
 - 如果发现历史 UI 产物在 `api/results/`，需要迁移到 `ui/results/`，避免 API 和 UI 执行结果混放。
@@ -71,6 +71,7 @@
 - 默认 P0 固定 1 worker。主账号只在无有效 storage state 时登录一次；后续用例加载 `ui/results/client-p0-storage-state.json`。
 - API/UI 交替时使用 `export-browser-p0-session.py`、`import-api-p0-session.py` 同步同一个 token，不得重新登录。
 - 清理结果时必须保留忽略的 UI storage state 和 API session；否则清理动作会意外触发新登录并使另一进程 token 失效。
+- Playwright 配置必须在读取 `CLIENT_BASE_URL` 前加载 `ENV_FILE`。否则 `ENV_FILE=.env.uat` 只会在 global setup 中生效，浏览器可能仍使用 FAT 默认 URL，而管理后台 helper 已切到 UAT，形成跨环境登录假象。当前 `playwright.config.mjs` 在配置解析顶部调用 `loadEnv()`，global setup 还会校验项目 `baseURL` 与 `CLIENT_BASE_URL` 的 origin 一致。
 
 ### Get Code 定位
 

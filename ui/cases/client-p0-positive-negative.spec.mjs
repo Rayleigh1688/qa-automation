@@ -147,14 +147,16 @@ test.describe("Client P0 positive and negative UI checkpoints", () => {
     const app = createApp(page);
 
     await app.openLogin();
-    await app.chooseOtpMode();
-    await app.fillPhone(requiredEnv("CLIENT_PHONE"));
-    await app.requestOtp();
-    await page.waitForFunction(() => document.querySelectorAll("input").length >= 2, null, { timeout: 5000 }).catch(() => {});
-
-    const visibleInputs = page.locator("input:visible");
-    const inputCount = await visibleInputs.count();
-    if (inputCount >= 2) await visibleInputs.nth(inputCount - 1).fill(requiredEnv("CLIENT_OTP"));
+    const phone = requiredEnv("PRE_KYC_CLIENT_PHONE");
+    const password = requiredEnv("PRE_KYC_CLIENT_PASSWORD");
+    const passwordMode = page.getByRole("button", { name: /^Password$/i }).first();
+    if (await passwordMode.isVisible({ timeout: 5000 }).catch(() => false)) {
+      await passwordMode.click({ timeout: 3000 });
+    }
+    await app.fillPhone(phone);
+    const passwordInput = page.locator('input[type="password"]:visible').first();
+    await passwordInput.waitFor({ state: "visible", timeout: 8000 });
+    await passwordInput.fill(password);
 
     const login = page.getByRole("button", { name: /^Login$/i }).first();
     if (await login.isEnabled().catch(() => false)) {

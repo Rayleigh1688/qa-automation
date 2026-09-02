@@ -13,6 +13,35 @@ import subprocess
 from pathlib import Path
 
 
+SENSITIVE_COMMAND_FLAGS = {
+    "--approval-code",
+    "--client-otp",
+    "--client-phone",
+    "--deposit-id",
+    "--kyc-uid",
+    "--register-phone",
+    "--withdraw-client-otp",
+    "--withdraw-client-phone",
+    "--withdraw-id",
+    "--withdraw-external-order-id",
+    "--write-client-otp",
+    "--write-client-phone",
+}
+
+
+def display_command(command: list[str]) -> str:
+    visible: list[str] = []
+    redact_next = False
+    for value in command:
+        if redact_next:
+            visible.append("<redacted>")
+            redact_next = False
+            continue
+        visible.append(value)
+        redact_next = value in SENSITIVE_COMMAND_FLAGS
+    return " ".join(visible)
+
+
 def load_env(path: Path) -> dict[str, str]:
     env = os.environ.copy()
     if not path.is_file():
@@ -28,7 +57,7 @@ def load_env(path: Path) -> dict[str, str]:
 
 
 def run(command: list[str], env: dict[str, str]) -> None:
-    print("+ " + " ".join(command), flush=True)
+    print("+ " + display_command(command), flush=True)
     subprocess.run(command, env=env, check=True)
 
 
@@ -69,7 +98,7 @@ def run_default_ui(env: dict[str, str], allow_known_defect: bool, *, clean: bool
     ui_env = {
         **env,
         "CLIENT_REUSE_P0_AUTH": "true",
-        "CLIENT_AUTH_MODE": "password",
+        "CLIENT_AUTH_MODE": env.get("CLIENT_AUTH_MODE", "password"),
         "ENV_FILE_PRECEDENCE": "shell",
     }
     try:
@@ -138,7 +167,7 @@ def main() -> None:
         "CLIENT_PHONE": kyc_phone,
         "CLIENT_PASSWORD": kyc_password,
         "CLIENT_OTP": kyc_otp,
-        "CLIENT_AUTH_MODE": "password",
+        "CLIENT_AUTH_MODE": env.get("KYC_CLIENT_AUTH_MODE", env.get("CLIENT_AUTH_MODE", "password")),
     }
     run([
         "python3", "scripts/api-controlled-flow-runner.py",
@@ -158,7 +187,7 @@ def main() -> None:
         "CLIENT_PHONE": write_phone,
         "CLIENT_PASSWORD": write_password,
         "CLIENT_OTP": write_otp,
-        "CLIENT_AUTH_MODE": "password",
+        "CLIENT_AUTH_MODE": env.get("CLIENT_AUTH_MODE", "password"),
     }
     run(["python3", "scripts/import-api-p0-session.py", "--env", args.env], fund_env)
     run_default_ui(fund_env, args.allow_known_defect, clean=False)

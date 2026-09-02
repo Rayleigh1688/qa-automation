@@ -75,6 +75,29 @@ function selectGame(config) {
   return game;
 }
 
+function assertConfiguredGameLaunch(game, frames) {
+  const expectedMarkers = game.expectedFrameText || [];
+  if (expectedMarkers.length === 0) {
+    throw new Error(`configured game launch identity is missing: id=${game.id}`);
+  }
+  const missingMarkers = expectedMarkers.filter(
+    (expected) => !frames.some((frame) => frame.includes(expected)),
+  );
+  if (missingMarkers.length === 0) return;
+
+  const observedHosts = [...new Set(frames.map((frame) => {
+    try {
+      return new URL(frame).host;
+    } catch {
+      return "invalid-url";
+    }
+  }))].filter(Boolean);
+  throw new Error(
+    `configured game launch mismatch: id=${game.id}; `
+    + `missing=${missingMarkers.join(",")}; observedHosts=${observedHosts.join(",")}`,
+  );
+}
+
 async function activatePoint(page, x, y) {
   if (process.env.CLIENT_GAME_INPUT !== "mouse") {
     await page.touchscreen.tap(x, y);
@@ -191,6 +214,11 @@ test.describe("Client game bet smoke", () => {
       );
       await page.waitForTimeout(500);
     }
+
+    // This is a hard write gate. A configured game ID that launches a different
+    // provider/game is a product or environment defect; never calibrate or bet.
+    const launchFrames = page.frames().map((frame) => frame.url()).filter(Boolean);
+    assertConfiguredGameLaunch(game, launchFrames);
 
     const requestedBetAmount = String(process.env.CLIENT_GAME_BET_AMOUNT || "");
     const betOption = requestedBetAmount ? game.betOptions?.[requestedBetAmount] : null;
@@ -338,9 +366,6 @@ test.describe("Client game bet smoke", () => {
     });
 
     expect(page.url()).toContain("/s-game-page/");
-    for (const expected of game.expectedFrameText || []) {
-      expect(frames.some((frame) => frame.includes(expected))).toBeTruthy();
-    }
     if (executeBet) {
       if (game.networkEvidenceRequired !== false) {
         expect(afterClickGameRequestCount).toBeGreaterThan(0);

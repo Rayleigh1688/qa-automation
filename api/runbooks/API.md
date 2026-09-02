@@ -119,7 +119,6 @@ python3 scripts/api-controlled-flow-runner.py \
   --client-phone <fund flow phone> \
   --insecure \
   --body-format cbor \
-  --deposit-pid 47870534954254469 \
   --deposit-amount 1200 \
   --out api/results/fund-flow-seed-result.json
 ```
@@ -157,7 +156,7 @@ runner 会先通过 `/member/v2/login` 完成密码登录，再按当前客户�
 
 当前 FAT 正例经验：
 
-- 充值正例优先使用 Gcash 通道 `pid=47870534954254469`。当前同账号资金主流程使用金额 1200；COINS 通道曾返回 `Failed to load payment channels, please contact customer service!`，不适合作为稳定主流程正例。
+- 充值正例默认从当前环境的 `mode=1` 通道列表动态选择；只有已确认环境专属通道时才传 `--deposit-pid` 或 `P0_DEPOSIT_PID`，不能跨环境复用 PID。当前同账号资金主流程使用金额 1200。
 - 注册不再临时生成手机号。执行完整写流程必须通过 `REGISTER_PHONE` 或 `--register-phone` 指定已分配的 `090XXXXXXXX` KYC 测试池账号，避免生成无法追踪、无法继续 KYC 的孤立账号。
 - 充值补单产生的流水/锁定金额属于主流程验证目标。同一个 `fund_flow_account` 必须先经过真实投注和流水轮询，再发起提现。
 - `scripts/run-api-tests.py p0` 默认执行到充值与补单检查点并停止。建议资金参数为充值 `1200`、首次 UI 投注 `1000`、提现探针 `1000`；跨 API、UI 和数据库的放行规则见 `api/p0/README.md`。

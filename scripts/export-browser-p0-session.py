@@ -4,11 +4,34 @@
 from __future__ import annotations
 
 import argparse
+import base64
+import importlib.util
 import json
 import os
 from pathlib import Path
 
 from p0_session import load_session, write_session
+
+
+def load_smoke_module():
+    path = Path(__file__).with_name("api-smoke-runner.py")
+    spec = importlib.util.spec_from_file_location("api_smoke_runner_for_export", path)
+    if spec is None or spec.loader is None:
+        raise SystemExit("cannot load CBOR codec")
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
+
+
+smoke = load_smoke_module()
+
+
+def decoded_signal(value: str) -> object:
+    try:
+        decoded = smoke.cbor_decode(base64.b64decode(value, validate=True))
+    except (ValueError, TypeError):
+        return None
+    return decoded.get("data") if isinstance(decoded, dict) else None
 
 
 def load_env(path: Path) -> None:
@@ -37,12 +60,18 @@ def main() -> None:
     client_token = ""
     for origin in state.get("origins", []):
         for item in origin.get("localStorage", []):
-            if item.get("name") != "no_clear_signal_api_access_token":
-                continue
-            value = json.loads(item.get("value", "{}"))
-            if isinstance(value, dict) and isinstance(value.get("data"), str):
-                client_token = value["data"]
-                break
+            name = item.get("name", "")
+            raw_value = item.get("value", "")
+            if name == "no_clear_signal_api_access_token":
+                value = json.loads(raw_value or "{}")
+                if isinstance(value, dict) and isinstance(value.get("data"), str):
+                    client_token = value["data"]
+                    break
+            if decoded_signal(name) == "no_clear_signal_api_access_token":
+                value = decoded_signal(raw_value)
+                if isinstance(value, str) and value:
+                    client_token = value
+                    break
     if not client_token:
         raise SystemExit("client token not found in Playwright storage state")
 

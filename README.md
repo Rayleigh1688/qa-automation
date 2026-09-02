@@ -54,6 +54,7 @@ scripts/         辅助脚本
 - UI 定位策略：对难以稳定抓取的三方游戏/canvas 场景，采用固定视口下的 Playwright + 坐标定位组合策略。
 - 当前主要风险：客户端自动化账号可能因频繁请求短信被 FAT 限制；CI 需要使用稳定的专用客户端账号或预置 token 策略。充值通道限额后端校验在 FAT 存在已知缺陷，越界契约探针不默认进入 CI。管理后台审核类动作使用已配置的真实 Google Authenticator 动态令牌；后台登录在 FAT 使用固定 `ADMIN_GOOGLE_CODE=111111`。
 - 2026-08-31 P0 快速门禁连续 3 轮稳定：每轮 FAT safe smoke 31/31、默认反例 13/13；UI 前两轮仅保留已确认条款缺陷，第三轮 11/11。完整受控链路已完成 KYC 审批与前台刷新、充值 1200、固定单注 1000 的流水驱动投注、提现 1000 和前后台订单关联核对；统一核对结果 PASS。
+- 2026-09-02 UAT 的 8 条 P0 主流程和统一资金链核对已 PASS：Maya 充值 1200、BNG `Coins` 单注 100 完成 6 次投注、流水归零、Maya 提现 500 进入后台 `under_review`。默认 UI 为 10/11，唯一失败是已明确接受本轮例外但尚未修复的“未勾选登录条款仍可登录”；实时证据以 [`AI-HANDOFF.md`](AI-HANDOFF.md) 为准。
 
 ## 执行规则
 
@@ -149,7 +150,7 @@ npm run test:p0:full
 - `--safe-only` 跳过注册、充值、提现和审核等受控写操作，只执行只读/反例检查。`--include-write` 保留为旧命令兼容参数；P0 默认包含受控写的充值检查点。提现以后台成功记录为验收，不校验项目外收款账户或真实到账，只应在测试环境或专用 UAT 测试数据下执行。
 - `test:ui:p0` 默认不执行真实投注。需要点击三方游戏内投注区域时，必须显式设置 `EXECUTE_BET=true`。
 - API 和 UI P0 分别执行、分别判定。Maya UI 提现使用 `npm run test:ui:withdraw-contract` 独立验证客户端建单；未 KYC 提现前置使用 `npm run test:ui:unverified-withdraw`。两者不会替代 API 提现契约。
-- 正向资金链单注由 `CLIENT_GAME_BET_AMOUNT` 控制：FAT 当前为 1000，UAT 当前上限为 100；`scripts/run-turnover-bet.py` 按所选环境的单注计算次数。投注后再次核对流水，归零才进入提现。完整差异见 [`ENVIRONMENTS.md`](api/runbooks/ENVIRONMENTS.md)。
+- 正向资金链单注由 `CLIENT_GAME_BET_AMOUNT` 控制：FAT/UAT 当前统一为 100，UAT 上限仍为 100；`scripts/run-turnover-bet.py` 按所选环境的剩余流水动态计算次数。投注后再次核对流水，归零才进入提现。完整差异见 [`ENVIRONMENTS.md`](api/runbooks/ENVIRONMENTS.md)。
 - 后台登录固定码和审核动态码是两套东西：`ADMIN_GOOGLE_CODE=111111` 只用于 FAT 后台登录，审核/补单/KYC 审批使用 `ADMIN_APPROVAL_TOTP_SECRET` 生成真实动态码。
 - API 执行会覆盖 `api/results/` 下同名结果和报告；UI 执行会覆盖 `ui/results/` 和 `ui/reports/` 下同名产物。需要历史记录时，以 CI 归档为准，不在仓库工作区内累积。
 - 每次 P0 API 执行还会生成 `api/results/p0-api-report.html`：可离线打开的静态主流程报告，包含放行结论、流程状态卡和可展开场景细则。

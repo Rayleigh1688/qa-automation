@@ -35,7 +35,7 @@ P0 只保留必要资产，避免 CSV 和 Markdown 重复维护。
 1. 充值、投注、流水核对和提现统一使用同一个 `fund_flow_account`，整条资金链串行执行。
 2. 账号在会话准备阶段只成功登录一次。API 复用忽略的 `api/results/p0-api-session.json`，UI 复用忽略的 `ui/results/client-p0-storage-state.json`；切换执行面时同步 token，不另起进程重复登录同一账号。
 3. API 完成充值、后台补单和钱包核对后必须停止。普通存款即使不参加活动也会产生基础流水，不能直接跳到提现。
-4. UI 三方游戏单注读取 `CLIENT_GAME_BET_AMOUNT`：FAT 当前为 1000，UAT 当前为 100。`scripts/run-turnover-bet.py` 只读汇总全部未完成流水，按当前环境单注计算投注次数并设置安全上限。
+4. UI 三方游戏单注读取 `CLIENT_GAME_BET_AMOUNT`：FAT/UAT 当前统一为 100。`scripts/run-turnover-bet.py` 只读汇总全部未完成流水，按当前环境单注计算投注次数并设置安全上限；FAT 默认读取只读数据库，UAT 默认通过管理后台会员列表和流水列表读取，不要求数据库连接。
 5. 投注后轮询 Bet History、钱包、账变和基础流水；以本轮时间窗口和关联标识核对记录。只有总剩余流水为 0，才允许发起提现。
 6. 提现金额必须同时满足余额和通道限制。完整 API 资金链通过 `/finance/payment/withdraw` 创建订单，再由后台 API 按订单 ID 精确定位并核对；Maya UI 建单另作独立 UI P0，不替代 API CTC-009。
 7. 数据库只用于只读诊断和交叉核对，不直接修改 KYC、余额、流水、充值或提现状态。

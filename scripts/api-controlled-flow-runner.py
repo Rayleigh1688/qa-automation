@@ -998,6 +998,13 @@ def main() -> None:
     for item in records:
         status = item.get("business_status")
         print(f"{item.get('name')} http={item.get('http_status')} business={status} url={item.get('url', '')}")
+    failed_names = [
+        str(item.get("name") or "unnamed")
+        for item in records
+        if item.get("business_status") is False
+    ]
+    if failed_names:
+        raise SystemExit("controlled flow business failure: " + ", ".join(failed_names))
 
 
 if __name__ == "__main__":

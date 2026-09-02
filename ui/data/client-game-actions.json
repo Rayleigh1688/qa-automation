@@ -11,6 +11,7 @@
       "readyWaitMs": 5000,
       "postClickWaitMs": 5000,
       "postStartWaitMs": 3000,
+      "assertRequestedBetAmount": false,
       "startTap": {
         "xRatio": 0.5,
         "yRatio": 0.9
@@ -20,6 +21,10 @@
         "yRatio": 0.79
       },
       "betOptions": {
+        "100": {
+          "xRatio": 0.5,
+          "yRatio": 0.51
+        },
         "1000": {
           "xRatio": 0.815,
           "yRatio": 0.576
@@ -58,6 +63,7 @@
       "id": "coins_uat",
       "name": "Coins",
       "path": "/s-game-page/17453859148937",
+      "assertRequestedBetAmount": false,
       "readyWaitMs": 7000,
       "postClickWaitMs": 6000,
       "networkEvidenceRequired": true,

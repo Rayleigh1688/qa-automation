@@ -17,6 +17,7 @@ from types import ModuleType
 ROOT = Path(__file__).resolve().parents[2]
 SCRIPTS = ROOT / "scripts"
 DEFAULT_OUTPUT_DIR = ROOT / "api/results/provisioning"
+DEFAULT_PHONE_START = "9000000001"
 
 
 class ProvisioningError(RuntimeError):
@@ -93,9 +94,16 @@ def find_unused_phone(args: argparse.Namespace) -> str:
     if not exact_member_exists(args, known_phone):
         raise ProvisioningError("admin phone filter could not locate the configured known member")
 
-    start = args.start_phone or os.environ.get("REGISTER_PHONE") or os.environ.get("PROVISION_PHONE_START", "")
+    start = (
+        args.start_phone
+        or os.environ.get("REGISTER_PHONE")
+        or os.environ.get("PROVISION_PHONE_START")
+        or DEFAULT_PHONE_START
+    )
     if not start or not start.isdigit():
-        raise ProvisioningError("--start-phone, REGISTER_PHONE, or PROVISION_PHONE_START must be numeric")
+        raise ProvisioningError(
+            "--start-phone, REGISTER_PHONE, or PROVISION_PHONE_START must be numeric"
+        )
     width = len(start)
     start_number = int(start)
     for offset in range(args.scan_limit):

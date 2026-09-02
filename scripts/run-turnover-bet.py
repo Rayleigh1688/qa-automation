@@ -1,17 +1,20 @@
 #!/usr/bin/env python3
 """Plan and optionally execute fixed-unit UI bets until current turnover is covered.
 
-The database is queried read-only before and after Playwright. The script never
+FAT can query the database read-only. UAT uses read-only admin member/turnover
+endpoints because its database is intentionally unavailable. The script never
 updates wallet, turnover, or member state directly.
 """
 
 from __future__ import annotations
 
 import argparse
+import importlib.util
 import json
 import math
 import os
 import subprocess
+import sys
 import time
 from decimal import Decimal
 from pathlib import Path
@@ -40,7 +43,7 @@ def required(name: str) -> str:
     return value
 
 
-def unfinished_turnover(phone: str) -> Decimal:
+def unfinished_turnover_database(phone: str) -> Decimal:
     if not phone.isdigit():
         raise SystemExit("client phone must contain digits only")
     sql = (
@@ -66,6 +69,136 @@ def unfinished_turnover(phone: str) -> Decimal:
     return Decimal(result.stdout.strip() or "0")
 
 
+def normalize_phone(value: object) -> str:
+    return "".join(character for character in str(value or "") if character.isdigit())
+
+
+def find_exact_member(value: object, phone: str) -> dict[str, object] | None:
+    if isinstance(value, dict):
+        if normalize_phone(value.get("phone")) == normalize_phone(phone):
+            return value
+        for item in value.values():
+            found = find_exact_member(item, phone)
+            if found:
+                return found
+    elif isinstance(value, list):
+        for item in value:
+            found = find_exact_member(item, phone)
+            if found:
+                return found
+    return None
+
+
+def remaining_turnover(rows: object) -> Decimal:
+    if not isinstance(rows, list):
+        raise RuntimeError("admin turnover data.d is not a list")
+    total = Decimal("0")
+    for row in rows:
+        if not isinstance(row, dict) or int(row.get("state") or 0) != 1:
+            continue
+        turnover = Decimal(str(row.get("turnover") or "0"))
+        finished = Decimal(str(row.get("finished") or "0"))
+        total += max(turnover - finished, Decimal("0"))
+    return total
+
+
+def import_smoke_runner():
+    scripts_dir = Path(__file__).resolve().parent
+    sys.path.insert(0, str(scripts_dir))
+    module_path = scripts_dir / "api-smoke-runner.py"
+    spec = importlib.util.spec_from_file_location("p0_api_smoke_runner", module_path)
+    if not spec or not spec.loader:
+        raise RuntimeError(f"cannot import {module_path}")
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
+
+
+class AdminTurnoverReader:
+    def __init__(self, phone: str, session_in: str, timeout: float, insecure: bool):
+        self.phone = phone
+        self.timeout = timeout
+        self.insecure = insecure
+        self.smoke = import_smoke_runner()
+        from p0_session import load_session
+
+        load_session(session_in, phone)
+        self._ensure_admin_session()
+        self.uid = self._find_uid()
+
+    @staticmethod
+    def row(url: str, method: str = "GET") -> dict[str, str]:
+        return {
+            "priority": "TURNOVER_READ",
+            "method": method,
+            "clean_url": url,
+            "suggested_base_var": "{{admin_url}}",
+        }
+
+    def request(self, url: str, method: str = "GET", body: dict[str, object] | None = None) -> dict[str, object]:
+        result = self.smoke.request_once(
+            self.row(url, method), self.timeout, self.insecure, body, "cbor"
+        )
+        decoded = result.get("decoded_body")
+        if result.get("status") != 200 or not isinstance(decoded, dict) or decoded.get("status") is not True:
+            raise RuntimeError(f"admin read failed: method={method} status={result.get('status')}")
+        return decoded
+
+    def _ensure_admin_session(self) -> None:
+        try:
+            self.request("{{admin_url}}/admin/me/detail")
+            return
+        except RuntimeError:
+            pass
+        login_args = argparse.Namespace(timeout=self.timeout, insecure=self.insecure, body_format="cbor")
+        _, token = self.smoke.admin_login(login_args)
+        if not token:
+            raise RuntimeError("admin login failed while preparing turnover reader")
+
+    def _find_uid(self) -> str:
+        decoded = self.request(
+            "{{admin_url}}/admin/member/list",
+            "POST",
+            {"page": 1, "page_size": 10, "phone": self.phone},
+        )
+        member = find_exact_member(decoded.get("data"), self.phone)
+        uid = member.get("uid") if member else None
+        if uid is None or str(uid).strip() == "":
+            raise RuntimeError("exact member was not found in admin member list")
+        return str(uid)
+
+    def unfinished(self) -> Decimal:
+        page = 1
+        page_size = 100
+        rows: list[object] = []
+        while page <= 100:
+            decoded = self.request(
+                f"{{{{admin_url}}}}/admin/finance/turnover/list?uid={self.uid}&page={page}&page_size={page_size}"
+            )
+            data = decoded.get("data")
+            if not isinstance(data, dict):
+                raise RuntimeError("admin turnover data is not an object")
+            batch = data.get("d")
+            if not isinstance(batch, list):
+                raise RuntimeError("admin turnover data.d is not a list")
+            rows.extend(batch)
+            total = int(data.get("t") or len(rows))
+            if len(rows) >= total or len(batch) < page_size:
+                return remaining_turnover(rows)
+            page += 1
+        raise RuntimeError("admin turnover pagination exceeded safety cap")
+
+
+def choose_turnover_source(requested: str, env_path: str) -> str:
+    configured = os.environ.get("TURNOVER_SOURCE", "").strip().lower()
+    selected = requested if requested != "auto" else configured
+    if selected and selected != "auto":
+        if selected not in {"database", "admin"}:
+            raise SystemExit("turnover source must be auto, database, or admin")
+        return selected
+    return "admin" if "uat" in Path(env_path).name.lower() else "database"
+
+
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--env", default=os.environ.get("ENV_FILE", ".env.fat"))
@@ -77,6 +210,10 @@ def main() -> None:
     parser.add_argument("--poll-timeout", type=float, default=60)
     parser.add_argument("--game-id", default="")
     parser.add_argument("--game-page", default="")
+    parser.add_argument("--turnover-source", choices=["auto", "database", "admin"], default="auto")
+    parser.add_argument("--session-in", default="api/results/p0-api-session.json")
+    parser.add_argument("--timeout", type=float, default=15)
+    parser.add_argument("--insecure", action=argparse.BooleanOptionalAction, default=True)
     parser.add_argument("--execute", action="store_true")
     parser.add_argument("--out", default="ui/results/turnover-bet-plan.json")
     args = parser.parse_args()
@@ -92,7 +229,14 @@ def main() -> None:
     if args.bet_unit <= 0 or args.max_spins <= 0:
         raise SystemExit("bet unit and max spins must be positive")
 
-    before = unfinished_turnover(phone)
+    source = choose_turnover_source(args.turnover_source, args.env)
+    if source == "admin":
+        turnover_reader = AdminTurnoverReader(phone, args.session_in, args.timeout, args.insecure)
+        unfinished_turnover = turnover_reader.unfinished
+    else:
+        unfinished_turnover = lambda: unfinished_turnover_database(phone)
+
+    before = unfinished_turnover()
     initial_planned_spins = math.ceil(before / Decimal(args.bet_unit)) if before > 0 else 0
     if initial_planned_spins > args.max_spins:
         raise SystemExit(
@@ -113,6 +257,8 @@ def main() -> None:
             )
         ui_env = os.environ.copy()
         ui_env.update({
+            "ENV_FILE": args.env,
+            "ENV_FILE_PRECEDENCE": "shell",
             "CLIENT_PHONE": phone,
             "CLIENT_PASSWORD": password,
             "CLIENT_GAME_ID": args.game_id,
@@ -121,7 +267,7 @@ def main() -> None:
             "CLIENT_GAME_SPIN_COUNT": str(batch_spins),
             "EXECUTE_BET": "true",
             "CLIENT_REUSE_P0_AUTH": "true",
-            "CLIENT_AUTH_MODE": "password",
+            "CLIENT_AUTH_MODE": os.environ.get("CLIENT_AUTH_MODE", "password"),
         })
         batch_before = current
         command = ["npm", "run", "test:ui:game-bet"]
@@ -138,10 +284,10 @@ def main() -> None:
         executed = True
 
         deadline = time.monotonic() + args.poll_timeout
-        observed = unfinished_turnover(phone)
+        observed = unfinished_turnover()
         while observed > 0 and time.monotonic() < deadline:
             time.sleep(max(0.5, args.poll_interval))
-            observed = unfinished_turnover(phone)
+            observed = unfinished_turnover()
         batches.append({
             "turnover_before": str(batch_before),
             "planned_spins": batch_spins,
@@ -156,6 +302,7 @@ def main() -> None:
     after = current if executed else before
     result = {
         "phone_suffix": phone[-4:],
+        "turnover_source": source,
         "bet_unit": args.bet_unit,
         "turnover_before": str(before),
         "planned_spins": total_planned if executed else initial_planned_spins,

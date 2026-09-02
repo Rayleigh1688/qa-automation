@@ -1,4 +1,5 @@
 import { handleConfiguredModals, clickFirstByText, clickConfiguredTarget } from "../framework/ui-actions.mjs";
+import { decodeCbor } from "../framework/cbor-decoder.mjs";
 
 export class ClientAppPage {
   constructor(page, { modalConfig = {}, pageConfig = {} } = {}) {
@@ -71,8 +72,12 @@ export class ClientAppPage {
     await this.chooseOtpMode();
 
     await this.fillPhone(phone);
-    await this.requestOtp();
-    await this.fillOtp(otp);
+    const otpId = await this.requestOtp();
+    const resolvedOtp = typeof otp === "function" ? await otp(otpId) : otp;
+    if (!/^\d{6}$/.test(String(resolvedOtp || ""))) {
+      throw new Error("client login OTP resolver did not return a six-digit code");
+    }
+    await this.fillOtp(resolvedOtp);
 
     await this.acceptLoginTerms();
     const clicked = await this.submitLogin();
@@ -189,8 +194,50 @@ export class ClientAppPage {
   async requestOtp() {
     const getCode = this.page.getByRole("button", { name: /^Get Code$|^Send$|^发送$|^获取$/i }).first();
     if (await getCode.isVisible({ timeout: 5000 }).catch(() => false)) {
-      await getCode.click({ timeout: 3000 }).catch(() => {});
+      const responsePromise = this.page.waitForResponse((response) => {
+        try {
+          return response.request().method() === "POST"
+            && new URL(response.url()).pathname === "/member/sms";
+        } catch {
+          return false;
+        }
+      }, { timeout: 15_000 });
+      await getCode.click({ timeout: 3000 });
+      const response = await responsePromise;
+      const body = await response.body();
+      const requestBytes = response.request().postDataBuffer();
+      if (requestBytes) {
+        let requestBody;
+        try {
+          requestBody = decodeCbor(requestBytes);
+        } catch {
+          requestBody = JSON.parse(requestBytes.toString("utf8"));
+        }
+        const phoneDigits = String(requestBody?.phone || "").replace(/\D/g, "");
+        this.warn("client SMS request metadata", {
+          fields: requestBody && typeof requestBody === "object" ? Object.keys(requestBody).sort() : [],
+          countryCode: String(requestBody?.country_code || ""),
+          reason: String(requestBody?.reason || ""),
+          phoneDigitCount: phoneDigits.length,
+          phoneStartsWithZero: phoneDigits.startsWith("0"),
+        });
+      }
+      let decoded;
+      try {
+        decoded = decodeCbor(body);
+      } catch {
+        decoded = JSON.parse(body.toString("utf8"));
+      }
+      if (decoded?.status !== true) {
+        throw new Error(`client SMS request failed: ${String(decoded?.data || decoded?.message || "unknown")}`);
+      }
+      const otpId = decoded?.data?.id ?? decoded?.data?.otp_id;
+      if (!/^\d+$/.test(String(otpId || ""))) {
+        throw new Error("client SMS response did not contain otp_id");
+      }
+      return String(otpId);
     }
+    throw new Error("client SMS Get Code button not found");
   }
 
   async fillOtp(otp) {
