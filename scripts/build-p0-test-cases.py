@@ -13,7 +13,7 @@ from pathlib import Path
 
 
 FIELDNAMES = [
-    "case_order", "case_id", "scenario_id", "priority", "polarity", "domain",
+    "case_order", "case_id", "scenario_id", "priority", "polarity", "surface", "module", "domain",
     "flow_stage", "flow_stage_label", "account_lane", "case_name",
     "execution_policy", "method", "clean_url", "path", "suggested_base_var",
     "assertions", "source_file", "request_body", "notes",
@@ -87,7 +87,7 @@ NEGATIVE_CASES = [
 
 CONTROLLED_CASES = [
     ("CTC-001", "01_register_login", 10, "positive", "auth", "new_kyc_account", "新号注册成功", "controlled", "POST", "/member/register", "注册账号必须显式来自 090XXXXXXXX 测试池"),
-    ("CTC-002", "01_register_login", 20, "positive", "auth", "mature_read_account", "现有成熟账号 OTP 登录成功", "setup", "POST", "/member/otp/login/v2", "safe smoke 的登录前置"),
+    ("CTC-002", "01_register_login", 20, "positive", "auth", "mature_read_account", "现有成熟账号密码登录成功", "setup", "SETUP", "client-login", "UI/API 默认密码登录；OTP 仅用于注册、首次设密和显式 OTP 专项"),
     ("CTC-003", "02_kyc", 30, "positive", "kyc", "new_kyc_account", "新号或未通过/驳回账号提交 KYC", "controlled", "POST", "/member/kyc/insert", "仅当当前非通过状态且接口允许再次提交时复用；待审状态单独验证"),
     ("CTC-004", "02_kyc", 70, "positive", "kyc", "admin_account", "后台定位并审核本次 KYC", "controlled", "POST", "/admin/kyc/approve|/admin/kyc/reject", "只审核本次提交记录"),
     ("CTC-005", "03_deposit", 20, "positive", "finance", "fund_flow_account", "创建充值订单", "controlled", "GET", "/finance/payment/deposit", "与后续投注、流水核对和提现复用同一主流程账号"),
@@ -116,6 +116,14 @@ def account_lane(row: dict[str, str]) -> str:
     return "mature_read_account"
 
 
+def metadata_surface(lane: str, domain: str) -> str:
+    return "admin" if lane == "admin_account" or domain == "admin" else "client"
+
+
+def metadata_module(domain: str) -> str:
+    return "permission" if domain == "admin" else domain
+
+
 def normalized_safe_cases(rows: list[dict[str, str]]) -> list[dict[str, str]]:
     selected: dict[tuple[str, str], dict[str, str]] = {}
     for row in rows:
@@ -125,9 +133,14 @@ def normalized_safe_cases(rows: list[dict[str, str]]) -> list[dict[str, str]]:
     result = []
     for row in selected.values():
         stage, within = CORE_PATH_ORDER[row["path"]]
+        module = row.get("module") or row.get("domain", "other")
+        if module == "admin":
+            module = "permission"
         item = {field: row.get(field, "") for field in FIELDNAMES}
         item.update({
             "scenario_id": FLOW_SCENARIOS[stage], "polarity": "positive",
+            "surface": row.get("surface") or ("admin" if row.get("suggested_base_var") == "{{admin_url}}" else "client"),
+            "module": module,
             "flow_stage": stage, "flow_stage_label": FLOW_LABELS[stage],
             "account_lane": account_lane(row), "execution_policy": "safe_smoke",
             "_within": within,
@@ -141,7 +154,8 @@ def metadata_cases() -> list[dict[str, str]]:
     for case_id, stage, within, polarity, domain, lane, name, policy, method, path, notes in CONTROLLED_CASES:
         result.append({
             "case_id": case_id, "scenario_id": FLOW_SCENARIOS[stage], "priority": "P0",
-            "polarity": polarity, "domain": domain, "flow_stage": stage,
+            "polarity": polarity, "surface": metadata_surface(lane, domain),
+            "module": metadata_module(domain), "domain": domain, "flow_stage": stage,
             "flow_stage_label": FLOW_LABELS[stage], "account_lane": lane,
             "case_name": name, "execution_policy": policy, "method": method,
             "clean_url": path, "path": path, "suggested_base_var": "",
@@ -152,7 +166,8 @@ def metadata_cases() -> list[dict[str, str]]:
         policy = "known_defect_probe" if case_id in {"NTC-014", "NTC-015"} else "negative_smoke"
         result.append({
             "case_id": case_id, "scenario_id": FLOW_SCENARIOS[stage], "priority": "P0",
-            "polarity": "negative", "domain": domain, "flow_stage": stage,
+            "polarity": "negative", "surface": metadata_surface("", domain),
+            "module": metadata_module(domain), "domain": domain, "flow_stage": stage,
             "flow_stage_label": FLOW_LABELS[stage], "account_lane": "mature_read_account",
             "case_name": name, "execution_policy": policy, "method": "DYNAMIC",
             "clean_url": "", "path": "", "suggested_base_var": "",
@@ -166,7 +181,9 @@ def metadata_cases() -> list[dict[str, str]]:
     for case_id, stage, within, name, lane in UI_STATE_CASES:
         result.append({
             "case_id": case_id, "scenario_id": FLOW_SCENARIOS[stage], "priority": "P0",
-            "polarity": "negative", "domain": "kyc" if stage == "02_kyc" else "finance",
+            "polarity": "negative", "surface": "client",
+            "module": "kyc" if stage == "02_kyc" else "finance",
+            "domain": "kyc" if stage == "02_kyc" else "finance",
             "flow_stage": stage, "flow_stage_label": FLOW_LABELS[stage], "account_lane": lane,
             "case_name": name, "execution_policy": "ui_controlled", "method": "UI",
             "clean_url": "", "path": "/my?action=withdraw", "suggested_base_var": "", "assertions": "security_requirements,no_withdraw_request",

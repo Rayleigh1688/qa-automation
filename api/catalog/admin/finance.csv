@@ -1,0 +1,90 @@
+surface,module,method,path,clean_url,flags,p0_candidate,source_file,name
+admin,finance,POST,"/OrderId           string          `json:""order_id""`           //销售订单ID","{{admin_url}}/OrderId           string          `json:""order_id""`           //销售订单ID",,,后台/财务管理/lazada订单-owen.bru,lazada订单-owen
+admin,finance,GET,/admin/channel/promotion/deposit/list,{{admin_url}}/admin/channel/promotion/deposit/list,,,后台/渠道推广-充值模版/充值模版列表.bru,充值模版列表
+admin,finance,POST,/admin/channel/promotion/deposit/update,{{admin_url}}/admin/channel/promotion/deposit/update,,,后台/渠道推广-充值模版/更新模版.bru,更新模版
+admin,finance,GET,/admin/filcoin/order/export,{{admin_url}}/admin/filcoin/order/export,"todo,hardcoded_env",,后台/财务管理/代币商城订单/代币商城订单导出-todo.bru,代币商城订单导出-todo
+admin,finance,GET,/admin/filcoin/order/list,{{admin_url}}/admin/filcoin/order/list,"todo,hardcoded_env",,后台/财务管理/代币商城订单/代币商城订单列表-todo.bru,代币商城订单列表-todo
+admin,finance,POST,/admin/finance/adjust/export,{{admin_url}}/admin/finance/adjust/export,hardcoded_env,,后台/风控管理/上下分记录/手动上下分数据导出 - owen.bru,手动上下分数据导出 - owen
+admin,finance,POST,/admin/finance/adjust/import,{{admin_url}}/admin/finance/adjust/import,,,后台/风控管理/上下分记录/批量上下分.bru,批量上下分
+admin,finance,GET,/admin/finance/adjust/import/failure/list,{{admin_url}}/admin/finance/adjust/import/failure/list?page=1&page_size=20,hardcoded_env,,后台/风控管理/上下分记录/批量上下分失败列表.bru,批量上下分失败列表
+admin,finance,POST,/admin/finance/adjust/insert,{{admin_url}}/admin/finance/adjust/insert,,,代理管理后台/代理管理/代理列表/余额调整.bru,余额调整
+admin,finance,POST,/admin/finance/adjust/insert,{{admin_url}}/admin/finance/adjust/insert,,,后台/风控管理/上下分记录/添加手动上下分-wesley.bru,添加手动上下分-wesley
+admin,finance,GET,/admin/finance/adjust/list,{{admin_url}}/admin/finance/adjust/list?uid=<redacted>&operator_uid=<redacted>&action=1%2C2&page=1&page_size=10&bill_no=&amount_min=1&amount_max=100&phone=<redacted>,,,后台/风控管理/上下分记录/手动上下分列表-wesley.bru,手动上下分列表-wesley
+admin,finance,POST,/admin/finance/adjust/list,{{admin_url}}/admin/finance/adjust/list?uid=<redacted>&operator_uid=<redacted>&action=1%2C2&page=1&page_size=10&bill_no=&amount_min=1&amount_max=100&phone=<redacted>,,yes,代理管理后台/财务管理/财务报表/系统调整.bru,系统调整
+admin,finance,POST,/admin/finance/deposit/export,{{admin_url}}/admin/finance/deposit/export,,yes,后台/财务管理/存款记录/充值记录导出-wesley.bru,充值记录导出-wesley
+admin,finance,POST,/admin/finance/deposit/list,{{admin_url}}/admin/finance/deposit/list,,yes,后台/财务管理/存款记录/充值列表-wesley.bru,充值列表-wesley
+admin,finance,GET,/admin/finance/deposit/manual/success,{{admin_url}}/admin/finance/deposit/manual/success,,yes,后台/风控管理/存-提审核/充值补单-wesley.bru,充值补单-wesley
+admin,finance,GET,/admin/finance/deposit/risk/list,{{admin_url}}/admin/finance/deposit/risk/list,,yes,后台/风控管理/存-提审核/充值列表-wesley.bru,充值列表-wesley
+admin,finance,POST,/admin/finance/deposit/sync,{{admin_url}}/admin/finance/deposit/sync?id=<id>,,yes,后台/财务管理/存款记录/充值同步状态-wesley.bru,充值同步状态-wesley
+admin,finance,POST,/admin/finance/lazada/order/list,{{admin_url}}/admin/finance/lazada/order/list,,yes,后台/财务管理/lazada订单/lazada-订单列表-owen.bru,lazada-订单列表-owen
+admin,finance,POST,/admin/finance/lazada/send/sms,{{admin_url}}/admin/finance/lazada/send/sms,,yes,后台/财务管理/lazada订单/lazada-重新发货-owen.bru,lazada-重新发货-owen
+admin,finance,GET,/admin/finance/member/wallet,{{admin_url}}/admin/finance/member/wallet?uid=<redacted>,,,后台/会员列表/会员钱包 - wesley.bru,会员钱包 - wesley
+admin,finance,GET,/admin/finance/member/wallet/pwd/clear,{{admin_url}}/admin/finance/member/wallet/pwd/clear?uid=<redacted>,hardcoded_env,,后台/会员列表/清空提款密码 -- ducky.bru,清空提款密码 -- ducky
+admin,finance,GET,/admin/finance/payment/Delete,{{admin_url}}/admin/finance/payment/Delete?id=998,,yes,后台/财务管理/支付渠道/x-删除支付渠道-cold.bru,x-删除支付渠道-cold
+admin,finance,POST,/admin/finance/payment/bank/enable,{{admin_url}}/admin/finance/payment/bank/enable,hardcoded_env,yes,后台/财务管理/银行卡/开启关闭按钮.bru,开启关闭按钮
+admin,finance,POST,/admin/finance/payment/bank/insert,{{admin_url}}/admin/finance/payment/bank/insert,hardcoded_env,yes,后台/财务管理/银行卡/银行卡添加.bru,银行卡添加
+admin,finance,GET,/admin/finance/payment/bank/list,{{admin_url}}/admin/finance/payment/bank/list,hardcoded_env,yes,后台/财务管理/银行卡/银行卡列表.bru,银行卡列表
+admin,finance,POST,/admin/finance/payment/bank/update,{{admin_url}}/admin/finance/payment/bank/update,hardcoded_env,yes,后台/财务管理/银行卡/银行卡编辑.bru,银行卡编辑
+admin,finance,GET,/admin/finance/payment/channel/delete,{{admin_url}}/admin/finance/payment/channel/delete?id=888,,yes,后台/财务管理/支付渠道/删除支付渠道通道.bru,删除支付渠道通道
+admin,finance,POST,/admin/finance/payment/channel/insert,{{admin_url}}/admin/finance/payment/channel/insert,,yes,后台/财务管理/支付渠道/添加支付渠道通道.bru,添加支付渠道通道
+admin,finance,GET,/admin/finance/payment/channel/list,{{admin_url}}/admin/finance/payment/channel/list?page=1&page_size=10&name=&state=1&payment_name=paycools&name=,,yes,后台/财务管理/支付渠道/支付渠道通道列表.bru,支付渠道通道列表
+admin,finance,POST,/admin/finance/payment/channel/update,{{admin_url}}/admin/finance/payment/channel/update,,yes,后台/财务管理/支付渠道/更新支付渠道通道.bru,更新支付渠道通道
+admin,finance,GET,/admin/finance/payment/deposit/channels,{{admin_url}}/admin/finance/payment/deposit/channels,,yes,后台/财务管理/存款记录/支付渠道列表-cold.bru,支付渠道列表-cold
+admin,finance,POST,/admin/finance/payment/insert,{{admin_url}}/admin/finance/payment/insert,,yes,后台/财务管理/支付渠道/x-添加支付渠道-cold.bru,x-添加支付渠道-cold
+admin,finance,GET,/admin/finance/payment/list,{{admin_url}}/admin/finance/payment/list?page=1&page_size=10&name=paycools&state=1&id=,,yes,后台/财务管理/支付渠道/x-支付渠道列表-cold.bru,x-支付渠道列表-cold
+admin,finance,POST,/admin/finance/payment/platform/enable,{{admin_url}}/admin/finance/payment/platform/enable,,yes,后台/财务管理/支付渠道/支付平台开关.bru,支付平台开关
+admin,finance,POST,/admin/finance/payment/platform/insert,{{admin_url}}/admin/finance/payment/platform/insert,,yes,后台/财务管理/支付渠道/添加支付平台.bru,添加支付平台
+admin,finance,GET,/admin/finance/payment/platform/list,{{admin_url}}/admin/finance/payment/platform/list?page=1&page_size=10&mode=deposit,hardcoded_env,yes,后台/财务管理/支付渠道/支付平台列表.bru,支付平台列表
+admin,finance,POST,/admin/finance/payment/platform/update,{{admin_url}}/admin/finance/payment/platform/update,,yes,后台/财务管理/支付渠道/更新支付平台.bru,更新支付平台
+admin,finance,POST,/admin/finance/payment/update,{{admin_url}}/admin/finance/payment/update,,yes,后台/财务管理/支付渠道/x-更新支付渠道-cold.bru,x-更新支付渠道-cold
+admin,finance,GET,/admin/finance/payment/withdraw/channels,{{admin_url}}/admin/finance/payment/withdraw/channels,,yes,合规/财务管理/财务记录/提现渠道列表-cold.bru,提现渠道列表-cold
+admin,finance,GET,/admin/finance/payment/withdraw/channels,{{admin_url}}/admin/finance/payment/withdraw/channels,,yes,后台/财务管理/提现记录/提现渠道列表-cold.bru,提现渠道列表-cold
+admin,finance,POST,/admin/finance/tokens/adjust,{{admin_url}}/admin/finance/tokens/adjust,,,后台/vip代币钱包/代币上下分.bru,代币上下分
+admin,finance,GET,/admin/finance/tokens/transaction/export,{{admin_url}}/admin/finance/tokens/transaction/export,,,后台/vip代币钱包/代币账变导出.bru,代币账变导出
+admin,finance,GET,/admin/finance/tokens/transaction/list,{{admin_url}}/admin/finance/tokens/transaction/list,,,后台/vip代币钱包/代币账变列表.bru,代币账变列表
+admin,finance,POST,/admin/finance/transaction/list,{{admin_url}}/admin/finance/transaction/list?cash_type=2001&page=1&page_size=5,,yes,后台/财务管理/会员钱包账变/账变列表- wesley.bru,账变列表- wesley
+admin,finance,GET,/admin/finance/transaction/types,{{admin_url}}/admin/finance/transaction/types,,yes,后台/财务管理/会员钱包账变/账变类型- wesley.bru,账变类型- wesley
+admin,finance,POST,/admin/finance/turnover/add,{{admin_url}}/admin/finance/turnover/add,hardcoded_env,,后台/会员流水/会员流水-增加.bru,会员流水-增加
+admin,finance,GET,/admin/finance/turnover/change/list,{{admin_url}}/admin/finance/turnover/change/list?page=1&page_size=20,hardcoded_env,,后台/会员流水/会员流水-异动记录.bru,会员流水-异动记录
+admin,finance,GET,/admin/finance/turnover/change/types,{{admin_url}}/admin/finance/turnover/change/types,hardcoded_env,,后台/会员流水/会员流水-异动记录-类型列表.bru,会员流水-异动记录-类型列表
+admin,finance,POST,/admin/finance/turnover/clear,{{admin_url}}/admin/finance/turnover/clear,hardcoded_env,,后台/会员流水/会员流水-清零.bru,会员流水-清零
+admin,finance,POST,/admin/finance/turnover/clear,{{admin_url}}/admin/finance/turnover/clear,hardcoded_env,,后台/会员流水/会员流水清理-light.bru,会员流水清理-light
+admin,finance,GET,/admin/finance/turnover/list,{{admin_url}}/admin/finance/turnover/list?uid=<redacted>&page=1&page_size=20,hardcoded_env,,后台/会员流水/会员流水明细.bru,会员流水明细
+admin,finance,POST,/admin/finance/turnover/sub,{{admin_url}}/admin/finance/turnover/sub,hardcoded_env,,后台/会员流水/会员流水-扣减.bru,会员流水-扣减
+admin,finance,POST,/admin/finance/withdraw/agree,{{admin_url}}/admin/finance/withdraw/agree,,yes,后台/风控管理/存-提审核/提现同意-wesley.bru,提现同意-wesley
+admin,finance,POST,/admin/finance/withdraw/batch/agree,{{admin_url}}/admin/finance/withdraw/batch/agree,,yes,后台/风控管理/存-提审核/批量提现同意-cold.bru,批量提现同意-cold
+admin,finance,POST,/admin/finance/withdraw/batch/reject,{{admin_url}}/admin/finance/withdraw/batch/reject,,yes,后台/风控管理/存-提审核/批量提现拒绝-cold.bru,批量提现拒绝-cold
+admin,finance,POST,/admin/finance/withdraw/export,{{admin_url}}/admin/finance/withdraw/export,,yes,后台/财务管理/提现记录/提现记录导出-wesley.bru,提现记录导出-wesley
+admin,finance,POST,/admin/finance/withdraw/fail,{{admin_url}}/admin/finance/withdraw/fail,,yes,后台/风控管理/存-提审核/出款失败-wesley.bru,出款失败-wesley
+admin,finance,POST,/admin/finance/withdraw/list,{{admin_url}}/admin/finance/withdraw/list,,yes,后台/财务管理/提现记录/提现列表-wesley.bru,提现列表-wesley
+admin,finance,POST,/admin/finance/withdraw/reject,{{admin_url}}/admin/finance/withdraw/reject?id=2,,yes,后台/风控管理/存-提审核/提现拒绝-wesley.bru,提现拒绝-wesley
+admin,finance,POST,/admin/finance/withdraw/risk/audit/export,{{admin_url}}/admin/finance/withdraw/risk/audit/export,hardcoded_env,yes,后台/风控管理/存-提审核/提现审核列表导出.bru,提现审核列表导出
+admin,finance,GET,/admin/finance/withdraw/risk/audit/list,{{admin_url}}/admin/finance/withdraw/risk/audit/list,,yes,后台/风控管理/存-提审核/提现审核列表-wesley.bru,提现审核列表-wesley
+admin,finance,POST,/admin/finance/withdraw/success,{{admin_url}}/admin/finance/withdraw/success,,yes,后台/风控管理/存-提审核/出款成功-wesley.bru,出款成功-wesley
+admin,finance,POST,/admin/finance/withdraw/sync,{{admin_url}}/admin/finance/withdraw/sync?id=3,,yes,后台/财务管理/提现记录/提现同步状态-wesley.bru,提现同步状态-wesley
+admin,finance,POST,/admin/finance/withdraws/limit/conf,{{admin_url}}/admin/finance/withdraws/limit/conf,,,后台/风控管理/大量小額提款檢查/更新大量小額提款檢查配置.bru,更新大量小額提款檢查配置
+admin,finance,GET,/admin/finance/withdraws/limit/list,{{admin_url}}/admin/finance/withdraws/limit/list,,,后台/风控管理/大量小額提款檢查/大量小額提款檢查列表.bru,大量小額提款檢查列表
+admin,finance,GET,/admin/finance/withdraws/limit/state,{{admin_url}}/admin/finance/withdraws/limit/state,,,后台/风控管理/大量小額提款檢查/更新大量小額提款檢查状态.bru,更新大量小額提款檢查状态
+admin,finance,GET,/admin/member/deposit/multiple/log,{{admin_url}}/admin/member/deposit/multiple/log?uid=<redacted>&page=1&page_size=20&operator_types=deposit_multiple_member,hardcoded_env,,后台/后台账号管理/用户充值倍率调整日志列表-aliang.bru,用户充值倍率调整日志列表-aliang
+admin,finance,POST,/admin/member/deposit/multiple/update,{{admin_url}}/admin/member/deposit/multiple/update,hardcoded_env,,后台/后台账号管理/用户充值倍率调整-aliang.bru,用户充值倍率调整-aliang
+admin,finance,GET,/admin/ops-tools/first-deposit-no-second/export,{{admin_url}}/admin/ops-tools/first-deposit-no-second/export,,,后台/运营管理/运营小工具/首存未二存.bru,首存未二存
+admin,finance,GET,/admin/promo/task/transaction,{{admin_url}}/admin/promo/task/transaction,,,后台/vip任务中心/任务奖金列表-seven.bru,任务奖金列表-seven
+admin,finance,GET,/admin/promo/task/transaction/export,{{admin_url}}/admin/promo/task/transaction/export,,,后台/vip任务中心/任务奖励列表导出-seven.bru,任务奖励列表导出-seven
+admin,finance,GET,/admin/promotion_first_deposit,{{admin_url}}/admin/promotion_first_deposit?page=1&page_size=15,hardcoded_env,,后台/推广管理/首充日活分析.bru,首充日活分析
+admin,finance,POST,/admin/record/bet,{{admin_url}}/admin/record/bet,,,后台/财务管理/注单管理/游戏记录-wesley.bru,游戏记录-wesley
+admin,finance,GET,/admin/sys/config/deposit/multiple/list,{{admin_url}}/admin/sys/config/deposit/multiple/list,hardcoded_env,,后台/运营管理/客户端管理/平台倍率/平台充值倍率列表-aliang.bru,平台充值倍率列表-aliang
+admin,finance,GET,/admin/sys/config/deposit/multiple/log,{{admin_url}}/admin/sys/config/deposit/multiple/log?page=1&page_size=20,hardcoded_env,,后台/运营管理/客户端管理/平台倍率/平台充值倍率异动记录-aliang.bru,平台充值倍率异动记录-aliang
+admin,finance,POST,/admin/sys/config/deposit/multiple/update,{{admin_url}}/admin/sys/config/deposit/multiple/update,hardcoded_env,,后台/运营管理/客户端管理/平台倍率/平台充值倍率更新-aliang.bru,平台充值倍率更新-aliang
+admin,finance,GET,/agency/finance/transaction/types,{{admin_url}}/agency/finance/transaction/types,,yes,代理管理后台/财务管理/财务报表/账变类型- wesley.bru,账变类型- wesley
+admin,finance,POST,/channel/promotion/deposit/insert,{{admin_url}}/channel/promotion/deposit/insert,,,后台/渠道推广-充值模版/新增模版.bru,新增模版
+admin,finance,POST,/cmpl/finance/deposit/export,{{admin_url}}/cmpl/finance/deposit/export,,yes,合规/财务管理/财务记录/充值记录导出-wesley.bru,充值记录导出-wesley
+admin,finance,GET,/cmpl/finance/deposit/list,{{admin_url}}/cmpl/finance/deposit/list,,yes,合规/财务管理/财务记录/充值记录-wesley.bru,充值记录-wesley
+admin,finance,GET,/cmpl/finance/payment/deposit/channels,{{admin_url}}/cmpl/finance/payment/deposit/channels,,yes,合规/财务管理/财务记录/支付渠道列表-cold.bru,支付渠道列表-cold
+admin,finance,POST,/cmpl/finance/transaction/export,{{admin_url}}/cmpl/finance/transaction/export,,,合规/交易管理/交易记录导出-wesley.bru,交易记录导出-wesley
+admin,finance,GET,/cmpl/finance/transaction/list,{{admin_url}}/cmpl/finance/transaction/list?cash_type=2001&page=1&page_size=5,,,合规/交易管理/交易记录- wesley.bru,交易记录- wesley
+admin,finance,GET,/cmpl/finance/transaction/types,{{admin_url}}/cmpl/finance/transaction/types,,,合规/交易管理/账变类型- wesley.bru,账变类型- wesley
+admin,finance,POST,/cmpl/finance/withdraw/export,{{admin_url}}/cmpl/finance/withdraw/export,,yes,合规/财务管理/财务记录/提现记录导出-wesley.bru,提现记录导出-wesley
+admin,finance,GET,/cmpl/finance/withdraw/list,{{admin_url}}/cmpl/finance/withdraw/list,,yes,合规/财务管理/财务记录/提现记录-wesley.bru,提现记录-wesley
+admin,finance,GET,/cmpl/game/transaction,{{admin_url}}/cmpl/game/transaction?from_date=2026-05-04+22:00:00&to_date=2026-05-04+22:10:00&return_rows=1&hash_code=<redacted>&page_number=1&page_size=100&api_id=gotech-stg-001,hardcoded_env,,mx/game-transaction （fat）.bru,game/transaction （fat）
+admin,finance,GET,/cmpl/member/withdrawal/limit,{{admin_url}}/cmpl/member/withdrawal/limit?uid=<redacted>,hardcoded_env,,合规/会员列表/提现限额.bru,提现限额
+admin,finance,POST,/finance/withdraw/risk/list,{{admin_url}}/finance/withdraw/risk/list,odd_relative_url,yes,后台/风控管理/存-提审核/提现订单.bru,提现订单

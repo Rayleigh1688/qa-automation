@@ -4,16 +4,22 @@
 
 ## 一分钟结论
 
-- P0 基线已完成一次修正版完整统一入口验证；当前进入提交冻结和服务器/CI 数据配置，不扩展活动、VIP、代理、OCR/eKYC 等 P1/P2 矩阵。
+- P0 基线已完成并提交，基线提交为 `90b24e3`；当前先在 UAT 验证环境配置、账号和现有门禁能力，Jenkins 后置，不扩展活动、VIP、代理、OCR/eKYC 等 P1/P2 矩阵。
 - API 固定资产为 8 条主流程、57 条整体用例：31 条 safe smoke、15 条 API 登记反例、10 条受控写/UI 协作项和 1 条已封装的新号状态 UI 反例。
 - 2026-08-31 FAT safe smoke 31/31、默认安全反例 13/13 已通过。
 - P0 快速门禁已连续执行 3 轮：每轮 API safe smoke 31/31、默认反例 13/13；默认 UI 前两轮 10/11（仅已确认的未勾选条款产品缺陷），第三轮 11/11，没有出现环境外随机失败。
 - 主账号采用单次密码登录，UI storage state 与 API session 双向同步 token；只读校验已证明复用时不会再次请求 client/admin 登录接口。
-- 当前本地配置的只读、资金流和已 KYC 别名仍指向同一个已验证账号；账号状态清单已统一到 `api/p0/test-account-pool.csv`。`PRE_KYC_CLIENT_PHONE` 永久保留为未 KYC 反例账号，不得提交 KYC；KYC 闭环使用独立账号。最低提现金额走成熟账号 API 小金额反例，不准备低余额账号。本地配置已收敛为 `.env`。
+- FAT 本地配置已拆到 `.env.fat`，UAT 使用独立的 `.env.uat`；两者均被 Git 忽略，禁止跨环境复用账号或 URL。当前 FAT 的只读、资金流和已 KYC 别名仍指向同一个已验证账号；账号状态清单已统一到 `api/p0/test-account-pool.csv`。`PRE_KYC_CLIENT_PHONE` 永久保留为未 KYC 反例账号，不得提交 KYC；KYC 闭环使用独立账号。最低提现金额走成熟账号 API 小金额反例，不准备低余额账号。
 - KYC 最小闭环已完成：后台按本次 uid 定位并审批成功，客户端刷新为 `kyc_status=5`；已通过池账号后续只复核状态，不重复提交。
 - 2026-08-31 修正版 `npm run test:p0:full` 已完整通过：永久未 KYC 拦截 1/1、safe 31/31、默认反例 13/13、默认 UI 11/11；充值 1200 后产生 1800 流水，以固定单注 1000 完成 2 次真实投注并归零，API 提现 1000 成功进入后台 `under_review`。
 - `p0-reconciliation-result.json` 已 PASS：充值创建/补单 ID、钱包 +1200、流水归零、提现前后台 ID/uid/金额均一致。
 - 最新本地主流程报告为 8/8；API 提现建单已恢复为完整资金链的独立步骤。Maya UI 提现与 DTC-002 新号 KYC 前提现拦截分别作为独立 UI P0，其中 DTC-002 已用新号实际通过且零提现请求。
+- FAT/UAT 的 URL、登录、OTP/TOTP、账号池、游戏、金额、通道和已知异常差异统一维护在 `api/runbooks/ENVIRONMENTS.md`；本文件不再重复环境规则。UAT 后台两段登录已通过，当前管理账号使用 6 位、30 秒窗口、SHA256 TOTP；`/admin/sms/auth` 可在内存中取得新账号短信验证码，验证码不落盘。
+- UAT 主只读/资金别名已统一切换到本次自动创建的账号。`tools/provisioning/member-bootstrap.py` 已实际完成注册 → KYC 提交/后台通过 → 非活动充值/后台补单，随后由用户设置钱包密码并绑定 Maya；工具对已完成核心阶段保持 PASS，不因扩展 session 失效回写错误进度。
+- 既有 UI/API 账号默认通过 `/member/v2/login` 密码登录，新账号注册使用环境中的统一登录密码并通过 OTP 完成必要验证；只有显式 `CLIENT_AUTH_MODE=otp` 的专项才走短信登录，真实密码只在忽略环境文件中。
+- 当前整理节点已完成 Python 编译、FAT/UAT 密码登录分支离线校验、账号 lane 密码映射校验、API 资产一致性检查和 `git diff --check`；密码登录改造后的 FAT/UAT 真实全面回归尚未执行，必须由下一对话从干净的执行顺序开始，不能把离线校验写成环境通过。
+- UAT 真实投注使用 BNG `Coins`，单注 100 已通过：下注前页面显示 Bet 100、余额 293，下注后余额 193，Network 包含 `total_bet=100`。校准前误投 1 已如实记录，不计入目标通过。首次 UAT safe smoke 曾因提款账户列表单次 `data=null` 为 30/31，随后同 token 连续 5 次复核恢复，严格断言保持不变。
+- API 资产已增加 `surface/module` 两级分类和自动生成的 `api/catalog/` 检索视图；当前扫描为 1136 个 Bruno 文件、911 条 HTTP 接口，其中 client 176、admin 587、agency 55、unknown 93。P0 仍保持 57 条/31 条 safe smoke，唯一用例索引未拆分。`scripts/check-api-assets.py` 校验分类、P0 唯一性、八段主流程和 URL 敏感值脱敏。
 
 ## 阅读链：由浅入深
 
@@ -21,7 +27,7 @@
 2. [`README.md`](README.md)：全局目录、统一命令、CI、敏感信息和结果边界。
 3. [`.agents/skills/filbet-p0-automation/SKILL.md`](.agents/skills/filbet-p0-automation/SKILL.md)：Codex 自动发现的任务路由。
 4. [`skills/README.md`](skills/README.md)：选择 API、UI 或业务规则方法。
-5. 子项目：[`api/p0/README.md`](api/p0/README.md)、[`ui/README.md`](ui/README.md)、`api/runbooks/`。
+5. 子项目：[`api/p0/README.md`](api/p0/README.md)、[`ui/README.md`](ui/README.md)、`api/runbooks/`；环境差异看 [`ENVIRONMENTS.md`](api/runbooks/ENVIRONMENTS.md)，接口分类看 [`api/catalog/`](api/catalog/README.md)。
 6. 发生失败时才进入 [`harness/README.md`](harness/README.md)。
 7. 最后查看 `api/results/`、`ui/results/`、`ui/reports/` 的最近一次证据；生成物不是规则来源。
 
@@ -34,7 +40,7 @@
 | 注册登录 | API 注册/登录、登录反例；UI 登录正反例已有实现 | 使用稳定账号全量复跑默认 UI 套件 | 基线已具备 |
 | KYC | 新号提交、后台按 uid 审批、前台刷新为 `kyc_status=5` | 扩展驳回重提、OCR/eKYC 等转 P1 | 最小闭环已通 |
 | 充值 | 非活动订单、后台补单、相同订单 ID、钱包 +1200 | 上下限缺陷探针等待产品修复 | 主链通过 |
-| 投注 | 固定单注 1000，按剩余流水分批投注并轮询归零 | 更深的单局派彩字段矩阵可转 P1 | 主链通过 |
+| 投注 | 按环境单注执行（FAT 1000、UAT 100），按剩余流水分批投注并轮询归零 | 更深的单局派彩字段矩阵可转 P1 | 主链通过 |
 | 投注/派彩记录 | 本轮真实投注、点击次数和异步流水结果已关联 | 复杂输赢/派彩组合可转 P1 | 主链通过 |
 | 钱包/账变 | 充值钱包增量、流水归零、提现 uid/金额统一核对 PASS | 扩展账变类型矩阵可转 P1 | 主链通过 |
 | 提现 | API 建单与后台精确订单关联；Maya UI 1000 建单独立封装；DTC-002 永久未 KYC 账号拦截已通过 | FAT 真实出款恢复后增强最终状态复验 | P0 通过 |
@@ -47,6 +53,7 @@
 - `api/p0/test-cases.csv` 是唯一完整用例索引。
 - `api/p0/main-flow-scenarios.csv` 只有 8 行，只表示业务顺序和完成标准。
 - `api/p0/interface-shortlist.csv` 是接口发现池，不能决定 P0 数量和执行顺序。
+- `api/catalog/` 是从全量 inventory 自动生成的调用端/业务模块检索视图，不是新的用例源。
 - 默认 safe/negative 已覆盖当前用户/权限、KYC 待审查询、充值/提现列表、财务报表、资金记录等结构契约。
 - `reconcile-p0-flow.py` 已统一保存并核对 uid、deposit id、钱包增量、投注批次、流水结果和 withdraw id。
 
@@ -62,9 +69,10 @@
 
 ## 当前下一步（按价值排序）
 
-1. 冻结并提交当前 P0 基线；生成物继续保留在本地忽略目录，不进入 Git。
-2. 将 `test-account-pool.csv` 的各账号 lane 和全部 secret 配置到服务器/CI，首次先执行 quick，再人工触发 full。
-3. FAT 转账接口恢复后，新建一笔提现复验后台同意/成功；不得重试已进入待审或已经取消的旧订单。
+1. 新对话先执行整理后的全面测试：静态/资产检查 → FAT safe API 与默认反例 → FAT 默认 UI → UAT safe API 与默认反例 → UAT 默认 UI；每一层失败先阻塞并归类，不直接进入受控写。
+2. 只读门禁稳定后，继续使用 UAT 本次已 KYC、已充值、已绑定 Maya、已完成 BNG 投注的资金账号验证提现和前后台完整核对；不能重放本次充值，也不能把已有余额变化冒充新一轮充值证据。
+3. 全面测试完成后再优化 token 生命周期：客户端和管理后台每次运行先主动登录取得新 token，不再把历史 session/token 检查作为执行前置；同一轮内部继续复用本轮登录态。既有客户端账号的密码登录已经完成。
+4. UAT 门禁和数据缺口收敛后再落地服务器/Jenkins；FAT 转账接口恢复后，另新建一笔提现复验后台同意/成功，不得重试旧订单。
 
 ## 不可违反的边界
 

@@ -1,5 +1,9 @@
 import { defineConfig, devices } from "@playwright/test";
 
+const clientDevice = process.env.CLIENT_BROWSER_PROFILE === "desktop"
+  ? devices["Desktop Chrome"]
+  : devices["Pixel 7"];
+
 export default defineConfig({
   globalSetup: process.env.CLIENT_REUSE_P0_AUTH === "true"
     ? "./ui/setup/client-p0-auth.setup.mjs"
@@ -30,8 +34,10 @@ export default defineConfig({
     {
       name: "client-mobile-chromium",
       use: {
-        ...devices["Pixel 7"],
-        viewport: { width: 412, height: 915 },
+        ...clientDevice,
+        viewport: process.env.CLIENT_BROWSER_PROFILE === "desktop"
+          ? { width: 1365, height: 900 }
+          : { width: 412, height: 915 },
         channel: process.env.PLAYWRIGHT_CHANNEL || undefined,
       },
     },

@@ -201,7 +201,7 @@ test.describe("Client P0 network discovery", () => {
     let loginCompleted = false;
 
     await captureStep(page, app, steps, "login", async () => {
-      await app.loginWithOtp(requiredEnv("CLIENT_PHONE"), requiredEnv("CLIENT_OTP"));
+      await app.loginWithPassword(requiredEnv("CLIENT_PHONE"), requiredEnv("CLIENT_PASSWORD"));
       return { text: "Login" };
     });
     const bodyTextAfterLogin = await page.locator("body").innerText({ timeout: 5000 }).catch(() => "");

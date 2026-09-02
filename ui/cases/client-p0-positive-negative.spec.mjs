@@ -61,12 +61,12 @@ async function writeResult(testInfo, result) {
   });
 }
 
-async function loginWithOtpOrSkip(page, testInfo, network, app) {
+async function loginExistingAccountOrSkip(page, testInfo, network, app) {
   try {
     await app.gotoHome();
     const current = await visibleState(page);
     if (looksLoggedIn(current) || hasMemberSuccess(network)) return;
-    await app.loginWithOtp(requiredEnv("CLIENT_PHONE"), requiredEnv("CLIENT_OTP"));
+    await app.loginWithPassword(requiredEnv("CLIENT_PHONE"), requiredEnv("CLIENT_PASSWORD"));
     return;
   } catch (error) {
     const state = await visibleState(page);
@@ -202,7 +202,7 @@ test.describe("Client P0 positive and negative UI checkpoints", () => {
     const network = attachNetworkRecorder(page);
     const app = createApp(page);
 
-    await loginWithOtpOrSkip(page, testInfo, network, app);
+    await loginExistingAccountOrSkip(page, testInfo, network, app);
     await page.goto("/my", { waitUntil: "domcontentloaded" });
     await page.waitForLoadState("networkidle", { timeout: 12_000 }).catch(() => {});
     await app.handleModals({ timeout: 3000 });
@@ -225,7 +225,7 @@ test.describe("Client P0 positive and negative UI checkpoints", () => {
     const network = attachNetworkRecorder(page, { hostPattern: /filbet|pwa|game|luck|jili|spribe|pg|cq9|bng|neurorestorativeals|playpoint|cloudfront/i });
     const app = createApp(page);
 
-    await loginWithOtpOrSkip(page, testInfo, network, app);
+    await loginExistingAccountOrSkip(page, testInfo, network, app);
     await page.goto("/s-game-page/invalid-p0-game-id", { waitUntil: "domcontentloaded" });
     await page.waitForLoadState("networkidle", { timeout: 15_000 }).catch(() => {});
     await page.waitForTimeout(3000);

@@ -29,6 +29,45 @@ function safeFrameUrl(value = "") {
   return `${base}?<redacted>`;
 }
 
+function compactDiagnostic(value = "") {
+  return String(value)
+    .replace(/https?:\/\/[^\s"']+/gi, (url) => safeFrameUrl(url))
+    .replace(/((?:token|ssoKey|authorization|session_id|player_id|uid))=?[^\s&,"']*/gi, "$1=<redacted>")
+    .slice(0, 1200);
+}
+
+function attachRuntimeDiagnostics(page) {
+  const diagnostics = [];
+  const push = (kind, text, extra = {}) => diagnostics.push({
+    kind,
+    text: compactDiagnostic(text),
+    ts: Date.now(),
+    ...extra,
+  });
+  page.on("console", (message) => {
+    if (["error", "warning"].includes(message.type())) {
+      const location = message.location();
+      push(`console.${message.type()}`, message.text(), {
+        source: location.url ? safeFrameUrl(location.url) : "",
+        line: location.lineNumber,
+        column: location.columnNumber,
+      });
+    }
+  });
+  page.on("pageerror", (error) => push("pageerror", error.stack || error.message));
+  page.on("requestfailed", (request) => push("requestfailed", request.failure()?.errorText || "unknown", {
+    method: request.method(),
+    url: safeFrameUrl(request.url()),
+  }));
+  page.on("websocket", (socket) => {
+    const socketUrl = safeFrameUrl(socket.url());
+    push("websocket.open", socketUrl);
+    socket.on("socketerror", (error) => push("websocket.error", error, { url: socketUrl }));
+    socket.on("close", () => push("websocket.close", socketUrl));
+  });
+  return diagnostics;
+}
+
 function selectGame(config) {
   const id = process.env.CLIENT_GAME_ID || "lucky_penny";
   const game = (config.games || []).find((item) => item.id === id);
@@ -103,14 +142,31 @@ test.describe("Client game bet smoke", () => {
     const modalConfig = loadJson("ui/data/client-modals.json");
     const gameConfig = loadJson("ui/data/client-game-actions.json");
     const game = selectGame(gameConfig);
-    const viewport = gameConfig.viewport || page.viewportSize() || { width: 412, height: 915 };
+    const viewport = game.viewport || gameConfig.viewport || page.viewportSize() || { width: 412, height: 915 };
+    if (JSON.stringify(page.viewportSize()) !== JSON.stringify(viewport)) {
+      await page.setViewportSize(viewport);
+    }
     const network = attachNetworkRecorder(page, { hostPattern: /filbet|pwa|game|luck|jili|spribe|pg|cq9|bng|neurorestorativeals|playpoint|cloudfront/i });
+    const runtimeDiagnostics = attachRuntimeDiagnostics(page);
     const app = new ClientAppPage(page, { pageConfig, modalConfig });
 
     await app.gotoHome();
     const alreadyLoggedIn = !(await page.locator("body").innerText()).includes("Register / Login");
     if (!alreadyLoggedIn) {
-      await app.loginWithOtp(requiredEnv("CLIENT_PHONE"), requiredEnv("CLIENT_OTP"));
+      const authDiagnostics = await page.evaluate(() => ({
+        localStorageKeyCount: Object.keys(localStorage).length,
+        hasAccessTokenKey: Object.keys(localStorage).some((key) => key.includes("api_access_token")),
+        hasLoggedInAccountKey: Object.keys(localStorage).some((key) => key.includes("logged_in_account")),
+        hasEncodedAccessTokenKey: Object.keys(localStorage).some((key) => {
+          try {
+            return atob(key).includes("api_access_token");
+          } catch {
+            return false;
+          }
+        }),
+      }));
+      console.log(`game auth diagnostics=${JSON.stringify(authDiagnostics)}`);
+      await app.loginWithPassword(requiredEnv("CLIENT_PHONE"), requiredEnv("CLIENT_PASSWORD"));
     }
     await expect(page.locator("body")).not.toContainText("Register / Login");
     await page.context().storageState({ path: storageStatePath });
@@ -126,6 +182,14 @@ test.describe("Client game bet smoke", () => {
         Math.round(viewport.height * game.startTap.yRatio),
       );
       await page.waitForTimeout(Number(process.env.CLIENT_GAME_POST_START_WAIT_MS || game.postStartWaitMs || 3000));
+    }
+
+    if (game.dismissOverlayTap) {
+      await activatePoint(page,
+        Math.round(viewport.width * game.dismissOverlayTap.xRatio),
+        Math.round(viewport.height * game.dismissOverlayTap.yRatio),
+      );
+      await page.waitForTimeout(500);
     }
 
     const requestedBetAmount = String(process.env.CLIENT_GAME_BET_AMOUNT || "");
@@ -225,6 +289,8 @@ test.describe("Client game bet smoke", () => {
     const afterClickBetTotals = network
       .filter((item) => item.kind === "request" && item.ts >= clickStartedAt && item.url.includes("/process/"))
       .map((item) => {
+        const match = String(item.postData || "").match(/"total_bet"\s*:\s*([0-9.]+)/);
+        if (match) return Number(match[1]);
         try {
           return Number(JSON.parse(item.postData || "{}").total_bet);
         } catch {
@@ -254,6 +320,7 @@ test.describe("Client game bet smoke", () => {
         after: afterScreenshot,
       },
       network,
+      runtimeDiagnostics,
     };
 
     const jsonOut = path.resolve("ui/results/client-game-bet-smoke.json");
@@ -277,6 +344,9 @@ test.describe("Client game bet smoke", () => {
     if (executeBet) {
       if (game.networkEvidenceRequired !== false) {
         expect(afterClickGameRequestCount).toBeGreaterThan(0);
+      }
+      if (requestedBetAmount && game.assertRequestedBetAmount !== false) {
+        expect(afterClickBetTotals).toContain(Number(requestedBetAmount));
       }
     }
   });

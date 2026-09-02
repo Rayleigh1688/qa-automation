@@ -533,7 +533,7 @@ def write_report(records: list[dict[str, object]], args: argparse.Namespace) -> 
 
 def main() -> None:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--env", default=".env")
+    parser.add_argument("--env", default=os.environ.get("ENV_FILE", ".env.fat"))
     parser.add_argument("--timeout", type=float, default=10)
     parser.add_argument("--insecure", action="store_true")
     parser.add_argument("--body-format", choices=["json", "cbor"], default="cbor")

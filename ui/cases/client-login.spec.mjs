@@ -39,21 +39,16 @@ test.describe("Client login P0", () => {
       });
       await app.gotoHome();
     } else {
-      app = await openLogin(page);
-      await app.chooseOtpMode();
-      await app.fillPhone(requiredEnv("CLIENT_PHONE"));
-      await app.requestOtp();
-      const visibleInputs = page.locator("input:visible");
-      const inputCount = await visibleInputs.count();
-      if (inputCount >= 2) await visibleInputs.nth(inputCount - 1).fill(requiredEnv("CLIENT_OTP"));
-      await app.acceptLoginTerms();
-      const login = page.getByRole("button", { name: /^Login$/i }).first();
-      if (await login.isEnabled().catch(() => false)) await login.click();
+      app = new ClientAppPage(page, {
+        pageConfig: loadJson("ui/data/client-pages.json"),
+        modalConfig: loadJson("ui/data/client-modals.json"),
+      });
+      await app.loginWithPassword(requiredEnv("CLIENT_PHONE"), requiredEnv("CLIENT_PASSWORD"));
     }
     await page.waitForTimeout(5000);
 
     const state = await visibleState(page);
-    const result = { name: "positive_otp_login", state, network };
+    const result = { name: "positive_password_login", state, network };
     const out = path.resolve("ui/results/client-login-positive.json");
     fs.mkdirSync(path.dirname(out), { recursive: true });
     fs.writeFileSync(out, JSON.stringify(result, null, 2));

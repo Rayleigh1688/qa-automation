@@ -14,6 +14,7 @@ AI 文档按“由浅入深”进入：
 2. 本文件：全局边界、目录、统一命令和 CI 规则。
 3. [skills/README.md](skills/README.md)：按 API、UI 或业务规则选择长期方法。
 4. 子项目说明：[`api/p0/README.md`](api/p0/README.md)、[`ui/README.md`](ui/README.md) 和 `api/runbooks/`。
+   FAT/UAT 差异统一查看 [`api/runbooks/ENVIRONMENTS.md`](api/runbooks/ENVIRONMENTS.md)。
 5. [harness/README.md](harness/README.md)：只有失败、环境差异或数据状态不清楚时再进入排障资料。
 6. `api/results/`、`ui/results/`、`ui/reports/`：最后查看最近一次证据，不把生成报告当作规则来源。
 
@@ -25,6 +26,7 @@ skills/          测试方法、规范、业务规则沉淀
 harness/         调试经验、已知问题、失败分析沉淀
 api/             API 自动化测试资产
   inventory/     接口文档扫描清单
+  catalog/       按调用端和后台业务模块自动生成的接口检索视图
   p0/            P0 场景、用例等固定资产
   results/       API 最近一次执行结果和报告，已忽略
   runbooks/      API 执行和调试入口文档
@@ -36,6 +38,7 @@ ui/              UI 自动化测试
   reports/       UI 最近一次可读报告
   results/       UI 最近一次原始执行结果，已忽略
 performance/     性能测试
+tools/           脱离门禁主流程的测试数据准备工具；写操作必须显式执行
 scripts/         辅助脚本
 ```
 
@@ -113,13 +116,15 @@ python3 scripts/run-api-tests.py p0 p1
 P0 只读快速检查：
 
 ```bash
-python3 scripts/run-api-tests.py p0 --safe-only
+python3 scripts/run-api-tests.py p0 --env .env.fat --scope FAT --safe-only
+python3 scripts/run-api-tests.py p0 --env .env.uat --scope UAT --safe-only
 ```
 
 UI P0：
 
 ```bash
 npm run test:ui:p0
+ENV_FILE=.env.uat npm run test:ui:p0
 ```
 
 API + UI P0：
@@ -144,7 +149,7 @@ npm run test:p0:full
 - `--safe-only` 跳过注册、充值、提现和审核等受控写操作，只执行只读/反例检查。`--include-write` 保留为旧命令兼容参数；P0 默认包含受控写的充值检查点。提现以后台成功记录为验收，不校验项目外收款账户或真实到账，只应在测试环境或专用 UAT 测试数据下执行。
 - `test:ui:p0` 默认不执行真实投注。需要点击三方游戏内投注区域时，必须显式设置 `EXECUTE_BET=true`。
 - API 和 UI P0 分别执行、分别判定。Maya UI 提现使用 `npm run test:ui:withdraw-contract` 独立验证客户端建单；未 KYC 提现前置使用 `npm run test:ui:unverified-withdraw`。两者不会替代 API 提现契约。
-- 正向资金链固定业务单注为 1000；`scripts/run-turnover-bet.py` 只读获取未完成流水并按 `ceil(remaining/1000)` 计算次数。投注后再次核对流水，归零才进入提现。
+- 正向资金链单注由 `CLIENT_GAME_BET_AMOUNT` 控制：FAT 当前为 1000，UAT 当前上限为 100；`scripts/run-turnover-bet.py` 按所选环境的单注计算次数。投注后再次核对流水，归零才进入提现。完整差异见 [`ENVIRONMENTS.md`](api/runbooks/ENVIRONMENTS.md)。
 - 后台登录固定码和审核动态码是两套东西：`ADMIN_GOOGLE_CODE=111111` 只用于 FAT 后台登录，审核/补单/KYC 审批使用 `ADMIN_APPROVAL_TOTP_SECRET` 生成真实动态码。
 - API 执行会覆盖 `api/results/` 下同名结果和报告；UI 执行会覆盖 `ui/results/` 和 `ui/reports/` 下同名产物。需要历史记录时，以 CI 归档为准，不在仓库工作区内累积。
 - 每次 P0 API 执行还会生成 `api/results/p0-api-report.html`：可离线打开的静态主流程报告，包含放行结论、流程状态卡和可展开场景细则。
@@ -152,7 +157,7 @@ npm run test:p0:full
 - FAT 主流程使用同一普通会员完成不参加活动的充值、投注和提现；充值参数固定 `cashback_flag=0&rotation_flag=0` 且不传活动 `product_id`。普通存款基础流水在提现前正常完成，但不在主链路中测试流水限制拒绝。
 - 充值页 `Multiple Deposit Bonus` 活动开关默认不参加；参加活动会产生提现流水限制。`9888888050` 已知存在提现流水限制，提现正例需换无流水限制账号或先后台解除限制。
 - KYC 新账号池使用 `090XXXXXXXX`，首个账号从 `09000000001` 开始；测试环境 OTP 固定为 `111111`，已驳回/未通过 KYC 的账号可再次提交。
-- 本地或 CI 通过 `WRITE_CLIENT_PHONE`、`WRITE_CLIENT_OTP` 注入 `fund_flow_account`；兼容变量 `BET_CLIENT_PHONE` 和 `WITHDRAW_CLIENT_PHONE` 可指向同一账号。未 KYC 提现反例固定使用永久不提交 KYC 的 `PRE_KYC_CLIENT_PHONE`；最低提现金额走成熟账号 API 反例，不准备低余额账号。`RESTRICTED_CLIENT_PHONE` 仅预留给 P1 活动流水专项。
+- 本地或 CI 通过 `WRITE_CLIENT_PHONE`、`WRITE_CLIENT_PASSWORD` 注入 `fund_flow_account`；兼容变量 `BET_CLIENT_PHONE` 和 `WITHDRAW_CLIENT_PHONE` 可指向同一账号。OTP 变量只保留给注册、首次设密和显式 OTP 专项。未 KYC 提现反例固定使用永久不提交 KYC 的 `PRE_KYC_CLIENT_PHONE`；最低提现金额走成熟账号 API 反例，不准备低余额账号。`RESTRICTED_CLIENT_PHONE` 仅预留给 P1 活动流水专项。
 
 ## CI 门禁
 
@@ -181,10 +186,14 @@ UAT_API_URL=<uat client api url>
 UAT_ADMIN_URL=<uat admin url>
 UAT_CLIENT_BASE_URL=<uat client url>
 CLIENT_PHONE=<client phone>
+CLIENT_PASSWORD=<client password>
+CLIENT_AUTH_MODE=password
 CLIENT_OTP=<otp>
 REGISTER_PHONE=<allocated 090XXXXXXXX KYC test phone>
+REGISTER_PASSWORD=<new-account password>
 REGISTER_OTP=<otp>
 WRITE_CLIENT_PHONE=<controlled write/deposit client phone>
+WRITE_CLIENT_PASSWORD=<controlled write/deposit client password>
 WRITE_CLIENT_OTP=<otp>
 BET_CLIENT_PHONE=<controlled bet/payout client phone>
 BET_CLIENT_OTP=<otp>
@@ -192,7 +201,7 @@ WITHDRAW_CLIENT_PHONE=<dedicated withdraw client phone>
 WITHDRAW_CLIENT_OTP=<otp>
 CLIENT_WALLET_PASSWORD=<numeric wallet password for Maya UI withdrawal>
 PRE_KYC_CLIENT_PHONE=<permanent BASIC account; never submit KYC>
-PRE_KYC_CLIENT_PASSWORD=<optional local password; omit to use OTP>
+PRE_KYC_CLIENT_PASSWORD=<local password>
 PRE_KYC_CLIENT_OTP=<fat otp>
 RESTRICTED_CLIENT_PHONE=<active turnover-restricted client phone>
 RESTRICTED_CLIENT_OTP=<otp>
@@ -225,12 +234,14 @@ npm install
 npx playwright install
 ```
 
-配置本地 `.env`：
+本地配置按环境拆分为 `.env.fat` 和 `.env.uat`，两者使用同一份 [`.env.example`](.env.example) 模板并均被 Git 忽略。默认命令读取 `.env.fat`；UAT 必须显式设置 `--env .env.uat`（Python 入口）或 `ENV_FILE=.env.uat`（UI/npm 入口），避免跨环境复用链接或账号。
+
+单个环境文件至少配置：
 
 ```bash
 CLIENT_BASE_URL=https://client-fat.filbet2025.com
 CLIENT_PHONE=<client phone>
-CLIENT_OTP=<fat otp>
+CLIENT_PASSWORD=<client password>
 PLAYWRIGHT_CHANNEL=
 ```
 

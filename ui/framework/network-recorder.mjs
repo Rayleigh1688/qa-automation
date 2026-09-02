@@ -25,8 +25,8 @@ function redactUrl(url) {
 function redactBody(body) {
   if (!body) return "";
   return String(body)
-    .replace(/(["'](?:password|pwd|otp|code|token|t|phone|mobile|authorization|session|session_id)["']\s*:\s*)"?[^",&\s}]+/gi, "$1<redacted>")
-    .replace(/((?:password|pwd|otp|code|token|t|phone|mobile|authorization|session|session_id)=)[^&\s]+/gi, "$1<redacted>")
+    .replace(/(["'](?:password|pwd|otp|code|token|t|phone|mobile|uid|player_id|authorization|session|session_id)["']\s*:\s*)"?[^",&\s}]+/gi, "$1<redacted>")
+    .replace(/((?:password|pwd|otp|code|token|t|phone|mobile|uid|player_id|authorization|session|session_id)=)[^&\s]+/gi, "$1<redacted>")
     .replace(/((?:phone|mobile|country_code)[A-Za-z]?)[0-9]{2,16}/gi, "$1<redacted>")
     .slice(0, 1200);
 }

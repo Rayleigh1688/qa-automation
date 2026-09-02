@@ -25,7 +25,12 @@ def load_env_file(path: Path) -> None:
         if not line or line.startswith("#") or "=" not in line:
             continue
         key, value = line.split("=", 1)
-        os.environ.setdefault(key.strip(), value.strip().strip('"').strip("'"))
+        key = key.strip()
+        value = value.strip().strip('"').strip("'")
+        if os.environ.get("ENV_FILE_PRECEDENCE") == "shell":
+            os.environ.setdefault(key, value)
+        else:
+            os.environ[key] = value
 
 
 def required(name: str) -> str:
@@ -63,24 +68,27 @@ def unfinished_turnover(phone: str) -> Decimal:
 
 def main() -> None:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--env", default=".env")
+    parser.add_argument("--env", default=os.environ.get("ENV_FILE", ".env.fat"))
     parser.add_argument("--phone", default="")
-    parser.add_argument("--otp", default="")
-    parser.add_argument("--bet-unit", type=int, default=1000)
+    parser.add_argument("--password", default="")
+    parser.add_argument("--bet-unit", type=int)
     parser.add_argument("--max-spins", type=int, default=20)
     parser.add_argument("--poll-interval", type=float, default=5)
     parser.add_argument("--poll-timeout", type=float, default=60)
-    parser.add_argument("--game-id", default="beanstalk_243")
-    parser.add_argument("--game-page", default="/s-game-page/17453877442826")
+    parser.add_argument("--game-id", default="")
+    parser.add_argument("--game-page", default="")
     parser.add_argument("--execute", action="store_true")
     parser.add_argument("--out", default="ui/results/turnover-bet-plan.json")
     args = parser.parse_args()
 
     load_env_file(Path(args.env))
+    args.bet_unit = args.bet_unit or int(os.environ.get("CLIENT_GAME_BET_AMOUNT", "1000"))
+    args.game_id = args.game_id or os.environ.get("CLIENT_GAME_ID", "beanstalk_243")
+    args.game_page = args.game_page or os.environ.get("CLIENT_GAME_PAGE_PATH", "/s-game-page/17453877442826")
     phone = args.phone or os.environ.get("BET_CLIENT_PHONE") or os.environ.get("WRITE_CLIENT_PHONE") or os.environ.get("CLIENT_PHONE", "")
-    otp = args.otp or os.environ.get("BET_CLIENT_OTP") or os.environ.get("WRITE_CLIENT_OTP") or os.environ.get("CLIENT_OTP", "")
-    if not phone or not otp:
-        raise SystemExit("phone and otp are required")
+    password = args.password or os.environ.get("BET_CLIENT_PASSWORD") or os.environ.get("WRITE_CLIENT_PASSWORD") or os.environ.get("CLIENT_PASSWORD", "")
+    if not phone or not password:
+        raise SystemExit("phone and password are required")
     if args.bet_unit <= 0 or args.max_spins <= 0:
         raise SystemExit("bet unit and max spins must be positive")
 
@@ -106,7 +114,7 @@ def main() -> None:
         ui_env = os.environ.copy()
         ui_env.update({
             "CLIENT_PHONE": phone,
-            "CLIENT_OTP": otp,
+            "CLIENT_PASSWORD": password,
             "CLIENT_GAME_ID": args.game_id,
             "CLIENT_GAME_PAGE_PATH": args.game_page,
             "CLIENT_GAME_BET_AMOUNT": str(args.bet_unit),

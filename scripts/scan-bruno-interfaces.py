@@ -8,7 +8,7 @@ import csv
 import re
 from collections import Counter
 from pathlib import Path
-from urllib.parse import urlsplit
+from urllib.parse import parse_qsl, urlencode, urlsplit, urlunsplit
 
 
 METHODS = {"get", "post", "put", "delete", "patch", "head", "options"}
@@ -29,7 +29,23 @@ HOST_VAR_MAP = {
     "client-beta.filbet.zone": "{{api_url}}",
     "admin-fat.filbet2025.com": "{{admin_url}}",
     "admin-antd.filbet2025.com": "{{admin_url}}",
+    "admin-antd.filbet.zone": "{{admin_url}}",
 }
+
+SENSITIVE_QUERY_KEYS = {
+    "authorization", "code", "device_id", "email", "hash_code", "mobile",
+    "otp", "password", "phone", "player_id", "secret", "session",
+    "session_id", "t", "token", "uid", "x-device-id",
+}
+
+
+def is_sensitive_query_key(key: str) -> bool:
+    lowered = key.lower().replace("-", "_")
+    return (
+        lowered in SENSITIVE_QUERY_KEYS
+        or lowered.endswith(("_phone", "_mobile", "_uid", "_token", "_session", "_session_id"))
+        or any(part in lowered for part in ("password", "authorization", "hash_code", "player_id"))
+    )
 
 
 def read_text(path: Path) -> str:
@@ -112,6 +128,30 @@ def query_string(url: str) -> str:
     return url.split("?", 1)[1]
 
 
+def sanitize_url(url: str) -> str:
+    value = url.strip()
+    if not value:
+        return ""
+
+    def sanitize_query(query: str) -> str:
+        pairs = []
+        for key, item in parse_qsl(query, keep_blank_values=True):
+            safe_item = "<redacted>" if is_sensitive_query_key(key) else item
+            safe_item = re.sub(r"(?<!\d)\d{16,20}(?!\d)", "<id>", safe_item)
+            safe_item = re.sub(r"(?<!\d)(?:09|9)\d{8,10}(?!\d)", "<phone>", safe_item)
+            pairs.append((key, safe_item))
+        return urlencode(pairs, doseq=True, safe="<>{}:/")
+
+    if value.startswith(("http://", "https://")):
+        parts = urlsplit(value)
+        path = re.sub(r"(?<!\d)\d{16,20}(?!\d)", "<id>", parts.path)
+        return urlunsplit((parts.scheme, parts.netloc, path, sanitize_query(parts.query), parts.fragment))
+
+    base, separator, query = value.partition("?")
+    base = re.sub(r"(?<!\d)\d{16,20}(?!\d)", "<id>", base)
+    return f"{base}?{sanitize_query(query)}" if separator else base
+
+
 def suggested_base_var(url: str, top: str) -> str:
     host = host_marker(url)
     if host in HOST_VAR_MAP:
@@ -135,7 +175,7 @@ def cleaned_url(url: str, top: str, api_path: str) -> str:
     if not url.strip() or not api_path or api_path == "body: none" or api_path.startswith("func "):
         return ""
     base_var = suggested_base_var(url, top)
-    query = query_string(url)
+    query = query_string(sanitize_url(url))
     suffix = f"?{query}" if query else ""
     if base_var:
         return f"{base_var}{api_path}{suffix}"
@@ -199,6 +239,32 @@ def classify_p0(top: str, relative_path: str, api_path: str, flags: list[str]) -
     return False, ",".join(matched_domains)
 
 
+def classify_surface(base_var: str) -> str:
+    return {
+        "{{api_url}}": "client",
+        "{{admin_url}}": "admin",
+        "{{agency_url}}": "agency",
+    }.get(base_var, "unknown")
+
+
+def classify_module(top: str, relative_path: str, api_path: str, p0_domain: str) -> str:
+    blob = f"{top}/{relative_path} {api_path}".lower()
+    rules = [
+        ("auth", ["login", "logout", "register", "otp", "/auth/", "password"]),
+        ("kyc", ["kyc", "ekyc", "ocr"]),
+        ("finance", ["finance", "wallet", "deposit", "withdraw", "payment", "transaction", "财务", "存-提"]),
+        ("game", ["/game", "游戏"]),
+        ("permission", ["/priv", "/group", "/role", "权限", "角色"]),
+        ("report", ["report", "报表", "统计"]),
+        ("promo", ["promo", "activity", "活动", "奖励"]),
+        ("member", ["member-center", "/member/", "会员管理", "会员信息"]),
+    ]
+    for module, hints in rules:
+        if any(hint in blob for hint in hints):
+            return module
+    return next((item for item in p0_domain.split(",") if item), "other")
+
+
 def collect_rows(source: Path) -> list[dict[str, str]]:
     rows = []
     for path in sorted(source.rglob("*.bru")):
@@ -212,6 +278,8 @@ def collect_rows(source: Path) -> list[dict[str, str]]:
         flags = ["non_request"] if not method else risk_flags(relative_path, name, url, api_path)
         is_p0, p0_domain = classify_p0(top, relative_path, api_path, flags)
         base_var = suggested_base_var(url, top) if method else ""
+        surface = classify_surface(base_var)
+        module = classify_module(top, relative_path, api_path, p0_domain)
 
         rows.append(
             {
@@ -219,10 +287,12 @@ def collect_rows(source: Path) -> list[dict[str, str]]:
                 "top_domain": top,
                 "name": name,
                 "method": method,
-                "url": url,
+                "url": sanitize_url(url),
                 "host": host_marker(url),
                 "path": api_path,
                 "suggested_base_var": base_var,
+                "surface": surface,
+                "module": module,
                 "clean_url": cleaned_url(url, top, api_path) if method else "",
                 "flags": ",".join(flags),
                 "p0_candidate": "yes" if is_p0 else "",
@@ -242,6 +312,8 @@ def write_csv(rows: list[dict[str, str]], output: Path) -> None:
         "host",
         "path",
         "suggested_base_var",
+        "surface",
+        "module",
         "clean_url",
         "flags",
         "p0_candidate",
@@ -275,6 +347,8 @@ def write_markdown(rows: list[dict[str, str]], source: Path, csv_output: Path, o
     method_counter = Counter(row["method"] or "NO_METHOD" for row in rows)
     host_counter = Counter(row["host"] or "(empty)" for row in http_rows)
     clean_var_counter = Counter(row["suggested_base_var"] or "(empty)" for row in http_rows)
+    surface_counter = Counter(row["surface"] for row in http_rows)
+    module_counter = Counter(row["module"] for row in http_rows)
     p0_rows = [row for row in request_rows if row["p0_candidate"] == "yes"]
 
     summary_rows = [
@@ -299,6 +373,8 @@ def write_markdown(rows: list[dict[str, str]], source: Path, csv_output: Path, o
     method_rows = [["方法", "数量"]] + [[key, str(value)] for key, value in method_counter.most_common()]
     host_rows = [["Host/变量", "请求数"]] + [[key, str(value)] for key, value in host_counter.most_common(12)]
     clean_var_rows = [["建议变量", "请求数"]] + [[key, str(value)] for key, value in clean_var_counter.most_common()]
+    surface_rows = [["调用端", "请求数"]] + [[key, str(value)] for key, value in surface_counter.most_common()]
+    module_rows = [["业务模块", "请求数"]] + [[key, str(value)] for key, value in module_counter.most_common()]
 
     p0_table_rows = [["业务域", "方法", "Path", "建议变量", "标记", "文件"]]
     for row in p0_rows[:80]:
@@ -345,6 +421,12 @@ def write_markdown(rows: list[dict[str, str]], source: Path, csv_output: Path, o
 ## 建议 URL 变量分布
 
 {table(clean_var_rows)}
+
+## 调用端与业务模块
+
+{table(surface_rows)}
+
+{table(module_rows)}
 
 ## 初步判断
 

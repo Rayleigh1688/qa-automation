@@ -1,0 +1,206 @@
+surface,module,method,path,clean_url,flags,p0_candidate,source_file,name
+admin,other,GET,,,invalid_url,,合规/获取品牌列表.bru,获取品牌列表
+admin,other,GET,,,invalid_url,,后台/礼金/礼金弹窗 - felix.bru.bru,礼金弹窗 - felix.bru
+admin,other,POST,,,invalid_url,,后台/会员列表/封禁会员-sunny.bru,封禁会员-sunny
+admin,other,GET,/admin/ad/material/delete,{{admin_url}}/admin/ad/material/delete?id=123,hardcoded_env,,后台/运营管理/客户端管理/素材管理/删除素材.bru,删除素材
+admin,other,GET,/admin/ad/material/detail,{{admin_url}}/admin/ad/material/detail?id=123,hardcoded_env,,后台/运营管理/客户端管理/素材管理/素材详情.bru,素材详情
+admin,other,POST,/admin/ad/material/insert,{{admin_url}}/admin/ad/material/insert,hardcoded_env,,后台/运营管理/客户端管理/素材管理/新增素材.bru,新增素材
+admin,other,POST,/admin/ad/material/list,{{admin_url}}/admin/ad/material/list,hardcoded_env,,后台/运营管理/客户端管理/素材管理/素材列表.bru,素材列表
+admin,other,GET,/admin/ad/material/platform/menu,{{admin_url}}/admin/ad/material/platform/menu,hardcoded_env,,后台/运营管理/客户端管理/素材管理/素材管理支持的平台枚举.bru,素材管理支持的平台枚举
+admin,other,GET,/admin/ad/material/type/delete,{{admin_url}}/admin/ad/material/type/delete?id=123,hardcoded_env,,后台/运营管理/客户端管理/素材管理/删除素材类型.bru,删除素材类型
+admin,other,POST,/admin/ad/material/type/insert,{{admin_url}}/admin/ad/material/type/insert,hardcoded_env,,后台/运营管理/客户端管理/素材管理/新增素材种类.bru,新增素材种类
+admin,other,GET,/admin/ad/material/type/list,{{admin_url}}/admin/ad/material/type/list,hardcoded_env,,后台/运营管理/客户端管理/素材管理/素材种类列表.bru,素材种类列表
+admin,other,POST,/admin/ad/material/type/update,{{admin_url}}/admin/ad/material/type/update,hardcoded_env,,后台/运营管理/客户端管理/素材管理/编辑素材种类.bru,编辑素材种类
+admin,other,POST,/admin/ad/material/type/update/state,{{admin_url}}/admin/ad/material/type/update/state,hardcoded_env,,后台/运营管理/客户端管理/素材管理/更新素材种类状态.bru,更新素材种类状态
+admin,other,POST,/admin/ad/material/update,{{admin_url}}/admin/ad/material/update,hardcoded_env,,后台/运营管理/客户端管理/素材管理/编辑素材.bru,编辑素材
+admin,other,POST,/admin/ad/material/update/state,{{admin_url}}/admin/ad/material/update/state,hardcoded_env,,后台/运营管理/客户端管理/素材管理/更新素材状态或排序.bru,更新素材状态或排序
+admin,other,POST,/admin/agency/audit/agree,{{admin_url}}/admin/agency/audit/agree,,,代理管理后台/代理管理/代理审核/代理审核同意-wesley.bru,代理审核同意-wesley
+admin,other,POST,/admin/agency/audit/reject,{{admin_url}}/admin/agency/audit/reject,,,代理管理后台/代理管理/代理审核/代理审核拒绝-wesley.bru,代理审核拒绝-wesley
+admin,other,GET,/admin/banner/delete,{{admin_url}}/admin/banner/delete?id=1,hardcoded_env,,后台/轮播图-首页弹窗/轮播图删除.bru,轮播图删除
+admin,other,POST,/admin/banner/insert,{{admin_url}}/admin/banner/insert,hardcoded_env,,后台/轮播图-首页弹窗/新增轮播图.bru,新增轮播图
+admin,other,POST,/admin/banner/list,{{admin_url}}/admin/banner/list,hardcoded_env,,后台/轮播图-首页弹窗/轮播图列表.bru,轮播图列表
+admin,other,GET,/admin/banner/menu,{{admin_url}}/admin/banner/menu,hardcoded_env,,后台/轮播图-首页弹窗/轮播图菜单.bru,轮播图菜单
+admin,other,POST,/admin/banner/update,{{admin_url}}/admin/banner/update,hardcoded_env,,后台/轮播图-首页弹窗/轮播图修改.bru,轮播图修改
+admin,other,POST,/admin/banner/update/state,{{admin_url}}/admin/banner/update/state,hardcoded_env,,后台/轮播图-首页弹窗/轮播图更新状态.bru,轮播图更新状态
+admin,other,GET,/admin/banner/user/count,{{admin_url}}/admin/banner/user/count,"todo,hardcoded_env",,后台/轮播图-首页弹窗/名单数量-todo.bru,名单数量-todo
+admin,other,GET,/admin/banner/user/list,{{admin_url}}/admin/banner/user/list,"todo,hardcoded_env",,后台/轮播图-首页弹窗/查看名单-todo.bru,查看名单-todo
+admin,other,GET,/admin/bonus/export,{{admin_url}}/admin/bonus/export?uid=<redacted>&ids=&state=&activity_name=&received_start_at=&received_end_at=&created_start_at=&created_end_at=&review_start_at=&review_end_at=&min_amount=&max_amount=&created_name=&review_name=&page=&page_size=&topic_id=11,,,后台/VIP/导出礼金列表 - felix.bru,导出礼金列表 - felix
+admin,other,GET,/admin/bonus/list,{{admin_url}}/admin/bonus/list?uid=<redacted>&ids=&state=&activity_id=&received_start_at=&received_end_at=&created_start_at=&created_end_at=&review_start_at=&review_end_at=&min_amount=&max_amount=&created_name=&review_name=&page=&page_size=&remark=,,,后台/VIP/礼金列表 - felix.bru,礼金列表 - felix
+admin,other,POST,/admin/bonus/review/approve,{{admin_url}}/admin/bonus/review/approve,,,后台/礼金/批量审批 - felix.bru,批量审批 - felix.bru
+admin,other,GET,/admin/bonus/review/export,{{admin_url}}/admin/bonus/review/export?page=&page_size=&activity_id=&activity_name=&bonus_id=&phone=<redacted>&username=&uid=<redacted>&created_start_at=&created_end_at=&min_bonus=&max_bonus=&created_name=&remark=&topic_id=,,,后台/礼金/导出待审订单 - felix.bru,导出待审订单 - felix.bru
+admin,other,GET,/admin/bonus/review/list,{{admin_url}}/admin/bonus/review/list?page=&page_size=&activity_id=&activity_name=&bonus_id=&phone=<redacted>&username=&uid=<redacted>&created_start_at=&created_end_at=&min_bonus=&max_bonus=&created_name=&remark=,,,后台/礼金/待审订单列表 - felix.bru,待审订单列表 - felix.bru
+admin,other,GET,/admin/bonus/review/noneed/list,{{admin_url}}/admin/bonus/review/noneed/list?page=&page_size=&activity_id=&activity_name=&bonus_id=&phone=<redacted>&username=&uid=<redacted>&created_start_at=&created_end_at=&received_start_at=&received_end_at=&review_start_at=&review_end_at=&min_bonus=&max_bonus=&created_name=&review_name=&remark=&review_state=,,,后台/礼金/导出过审礼金列表 - felix.bru,导出过审礼金列表 - felix.bru
+admin,other,GET,/admin/bonus/review/noneed/list,{{admin_url}}/admin/bonus/review/noneed/list?page=&page_size=&activity_id=&activity_name=&bonus_id=&phone=<redacted>&username=&uid=<redacted>&created_start_at=&created_end_at=&received_start_at=&received_end_at=&review_start_at=&review_end_at=&min_bonus=&max_bonus=&created_name=&review_name=&remark=&review_state=,,,后台/礼金/过审礼金列表 - felix.bru,过审礼金列表 - felix.bru
+admin,other,POST,/admin/bonus/review/send,{{admin_url}}/admin/bonus/review/send,,,后台/礼金/批量补发 - felix.bru,批量补发 - felix.bru
+admin,other,GET,/admin/bonus/review/userinfo,{{admin_url}}/admin/bonus/review/userinfo?uid=<redacted>,,,后台/礼金/获取用户信息 - felix.bru,获取用户信息 - felix.bru
+admin,other,POST,/admin/buriedPoint/delete,{{admin_url}}/admin/buriedPoint/delete,"todo,hardcoded_env",,后台/埋点/删除埋点-todo.bru,删除埋点-todo
+admin,other,POST,/admin/buriedPoint/insert,{{admin_url}}/admin/buriedPoint/insert,"todo,hardcoded_env",,后台/埋点/新增埋点-todo.bru,新增埋点-todo
+admin,other,GET,/admin/buriedPoint/list,{{admin_url}}/admin/buriedPoint/list,"todo,hardcoded_env",,后台/埋点/埋点列表-todo.bru,埋点列表-todo
+admin,other,POST,/admin/buriedPoint/update,{{admin_url}}/admin/buriedPoint/update,"todo,hardcoded_env",,后台/埋点/修改埋点-todo.bru,修改埋点-todo
+admin,other,GET,/admin/channel/delete,{{admin_url}}/admin/channel/delete?id=<id>,todo,,后台/运营管理/渠道管理/引流渠道管理/删除渠道-todo.bru,删除渠道-todo
+admin,other,GET,/admin/channel/dict,{{admin_url}}/admin/channel/dict,todo,,后台/运营管理/渠道管理/引流渠道管理/渠道过滤-todo.bru,渠道过滤-todo
+admin,other,GET,/admin/channel/exchangeRate/list,{{admin_url}}/admin/channel/exchangeRate/list,todo,,后台/运营管理/推广管理/渠道管理/渠道汇率/渠道汇率列表-todo.bru,渠道汇率列表-todo
+admin,other,POST,/admin/channel/exchangeRate/update,{{admin_url}}/admin/channel/exchangeRate/update,todo,,后台/运营管理/推广管理/渠道管理/渠道汇率/更新渠道汇率-todo.bru,更新渠道汇率-todo
+admin,other,POST,/admin/channel/export,{{admin_url}}/admin/channel/export,todo,,后台/运营管理/渠道管理/引流渠道管理/渠道列表导出-todo.bru,渠道列表导出-todo
+admin,other,POST,/admin/channel/insert,{{admin_url}}/admin/channel/insert,todo,,后台/运营管理/渠道管理/引流渠道管理/新增渠道-todo.bru,新增渠道-todo
+admin,other,POST,/admin/channel/list,{{admin_url}}/admin/channel/list,todo,,后台/运营管理/渠道管理/引流渠道管理/渠道列表-todo.bru,渠道列表-todo
+admin,other,POST,/admin/channel/manage/delete,{{admin_url}}/admin/channel/manage/delete,todo,,后台/运营管理/推广管理/渠道管理/删除渠道管理-todo.bru,删除渠道管理-todo
+admin,other,GET,/admin/channel/manage/detail,{{admin_url}}/admin/channel/manage/detail,todo,,后台/运营管理/推广管理/渠道管理/渠道管理详情-todo.bru,渠道管理详情-todo
+admin,other,GET,/admin/channel/manage/dict,{{admin_url}}/admin/channel/manage/dict,todo,,后台/运营管理/推广管理/渠道管理/渠道管理字典-todo.bru,渠道管理字典-todo
+admin,other,GET,/admin/channel/manage/export,{{admin_url}}/admin/channel/manage/export,todo,,后台/运营管理/推广管理/渠道管理/渠道管理导出-todo.bru,渠道管理导出-todo
+admin,other,POST,/admin/channel/manage/insert,{{admin_url}}/admin/channel/manage/insert,todo,,后台/运营管理/推广管理/渠道管理/新增渠道管理-todo.bru,新增渠道管理-todo
+admin,other,GET,/admin/channel/manage/list,{{admin_url}}/admin/channel/manage/list,todo,,后台/运营管理/推广管理/渠道管理/渠道管理列表-todo.bru,渠道管理列表-todo
+admin,other,POST,/admin/channel/manage/update,{{admin_url}}/admin/channel/manage/update,todo,,后台/运营管理/推广管理/渠道管理/更新渠道管理-todo.bru,更新渠道管理-todo
+admin,other,POST,/admin/channel/manage/update/state,{{admin_url}}/admin/channel/manage/update/state,todo,,后台/运营管理/推广管理/渠道管理/更新渠道管理状态-todo.bru,更新渠道管理状态-todo
+admin,other,GET,/admin/channel/menus,{{admin_url}}/admin/channel/menus,todo,,后台/运营管理/渠道管理/引流渠道管理/渠道菜单-todo.bru,渠道菜单-todo
+admin,other,POST,/admin/channel/update,{{admin_url}}/admin/channel/update,todo,,后台/运营管理/渠道管理/引流渠道管理/编辑渠道-todo.bru,编辑渠道-todo
+admin,other,POST,/admin/client/version/insert,{{admin_url}}/admin/client/version/insert,,,后台/运营管理/客户端管理/版本号管理/版本管理新增.bru,版本管理新增
+admin,other,GET,/admin/client/version/list,{{admin_url}}/admin/client/version/list?page=1&page_size=10,,,后台/运营管理/客户端管理/版本号管理/版本管理列表.bru,版本管理列表
+admin,other,POST,/admin/client/version/update,{{admin_url}}/admin/client/version/update,,,后台/运营管理/客户端管理/版本号管理/版本管理更新.bru,版本管理更新
+admin,other,GET,/admin/domain/delete,{{admin_url}}/admin/domain/delete?id=<id>,todo,,后台/运营管理/渠道管理/域名库管理/删除域名-todo.bru,删除域名-todo
+admin,other,POST,/admin/domain/export,{{admin_url}}/admin/domain/export,todo,,后台/运营管理/渠道管理/域名库管理/域名列表导出-todo.bru,域名列表导出-todo
+admin,other,POST,/admin/domain/insert,{{admin_url}}/admin/domain/insert,todo,,后台/运营管理/渠道管理/域名库管理/新增域名-todo.bru,新增域名-todo
+admin,other,POST,/admin/domain/list,{{admin_url}}/admin/domain/list,,,后台/域名/域名列表.bru,域名列表
+admin,other,POST,/admin/domain/list,{{admin_url}}/admin/domain/list,todo,,后台/运营管理/渠道管理/域名库管理/域名列表-todo.bru,域名列表-todo
+admin,other,GET,/admin/domain/listForSelect,{{admin_url}}/admin/domain/listForSelect,"todo,hardcoded_env",,后台/域名/域名选项列表-todo.bru,域名选项列表-todo
+admin,other,GET,/admin/domain/listForSelect,{{admin_url}}/admin/domain/listForSelect,"todo,hardcoded_env",,后台/域名/获取域名下拉列表-todo.bru,获取域名下拉列表-todo
+admin,other,GET,/admin/domain/menus,{{admin_url}}/admin/domain/menus,todo,,后台/运营管理/渠道管理/域名库管理/域名菜单-todo.bru,域名菜单-todo
+admin,other,POST,/admin/domain/update,{{admin_url}}/admin/domain/update,todo,,后台/运营管理/渠道管理/域名库管理/编辑域名-todo.bru,编辑域名-todo
+admin,other,POST,/admin/feedback/category/edit,{{admin_url}}/admin/feedback/category/edit,,,后台/运营管理/会员反馈/问题分类/反馈问题分类修改.bru,反馈问题分类修改
+admin,other,POST,/admin/feedback/category/insert,{{admin_url}}/admin/feedback/category/insert,,,后台/运营管理/会员反馈/问题分类/反馈问题分类添加.bru,反馈问题分类添加
+admin,other,GET,/admin/feedback/category/list,{{admin_url}}/admin/feedback/category/list,,,后台/运营管理/会员反馈/问题分类/反馈问题分类列表.bru,反馈问题分类列表
+admin,other,POST,/admin/feedback/category/update/state,{{admin_url}}/admin/feedback/category/update/state,,,后台/运营管理/会员反馈/问题分类/反馈问题分类停用启用.bru,反馈问题分类停用启用
+admin,other,GET,/admin/feedback/list,{{admin_url}}/admin/feedback/list,,,后台/运营管理/会员反馈/反馈列表.bru,反馈列表
+admin,other,POST,/admin/feedback/pending,{{admin_url}}/admin/feedback/pending,,,后台/运营管理/会员反馈/反馈挂起.bru,反馈挂起
+admin,other,POST,/admin/feedback/reply,{{admin_url}}/admin/feedback/reply,,,后台/运营管理/会员反馈/反馈回复.bru,反馈回复
+admin,other,POST,/admin/feedback/reply/update,{{admin_url}}/admin/feedback/reply/update,,,后台/运营管理/会员反馈/反馈回复修改.bru,反馈回复修改
+admin,other,POST,/admin/feedback/template/edit,{{admin_url}}/admin/feedback/template/edit,,,后台/运营管理/会员反馈/问题模版/反馈问题模版修改.bru,反馈问题模版修改
+admin,other,POST,/admin/feedback/template/insert,{{admin_url}}/admin/feedback/template/insert,,,后台/运营管理/会员反馈/问题模版/反馈问题模版添加.bru,反馈问题模版添加
+admin,other,GET,/admin/feedback/template/list,{{admin_url}}/admin/feedback/template/list,,,后台/运营管理/会员反馈/问题模版/反馈问题模版列表.bru,反馈问题模版列表
+admin,other,POST,/admin/feedback/template/update/state,{{admin_url}}/admin/feedback/template/update/state,,,后台/运营管理/会员反馈/问题模版/反馈问题模版停用启用.bru,反馈问题模版停用启用
+admin,other,GET,/admin/google/qrcode/info,{{admin_url}}/admin/google/qrcode/info,,,后台/后台账号管理/获取谷歌令牌密钥-seven.bru,获取谷歌令牌密钥-seven
+admin,other,POST,/admin/google/secret/update,{{admin_url}}/admin/google/secret/update,,,后台/后台账号管理/绑定谷歌令牌-seven.bru,绑定谷歌令牌-seven
+admin,other,GET,/admin/google/unbind,{{admin_url}}/admin/google/unbind?id=%E5%90%8E%E5%8F%B0%E8%B4%A6%E6%88%B7ID,,,后台/后台账号管理/谷歌令牌解绑.bru,谷歌令牌解绑
+admin,other,GET,/admin/google/verify,{{admin_url}}/admin/google/verify?code=<redacted>,,,后台/后台账号管理/谷歌令牌验证-seven.bru,谷歌令牌验证-seven
+admin,other,POST,/admin/home/section/batch-upsert,{{admin_url}}/admin/home/section/batch-upsert,,,后台/运营管理/首页板块配置/發佈.bru,發佈
+admin,other,POST,/admin/home/section/cache/rebuild,{{admin_url}}/admin/home/section/cache/rebuild,,,后台/运营管理/首页板块配置/重建缓存.bru,重建缓存
+admin,other,POST,/admin/home/section/create,{{admin_url}}/admin/home/section/create,,,后台/运营管理/首页板块配置/新增自定义板块.bru,新增自定义板块
+admin,other,GET,/admin/home/section/detail,{{admin_url}}/admin/home/section/detail?id=13,,,后台/运营管理/首页板块配置/详情.bru,详情
+admin,other,GET,/admin/home/section/list,{{admin_url}}/admin/home/section/list?prefix=fat,,,后台/运营管理/首页板块配置/列表.bru,列表
+admin,other,POST,/admin/home/section/update,{{admin_url}}/admin/home/section/update,,,后台/运营管理/首页板块配置/更新基础分类板块.bru,更新基础分类板块
+admin,other,POST,/admin/home/section/update,{{admin_url}}/admin/home/section/update,,,后台/运营管理/首页板块配置/更新系统板块.bru,更新系统板块
+admin,other,POST,/admin/home/section/update,{{admin_url}}/admin/home/section/update,,,后台/运营管理/首页板块配置/更新自定义板块.bru,更新自定义板块
+admin,other,GET,/admin/hotBetNotice/config/detail,{{admin_url}}/admin/hotBetNotice/config/detail,,,后台/爆彩/爆彩设置查询.bru,爆彩设置查询
+admin,other,POST,/admin/hotBetNotice/config/update,{{admin_url}}/admin/hotBetNotice/config/update,,,后台/爆彩/爆彩设置更新.bru,爆彩设置更新
+admin,other,POST,/admin/hotBetNotice/displayBlacklist/insert,{{admin_url}}/admin/hotBetNotice/displayBlacklist/insert,,,后台/爆彩/爆彩黑名单新增.bru,爆彩黑名单新增
+admin,other,GET,/admin/hotBetNotice/displayBlacklist/list,{{admin_url}}/admin/hotBetNotice/displayBlacklist/list?page=1&page_size=10&username=hbn_report_1783753951967_black,,,后台/爆彩/爆彩黑名单列表.bru,爆彩黑名单列表
+admin,other,POST,/admin/hotBetNotice/displayBlacklist/remove,{{admin_url}}/admin/hotBetNotice/displayBlacklist/remove,,,后台/爆彩/爆彩黑名单删除.bru,爆彩黑名单删除
+admin,other,GET,/admin/hotBetNotice/export,{{admin_url}}/admin/hotBetNotice/export?topic_id={{topic_id}}&username=hbn_report_1783753951967,,,后台/爆彩/爆彩列表导出.bru,爆彩列表导出
+admin,other,GET,/admin/hotBetNotice/list,{{admin_url}}/admin/hotBetNotice/list?page=1&page_size=10&username=hbn_report_1783753951967,,,后台/爆彩/爆彩列表查询.bru,爆彩列表查询
+admin,other,GET,/admin/log/list,{{admin_url}}/admin/log/list?page_isze=10&page=1&ops=%E7%99%BB%E9%99%86%2Ckcy&result=%E6%88%90%E5%8A%9F%2C%E5%A4%B1%E8%B4%A5,,,代理管理后台/系统/操作日志.bru,操作日志
+admin,other,GET,/admin/log/list,{{admin_url}}/admin/log/list?page_isze=10&page=1&ops=%E7%99%BB%E9%99%86%2Ckcy&result=%E6%88%90%E5%8A%9F%2C%E5%A4%B1%E8%B4%A5,,,后台/后台日志/日志-seven.bru,日志-seven
+admin,other,GET,/admin/mall/goods/detail,{{admin_url}}/admin/mall/goods/detail?id=%E5%95%86%E5%93%81id,"todo,hardcoded_env",,后台/商城管理/产品详情-todo.bru,产品详情
+admin,other,GET,/admin/mall/goods/export,{{admin_url}}/admin/mall/goods/export,"todo,hardcoded_env",,后台/商城管理/产品导出-todo.bru,产品导出-todo
+admin,other,GET,/admin/mall/goods/import,{{admin_url}}/admin/mall/goods/import,"todo,hardcoded_env",,后台/商城管理/产品导入-todo.bru,产品导入-todo
+admin,other,POST,/admin/mall/goods/insert,{{admin_url}}/admin/mall/goods/insert,"todo,hardcoded_env",,后台/商城管理/新增商城商品-todo.bru,新增商城商品-todo
+admin,other,GET,/admin/mall/goods/list,{{admin_url}}/admin/mall/goods/list,"todo,hardcoded_env",,后台/商城管理/获取产品列表-todo.bru,获取产品列表-todo
+admin,other,POST,/admin/mall/goods/update,{{admin_url}}/admin/mall/goods/update,"todo,hardcoded_env",,后台/商城管理/更新商城商品-todo.bru,更新商城商品-todo
+admin,other,POST,/admin/mall/order/delivery,{{admin_url}}/admin/mall/order/delivery,"todo,hardcoded_env",,后台/商城订单记录/手动发货-todo.bru,手动发货-todo
+admin,other,GET,/admin/mall/order/detail,{{admin_url}}/admin/mall/order/detail?id=%E8%AE%A2%E5%8D%95id,"todo,hardcoded_env",,后台/商城订单记录/商城订单详情-todo.bru,商城订单详情-todo
+admin,other,GET,/admin/mall/order/export,{{admin_url}}/admin/mall/order/export,"todo,hardcoded_env",,后台/商城订单记录/商城订单导出-todo.bru,商城订单导出-todo
+admin,other,GET,/admin/mall/order/list,{{admin_url}}/admin/mall/order/list,"todo,hardcoded_env",,后台/商城订单记录/商城订单列表-todo.bru,商城订单列表-todo
+admin,other,POST,/admin/marquee/add,{{admin_url}}/admin/marquee/add,hardcoded_env,,后台/跑马灯/添加.bru,添加
+admin,other,POST,/admin/marquee/delete,{{admin_url}}/admin/marquee/delete,hardcoded_env,,后台/跑马灯/删除.bru,删除
+admin,other,GET,/admin/marquee/list,{{admin_url}}/admin/marquee/list?ty=1,hardcoded_env,,后台/跑马灯/列表.bru,列表
+admin,other,POST,/admin/marquee/update,{{admin_url}}/admin/marquee/update,hardcoded_env,,后台/跑马灯/修改-启用停止切换.bru,修改/启用停止切换
+admin,other,GET,/admin/me/detail,{{admin_url}}/admin/me/detail,,,后台/后台账号管理/后台账户详情(当前登陆信息)-seven.bru,后台账户详情(当前登陆信息)-seven
+admin,other,GET,/admin/message/export,{{admin_url}}/admin/message/export?topic_id=your_topic_id,todo,,后台/运营管理/站内信管理/站内信导出-todo.bru,站内信导出-todo
+admin,other,GET,/admin/message/list,{{admin_url}}/admin/message/list,todo,,后台/运营管理/站内信管理/已阅读名单-todo.bru,已阅读名单-todo
+admin,other,GET,/admin/message/list,{{admin_url}}/admin/message/list,todo,,后台/运营管理/站内信管理/获取消息列表-todo.bru,获取消息列表-todo
+admin,other,POST,/admin/message/revoke,{{admin_url}}/admin/message/revoke,todo,,后台/运营管理/站内信管理/撤销站内信-todo.bru,撤销站内信-todo
+admin,other,POST,/admin/message/send,{{admin_url}}/admin/message/send,,,代理后台/消息管理/发送站内信消息.bru,发送站内信消息
+admin,other,POST,/admin/message/send,{{admin_url}}/admin/message/send,todo,,后台/运营管理/站内信管理/发送站内信消息-todo.bru,发送站内信消息-todo
+admin,other,GET,/admin/message/templates/export,{{admin_url}}/admin/message/templates/export,todo,,后台/运营管理/消息模板/消息模板导出-todo.bru,消息模板导出-todo
+admin,other,GET,/admin/message/templates/list,{{admin_url}}/admin/message/templates/list,todo,,后台/运营管理/消息模板/获取消息模板列表-todo.bru,获取消息模板列表-todo
+admin,other,POST,/admin/message/templates/update,{{admin_url}}/admin/message/templates/update,todo,,后台/运营管理/消息模板/更新消息模板-todo.bru,更新消息模板-todo
+admin,other,GET,/admin/message/user/list,{{admin_url}}/admin/message/user/list?updated_name=bali,hardcoded_env,,后台/运营管理/消息模板/更新用户列表.bru,更新用户列表
+admin,other,GET,/admin/notify/audit/alarm,{{admin_url}}/admin/notify/audit/alarm?t=<redacted>,,,后台/系统管理/通知中心/获取系统通知数量-wesley-owen.bru,获取系统通知数量-wesley/owen
+admin,other,GET,/admin/ops-tools/turnover/export,{{admin_url}}/admin/ops-tools/turnover/export,,,后台/运营管理/运营小工具/首存导出.bru,首存导出
+admin,other,GET,/admin/rechargeCard/listForSelect,{{admin_url}}/admin/rechargeCard/listForSelect,"todo,hardcoded_env",,后台/其它/获取充值卡下拉列表-todo.bru,获取充值卡下拉列表-todo
+admin,other,GET,/admin/shop/gs/list,{{admin_url}}/admin/shop/gs/list,,,后台/运营管理/客户端管理/门店客户端/门店列表.bru,门店列表
+admin,other,POST,/admin/shop/gs/update,{{admin_url}}/admin/shop/gs/update,,,后台/运营管理/客户端管理/门店客户端/更新场馆状态.bru,更新场馆状态
+admin,other,GET,/admin/superior/log,{{admin_url}}/admin/superior/log?uid=<redacted>,hardcoded_env,,后台/会员列表/会员转线log.bru,会员转线log
+admin,other,GET,/admin/superior/one,{{admin_url}}/admin/superior/one?uid=<redacted>,hardcoded_env,,后台/会员列表/代理查询.bru,代理查询
+admin,other,POST,/admin/superior/update,{{admin_url}}/admin/superior/update,hardcoded_env,,后台/会员列表/会员转线.bru,会员转线
+admin,other,POST,/admin/sys/config/gnode/list,{{admin_url}}/admin/sys/config/gnode/list?ty=5,,,后台/集成后台参数/接口管理/集成参数/集成参数获取.bru,集成参数获取
+admin,other,POST,/admin/sys/config/gnode/submit,{{admin_url}}/admin/sys/config/gnode/submit,,,后台/集成后台参数/接口管理/集成参数/集成参数提交.bru,集成参数提交
+admin,other,GET,/admin/todo/reminder,{{admin_url}}/admin/todo/reminder,"todo,hardcoded_env",,后台/其它/待办事项提示器-todo.bru,待办事项提示器-todo
+admin,other,GET,/admin/trd/list,{{admin_url}}/admin/trd/list,hardcoded_env,,后台/运营管理/客户端管理/三方登录开关/列表.bru,列表
+admin,other,POST,/admin/trd/update,{{admin_url}}/admin/trd/update,hardcoded_env,,后台/运营管理/客户端管理/三方登录开关/修改.bru,修改
+admin,other,POST,/admin/upload/public,{{admin_url}}/admin/upload/public?prefix=banner,,,后台/上传/上传-公开访问 - double.bru,上传-公开访问 - double
+admin,other,GET,/admin/user/delete,{{admin_url}}/admin/user/delete?id=<id>,,,后台/后台账号管理/后台删除账户-seven.bru,后台删除账户-seven
+admin,other,GET,/admin/user/detail,{{admin_url}}/admin/user/detail?id=<id>,,,后台/后台账号管理/后台账户详情-seven.bru,后台账户详情-seven
+admin,other,POST,/admin/user/insert,{{admin_url}}/admin/user/insert,,,后台/后台账号管理/新增账户-seven.bru,新增账户-seven
+admin,other,GET,/admin/user/list,{{admin_url}}/admin/user/list,,,后台/后台账号管理/后台账户列表-seven.bru,后台账户列表-seven
+admin,other,POST,/admin/user/update,{{admin_url}}/admin/user/update,,,后台/后台账号管理/修改账户信息-seven.bru,修改账户信息-seven
+admin,other,GET,/admin/vip/config/comparison,{{admin_url}}/admin/vip/config/comparison,"name_v2,hardcoded_env",,后台/Vipv2/获取XP对照表.bru,获取XP对照表
+admin,other,POST,/admin/vip/config/edit,{{admin_url}}/admin/vip/config/edit,"name_v2,hardcoded_env",,后台/Vipv2/配置编辑.bru,配置编辑
+admin,other,GET,/admin/vip/config/listv2,{{admin_url}}/admin/vip/config/listv2,"name_v2,hardcoded_env",,后台/Vipv2/配置列表.bru,配置列表
+admin,other,GET,/admin/vip/level/detail,{{admin_url}}/admin/vip/level/detail?level=VIP%E7%AD%89%E7%BA%A7,"todo,hardcoded_env",,后台/VIP/VIP配置详情-todo.bru,VIP配置详情-todo
+admin,other,GET,/admin/vip/level/list,{{admin_url}}/admin/vip/level/list,"todo,hardcoded_env",,后台/VIP/VIP配置列表-todo.bru,VIP配置列表-todo
+admin,other,GET,/admin/vip/level/range/detail,{{admin_url}}/admin/vip/level/range/detail?ty=%E7%AD%89%E7%BA%A7%E5%8C%BA%E9%97%B4%E5%90%8D%E7%A7%B0,"todo,hardcoded_env",,后台/VIP/VIP等级区间详情-todo.bru,VIP等级区间详情-todo
+admin,other,POST,/admin/vip/level/update,{{admin_url}}/admin/vip/level/update,"todo,hardcoded_env",,后台/VIP/VIP配置编辑-todo.bru,VIP配置编辑-todo
+admin,other,GET,/admin/vip/xp/export,{{admin_url}}/admin/vip/xp/export?ids=1%2C2&min_xp=3&max_xp=&start_at=&end_at=&topic_id=111&uid=<redacted>,,,后台/VIP/导出xp成长日志 - felix.bru,导出xp成长日志 - felix
+admin,other,GET,/admin/vip/xp/list,{{admin_url}}/admin/vip/xp/list?ids=3&min_xp=3&start_at=&end_at=&page=&page_size=3&uid=<redacted>,,,后台/VIP/xp成长日志 - felix.bru,xp成长日志 - felix
+admin,other,GET,/admin/whiteList/delete,{{admin_url}}/admin/whiteList/delete?id=123456,,,后台/系统管理/白名单管理/删除白名单 --yasser.bru,删除白名单 --yasser
+admin,other,POST,/admin/whiteList/insert,{{admin_url}}/admin/whiteList/insert,hardcoded_env,,后台/系统管理/白名单管理/新增白名单 --yasser.bru,新增白名单 --yasser
+admin,other,GET,/admin/whiteList/list,{{admin_url}}/admin/whiteList/list?page=1&page_size=20,,,后台/系统管理/白名单管理/白名单列表 --yasser.bru,白名单列表 --yasser
+admin,other,POST,/admin/whiteList/update,{{admin_url}}/admin/whiteList/update,,,后台/系统管理/白名单管理/更新白名单 --yasser.bru,更新白名单 --yasser
+admin,other,GET,/agency/message/list,{{admin_url}}/agency/message/list?page=1&page_size=20&title=%E5%86%8D%E6%B5%8B%E4%B8%80%E4%B8%8B,,,代理后台/消息管理/获取消息列表.bru,获取消息列表
+admin,other,POST,/backend/agency/banner/insert,{{admin_url}}/backend/agency/banner/insert,hardcoded_env,,代理管理后台/推广素材/新增轮播图.bru,新增轮播图
+admin,other,POST,/backend/agency/banner/list,{{admin_url}}/backend/agency/banner/list,hardcoded_env,,代理管理后台/推广素材/轮播图列表.bru,轮播图列表
+admin,other,POST,/backend/agency/banner/update/state,{{admin_url}}/backend/agency/banner/update/state,hardcoded_env,,代理管理后台/推广素材/轮播图更新状态.bru,轮播图更新状态
+admin,other,GET,/backend/agency/detail,{{admin_url}}/backend/agency/detail?id=<id>,,,代理管理后台/后台账号管理/后台账户详情-seven.bru,后台账户详情-seven
+admin,other,GET,/backend/agency/google/qrcode/info,{{admin_url}}/backend/agency/google/qrcode/info,,,代理管理后台/后台账号管理/获取谷歌令牌密钥-seven.bru,获取谷歌令牌密钥-seven
+admin,other,POST,/backend/agency/google/secret/update,{{admin_url}}/backend/agency/google/secret/update,,,代理管理后台/后台账号管理/绑定谷歌令牌-seven.bru,绑定谷歌令牌-seven
+admin,other,GET,/backend/agency/google/unbind,{{admin_url}}/backend/agency/google/unbind?id=%E5%90%8E%E5%8F%B0%E8%B4%A6%E6%88%B7ID,,,代理管理后台/后台账号管理/谷歌令牌解绑.bru,谷歌令牌解绑
+admin,other,GET,/backend/agency/google/verify,{{admin_url}}/backend/agency/google/verify?code=<redacted>,,,代理管理后台/后台账号管理/谷歌令牌验证-seven.bru,谷歌令牌验证-seven
+admin,other,GET,/backend/agency/me/detail,{{admin_url}}/backend/agency/me/detail,,,代理管理后台/后台账号管理/后台账户详情(当前登陆信息).bru,后台账户详情(当前登陆信息)
+admin,other,GET,/backend/agency/sys/config/list,{{admin_url}}/backend/agency/sys/config/list,,,代理管理后台/代理管理/代理设置/代理开关/代理开关列表.bru,代理开关列表
+admin,other,GET,/backend/agency/sys/config/list,{{admin_url}}/backend/agency/sys/config/list?ty=4,,,代理管理后台/代理管理/代理设置/活跃会员/系统配置列表.bru,系统配置列表
+admin,other,POST,/backend/agency/sys/config/set,{{admin_url}}/backend/agency/sys/config/set,,,代理管理后台/代理管理/代理设置/活跃会员/系统配置设置.bru,系统配置设置
+admin,other,POST,/backend/agency/user/insert,{{admin_url}}/backend/agency/user/insert,,,代理管理后台/后台账号管理/新增账户.bru,新增账户
+admin,other,GET,/backend/agency/user/list,{{admin_url}}/backend/agency/user/list,,,代理管理后台/后台账号管理/后台账户列表.bru,后台账户列表
+admin,other,POST,/backend/agency/user/update,{{admin_url}}/backend/agency/user/update,,,代理管理后台/后台账号管理/修改账户信息.bru,修改账户信息
+admin,other,GET,/cmpl/banner/delete,{{admin_url}}/cmpl/banner/delete?id=1,hardcoded_env,,合规/轮播图/轮播图删除.bru,轮播图删除
+admin,other,POST,/cmpl/banner/insert,{{admin_url}}/cmpl/banner/insert,hardcoded_env,,合规/轮播图/新增轮播图.bru,新增轮播图
+admin,other,POST,/cmpl/banner/list,{{admin_url}}/cmpl/banner/list,hardcoded_env,,合规/轮播图/轮播图列表.bru,轮播图列表
+admin,other,POST,/cmpl/banner/update,{{admin_url}}/cmpl/banner/update,hardcoded_env,,合规/轮播图/轮播图修改.bru,轮播图修改
+admin,other,POST,/cmpl/banner/update/state,{{admin_url}}/cmpl/banner/update/state,hardcoded_env,,合规/轮播图/轮播图更新状态.bru,轮播图更新状态
+admin,other,POST,/cmpl/log/list,{{admin_url}}/cmpl/log/list?page_isze=10&page=1&ops=%E7%99%BB%E9%99%86%2Ckcy&result=%E6%88%90%E5%8A%9F%2C%E5%A4%B1%E8%B4%A5,,,合规/后台日志/日志-seven.bru,日志-seven
+admin,other,GET,/cmpl/me/detail,{{admin_url}}/cmpl/me/detail,,,合规/后台账号管理/后台账户详情(当前登陆信息)-seven.bru,后台账户详情(当前登陆信息)-seven
+admin,other,GET,/cmpl/notify/audit/alarm,{{admin_url}}/cmpl/notify/audit/alarm?t=<redacted>,,,合规/系统管理/通知中心/获取系统通知数量-wesley.bru,获取系统通知数量-wesley
+admin,other,GET,/cmpl/online/count,{{admin_url}}/cmpl/online/count,,,合规/在线用户/获取在线会员数.bru,获取在线会员数
+admin,other,GET,/cmpl/online/list,{{admin_url}}/cmpl/online/list,,,合规/在线用户/在线会员列表.bru,在线会员列表
+admin,other,GET,/cmpl/platform/list,{{admin_url}}/cmpl/platform/list?page=1&page_size=10&game_type=0,hardcoded_env,,合规/场馆管理/场馆列表.bru,场馆列表
+admin,other,POST,/cmpl/platform/update/state,{{admin_url}}/cmpl/platform/update/state,,,合规/场馆管理/场馆更新状态.bru,场馆更新状态
+admin,other,POST,/cmpl/shop/insert,{{admin_url}}/cmpl/shop/insert,,,合规/门店/新增门店.bru,新增门店
+admin,other,GET,/cmpl/shop/list,{{admin_url}}/cmpl/shop/list,,,合规/门店/门店列表.bru,门店列表
+admin,other,POST,/cmpl/shop/update,{{admin_url}}/cmpl/shop/update,,,合规/门店/修改门店.bru,修改门店
+admin,other,POST,/cmpl/upload/public,{{admin_url}}/cmpl/upload/public?prefix=banner,,,合规/上传/上传-公开访问 - double.bru,上传-公开访问 - double
+admin,other,GET,/cmpl/user/delete,{{admin_url}}/cmpl/user/delete?id=<id>,,,合规/后台账号管理/后台删除账户-seven.bru,后台删除账户-seven
+admin,other,GET,/cmpl/user/detail,{{admin_url}}/cmpl/user/detail?id=<id>,,,合规/后台账号管理/后台账户详情-seven.bru,后台账户详情-seven
+admin,other,POST,/cmpl/user/insert,{{admin_url}}/cmpl/user/insert,,,合规/后台账号管理/新增账户-seven.bru,新增账户-seven
+admin,other,GET,/cmpl/user/list,{{admin_url}}/cmpl/user/list,,,合规/后台账号管理/后台账户列表-seven.bru,后台账户列表-seven
+admin,other,POST,/cmpl/user/update,{{admin_url}}/cmpl/user/update,,,合规/后台账号管理/修改账户信息-seven.bru,修改账户信息-seven
+admin,other,GET,/cmpl/venue/list,{{admin_url}}/cmpl/venue/list,,,合规/厂商管理/厂商列表-light.bru,厂商列表-light
+admin,other,GET,/cmpl/whiteList/delete,{{admin_url}}/cmpl/whiteList/delete?id=123456,,,合规/系统管理/白名单管理/删除白名单 --yasser.bru,删除白名单 --yasser
+admin,other,POST,/cmpl/whiteList/insert,{{admin_url}}/cmpl/whiteList/insert,hardcoded_env,,合规/系统管理/白名单管理/新增白名单 --yasser.bru,新增白名单 --yasser
+admin,other,GET,/cmpl/whiteList/list,{{admin_url}}/cmpl/whiteList/list?page=1&page_size=20,,,合规/系统管理/白名单管理/白名单列表 --yasser.bru,白名单列表 --yasser
+admin,other,POST,/cmpl/whiteList/update,{{admin_url}}/cmpl/whiteList/update,,,合规/系统管理/白名单管理/更新白名单 --yasser.bru,更新白名单 --yasser
+admin,other,GET,/sys/config/compliance/detail,{{admin_url}}/sys/config/compliance/detail,,,后台/运营管理/客户端配置/合规化开关详情.bru,合规化开关详情
+admin,other,GET,/sys/config/compliance/status,{{admin_url}}/sys/config/compliance/status,,,后台/运营管理/客户端配置/合规化开关状态.bru,合规化开关状态
+admin,other,POST,/sys/config/compliance/update,{{admin_url}}/sys/config/compliance/update,,,后台/运营管理/客户端配置/合规化开关更新.bru,合规化开关更新
+admin,other,GET,/sys/config/list,{{admin_url}}/sys/config/list,,,后台/系统管理/系统配置/系统配置列表 --wesley.bru,系统配置列表 --wesley
+admin,other,POST,/sys/config/set,{{admin_url}}/sys/config/set,,,后台/系统管理/系统配置/系统配置设置--wesley.bru,系统配置设置--wesley
+admin,other,POST,/sys/config/update,{{admin_url}}/sys/config/update,,,后台/系统管理/系统配置/系统配置更新--wesley.bru,系统配置更新--wesley

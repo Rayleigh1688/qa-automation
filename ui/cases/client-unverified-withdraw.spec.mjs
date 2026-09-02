@@ -28,13 +28,8 @@ test("new account is blocked from withdrawal before wallet password and KYC", as
   });
 
   const phone = required("PRE_KYC_CLIENT_PHONE");
-  const password = String(process.env.PRE_KYC_CLIENT_PASSWORD || "").trim();
-  if (password) {
-    await app.loginWithPassword(phone, password);
-  } else {
-    const otp = required("PRE_KYC_CLIENT_OTP");
-    await app.loginWithOtp(phone, otp);
-  }
+  const password = required("PRE_KYC_CLIENT_PASSWORD");
+  await app.loginWithPassword(phone, password);
 
   const kycGate = page.getByText(/Your current account type is a basic account/i).first();
   await expect(kycGate).toBeVisible();

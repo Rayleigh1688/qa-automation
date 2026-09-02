@@ -1,0 +1,56 @@
+surface,module,method,path,clean_url,flags,p0_candidate,source_file,name
+agency,auth,POST,/agency/pwd/login,{{agency_url}}/agency/pwd/login,"hardcoded_env,odd_relative_url",,代理后台/登陆/密码登陆-wesley.bru,密码登陆-wesley
+agency,auth,POST,/member/auth/sms,{{agency_url}}/member/auth/sms,,,代理后台/登陆/短信验证码前置检查-wesley.bru,短信验证码前置检查-wesley
+agency,finance,POST,/admin/agency/commission/audit/adjust,{{agency_url}}/admin/agency/commission/audit/adjust,,,代理管理后台/财务管理/佣金审核/佣金校准 - wesley.bru,佣金校准 - wesley
+agency,finance,POST,/admin/agency/commission/audit/agree,{{agency_url}}/admin/agency/commission/audit/agree,,,代理管理后台/财务管理/佣金审核/佣金审核通过 - wesley.bru,佣金审核通过 - wesley
+agency,finance,POST,/admin/agency/commission/audit/batch/agree,{{agency_url}}/admin/agency/commission/audit/batch/agree,,,代理管理后台/财务管理/佣金审核/批量通过.bru,批量通过
+agency,finance,POST,/admin/agency/commission/audit/batch/reject,{{agency_url}}/admin/agency/commission/audit/batch/reject,,,代理管理后台/财务管理/佣金审核/批量拒绝.bru,批量拒绝
+agency,finance,GET,/admin/agency/commission/audit/list,{{agency_url}}/admin/agency/commission/audit/list?status=1,,,代理管理后台/财务管理/佣金审核/佣金审核列表 - wesley.bru,佣金审核列表 - wesley
+agency,finance,POST,/admin/agency/commission/audit/reject,{{agency_url}}/admin/agency/commission/audit/reject,,,代理管理后台/财务管理/佣金审核/佣金审核拒绝 - wesley.bru,佣金审核拒绝 - wesley
+agency,finance,GET,/admin/agency/commission/report,{{agency_url}}/admin/agency/commission/report?page=1&page_size=10&state=1,,,代理管理后台/财务管理/佣金报表/佣金报表.bru,佣金报表
+agency,finance,GET,/admin/agency/commission/report/export,{{agency_url}}/admin/agency/commission/report/export?start_time=1754133776000&end_time=1759404176000,,,代理管理后台/财务管理/佣金报表/佣金报表导出.bru,佣金报表导出
+agency,finance,POST,/agency/finance/transaction/list,{{agency_url}}/agency/finance/transaction/list?cash_type=2001&page=1&page_size=5,hardcoded_env,yes,代理管理后台/财务管理/财务报表/账变列表- wesley.bru,账变列表- wesley
+agency,member,GET,/admin/agency/member/list,{{agency_url}}/admin/agency/member/list?page=1&page_size=10&start_time=1753977600000&end_time=1756656000000&parent_name=adfa&parent_phone=<redacted>,hardcoded_env,,代理管理后台/代理管理/会员列表/会员列表-wesley.bru,会员列表-wesley
+agency,member,POST,/admin/agency/member/tags/update,{{agency_url}}/admin/agency/member/tags/update,,,代理管理后台/代理管理/代理列表/会员备注.bru,会员备注
+agency,member,GET,/agency/member/list,{{agency_url}}/agency/member/list?page=1&page_size=10&start_time=1753977600000&end_time=1756656000000,"old_or_copy,hardcoded_env",,代理后台/会员列表/会员列表 copy.bru,会员列表 copy
+agency,member,GET,/agency/member/list,{{agency_url}}/agency/member/list?page=1&page_size=10&start_time=1753977600000&end_time=1756656000000,hardcoded_env,,代理后台/会员列表/会员列表.bru,会员列表
+agency,other,GET,/admin/agency/audit/detail,{{agency_url}}/admin/agency/audit/detail?uid=<redacted>,,,代理管理后台/代理管理/代理审核/代理资料.bru,代理资料
+agency,other,GET,/admin/agency/audit/list,{{agency_url}}/admin/agency/audit/list?page=1&page_size=10&start_time=1759766400000&end_time=1759852799999&username=filbet_p1cvKH12,,,代理管理后台/代理管理/代理审核/代理审核列表 - wesley.bru,代理审核列表 - wesley
+agency,other,GET,/admin/agency/child/active/list,{{agency_url}}/admin/agency/child/active/list?page=1&page_size=10&parent_id=<id>&ty=1&month=202508,,,代理管理后台/活跃会员列表.bru,活跃会员列表
+agency,other,GET,/admin/agency/child/ggr,{{agency_url}}/admin/agency/child/ggr?parent_id=1&ty=1&month=202508,hardcoded_env,,代理后台/ggr明细.bru,ggr明细
+agency,other,GET,/admin/agency/child/ggr,{{agency_url}}/admin/agency/child/ggr?parent_id=1&ty=1&month=202508,hardcoded_env,,代理管理后台/ggr明细.bru,ggr明细
+agency,other,GET,/admin/agency/child/pagcor/tax,{{agency_url}}/admin/agency/child/pagcor/tax?parent_id=1&ty=1&month=202508,hardcoded_env,,代理后台/pagcor税费明细.bru,pagcor税费明细
+agency,other,GET,/admin/agency/child/pagcor/tax,{{agency_url}}/admin/agency/child/pagcor/tax?parent_id=1&ty=1&month=202508,hardcoded_env,,代理管理后台/pagcor税费明细.bru,pagcor税费明细
+agency,other,GET,/admin/agency/child/venue/fee,{{agency_url}}/admin/agency/child/venue/fee?parent_id=1&ty=1&month=202508,hardcoded_env,,代理后台/场馆费明细.bru,场馆费明细
+agency,other,GET,/admin/agency/child/venue/fee,{{agency_url}}/admin/agency/child/venue/fee?parent_id=1&ty=1&month=202508,hardcoded_env,,代理管理后台/场馆费明细.bru,场馆费明细
+agency,other,POST,/admin/agency/domain/cutover,{{agency_url}}/admin/agency/domain/cutover,hardcoded_env,,代理管理后台/代理域名/开关切换.bru,开关切换
+agency,other,POST,/admin/agency/domain/delete,{{agency_url}}/admin/agency/domain/delete,hardcoded_env,,代理管理后台/代理域名/删除.bru,删除
+agency,other,POST,/admin/agency/domain/insert,{{agency_url}}/admin/agency/domain/insert,hardcoded_env,,代理管理后台/代理域名/添加.bru,添加
+agency,other,GET,/admin/agency/domain/list,{{agency_url}}/admin/agency/domain/list?domain=filplay,hardcoded_env,,代理管理后台/代理域名/列表.bru,列表
+agency,other,POST,/admin/agency/domain/update,{{agency_url}}/admin/agency/domain/update,hardcoded_env,,代理管理后台/代理域名/编辑.bru,编辑
+agency,other,GET,/admin/agency/ladder,{{agency_url}}/admin/agency/ladder?type=1,,,代理管理后台/代理管理/代理设置/佣金阶梯/查询佣金阶梯.bru,查询佣金阶梯
+agency,other,POST,/admin/agency/ladder/delete,{{agency_url}}/admin/agency/ladder/delete,,,代理管理后台/代理管理/代理设置/佣金阶梯/删除佣金阶梯.bru,删除佣金阶梯
+agency,other,POST,/admin/agency/ladder/insert,{{agency_url}}/admin/agency/ladder/insert,,,代理管理后台/代理管理/代理设置/佣金阶梯/添加佣金阶梯.bru,添加佣金阶梯
+agency,other,POST,/admin/agency/ladder/update,{{agency_url}}/admin/agency/ladder/update,,,代理管理后台/代理管理/代理设置/佣金阶梯/修改佣金阶梯.bru,修改佣金阶梯
+agency,other,GET,/admin/agency/list,{{agency_url}}/admin/agency/list?page=1&page_size=10&settle_type=1,,,代理管理后台/代理管理/代理列表/代理列表.bru,代理列表
+agency,other,GET,/admin/agency/taxrate/list,{{agency_url}}/admin/agency/taxrate/list,,,代理管理后台/代理管理/代理设置/Pagcor税率/Pagcor税率列表.bru,Pagcor税率列表
+agency,other,POST,/admin/agency/taxrate/update,{{agency_url}}/admin/agency/taxrate/update,,,代理管理后台/代理管理/代理设置/Pagcor税率/Pagcor 税率修改.bru,Pagcor 税率修改
+agency,other,POST,/admin/agency/update,{{agency_url}}/admin/agency/update,,,代理管理后台/代理管理/代理列表/代理列表编辑.bru,代理列表编辑
+agency,other,GET,/admin/agency/vendorrate/list,{{agency_url}}/admin/agency/vendorrate/list,,,代理管理后台/代理管理/代理设置/厂商费率/厂商费率列表.bru,厂商费率列表
+agency,other,POST,/admin/agency/vendorrate/update,{{agency_url}}/admin/agency/vendorrate/update,,,代理管理后台/代理管理/代理设置/厂商费率/厂商费率修改.bru,厂商费率修改
+agency,other,GET,/agency/ladder,{{agency_url}}/agency/ladder,,,代理后台/规则设置/查询佣金阶梯.bru,查询佣金阶梯
+agency,other,GET,/agency/platform/list,{{agency_url}}/agency/platform/list,hardcoded_env,,代理后台/厂商列表.bru,厂商列表
+agency,other,GET,/agency/profile,{{agency_url}}/agency/profile?start_time=1760284800000&end_time=1760371199999,,,代理后台/首页看板.bru,首页看板
+agency,other,POST,/agency/record/bet,{{agency_url}}/agency/record/bet,,,代理后台/投注记录.bru,投注记录
+agency,other,GET,/agency/taxrate/list,{{agency_url}}/agency/taxrate/list,,,代理后台/规则设置/Pagcor 税率列表.bru,Pagcor 税率列表
+agency,other,GET,/agency/vendorrate/list,{{agency_url}}/agency/vendorrate/list,,,代理后台/规则设置/厂商费率列表.bru,厂商费率列表
+agency,other,POST,/backend/agency/banner/insert,{{agency_url}}/backend/agency/banner/insert,,,代理管理后台/代理管理/代理设置/推广素材/添加.bru,添加
+agency,other,POST,/backend/agency/banner/list,{{agency_url}}/backend/agency/banner/list,,,代理管理后台/代理管理/代理设置/推广素材/列表.bru,列表
+agency,other,POST,/backend/agency/banner/update,{{agency_url}}/backend/agency/banner/update,,,代理管理后台/代理管理/代理设置/推广素材/编辑.bru,编辑
+agency,other,POST,/backend/agency/sys/config/update,{{agency_url}}/backend/agency/sys/config/update,hardcoded_env,,代理管理后台/代理管理/代理设置/代理开关/代理开关修改.bru,代理开关修改
+agency,permission,GET,/agency/priv/list,{{agency_url}}/agency/priv/list,odd_relative_url,,代理管理后台/系统/角色配置/权限列表.bru,权限列表
+agency,promo,GET,/admin/agency/child/bonus/list,{{agency_url}}/admin/agency/child/bonus/list?page=1&page_size=10&parent_id=<id>&ty=1&end_time=20251001,,,代理管理后台/活动礼金列表.bru,活动礼金列表
+agency,promo,GET,/agency/bonus/list,{{agency_url}}/agency/bonus/list?page=1&page_size=10&uid=<redacted>,,,代理后台/佣金管理/活动礼金列表.bru,活动礼金列表
+agency,report,GET,/admin/agency/reports/bi/basic,{{agency_url}}/admin/agency/reports/bi/basic?report_type=1,hardcoded_env,,代理管理后台/首页BI/数据总览.bru,数据总览
+agency,report,GET,/admin/agency/reports/bi/chart,{{agency_url}}/admin/agency/reports/bi/chart?time_range=1,hardcoded_env,,代理管理后台/首页BI/报表图形化数据.bru,报表图形化数据
+agency,report,GET,/agency/commission/report,{{agency_url}}/agency/commission/report?page=1&page_size=10&start_time=1756656000000&end_time=1759248000000,,,代理后台/佣金管理/佣金列表.bru,佣金列表

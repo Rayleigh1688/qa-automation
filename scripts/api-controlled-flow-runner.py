@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Run controlled write-flow API probes in FAT.
+"""Run controlled write-flow API probes in test environments.
 
 This runner is intentionally separate from the read-only P0 smoke runner.
 Use it only for test environments and explicit controlled write probes.
@@ -8,15 +8,11 @@ Use it only for test environments and explicit controlled write probes.
 from __future__ import annotations
 
 import argparse
-import base64
-import hashlib
-import hmac
 import importlib.util
 import json
 import mimetypes
 import os
 import ssl
-import struct
 import time
 import uuid
 from pathlib import Path
@@ -25,6 +21,7 @@ from urllib.parse import parse_qs, urlencode, urlparse
 from urllib.request import Request, urlopen
 
 from p0_session import load_session, write_session
+from totp import current_totp
 
 
 def load_smoke_runner() -> ModuleType:
@@ -52,34 +49,6 @@ def row(method: str, clean_url: str, base_var: str = "{{api_url}}") -> dict[str,
 def business_ok(result: dict[str, object]) -> bool:
     body = result.get("decoded_body")
     return isinstance(body, dict) and body.get("status") is True
-
-
-def digest_factory(algorithm: str):
-    normalized = algorithm.strip().lower().replace("-", "")
-    if normalized == "sha1":
-        return hashlib.sha1
-    if normalized == "sha256":
-        return hashlib.sha256
-    if normalized == "sha512":
-        return hashlib.sha512
-    raise SystemExit(f"unsupported TOTP algorithm: {algorithm}")
-
-
-def current_totp(
-    secret: str,
-    timestamp: int | None = None,
-    step: int = 30,
-    digits: int = 6,
-    algorithm: str = "SHA1",
-) -> str:
-    normalized = secret.strip().replace(" ", "").upper()
-    padded = normalized + "=" * (-len(normalized) % 8)
-    key = base64.b32decode(padded, casefold=True)
-    counter = int((timestamp or time.time()) // step)
-    digest = hmac.new(key, struct.pack(">Q", counter), digest_factory(algorithm)).digest()
-    offset = digest[-1] & 0x0F
-    code = struct.unpack(">I", digest[offset : offset + 4])[0] & 0x7FFFFFFF
-    return str(code % (10**digits)).zfill(digits)
 
 
 def approval_code(args: argparse.Namespace) -> str:
@@ -188,9 +157,17 @@ def client_login(args: argparse.Namespace) -> list[dict[str, object]]:
     if not token:
         raise SystemExit("client login failed; cannot run controlled write probes")
     os.environ["API_TOKEN"] = token
-    return [result_record("client_sms", item) for item in login_results[:1]] + [
-        result_record("client_login", item) for item in login_results[1:]
-    ]
+    records = []
+    for item in login_results:
+        url = str(item.get("url") or "")
+        if url.endswith("/member/sms"):
+            name = "client_sms"
+        elif "/member/otp/login" in url:
+            name = "client_otp_login"
+        else:
+            name = "client_password_login"
+        records.append(result_record(name, item))
+    return records
 
 
 def relabel(records: list[dict[str, object]], prefix: str) -> list[dict[str, object]]:
@@ -202,26 +179,41 @@ def relabel(records: list[dict[str, object]], prefix: str) -> list[dict[str, obj
     return renamed
 
 
-def use_withdraw_client(args: argparse.Namespace) -> tuple[str | None, str | None, str | None]:
+def use_withdraw_client(
+    args: argparse.Namespace,
+) -> tuple[str | None, str | None, str | None, str | None]:
     phone = args.withdraw_client_phone or os.environ.get("WITHDRAW_CLIENT_PHONE", "")
     if not phone:
-        return None, None, None
+        return None, None, None, None
     previous_phone = os.environ.get("CLIENT_PHONE")
+    previous_password = os.environ.get("CLIENT_PASSWORD")
     previous_otp = os.environ.get("CLIENT_OTP")
     previous_token = os.environ.get("API_TOKEN")
     os.environ["CLIENT_PHONE"] = phone
+    password = os.environ.get("WITHDRAW_CLIENT_PASSWORD") or os.environ.get("WRITE_CLIENT_PASSWORD", "")
+    if password:
+        os.environ["CLIENT_PASSWORD"] = password
     otp = args.withdraw_client_otp or os.environ.get("WITHDRAW_CLIENT_OTP", "")
     if otp:
         os.environ["CLIENT_OTP"] = otp
     os.environ.pop("API_TOKEN", None)
-    return previous_phone, previous_otp, previous_token
+    return previous_phone, previous_password, previous_otp, previous_token
 
 
-def restore_client(previous_phone: str | None, previous_otp: str | None, previous_token: str | None) -> None:
+def restore_client(
+    previous_phone: str | None,
+    previous_password: str | None,
+    previous_otp: str | None,
+    previous_token: str | None,
+) -> None:
     if previous_phone is None:
         os.environ.pop("CLIENT_PHONE", None)
     else:
         os.environ["CLIENT_PHONE"] = previous_phone
+    if previous_password is None:
+        os.environ.pop("CLIENT_PASSWORD", None)
+    else:
+        os.environ["CLIENT_PASSWORD"] = previous_password
     if previous_otp is None:
         os.environ.pop("CLIENT_OTP", None)
     else:
@@ -234,9 +226,19 @@ def restore_client(previous_phone: str | None, previous_otp: str | None, previou
 
 def apply_primary_client_override(args: argparse.Namespace) -> None:
     phone = args.client_phone or os.environ.get("WRITE_CLIENT_PHONE", "")
+    write_phone = os.environ.get("WRITE_CLIENT_PHONE", "")
+    normalized_phone = "".join(character for character in phone if character.isdigit())
+    normalized_write_phone = "".join(character for character in write_phone if character.isdigit())
+    use_write_lane = bool(
+        not args.client_phone
+        or (normalized_phone and normalized_phone == normalized_write_phone)
+    )
+    password = os.environ.get("WRITE_CLIENT_PASSWORD", "") if use_write_lane else ""
     otp = args.client_otp or os.environ.get("WRITE_CLIENT_OTP", "")
     if phone:
         os.environ["CLIENT_PHONE"] = phone
+    if password:
+        os.environ["CLIENT_PASSWORD"] = password
     if otp:
         os.environ["CLIENT_OTP"] = otp
 
@@ -254,10 +256,18 @@ def register_new_user(args: argparse.Namespace) -> list[dict[str, object]]:
     phone = args.register_phone or os.environ.get("REGISTER_PHONE", "")
     if not phone:
         raise SystemExit("REGISTER_PHONE or --register-phone is required; use an allocated 090XXXXXXXX KYC test account")
-    password = os.environ.get("REGISTER_PASSWORD", "Qa123456")
+    password = os.environ.get("REGISTER_PASSWORD", "")
+    if not password:
+        raise SystemExit("REGISTER_PASSWORD is required for registration")
     code = os.environ.get("REGISTER_OTP") or os.environ.get("CLIENT_OTP")
-    if not code:
-        raise SystemExit("REGISTER_OTP or CLIENT_OTP is required for registration")
+    otp_source = os.environ.get(
+        "REGISTER_OTP_SOURCE",
+        os.environ.get("CLIENT_OTP_SOURCE", "fixed"),
+    ).strip().lower()
+    if not code and otp_source != "admin_sms":
+        raise SystemExit(
+            "REGISTER_OTP/CLIENT_OTP or REGISTER_OTP_SOURCE=admin_sms is required for registration"
+        )
 
     sms_body = {
         "country_code": os.environ.get("REGISTER_COUNTRY_CODE", os.environ.get("CLIENT_COUNTRY_CODE", "63")),
@@ -279,6 +289,18 @@ def register_new_user(args: argparse.Namespace) -> list[dict[str, object]]:
     records = [result_record("register_sms", sms_result)]
     if not otp_id:
         records.append({"name": "register", "skipped": True, "reason": "missing otp_id", "phone": phone})
+        return records
+
+    if not code and otp_source == "admin_sms":
+        code = smoke.admin_sms_otp(args, otp_id)
+    if not code:
+        records.append({
+            "name": "register",
+            "business_status": False,
+            "skipped": True,
+            "reason": "registration OTP lookup failed",
+            "phone": phone,
+        })
         return records
 
     register_body = {
@@ -756,7 +778,7 @@ def approve_withdraw(args: argparse.Namespace, withdraw_order: dict[str, object]
 
 def main() -> None:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--env", default=".env")
+    parser.add_argument("--env", default=os.environ.get("ENV_FILE", ".env.fat"))
     parser.add_argument("--timeout", type=float, default=10)
     parser.add_argument("--insecure", action="store_true")
     parser.add_argument("--body-format", choices=["json", "cbor"], default="cbor")
@@ -924,7 +946,7 @@ def main() -> None:
         records.append(list_record)
         records.extend(approve_deposit(args, order, args.deposit_id, args.deposit_external_order_id))
     if args.withdraw and separate_withdraw_client:
-        previous_phone, previous_otp, previous_token = use_withdraw_client(args)
+        previous_phone, previous_password, previous_otp, previous_token = use_withdraw_client(args)
         try:
             records.extend(relabel(client_login(args), "withdraw"))
             records.append(query_wallet(args, "withdraw_wallet_before"))
@@ -940,7 +962,7 @@ def main() -> None:
                 records.extend(approve_withdraw(args, order))
             records.append(query_wallet(args, "withdraw_wallet_after"))
         finally:
-            restore_client(previous_phone, previous_otp, previous_token)
+            restore_client(previous_phone, previous_password, previous_otp, previous_token)
     elif args.withdraw:
         withdraw_records = run_withdraw(args)
         records.extend(withdraw_records)

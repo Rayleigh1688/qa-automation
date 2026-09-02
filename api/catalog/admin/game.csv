@@ -1,0 +1,92 @@
+surface,module,method,path,clean_url,flags,p0_candidate,source_file,name
+admin,game,POST,/admin/game/bindvenue,{{admin_url}}/admin/game/bindvenue,,,后台/game管理/游戏管理/+游戏绑定到场馆-owen.bru,+游戏绑定到场馆-owen
+admin,game,POST,/admin/game/dicttypetag/insert,{{admin_url}}/admin/game/dicttypetag/insert,,,后台/game管理/游戏管理/+添加 -类型标签--owen.bru,+添加 <类型标签>-owen
+admin,game,POST,/admin/game/dicttypetag/list,{{admin_url}}/admin/game/dicttypetag/list,,,后台/game管理/游戏管理/+获取 -类型标签- 列表-owen.bru,+获取 <类型标签> 列表-owen
+admin,game,POST,/admin/game/dicttypetag/update/state,{{admin_url}}/admin/game/dicttypetag/update/state,,,后台/game管理/游戏管理/+修改 -类型标签--owen.bru,+修改 <类型标签>-owen
+admin,game,POST,/admin/game/dictweighttag/insert,{{admin_url}}/admin/game/dictweighttag/insert,,,后台/game管理/游戏管理/+添加 -权重标签--owen.bru,+添加 <权重标签>-owen
+admin,game,POST,/admin/game/dictweighttag/list,{{admin_url}}/admin/game/dictweighttag/list,,,后台/game管理/游戏管理/+获取 -权重标签- 列表-owen.bru,+获取 <权重标签> 列表-owen
+admin,game,POST,/admin/game/dictweighttag/update/state,{{admin_url}}/admin/game/dictweighttag/update/state,,,后台/game管理/游戏管理/+修改 -权重标签--owen.bru,+修改 <权重标签>-owen
+admin,game,GET,/admin/game/downbox,{{admin_url}}/admin/game/downbox,,,后台/game管理/游戏管理/游戏下拉框-owen.bru,游戏下拉框-owen
+admin,game,GET,/admin/game/freespins,{{admin_url}}/admin/game/freespins?provider_names=fc%2Cjili,hardcoded_env,,后台/game管理/免费旋转游戏列表.bru,免费旋转游戏列表
+admin,game,POST,/admin/game/gameweighttag/insert,{{admin_url}}/admin/game/gameweighttag/insert,,,后台/game管理/游戏管理/+给游戏添加权重标签-owen.bru,+给游戏添加权重标签-owen
+admin,game,POST,/admin/game/import,{{admin_url}}/admin/game/import,,,后台/game管理/游戏管理/游戏导入.bru,游戏导入
+admin,game,GET,/admin/game/import/failed/list,{{admin_url}}/admin/game/import/failed/list?page=1&page_size=100,,,后台/game管理/游戏管理/游戏导入失败列表.bru,游戏导入失败列表
+admin,game,POST,/admin/game/insert,{{admin_url}}/admin/game/insert,,,后台/game管理/游戏管理/游戏新增.bru,游戏新增
+admin,game,POST,/admin/game/list,{{admin_url}}/admin/game/list,,,后台/game管理/游戏管理/游戏列表-owen.bru,游戏列表-owen
+admin,game,POST,/admin/game/search,{{admin_url}}/admin/game/search,,,后台/game管理/游戏管理/+游戏列表查询-owen-aliang.bru,+游戏列表查询-owen-aliang
+admin,game,POST,/admin/game/search/export,{{admin_url}}/admin/game/search/export,,,后台/game管理/游戏管理/+游戏列表查询-结果导出-owen.bru,+游戏列表查询-结果导出-owen
+admin,game,POST,/admin/game/update,{{admin_url}}/admin/game/update,,,后台/game管理/游戏管理/+游戏条目更新-owen.bru,+游戏条目更新-owen
+admin,game,POST,/admin/game/update/compliance,{{admin_url}}/admin/game/update/compliance,,,后台/game管理/游戏管理/更新游戏合规状态-light-owen.bru,更新游戏合规状态-light/owen
+admin,game,POST,/admin/game/update/state,{{admin_url}}/admin/game/update/state,,,后台/game管理/游戏管理/游戏更新状态.bru,游戏更新状态
+admin,game,POST,/admin/game/update/tags,{{admin_url}}/admin/game/update/tags,,,后台/game管理/游戏管理/游戏设置排序标签.bru,游戏设置排序标签
+admin,game,POST,/admin/gameclass/insert,{{admin_url}}/admin/gameclass/insert,,,后台/game管理/场馆管理/+添加场馆记录-owen.bru,+添加场馆记录-owen
+admin,game,POST,/admin/gameclass/list,{{admin_url}}/admin/gameclass/list,,,后台/game管理/场馆管理/+查询场馆列表-owen.bru,+查询场馆列表-owen
+admin,game,POST,/admin/gameclass/member/index,{{admin_url}}/admin/gameclass/member/index,,,后台/game管理/场馆管理/查询缓存-owen.bru,查询缓存-owen
+admin,game,POST,/admin/gameclass/update,{{admin_url}}/admin/gameclass/update,,,后台/game管理/场馆管理/+更新场馆记录-owen.bru,+更新场馆记录-owen
+admin,game,GET,/admin/platform/gametype,{{admin_url}}/admin/platform/gametype?venue_id=123,,,后台/game管理/厂商管理/获取厂商支持的场馆.bru,获取厂商支持的场馆
+admin,game,POST,/admin/platform/insert,{{admin_url}}/admin/platform/insert,,,后台/game管理/厂商管理/+添加厂商记录-owen.bru,+添加厂商记录-owen
+admin,game,POST,/admin/platform/list,{{admin_url}}/admin/platform/list,hardcoded_env,,后台/game管理/场馆管理/场馆列表-owen.bru,场馆列表-owen
+admin,game,POST,/admin/platform/search,{{admin_url}}/admin/platform/search,,,后台/game管理/厂商管理/+查询厂商列表-owen.bru,+查询厂商列表-owen
+admin,game,POST,/admin/platform/update,{{admin_url}}/admin/platform/update,,,后台/game管理/厂商管理/+更新厂商记录-owen.bru,+更新厂商记录-owen
+admin,game,POST,/admin/platform/update/state,{{admin_url}}/admin/platform/update/state,,,后台/game管理/场馆管理/场馆更新状态-owen.bru,场馆更新状态-owen
+admin,game,POST,/admin/promo/bonus/game/insert,{{admin_url}}/admin/promo/bonus/game/insert,,,后台/活动/游戏插入 - felix.bru,游戏插入
+admin,game,POST,/admin/promo/bti/world/cup/bti/syn,{{admin_url}}/admin/promo/bti/world/cup/bti/syn,,,后台/game管理/freebet活动管理/freebet活动管理-同步状态.bru,freebet活动管理-同步状态
+admin,game,POST,/admin/promo/bti/world/cup/cancel,{{admin_url}}/admin/promo/bti/world/cup/cancel,,,后台/game管理/freebet活动管理/freebet活动管理-取消免费投注.bru,freebet活动管理-取消免费投注
+admin,game,GET,/admin/promo/bti/world/cup/list,{{admin_url}}/admin/promo/bti/world/cup/list,,,后台/game管理/freebet活动管理/freebet活动管理-重新发放.bru,freebet活动管理-重新发放
+admin,game,GET,/admin/promo/bti/world/cup/list,{{admin_url}}/admin/promo/bti/world/cup/list,,,后台/game管理/freebet活动管理/freebet活动管理列表.bru,freebet活动管理列表
+admin,game,GET,/admin/promo/bti/world/cup/list,{{admin_url}}/admin/promo/bti/world/cup/list,,,后台/game管理/freebet活动管理/freebet活动管理列表导出.bru,freebet活动管理列表导出
+admin,game,GET,/admin/reports/game,{{admin_url}}/admin/reports/game?page=1&page_size=10,,,后台/报表/游戏报表/游戏报表.bru,游戏报表
+admin,game,POST,/admin/reports/game/adjust,{{admin_url}}/admin/reports/game/adjust,,,后台/报表/游戏报表校准.bru,游戏报表校准
+admin,game,GET,/admin/reports/game/export,{{admin_url}}/admin/reports/game/export?topic_id=1234,,,后台/报表/游戏报表/游戏报表导出.bru,游戏报表导出
+admin,game,GET,/admin/reports/game/node,{{admin_url}}/admin/reports/game/node?page=1&page_size=10&start_time=1753977600000&end_time=1754409600000&venue_name=pg&game_class=1&gname=super+ace&node=1,,,后台/报表/游戏报表/游戏线路报表.bru,游戏线路报表
+admin,game,GET,/admin/reports/game/node/export,{{admin_url}}/admin/reports/game/node/export?topic_id=1234&node=1,,,后台/报表/游戏报表/游戏线路报表导出.bru,游戏线路报表导出
+admin,game,GET,/admin/reports/gameclass,{{admin_url}}/admin/reports/gameclass?page=1&page_size=10&start_time=1753977600000&end_time=1754409600000&game_class=1&venue_name=pg,,,后台/报表/游戏类型报表/游戏类型报表.bru,游戏类型报表
+admin,game,GET,/admin/reports/gameclass/export,{{admin_url}}/admin/reports/gameclass/export?topic_id=1234,,,后台/报表/游戏类型报表/游戏类型报表导出.bru,游戏类型报表导出
+admin,game,GET,/admin/reports/gameclass/node,{{admin_url}}/admin/reports/gameclass/node?page=1&page_size=10&start_time=1753977600000&end_time=1754409600000&game_class=1&venue_name=pg&node=1,,,后台/报表/游戏类型报表/游戏类型线路报表.bru,游戏类型线路报表
+admin,game,GET,/admin/reports/gameclass/node/export,{{admin_url}}/admin/reports/gameclass/node/export?topic_id=1234,,,后台/报表/游戏类型报表/游戏类型线路报表导出.bru,游戏类型线路报表导出
+admin,game,GET,/admin/reports/member-daily-game/aggregate,{{admin_url}}/admin/reports/member-daily-game/aggregate?start_date=2026-06-01&end_date=2026-06-03&page=1&page_size=20,,,后台/报表管理/会员每日游戏报表--汇总列表.bru,会员每日游戏报表--汇总列表
+admin,game,GET,/admin/reports/member-daily-game/aggregate/export,{{admin_url}}/admin/reports/member-daily-game/aggregate/export?topic_id={{topic_id}}&start_date=2026-06-01&end_date=2026-06-03,,,后台/报表管理/会员每日游戏报表--汇总导出.bru,会员每日游戏报表--汇总导出
+admin,game,GET,/admin/reports/member-daily-game/detail,{{admin_url}}/admin/reports/member-daily-game/detail?uid=<redacted>&start_date=2026-06-01&end_date=2026-06-03&page=1&page_size=20,,,后台/报表管理/会员每日游戏报表--每日明细.bru,会员每日游戏报表--每日明细
+admin,game,GET,/admin/reports/venue,{{admin_url}}/admin/reports/venue?page=1&page_size=10&start_time=1753977600000&end_time=1754409600000&venue_name=pg,,,后台/报表/游戏平台报表/厂商报表.bru,厂商报表
+admin,game,GET,/admin/reports/venue/export,{{admin_url}}/admin/reports/venue/export?start_time=1753977600000&end_time=1754409600000&venue_name=pg&topic_id=12343,,,后台/报表/游戏平台报表/厂商报表导出.bru,厂商报表导出
+admin,game,GET,/admin/reports/venue/node,{{admin_url}}/admin/reports/venue/node?page=1&page_size=10&start_time=1753977600000&end_time=1754409600000&venue_name=pg&node=1,,,后台/报表/游戏平台报表/厂商线路报表.bru,厂商线路报表
+admin,game,GET,/admin/reports/venue/node/export,{{admin_url}}/admin/reports/venue/node/export?start_time=1753977600000&end_time=1754409600000&venue_name=pg&topic_id=12343&node=1,,,后台/报表/游戏平台报表/厂商线路报表导出.bru,厂商线路报表导出
+admin,game,POST,/admin/venue/list,{{admin_url}}/admin/venue/list,,,后台/game管理/厂商管理/厂商列表-light-owen.bru,厂商列表-light/owen
+admin,game,GET,/cmpl/game/list,{{admin_url}}/cmpl/game/list?page=1&page_size=10&venue_id=1,,,合规/游戏管理/游戏列表.bru,游戏列表
+admin,game,POST,/cmpl/game/update/state,{{admin_url}}/cmpl/game/update/state,,,合规/游戏管理/游戏更新状态.bru,游戏更新状态
+admin,game,POST,/cmpl/jackpot/export,{{admin_url}}/cmpl/jackpot/export,,,合规/游戏记录/jackpot记录导出-owen.bru,jackpot记录导出-owen
+admin,game,POST,/cmpl/jackpot/list,{{admin_url}}/cmpl/jackpot/list,,,合规/游戏记录/jackpot记录-owen.bru,jackpot记录-owen
+admin,game,POST,/cmpl/record/bet,{{admin_url}}/cmpl/record/bet,,,合规/游戏记录/全平台投注记录-wesley-owen.bru,全平台投注记录-wesley/owen
+admin,game,POST,/cmpl/record/export,{{admin_url}}/cmpl/record/export,,,合规/游戏记录/游戏记录导出-wesley-owen.bru,游戏记录导出-wesley/owen
+admin,game,POST,/platform/game/dicttypetag/list,{{admin_url}}/platform/game/dicttypetag/list,,,游戏集成平台/游戏管理/+获取 -类型标签- 列表-owen.bru,+获取 <类型标签> 列表-owen
+admin,game,POST,/platform/game/dictweighttag/list,{{admin_url}}/platform/game/dictweighttag/list,,,游戏集成平台/游戏管理/+获取 -权重标签- 列表-owen.bru,+获取 <权重标签> 列表-owen
+admin,game,POST,/platform/game/export,{{admin_url}}/platform/game/export?topic_id=%E9%98%B2%E5%86%B2%E7%AA%81id,,,游戏集成平台/游戏管理/游戏导出.bru,游戏导出
+admin,game,GET,/platform/game/list,{{admin_url}}/platform/game/list,,,游戏集成平台/游戏管理/游戏列表.bru,游戏列表
+admin,game,GET,/platform/game/name/list,{{admin_url}}/platform/game/name/list,,,游戏集成平台/游戏管理/游戏名称列表.bru,游戏名称列表
+admin,game,POST,/platform/game/update,{{admin_url}}/platform/game/update,,,游戏集成平台/游戏管理/游戏编辑.bru,游戏编辑
+admin,game,POST,/platform/game/update/state,{{admin_url}}/platform/game/update/state,,,游戏集成平台/游戏管理/游戏更新状态.bru,游戏更新状态
+admin,game,POST,/platform/gameclass/list,{{admin_url}}/platform/gameclass/list,,,游戏集成平台/游戏管理/+查询场馆列表-owen.bru,+查询场馆列表-owen
+admin,game,POST,/platform/group/insert,{{admin_url}}/platform/group/insert,hardcoded_env,,游戏集成平台/系统管理/角色管理/新增角色.bru,新增角色
+admin,game,GET,/platform/group/list,{{admin_url}}/platform/group/list?page=1&page_size=20,,,游戏集成平台/系统管理/角色管理/角色列表.bru,角色列表
+admin,game,POST,/platform/group/update,{{admin_url}}/platform/group/update,,,游戏集成平台/系统管理/角色管理/更新角色.bru,更新角色
+admin,game,GET,/platform/me/detail,{{admin_url}}/platform/me/detail,,,游戏集成平台/系统管理/用户管理/后台账户详情(当前登陆信息)-seven.bru,后台账户详情(当前登陆信息)-seven
+admin,game,GET,/platform/member/export,{{admin_url}}/platform/member/export,,,游戏集成平台/商户管理/玩家管理导出.bru,玩家管理导出
+admin,game,GET,/platform/member/list,{{admin_url}}/platform/member/list,,,游戏集成平台/商户管理/玩家管理.bru,玩家管理
+admin,game,GET,/platform/merchant/list,{{admin_url}}/platform/merchant/list,,,游戏集成平台/商户管理/商户列表.bru,商户列表
+admin,game,POST,/platform/merchant/resetkey,{{admin_url}}/platform/merchant/resetkey,,,游戏集成平台/商户管理/商户key生成.bru,商户key生成
+admin,game,POST,/platform/merchant/update/state,{{admin_url}}/platform/merchant/update/state,,,游戏集成平台/商户管理/商户更新.bru,商户更新
+admin,game,GET,/platform/priv/by/group,{{admin_url}}/platform/priv/by/group?gid=0,hardcoded_env,,游戏集成平台/系统管理/角色管理/角色权限列表.bru,角色权限列表
+admin,game,GET,/platform/priv/list,{{admin_url}}/platform/priv/list?pid=0,hardcoded_env,,游戏集成平台/系统管理/角色管理/权限列表.bru,权限列表
+admin,game,POST,/platform/record/bet,{{admin_url}}/platform/record/bet,,,游戏集成平台/商户管理/注单管理.bru,注单管理
+admin,game,POST,/platform/record/bet/stat,{{admin_url}}/platform/record/bet/stat,,,游戏集成平台/商户管理/注单管理合计.bru,注单管理合计
+admin,game,GET,/platform/record/export,{{admin_url}}/platform/record/export,,,游戏集成平台/商户管理/注单管理导出.bru,注单管理导出
+admin,game,GET,/platform/report/bi,{{admin_url}}/platform/report/bi,,,游戏集成平台/首页.bru,首页
+admin,game,POST,/platform/report/bi,{{admin_url}}/platform/report/bi,,,游戏集成平台/报表/首页报表.bru,首页报表
+admin,game,GET,/platform/user/delete,{{admin_url}}/platform/user/delete?id=<id>,,,游戏集成平台/系统管理/用户管理/后台删除账户-seven.bru,后台删除账户-seven
+admin,game,GET,/platform/user/detail,{{admin_url}}/platform/user/detail?id=<id>,,,游戏集成平台/系统管理/用户管理/后台账户详情-seven.bru,后台账户详情-seven
+admin,game,POST,/platform/user/insert,{{admin_url}}/platform/user/insert,,,游戏集成平台/系统管理/用户管理/新增账户-seven.bru,新增账户-seven
+admin,game,GET,/platform/user/list,{{admin_url}}/platform/user/list,,,游戏集成平台/系统管理/用户管理/后台账户列表-seven.bru,后台账户列表-seven
+admin,game,POST,/platform/user/update,{{admin_url}}/platform/user/update,,,游戏集成平台/系统管理/用户管理/修改账户信息-seven.bru,修改账户信息-seven
+admin,game,GET,/platform/venue/list,{{admin_url}}/platform/venue/list,,,游戏集成平台/游戏管理/厂商管理.bru,厂商管理
+admin,game,GET,/platform/venue/name/list,{{admin_url}}/platform/venue/name/list,,,游戏集成平台/游戏管理/厂商名称列表.bru,厂商名称列表
+admin,game,POST,/platform/venue/update/state,{{admin_url}}/platform/venue/update/state,,,游戏集成平台/游戏管理/厂商管理更新.bru,厂商管理更新

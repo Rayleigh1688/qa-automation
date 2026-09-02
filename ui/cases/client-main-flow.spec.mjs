@@ -62,7 +62,7 @@ function writeMainFlowReport(result) {
 test.describe("P0 client main flow UI scan", () => {
   test("login and scan wallet/deposit/withdraw/betting surfaces", async ({ page }, testInfo) => {
     const phone = requiredEnv("CLIENT_PHONE");
-    const otp = requiredEnv("CLIENT_OTP");
+    const password = requiredEnv("CLIENT_PASSWORD");
     const pageConfig = loadJson("ui/data/client-pages.json");
     const modalConfig = loadJson("ui/data/client-modals.json");
     const network = attachNetworkRecorder(page);
@@ -71,7 +71,7 @@ test.describe("P0 client main flow UI scan", () => {
     await app.gotoHome();
     const initialBodyText = await page.locator("body").innerText();
     if (initialBodyText.includes("Register / Login")) {
-      await app.loginWithOtp(phone, otp);
+      await app.loginWithPassword(phone, password);
     }
 
     const bodyText = await page.locator("body").innerText();

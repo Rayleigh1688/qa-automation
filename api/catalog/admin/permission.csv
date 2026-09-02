@@ -1,0 +1,21 @@
+surface,module,method,path,clean_url,flags,p0_candidate,source_file,name
+admin,permission,POST,/admin/channel/group/delete,{{admin_url}}/admin/channel/group/delete,todo,,后台/运营管理/推广管理/渠道管理/渠道分组/删除渠道分组-todo.bru,删除渠道分组-todo
+admin,permission,GET,/admin/channel/group/dict,{{admin_url}}/admin/channel/group/dict,todo,,后台/运营管理/推广管理/渠道管理/渠道分组/渠道分组字黄-todo.bru,渠道分组字黄-todo
+admin,permission,POST,/admin/channel/group/insert,{{admin_url}}/admin/channel/group/insert,todo,,后台/运营管理/推广管理/渠道管理/渠道分组/新增渠道分组-todo.bru,新增渠道分组-todo
+admin,permission,GET,/admin/channel/group/list,{{admin_url}}/admin/channel/group/list,todo,,后台/运营管理/推广管理/渠道管理/渠道分组/渠道分组列表-todo.bru,渠道分组列表-todo
+admin,permission,POST,/admin/channel/group/update,{{admin_url}}/admin/channel/group/update,todo,,后台/运营管理/推广管理/渠道管理/渠道分组/更新渠道分组-todo.bru,更新渠道分组-todo
+admin,permission,POST,/admin/channel/manage/update/group,{{admin_url}}/admin/channel/manage/update/group,todo,,后台/运营管理/推广管理/渠道管理/更新渠道管理分组-todo.bru,更新渠道管理分组-todo
+admin,permission,POST,/admin/group/insert,{{admin_url}}/admin/group/insert,hardcoded_env,,后台/系统管理/角色管理/新增角色 --yasser.bru,新增角色 --yasser
+admin,permission,GET,/admin/group/list,{{admin_url}}/admin/group/list?page=1&page_size=20,,,后台/系统管理/角色管理/角色列表 --yasser.bru,角色列表 --yasser
+admin,permission,POST,/admin/group/update,{{admin_url}}/admin/group/update,hardcoded_env,,后台/系统管理/权限管理/权限列表保存.bru,权限列表保存
+admin,permission,POST,/admin/group/update,{{admin_url}}/admin/group/update,,,后台/系统管理/角色管理/更新角色--yasser.bru,更新角色--yasser
+admin,permission,GET,/admin/priv/by/group,{{admin_url}}/admin/priv/by/group?gid=0,hardcoded_env,,后台/系统管理/权限管理/角色权限列表.bru,角色权限列表
+admin,permission,GET,/admin/priv/check,{{admin_url}}/admin/priv/check?path=admin/priv/check,hardcoded_env,,后台/系统管理/权限管理/权限检查.bru,权限检查
+admin,permission,GET,/admin/priv/list,{{admin_url}}/admin/priv/list?pid=0,hardcoded_env,,后台/系统管理/权限管理/权限列表.bru,权限列表
+admin,permission,POST,/admin/upload/private,{{admin_url}}/admin/upload/private?prefix=kyc,,,后台/上传/上传-临时访问 - double.bru,上传-临时访问 - double
+admin,permission,POST,/cmpl/group/insert,{{admin_url}}/cmpl/group/insert,hardcoded_env,,合规/系统管理/角色管理/新增角色 --yasser.bru,新增角色 --yasser
+admin,permission,GET,/cmpl/group/list,{{admin_url}}/cmpl/group/list?page=1&page_size=20,,,合规/系统管理/角色管理/角色列表 --yasser.bru,角色列表 --yasser
+admin,permission,POST,/cmpl/group/update,{{admin_url}}/cmpl/group/update,,,合规/系统管理/角色管理/更新角色--yasser.bru,更新角色--yasser
+admin,permission,GET,/cmpl/priv/by/group,{{admin_url}}/cmpl/priv/by/group?gid=0,hardcoded_env,,合规/系统管理/权限管理/角色权限列表.bru,角色权限列表
+admin,permission,GET,/cmpl/priv/list,{{admin_url}}/cmpl/priv/list?pid=0,hardcoded_env,,合规/系统管理/权限管理/权限列表.bru,权限列表
+admin,permission,POST,/cmpl/upload/private,{{admin_url}}/cmpl/upload/private?prefix=kyc,,,合规/上传/上传-临时访问 - double.bru,上传-临时访问 - double

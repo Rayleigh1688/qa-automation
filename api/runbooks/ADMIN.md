@@ -1,6 +1,6 @@
 # Admin API Runbook
 
-上级入口：[`API.md`](API.md) 和 [`api/p0/README.md`](../p0/README.md)。本文件只说明后台鉴权与受控审批，不维护当前执行状态；实时状态看 [`AI-HANDOFF.md`](../../AI-HANDOFF.md)。
+上级入口：[`API.md`](API.md) 和 [`api/p0/README.md`](../p0/README.md)。FAT/UAT 登录、账号和金额差异统一查看 [`ENVIRONMENTS.md`](ENVIRONMENTS.md)。本文件只说明后台鉴权与受控审批，不维护当前执行状态；实时状态看 [`AI-HANDOFF.md`](../../AI-HANDOFF.md)。
 
 ## 目标
 
@@ -43,7 +43,7 @@ ADMIN_CLIENT_VERSION=Chrome/151.0.0.0
 ADMIN_TOKEN_PREFIX=
 ```
 
-注意：`ADMIN_GOOGLE_CODE` 只用于后台登录。充值补单、提现审核、KYC 审核等管理后台审核动作仍需要真实 Google Authenticator 动态验证码，不能用 `111111` 代替。当前 AI 后台账号二维码使用 SHA256 算法，自动生成审核码时需要设置 `ADMIN_APPROVAL_TOTP_ALGORITHM=SHA256`。
+注意：FAT 的 `ADMIN_GOOGLE_CODE=111111` 只用于后台登录。若目标环境后台登录也要求动态码，可将 `ADMIN_GOOGLE_CODE` 留空；runner 会优先使用 `ADMIN_LOGIN_TOTP_SECRET`，未配置时回退到 `ADMIN_APPROVAL_TOTP_SECRET`，算法同样优先使用 login 专用变量再回退到 approval 算法。充值补单、提现审核、KYC 审核等动作始终需要真实动态验证码，不能用 FAT 固定登录码代替。当前 FAT 与已验证 UAT 管理账号均使用 SHA256。
 
 `ADMIN_TOKEN_PREFIX` 默认留空。前端真实请求里的后台业务接口使用裸 token：
 
@@ -108,6 +108,15 @@ python3 scripts/api-smoke-runner.py \
 ```
 
 后台列表 POST 请求不能发送空 body。充值/提现待审列表和财务记录使用 `start_time`、`end_time`、`page`、`page_size`；当前实测为秒级时间戳。`test-cases.csv` 使用动态时间标记，由 smoke runner 在发送前替换。
+
+UAT 会员账号筛选的实测契约：
+
+- 浏览器页面路由为 `/member-center/list` 和 `/member-center/detail/{uid}`；它们不是数据接口。会员列表数据接口是 `POST /admin/member/list`，使用 CBOR 请求体且至少包含 `page`、`page_size`；直接 `GET` 返回 405。
+- `kyc_status` 筛选值必须按字符串发送，例如 `"5"`；按整数发送会得到业务失败。
+- `/admin/member/detail?uid=...`、`/admin/kyc/detail?uid=...`、`/admin/finance/member/wallet?uid=...` 均为只读 GET，可分别核对会员、KYC、流水和钱包状态。
+- UAT lane 准备以后台接口为主：先从会员列表批量筛选，再用三个详情接口核对 KYC、余额、可提现额、锁定状态、剩余流水、钱包密码和最近登录状态。具体账号年龄、号段和复核规则统一见 [`ENVIRONMENTS.md`](ENVIRONMENTS.md)，不要在本文件重复维护。
+- 后台字段足以完成候选筛选，但不能证明客户端 token 当前可签发，也不能完全替代客户端 `/finance/account/list` 的提款账户契约；列表中的 password 信息不是可复用明文。
+- UAT `/admin/sms/auth?code=<current admin TOTP>&id=<sms id>` 已验证为只读短信验证码查看接口，成功时 `data` 为 6 位验证码。设置 `CLIENT_OTP_SOURCE=admin_sms` 后，客户端 runner 会在申请短信取得 id 后通过该接口在内存中取码并登录；验证码不得写入结果、日志或环境文件。
 
 ## 已定位的问题
 

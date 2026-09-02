@@ -1,6 +1,6 @@
 # P0 API AI Runbook
 
-上级入口：[`api/p0/README.md`](../p0/README.md)。涉及后台登录、权限或审批时继续阅读 [`ADMIN.md`](ADMIN.md)；出现环境或响应异常时从 [`harness/README.md`](../../harness/README.md) 选择排障分支。
+上级入口：[`api/p0/README.md`](../p0/README.md)。FAT/UAT 差异统一查看 [`ENVIRONMENTS.md`](ENVIRONMENTS.md)；涉及后台登录、权限或审批时继续阅读 [`ADMIN.md`](ADMIN.md)；出现环境或响应异常时从 [`harness/README.md`](../../harness/README.md) 选择排障分支。
 
 ## 目标
 
@@ -18,6 +18,7 @@
 | --- | --- |
 | `api/inventory/interfaces.csv` | Bruno 全量接口资产清单，包含原始 URL、清洗 URL、标记、P0 候选 |
 | `api/inventory/interfaces.md` | 接口资产摘要 |
+| `api/catalog/README.md` | 按 client/admin/agency 与后台模块生成的检索视图 |
 | `api/p0/interface-shortlist.csv` | P0 候选接口清单 |
 | `api/p0/main-flow-scenarios.csv` | P0 主流程正反例场景矩阵 |
 | `api/p0/README.md` | P0 API 资产说明和执行规则 |
@@ -33,12 +34,14 @@
 
 ## 环境变量
 
-不要把真实凭据提交到 Git。用本地 shell、`.env` 或 CI secret 注入：
+不要把真实凭据提交到 Git。本地按环境使用 `.env.fat` / `.env.uat`，或通过 CI secret 注入：
 
 ```bash
 API_URL=https://client-fat.filbet2025.com
 CLIENT_PHONE=<client phone>
-CLIENT_OTP=<otp code>
+CLIENT_PASSWORD=<client password>
+CLIENT_AUTH_MODE=password
+CLIENT_OTP=<optional; explicit OTP flows only>
 DEVICE=25
 LANG_HEADER=en_US
 ```
@@ -55,6 +58,15 @@ python3 scripts/run-api-tests.py p0 p1
 python3 scripts/run-api-tests.py p0 --safe-only
 ```
 
+创建测试会员、代理或准备账号状态不属于 API 门禁。此类能力统一放在 [`tools/provisioning/`](../../tools/provisioning/README.md)。当前会员初始化工具默认只读查找未注册号码；显式 `--execute` 后才按注册 → KYC 提交/后台通过 → 充值/后台补单执行：
+
+```bash
+python3 tools/provisioning/member-bootstrap.py --env .env.uat
+python3 tools/provisioning/member-bootstrap.py --env .env.uat --execute --deposit-amount 1200 --kyc-image 21000000008072.webp
+```
+
+该工具不进入默认 P0 或 CI，阶段失败立即阻塞，原始账号和订单结果只写入忽略的 `api/results/provisioning/`。
+
 统一入口会在执行前清空 `api/results/`，然后覆盖写入本次结果。需要只清理生成物时执行：
 
 ```bash
@@ -67,7 +79,7 @@ python3 scripts/clean-test-artifacts.py all
 FAT 测试环境当前需要临时跳过本机 TLS 证书校验：
 
 ```bash
-CLIENT_PHONE=<client phone> CLIENT_OTP=<otp code> \
+CLIENT_PHONE=<client phone> CLIENT_PASSWORD=<client password> CLIENT_AUTH_MODE=password \
 ADMIN_EMAIL=<admin email> ADMIN_PASSWORD=<admin password> ADMIN_GOOGLE_CODE=<google code> ADMIN_DEVICE_ID=<x-device-id> \
 python3 scripts/api-smoke-runner.py \
   --cases api/p0/test-cases.csv \
@@ -85,7 +97,7 @@ python3 scripts/api-smoke-runner.py \
 P0 主流程写操作冒烟：
 
 ```bash
-CLIENT_PHONE=<client phone> CLIENT_OTP=<otp code> REGISTER_OTP=<otp code> \
+CLIENT_PHONE=<client phone> CLIENT_PASSWORD=<client password> REGISTER_OTP=<otp code> \
 python3 scripts/api-controlled-flow-runner.py \
   --register \
   --register-phone <allocated 090XXXXXXXX KYC phone> \
@@ -99,7 +111,7 @@ python3 scripts/api-controlled-flow-runner.py \
 P0 资金主流程阶段 B 调试，只执行客户端登录、充值下单、后台补单和钱包检查：
 
 ```bash
-CLIENT_PHONE=<client phone> CLIENT_OTP=<otp code> \
+CLIENT_PHONE=<client phone> CLIENT_PASSWORD=<client password> \
 ADMIN_EMAIL=<admin email> ADMIN_PASSWORD=<admin password> ADMIN_GOOGLE_CODE=111111 ADMIN_DEVICE_ID=<x-device-id> \
 python3 scripts/api-controlled-flow-runner.py \
   --deposit \
@@ -115,11 +127,10 @@ python3 scripts/api-controlled-flow-runner.py \
 P0 KYC 新号提交专项（受控写；三项附件可复用同一张测试图片）：
 
 ```bash
-CLIENT_PHONE=<new 090XXXXXXXX phone> CLIENT_OTP=111111 \
+CLIENT_PHONE=<new 090XXXXXXXX phone> CLIENT_PASSWORD=<client password> \
 python3 scripts/api-controlled-flow-runner.py \
   --submit-kyc \
   --client-phone <new 090XXXXXXXX phone> \
-  --client-otp 111111 \
   --kyc-image 21000000008072.webp \
   --kyc-first-name Codex \
   --kyc-middle-name '-' \
@@ -139,10 +150,10 @@ python3 scripts/api-controlled-flow-runner.py \
   --out api/results/kyc-submit-result.json
 ```
 
-runner 会按当前客户端契约依次查询 KYC 前置和动态分行、上传三项附件、调用 `/member/kyc/insert`，再查询提交后详情。KYC 手机号由登录账号自动带出，不能在表单中覆盖；成功提交只代表进入 `Under Review`，不会自动执行后台通过或驳回。
+runner 会先通过 `/member/v2/login` 完成密码登录，再按当前客户端契约依次查询 KYC 前置和动态分行、上传三项附件、调用 `/member/kyc/insert`，最后查询提交后详情。KYC 手机号由登录账号自动带出，不能在表单中覆盖；成功提交只代表进入 `Under Review`，不会自动执行后台通过或驳回。
 
 注意：FAT 后台登录的 `ADMIN_GOOGLE_CODE` 固定为 `111111`。管理后台审核动作需要真实 Google Authenticator 动态验证码，充值补单、提现审核、KYC 审核等都不能用 `111111`。如果使用 `ADMIN_APPROVAL_TOTP_SECRET` 自动生成审核码，需要按二维码参数设置 `ADMIN_APPROVAL_TOTP_ALGORITHM`，当前 AI 后台账号为 `SHA256`。
-`scripts/api-controlled-flow-runner.py` 的审批动作优先使用 `--approval-code`，未传时会用本地 `.env` 中的 `ADMIN_APPROVAL_TOTP_SECRET` 动态生成当前验证码。
+`scripts/api-controlled-flow-runner.py` 的审批动作优先使用 `--approval-code`，未传时会用当前选中环境文件中的 `ADMIN_APPROVAL_TOTP_SECRET` 动态生成验证码。Python 入口通过 `--env` 选择环境，也可统一设置 `ENV_FILE`。
 
 当前 FAT 正例经验：
 

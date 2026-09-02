@@ -1,0 +1,27 @@
+surface,module,method,path,clean_url,flags,p0_candidate,source_file,name
+admin,member,GET,/admin/member/buyfeature/list,{{admin_url}}/admin/member/buyfeature/list?page=1&page_size=10&uid=<redacted>,,,后台/会员列表/会员购买免费旋转记录.bru,会员购买免费旋转记录
+admin,member,POST,/admin/member/buyfeature/state/set,{{admin_url}}/admin/member/buyfeature/state/set,,,后台/会员列表/更新会员购买免费旋转记录.bru,更新会员购买免费旋转记录
+admin,member,GET,/admin/member/change/logs,{{admin_url}}/admin/member/change/logs?uid=<redacted>&change_type=0,,,后台/会员列表/获取会员变更记录.bru,获取会员变更记录
+admin,member,GET,/admin/member/detail,{{admin_url}}/admin/member/detail,,,后台/会员列表/会员详情 - seven-double.bru,会员详情 - seven/double
+admin,member,POST,/admin/member/exemption/insert,{{admin_url}}/admin/member/exemption/insert,,,后台/集成后台参数/接口管理/集成参数/豁免清单导入.bru,豁免清单导入
+admin,member,GET,/admin/member/exemption/list,{{admin_url}}/admin/member/exemption/list,,,后台/集成后台参数/接口管理/集成参数/豁免清单列表.bru,豁免清单列表
+admin,member,GET,/admin/member/export,{{admin_url}}/admin/member/export,,,后台/会员列表/数据导出 - seven-double.bru,数据导出 - seven/double
+admin,member,POST,/admin/member/insert,{{admin_url}}/admin/member/insert,,,后台/会员列表/新增会员 - seven-double.bru,新增会员 - seven/double
+admin,member,GET,/admin/member/limitation/state/info,{{admin_url}}/admin/member/limitation/state/info?uid=<redacted>,,,后台/会员列表/会员限制状态列表.bru,会员限制状态列表
+admin,member,POST,/admin/member/limitation/state/update,{{admin_url}}/admin/member/limitation/state/update,hardcoded_env,,后台/会员列表/更新会员限制状态.bru,更新会员限制状态
+admin,member,GET,/admin/member/list,{{admin_url}}/admin/member/list?page=1&page_size=10&risk_tag=%E5%AF%B9%E6%89%93,hardcoded_env,,后台/会员列表/会员列表 - seven-double.bru,会员列表 - seven/double
+admin,member,GET,/admin/member/log/list,{{admin_url}}/admin/member/log/list?page_isze=10&page=1&client_id=%E5%AE%A2%E6%88%B7%E7%AB%AF%E7%B1%BB%E5%9E%8B&reg_device_no=%E8%AE%BE%E5%A4%87ID,,,后台/后台日志/会员登录日志-seven.bru,会员登录日志-seven
+admin,member,GET,/admin/member/log/listv1,{{admin_url}}/admin/member/log/listv1?uid=<redacted>,hardcoded_env,,后台/后台日志/会员登录日志v1.bru,会员登录日志v1
+admin,member,GET,/admin/member/risk/log,{{admin_url}}/admin/member/risk/log?remark=test1%2C%E6%B5%8B%E8%AF%952,hardcoded_env,,后台/会员列表/风控日志.bru,风控日志
+admin,member,POST,/admin/member/risk/update,{{admin_url}}/admin/member/risk/update,hardcoded_env,,后台/会员列表/风控调整.bru,风控调整
+admin,member,POST,/admin/member/turnover/clear,{{admin_url}}/admin/member/turnover/clear,,,后台/会员列表/会员流水清理-light.bru,会员流水清理-light
+admin,member,POST,/admin/member/unbind,{{admin_url}}/admin/member/unbind,hardcoded_env,,后台/会员列表/三方账号解绑.bru,三方账号解绑
+admin,member,POST,/admin/member/unblock,{{admin_url}}/admin/member/unblock,hardcoded_env,,后台/会员列表/block解封.bru,block解封
+admin,member,POST,/admin/member/update,{{admin_url}}/admin/member/update,,,后台/会员列表/更新会员 - seven-double.bru,更新会员 - seven/double
+admin,member,GET,/admin/member/vip/level/list,{{admin_url}}/admin/member/vip/level/list?page=1&page_size=10&uid=<redacted>&start_time=1774972800000&end_time=1778083200000,"name_v2,hardcoded_env",,后台/Vipv2/会员vip等级记录.bru,会员vip等级记录
+admin,member,POST,/admin/member/vip/level/manual/upgrade,{{admin_url}}/admin/member/vip/level/manual/upgrade,name_v2,,后台/Vipv2/会员vip手动升级.bru,会员vip手动升级
+admin,member,GET,/cmpl/member/export,{{admin_url}}/cmpl/member/export,,,合规/会员列表/数据导出 - seven-double.bru,数据导出 - seven/double
+admin,member,POST,/cmpl/member/insert,{{admin_url}}/cmpl/member/insert,,,合规/会员列表/新增会员 - seven-double.bru,新增会员 - seven/double
+admin,member,GET,/cmpl/member/list,{{admin_url}}/cmpl/member/list,,,合规/会员列表/会员列表 - seven-double.bru,会员列表 - seven/double
+admin,member,GET,/cmpl/member/log/list,{{admin_url}}/cmpl/member/log/list?page_isze=10&page=1&client_id=%E5%AE%A2%E6%88%B7%E7%AB%AF%E7%B1%BB%E5%9E%8B&reg_device_no=%E8%AE%BE%E5%A4%87ID,,,合规/后台日志/会员登录日志-seven.bru,会员登录日志-seven
+admin,member,POST,/cmpl/member/update,{{admin_url}}/cmpl/member/update,,,合规/会员列表/更新会员 - seven-double.bru,更新会员 - seven/double

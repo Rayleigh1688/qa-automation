@@ -1,0 +1,44 @@
+surface,module,method,path,clean_url,flags,p0_candidate,source_file,name
+admin,report,GET,/admin/channel/dict,{{admin_url}}/admin/channel/dict,,,后台/报表/渠道字典.bru,渠道字典
+admin,report,GET,/admin/dict/venues,{{admin_url}}/admin/dict/venues,,,后台/报表/厂商名称字典.bru,厂商名称字典
+admin,report,GET,/admin/promo/invite/statistics/export,{{admin_url}}/admin/promo/invite/statistics/export,,,后台/运营管理/邀请好友/派发佣金统计导出.bru,派发佣金统计导出
+admin,report,GET,/admin/promo/invite/statistics/list,{{admin_url}}/admin/promo/invite/statistics/list,,,后台/运营管理/邀请好友/派发佣金统计列表.bru,派发佣金统计列表
+admin,report,GET,/admin/promo/rebate/rebat/report,{{admin_url}}/admin/promo/rebate/rebat/report?uid=<redacted>,hardcoded_env,,活动/后台-活动管理/投注返水/返水列表.bru,返水列表
+admin,report,GET,/admin/promotion_satistic,{{admin_url}}/admin/promotion_satistic?page=1&page_size=15&sort=register_counts:desc%2Cvisit_counts:asc,hardcoded_env,,后台/推广管理/推广统计报表.bru,推广统计报表
+admin,report,GET,/admin/reports/agency,{{admin_url}}/admin/reports/agency?page_size=20&page=1,hardcoded_env,,后台/代理管理/代理统计报表.bru,代理统计报表
+admin,report,GET,/admin/reports/agency/export,{{admin_url}}/admin/reports/agency/export?topic_id=12345,hardcoded_env,,后台/代理管理/代理统计导出.bru,代理统计导出
+admin,report,GET,/admin/reports/bi/basic,{{admin_url}}/admin/reports/bi/basic?report_type=1,hardcoded_env,,后台/报表/首页BI.bru,首页BI
+admin,report,GET,/admin/reports/bi/gnode,{{admin_url}}/admin/reports/bi/gnode,,,后台/集成后台参数/首页/首页.bru,首页
+admin,report,GET,/admin/reports/channel,{{admin_url}}/admin/reports/channel?page=1&page_size=10&start_time=20250722&end_time=20250722,,,后台/报表/渠道报表/渠道日报表-sandy.bru,渠道日报表-sandy
+admin,report,GET,/admin/reports/channel,{{admin_url}}/admin/reports/channel,todo,,后台/运营管理/日常报表/渠道业绩/渠道报表-todo.bru,渠道报表-todo
+admin,report,GET,/admin/reports/channel,{{admin_url}}/admin/reports/channel,todo,,后台/运营管理/日常报表/渠道业绩/渠道报表导出-todo.bru,渠道报表导出-todo
+admin,report,GET,/admin/reports/channel/detail,{{admin_url}}/admin/reports/channel/detail?page=1&page_size=10&day=20250722&channe_id=1,,,后台/报表/渠道报表/渠道日报表明细-wesley.bru,渠道日报表明细-wesley
+admin,report,GET,/admin/reports/channel/detail,{{admin_url}}/admin/reports/channel/detail,todo,,后台/运营管理/日常报表/渠道业绩/渠道报表明细-todo.bru,渠道报表明细-todo
+admin,report,GET,/admin/reports/channel/detail/export,{{admin_url}}/admin/reports/channel/detail/export?day=20250722&channel_id=1&topic_id=1,,,后台/报表/渠道报表/渠道日报表明细导出.bru,渠道日报表明细导出
+admin,report,GET,/admin/reports/channel/detail/export,{{admin_url}}/admin/reports/channel/detail/export,todo,,后台/运营管理/日常报表/渠道业绩/渠道报表明细导出-todo.bru,渠道报表明细导出-todo
+admin,report,GET,/admin/reports/channel/export,{{admin_url}}/admin/reports/channel/export?start_time=20250722&end_time=20250722&topic_id=1,,,后台/报表/渠道报表/渠道日报表导出.bru,渠道日报表导出
+admin,report,GET,/admin/reports/gnode,{{admin_url}}/admin/reports/gnode?day=20251013,,,后台/集成后台参数/接口管理/任务管理/业绩管理.bru,业绩管理
+admin,report,GET,/admin/reports/invite,{{admin_url}}/admin/reports/invite,hardcoded_env,,后台/报表管理/邀请统计--列表.bru,邀请统计--列表
+admin,report,GET,/admin/reports/invite/detail,{{admin_url}}/admin/reports/invite/detail?uid=<redacted>,hardcoded_env,,后台/报表管理/邀请统计--查看.bru,邀请统计--查看
+admin,report,GET,/admin/reports/invite/detail/export,{{admin_url}}/admin/reports/invite/detail/export?uid=<redacted>,hardcoded_env,,后台/报表管理/邀请统计--查看--导出.bru,邀请统计--查看--导出
+admin,report,GET,/admin/reports/invite/export,{{admin_url}}/admin/reports/invite/export,hardcoded_env,,后台/报表管理/邀请统计--导出.bru,邀请统计--导出
+admin,report,GET,/admin/reports/member,{{admin_url}}/admin/reports/member?page_size=20&page=1&uid=<redacted>&field=day&sort=desc&start_time=2025-06-04&end_time=2026-06-03,hardcoded_env,,后台/报表管理/个人统计--列表.bru,个人统计--列表
+admin,report,GET,/admin/reports/member/detail,{{admin_url}}/admin/reports/member/detail?uid=<redacted>,hardcoded_env,,后台/报表管理/个人统计--查看.bru,个人统计--查看
+admin,report,GET,/admin/reports/member/detail/export,{{admin_url}}/admin/reports/member/detail/export?uid=<redacted>,hardcoded_env,,后台/报表管理/个人统计--查看--导出.bru,个人统计--查看--导出
+admin,report,GET,/admin/reports/member/export,{{admin_url}}/admin/reports/member/export,hardcoded_env,,后台/报表管理/个人统计--导出.bru,个人统计--导出
+admin,report,GET,/admin/reports/platform,{{admin_url}}/admin/reports/platform?start_time=20250507&end_time=20250510,hardcoded_env,,后台/运营管理/厂商业绩报表--yasser.bru,厂商业绩报表--yasser
+admin,report,GET,/admin/reports/profit,{{admin_url}}/admin/reports/profit?page=1&page_size=10&report_type=1&day_start_time=1753632000&day_end_time=1754236799,,,后台/报表/首页BI/平台业绩报表.bru,平台业绩报表
+admin,report,GET,/admin/reports/profit/export,{{admin_url}}/admin/reports/profit/export?page=1&page_size=10&report_type=1&day_start_time=1753632000&day_end_time=1754236799&topic_id=1,,,后台/报表/首页BI/平台业绩报表导出.bru,平台业绩报表导出
+admin,report,GET,/admin/reports/provider/order/compare/daily,{{admin_url}}/admin/reports/provider/order/compare/daily?page=1&page_size=20&platform_name=pg&created_at_start=1780000000000&created_at_end=1780086399999,,,后台/报表/厂商注单对比日报/列表.bru,列表
+admin,report,GET,/admin/reports/reg,{{admin_url}}/admin/reports/reg?page=1&page_size=10&report_type=1&day_start_time=1753632000&day_end_time=1754236799,,,后台/报表/新增会员报表/新增用户报表.bru,新增用户报表
+admin,report,GET,/admin/reports/reg/detail,{{admin_url}}/admin/reports/reg/detail?day=20250722&page=1&page_size=10&ty=1&report_type=1,,,后台/报表/新增会员报表/新增用户详情报表.bru,新增用户详情报表
+admin,report,GET,/admin/reports/reg/detail/export,{{admin_url}}/admin/reports/reg/detail/export?day=20250722&topic_id=1&ty=1,,,后台/报表/新增会员报表/新增用户详情报表导出.bru,新增用户详情报表导出
+admin,report,GET,/admin/reports/reg/export,{{admin_url}}/admin/reports/reg/export?page=1&page_size=10&report_type=1&day_start_time=1753632000&day_end_time=1754236799&topic_id=1,,,后台/报表/新增会员报表/新增用户报表导出.bru,新增用户报表导出
+admin,report,GET,/admin/reports/venue,{{admin_url}}/admin/reports/venue?start_time=20250507&end_time=20250510,hardcoded_env,,后台/运营管理/场馆业绩报表--yasser.bru,场馆业绩报表--yasser
+admin,report,POST,/cmpl/record/api,{{admin_url}}/cmpl/record/api?start_time=1749473206500&end_time=1749483206500&page=1&page_size=10&signature=adfsafagw34234,,,合规/报表/拉单API - light.bru,拉单API - light
+admin,report,POST,/cmpl/report/pagcor/dictionary,{{admin_url}}/cmpl/report/pagcor/dictionary,,,合规/报表/pagcor 数据字典 - owen.bru,pagcor 数据字典 - owen
+admin,report,POST,/cmpl/report/pagcor/export,{{admin_url}}/cmpl/report/pagcor/export,,,合规/报表/pagcor 导出 - owen.bru,pagcor 导出 - owen
+admin,report,POST,/cmpl/report/pagcor/list,{{admin_url}}/cmpl/report/pagcor/list,hardcoded_env,,合规/报表/pagcor 报表 - owen.bru,pagcor 报表 - owen
+admin,report,POST,/cmpl/report/shop/export,{{admin_url}}/cmpl/report/shop/export,,,合规/报表/门店报表导出 - owen.bru,门店报表导出 - owen
+admin,report,POST,/cmpl/report/shop/list,{{admin_url}}/cmpl/report/shop/list,hardcoded_env,,合规/报表/门店报表 - owen.bru,门店报表 - owen
+admin,report,POST,/cmpl/report/summary/list,{{admin_url}}/cmpl/report/summary/list,hardcoded_env,,合规/报表/报表-报告摘要.bru,报表-报告摘要

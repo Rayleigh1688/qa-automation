@@ -44,7 +44,7 @@ test("capture skip-bonus deposit request contract", async ({ page }) => {
   await app.gotoHome();
   const alreadyLoggedIn = !(await page.locator("body").innerText()).includes("Register / Login");
   if (!alreadyLoggedIn) {
-    await app.loginWithOtp(requiredEnv("CLIENT_PHONE"), requiredEnv("CLIENT_OTP"));
+    await app.loginWithPassword(requiredEnv("CLIENT_PHONE"), requiredEnv("CLIENT_PASSWORD"));
   }
   await page.context().storageState({ path: storageStatePath });
 

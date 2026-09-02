@@ -14,13 +14,12 @@ Print the current generated TOTP explicitly with:
 from __future__ import annotations
 
 import argparse
-import base64
-import hashlib
 import hmac
 import os
-import struct
 import time
 from pathlib import Path
+
+from totp import current_totp
 
 
 def load_env_file(path: Path) -> None:
@@ -31,35 +30,12 @@ def load_env_file(path: Path) -> None:
         if not stripped or stripped.startswith("#") or "=" not in stripped:
             continue
         key, value = stripped.split("=", 1)
-        os.environ.setdefault(key.strip(), value.strip().strip('"').strip("'"))
-
-
-def digest_factory(algorithm: str):
-    normalized = algorithm.strip().lower().replace("-", "")
-    if normalized == "sha1":
-        return hashlib.sha1
-    if normalized == "sha256":
-        return hashlib.sha256
-    if normalized == "sha512":
-        return hashlib.sha512
-    raise SystemExit(f"unsupported TOTP algorithm: {algorithm}")
-
-
-def current_totp(
-    secret: str,
-    timestamp: int | None = None,
-    step: int = 30,
-    digits: int = 6,
-    algorithm: str = "SHA1",
-) -> str:
-    normalized = secret.strip().replace(" ", "").upper()
-    padded = normalized + "=" * (-len(normalized) % 8)
-    key = base64.b32decode(padded, casefold=True)
-    counter = int((timestamp or time.time()) // step)
-    digest = hmac.new(key, struct.pack(">Q", counter), digest_factory(algorithm)).digest()
-    offset = digest[-1] & 0x0F
-    code = struct.unpack(">I", digest[offset : offset + 4])[0] & 0x7FFFFFFF
-    return str(code % (10**digits)).zfill(digits)
+        key = key.strip()
+        value = value.strip().strip('"').strip("'")
+        if os.environ.get("ENV_FILE_PRECEDENCE") == "shell":
+            os.environ.setdefault(key, value)
+        else:
+            os.environ[key] = value
 
 
 def main() -> None:
@@ -67,10 +43,10 @@ def main() -> None:
     parser.add_argument("--show-code", action="store_true", help="print the current generated TOTP")
     args = parser.parse_args()
 
-    load_env_file(Path(".env"))
+    load_env_file(Path(os.environ.get("ENV_FILE", ".env.fat")))
     secret = os.environ.get("ADMIN_APPROVAL_TOTP_SECRET", "")
     if not secret:
-        raise SystemExit("ADMIN_APPROVAL_TOTP_SECRET is missing in .env")
+        raise SystemExit("ADMIN_APPROVAL_TOTP_SECRET is missing in the selected environment file")
     algorithm = os.environ.get("ADMIN_APPROVAL_TOTP_ALGORITHM", "SHA1")
 
     expected = os.environ.get("EXPECTED_ADMIN_APPROVAL_CODE", "").strip()

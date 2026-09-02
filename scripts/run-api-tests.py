@@ -10,21 +10,36 @@ Examples:
 from __future__ import annotations
 
 import argparse
+import os
 import subprocess
 import sys
 from pathlib import Path
 
 
-def run(command: list[str]) -> None:
+def load_env(path: Path) -> dict[str, str]:
+    env = os.environ.copy()
+    if not path.is_file():
+        raise SystemExit(f"environment file does not exist: {path}")
+    for raw in path.read_text(encoding="utf-8").splitlines():
+        line = raw.strip()
+        if not line or line.startswith("#") or "=" not in line:
+            continue
+        key, value = line.split("=", 1)
+        env[key.strip()] = value.strip().strip('"').strip("'")
+    env["ENV_FILE_PRECEDENCE"] = "shell"
+    return env
+
+
+def run(command: list[str], env: dict[str, str]) -> None:
     print("+ " + " ".join(command), flush=True)
-    subprocess.run(command, check=True)
+    subprocess.run(command, env=env, check=True)
 
 
-def clean_api_results() -> None:
-    run(["python3", "scripts/clean-test-artifacts.py", "api"])
+def clean_api_results(env: dict[str, str]) -> None:
+    run(["python3", "scripts/clean-test-artifacts.py", "api"], env)
 
 
-def render_p0_main_report(args: argparse.Namespace) -> None:
+def render_p0_main_report(args: argparse.Namespace, env: dict[str, str]) -> None:
     run(
         [
             "python3",
@@ -35,11 +50,12 @@ def render_p0_main_report(args: argparse.Namespace) -> None:
             "api/results/p0-main-flow-report.md",
             "--html-out",
             "api/results/p0-api-report.html",
-        ]
+        ],
+        env,
     )
 
 
-def run_p0(args: argparse.Namespace) -> None:
+def run_p0(args: argparse.Namespace, env: dict[str, str]) -> None:
     cases = Path("api/p0/test-cases.csv")
     if not cases.exists():
         raise SystemExit("missing api/p0/test-cases.csv")
@@ -50,6 +66,8 @@ def run_p0(args: argparse.Namespace) -> None:
             "scripts/api-smoke-runner.py",
             "--cases",
             str(cases),
+            "--env",
+            args.env,
             "--with-client-login",
             "--with-admin-login",
             "--limit",
@@ -64,7 +82,8 @@ def run_p0(args: argparse.Namespace) -> None:
             "--session-in",
             "api/results/p0-api-session.json",
             *(["--insecure"] if args.insecure else []),
-        ]
+        ],
+        env,
     )
     run(
         [
@@ -78,12 +97,15 @@ def run_p0(args: argparse.Namespace) -> None:
             "api/results/p0-smoke-report.md",
             "--scope",
             args.scope,
-        ]
+        ],
+        env,
     )
     run(
         [
             "python3",
             "scripts/api-p0-negative-runner.py",
+            "--env",
+            args.env,
             "--body-format",
             args.body_format,
             "--scope",
@@ -95,7 +117,8 @@ def run_p0(args: argparse.Namespace) -> None:
             "--session-in",
             "api/results/p0-api-session.json",
             *(["--insecure"] if args.insecure else []),
-        ]
+        ],
+        env,
     )
     write_error: subprocess.CalledProcessError | None = None
     if not args.safe_only:
@@ -104,6 +127,8 @@ def run_p0(args: argparse.Namespace) -> None:
                 [
                     "python3",
                     "scripts/api-controlled-flow-runner.py",
+                    "--env",
+                    args.env,
                     "--deposit",
                     "--approve-deposit",
                     "--body-format",
@@ -122,16 +147,17 @@ def run_p0(args: argparse.Namespace) -> None:
                     "--session-out",
                     "api/results/p0-api-session.json",
                     *(["--insecure"] if args.insecure else []),
-                ]
+                ],
+                env,
             )
         except subprocess.CalledProcessError as error:
             write_error = error
-    render_p0_main_report(args)
+    render_p0_main_report(args, env)
     if write_error:
         raise write_error
 
 
-def run_generic_level(level: str, args: argparse.Namespace) -> None:
+def run_generic_level(level: str, args: argparse.Namespace, env: dict[str, str]) -> None:
     cases = Path(f"api/{level}/test-cases.csv")
     if not cases.exists():
         print(f"skip {level}: missing {cases}")
@@ -144,6 +170,8 @@ def run_generic_level(level: str, args: argparse.Namespace) -> None:
             "scripts/api-smoke-runner.py",
             "--cases",
             str(cases),
+            "--env",
+            args.env,
             "--with-client-login",
             "--with-admin-login",
             "--execute",
@@ -152,7 +180,8 @@ def run_generic_level(level: str, args: argparse.Namespace) -> None:
             "--out",
             output,
             *(["--insecure"] if args.insecure else []),
-        ]
+        ],
+        env,
     )
     run(
         [
@@ -168,13 +197,19 @@ def run_generic_level(level: str, args: argparse.Namespace) -> None:
             f"{level.upper()} API Smoke Report",
             "--scope",
             args.scope,
-        ]
+        ],
+        env,
     )
 
 
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("levels", nargs="+", help="test levels to run, for example: p0 p1")
+    parser.add_argument(
+        "--env",
+        default=os.environ.get("ENV_FILE", ".env.fat"),
+        help="dotenv file loaded before launching child runners (default: ENV_FILE or .env.fat)",
+    )
     parser.add_argument("--scope", default="FAT")
     parser.add_argument("--body-format", choices=["json", "cbor"], default="cbor")
     parser.add_argument("--insecure", action=argparse.BooleanOptionalAction, default=True)
@@ -190,24 +225,25 @@ def main() -> None:
     parser.add_argument("--withdraw-client-otp", default="")
     parser.add_argument("--register-phone", default="")
     args = parser.parse_args()
+    env = load_env(Path(args.env))
 
     if args.safe_only and args.include_write:
         raise SystemExit("--safe-only and --include-write cannot be used together")
 
     if not args.no_clean:
-        clean_api_results()
+        clean_api_results(env)
 
     for level in [item.lower() for item in args.levels]:
         if level == "p0":
             try:
-                run_p0(args)
+                run_p0(args, env)
             except subprocess.CalledProcessError:
                 # A failing smoke/negative/write step must still leave a P0
                 # verdict artifact for local inspection and CI archiving.
-                render_p0_main_report(args)
+                render_p0_main_report(args, env)
                 raise
         elif level in {"p1", "p2"}:
-            run_generic_level(level, args)
+            run_generic_level(level, args, env)
         else:
             raise SystemExit(f"unsupported level: {level}")
 

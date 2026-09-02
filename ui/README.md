@@ -32,9 +32,11 @@ KYC 在默认 UI 门禁中只验证入口和状态可见；真实资料提交由
 ## 当前收口重点
 
 1. 默认 UI 套件补齐充值页安全前置，不创建真实资金订单；Maya 合法提现和未 KYC 提现拦截均使用独立受控 UI 用例。
-2. 真实投注继续使用 Pixel 7 `412x915` 固定视口和配置化相对坐标；固定业务单注为 1000，投注次数由流水查询结果决定。
+2. 真实投注继续使用 Pixel 7 `412x915` 固定视口和配置化相对坐标；单注读取 `CLIENT_GAME_BET_AMOUNT`（FAT 1000、UAT 100），投注次数由流水查询结果决定。
 3. UI 证明三方游戏内真实交互；API/数据库只读核对投注记录、账变、流水和提现订单，不能用启动请求代替业务金额断言。
 4. Network discovery、HAR 和 trace 只用于接口版本发现与排障，不作为默认 P0 通过条件。
+
+UAT 真实投注使用 BNG `Coins`（`/s-game-page/17453859148937`），环境单注上限为 100。脚本先点击游戏空白区域收起客户端侧栏，再打开投注额面板、选择 100 并点击 Spin；UAT 专用 Jili `Super Ace 2` 配置已移除，FAT 原有游戏配置保持不变。
 
 ## 定位策略
 
@@ -67,13 +69,13 @@ npm run test:p0:full
 
 提现金额下限属于 API 业务契约：使用有效提款账户传入小于通道最小值的金额，并断言不能生成订单。UI 不重复承担该后端边界矩阵，只验证合法金额输入、提交动作以及本次提现订单确实生成。
 
-受控提现 UI 使用独立命令 `npm run test:ui:withdraw-contract`。FAT 默认先选择 `CLIENT_WITHDRAW_CHANNEL=Maya`，GCash 当前会返回 `Payment channel unavailable`。默认只验证非法金额不会发请求；显式设置 `EXECUTE_WITHDRAW_UI=true` 时还需要本地 `CLIENT_WALLET_PASSWORD`，脚本通过页面数字键盘输入后提交合法金额。钱包密码只能放在忽略的 `.env` 或 CI 凭据中。
+受控提现 UI 使用独立命令 `npm run test:ui:withdraw-contract`。FAT 默认先选择 `CLIENT_WITHDRAW_CHANNEL=Maya`，GCash 当前会返回 `Payment channel unavailable`。默认只验证非法金额不会发请求；显式设置 `EXECUTE_WITHDRAW_UI=true` 时还需要本地 `CLIENT_WALLET_PASSWORD`，脚本通过页面数字键盘输入后提交合法金额。钱包密码只能放在忽略的 `.env.fat` / `.env.uat` 或 CI 凭据中；UAT UI 命令必须设置 `ENV_FILE=.env.uat`。
 
-永久未 KYC 账号的提现拦截使用 `npm run test:ui:unverified-withdraw`。账号通过 `PRE_KYC_CLIENT_PHONE` 注入，优先使用 `PRE_KYC_CLIENT_PASSWORD`，否则使用 `PRE_KYC_CLIENT_OTP`；该账号绝不提交 KYC 或设置钱包密码。用例断言 Security Requirements 同时要求钱包密码和 KYC，且没有创建提现请求。
+永久未 KYC 账号的提现拦截使用 `npm run test:ui:unverified-withdraw`。账号通过 `PRE_KYC_CLIENT_PHONE` 和 `PRE_KYC_CLIENT_PASSWORD` 注入；该账号绝不提交 KYC 或设置钱包密码。用例断言 Security Requirements 同时要求钱包密码和 KYC，且没有创建提现请求。
 
 所有 npm UI 命令执行前都会清空 UI 生成物目录，只保留最近一次结果。
 
-`npm run test:ui:p0` 固定 `--workers=1`。全局准备只在没有有效 storage state 时使用密码登录一次；以后复用 `ui/results/client-p0-storage-state.json`。该文件被 Git 忽略且不会被 UI 清理器删除。禁止另开进程用同一账号重新登录。
+`npm run test:ui:p0` 固定 `--workers=1`。除刚注册且尚未设置登录密码的账号外，所有既有账号默认使用密码登录；OTP 只用于注册、首次设置密码等必要步骤。当前全局准备在没有有效状态时使用密码登录，登录与 token 生命周期的进一步简化留到下一步统一处理。
 
 - `npm run test:ui:network-discovery`：窗口化 Playwright Network 发现入口，固定 Pixel 7 手机浏览器格式，登录后探索首页、Game、Rewards、Filcoin、My、充值、提现、Transaction、Bet History、KYC、账户入口；输出脱敏 JSON、HAR、trace 和 Markdown 报告，只用于接口发现，不纳入默认 CI 门禁。
 - `npm run test:ui:deposit-contract`：验证充值页、支付方式和金额控件；默认不创建订单，只有显式 `EXECUTE_DEPOSIT_CONTRACT=true` 时才提交并捕获非活动充值请求。

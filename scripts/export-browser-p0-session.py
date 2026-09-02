@@ -17,12 +17,17 @@ def load_env(path: Path) -> None:
         if not line or line.startswith("#") or "=" not in line:
             continue
         key, value = line.split("=", 1)
-        os.environ.setdefault(key.strip(), value.strip().strip('"').strip("'"))
+        key = key.strip()
+        value = value.strip().strip('"').strip("'")
+        if os.environ.get("ENV_FILE_PRECEDENCE") == "shell":
+            os.environ.setdefault(key, value)
+        else:
+            os.environ[key] = value
 
 
 def main() -> None:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--env", default=".env")
+    parser.add_argument("--env", default=os.environ.get("ENV_FILE", ".env.fat"))
     parser.add_argument("--storage-state", default="ui/results/client-p0-storage-state.json")
     parser.add_argument("--session-out", default="api/results/p0-api-session.json")
     args = parser.parse_args()

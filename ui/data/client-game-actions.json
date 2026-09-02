@@ -53,6 +53,35 @@
         "yRatio": 0.82
       },
       "expectedFrameText": []
+    },
+    {
+      "id": "coins_uat",
+      "name": "Coins",
+      "path": "/s-game-page/17453859148937",
+      "readyWaitMs": 7000,
+      "postClickWaitMs": 6000,
+      "networkEvidenceRequired": true,
+      "dismissOverlayTap": {
+        "xRatio": 0.2,
+        "yRatio": 0.45
+      },
+      "betButton": {
+        "xRatio": 0.94,
+        "yRatio": 0.8
+      },
+      "betOptions": {
+        "100": {
+          "xRatio": 0.5,
+          "yRatio": 0.51
+        }
+      },
+      "spinButton": {
+        "xRatio": 0.5,
+        "yRatio": 0.8
+      },
+      "expectedFrameText": [
+        "bng.games"
+      ]
     }
   ]
 }

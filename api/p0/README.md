@@ -12,6 +12,7 @@ P0 只保留必要资产，避免 CSV 和 Markdown 重复维护。
 | `test-account-pool.csv` | P0 测试账号池规则，记录新账号、只读账号、充值写账号和提现专用账号的用途边界 |
 
 需要追溯接口文档扫描来源时，再进入 [`api/inventory/interfaces.md`](../inventory/interfaces.md)；扫描资产只用于发现，不用于决定 P0 顺序。
+按客户端、后台和后台业务模块检索接口时，使用自动生成的 [`api/catalog/`](../catalog/README.md)。FAT/UAT 差异统一维护在 [`api/runbooks/ENVIRONMENTS.md`](../runbooks/ENVIRONMENTS.md)。
 
 ## 执行规则
 
@@ -34,7 +35,7 @@ P0 只保留必要资产，避免 CSV 和 Markdown 重复维护。
 1. 充值、投注、流水核对和提现统一使用同一个 `fund_flow_account`，整条资金链串行执行。
 2. 账号在会话准备阶段只成功登录一次。API 复用忽略的 `api/results/p0-api-session.json`，UI 复用忽略的 `ui/results/client-p0-storage-state.json`；切换执行面时同步 token，不另起进程重复登录同一账号。
 3. API 完成充值、后台补单和钱包核对后必须停止。普通存款即使不参加活动也会产生基础流水，不能直接跳到提现。
-4. UI 在三方游戏中固定业务单注为 1000。`scripts/run-turnover-bet.py` 只读汇总全部未完成流水，按 `ceil(remaining/1000)` 计算投注次数并设置安全上限。
+4. UI 三方游戏单注读取 `CLIENT_GAME_BET_AMOUNT`：FAT 当前为 1000，UAT 当前为 100。`scripts/run-turnover-bet.py` 只读汇总全部未完成流水，按当前环境单注计算投注次数并设置安全上限。
 5. 投注后轮询 Bet History、钱包、账变和基础流水；以本轮时间窗口和关联标识核对记录。只有总剩余流水为 0，才允许发起提现。
 6. 提现金额必须同时满足余额和通道限制。完整 API 资金链通过 `/finance/payment/withdraw` 创建订单，再由后台 API 按订单 ID 精确定位并核对；Maya UI 建单另作独立 UI P0，不替代 API CTC-009。
 7. 数据库只用于只读诊断和交叉核对，不直接修改 KYC、余额、流水、充值或提现状态。
@@ -134,7 +135,7 @@ KYC 保留最小 P0 闭环：真实提交、后台审核以及审核后前台状
 
 完整账号状态、是否必须预备、复用规则和环境变量映射以 [`test-account-pool.csv`](test-account-pool.csv) 为准。准备账号时记录 phone、uid、已知密码、KYC 状态、提款账户状态、未完成流水、可提现余额和最后验证时间，但实际值只写本地忽略的 `.env*`，不要写入 CSV。
 
-- `CLIENT_PHONE`：只读 smoke 账号，必须可登录，且最好是已 KYC、已绑定提款账户的成熟账号；否则提款账户列表等只读断言会失败。
+- `CLIENT_PHONE`：只读 smoke 账号，必须可使用 `CLIENT_PASSWORD` 登录，且最好是已 KYC、已绑定提款账户的成熟账号；否则提款账户列表等只读断言会失败。
 - `WRITE_CLIENT_PHONE`：`fund_flow_account`，必须是普通可登录、已 KYC、已绑定提款账户的会员；从充值补单开始，复用到投注、流水和提现。
 - `BET_CLIENT_PHONE`、`WITHDRAW_CLIENT_PHONE`：兼容别名，可以指向同一个 `fund_flow_account`。
 - `RESTRICTED_CLIENT_PHONE`：P1 活动流水专项预留变量，不参与 P0 主流程放行判断。

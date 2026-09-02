@@ -126,6 +126,8 @@ def write_csv(rows: list[dict[str, str]], output: Path) -> None:
     output.parent.mkdir(parents=True, exist_ok=True)
     fieldnames = [
         "priority",
+        "surface",
+        "module",
         "domain",
         "execution_policy",
         "method",
@@ -155,6 +157,8 @@ def table(rows: list[list[str]]) -> str:
 def write_markdown(rows: list[dict[str, str]], output: Path, csv_output: Path) -> None:
     policy_counter = Counter(row["execution_policy"] for row in rows)
     domain_counter = Counter(row["domain"] for row in rows)
+    surface_counter = Counter(row["surface"] for row in rows)
+    module_counter = Counter(row["module"] for row in rows)
 
     summary = [
         ["指标", "数量"],
@@ -165,6 +169,8 @@ def write_markdown(rows: list[dict[str, str]], output: Path, csv_output: Path) -
         ["仅复核 review_only", str(policy_counter["review_only"])],
     ]
     domains = [["领域", "数量"]] + [[key, str(value)] for key, value in domain_counter.most_common()]
+    surfaces = [["调用端", "数量"]] + [[key, str(value)] for key, value in surface_counter.most_common()]
+    modules = [["模块", "数量"]] + [[key, str(value)] for key, value in module_counter.most_common()]
 
     smoke_rows = [["优先级", "领域", "方法", "Clean URL", "来源"]]
     for row in rows:
@@ -202,6 +208,12 @@ def write_markdown(rows: list[dict[str, str]], output: Path, csv_output: Path) -
 
 {table(domains)}
 
+## 调用端与模块分布
+
+{table(surfaces)}
+
+{table(modules)}
+
 ## 可先冒烟的 GET 接口
 
 这些接口优先用于连通性和基础响应结构验证。真正进入门禁前仍需确认是否需要 token、设备号、语言或特殊 header。
@@ -234,6 +246,8 @@ def main() -> None:
         rows.append(
             {
                 "priority": "",
+                "surface": row.get("surface", "unknown"),
+                "module": row.get("module", domain or "other"),
                 "domain": domain,
                 "execution_policy": policy,
                 "method": row["method"],

@@ -14,7 +14,7 @@
 
 ## 规则
 
-1. 先读 `api/runbooks/API.md`。如果处理后台接口，再读 `api/runbooks/ADMIN.md`。
+1. 先读 `api/runbooks/API.md`。涉及环境差异时读 `api/runbooks/ENVIRONMENTS.md`；如果处理后台接口，再读 `api/runbooks/ADMIN.md`。
 2. 接口文档只负责发现接口，不能直接决定用例价值。新增接口必须先映射到 `api/p0/main-flow-scenarios.csv` 的业务场景。
 3. P0 统一管理在 `api/p0/`：
    - 用例：`api/p0/test-cases.csv`

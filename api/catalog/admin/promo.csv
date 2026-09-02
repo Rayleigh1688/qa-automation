@@ -1,0 +1,57 @@
+surface,module,method,path,clean_url,flags,p0_candidate,source_file,name
+admin,promo,GET,/admin/bonus/activity/list,{{admin_url}}/admin/bonus/activity/list,,,后台/礼金/活动列表 - felix.bru,活动列表 - felix.bru
+admin,promo,POST,/admin/bonus/manual/send,{{admin_url}}/admin/bonus/manual/send,,,后台/活动/手动发放礼金 - felix.bru,手动发放礼金
+admin,promo,GET,/admin/channel/promoData/consumption,{{admin_url}}/admin/channel/promoData/consumption,todo,,后台/运营管理/推广管理/推广数据/推广数据面板消耗详情-todo.bru,推广数据面板消耗详情-todo
+admin,promo,GET,/admin/channel/promoData/detail,{{admin_url}}/admin/channel/promoData/detail,todo,,后台/运营管理/推广管理/推广数据/推广数据详细-todo.bru,推广数据详细-todo
+admin,promo,GET,/admin/channel/promoData/list,{{admin_url}}/admin/channel/promoData/list,todo,,后台/运营管理/推广管理/推广数据/推广数据列表-todo.bru,推广数据列表-todo
+admin,promo,GET,/admin/channel/promoData/logs,{{admin_url}}/admin/channel/promoData/logs,todo,,后台/运营管理/推广管理/推广数据/推广数据日志-todo.bru,推广数据日志-todo
+admin,promo,POST,/admin/channel/promoData/update,{{admin_url}}/admin/channel/promoData/update,todo,,后台/运营管理/推广管理/推广数据/更新推广数据-todo.bru,更新推广数据-todo
+admin,promo,POST,/admin/channel/promoData/update/consumption,{{admin_url}}/admin/channel/promoData/update/consumption,todo,,后台/运营管理/推广管理/推广数据/更新推广数据面板消耗-todo.bru,更新推广数据面板消耗-todo
+admin,promo,POST,/admin/channel/promotion/domain/insert,{{admin_url}}/admin/channel/promotion/domain/insert,,,后台/渠道推广-域名管理/新增.bru,新增
+admin,promo,GET,/admin/channel/promotion/domain/list,{{admin_url}}/admin/channel/promotion/domain/list,,,后台/渠道推广-域名管理/列表.bru,列表
+admin,promo,POST,/admin/channel/promotion/domain/update,{{admin_url}}/admin/channel/promotion/domain/update,,,后台/渠道推广-域名管理/修改.bru,修改
+admin,promo,GET,/admin/promo/bonus/export,{{admin_url}}/admin/promo/bonus/export?min_amount=&max_amount=&uid=<redacted>&created_start_at=&created_end_at=&day=&state=&phone=<redacted>&activity_id=&username=&received_start_at=&received_end_at=&review_start_at=&review_end_at=&username=&topic_id=ddddddddddddd2,,,后台/活动/导出礼金明细 - felix.bru,导出礼金明细 - felix
+admin,promo,GET,/admin/promo/bonus/list,{{admin_url}}/admin/promo/bonus/list?min_amount=&max_amount=&uid=<redacted>&created_start_at=&created_end_at=&day=&state=&page=&page_size=&phone=<redacted>&activity_id=&username=&received_start_at=&received_end_at=&review_start_at=&review_end_at=&username=,,,后台/活动/礼金明细 - felix.bru,礼金明细 - felix
+admin,promo,GET,/admin/promo/cq9/bonus/export,{{admin_url}}/admin/promo/cq9/bonus/export?min_amount=&max_amount=&uid=<redacted>&created_start_at=&created_end_at=&day=&state=&phone=<redacted>&activity_id=&username=&received_start_at=&received_end_at=&review_start_at=&review_end_at=&username=&topic_id=ddddddddddddd2,,,后台/活动/cq9返水/导出礼金明细-seven.bru,导出礼金明细-seven
+admin,promo,GET,/admin/promo/cq9/bonus/list,{{admin_url}}/admin/promo/cq9/bonus/list?min_amount=&max_amount=&uid=<redacted>&created_start_at=&created_end_at=&day=&state=&page=&page_size=&phone=<redacted>&activity_id=&username=&received_start_at=&received_end_at=&review_start_at=&review_end_at=&username=,,,后台/活动/cq9返水/礼金明细-seven.bru,礼金明细-seven
+admin,promo,GET,/admin/promo/export,{{admin_url}}/admin/promo/export?start_at=&end_at=&state=&activity_name=&topic_id=23333332&activity_id=1%2C2&update_name=%E5%9C%B0%E6%96%B9,,,后台/活动/导出活动列表 - felix.bru,导出活动列表 - felix
+admin,promo,GET,/admin/promo/free/spin/detail,{{admin_url}}/admin/promo/free/spin/detail?id=<id>,hardcoded_env,,活动/后台-活动管理/freeSpin/详情.bru,详情
+admin,promo,GET,/admin/promo/free/spin/export,{{admin_url}}/admin/promo/free/spin/export,hardcoded_env,,活动/后台-活动管理/freeSpin/导出.bru,导出
+admin,promo,POST,/admin/promo/free/spin/import,{{admin_url}}/admin/promo/free/spin/import,hardcoded_env,,活动/后台-活动管理/freeSpin/批量派发.bru,批量派发
+admin,promo,GET,/admin/promo/free/spin/import/export,{{admin_url}}/admin/promo/free/spin/import/export?batch_id=<id>&topic_id=test123,hardcoded_env,,活动/后台-活动管理/freeSpin/失败清单下载.bru,失败清单下载
+admin,promo,GET,/admin/promo/free/spin/import/fail,{{admin_url}}/admin/promo/free/spin/import/fail?batch_id=<id>,hardcoded_env,,活动/后台-活动管理/freeSpin/失败明细.bru,失败明细
+admin,promo,GET,/admin/promo/free/spin/import/log,{{admin_url}}/admin/promo/free/spin/import/log,hardcoded_env,,活动/后台-活动管理/freeSpin/fs批量派发记录.bru,fs批量派发记录
+admin,promo,POST,/admin/promo/free/spin/insert,{{admin_url}}/admin/promo/free/spin/insert,hardcoded_env,,活动/后台-活动管理/freeSpin/手动派发.bru,手动派发
+admin,promo,POST,/admin/promo/free/spin/invalid,{{admin_url}}/admin/promo/free/spin/invalid,"deprecated,hardcoded_env",,活动/后台-活动管理/freeSpin/作废.bru,作废
+admin,promo,GET,/admin/promo/free/spin/list,{{admin_url}}/admin/promo/free/spin/list?batch_id=12,hardcoded_env,,活动/后台-活动管理/freeSpin/列表.bru,列表
+admin,promo,GET,/admin/promo/free/spin/synchronous,{{admin_url}}/admin/promo/free/spin/synchronous?id=<id>,hardcoded_env,,活动/后台-活动管理/freeSpin/同步.bru,同步
+admin,promo,POST,/admin/promo/insert,{{admin_url}}/admin/promo/insert,,,后台/活动/活动充值 - whisper.bru,活动充值 - whisper
+admin,promo,GET,/admin/promo/invite/base/export,{{admin_url}}/admin/promo/invite/base/export,,,后台/运营管理/邀请好友/基础奖励数据导出.bru,基础奖励数据导出
+admin,promo,GET,/admin/promo/invite/base/list,{{admin_url}}/admin/promo/invite/base/list,,,后台/运营管理/邀请好友/邀请基础奖励列表.bru,邀请基础奖励列表
+admin,promo,GET,/admin/promo/invite/commission/export,{{admin_url}}/admin/promo/invite/commission/export,,,后台/运营管理/邀请好友/结算佣金奖励导出.bru,结算佣金奖励导出
+admin,promo,GET,/admin/promo/invite/commission/list,{{admin_url}}/admin/promo/invite/commission/list,,,后台/运营管理/邀请好友/结算佣金列表.bru,结算佣金列表
+admin,promo,GET,/admin/promo/invite/config/info,{{admin_url}}/admin/promo/invite/config/info,,,后台/运营管理/邀请好友/获取配置信息.bru,获取配置信息
+admin,promo,POST,/admin/promo/invite/config/update,{{admin_url}}/admin/promo/invite/config/update,,,后台/运营管理/邀请好友/保存配置信息.bru,保存配置信息
+admin,promo,POST,/admin/promo/invite/friends/transfer,{{admin_url}}/admin/promo/invite/friends/transfer,,,后台/运营管理/邀请好友/好友转线.bru,好友转线
+admin,promo,GET,/admin/promo/invite/friends/transfer/export,{{admin_url}}/admin/promo/invite/friends/transfer/export,,,后台/运营管理/邀请好友/好友转线导出.bru,好友转线导出
+admin,promo,GET,/admin/promo/invite/friends/transfer/list,{{admin_url}}/admin/promo/invite/friends/transfer/list,,,后台/运营管理/邀请好友/好友转线列表.bru,好友转线列表
+admin,promo,GET,/admin/promo/invite/upgrade/export,{{admin_url}}/admin/promo/invite/upgrade/export,,,后台/运营管理/邀请好友/里程碑奖励导出.bru,里程碑奖励导出
+admin,promo,GET,/admin/promo/invite/upgrade/list,{{admin_url}}/admin/promo/invite/upgrade/list,,,后台/运营管理/邀请好友/邀请里程碑奖励列表.bru,邀请里程碑奖励列表
+admin,promo,GET,/admin/promo/list,{{admin_url}}/admin/promo/list?activity_id=1%2C2&start_at=&end_at=&page=&page_size=&state=&update_name=%E5%9C%B0%E6%96%B9&activity_name=,,,后台/活动/活动列表 - felix.bru,活动列表 - felix
+admin,promo,GET,/admin/promo/pt/export,{{admin_url}}/admin/promo/pt/export?topic_id=23456,hardcoded_env,,活动/后台-活动管理/pt排行榜/导出.bru,导出
+admin,promo,GET,/admin/promo/pt/list,{{admin_url}}/admin/promo/pt/list,hardcoded_env,,活动/后台-活动管理/pt排行榜/列表.bru,列表
+admin,promo,GET,/admin/promo/rebate/rebat/export,{{admin_url}}/admin/promo/rebate/rebat/export,hardcoded_env,,活动/后台-活动管理/投注返水/返水列表导出.bru,返水列表导出
+admin,promo,GET,/admin/promo/task/all,{{admin_url}}/admin/promo/task/all,,,后台/vip任务中心/任务清单(账变)-seven.bru,任务清单(账变)-seven
+admin,promo,GET,/admin/promo/task/export,{{admin_url}}/admin/promo/task/export,,,后台/vip任务中心/任务中心导出-seven.bru,任务中心导出-seven
+admin,promo,POST,/admin/promo/task/insert,{{admin_url}}/admin/promo/task/insert,,,后台/vip任务中心/新增任务-seven.bru,新增任务-seven
+admin,promo,GET,/admin/promo/task/list,{{admin_url}}/admin/promo/task/list,,,后台/vip任务中心/任务中心列表-seven.bru,任务中心列表-seven
+admin,promo,POST,/admin/promo/update,{{admin_url}}/admin/promo/update,name_v2,,后台/Vipv2/活动编辑.bru,活动编辑
+admin,promo,GET,/admin/promo/vip/daily/loss/export,{{admin_url}}/admin/promo/vip/daily/loss/export,"name_v2,hardcoded_env",,后台/Vipv2/每日负盈利活动记录-导出-aliang.bru,每日负盈利活动记录-导出-aliang
+admin,promo,GET,/admin/promo/vip/daily/loss/list,{{admin_url}}/admin/promo/vip/daily/loss/list?page=1&page_size=100&phone=<redacted>,"name_v2,hardcoded_env",,后台/Vipv2/每日负盈利活动记录-aliang.bru,每日负盈利活动记录-aliang
+admin,promo,GET,/admin/promo/vip/half/moon/export,{{admin_url}}/admin/promo/vip/half/moon/export,"name_v2,hardcoded_env",,后台/Vipv2/半月礼金活动记录-导出-aliang.bru,半月礼金活动记录-导出-aliang
+admin,promo,GET,/admin/promo/vip/half/moon/list,{{admin_url}}/admin/promo/vip/half/moon/list?page=1&page_size=100&phone=<redacted>,"name_v2,hardcoded_env",,后台/Vipv2/半月礼金活动记录列表-aliang.bru,半月礼金活动记录列表-aliang
+admin,promo,GET,/admin/promo/vip/log/export,{{admin_url}}/admin/promo/vip/log/export,"name_v2,hardcoded_env",,后台/Vipv2/奖励表-导出-aliang.bru,奖励表-导出-aliang
+admin,promo,GET,/admin/promo/vip/log/list,{{admin_url}}/admin/promo/vip/log/list?page=1&page_size=20,"name_v2,hardcoded_env",,后台/Vipv2/奖励表列表-aliang.bru,奖励表列表-aliang
+admin,promo,GET,/admin/promo/vip/sign/in/export,{{admin_url}}/admin/promo/vip/sign/in/export?topic_id=123456,"name_v2,hardcoded_env",,后台/Vipv2/每日签到导出.bru,每日签到导出
+admin,promo,GET,/admin/promo/vip/sign/in/list,{{admin_url}}/admin/promo/vip/sign/in/list,"name_v2,hardcoded_env",,后台/Vipv2/每日签到列表.bru,每日签到列表
+admin,promo,GET,/admin/promotion_effect,{{admin_url}}/admin/promotion_effect?promo_group=1,hardcoded_env,,后台/推广管理/推广效果评估.bru,推广效果评估

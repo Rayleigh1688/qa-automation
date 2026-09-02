@@ -1,7 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
 
-export function loadEnv(file = process.env.ENV_FILE || ".env") {
+export function loadEnv(file = process.env.ENV_FILE || ".env.fat") {
   const fullPath = path.resolve(process.cwd(), file);
   if (!fs.existsSync(fullPath)) return;
   for (const line of fs.readFileSync(fullPath, "utf8").split(/\r?\n/)) {
@@ -10,7 +10,8 @@ export function loadEnv(file = process.env.ENV_FILE || ".env") {
     const idx = trimmed.indexOf("=");
     const key = trimmed.slice(0, idx).trim();
     const value = trimmed.slice(idx + 1).trim().replace(/^['"]|['"]$/g, "");
-    if (!(key in process.env)) process.env[key] = value;
+    const shellOverridesFile = process.env.ENV_FILE_PRECEDENCE === "shell";
+    if (!shellOverridesFile || !(key in process.env)) process.env[key] = value;
   }
 }
 

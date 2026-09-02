@@ -1,0 +1,24 @@
+surface,module,method,path,clean_url,flags,p0_candidate,source_file,name
+admin,kyc,POST,/admin/kyc/approve,{{admin_url}}/admin/kyc/approve,,yes,后台/kyc/kyc 审核通过 - double.bru,kyc 审核通过 - double
+admin,kyc,GET,/admin/kyc/approved/count,{{admin_url}}/admin/kyc/approved/count,,yes,后台/kyc/统计每天审核通过数量.bru,统计每天审核通过数量
+admin,kyc,POST,/admin/kyc/config/edit,{{admin_url}}/admin/kyc/config/edit,hardcoded_env,yes,后台/kyc/ekyc配置编辑.bru,ekyc配置编辑
+admin,kyc,GET,/admin/kyc/config/info,{{admin_url}}/admin/kyc/config/info,hardcoded_env,yes,后台/kyc/获取ekyc相关配置.bru,获取ekyc相关配置
+admin,kyc,GET,/admin/kyc/detail,{{admin_url}}/admin/kyc/detail,,yes,后台/kyc/获取 kyc 详情 - double.bru,获取 kyc 详情 - double
+admin,kyc,GET,/admin/kyc/detail,{{admin_url}}/admin/kyc/detail,,yes,后台/会员列表/kyc详情.bru,kyc详情
+admin,kyc,POST,/admin/kyc/details,{{admin_url}}/admin/kyc/details,,yes,后台/kyc/uid数组查询详情页.bru,uid数组查询详情页
+admin,kyc,POST,/admin/kyc/edit,{{admin_url}}/admin/kyc/edit,hardcoded_env,yes,后台/kyc/ekyc编辑.bru,ekyc编辑
+admin,kyc,GET,/admin/kyc/ekyc/log,{{admin_url}}/admin/kyc/ekyc/log?uid=<redacted>,hardcoded_env,yes,后台/kyc/异动记录.bru,异动记录
+admin,kyc,POST,/admin/kyc/list,{{admin_url}}/admin/kyc/list?phone=<redacted>&created_end_time=1774972799999&created_start_time=1772294400000&source=default,hardcoded_env,yes,后台/kyc/获取 kyc 列表 - double-owen.bru,获取 kyc 列表 - double/owen
+admin,kyc,GET,/admin/kyc/pending/count,{{admin_url}}/admin/kyc/pending/count,,yes,后台/kyc/获取 kyc 待审批数量.bru,获取 kyc 待审批数量
+admin,kyc,POST,/admin/kyc/reject,{{admin_url}}/admin/kyc/reject,,yes,后台/kyc/kyc 审核驳回 - double.bru,kyc 审核驳回 - double
+admin,kyc,POST,/admin/kyc/update,{{admin_url}}/admin/kyc/update,,yes,后台/kyc/更新 kyc - double.bru,更新 kyc - double
+admin,kyc,GET,/admin/promo/rotate/kyc/export,{{admin_url}}/admin/promo/rotate/kyc/export?topic_id=1234567,hardcoded_env,yes,活动/后台-活动管理/KYC通过送免费旋转/导出.bru,导出
+admin,kyc,GET,/admin/promo/rotate/kyc/list,{{admin_url}}/admin/promo/rotate/kyc/list,hardcoded_env,yes,活动/后台-活动管理/KYC通过送免费旋转/列表.bru,列表
+admin,kyc,POST,/cmpl/kyc/approve,{{admin_url}}/cmpl/kyc/approve,,yes,合规/kyc/kyc 审核通过 - owen.bru,kyc 审核通过 - owen
+admin,kyc,GET,/cmpl/kyc/detail,{{admin_url}}/cmpl/kyc/detail,,yes,合规/kyc/获取 kyc 详情 - owen.bru,获取 kyc 详情 - owen
+admin,kyc,GET,/cmpl/kyc/detail,{{admin_url}}/cmpl/kyc/detail,,yes,合规/会员列表/kyc详情 - owen.bru,kyc详情 - owen
+admin,kyc,POST,/cmpl/kyc/list,{{admin_url}}/cmpl/kyc/list,,yes,合规/kyc/获取 kyc 列表 - owen.bru,获取 kyc 列表 - owen
+admin,kyc,GET,/cmpl/kyc/pending/count,{{admin_url}}/cmpl/kyc/pending/count,,yes,合规/kyc/获取 kyc 待审批数量.bru,获取 kyc 待审批数量
+admin,kyc,POST,/cmpl/kyc/reject,{{admin_url}}/cmpl/kyc/reject,,yes,合规/kyc/kyc 审核驳回 - owen.bru,kyc 审核驳回 - owen
+admin,kyc,POST,/cmpl/kyc/update,{{admin_url}}/cmpl/kyc/update,,yes,合规/kyc/更新 kyc - owen.bru,更新 kyc - owen
+admin,kyc,POST,/member/oss/upload,{{admin_url}}/member/oss/upload,,yes,前台/oss/上传 kyc 相关图片 - double.bru,上传 kyc 相关图片 - double

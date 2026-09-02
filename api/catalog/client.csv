@@ -1,0 +1,177 @@
+surface,module,method,path,clean_url,flags,p0_candidate,source_file,name
+client,auth,GET,/agency/logout,{{api_url}}/agency/logout,,,代理后台/登陆/退出登陆-wesley.bru,退出登陆-wesley
+client,auth,POST,/agency/otp/login,{{api_url}}/agency/otp/login,,,代理后台/登陆/otp登陆-wesley.bru,otp登陆-wesley
+client,auth,POST,/finance/lazadaminiapp/login,{{api_url}}/finance/lazadaminiapp/login,,yes,前台/lazada mini/登陆-owen.bru,登陆-owen
+client,auth,POST,/member/auth/mail,{{api_url}}/member/auth/mail,,yes,前台/会员信息/邮箱验证码验证-ducky.bru,邮箱验证码验证-ducky
+client,auth,POST,/member/auth/password,{{api_url}}/member/auth/password,old_or_copy,yes,前台/会员登陆注册验证/旧密码前置验证-seven.bru,旧密码前置验证-seven
+client,auth,POST,/member/auth/sms,{{api_url}}/member/auth/sms,,yes,前台/会员登陆注册验证/短信验证码前置检查-seven.bru,短信验证码前置检查-seven
+client,auth,POST,/member/facebook/login,{{api_url}}/member/facebook/login,,yes,前台/会员登陆注册验证/facebook oauth登录-ducky.bru,facebook oauth登录-ducky
+client,auth,POST,/member/fb/login,{{api_url}}/member/fb/login,hardcoded_env,yes,前台/三方登录/注册接口.bru,注册接口
+client,auth,POST,/member/google/login,{{api_url}}/member/google/login,,yes,前台/会员登陆注册验证/google oauth登录-ducky.bru,google oauth登录-ducky
+client,auth,POST,/member/login,{{api_url}}/member/login,,yes,前台/会员登陆注册验证/密码登陆-seven.bru,密码登陆-seven
+client,auth,GET,/member/logout,{{api_url}}/member/logout,,yes,前台/会员登陆注册验证/退出登陆-seven.bru,退出登陆-seven
+client,auth,POST,/member/otp/login,{{api_url}}/member/otp/login,,yes,前台/会员登陆注册验证/otp登陆-seven.bru,otp登陆-seven
+client,auth,POST,/member/otp/login/v2,{{api_url}}/member/otp/login/v2,url_v2,yes,前台/会员登陆注册验证/otp登陆V2-seven.bru,otp登陆V2-seven
+client,auth,POST,/member/password/update,{{api_url}}/member/password/update,,yes,前台/会员信息/密码修改-seven.bru,密码修改-seven
+client,auth,POST,/member/register,{{api_url}}/member/register,hardcoded_env,yes,前台/会员登陆注册验证/注册.bru,注册
+client,auth,POST,/member/retrieve/password,{{api_url}}/member/retrieve/password,,yes,前台/会员登陆注册验证/重置密码-seven.bru,重置密码-seven
+client,auth,POST,/member/retrieve/passwordbyemail,{{api_url}}/member/retrieve/passwordbyemail,,yes,前台/会员信息/通过邮箱修改密码-ducky.bru,通过邮箱修改密码-ducky
+client,auth,POST,/member/v2/login,{{api_url}}/member/v2/login,url_v2,yes,前台/会员登陆注册验证/密码登陆v2-ducky.bru,密码登陆v2-ducky
+client,auth,POST,/member/wallet/checkpassword,{{api_url}}/member/wallet/checkpassword,,yes,前台/会员信息/校验钱包密码-ducky.bru,校验钱包密码-ducky
+client,auth,POST,/member/wallet/password,{{api_url}}/member/wallet/password,,yes,前台/会员信息/钱包密码设置-ducky.bru,钱包密码设置-ducky
+client,auth,POST,/member/wallet/password/update,{{api_url}}/member/wallet/password/update,,yes,前台/会员信息/设置新钱包密码-ducky.bru,设置新钱包密码-ducky
+client,finance,GET,/agency/commission/trans/list,{{api_url}}/agency/commission/trans/list?month=202508&page=1&page_size=20,hardcoded_env,,前台/财务/佣金账变.bru,佣金账变
+client,finance,POST,/cmpl/wallet/information,{{api_url}}/cmpl/wallet/information?api_id=gotech-stg-001&hash_code=<redacted>&from_date=2026-01-02+15:04:05&to_date=2026-03-02+15:04:05&page_number=1&page_size=10,hardcoded_env,yes,前台/mx/information.bru,information
+client,finance,POST,/cmpl/wallet/playerid,{{api_url}}/cmpl/wallet/playerid?api_id=gotech-stg-001&hash_code=<redacted>&player_id=<redacted>,hardcoded_env,yes,前台/mx/playerid.bru,playerid
+client,finance,POST,/finance/account/bank/delete,{{api_url}}/finance/account/bank/delete,hardcoded_env,yes,前台/财务/删除银行卡.bru,删除银行卡
+client,finance,POST,/finance/account/bank/update,{{api_url}}/finance/account/bank/update,hardcoded_env,yes,前台/财务/编辑银行卡.bru,编辑银行卡
+client,finance,GET,/finance/account/delete,{{api_url}}/finance/account/delete?id=<id>,,yes,前台/财务/提款账号删除-wesley.bru,提款账号删除-wesley
+client,finance,POST,/finance/account/insert,{{api_url}}/finance/account/insert,hardcoded_env,yes,前台/财务/创建提现账户-wesley.bru,创建提现账户-wesley
+client,finance,GET,/finance/account/list,{{api_url}}/finance/account/list,hardcoded_env,yes,前台/财务/提款账户列表-wesley.bru,提款账户列表-wesley
+client,finance,GET,/finance/channel/list,{{api_url}}/finance/channel/list?mode=2&source=huawei,,yes,前台/财务/获取支付通道列表-wesley.bru,获取支付通道列表-wesley
+client,finance,GET,/finance/channel/product/list,{{api_url}}/finance/channel/product/list?mode=1&pid=1,hardcoded_env,yes,前台/财务/获取支付通道商品列表.bru,获取支付通道商品列表
+client,finance,GET,/finance/deposit/detail,{{api_url}}/finance/deposit/detail?id=<id>,,yes,前台/财务/充值详情.bru,充值详情
+client,finance,GET,/finance/deposit/list,{{api_url}}/finance/deposit/list?status=PENDING&time_flag=0&page=1&page_size=10,,yes,前台/财务/充值记录-wesley.bru,充值记录-wesley
+client,finance,POST,/finance/lazada/exchange,{{api_url}}/finance/lazada/exchange,,yes,前台/财务/lazada兑换-owen.bru,lazada兑换-owen
+client,finance,POST,/finance/lazada/product/list,{{api_url}}/finance/lazada/product/list,,yes,前台/财务/lazada商品列表-owen.bru,lazada商品列表-owen
+client,finance,GET,/finance/member/buyfeatures,{{api_url}}/finance/member/buyfeatures,hardcoded_env,yes,前台/财务/购买免费旋转游戏列表.bru,购买免费旋转游戏列表
+client,finance,GET,/finance/payment/bank/list,{{api_url}}/finance/payment/bank/list?page=2&page_size=10,hardcoded_env,yes,前台/财务/银行列表.bru,银行列表
+client,finance,POST,/finance/payment/callback/deposit/pisopay,{{api_url}}/finance/payment/callback/deposit/pisopay,hardcoded_env,yes,前台/支付/pisopay回调.bru,pisopay回调
+client,finance,GET,/finance/payment/deposit,{{api_url}}/finance/payment/deposit?pid=10&amount=998&device=web&source=huawei&product_id=123,,yes,前台/财务/充值-wesley-cold.bru,充值-wesley/cold
+client,finance,GET,/finance/payment/tab/list,{{api_url}}/finance/payment/tab/list,hardcoded_env,yes,前台/财务/提现tab.bru,提现tab
+client,finance,GET,/finance/payment/withdraw,{{api_url}}/finance/payment/withdraw?amount=100&account_id=<id>,hardcoded_env,yes,前台/财务/提现-wesley-cold.bru,提现-wesley/cold
+client,finance,GET,/finance/transaction/list,{{api_url}}/finance/transaction/list?time_flag=15&page=1&page_size=20,,yes,前台/财务/获取交易记录- wesley-alex.bru,获取交易记录- wesley/alex
+client,finance,GET,/finance/transaction/types,{{api_url}}/finance/transaction/types,,yes,前台/财务/账变字典.bru,账变字典
+client,finance,GET,/finance/wallet,{{api_url}}/finance/wallet,,yes,前台/财务/会员钱包-wesley.bru,会员钱包-wesley
+client,finance,POST,/finance/wallet/pwd/check,{{api_url}}/finance/wallet/pwd/check,hardcoded_env,yes,前台/财务/钱包密码/验证钱包密码.bru,验证钱包密码
+client,finance,POST,/finance/wallet/pwd/set,{{api_url}}/finance/wallet/pwd/set,hardcoded_env,yes,前台/财务/钱包密码/设置钱包密码.bru,设置钱包密码
+client,finance,POST,/finance/wallet/pwd/update,{{api_url}}/finance/wallet/pwd/update,hardcoded_env,yes,前台/财务/钱包密码/修改密码.bru,修改密码
+client,finance,GET,/finance/withdraw/detail,{{api_url}}/finance/withdraw/detail?id=<id>,,yes,前台/财务/提现详情.bru,提现详情
+client,finance,GET,/finance/withdraw/list,{{api_url}}/finance/withdraw/list?time_flag=0&page=1&page_size=10,,yes,前台/财务/提现记录-wesley.bru,提现记录-wesley
+client,finance,GET,/promo/task/transaction,{{api_url}}/promo/task/transaction,,yes,前台/任务中心/代币明细-seven.bru,代币明细-seven
+client,game,GET,/member/faq,{{api_url}}/member/faq?brand=h5,hardcoded_env,,前台/游戏/3-获取FAQ  -cold.bru,3-获取FAQ  -cold
+client,game,GET,/member/fav/delete,{{api_url}}/member/fav/delete?id=0,,yes,前台/游戏/删除游戏收藏-light.bru,删除游戏收藏-light
+client,game,GET,/member/fav/insert,{{api_url}}/member/fav/insert?id=0,,yes,前台/游戏/添加游戏收藏-light.bru,添加游戏收藏-light
+client,game,GET,/member/fav/list,{{api_url}}/member/fav/list?page=1&page_size=10,,yes,前台/游戏/游戏收藏列表-light.bru,游戏收藏列表-light
+client,game,GET,/member/game/bet/list,{{api_url}}/member/game/bet/list?page=1&page_size=10&time_flag=30&status=1,,yes,前台/游戏/游戏记录-wesley.bru,游戏记录-wesley
+client,game,GET,/member/game/list,{{api_url}}/member/game/list?page=1&page_size=10&game_type=0&is_hot=0&is_new=0&platform_id=0&venue_id=0&w=&sorting=&maintained=1,,yes,前台/游戏/游戏列表-light.bru,游戏列表-light
+client,game,GET,/member/game/list/history,{{api_url}}/member/game/list/history,,yes,前台/游戏/历史游戏列表-light.bru,历史游戏列表-light
+client,game,GET,/member/game/list/recent,{{api_url}}/member/game/list/recent?page=1&page_size=10,,yes,前台/游戏/最近游戏-benjie.bru,最近游戏-benjie
+client,game,GET,/member/game/list/recommend,{{api_url}}/member/game/list/recommend,hardcoded_env,yes,前台/游戏/推荐列表-benjie.bru,推荐列表-benjie
+client,game,GET,/member/game/listRw,{{api_url}}/member/game/listRw?page=1&page_size=10&venues=op&sort=4,hardcoded_env,yes,前台/游戏/游戏查询语句组合-benjie.bru,游戏查询语句组合-benjie
+client,game,POST,/member/game/rank,{{api_url}}/member/game/rank,hardcoded_env,,前台/游戏/游戏排名-benjie.bru,游戏排名-benjie
+client,game,GET,/member/game/rpt,{{api_url}}/member/game/rpt?ty=10,hardcoded_env,,前台/首页/回报率排名 (Highest RTP).bru,回报率排名 (Highest RTP)
+client,game,GET,/member/index,{{api_url}}/member/index,,,前台/游戏/首页缓存.bru,首页缓存
+client,game,GET,/member/platform/list,{{api_url}}/member/platform/list?page=1&page_size=10&game_type=0,,,前台/游戏/获取场馆列表-light.bru,获取场馆列表-light
+client,game,GET,/member/popup/list,{{api_url}}/member/popup/list?brand=glife1,hardcoded_env,,前台/游戏/4-广告弹窗.bru,4-广告弹窗
+client,game,GET,/member/privacy,{{api_url}}/member/privacy?brand=glife1,hardcoded_env,,前台/游戏/1-隐私政策 privacy -cold.bru,1-隐私政策 privacy -cold
+client,game,GET,/member/stmt,{{api_url}}/member/stmt?brand=h5,hardcoded_env,,前台/游戏/5-获取声明.bru,5-获取声明
+client,game,GET,/member/terms,{{api_url}}/member/terms?brand=h5,hardcoded_env,,前台/游戏/2-服务条款 terms -cold.bru,2-服务条款 terms -cold
+client,game,GET,/member/v2/index,{{api_url}}/member/v2/index,"url_v2,hardcoded_env",yes,前台/游戏/首页缓存v2-owen.bru,首页缓存v2-owen
+client,game,GET,/promo/rotation/detail,{{api_url}}/promo/rotation/detail?id=<id>&use_method=3,hardcoded_env,,活动/freeSpin/详情(选择厂商或游戏).bru,详情(选择厂商或游戏)
+client,game,POST,/promo/rotation/game/create,{{api_url}}/promo/rotation/game/create,hardcoded_env,,活动/freeSpin/创建(带入游戏).bru,创建(带入游戏)
+client,kyc,POST,/member/flutter/ocr/checkresult,{{api_url}}/member/flutter/ocr/checkresult,,yes,前台/ocr-flutter/获取身份验证进程的运行状态和相关的验证结果.bru,获取身份验证进程的运行状态和相关的验证结果-double
+client,kyc,POST,/member/flutter/ocr/setup,{{api_url}}/member/flutter/ocr/setup,,yes,前台/ocr-flutter/初始化ZOLOZ中的身份验证进程.bru,初始化ZOLOZ中的身份验证进程-double
+client,kyc,POST,/member/kyc/base,{{api_url}}/member/kyc/base,,yes,前台/kyc/提交 kyc 基础信息 -- double-cold.bru,提交 kyc 基础信息 -- double/cold
+client,kyc,GET,/member/kyc/detail,{{api_url}}/member/kyc/detail,,yes,前台/kyc/获取 kyc 详情 -- double-cold.bru,获取 kyc 详情 -- double/cold
+client,kyc,POST,/member/kyc/ekyc/callback,{{api_url}}/member/kyc/ekyc/callback,hardcoded_env,yes,前台/kyc/ekyc回调.bru,ekyc回调
+client,kyc,GET,/member/kyc/ekyc/get_results,{{api_url}}/member/kyc/ekyc/get_results?signature_id=26fbea1d1671b7cc,hardcoded_env,yes,前台/kyc/获取ekyc结果.bru,获取ekyc结果
+client,kyc,GET,/member/kyc/ekyc/info,{{api_url}}/member/kyc/ekyc/info,hardcoded_env,yes,前台/kyc/ekyc 配置.bru,ekyc 配置
+client,kyc,GET,/member/kyc/ekyc/url,{{api_url}}/member/kyc/ekyc/url?language=en&prefers_color_scheme=&iframe_enabled=true,hardcoded_env,yes,前台/kyc/获取ekyc的url.bru,获取ekyc的url
+client,kyc,POST,/member/kyc/insert,{{api_url}}/member/kyc/insert,,yes,前台/kyc/提交 kyc -- double-cold-owen.bru,提交 kyc -- double/cold/owen
+client,kyc,POST,/member/kyc/shops,{{api_url}}/member/kyc/shops,,yes,前台/kyc/获取门店列表 -- owen.bru,获取门店列表 -- owen
+client,kyc,POST,/member/kyc/update,{{api_url}}/member/kyc/update,deprecated,,前台/kyc/更新 kyc -- double-cold（已经弃用，请调用 -kyc-insert）.bru,更新 kyc -- double/cold（已经弃用，请调用 /kyc/insert）
+client,kyc,POST,/member/kyc/v2/insert,{{api_url}}/member/kyc/v2/insert,"url_v2,hardcoded_env",yes,前台/kyc/v2/insert.bru,提交 kyc v2 -- double/cold/owen
+client,kyc,POST,/member/ocr/checkresult,{{api_url}}/member/ocr/checkresult,,yes,前台/ocr/获取身份验证进程的运行状态和相关的验证结果-double-owen.bru,获取身份验证进程的运行状态和相关的验证结果-double/owen
+client,kyc,POST,/member/ocr/setup,{{api_url}}/member/ocr/setup,,yes,前台/ocr/初始化ZOLOZ中的身份验证进程.bru,初始化ZOLOZ中的身份验证进程-double
+client,kyc,GET,/promo/rotate/bet/detail,{{api_url}}/promo/rotate/bet/detail?pid=13&is_welfare=1,"old_or_copy,hardcoded_env",yes,活动/kyc送免费旋转/详情(老页面).bru,详情(老页面)
+client,kyc,GET,/promo/rotate/kyc/detail,{{api_url}}/promo/rotate/kyc/detail,hardcoded_env,yes,活动/kyc送免费旋转/详情.bru,详情
+client,kyc,GET,/promo/rotate/kyc/popup,{{api_url}}/promo/rotate/kyc/popup,hardcoded_env,yes,活动/kyc送免费旋转/弹窗上报.bru,弹窗上报
+client,member,POST,/member/agency/apply,{{api_url}}/member/agency/apply,,yes,前台/会员信息/代理申请.bru,代理申请
+client,member,POST,/member/agency/apply/material,{{api_url}}/member/agency/apply/material,hardcoded_env,yes,前台/代理/申请资料提交.bru,申请资料提交
+client,member,GET,/member/agency/audit/results,{{api_url}}/member/agency/audit/results,hardcoded_env,yes,前台/代理/代理审核结果.bru,代理审核结果
+client,member,GET,/member/agency/problem/list,{{api_url}}/member/agency/problem/list,hardcoded_env,yes,前台/代理/代理申请问题列表.bru,代理申请问题列表
+client,member,GET,/member/app/version,{{api_url}}/member/app/version?ty=1,,,前台/配置/app最新版本信息获取.bru,app最新版本信息获取
+client,member,GET,/member/avatar/list,{{api_url}}/member/avatar/list,,,前台/会员信息/会员头像列表-ducky.bru,会员头像列表-ducky
+client,member,GET,/member/bigprize/list,{{api_url}}/member/bigprize/list,,,前台/爆奖信息/爆奖列表.bru,爆奖列表
+client,member,POST,/member/bind/facebook,{{api_url}}/member/bind/facebook,,yes,前台/会员信息/facebook oauth绑定-ducky.bru,facebook oauth绑定-ducky
+client,member,POST,/member/bind/google,{{api_url}}/member/bind/google,,yes,前台/会员信息/google oauth绑定-ducky.bru,google oauth绑定-ducky
+client,member,POST,/member/block,{{api_url}}/member/block,hardcoded_env,,前台/会员信息/申请封禁.bru,申请封禁
+client,member,GET,/member/buriedPoint/detail,{{api_url}}/member/buriedPoint/detail?ad_id=%E5%B9%BF%E5%91%8AID,todo,,前台/埋点/埋点详情-todo.bru,埋点详情-todo
+client,member,GET,/member/buriedPoint/detailV2,{{api_url}}/member/buriedPoint/detailV2?ad_id=%E5%B9%BF%E5%91%8AID,"todo,name_v2",,前台/埋点/埋点详情V2-todo.bru,埋点详情V2-todo
+client,member,POST,/member/card/list,{{api_url}}/member/card/list,,yes,前台/会员信息/会员卡片列表查询-owen.bru,会员卡片列表查询-owen
+client,member,POST,/member/card/update,{{api_url}}/member/card/update,,yes,前台/会员信息/会员卡片列表更新-owen.bru,会员卡片列表更新-owen
+client,member,GET,/member/channel/detail,{{api_url}}/member/channel/detail,todo,,前台/渠道/渠道详情-todo.bru,渠道详情-todo
+client,member,POST,/member/channel/trackclick,{{api_url}}/member/channel/trackclick,todo,,前台/渠道/渠道跟踪点击-todo.bru,渠道跟踪点击-todo
+client,member,GET,/member/detail,{{api_url}}/member/detail,hardcoded_env,yes,前台/会员信息/获取会员信息-seven-aliang(20260424).bru,获取会员信息-seven-aliang(20260424)
+client,member,POST,/member/detail/update,{{api_url}}/member/detail/update,,yes,前台/会员信息/会员信息修改-seven.bru,会员信息修改-seven
+client,member,GET,/member/facebook_link,{{api_url}}/member/facebook_link,,yes,前台/会员信息/facebook oauth链接-ducky.bru,facebook oauth链接-ducky
+client,member,POST,/member/fb/bind,{{api_url}}/member/fb/bind,hardcoded_env,,前台/三方登录/绑定三方账号.bru,绑定三方账号
+client,member,GET,/member/fb/info,{{api_url}}/member/fb/info?state=success&token=<redacted>,hardcoded_env,,前台/三方登录/获取用户信息.bru,获取用户信息
+client,member,GET,/member/fb/list,{{api_url}}/member/fb/list,hardcoded_env,,前台/三方登录/三方登录列表.bru,三方登录列表
+client,member,POST,/member/fb/unbind,{{api_url}}/member/fb/unbind,hardcoded_env,,前台/三方登录/解绑三方账号.bru,解绑三方账号
+client,member,GET,/member/fb/url,{{api_url}}/member/fb/url,hardcoded_env,,前台/三方登录/fb-获取fb地址.bru,fb-获取fb地址
+client,member,POST,/member/feedback,{{api_url}}/member/feedback,,,前台/feedback/feedback-ducky.bru,feedback-ducky
+client,member,GET,/member/feedback/history,{{api_url}}/member/feedback/history?page=1&page_size=10,,,前台/feedback/feedback history-ducky.bru,feedback history-ducky
+client,member,POST,/member/feedback/read,{{api_url}}/member/feedback/read,,,前台/feedback/feedback read-ducky.bru,feedback read-ducky
+client,member,GET,/member/filcoin/balance,{{api_url}}/member/filcoin/balance,,,前台/商城/代币余额 - felix.bru,代币余额 - felix
+client,member,GET,/member/goods/detail,{{api_url}}/member/goods/detail?goods_id=<id>,,,前台/商城/商品详情 - felix.bru,商品详情 - felix
+client,member,GET,/member/goods/list,{{api_url}}/member/goods/list?sort=3&points_range=&page=&page_size=,,,前台/商城/商品列表 - felix.bru,商品列表 - felix
+client,member,GET,/member/google_link,{{api_url}}/member/google_link,,yes,前台/会员信息/google oauth链接-ducky.bru,google oauth链接-ducky
+client,member,GET,/member/home/sections,{{api_url}}/member/home/sections?brand=filbet,,,前台/首页/首页板块列表.bru,首页板块列表
+client,member,GET,/member/index/bigwin,{{api_url}}/member/index/bigwin,hardcoded_env,,前台/首页/big win.bru,big win
+client,member,GET,/member/introduce/complex,{{api_url}}/member/introduce/complex?brand=h5&ty=welfare,hardcoded_env,,前台/配置/网站介绍.bru,网站介绍
+client,member,GET,/member/introduce/simple,{{api_url}}/member/introduce/simple?brand=h5&ty=stmts,hardcoded_env,,前台/配置/网站介绍(单个).bru,网站介绍(单个)
+client,member,POST,/member/invite/code/check,{{api_url}}/member/invite/code/check,,,前台/会员登陆注册验证/校验邀请码.bru,校验邀请码
+client,member,POST,/member/mail,{{api_url}}/member/mail,,,前台/会员信息/邮箱验证码发送-ducky.bru,邮箱验证码发送-ducky
+client,member,GET,/member/marquee/list,{{api_url}}/member/marquee/list,,,前台/跑马灯/跑马灯列表.bru,跑马灯列表
+client,member,GET,/member/materials/list,{{api_url}}/member/materials/list?platform_code=filbet&material_type_code=logo,hardcoded_env,,前台/素材/素材列表.bru,素材列表
+client,member,GET,/member/message/has_unread,{{api_url}}/member/message/has_unread,"todo,hardcoded_env",,前台/站内信/是否有未读信息-todo.bru,是否有未读信息-todo
+client,member,GET,/member/message/list,{{api_url}}/member/message/list?page=1&page_size=10,"todo,hardcoded_env",,前台/站内信/站内信列表-todo.bru,站内信列表-todo
+client,member,GET,/member/message/popup_list,{{api_url}}/member/message/popup_list,"todo,hardcoded_env",,前台/站内信/获取弹窗站内信列表-todo.bru,获取弹窗站内信列表-todo
+client,member,POST,/member/message/reads,{{api_url}}/member/message/reads,"todo,hardcoded_env",,前台/站内信/站内信已读-todo.bru,站内信已读-todo
+client,member,GET,/member/order/detail,{{api_url}}/member/order/detail?order_id=<id>,,,前台/商城/订单详情 - felix.bru,订单详情 - felix
+client,member,GET,/member/order/list,{{api_url}}/member/order/list?page=1&page_size=2,,,前台/商城/订单列表 - felix.bru,订单列表 - felix
+client,member,POST,/member/order/submit,{{api_url}}/member/order/submit,,,前台/商城/提交订单 - felix.bru,提交订单 - felix
+client,member,GET,/member/oss/upload/url,{{api_url}}/member/oss/upload/url?name=test,hardcoded_env,,前台/代理/代理获取视频上传地址.bru,代理获取视频上传地址
+client,member,GET,/member/popup/list,{{api_url}}/member/popup/list,todo,,前台/配置/首页弹窗/获取首页弹窗列表-todo.bru,获取首页弹窗列表-todo
+client,member,GET,/member/refresh/token,{{api_url}}/member/refresh/token,,yes,前台/会员登陆注册验证/刷新token-seven.bru,刷新token-seven
+client,member,POST,/member/sms,{{api_url}}/member/sms,,,代理后台/登陆/短信发送-wesley.bru,短信发送-wesley
+client,member,POST,/member/sms,{{api_url}}/member/sms,,yes,前台/会员登陆注册验证/短信发送-seven.bru,短信发送-seven
+client,member,GET,/member/stmt,{{api_url}}/member/stmt?brand=h5,hardcoded_env,,test.bru,test
+client,member,GET,/member/system,{{api_url}}/member/system,hardcoded_env,,前台/配置/获取系统配置.bru,获取系统配置
+client,member,GET,/member/vip,{{api_url}}/member/vip,,yes,前台/会员信息/会员vip信息-seven.bru,会员vip信息-seven
+client,member,GET,/member/vip/level/detail,{{api_url}}/member/vip/level/detail,hardcoded_env,yes,前台/VIP/会员vip等级详情.bru,会员vip等级详情
+client,member,GET,/member/vip/rule,{{api_url}}/member/vip/rule,todo,yes,前台/VIP/VIP配置规则-todo.bru,VIP配置规则-todo
+client,other,POST,/api/v1/cbconfig,{{api_url}}/api/v1/cbconfig,,,前台/glife mini/glife-获取系统配置-owen.bru,glife-获取系统配置-owen
+client,other,POST,/vip/sign/in,{{api_url}}/vip/sign/in,,,前台/任务中心/vip签到.bru,vip签到
+client,other,PUT,func (that GlifeController) Config(fctx *fasthttp.RequestCtx) {,,"odd_relative_url,invalid_url",,前台/刷新token-owen.bru,刷新token-owen
+client,other,PUT,func (that GlifeController) Config(fctx *fasthttp.RequestCtx) {,,"odd_relative_url,invalid_url",,前台/获取系统配置-owen.bru,获取系统配置-owen
+client,promo,GET,/promo/inviter/statistics,{{api_url}}/promo/inviter/statistics?stime=1775012314000&etime=1777564799000&level=1,hardcoded_env,,活动/邀请好友/邀请好友数据展示.bru,邀请好友数据展示
+client,promo,GET,/promo/pt/info,{{api_url}}/promo/pt/info,hardcoded_env,,活动/pt/pt相关数据.bru,pt相关数据
+client,promo,GET,/promo/rotate/bet/detail,{{api_url}}/promo/rotate/bet/detail?pid=13&is_welfare=1,"old_or_copy,hardcoded_env",,活动/Vip/详情(老页面).bru,详情(老页面)
+client,promo,GET,/promo/rotate/bet/detail,{{api_url}}/promo/rotate/bet/detail?pid=13&is_welfare=1,hardcoded_env,,活动/每日充值+投注阶梯送礼金和旋转次数/活动详情.bru,活动详情
+client,promo,GET,/promo/rotation/list,{{api_url}}/promo/rotation/list?ty=1,hardcoded_env,,活动/freeSpin/列表.bru,列表
+client,promo,GET,/promo/task/daily/claim,{{api_url}}/promo/task/daily/claim,,,前台/任务中心/领取日常任务-seven.bru,领取日常任务-seven
+client,promo,GET,/promo/task/daily/history,{{api_url}}/promo/task/daily/history,,,前台/任务中心/日常签到历史记录-seven.bru,日常签到历史记录-seven
+client,promo,GET,/promo/task/daily/list,{{api_url}}/promo/task/daily/list,,,前台/任务中心/日常任务列表-seven.bru,日常任务列表-seven
+client,promo,GET,/promo/task/daily/task,{{api_url}}/promo/task/daily/task,,,前台/任务中心/日常签到任务详情-seven.bru,日常签到任务详情-seven
+client,promo,GET,/promo/task/newbie/claim,{{api_url}}/promo/task/newbie/claim,,,前台/任务中心/领取任务（新手任务14个）-seven.bru,领取任务（新手任务14个）-seven
+client,promo,GET,/promo/task/newbie/daily,{{api_url}}/promo/task/newbie/daily,,,前台/任务中心/签到任务详情-seven.bru,签到任务详情-seven
+client,promo,GET,/promo/task/newbie/daily/claim,{{api_url}}/promo/task/newbie/daily/claim,,,前台/任务中心/签到任务领取-seven.bru,签到任务领取-seven
+client,promo,GET,/promo/task/newbie/list,{{api_url}}/promo/task/newbie/list,,,前台/任务中心/新人任务列表-seven.bru,新人任务列表-seven
+client,promo,GET,/promo/task/tokens/balance,{{api_url}}/promo/task/tokens/balance,,,前台/任务中心/代币余额-seven.bru,代币余额-seven
+client,promo,GET,/promo/task/unclaimed/num,{{api_url}}/promo/task/unclaimed/num,,,前台/任务中心/待领取任务数-seven.bru,待领取任务数-seven
+client,promo,POST,/promo/vip/clock/in,{{api_url}}/promo/vip/clock/in,hardcoded_env,,活动/Vip/补签.bru,补签
+client,promo,GET,/promo/vip/config,{{api_url}}/promo/vip/config,hardcoded_env,,活动/Vip/vip配置.bru,vip配置
+client,promo,POST,/promo/vip/daily/loss/claim,{{api_url}}/promo/vip/daily/loss/claim,hardcoded_env,,前台/VIP/每日负盈利-领取奖励-aliang.bru,每日负盈利-领取奖励-aliang
+client,promo,GET,/promo/vip/detail,{{api_url}}/promo/vip/detail,hardcoded_env,,活动/Vip/详情.bru,详情
+client,promo,POST,/promo/vip/half/moon/claim,{{api_url}}/promo/vip/half/moon/claim,hardcoded_env,,前台/VIP/半月礼金-领取奖励-aliang.bru,半月礼金-领取奖励-aliang
+client,promo,POST,/promo/vip/log/claim/all,{{api_url}}/promo/vip/log/claim/all,hardcoded_env,,前台/VIP/领取全部奖励.bru,领取全部奖励
+client,promo,POST,/promo/vip/log/claim/byid,{{api_url}}/promo/vip/log/claim/byid,hardcoded_env,,前台/VIP/领取奖励-aliang.bru,领取奖励-aliang
+client,promo,GET,/promo/vip/log/history,{{api_url}}/promo/vip/log/history,hardcoded_env,,前台/VIP/领取奖励历史记录列表-aliang.bru,领取奖励历史记录列表-aliang
+client,promo,GET,/promo/vip/log/list,{{api_url}}/promo/vip/log/list?page=1&page_size=10,hardcoded_env,,前台/VIP/待领取奖励列表-aliang.bru,待领取奖励列表-aliang
+client,promo,POST,/promo/vip/sign/in,{{api_url}}/promo/vip/sign/in,hardcoded_env,,活动/Vip/签到.bru,签到
+client,promo,GET,/promo/vip/sign/in/config,{{api_url}}/promo/vip/sign/in/config,hardcoded_env,,活动/Vip/签到配置.bru,签到配置
+client,promo,GET,/promo/vip/test,{{api_url}}/promo/vip/test,hardcoded_env,,活动/Vip/测试(这个不用管).bru,测试(这个不用管)
+client,report,GET,/promo/rotation/summary,{{api_url}}/promo/rotation/summary,hardcoded_env,,活动/freeSpin/统计.bru,统计

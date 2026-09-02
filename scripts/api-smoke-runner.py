@@ -16,6 +16,7 @@ from urllib.parse import quote
 from urllib.request import Request, urlopen
 
 from p0_session import load_session, write_session
+from totp import current_totp
 
 
 VAR_DEFAULTS = {
@@ -44,7 +45,12 @@ def load_env_file(path: Path) -> None:
         if not line or line.startswith("#") or "=" not in line:
             continue
         key, value = line.split("=", 1)
-        os.environ.setdefault(key.strip(), value.strip().strip('"').strip("'"))
+        key = key.strip()
+        value = value.strip().strip('"').strip("'")
+        if os.environ.get("ENV_FILE_PRECEDENCE") == "shell":
+            os.environ.setdefault(key, value)
+        else:
+            os.environ[key] = value
 
 
 def cbor_encode(value: object) -> bytes:
@@ -310,6 +316,7 @@ def request_once(
     insecure: bool,
     body: dict[str, object] | None = None,
     body_format: str = "json",
+    content_type: str = "",
 ) -> dict[str, object]:
     url = resolve_url(row["clean_url"])
     headers = headers_for(row)
@@ -317,10 +324,10 @@ def request_once(
     if body is not None:
         if body_format == "cbor":
             payload = cbor_encode(body)
-            headers["content-type"] = "application/cbor"
+            headers["content-type"] = content_type or "application/cbor"
         else:
             payload = json.dumps(body).encode("utf-8")
-            headers["content-type"] = "application/json"
+            headers["content-type"] = content_type or "application/json"
     request = Request(url, data=payload, method=row["method"], headers=headers)
     context = ssl._create_unverified_context() if insecure else None
     started = time.monotonic()
@@ -394,11 +401,76 @@ def extract_token(result: dict[str, object]) -> str:
     return ""
 
 
+def admin_sms_otp(args: argparse.Namespace, otp_id: str) -> str:
+    if not otp_id.isdigit():
+        return ""
+    admin_token = os.environ.get("ADMIN_TOKEN", "")
+    if admin_token:
+        validation = request_once(
+            login_row("{{admin_url}}/admin/me/detail", "{{admin_url}}", method="GET"),
+            args.timeout,
+            args.insecure,
+            body_format=args.body_format,
+        )
+        body = validation.get("decoded_body")
+        if not (isinstance(body, dict) and body.get("status") is True):
+            admin_token = ""
+            os.environ.pop("ADMIN_TOKEN", None)
+    if not admin_token:
+        _, admin_token = admin_login(args)
+    if not admin_token:
+        return ""
+    os.environ["ADMIN_TOKEN"] = admin_token
+
+    secret = os.environ.get("ADMIN_APPROVAL_TOTP_SECRET", "")
+    algorithm = os.environ.get("ADMIN_APPROVAL_TOTP_ALGORITHM", "SHA1")
+    if not secret:
+        return ""
+    seconds_remaining = 30 - (int(time.time()) % 30)
+    if seconds_remaining <= 2:
+        time.sleep(seconds_remaining + 1)
+    google_code = current_totp(secret, algorithm=algorithm)
+    lookup_row = login_row(
+        f"{{{{admin_url}}}}/admin/sms/auth?code={google_code}&id={otp_id}",
+        "{{admin_url}}",
+        method="GET",
+    )
+    result = request_once(lookup_row, args.timeout, args.insecure, body_format=args.body_format)
+    body = result.get("decoded_body")
+    data = body.get("data") if isinstance(body, dict) and body.get("status") is True else None
+    return data if isinstance(data, str) and data.isdigit() else ""
+
+
 def client_login(args: argparse.Namespace) -> tuple[list[dict[str, object]], str]:
     phone = os.environ.get("CLIENT_PHONE", "")
+    password = os.environ.get("CLIENT_PASSWORD", "")
     otp = os.environ.get("CLIENT_OTP", "")
-    if not phone or not otp:
-        raise SystemExit("CLIENT_PHONE and CLIENT_OTP are required")
+    otp_source = os.environ.get("CLIENT_OTP_SOURCE", "fixed").strip().lower()
+    auth_mode = os.environ.get("CLIENT_AUTH_MODE", "password").strip().lower()
+    if auth_mode not in {"password", "otp"}:
+        raise SystemExit("CLIENT_AUTH_MODE must be password or otp")
+    if not phone:
+        raise SystemExit("CLIENT_PHONE is required")
+
+    if auth_mode == "password":
+        if not password:
+            raise SystemExit("CLIENT_PASSWORD is required when CLIENT_AUTH_MODE=password")
+        password_row = login_row("{{api_url}}/member/v2/login", "{{api_url}}")
+        password_body = {"login_text": phone, "password": password}
+        password_result = request_once(
+            password_row,
+            args.timeout,
+            args.insecure,
+            password_body,
+            args.body_format,
+        )
+        token = extract_token(password_result)
+        if token:
+            os.environ["API_TOKEN"] = token
+        return [password_result], token
+
+    if not otp and otp_source != "admin_sms":
+        raise SystemExit("CLIENT_OTP or CLIENT_OTP_SOURCE=admin_sms is required when CLIENT_AUTH_MODE=otp")
 
     sms_row = login_row("{{api_url}}/member/sms", "{{api_url}}")
     sms_body = {
@@ -414,15 +486,18 @@ def client_login(args: argparse.Namespace) -> tuple[list[dict[str, object]], str
 
     login_result: dict[str, object] | None = None
     if otp_id:
+        if otp_source == "admin_sms":
+            otp = admin_sms_otp(args, otp_id)
         otp_row = login_row("{{api_url}}/member/otp/login/v2", "{{api_url}}")
-        login_body = {
-            "code": otp,
-            "otp_id": otp_id,
-        }
-        login_result = request_once(otp_row, args.timeout, args.insecure, login_body, args.body_format)
-        token = extract_token(login_result)
-        if token:
-            os.environ["API_TOKEN"] = token
+        if otp:
+            login_body = {
+                "code": otp,
+                "otp_id": otp_id,
+            }
+            login_result = request_once(otp_row, args.timeout, args.insecure, login_body, args.body_format)
+            token = extract_token(login_result)
+            if token:
+                os.environ["API_TOKEN"] = token
 
     token = ""
     results = [sms_result]
@@ -436,17 +511,26 @@ def run_client_login(args: argparse.Namespace) -> None:
     results, token = client_login(args)
     Path(args.out).write_text(json.dumps(results, ensure_ascii=False, indent=2), encoding="utf-8")
     print(f"wrote {Path(args.out).resolve()}")
-    print(f"client sms status={results[0]['status']} otp_id={'yes' if len(results) > 1 else 'no'}")
-    if len(results) > 1:
-        print(f"client login status={results[1]['status']} token={'yes' if token else 'no'}")
+    auth_mode = os.environ.get("CLIENT_AUTH_MODE", "password").strip().lower()
+    if auth_mode == "password":
+        print(f"client password login status={results[0]['status']} token={'yes' if token else 'no'}")
+    else:
+        print(f"client sms status={results[0]['status']} otp_id={'yes' if len(results) > 1 else 'no'}")
+        if len(results) > 1:
+            print(f"client otp login status={results[1]['status']} token={'yes' if token else 'no'}")
 
 
 def admin_login(args: argparse.Namespace) -> tuple[list[dict[str, object]], str]:
     email = os.environ.get("ADMIN_EMAIL", "")
     password = os.environ.get("ADMIN_PASSWORD", "")
     google_code = os.environ.get("ADMIN_GOOGLE_CODE", "")
+    if not google_code:
+        login_secret = os.environ.get("ADMIN_LOGIN_TOTP_SECRET") or os.environ.get("ADMIN_APPROVAL_TOTP_SECRET", "")
+        login_algorithm = os.environ.get("ADMIN_LOGIN_TOTP_ALGORITHM") or os.environ.get("ADMIN_APPROVAL_TOTP_ALGORITHM", "SHA1")
+        if login_secret:
+            google_code = current_totp(login_secret, algorithm=login_algorithm)
     if not email or not password or not google_code:
-        raise SystemExit("ADMIN_EMAIL, ADMIN_PASSWORD, and ADMIN_GOOGLE_CODE are required")
+        raise SystemExit("ADMIN_EMAIL, ADMIN_PASSWORD, and an admin login code or TOTP secret are required")
 
     auth_row = login_row("{{admin_url}}/admin/login/auth", "{{admin_url}}")
     auth_body = {"email": email, "password": password}
@@ -481,7 +565,7 @@ def run_admin_login(args: argparse.Namespace) -> None:
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--list", default="api/p0/interface-shortlist.csv")
-    parser.add_argument("--env", default=".env")
+    parser.add_argument("--env", default=os.environ.get("ENV_FILE", ".env.fat"))
     parser.add_argument("--limit", type=int, default=0, help="Maximum cases to run; 0 runs all selected cases")
     parser.add_argument("--base", choices=["all", "client", "admin", "agency"], default="all")
     parser.add_argument("--timeout", type=float, default=10)
