@@ -1,0 +1,390 @@
+{
+  "captured_at": "2026-09-03T08:47:55.477Z",
+  "environment": "FAT",
+  "lane": "kyc_reject",
+  "target_ref": "FAT-KYC-REJECT-01",
+  "page_route": "/member-center/detail/{uid}",
+  "tab_name": "",
+  "action_name": "Token Top-Up and Withdrawal",
+  "control_present": true,
+  "control_disabled": false,
+  "available_buttons": [
+    "Reset",
+    "Query",
+    "Token Top-Up and Withdrawal",
+    "Export"
+  ],
+  "form": {
+    "title": "Token Top-Up and Withdrawal",
+    "text_head": "Token Top-Up and Withdrawal Phone Number Member Account Member UID Token Wallet Balance Adjustment Type Token Top-Up Token Withdrawal Token Reset/Clear Adjust Token Amount Adjustment Reason 0 / 500 Google Verification Code Cancel OK",
+    "fields": [
+      {
+        "index": 0,
+        "label": "Phone Number",
+        "required": true,
+        "controls": [
+          {
+            "type": "text",
+            "placeholder": "Please Enter Phone Number",
+            "disabled": true
+          }
+        ]
+      },
+      {
+        "index": 1,
+        "label": "Member Account",
+        "required": true,
+        "controls": [
+          {
+            "type": "text",
+            "placeholder": "Enter Member Account",
+            "disabled": true
+          }
+        ]
+      },
+      {
+        "index": 2,
+        "label": "Member UID",
+        "required": true,
+        "controls": [
+          {
+            "type": "text",
+            "placeholder": "Enter Member UID",
+            "disabled": true
+          }
+        ]
+      },
+      {
+        "index": 3,
+        "label": "Token Wallet Balance",
+        "required": false,
+        "controls": [
+          {
+            "type": "text",
+            "placeholder": "Enter Token Wallet Balance",
+            "disabled": true
+          }
+        ]
+      },
+      {
+        "index": 4,
+        "label": "Adjustment Type",
+        "required": true,
+        "controls": [
+          {
+            "type": "radio",
+            "placeholder": "",
+            "disabled": false
+          },
+          {
+            "type": "radio",
+            "placeholder": "",
+            "disabled": false
+          },
+          {
+            "type": "radio",
+            "placeholder": "",
+            "disabled": false
+          }
+        ]
+      },
+      {
+        "index": 5,
+        "label": "Adjust Token Amount",
+        "required": true,
+        "controls": [
+          {
+            "type": "input",
+            "placeholder": "Non-Zero Positive Value, Up to Two Decimal Places",
+            "disabled": false
+          }
+        ]
+      },
+      {
+        "index": 6,
+        "label": "Adjustment Reason",
+        "required": false,
+        "controls": [
+          {
+            "type": "textarea",
+            "placeholder": "Text 1~500 characters",
+            "disabled": false
+          }
+        ]
+      },
+      {
+        "index": 7,
+        "label": "Google Verification Code",
+        "required": true,
+        "controls": [
+          {
+            "type": "text",
+            "placeholder": "Enter Google Authenticator Code",
+            "disabled": false
+          }
+        ]
+      }
+    ],
+    "radio_labels": [
+      "Token Top-Up",
+      "Token Withdrawal",
+      "Token Reset/Clear"
+    ],
+    "select_texts": [],
+    "select_options": [],
+    "buttons": [
+      "",
+      "Cancel",
+      "OK"
+    ]
+  },
+  "destination": null,
+  "submitted": false,
+  "writes": 0,
+  "raw_phone_or_uid_persisted": false,
+  "network": [
+    {
+      "action": "login",
+      "method": "GET",
+      "path": "/admin/me/detail",
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": false,
+      "response_values_persisted": false
+    },
+    {
+      "action": "login",
+      "method": "POST",
+      "path": "/admin/login/auth",
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_values_persisted": false
+    },
+    {
+      "action": "login",
+      "method": "POST",
+      "path": "/admin/login",
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_values_persisted": false
+    },
+    {
+      "action": "login",
+      "method": "GET",
+      "path": "/admin/me/detail",
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_values_persisted": false
+    },
+    {
+      "action": "open_member_detail",
+      "method": "GET",
+      "path": "/admin/me/detail",
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_values_persisted": false
+    },
+    {
+      "action": "open_member_detail",
+      "method": "GET",
+      "path": "/admin/priv/check",
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_values_persisted": false
+    },
+    {
+      "action": "open_member_detail",
+      "method": "GET",
+      "path": "/admin/kyc/detail",
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_values_persisted": false
+    },
+    {
+      "action": "open_member_detail",
+      "method": "GET",
+      "path": "/admin/sys/config/compliance/status",
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_values_persisted": false
+    },
+    {
+      "action": "open_member_detail",
+      "method": "GET",
+      "path": "/admin/finance/member/wallet",
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_values_persisted": false
+    },
+    {
+      "action": "open_member_detail",
+      "method": "GET",
+      "path": "/admin/notify/audit/alarm",
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_values_persisted": false
+    },
+    {
+      "action": "open_member_detail",
+      "method": "POST",
+      "path": "/admin/gameclass/list",
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_values_persisted": false
+    },
+    {
+      "action": "open_member_detail",
+      "method": "GET",
+      "path": "/admin/member/detail",
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_values_persisted": false
+    },
+    {
+      "action": "open_member_detail",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_values_persisted": false
+    },
+    {
+      "action": "open_member_detail",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_values_persisted": false
+    },
+    {
+      "action": "open_member_detail",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_values_persisted": false
+    },
+    {
+      "action": "open_member_detail",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_values_persisted": false
+    },
+    {
+      "action": "open_member_detail",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_values_persisted": false
+    },
+    {
+      "action": "open_member_detail",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_values_persisted": false
+    },
+    {
+      "action": "open_member_detail",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_values_persisted": false
+    },
+    {
+      "action": "open_member_detail",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_values_persisted": false
+    },
+    {
+      "action": "open_member_detail",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_values_persisted": false
+    },
+    {
+      "action": "open_member_detail",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_values_persisted": false
+    },
+    {
+      "action": "open_member_detail",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_values_persisted": false
+    },
+    {
+      "action": "open_member_detail",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_values_persisted": false
+    },
+    {
+      "action": "open_preaction:View Token Wallet",
+      "method": "POST",
+      "path": "/admin/promo/task/list",
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_values_persisted": false
+    },
+    {
+      "action": "open_preaction:View Token Wallet",
+      "method": "POST",
+      "path": "/admin/finance/tokens/transaction/list",
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_values_persisted": false
+    },
+    {
+      "action": "open:Token Top-Up and Withdrawal",
+      "method": "GET",
+      "path": "/admin/member/detail",
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_values_persisted": false
+    }
+  ]
+}

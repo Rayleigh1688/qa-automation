@@ -1,0 +1,58 @@
+{
+  "environment": "FAT",
+  "target_ref": "FAT-KYC-REJECT-01",
+  "page_route": "/member-center/detail/{uid}",
+  "visible_data_sources": [
+    {
+      "method": "GET",
+      "path": "/admin/member/detail",
+      "query_fields": ["uid"],
+      "page_sections": ["User Information", "Promotion", "Security", "Statistics"],
+      "field_groups": ["identity/account", "member state", "referral/agent", "balance summary", "turnover", "VIP/XP", "token", "deposit/withdraw/bet aggregates"],
+      "evidence": "response field names in record-flow-member-lane-kyc_reject-baseline.json"
+    },
+    {
+      "method": "GET",
+      "path": "/admin/kyc/detail",
+      "query_fields": ["uid"],
+      "page_sections": ["KYC", "real-name and registration correlation"],
+      "field_groups": ["KYC status", "identity", "address", "employment", "attachments", "OCR", "review information", "member correlation"],
+      "evidence": "response field names in record-flow-member-lane-kyc_reject-baseline.json"
+    },
+    {
+      "method": "GET",
+      "path": "/admin/finance/member/wallet",
+      "query_fields": ["uid"],
+      "page_sections": ["Wallet balance", "Withdrawable balance"],
+      "field_groups": ["balance", "locked", "withdrawable", "uid"],
+      "evidence": "response field names in record-flow-member-lane-kyc_reject-baseline.json"
+    }
+  ],
+  "supporting_requests": [
+    {
+      "method": "GET",
+      "path": "/admin/priv/check",
+      "query_fields": ["path"],
+      "purpose": "operation rights; not a visible business-data source"
+    },
+    {
+      "method": "POST",
+      "path": "/admin/gameclass/list",
+      "purpose": "preload seven turnover-game categories"
+    },
+    {
+      "method": "POST",
+      "path": "/admin/game/search",
+      "purpose": "detail-page preload in 12 responses: eleven batches of 500 and one batch of 231, total 5731 games"
+    }
+  ],
+  "turnover_tree_open": {
+    "requests": ["POST /admin/gameclass/list", "POST /admin/game/search"],
+    "category_count": 7,
+    "game_count": 5731,
+    "category_provider_pairs": 72,
+    "node_expansion_additional_game_requests": 0,
+    "evidence": "record-flow-member-turnover-game-tree.json"
+  },
+  "raw_phone_uid_or_member_values_persisted": false
+}

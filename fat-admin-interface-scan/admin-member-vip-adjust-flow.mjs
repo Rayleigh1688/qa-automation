@@ -1,0 +1,78 @@
+import fs from "node:fs";
+import path from "node:path";
+import crypto from "node:crypto";
+import { chromium } from "playwright";
+import { loadEnv, requiredEnv } from "../ui/framework/env.mjs";
+import { decodeCbor } from "../ui/framework/cbor-decoder.mjs";
+
+loadEnv(process.env.ENV_FILE || ".env.fat");
+const target = JSON.parse(fs.readFileSync("/tmp/fat-member-lane-reversible.json", "utf8"));
+if (target.environment !== "FAT" || target.target_ref !== "FAT-MEMBER-REV-01") throw new Error("unexpected reversible target");
+const baseUrl = requiredEnv("ADMIN_URL"), origin = new URL(baseUrl).origin;
+const execute = process.env.MEMBER_VIP_EXECUTE === "true";
+const verifyOnly = process.env.MEMBER_VIP_VERIFY_ONLY === "true";
+const restoreOnly = process.env.MEMBER_VIP_RESTORE_ONLY === "true";
+const output = path.resolve(`fat-admin-interface-scan/results/record-flow-member-reversible-vip-adjust-${execute ? "flow" : "probe"}.json`);
+const network = [], before = {}; let action = "login", latestVip = {};
+const scrub = (value) => String(value || "").replace(/(?:\+?63|0)9\d{9}|\b\d{7,}\b/g, "<redacted>").replace(/\s+/g, " ").trim().slice(0, 500);
+const browser = await chromium.launch({ headless: process.env.ADMIN_SCAN_HEADED === "false" });
+const context = await browser.newContext({ ignoreHTTPSErrors: true, viewport: { width: 1440, height: 1000 }, locale: "en-US" });
+const page = await context.newPage();
+page.on("response", async (response) => {
+  const request = response.request(); if (!["xhr", "fetch"].includes(request.resourceType())) return;
+  const url = new URL(response.url()); if (url.origin !== origin) return;
+  let decoded = null, bodyFields = [];
+  try { const raw = request.postDataBuffer(); if (raw?.length) { const content = (request.headers()["content-type"] || "").toLowerCase(); const body = content.includes("json") ? JSON.parse(raw.toString("utf8")) : decodeCbor(new Uint8Array(raw)); if (body && typeof body === "object" && !Array.isArray(body)) bodyFields = Object.keys(body).sort(); } } catch {}
+  try { decoded = decodeCbor(new Uint8Array(await response.body())); } catch {}
+  const data = decoded?.data;
+  if (url.pathname === "/admin/member/detail" && data && typeof data === "object") {
+    const snapshot={};for (const key of ["vip_level", "vip_manual_level", "vip_score", "vip_category"]) if (key in data) snapshot[key] = typeof data[key] === "number" || typeof data[key] === "boolean" ? data[key] : "<present>";
+    latestVip=snapshot;if(!Object.keys(before).length)Object.assign(before,snapshot);
+  }
+  const list=Array.isArray(data)?data:Array.isArray(data?.d)?data.d:Array.isArray(data?.list)?data.list:null;
+  network.push({ action, method: request.method(), path: url.pathname, query_fields: [...url.searchParams.keys()].filter((key) => key !== "t").sort(), body_fields: bodyFields, http_status: response.status(), business_status: decoded?.status ?? null, response_type: Array.isArray(data) ? "list" : data === null ? "null" : typeof data, response_keys: data && typeof data === "object" && !Array.isArray(data) ? Object.keys(data).sort() : [], response_summary:list?{list_count:list.length}: {}, response_values_persisted: false });
+});
+async function quiet(){let last=network.length,stable=Date.now();for(let i=0;i<70;i++){await page.waitForTimeout(100);if(last!==network.length){last=network.length;stable=Date.now();}else if(Date.now()-stable>700)return;}}
+async function login(){await page.goto(baseUrl,{waitUntil:"domcontentloaded",timeout:30000});await page.getByPlaceholder(/请输入用户名|user\s*name|email/i).fill(requiredEnv("ADMIN_EMAIL"));await page.getByPlaceholder(/请输入密码|password/i).fill(requiredEnv("ADMIN_PASSWORD"));await page.getByRole("button",{name:/登\s*录|log\s*in/i}).click();const code=page.getByPlaceholder(/谷歌验证|google.*(?:code|verification|authenticator)/i);await code.waitFor({state:"visible",timeout:10000});await code.fill(requiredEnv("ADMIN_GOOGLE_CODE"));await page.getByRole("button",{name:/确\s*定|confirm|ok/i}).click();await page.waitForURL((url)=>!url.pathname.startsWith("/user/login"),{timeout:20000});}
+async function openOverflowTab(name){
+  const pattern=new RegExp(`^\\s*${name}\\s*$`);
+  const tab=page.locator(".ant-layout-content .ant-tabs-tab").filter({hasText:pattern}).last();
+  let method="direct_tab";
+  if(await tab.isVisible({timeout:1000}).catch(()=>false)){await tab.click();await page.waitForTimeout(250);}
+  if(!(await tab.getAttribute("class").catch(()=>"")||"").includes("ant-tabs-tab-active") && await tab.count()){
+    await tab.evaluate((node)=>node.click());await page.waitForTimeout(250);method="dom_tab_activation";
+  }
+  if(!(await tab.getAttribute("class").catch(()=>"")||"").includes("ant-tabs-tab-active")){
+    const more=page.locator(".ant-layout-content .ant-tabs-nav-more:visible").last();await more.click();
+    const item=page.locator(".ant-tabs-dropdown-menu-item:visible").filter({hasText:pattern}).last();await item.waitFor({state:"visible",timeout:5000});await item.click();method="overflow_menu";
+  }
+  const active=page.locator(".ant-layout-content .ant-tabs-tab-active").filter({hasText:pattern}).last();await active.waitFor({state:"visible",timeout:5000});
+  return method;
+}
+function base32Decode(value){const alphabet="ABCDEFGHIJKLMNOPQRSTUVWXYZ234567",normalized=value.replace(/\s|=/g,"").toUpperCase();let bits="";for(const char of normalized){const index=alphabet.indexOf(char);if(index<0)throw new Error("invalid approval TOTP secret");bits+=index.toString(2).padStart(5,"0");}const bytes=[];for(let i=0;i+8<=bits.length;i+=8)bytes.push(parseInt(bits.slice(i,i+8),2));return Buffer.from(bytes);}
+function currentTotp(){const key=base32Decode(requiredEnv("ADMIN_APPROVAL_TOTP_SECRET"));const algorithm=(process.env.ADMIN_APPROVAL_TOTP_ALGORITHM||"SHA1").toLowerCase().replace("-","");const counter=Math.floor(Date.now()/1000/30),message=Buffer.alloc(8);message.writeBigUInt64BE(BigInt(counter));const digest=crypto.createHmac(algorithm,key).update(message).digest(),offset=digest[digest.length-1]&15;return String((digest.readUInt32BE(offset)&0x7fffffff)%1000000).padStart(6,"0");}
+async function openVipModal(){action="open VIP Level Log";await openOverflowTab("VIP Level Log");await quiet();action="open Manual Adjust VIP";const button=page.getByRole("button",{name:"Manual Adjust VIP",exact:true});await button.waitFor({state:"visible",timeout:8000});await button.click();const modal=page.locator(".ant-modal:visible,.ant-drawer:visible,[role=dialog]:visible").last();await modal.waitFor({state:"visible",timeout:8000});return modal;}
+async function adjustVip(modal, levelPattern, reason, actionName){
+  const select=modal.locator(".ant-select:visible").first();await select.click();const option=page.locator(".ant-select-dropdown:visible .ant-select-item-option").filter({hasText:levelPattern}).first();await option.click({force:true,timeout:3000}).catch(async()=>option.evaluate((node)=>node.click()));
+  const reasonItem=modal.locator(".ant-form-item").filter({hasText:/Reason/i}).first();const reasonInput=reasonItem.locator("textarea,input:not([type=search])").first();await reasonInput.fill(reason);
+  action=actionName;let responsePromise=page.waitForResponse((response)=>response.request().method()==="POST"&&new URL(response.url()).pathname==="/admin/member/vip/level/manual/upgrade",{timeout:7000});
+  await modal.getByRole("button",{name:/^Confirm$/i}).click();let response=await responsePromise.catch(()=>null);
+  if(!response){const verifyModal=page.locator(".ant-modal:visible,.ant-drawer:visible,[role=dialog]:visible").last();const verification=verifyModal.locator("input:visible").last();if(!(await verification.isVisible({timeout:1500}).catch(()=>false)))throw new Error("VIP adjustment produced neither request nor verification control");await verification.fill(currentTotp());responsePromise=page.waitForResponse((item)=>item.request().method()==="POST"&&new URL(item.url()).pathname==="/admin/member/vip/level/manual/upgrade",{timeout:10000});await verifyModal.getByRole("button",{name:/^OK$|^Confirm$/i}).last().click();response=await responsePromise;}
+  let decoded=null;try{decoded=decodeCbor(new Uint8Array(await response.body()));}catch{}await quiet();const event={method:"POST",path:"/admin/member/vip/level/manual/upgrade",http_status:response.status(),business_status:decoded?.status??null};if(event.http_status>=400||event.business_status!==true)throw Object.assign(new Error(`${actionName} business failure`),{writeEvent:event});return event;
+}
+async function refreshVip(label){action=label;await page.goto(new URL(`/member-center/detail/${target.uid}`,baseUrl).toString(),{waitUntil:"domcontentloaded",timeout:25000});await quiet();return {...latestVip};}
+
+await login(); action="open reversible member detail"; await page.goto(new URL(`/member-center/detail/${target.uid}`,baseUrl).toString(),{waitUntil:"domcontentloaded",timeout:25000}); await quiet();
+if(restoreOnly){const restoreBefore={...latestVip};const restoreModal=await openVipModal();let restore=null,afterRestore=null,error="";try{restore=await adjustVip(restoreModal,/^V0\s*\/\s*Bronze/i,"FAT reversible VIP discovery delayed restore","vip manual delayed restore V1 to V0");await page.waitForTimeout(12000);afterRestore=await refreshVip("verify delayed VIP restore");if(afterRestore.vip_level!==0||afterRestore.vip_manual_level!==0)throw new Error("VIP delayed restore did not return to V0 baseline");}catch(caught){error=scrub(caught?.message||caught);}const restored=Boolean(restore&&afterRestore?.vip_level===0&&afterRestore?.vip_manual_level===0);const result={captured_at:new Date().toISOString(),environment:"FAT",target_ref:target.target_ref,uid_ref:"FAT-UID-REV-01",operation:"Manual Adjust VIP delayed restore",before:restoreBefore,restore,after_restore:afterRestore,restored,error,writes:Number(Boolean(restore)),side_effects:restored?["restored delayed VIP V1 to original V0"]:[],raw_phone_or_uid_persisted:false,network};fs.writeFileSync(path.resolve("fat-admin-interface-scan/results/record-flow-member-reversible-vip-adjust-restore.json"),JSON.stringify(result,null,2)+"\n");await browser.close();console.log(JSON.stringify({target_ref:target.target_ref,before:restoreBefore,restore,after_restore:afterRestore,restored,error,writes:Number(Boolean(restore))}));if(error||!restored)process.exitCode=1;process.exit();}
+if(verifyOnly){await page.waitForTimeout(12000);const delayed=await refreshVip("delayed verify VIP member detail");action="delayed verify VIP Level Log";let method="TAB_NOT_VISIBLE",tabError="";try{page.setDefaultTimeout(5000);method=await openOverflowTab("VIP Level Log");await quiet();}catch(caught){tabError=scrub(caught?.message||caught);}const logEvent=[...network].reverse().find((item)=>item.path==="/admin/member/vip/level/list");const noDetailChange=delayed.vip_level===0&&delayed.vip_manual_level===0;const result={captured_at:new Date().toISOString(),environment:"FAT",target_ref:target.target_ref,uid_ref:"FAT-UID-REV-01",operation:"delayed read-only VIP side-effect verification",delay_seconds:12,member_detail:delayed,vip_level_log:{selection_method:method,http_status:logEvent?.http_status??null,business_status:logEvent?.business_status??null,list_count:logEvent?.response_summary?.list_count??null,error:tabError},classification:noDetailChange&&(logEvent?Number(logEvent.response_summary?.list_count||0)===0:true)?"HTTP_BUSINESS_SUCCESS_EXPECTED_SIDE_EFFECT_NOT_OBSERVED":"SIDE_EFFECT_OBSERVED",writes:0,network,raw_phone_or_uid_persisted:false};fs.writeFileSync(path.resolve("fat-admin-interface-scan/results/record-flow-member-reversible-vip-adjust-final-check.json"),JSON.stringify(result,null,2)+"\n");await browser.close();console.log(JSON.stringify({target_ref:target.target_ref,member_detail:delayed,vip_level_log:result.vip_level_log,classification:result.classification,writes:0}));process.exit(0);}
+const modal=await openVipModal();const selectionMethod="dom_tab_activation";await quiet();
+const form={title:scrub(await modal.locator(".ant-modal-title,.ant-drawer-title").first().innerText().catch(()=>"")),text_head:scrub((await modal.innerText()).slice(0,1000)),fields:await modal.locator(".ant-form-item").evaluateAll(items=>items.map((item,index)=>({index,label:item.querySelector(".ant-form-item-label")?.innerText.replace(/\s+/g," ").trim()||"",required:Boolean(item.querySelector(".ant-form-item-required")),controls:[...item.querySelectorAll("input,textarea")].map(node=>({type:node.getAttribute("type")||node.tagName.toLowerCase(),placeholder:node.getAttribute("placeholder")||"",disabled:Boolean(node.disabled)}))}))),selects:(await modal.locator(".ant-select:visible").allInnerTexts()).map(scrub),options:[],buttons:(await modal.locator("button:visible").allInnerTexts()).map(scrub)};
+for(let index=0;index<await modal.locator(".ant-select:visible").count();index++){await modal.locator(".ant-select:visible").nth(index).click();await page.waitForTimeout(250);form.options.push((await page.locator(".ant-select-dropdown:visible .ant-select-item-option").allInnerTexts()).map(scrub));await page.keyboard.press("Escape");}
+if(!execute){await page.keyboard.press("Escape");fs.writeFileSync(output,JSON.stringify({captured_at:new Date().toISOString(),environment:"FAT",target_ref:target.target_ref,uid_ref:"FAT-UID-REV-01",page_route:"/member-center/detail/{uid}",tab:"VIP Level Log",tab_selection_method:selectionMethod,action:"Manual Adjust VIP",before,form,submitted:false,writes:0,side_effects:[],raw_phone_or_uid_persisted:false,network},null,2)+"\n");await browser.close();console.log(JSON.stringify({target_ref:target.target_ref,before,selection_method:selectionMethod,form:{title:form.title,fields:form.fields.map((item)=>item.label),selects:form.selects,options:form.options,buttons:form.buttons},writes:0}));}
+else{
+  let upgrade=null,afterUpgrade=null,restore=null,afterRestore=null,error="";
+  try{upgrade=await adjustVip(modal,/^V1\s*\/\s*Bronze$/i,"FAT reversible VIP discovery upgrade","vip manual adjust V0 to V1");afterUpgrade=await refreshVip("verify VIP after upgrade");if(afterUpgrade.vip_level!==1&&afterUpgrade.vip_manual_level!==1)throw new Error("VIP state did not change to V1 after successful response");const restoreModal=await openVipModal();restore=await adjustVip(restoreModal,/^V0\s*\/\s*Bronze/i,"FAT reversible VIP discovery restore","vip manual restore V1 to V0");afterRestore=await refreshVip("verify VIP after restore");if(afterRestore.vip_level!==before.vip_level||afterRestore.vip_manual_level!==before.vip_manual_level)throw new Error("VIP state did not restore to baseline");}catch(caught){error=scrub(caught?.message||caught);}
+  const restored=Boolean(restore&&afterRestore&&afterRestore.vip_level===before.vip_level&&afterRestore.vip_manual_level===before.vip_manual_level);
+  fs.writeFileSync(output,JSON.stringify({captured_at:new Date().toISOString(),environment:"FAT",target_ref:target.target_ref,uid_ref:"FAT-UID-REV-01",page_route:"/member-center/detail/{uid}",operation:"Manual Adjust VIP reversible closure",before,form,upgrade,after_upgrade:afterUpgrade,restore,after_restore:afterRestore,restored,error,writes:Number(Boolean(upgrade))+Number(Boolean(restore)),side_effects:restored?["temporary VIP V1; restored to original V0"]:[],raw_phone_or_uid_persisted:false,network},null,2)+"\n");
+  await browser.close();console.log(JSON.stringify({target_ref:target.target_ref,before,upgrade,after_upgrade:afterUpgrade,restore,after_restore:afterRestore,restored,error,writes:Number(Boolean(upgrade))+Number(Boolean(restore))}));if(error||!restored)process.exitCode=1;
+}

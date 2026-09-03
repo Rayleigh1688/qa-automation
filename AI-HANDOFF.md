@@ -63,8 +63,9 @@
 
 ## 当前下一步（按价值排序）
 
-1. 不重放本轮 UAT 充值、投注或提现订单；下一次完整资金链必须创建并关联新的 flow。
-2. 未勾选登录条款缺陷修复后，只重跑默认 UI 11 项并取消临时接受例外。
+1. FAT 接口发现的会员列表和详情内部操作补扫已完成：会员列表形成 30 个动作结论，Batch/全部筛选族/组合查询/分页/行内入口已有证据，`POST /admin/member/list` 对比文档 GET 定义归类 `MISCLASSIFIED`；17/17 详情页签完成 DOM 清单，14 个数据页签形成 72 个 UI 动作结论、76 条 action-endpoint 映射。Export 以触发接口为完成标准，不保存文件；Deposit Export 实际触发但空数据业务失败，其余未捕获 Network 的点击不虚报接口。KYC 保持 `0→2→3→2→5`；Bet/Login、Risk Control、Wallet `0→0.01→0`、VIP `V0→V1→V0`、充值倍率和 Turnover `0→1→0` 均完成可恢复闭环并恢复。流水 add/sub 均 HTTP 200、业务成功，数据库只读确认同一行 finished 且 locked=0；clear 和 Token 调整未请求。独立写操作资产为 32 行、18 个唯一已触发接口：`ACTIVE 21`、`ACTIVE_FAILED 1`、`DOCUMENTED_UNVERIFIED 6`、`UNDOCUMENTED_ACTIVE 1`、`MISCLASSIFIED 3`，无意外未恢复副作用。独立管理后台合并结果为 135 个唯一 method+path，连同客户端 59 个共 194 个首方接口；共享 inventory/catalog 尚未修改。184 个安全跳过、6 个交互错误和 60 个旧写阻塞项已生成逐行审计，未仅凭未扫描到判 `STALE`。下一步只处理具备合法本轮数据和恢复路径的高前置/终态项，再统一评审分类和等级；不修改现有 P0/P1 范围。
+2. 不重放本轮 UAT 充值、投注或提现订单；下一次完整资金链必须创建并关联新的 flow。
+3. 未勾选登录条款缺陷修复后，只重跑默认 UI 11 项并取消临时接受例外。
 
 ## 不可违反的边界
 

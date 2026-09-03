@@ -1,0 +1,2205 @@
+{
+  "captured_at": "2026-09-03T06:21:39.661Z",
+  "environment": "FAT",
+  "probes": [
+    {
+      "page": "Material Management",
+      "route": "/operations/material-management",
+      "action": "Add",
+      "status": "OPENED",
+      "controls": {
+        "text": "Add",
+        "inputs": [
+          {
+            "type": "text",
+            "name": "",
+            "placeholder": ""
+          },
+          {
+            "type": "search",
+            "name": "",
+            "placeholder": ""
+          },
+          {
+            "type": "search",
+            "name": "",
+            "placeholder": ""
+          },
+          {
+            "type": "text",
+            "name": "",
+            "placeholder": "Some material types will display name to client Ex: Media Account"
+          },
+          {
+            "type": "text",
+            "name": "",
+            "placeholder": "Managers record usage by themselves, only visible in backend"
+          },
+          {
+            "type": "file",
+            "name": "file",
+            "placeholder": ""
+          },
+          {
+            "type": "text",
+            "name": "",
+            "placeholder": "0~1000 integer, larger is higher"
+          },
+          {
+            "type": "radio",
+            "name": ":rcr:",
+            "placeholder": ""
+          },
+          {
+            "type": "radio",
+            "name": ":rcr:",
+            "placeholder": ""
+          },
+          {
+            "type": "text",
+            "name": "",
+            "placeholder": "Please enter APP jump path"
+          },
+          {
+            "type": "text",
+            "name": "",
+            "placeholder": "Please enter H5 jump path"
+          },
+          {
+            "type": "radio",
+            "name": ":rcu:",
+            "placeholder": ""
+          },
+          {
+            "type": "radio",
+            "name": ":rcu:",
+            "placeholder": ""
+          },
+          {
+            "type": "radio",
+            "name": ":rd1:",
+            "placeholder": ""
+          },
+          {
+            "type": "radio",
+            "name": ":rd1:",
+            "placeholder": ""
+          },
+          {
+            "type": "text",
+            "name": "",
+            "placeholder": ""
+          },
+          {
+            "type": "search",
+            "name": "",
+            "placeholder": ""
+          },
+          {
+            "type": "text",
+            "name": "",
+            "placeholder": "Start Date"
+          },
+          {
+            "type": "text",
+            "name": "",
+            "placeholder": "End Date"
+          },
+          {
+            "type": "text",
+            "name": "",
+            "placeholder": "Please enter Google verification code"
+          }
+        ],
+        "selects": [
+          "Select Platform",
+          "Select Material Type",
+          "开启"
+        ],
+        "buttons": [
+          "Cancel",
+          "Next Step",
+          "插入",
+          "默认",
+          "默认",
+          "Previous Step",
+          "Cancel",
+          "Confirm"
+        ],
+        "labels": [
+          "Platform",
+          "Platform",
+          "Material Type",
+          "Material Type",
+          "Name",
+          "Name",
+          "Description",
+          "Description",
+          "Image",
+          "Image",
+          "Display Priority",
+          "Display Priority",
+          "Link Type",
+          "Link Type",
+          "Internal Jump",
+          "External Link",
+          "APP Jump Path",
+          "APP Jump Path",
+          "H5 Jump Path",
+          "H5 Jump Path",
+          "Popup Frequency",
+          "Popup Frequency",
+          "Once a day",
+          "Every time enter home page",
+          "Popup Visibility",
+          "Popup Visibility",
+          "Visible to all members",
+          "Visible to specified VIP level only",
+          "Content",
+          "Content",
+          "Status",
+          "Status",
+          "Display Time",
+          "Display Time",
+          "Google Code",
+          "Google Code"
+        ]
+      },
+      "error": ""
+    },
+    {
+      "page": "Marquee Management",
+      "route": "/operations/marquee-management",
+      "action": "Add Marquee",
+      "status": "OPENED",
+      "controls": {
+        "text": "Add Marquee",
+        "inputs": [
+          {
+            "type": "text",
+            "name": "",
+            "placeholder": ""
+          },
+          {
+            "type": "textarea",
+            "name": "",
+            "placeholder": "Enter marquee content, max 200 characters"
+          },
+          {
+            "type": "search",
+            "name": "",
+            "placeholder": ""
+          },
+          {
+            "type": "radio",
+            "name": ":rht:",
+            "placeholder": ""
+          },
+          {
+            "type": "radio",
+            "name": ":rht:",
+            "placeholder": ""
+          },
+          {
+            "type": "text",
+            "name": "",
+            "placeholder": "Please enter"
+          },
+          {
+            "type": "text",
+            "name": "",
+            "placeholder": "Please select"
+          },
+          {
+            "type": "text",
+            "name": "",
+            "placeholder": "Please select"
+          },
+          {
+            "type": "radio",
+            "name": ":rhv:",
+            "placeholder": ""
+          },
+          {
+            "type": "radio",
+            "name": ":rhv:",
+            "placeholder": ""
+          },
+          {
+            "type": "radio",
+            "name": ":rhv:",
+            "placeholder": ""
+          }
+        ],
+        "selects": [
+          "System Announcement"
+        ],
+        "buttons": [
+          "Cancel",
+          "Confirm"
+        ],
+        "labels": [
+          "Content",
+          "Content",
+          "Type",
+          "Type",
+          "Status",
+          "Status",
+          "Enabled",
+          "Disabled",
+          "Sort",
+          "Sort",
+          "Effective Period",
+          "Effective Period",
+          "Jump Type",
+          "Jump Type",
+          "None",
+          "Internal",
+          "External"
+        ]
+      },
+      "error": ""
+    },
+    {
+      "page": "Channel Management",
+      "route": "/promo-marketing/channels",
+      "action": "Add",
+      "status": "OPENED",
+      "controls": {
+        "text": "Add Promotion Group",
+        "inputs": [
+          {
+            "type": "text",
+            "name": "",
+            "placeholder": "Please enter"
+          }
+        ],
+        "selects": [],
+        "buttons": [
+          "Cancel",
+          "Confirm"
+        ],
+        "labels": []
+      },
+      "error": ""
+    },
+    {
+      "page": "Recharge Template",
+      "route": "/operations/recharge-template",
+      "action": "Add Template",
+      "status": "OPENED",
+      "controls": {
+        "text": "Add Template",
+        "inputs": [
+          {
+            "type": "text",
+            "name": "",
+            "placeholder": "Please enter"
+          },
+          {
+            "type": "text",
+            "name": "",
+            "placeholder": "Please enter"
+          },
+          {
+            "type": "text",
+            "name": "",
+            "placeholder": "Please enter"
+          },
+          {
+            "type": "text",
+            "name": "",
+            "placeholder": "Please enter amount"
+          }
+        ],
+        "selects": [],
+        "buttons": [
+          "Delete",
+          "Add",
+          "Cancel",
+          "Confirm"
+        ],
+        "labels": [
+          "Template Name",
+          "Template Name",
+          "Wagering Requirement",
+          "Wagering Requirement",
+          "Minimum Recharge Amount",
+          "Minimum Recharge Amount",
+          "Quick Recharge Buttons",
+          "Quick Recharge Buttons"
+        ]
+      },
+      "error": ""
+    },
+    {
+      "page": "Role Configuration",
+      "route": "/system/role",
+      "action": "Add New",
+      "status": "OPENED",
+      "controls": {
+        "text": "Add Role",
+        "inputs": [
+          {
+            "type": "text",
+            "name": "",
+            "placeholder": ""
+          },
+          {
+            "type": "text",
+            "name": "",
+            "placeholder": "Please enter"
+          },
+          {
+            "type": "search",
+            "name": "",
+            "placeholder": ""
+          },
+          {
+            "type": "radio",
+            "name": ":rg2:",
+            "placeholder": ""
+          },
+          {
+            "type": "radio",
+            "name": ":rg2:",
+            "placeholder": ""
+          },
+          {
+            "type": "textarea",
+            "name": "",
+            "placeholder": "Please enter"
+          }
+        ],
+        "selects": [
+          "Please select"
+        ],
+        "buttons": [
+          "Cancel",
+          "OK"
+        ],
+        "labels": [
+          "Role Name",
+          "Role Name",
+          "Parent Node",
+          "Parent Node",
+          "Status",
+          "Status",
+          "Enable",
+          "Disable",
+          "Remarks",
+          "Remarks"
+        ]
+      },
+      "error": ""
+    },
+    {
+      "page": "Whitelist",
+      "route": "/whitelist/list",
+      "action": "Add IP Pool",
+      "status": "OPENED",
+      "controls": {
+        "text": "Add IP Pool",
+        "inputs": [
+          {
+            "type": "text",
+            "name": "",
+            "placeholder": ""
+          },
+          {
+            "type": "text",
+            "name": "",
+            "placeholder": "Auto-fill"
+          },
+          {
+            "type": "text",
+            "name": "",
+            "placeholder": "Please enter IP address, e.g.: 1.1.1.1"
+          },
+          {
+            "type": "textarea",
+            "name": "",
+            "placeholder": "Text (1–50 characters)"
+          }
+        ],
+        "selects": [],
+        "buttons": [
+          "Cancel",
+          "OK"
+        ],
+        "labels": [
+          "IP Geolocation",
+          "IP Geolocation",
+          "IP Address",
+          "IP Address",
+          "Notes",
+          "Notes"
+        ]
+      },
+      "error": ""
+    }
+  ],
+  "network": [
+    {
+      "action": "login",
+      "method": "GET",
+      "path": "/admin/me/detail",
+      "query_fields": [],
+      "http_status": 200,
+      "business_status": false,
+      "response_data_keys": []
+    },
+    {
+      "action": "login",
+      "method": "POST",
+      "path": "/admin/login/auth",
+      "query_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_keys": []
+    },
+    {
+      "action": "login",
+      "method": "POST",
+      "path": "/admin/login",
+      "query_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_keys": []
+    },
+    {
+      "action": "login",
+      "method": "GET",
+      "path": "/admin/me/detail",
+      "query_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_keys": [
+        "avatar",
+        "bind_time",
+        "button_permission_ids",
+        "cmpl",
+        "create_name",
+        "created_at",
+        "email",
+        "google_secret",
+        "group_id",
+        "id",
+        "last_login_ip",
+        "last_login_time",
+        "login_password",
+        "nickname",
+        "operator_name",
+        "pwd_edit_time",
+        "roles",
+        "sid",
+        "status",
+        "stores",
+        "updated_at",
+        "username"
+      ]
+    },
+    {
+      "action": "prepare Material Management",
+      "method": "GET",
+      "path": "/admin/me/detail",
+      "query_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_keys": [
+        "avatar",
+        "bind_time",
+        "button_permission_ids",
+        "cmpl",
+        "create_name",
+        "created_at",
+        "email",
+        "google_secret",
+        "group_id",
+        "id",
+        "last_login_ip",
+        "last_login_time",
+        "login_password",
+        "nickname",
+        "operator_name",
+        "pwd_edit_time",
+        "roles",
+        "sid",
+        "status",
+        "stores",
+        "updated_at",
+        "username"
+      ]
+    },
+    {
+      "action": "prepare Material Management",
+      "method": "GET",
+      "path": "/admin/sys/config/compliance/status",
+      "query_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_keys": [
+        "effective_open",
+        "effective_reason",
+        "effective_status_msg"
+      ]
+    },
+    {
+      "action": "prepare Material Management",
+      "method": "GET",
+      "path": "/admin/notify/audit/alarm",
+      "query_fields": [
+        "t"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_keys": [
+        "bonus_review_pending",
+        "feedback_pending",
+        "kyc_pending",
+        "mall_order_pending",
+        "withdraw_pending"
+      ]
+    },
+    {
+      "action": "prepare Material Management",
+      "method": "POST",
+      "path": "/admin/gameclass/list",
+      "query_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_keys": [
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ]
+    },
+    {
+      "action": "prepare Material Management",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_keys": [
+        "ids",
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ]
+    },
+    {
+      "action": "prepare Material Management",
+      "method": "GET",
+      "path": "/admin/ad/material/platform/menu",
+      "query_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_keys": []
+    },
+    {
+      "action": "prepare Material Management",
+      "method": "GET",
+      "path": "/admin/ad/material/type/list",
+      "query_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_keys": []
+    },
+    {
+      "action": "prepare Material Management",
+      "method": "POST",
+      "path": "/admin/ad/material/list",
+      "query_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_keys": [
+        "d",
+        "s",
+        "t"
+      ]
+    },
+    {
+      "action": "prepare Material Management",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_keys": [
+        "ids",
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ]
+    },
+    {
+      "action": "prepare Material Management",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_keys": [
+        "ids",
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ]
+    },
+    {
+      "action": "Material Management :: Add",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_keys": [
+        "ids",
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ]
+    },
+    {
+      "action": "Material Management :: Add",
+      "method": "GET",
+      "path": "/admin/ad/material/platform/menu",
+      "query_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_keys": []
+    },
+    {
+      "action": "Material Management :: Add",
+      "method": "GET",
+      "path": "/admin/ad/material/type/list",
+      "query_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_keys": []
+    },
+    {
+      "action": "Material Management :: Add",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_keys": [
+        "ids",
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ]
+    },
+    {
+      "action": "Material Management :: Add",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_keys": [
+        "ids",
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ]
+    },
+    {
+      "action": "Material Management :: Add",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_keys": [
+        "ids",
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ]
+    },
+    {
+      "action": "prepare Marquee Management",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "http_status": 200,
+      "business_status": null,
+      "response_data_keys": []
+    },
+    {
+      "action": "prepare Marquee Management",
+      "method": "GET",
+      "path": "/admin/me/detail",
+      "query_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_keys": [
+        "avatar",
+        "bind_time",
+        "button_permission_ids",
+        "cmpl",
+        "create_name",
+        "created_at",
+        "email",
+        "google_secret",
+        "group_id",
+        "id",
+        "last_login_ip",
+        "last_login_time",
+        "login_password",
+        "nickname",
+        "operator_name",
+        "pwd_edit_time",
+        "roles",
+        "sid",
+        "status",
+        "stores",
+        "updated_at",
+        "username"
+      ]
+    },
+    {
+      "action": "prepare Marquee Management",
+      "method": "GET",
+      "path": "/admin/priv/check",
+      "query_fields": [
+        "path"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_keys": [
+        "rights"
+      ]
+    },
+    {
+      "action": "prepare Marquee Management",
+      "method": "GET",
+      "path": "/admin/priv/check",
+      "query_fields": [
+        "path"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_keys": [
+        "rights"
+      ]
+    },
+    {
+      "action": "prepare Marquee Management",
+      "method": "GET",
+      "path": "/admin/priv/check",
+      "query_fields": [
+        "path"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_keys": [
+        "rights"
+      ]
+    },
+    {
+      "action": "prepare Marquee Management",
+      "method": "GET",
+      "path": "/admin/sys/config/compliance/status",
+      "query_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_keys": [
+        "effective_open",
+        "effective_reason",
+        "effective_status_msg"
+      ]
+    },
+    {
+      "action": "prepare Marquee Management",
+      "method": "GET",
+      "path": "/admin/notify/audit/alarm",
+      "query_fields": [
+        "t"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_keys": [
+        "bonus_review_pending",
+        "feedback_pending",
+        "kyc_pending",
+        "mall_order_pending",
+        "withdraw_pending"
+      ]
+    },
+    {
+      "action": "prepare Marquee Management",
+      "method": "POST",
+      "path": "/admin/gameclass/list",
+      "query_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_keys": [
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ]
+    },
+    {
+      "action": "prepare Marquee Management",
+      "method": "GET",
+      "path": "/admin/marquee/list",
+      "query_fields": [
+        "page",
+        "page_size",
+        "ty"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_keys": [
+        "d",
+        "t"
+      ]
+    },
+    {
+      "action": "prepare Marquee Management",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_keys": [
+        "ids",
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ]
+    },
+    {
+      "action": "prepare Marquee Management",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_keys": [
+        "ids",
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ]
+    },
+    {
+      "action": "prepare Marquee Management",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_keys": [
+        "ids",
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ]
+    },
+    {
+      "action": "prepare Marquee Management",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_keys": [
+        "ids",
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ]
+    },
+    {
+      "action": "prepare Marquee Management",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_keys": [
+        "ids",
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ]
+    },
+    {
+      "action": "prepare Marquee Management",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_keys": [
+        "ids",
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ]
+    },
+    {
+      "action": "prepare Marquee Management",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_keys": [
+        "ids",
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ]
+    },
+    {
+      "action": "Marquee Management :: Add Marquee",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_keys": [
+        "ids",
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ]
+    },
+    {
+      "action": "Marquee Management :: Add Marquee",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_keys": [
+        "ids",
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ]
+    },
+    {
+      "action": "Marquee Management :: Add Marquee",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_keys": [
+        "ids",
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ]
+    },
+    {
+      "action": "Marquee Management :: Add Marquee",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_keys": [
+        "ids",
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ]
+    },
+    {
+      "action": "Marquee Management :: Add Marquee",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_keys": [
+        "ids",
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ]
+    },
+    {
+      "action": "prepare Channel Management",
+      "method": "GET",
+      "path": "/admin/me/detail",
+      "query_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_keys": [
+        "avatar",
+        "bind_time",
+        "button_permission_ids",
+        "cmpl",
+        "create_name",
+        "created_at",
+        "email",
+        "google_secret",
+        "group_id",
+        "id",
+        "last_login_ip",
+        "last_login_time",
+        "login_password",
+        "nickname",
+        "operator_name",
+        "pwd_edit_time",
+        "roles",
+        "sid",
+        "status",
+        "stores",
+        "updated_at",
+        "username"
+      ]
+    },
+    {
+      "action": "prepare Channel Management",
+      "method": "GET",
+      "path": "/admin/sys/config/compliance/status",
+      "query_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_keys": [
+        "effective_open",
+        "effective_reason",
+        "effective_status_msg"
+      ]
+    },
+    {
+      "action": "prepare Channel Management",
+      "method": "GET",
+      "path": "/admin/channel/group/list",
+      "query_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_keys": [
+        "d",
+        "t"
+      ]
+    },
+    {
+      "action": "prepare Channel Management",
+      "method": "GET",
+      "path": "/admin/notify/audit/alarm",
+      "query_fields": [
+        "t"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_keys": [
+        "bonus_review_pending",
+        "feedback_pending",
+        "kyc_pending",
+        "mall_order_pending",
+        "withdraw_pending"
+      ]
+    },
+    {
+      "action": "prepare Channel Management",
+      "method": "POST",
+      "path": "/admin/gameclass/list",
+      "query_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_keys": [
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ]
+    },
+    {
+      "action": "prepare Channel Management",
+      "method": "GET",
+      "path": "/admin/channel/manage/list",
+      "query_fields": [
+        "page",
+        "page_size"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_keys": [
+        "d",
+        "s",
+        "t"
+      ]
+    },
+    {
+      "action": "prepare Channel Management",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_keys": [
+        "ids",
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ]
+    },
+    {
+      "action": "prepare Channel Management",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_keys": [
+        "ids",
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ]
+    },
+    {
+      "action": "prepare Channel Management",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_keys": [
+        "ids",
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ]
+    },
+    {
+      "action": "prepare Channel Management",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_keys": [
+        "ids",
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ]
+    },
+    {
+      "action": "prepare Channel Management",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_keys": [
+        "ids",
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ]
+    },
+    {
+      "action": "prepare Channel Management",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_keys": [
+        "ids",
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ]
+    },
+    {
+      "action": "Channel Management :: Add",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_keys": [
+        "ids",
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ]
+    },
+    {
+      "action": "Channel Management :: Add",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_keys": [
+        "ids",
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ]
+    },
+    {
+      "action": "Channel Management :: Add",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_keys": [
+        "ids",
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ]
+    },
+    {
+      "action": "Channel Management :: Add",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_keys": [
+        "ids",
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ]
+    },
+    {
+      "action": "prepare Recharge Template",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "http_status": 200,
+      "business_status": null,
+      "response_data_keys": []
+    },
+    {
+      "action": "prepare Recharge Template",
+      "method": "GET",
+      "path": "/admin/me/detail",
+      "query_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_keys": [
+        "avatar",
+        "bind_time",
+        "button_permission_ids",
+        "cmpl",
+        "create_name",
+        "created_at",
+        "email",
+        "google_secret",
+        "group_id",
+        "id",
+        "last_login_ip",
+        "last_login_time",
+        "login_password",
+        "nickname",
+        "operator_name",
+        "pwd_edit_time",
+        "roles",
+        "sid",
+        "status",
+        "stores",
+        "updated_at",
+        "username"
+      ]
+    },
+    {
+      "action": "prepare Recharge Template",
+      "method": "GET",
+      "path": "/admin/sys/config/compliance/status",
+      "query_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_keys": [
+        "effective_open",
+        "effective_reason",
+        "effective_status_msg"
+      ]
+    },
+    {
+      "action": "prepare Recharge Template",
+      "method": "GET",
+      "path": "/admin/notify/audit/alarm",
+      "query_fields": [
+        "t"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_keys": [
+        "bonus_review_pending",
+        "feedback_pending",
+        "kyc_pending",
+        "mall_order_pending",
+        "withdraw_pending"
+      ]
+    },
+    {
+      "action": "prepare Recharge Template",
+      "method": "POST",
+      "path": "/admin/gameclass/list",
+      "query_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_keys": [
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ]
+    },
+    {
+      "action": "prepare Recharge Template",
+      "method": "GET",
+      "path": "/admin/channel/promotion/deposit/list",
+      "query_fields": [
+        "page",
+        "page_size"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_keys": [
+        "d",
+        "t"
+      ]
+    },
+    {
+      "action": "prepare Recharge Template",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_keys": [
+        "ids",
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ]
+    },
+    {
+      "action": "prepare Recharge Template",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_keys": [
+        "ids",
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ]
+    },
+    {
+      "action": "prepare Recharge Template",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_keys": [
+        "ids",
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ]
+    },
+    {
+      "action": "prepare Recharge Template",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_keys": [
+        "ids",
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ]
+    },
+    {
+      "action": "prepare Recharge Template",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_keys": [
+        "ids",
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ]
+    },
+    {
+      "action": "prepare Recharge Template",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_keys": [
+        "ids",
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ]
+    },
+    {
+      "action": "prepare Recharge Template",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_keys": [
+        "ids",
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ]
+    },
+    {
+      "action": "Recharge Template :: Add Template",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_keys": [
+        "ids",
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ]
+    },
+    {
+      "action": "Recharge Template :: Add Template",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_keys": [
+        "ids",
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ]
+    },
+    {
+      "action": "Recharge Template :: Add Template",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_keys": [
+        "ids",
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ]
+    },
+    {
+      "action": "Recharge Template :: Add Template",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_keys": [
+        "ids",
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ]
+    },
+    {
+      "action": "Recharge Template :: Add Template",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_keys": [
+        "ids",
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ]
+    },
+    {
+      "action": "prepare Role Configuration",
+      "method": "GET",
+      "path": "/admin/me/detail",
+      "query_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_keys": [
+        "avatar",
+        "bind_time",
+        "button_permission_ids",
+        "cmpl",
+        "create_name",
+        "created_at",
+        "email",
+        "google_secret",
+        "group_id",
+        "id",
+        "last_login_ip",
+        "last_login_time",
+        "login_password",
+        "nickname",
+        "operator_name",
+        "pwd_edit_time",
+        "roles",
+        "sid",
+        "status",
+        "stores",
+        "updated_at",
+        "username"
+      ]
+    },
+    {
+      "action": "prepare Role Configuration",
+      "method": "GET",
+      "path": "/admin/sys/config/compliance/status",
+      "query_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_keys": [
+        "effective_open",
+        "effective_reason",
+        "effective_status_msg"
+      ]
+    },
+    {
+      "action": "prepare Role Configuration",
+      "method": "POST",
+      "path": "/admin/gameclass/list",
+      "query_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_keys": [
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ]
+    },
+    {
+      "action": "prepare Role Configuration",
+      "method": "GET",
+      "path": "/admin/notify/audit/alarm",
+      "query_fields": [
+        "t"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_keys": [
+        "bonus_review_pending",
+        "feedback_pending",
+        "kyc_pending",
+        "mall_order_pending",
+        "withdraw_pending"
+      ]
+    },
+    {
+      "action": "prepare Role Configuration",
+      "method": "GET",
+      "path": "/admin/group/list",
+      "query_fields": [
+        "page",
+        "page_size"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_keys": [
+        "d",
+        "s",
+        "t"
+      ]
+    },
+    {
+      "action": "prepare Role Configuration",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_keys": [
+        "ids",
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ]
+    },
+    {
+      "action": "prepare Role Configuration",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_keys": [
+        "ids",
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ]
+    },
+    {
+      "action": "prepare Role Configuration",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_keys": [
+        "ids",
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ]
+    },
+    {
+      "action": "prepare Role Configuration",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_keys": [
+        "ids",
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ]
+    },
+    {
+      "action": "prepare Role Configuration",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_keys": [
+        "ids",
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ]
+    },
+    {
+      "action": "prepare Role Configuration",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_keys": [
+        "ids",
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ]
+    },
+    {
+      "action": "prepare Role Configuration",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_keys": [
+        "ids",
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ]
+    },
+    {
+      "action": "Role Configuration :: Add New",
+      "method": "GET",
+      "path": "/admin/group/list",
+      "query_fields": [
+        "page",
+        "page_size"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_keys": [
+        "d",
+        "s",
+        "t"
+      ]
+    },
+    {
+      "action": "Role Configuration :: Add New",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_keys": [
+        "ids",
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ]
+    },
+    {
+      "action": "Role Configuration :: Add New",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_keys": [
+        "ids",
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ]
+    },
+    {
+      "action": "Role Configuration :: Add New",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_keys": [
+        "ids",
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ]
+    },
+    {
+      "action": "Role Configuration :: Add New",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_keys": [
+        "ids",
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ]
+    },
+    {
+      "action": "Role Configuration :: Add New",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_keys": [
+        "ids",
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ]
+    },
+    {
+      "action": "prepare Whitelist",
+      "method": "GET",
+      "path": "/admin/me/detail",
+      "query_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_keys": [
+        "avatar",
+        "bind_time",
+        "button_permission_ids",
+        "cmpl",
+        "create_name",
+        "created_at",
+        "email",
+        "google_secret",
+        "group_id",
+        "id",
+        "last_login_ip",
+        "last_login_time",
+        "login_password",
+        "nickname",
+        "operator_name",
+        "pwd_edit_time",
+        "roles",
+        "sid",
+        "status",
+        "stores",
+        "updated_at",
+        "username"
+      ]
+    },
+    {
+      "action": "prepare Whitelist",
+      "method": "GET",
+      "path": "/admin/sys/config/compliance/status",
+      "query_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_keys": [
+        "effective_open",
+        "effective_reason",
+        "effective_status_msg"
+      ]
+    },
+    {
+      "action": "prepare Whitelist",
+      "method": "GET",
+      "path": "/admin/notify/audit/alarm",
+      "query_fields": [
+        "t"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_keys": [
+        "bonus_review_pending",
+        "feedback_pending",
+        "kyc_pending",
+        "mall_order_pending",
+        "withdraw_pending"
+      ]
+    },
+    {
+      "action": "prepare Whitelist",
+      "method": "POST",
+      "path": "/admin/gameclass/list",
+      "query_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_keys": [
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ]
+    },
+    {
+      "action": "prepare Whitelist",
+      "method": "GET",
+      "path": "/admin/whiteList/list",
+      "query_fields": [
+        "end_time",
+        "page",
+        "page_size",
+        "start_time"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_keys": [
+        "d",
+        "page",
+        "page_size",
+        "t"
+      ]
+    },
+    {
+      "action": "prepare Whitelist",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_keys": [
+        "ids",
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ]
+    },
+    {
+      "action": "prepare Whitelist",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_keys": [
+        "ids",
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ]
+    },
+    {
+      "action": "prepare Whitelist",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_keys": [
+        "ids",
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ]
+    },
+    {
+      "action": "prepare Whitelist",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_keys": [
+        "ids",
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ]
+    },
+    {
+      "action": "prepare Whitelist",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_keys": [
+        "ids",
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ]
+    },
+    {
+      "action": "prepare Whitelist",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_keys": [
+        "ids",
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ]
+    },
+    {
+      "action": "Whitelist :: Add IP Pool",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_keys": [
+        "ids",
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ]
+    },
+    {
+      "action": "Whitelist :: Add IP Pool",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_keys": [
+        "ids",
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ]
+    },
+    {
+      "action": "Whitelist :: Add IP Pool",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_keys": [
+        "ids",
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ]
+    },
+    {
+      "action": "Whitelist :: Add IP Pool",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_keys": [
+        "ids",
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ]
+    },
+    {
+      "action": "Whitelist :: Add IP Pool",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_keys": [
+        "ids",
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ]
+    }
+  ]
+}

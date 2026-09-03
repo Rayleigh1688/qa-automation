@@ -1,0 +1,18 @@
+{
+  "generated_at": "2026-09-03T06:04:38.687Z",
+  "environment": "FAT",
+  "planned_actions": 110,
+  "completed_actions": 110,
+  "clicked_actions": 106,
+  "skipped_actions": 4,
+  "error_actions": 0,
+  "action_network_events": 89,
+  "deduplicated_action_rows": 116,
+  "classifications": {
+    "ACTIVE": 78,
+    "DOCUMENTED_UNVERIFIED": 27,
+    "UNDOCUMENTED_ACTIVE": 11
+  },
+  "combined_initialization_and_action_rows": 689,
+  "fatal_error": null
+}

@@ -1,0 +1,397 @@
+{
+  "captured_at": "2026-09-03T08:44:04.699Z",
+  "environment": "FAT",
+  "lane": "kyc_reject",
+  "target_ref": "FAT-KYC-REJECT-01",
+  "page_route": "/member-center/detail/{uid}",
+  "tab_name": "",
+  "action_name": "流水要求调整",
+  "control_present": true,
+  "control_disabled": false,
+  "available_buttons": [
+    "View History",
+    "View History",
+    "Ban Records",
+    "Unblock",
+    "Risk Control",
+    "Turnover Details",
+    "Credit or Debit",
+    "流水要求调整",
+    "records",
+    "operating record",
+    "changed",
+    "View History",
+    "Login Logs",
+    "XP Turnover",
+    "View Token Wallet",
+    "View Credit/Debit Records"
+  ],
+  "form": {
+    "title": "流水要求调整",
+    "text_head": "流水要求调整 Phone Number Member Account ID Member UID 剩余流水限制 0 条; 合计流水要求 ₱ 0.00 Adjustment Type 增加 扣除 清零 Adjustment Amount 流水游戏限制 Please select Google Verification Code Adjustment Reason 0 / 500 Cancel OK",
+    "fields": [
+      {
+        "index": 0,
+        "label": "Phone Number",
+        "required": false,
+        "controls": [
+          {
+            "type": "text",
+            "placeholder": "Please enter",
+            "disabled": true
+          }
+        ]
+      },
+      {
+        "index": 1,
+        "label": "Member Account ID",
+        "required": false,
+        "controls": [
+          {
+            "type": "text",
+            "placeholder": "Please enter",
+            "disabled": true
+          }
+        ]
+      },
+      {
+        "index": 2,
+        "label": "Member UID",
+        "required": false,
+        "controls": [
+          {
+            "type": "text",
+            "placeholder": "Please enter",
+            "disabled": true
+          }
+        ]
+      },
+      {
+        "index": 3,
+        "label": "",
+        "required": false,
+        "controls": []
+      },
+      {
+        "index": 4,
+        "label": "",
+        "required": false,
+        "controls": []
+      },
+      {
+        "index": 5,
+        "label": "Adjustment Type",
+        "required": true,
+        "controls": [
+          {
+            "type": "radio",
+            "placeholder": "",
+            "disabled": false
+          },
+          {
+            "type": "radio",
+            "placeholder": "",
+            "disabled": false
+          },
+          {
+            "type": "radio",
+            "placeholder": "",
+            "disabled": false
+          }
+        ]
+      },
+      {
+        "index": 6,
+        "label": "Adjustment Amount",
+        "required": true,
+        "controls": [
+          {
+            "type": "input",
+            "placeholder": "Only non-zero positive values allowed, up to two decimal places",
+            "disabled": false
+          }
+        ]
+      },
+      {
+        "index": 7,
+        "label": "流水游戏限制",
+        "required": true,
+        "controls": [
+          {
+            "type": "search",
+            "placeholder": "",
+            "disabled": false
+          }
+        ]
+      },
+      {
+        "index": 8,
+        "label": "Google Verification Code",
+        "required": true,
+        "controls": [
+          {
+            "type": "text",
+            "placeholder": "Please enter",
+            "disabled": false
+          }
+        ]
+      },
+      {
+        "index": 9,
+        "label": "Adjustment Reason",
+        "required": true,
+        "controls": [
+          {
+            "type": "textarea",
+            "placeholder": "Text 1~500 characters",
+            "disabled": false
+          }
+        ]
+      }
+    ],
+    "radio_labels": [
+      "增加",
+      "扣除",
+      "清零"
+    ],
+    "select_texts": [
+      "Please select"
+    ],
+    "select_options": [],
+    "buttons": [
+      "",
+      "Cancel",
+      "OK"
+    ]
+  },
+  "submitted": false,
+  "writes": 0,
+  "raw_phone_or_uid_persisted": false,
+  "network": [
+    {
+      "action": "login",
+      "method": "GET",
+      "path": "/admin/me/detail",
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": false,
+      "response_values_persisted": false
+    },
+    {
+      "action": "login",
+      "method": "POST",
+      "path": "/admin/login/auth",
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_values_persisted": false
+    },
+    {
+      "action": "login",
+      "method": "POST",
+      "path": "/admin/login",
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_values_persisted": false
+    },
+    {
+      "action": "login",
+      "method": "GET",
+      "path": "/admin/me/detail",
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_values_persisted": false
+    },
+    {
+      "action": "open_member_detail",
+      "method": "GET",
+      "path": "/admin/me/detail",
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_values_persisted": false
+    },
+    {
+      "action": "open_member_detail",
+      "method": "GET",
+      "path": "/admin/sys/config/compliance/status",
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_values_persisted": false
+    },
+    {
+      "action": "open_member_detail",
+      "method": "GET",
+      "path": "/admin/notify/audit/alarm",
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_values_persisted": false
+    },
+    {
+      "action": "open_member_detail",
+      "method": "POST",
+      "path": "/admin/gameclass/list",
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_values_persisted": false
+    },
+    {
+      "action": "open_member_detail",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_values_persisted": false
+    },
+    {
+      "action": "open_member_detail",
+      "method": "GET",
+      "path": "/admin/kyc/detail",
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_values_persisted": false
+    },
+    {
+      "action": "open_member_detail",
+      "method": "GET",
+      "path": "/admin/priv/check",
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_values_persisted": false
+    },
+    {
+      "action": "open_member_detail",
+      "method": "GET",
+      "path": "/admin/finance/member/wallet",
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_values_persisted": false
+    },
+    {
+      "action": "open_member_detail",
+      "method": "GET",
+      "path": "/admin/member/detail",
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_values_persisted": false
+    },
+    {
+      "action": "open_member_detail",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_values_persisted": false
+    },
+    {
+      "action": "open_member_detail",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_values_persisted": false
+    },
+    {
+      "action": "open_member_detail",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_values_persisted": false
+    },
+    {
+      "action": "open_member_detail",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_values_persisted": false
+    },
+    {
+      "action": "open_member_detail",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_values_persisted": false
+    },
+    {
+      "action": "open_member_detail",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_values_persisted": false
+    },
+    {
+      "action": "open_member_detail",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_values_persisted": false
+    },
+    {
+      "action": "open_member_detail",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_values_persisted": false
+    },
+    {
+      "action": "open_member_detail",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_values_persisted": false
+    },
+    {
+      "action": "open_member_detail",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_values_persisted": false
+    },
+    {
+      "action": "open_member_detail",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_values_persisted": false
+    },
+    {
+      "action": "open:流水要求调整",
+      "method": "POST",
+      "path": "/admin/gameclass/list",
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_values_persisted": false
+    }
+  ]
+}

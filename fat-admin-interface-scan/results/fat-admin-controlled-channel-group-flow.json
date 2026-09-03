@@ -1,0 +1,392 @@
+{
+  "captured_at": "2026-09-03T06:20:24.454Z",
+  "environment": "FAT",
+  "page": "Channel Management",
+  "route": "/promo-marketing/channels",
+  "target_type": "promotion group",
+  "target_id": "",
+  "test_name": "codex-fat-scan-20260903-eebb1a",
+  "before_state": "absent by unique generated name",
+  "steps": [
+    {
+      "action": "before state",
+      "status": "PASS_ABSENT",
+      "visible_count": 0
+    },
+    {
+      "action": "create",
+      "status": "NO_CREATE_REQUEST",
+      "target_id": "",
+      "endpoint_keys": [],
+      "ignored_delayed_initialization_events": 7
+    }
+  ],
+  "after_state": "target not visible after flow",
+  "cleanup": "",
+  "network": [
+    {
+      "action": "login",
+      "method": "GET",
+      "path": "/admin/me/detail",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": false,
+      "response_type": "string",
+      "response_keys": []
+    },
+    {
+      "action": "login",
+      "method": "POST",
+      "path": "/admin/login/auth",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "number",
+      "response_keys": []
+    },
+    {
+      "action": "login",
+      "method": "POST",
+      "path": "/admin/login",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "string",
+      "response_keys": []
+    },
+    {
+      "action": "login",
+      "method": "GET",
+      "path": "/admin/me/detail",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "avatar",
+        "bind_time",
+        "button_permission_ids",
+        "cmpl",
+        "create_name",
+        "created_at",
+        "email",
+        "google_secret",
+        "group_id",
+        "id",
+        "last_login_ip",
+        "last_login_time",
+        "login_password",
+        "nickname",
+        "operator_name",
+        "pwd_edit_time",
+        "roles",
+        "sid",
+        "status",
+        "stores",
+        "updated_at",
+        "username"
+      ]
+    },
+    {
+      "action": "before state",
+      "method": "GET",
+      "path": "/admin/me/detail",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "avatar",
+        "bind_time",
+        "button_permission_ids",
+        "cmpl",
+        "create_name",
+        "created_at",
+        "email",
+        "google_secret",
+        "group_id",
+        "id",
+        "last_login_ip",
+        "last_login_time",
+        "login_password",
+        "nickname",
+        "operator_name",
+        "pwd_edit_time",
+        "roles",
+        "sid",
+        "status",
+        "stores",
+        "updated_at",
+        "username"
+      ]
+    },
+    {
+      "action": "before state",
+      "method": "GET",
+      "path": "/admin/sys/config/compliance/status",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "effective_open",
+        "effective_reason",
+        "effective_status_msg"
+      ]
+    },
+    {
+      "action": "before state",
+      "method": "GET",
+      "path": "/admin/channel/group/list",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "d",
+        "t"
+      ]
+    },
+    {
+      "action": "before state",
+      "method": "GET",
+      "path": "/admin/notify/audit/alarm",
+      "query_fields": [
+        "t"
+      ],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "bonus_review_pending",
+        "feedback_pending",
+        "kyc_pending",
+        "mall_order_pending",
+        "withdraw_pending"
+      ]
+    },
+    {
+      "action": "before state",
+      "method": "POST",
+      "path": "/admin/gameclass/list",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ]
+    },
+    {
+      "action": "before state",
+      "method": "GET",
+      "path": "/admin/channel/manage/list",
+      "query_fields": [
+        "page",
+        "page_size"
+      ],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "d",
+        "s",
+        "t"
+      ]
+    },
+    {
+      "action": "before state",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "ids",
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ]
+    },
+    {
+      "action": "before state",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "ids",
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ]
+    },
+    {
+      "action": "before state",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "ids",
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ]
+    },
+    {
+      "action": "create channel group",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "ids",
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ]
+    },
+    {
+      "action": "create channel group",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "ids",
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ]
+    },
+    {
+      "action": "create channel group",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "ids",
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ]
+    },
+    {
+      "action": "create channel group",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "ids",
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ]
+    },
+    {
+      "action": "create channel group",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "ids",
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ]
+    },
+    {
+      "action": "create channel group",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "ids",
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ]
+    },
+    {
+      "action": "create channel group",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "ids",
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ]
+    }
+  ]
+}

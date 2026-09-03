@@ -1,0 +1,46 @@
+{
+  "captured_at": "2026-09-03T07:02:55.568639+00:00",
+  "environment": "FAT",
+  "target_ref": "KYC-RUN-B9CA6D6A0704",
+  "data_scope": "THIS_RUN_CREATED",
+  "before_state": {
+    "exact_admin_lookup": "ABSENT",
+    "source": "controlled provisioning allocator"
+  },
+  "process_exit_code": 0,
+  "records": [
+    {
+      "name": "register_sms",
+      "method": "POST",
+      "path": "/member/sms",
+      "http_status": 200,
+      "business_status": true,
+      "request_fields": [
+        "country_code",
+        "phone",
+        "reason"
+      ],
+      "response_data_type": "dict",
+      "skipped": false,
+      "reason": ""
+    },
+    {
+      "name": "register",
+      "method": "POST",
+      "path": "/member/register",
+      "http_status": 200,
+      "business_status": true,
+      "request_fields": [
+        "otp_id",
+        "code",
+        "password",
+        "invite_code",
+        "i"
+      ],
+      "response_data_type": "dict",
+      "skipped": false,
+      "reason": ""
+    }
+  ],
+  "raw_evidence": "ignored api/results/provisioning/kyc-record-flow/register-result.json"
+}

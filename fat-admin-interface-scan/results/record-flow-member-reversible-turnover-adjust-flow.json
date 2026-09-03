@@ -1,0 +1,402 @@
+{
+  "captured_at": "2026-09-03T10:23:04.528Z",
+  "environment": "FAT",
+  "target_ref": "FAT-MEMBER-REV-01",
+  "uid_ref": "FAT-UID-REV-01",
+  "page_route": "/member-center/detail/{uid}",
+  "operation": "Turnover requirement adjustment minimal reversible closure",
+  "before": {
+    "left_turnover_count": 0,
+    "left_turnover_type": "string",
+    "left_turnover_item_count": null,
+    "left_turnover_keys": []
+  },
+  "add": {
+    "method": "POST",
+    "path": "/admin/finance/turnover/add",
+    "http_status": 200,
+    "business_status": true,
+    "body_fields": [
+      "amount",
+      "bet_multiplier",
+      "google_code",
+      "plats",
+      "remark",
+      "uid"
+    ]
+  },
+  "after_add": {
+    "left_turnover_count": 1,
+    "left_turnover_type": "string",
+    "left_turnover_item_count": null,
+    "left_turnover_keys": []
+  },
+  "restore": {
+    "method": "POST",
+    "path": "/admin/finance/turnover/sub",
+    "http_status": 200,
+    "business_status": true,
+    "body_fields": [
+      "amount",
+      "google_code",
+      "remark",
+      "uid"
+    ]
+  },
+  "after_restore": {
+    "left_turnover_count": 0
+  },
+  "restored": true,
+  "recovery_from_prior_run": true,
+  "error": "",
+  "writes": 2,
+  "side_effects": [
+    "temporary all-games turnover requirement +1; restored by -1"
+  ],
+  "selection_evidence": {
+    "add_scope": "all-games root",
+    "database_game_restriction_entry_count": 5731,
+    "subtract_game_control": "disabled; no selection accepted by the current UI"
+  },
+  "submit_evidence": [
+    {
+      "amount_filled": true,
+      "game_field_disabled": true,
+      "totp_length": 6,
+      "reason_length": 31,
+      "request_observed": true
+    }
+  ],
+  "raw_phone_or_uid_persisted": false,
+  "network": [
+    {
+      "action": "validate recovery before",
+      "method": "GET",
+      "path": "/admin/me/detail",
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_values_persisted": false
+    },
+    {
+      "action": "validate recovery before",
+      "method": "GET",
+      "path": "/admin/sys/config/compliance/status",
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_values_persisted": false
+    },
+    {
+      "action": "validate recovery before",
+      "method": "GET",
+      "path": "/admin/notify/audit/alarm",
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_values_persisted": false
+    },
+    {
+      "action": "validate recovery before",
+      "method": "POST",
+      "path": "/admin/gameclass/list",
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_values_persisted": false
+    },
+    {
+      "action": "validate recovery before",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_values_persisted": false
+    },
+    {
+      "action": "validate recovery before",
+      "method": "GET",
+      "path": "/admin/priv/check",
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_values_persisted": false
+    },
+    {
+      "action": "validate recovery before",
+      "method": "GET",
+      "path": "/admin/kyc/detail",
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_values_persisted": false
+    },
+    {
+      "action": "validate recovery before",
+      "method": "GET",
+      "path": "/admin/finance/member/wallet",
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_values_persisted": false
+    },
+    {
+      "action": "validate recovery before",
+      "method": "GET",
+      "path": "/admin/member/detail",
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_values_persisted": false
+    },
+    {
+      "action": "validate recovery before",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_values_persisted": false
+    },
+    {
+      "action": "validate recovery before",
+      "method": "POST",
+      "path": "/admin/gameclass/list",
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_values_persisted": false
+    },
+    {
+      "action": "validate recovery before",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_values_persisted": false
+    },
+    {
+      "action": "validate recovery before",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_values_persisted": false
+    },
+    {
+      "action": "validate recovery before",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_values_persisted": false
+    },
+    {
+      "action": "validate recovery before",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_values_persisted": false
+    },
+    {
+      "action": "validate recovery before",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_values_persisted": false
+    },
+    {
+      "action": "validate recovery before",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_values_persisted": false
+    },
+    {
+      "action": "validate recovery before",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_values_persisted": false
+    },
+    {
+      "action": "validate recovery before",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_values_persisted": false
+    },
+    {
+      "action": "validate recovery before",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_values_persisted": false
+    },
+    {
+      "action": "validate recovery before",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_values_persisted": false
+    },
+    {
+      "action": "validate recovery before",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_values_persisted": false
+    },
+    {
+      "action": "validate recovery before",
+      "method": "GET",
+      "path": "/admin/sys/config/compliance/status",
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_values_persisted": false
+    },
+    {
+      "action": "validate recovery before",
+      "method": "GET",
+      "path": "/admin/sys/config/compliance/status",
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_values_persisted": false
+    },
+    {
+      "action": "turnover subtract one restore",
+      "method": "POST",
+      "path": "/admin/finance/turnover/sub",
+      "body_fields": [
+        "amount",
+        "google_code",
+        "remark",
+        "uid"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_values_persisted": false
+    },
+    {
+      "action": "turnover subtract one restore",
+      "method": "GET",
+      "path": "/admin/kyc/detail",
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_values_persisted": false
+    },
+    {
+      "action": "turnover subtract one restore",
+      "method": "GET",
+      "path": "/admin/finance/member/wallet",
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_values_persisted": false
+    },
+    {
+      "action": "turnover subtract one restore",
+      "method": "GET",
+      "path": "/admin/member/detail",
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_values_persisted": false
+    },
+    {
+      "action": "verify recovery after sub",
+      "method": "GET",
+      "path": "/admin/me/detail",
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_values_persisted": false
+    },
+    {
+      "action": "verify recovery after sub",
+      "method": "GET",
+      "path": "/admin/sys/config/compliance/status",
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_values_persisted": false
+    },
+    {
+      "action": "verify recovery after sub",
+      "method": "GET",
+      "path": "/admin/notify/audit/alarm",
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_values_persisted": false
+    },
+    {
+      "action": "verify recovery after sub",
+      "method": "POST",
+      "path": "/admin/gameclass/list",
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_values_persisted": false
+    },
+    {
+      "action": "verify recovery after sub",
+      "method": "GET",
+      "path": "/admin/priv/check",
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_values_persisted": false
+    },
+    {
+      "action": "verify recovery after sub",
+      "method": "GET",
+      "path": "/admin/kyc/detail",
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_values_persisted": false
+    },
+    {
+      "action": "verify recovery after sub",
+      "method": "GET",
+      "path": "/admin/finance/member/wallet",
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_values_persisted": false
+    },
+    {
+      "action": "verify recovery after sub",
+      "method": "GET",
+      "path": "/admin/member/detail",
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_values_persisted": false
+    }
+  ]
+}

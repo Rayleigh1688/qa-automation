@@ -1,0 +1,57 @@
+{
+  "environment": "FAT",
+  "phase": "member_record_flow_with_controlled_reversible_write",
+  "target_ref_for_future_writes": "KYC-RUN-B9CA6D6A0704",
+  "existing_record_write_actions_executed": 0,
+  "current_run_write_requests": 2,
+  "restored_write_flows": 1,
+  "add_member_submitted": false,
+  "unrestored_side_effects": 0,
+  "detail_tabs": {
+    "registered": 17,
+    "opened_read_only": 17,
+    "blocked": 0
+  },
+  "safe_detail_entries": {
+    "registered": 11,
+    "opened_read_only": 11
+  },
+  "add_member_fields": 12,
+  "add_member_required_fields": [
+    "Account",
+    "Email",
+    "Phone Number"
+  ],
+  "action_endpoint_rows": 48,
+  "unique_endpoints": 30,
+  "new_endpoints_vs_main": 13,
+  "new_endpoint_keys": [
+    "GET /admin/bonus/list",
+    "GET /admin/finance/turnover/list",
+    "GET /admin/member/buyfeature/list",
+    "GET /admin/member/change/logs",
+    "GET /admin/member/deposit/multiple/log",
+    "GET /admin/member/limitation/state/info",
+    "GET /admin/member/log/list",
+    "GET /admin/member/log/listv1",
+    "GET /admin/member/vip/level/list",
+    "GET /admin/reports/member-daily-game/detail",
+    "GET /admin/reports/member/detail",
+    "GET /admin/superior/log",
+    "POST /admin/member/limitation/state/update"
+  ],
+  "unique_endpoint_classifications": {
+    "ACTIVE": 28,
+    "UNDOCUMENTED_ACTIVE": 2
+  },
+  "mapping_row_classifications": {
+    "ACTIVE": 44,
+    "UNDOCUMENTED_ACTIVE": 4
+  },
+  "current_target_list_match_verified": true,
+  "current_target_detail_uid_verified": true,
+  "current_target_kyc_status": 5,
+  "write_status": "LOW_RISK_REVERSIBLE_FLOW_EXECUTED_RESTORED; remaining risky/irreversible operations blocked",
+  "raw_uid_persisted": false,
+  "member_values_persisted": false
+}

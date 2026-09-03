@@ -1,0 +1,62 @@
+{
+  "captured_at": "2026-09-03T08:42:57.353Z",
+  "environment": "FAT",
+  "lane": "kyc_reject",
+  "target_ref": "FAT-KYC-REJECT-01",
+  "page_route": "/member-center/detail/{uid}",
+  "tab_name": "",
+  "action_name": "查看代币钱包",
+  "control_present": false,
+  "control_disabled": null,
+  "form": null,
+  "submitted": false,
+  "writes": 0,
+  "raw_phone_or_uid_persisted": false,
+  "network": [
+    {
+      "action": "login",
+      "method": "GET",
+      "path": "/admin/me/detail",
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": false,
+      "response_values_persisted": false
+    },
+    {
+      "action": "login",
+      "method": "POST",
+      "path": "/admin/login/auth",
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_values_persisted": false
+    },
+    {
+      "action": "login",
+      "method": "POST",
+      "path": "/admin/login",
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_values_persisted": false
+    },
+    {
+      "action": "login",
+      "method": "GET",
+      "path": "/admin/me/detail",
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_values_persisted": false
+    },
+    {
+      "action": "open_member_detail",
+      "method": "GET",
+      "path": "/admin/me/detail",
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": false,
+      "response_values_persisted": false
+    }
+  ]
+}

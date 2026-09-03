@@ -1,0 +1,484 @@
+path,bundle_referenced,documented,documented_methods,inventory_names,runtime_api_executed,http_status,business_status,classification,classification_basis
+/admin/ad/material/delete,YES,YES,GET,删除素材,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/ad/material/detail,YES,YES,GET,素材详情,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/ad/material/insert,YES,YES,POST,新增素材,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/ad/material/list,YES,YES,POST,素材列表,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/ad/material/platform/menu,YES,YES,GET,素材管理支持的平台枚举,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/ad/material/type/delete,YES,YES,GET,删除素材类型,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/ad/material/type/insert,YES,YES,POST,新增素材种类,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/ad/material/type/list,YES,YES,GET,素材种类列表,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/ad/material/type/update,YES,YES,POST,编辑素材种类,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/ad/material/type/update/state,YES,YES,POST,更新素材种类状态,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/ad/material/update,YES,YES,POST,编辑素材,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/ad/material/update/state,YES,YES,POST,更新素材状态或排序,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/agency/audit/agree,YES,YES,POST,代理审核同意-wesley,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/agency/audit/list,YES,NO,,,NO,,,UNDOCUMENTED_CANDIDATE,Referenced by current FAT bundle; absent from inventory; not executed from UI
+/admin/agency/audit/reject,YES,YES,POST,代理审核拒绝-wesley,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/agency/child/bonus/list,YES,NO,,,NO,,,UNDOCUMENTED_CANDIDATE,Referenced by current FAT bundle; absent from inventory; not executed from UI
+/admin/agency/child/ggr,YES,NO,,,NO,,,UNDOCUMENTED_CANDIDATE,Referenced by current FAT bundle; absent from inventory; not executed from UI
+/admin/agency/commission/active/list,YES,NO,,,NO,,,UNDOCUMENTED_CANDIDATE,Referenced by current FAT bundle; absent from inventory; not executed from UI
+/admin/agency/commission/audit/adjust,YES,NO,,,NO,,,UNDOCUMENTED_CANDIDATE,Referenced by current FAT bundle; absent from inventory; not executed from UI
+/admin/agency/commission/audit/agree,YES,NO,,,NO,,,UNDOCUMENTED_CANDIDATE,Referenced by current FAT bundle; absent from inventory; not executed from UI
+/admin/agency/commission/audit/list,YES,NO,,,NO,,,UNDOCUMENTED_CANDIDATE,Referenced by current FAT bundle; absent from inventory; not executed from UI
+/admin/agency/commission/audit/reject,YES,NO,,,NO,,,UNDOCUMENTED_CANDIDATE,Referenced by current FAT bundle; absent from inventory; not executed from UI
+/admin/agency/commission/pagcor/tax,YES,NO,,,NO,,,UNDOCUMENTED_CANDIDATE,Referenced by current FAT bundle; absent from inventory; not executed from UI
+/admin/agency/commission/report,YES,NO,,,NO,,,UNDOCUMENTED_CANDIDATE,Referenced by current FAT bundle; absent from inventory; not executed from UI
+/admin/agency/commission/venue/fee,YES,NO,,,NO,,,UNDOCUMENTED_CANDIDATE,Referenced by current FAT bundle; absent from inventory; not executed from UI
+/admin/agency/domain/cutover,YES,NO,,,NO,,,UNDOCUMENTED_CANDIDATE,Referenced by current FAT bundle; absent from inventory; not executed from UI
+/admin/agency/domain/delete,YES,NO,,,NO,,,UNDOCUMENTED_CANDIDATE,Referenced by current FAT bundle; absent from inventory; not executed from UI
+/admin/agency/domain/insert,YES,NO,,,NO,,,UNDOCUMENTED_CANDIDATE,Referenced by current FAT bundle; absent from inventory; not executed from UI
+/admin/agency/domain/list,YES,NO,,,NO,,,UNDOCUMENTED_CANDIDATE,Referenced by current FAT bundle; absent from inventory; not executed from UI
+/admin/agency/domain/update,YES,NO,,,NO,,,UNDOCUMENTED_CANDIDATE,Referenced by current FAT bundle; absent from inventory; not executed from UI
+/admin/agency/ladder,YES,NO,,,NO,,,UNDOCUMENTED_CANDIDATE,Referenced by current FAT bundle; absent from inventory; not executed from UI
+/admin/agency/ladder/update,YES,NO,,,NO,,,UNDOCUMENTED_CANDIDATE,Referenced by current FAT bundle; absent from inventory; not executed from UI
+/admin/agency/list,YES,NO,,,NO,,,UNDOCUMENTED_CANDIDATE,Referenced by current FAT bundle; absent from inventory; not executed from UI
+/admin/agency/member/list,YES,NO,,,NO,,,UNDOCUMENTED_CANDIDATE,Referenced by current FAT bundle; absent from inventory; not executed from UI
+/admin/agency/member/tags/update,YES,NO,,,NO,,,UNDOCUMENTED_CANDIDATE,Referenced by current FAT bundle; absent from inventory; not executed from UI
+/admin/agency/taxrate/list,YES,NO,,,NO,,,UNDOCUMENTED_CANDIDATE,Referenced by current FAT bundle; absent from inventory; not executed from UI
+/admin/agency/taxrate/update,YES,NO,,,NO,,,UNDOCUMENTED_CANDIDATE,Referenced by current FAT bundle; absent from inventory; not executed from UI
+/admin/agency/vendorrate/list,YES,NO,,,NO,,,UNDOCUMENTED_CANDIDATE,Referenced by current FAT bundle; absent from inventory; not executed from UI
+/admin/agency/vendorrate/update,YES,NO,,,NO,,,UNDOCUMENTED_CANDIDATE,Referenced by current FAT bundle; absent from inventory; not executed from UI
+/admin/banner/insert,YES,YES,POST,新增轮播图,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/banner/list,YES,YES,POST,轮播图列表,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/banner/menu,YES,YES,GET,轮播图菜单,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/banner/update,YES,YES,POST,轮播图修改,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/banner/update/state,YES,YES,POST,轮播图更新状态,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/banner/upload,YES,NO,,,NO,,,UNDOCUMENTED_CANDIDATE,Referenced by current FAT bundle; absent from inventory; not executed from UI
+/admin/banner/user/count,YES,YES,GET,名单数量-todo,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/banner/user/list,YES,YES,GET,查看名单-todo,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/bonus/activity/list,YES,YES,GET,活动列表 - felix.bru,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/bonus/export,YES,YES,GET,导出礼金列表 - felix,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/bonus/list,YES,YES,GET,礼金列表 - felix,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/bonus/manual/send,YES,YES,POST,手动发放礼金,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/bonus/review/approve,YES,YES,POST,批量审批 - felix.bru,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/bonus/review/export,YES,YES,GET,导出待审订单 - felix.bru,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/bonus/review/list,YES,YES,GET,待审订单列表 - felix.bru,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/bonus/review/noneed/export,YES,NO,,,NO,,,UNDOCUMENTED_CANDIDATE,Referenced by current FAT bundle; absent from inventory; not executed from UI
+/admin/bonus/review/noneed/list,YES,YES,GET,导出过审礼金列表 - felix.bru | 过审礼金列表 - felix.bru,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/bonus/review/send,YES,YES,POST,批量补发 - felix.bru,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/bonus/review/userinfo,YES,YES,GET,获取用户信息 - felix.bru,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/buriedPoint/delete,YES,YES,POST,删除埋点-todo,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/buriedPoint/insert,YES,YES,POST,新增埋点-todo,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/buriedPoint/list,YES,YES,GET,埋点列表-todo,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/buriedPoint/update,YES,YES,POST,修改埋点-todo,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/channel/dict,YES,YES,GET,渠道字典 | 渠道过滤-todo,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/channel/exchangeRate/list,YES,YES,GET,渠道汇率列表-todo,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/channel/exchangeRate/update,YES,YES,POST,更新渠道汇率-todo,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/channel/export,YES,YES,POST,渠道列表导出-todo,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/channel/group/delete,YES,YES,POST,删除渠道分组-todo,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/channel/group/dict,YES,YES,GET,渠道分组字黄-todo,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/channel/group/insert,YES,YES,POST,新增渠道分组-todo,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/channel/group/list,YES,YES,GET,渠道分组列表-todo,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/channel/group/update,YES,YES,POST,更新渠道分组-todo,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/channel/insert,YES,YES,POST,新增渠道-todo,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/channel/list,YES,YES,POST,渠道列表-todo,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/channel/manage/delete,YES,YES,POST,删除渠道管理-todo,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/channel/manage/detail,YES,YES,GET,渠道管理详情-todo,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/channel/manage/dict,YES,YES,GET,渠道管理字典-todo,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/channel/manage/export,YES,YES,GET,渠道管理导出-todo,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/channel/manage/insert,YES,YES,POST,新增渠道管理-todo,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/channel/manage/list,YES,YES,GET,渠道管理列表-todo,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/channel/manage/update,YES,YES,POST,更新渠道管理-todo,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/channel/manage/update/group,YES,YES,POST,更新渠道管理分组-todo,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/channel/manage/update/state,YES,YES,POST,更新渠道管理状态-todo,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/channel/menus,YES,YES,GET,渠道菜单-todo,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/channel/promoData/consumption,YES,YES,GET,推广数据面板消耗详情-todo,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/channel/promoData/detail,YES,YES,GET,推广数据详细-todo,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/channel/promoData/list,YES,YES,GET,推广数据列表-todo,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/channel/promoData/logs,YES,YES,GET,推广数据日志-todo,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/channel/promoData/update,YES,YES,POST,更新推广数据-todo,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/channel/promoData/update/consumption,YES,YES,POST,更新推广数据面板消耗-todo,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/channel/promotion/deposit/insert,YES,NO,,,NO,,,UNDOCUMENTED_CANDIDATE,Referenced by current FAT bundle; absent from inventory; not executed from UI
+/admin/channel/promotion/deposit/list,YES,YES,GET,充值模版列表,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/channel/promotion/deposit/update,YES,YES,POST,更新模版,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/channel/promotion/domain/insert,YES,YES,POST,新增,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/channel/promotion/domain/list,YES,YES,GET,列表,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/channel/promotion/domain/share,YES,NO,,,NO,,,UNDOCUMENTED_CANDIDATE,Referenced by current FAT bundle; absent from inventory; not executed from UI
+/admin/channel/promotion/domain/update,YES,YES,POST,修改,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/channel/promotion/effect,YES,NO,,,NO,,,UNDOCUMENTED_CANDIDATE,Referenced by current FAT bundle; absent from inventory; not executed from UI
+/admin/channel/promotion/firstDeposit,YES,NO,,,NO,,,UNDOCUMENTED_CANDIDATE,Referenced by current FAT bundle; absent from inventory; not executed from UI
+/admin/channel/promotion/register,YES,NO,,,NO,,,UNDOCUMENTED_CANDIDATE,Referenced by current FAT bundle; absent from inventory; not executed from UI
+/admin/channel/promotion/satistic,YES,NO,,,NO,,,UNDOCUMENTED_CANDIDATE,Referenced by current FAT bundle; absent from inventory; not executed from UI
+/admin/channel/update,YES,YES,POST,编辑渠道-todo,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/client/version/insert,YES,YES,POST,版本管理新增,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/client/version/list,YES,YES,GET,版本管理列表,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/client/version/update,YES,YES,POST,版本管理更新,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/dict/venues,YES,YES,GET,厂商名称字典,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/domain/export,YES,YES,POST,域名列表导出-todo,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/domain/insert,YES,YES,POST,新增域名-todo,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/domain/list,YES,YES,POST,域名列表 | 域名列表-todo,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/domain/listForSelect,YES,YES,GET,域名选项列表-todo | 获取域名下拉列表-todo,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/domain/menus,YES,YES,GET,域名菜单-todo,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/domain/update,YES,YES,POST,编辑域名-todo,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/filcoin/order/export,YES,YES,GET,代币商城订单导出-todo,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/filcoin/order/list,YES,YES,GET,代币商城订单列表-todo,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/finance/adjust/export,YES,YES,POST,手动上下分数据导出 - owen,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/finance/adjust/import,YES,YES,POST,批量上下分,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/finance/adjust/import/failure/list,YES,YES,GET,批量上下分失败列表,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/finance/adjust/insert,YES,YES,POST,余额调整 | 添加手动上下分-wesley,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/finance/adjust/list,YES,YES,GET | POST,手动上下分列表-wesley | 系统调整,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/finance/deposit/export,YES,YES,POST,充值记录导出-wesley,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/finance/deposit/list,YES,YES,POST,充值列表-wesley,YES,200,True,DOCUMENTED_REACHABLE,API probe succeeded; browser page trigger not yet observed
+/admin/finance/deposit/manual/success,YES,YES,GET,充值补单-wesley,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/finance/deposit/risk/list,YES,YES,GET,充值列表-wesley,YES,200,True,DOCUMENTED_REACHABLE,API probe succeeded; browser page trigger not yet observed
+/admin/finance/deposit/sync,YES,YES,POST,充值同步状态-wesley,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/finance/lazada/order/list,YES,YES,POST,lazada-订单列表-owen,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/finance/lazada/send/sms,YES,YES,POST,lazada-重新发货-owen,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/finance/member/wallet,YES,YES,GET,会员钱包 - wesley,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/finance/member/wallet/pwd/clear,YES,YES,GET,清空提款密码 -- ducky,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/finance/payment/Delete,YES,YES,GET,x-删除支付渠道-cold,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/finance/payment/bank/enable,YES,YES,POST,开启关闭按钮,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/finance/payment/bank/insert,YES,YES,POST,银行卡添加,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/finance/payment/bank/list,YES,YES,GET,银行卡列表,YES,200,True,DOCUMENTED_REACHABLE,API probe succeeded; browser page trigger not yet observed
+/admin/finance/payment/bank/update,YES,YES,POST,银行卡编辑,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/finance/payment/channel/delete,YES,YES,GET,删除支付渠道通道,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/finance/payment/channel/insert,YES,YES,POST,添加支付渠道通道,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/finance/payment/channel/list,YES,YES,GET,支付渠道通道列表,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/finance/payment/channel/update,YES,YES,POST,更新支付渠道通道,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/finance/payment/deposit/channels,YES,YES,GET,支付渠道列表-cold,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/finance/payment/insert,YES,YES,POST,x-添加支付渠道-cold,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/finance/payment/list,YES,YES,GET,x-支付渠道列表-cold,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/finance/payment/platform/enable,YES,YES,POST,支付平台开关,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/finance/payment/platform/insert,YES,YES,POST,添加支付平台,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/finance/payment/platform/list,YES,YES,GET,支付平台列表,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/finance/payment/platform/update,YES,YES,POST,更新支付平台,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/finance/payment/update,YES,YES,POST,x-更新支付渠道-cold,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/finance/payment/withdraw/channels,YES,YES,GET,提现渠道列表-cold,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/finance/tokens/adjust,YES,YES,POST,代币上下分,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/finance/tokens/transaction/export,YES,YES,GET,代币账变导出,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/finance/tokens/transaction/list,YES,YES,GET,代币账变列表,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/finance/transaction/list,YES,YES,POST,账变列表- wesley,YES,200,True,DOCUMENTED_REACHABLE,API probe succeeded; browser page trigger not yet observed
+/admin/finance/transaction/types,YES,YES,GET,账变类型- wesley,YES,200,True,DOCUMENTED_REACHABLE,API probe succeeded; browser page trigger not yet observed
+/admin/finance/turnover/add,YES,YES,POST,会员流水-增加,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/finance/turnover/change/list,YES,YES,GET,会员流水-异动记录,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/finance/turnover/change/types,YES,YES,GET,会员流水-异动记录-类型列表,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/finance/turnover/clear,YES,YES,POST,会员流水-清零 | 会员流水清理-light,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/finance/turnover/list,YES,YES,GET,会员流水明细,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/finance/turnover/sub,YES,YES,POST,会员流水-扣减,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/finance/withdraw/agree,YES,YES,POST,提现同意-wesley,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/finance/withdraw/alarm/count,YES,NO,,,NO,,,UNDOCUMENTED_CANDIDATE,Referenced by current FAT bundle; absent from inventory; not executed from UI
+/admin/finance/withdraw/batch/agree,YES,YES,POST,批量提现同意-cold,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/finance/withdraw/batch/reject,YES,YES,POST,批量提现拒绝-cold,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/finance/withdraw/export,YES,YES,POST,提现记录导出-wesley,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/finance/withdraw/fail,YES,YES,POST,出款失败-wesley,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/finance/withdraw/list,YES,YES,POST,提现列表-wesley,YES,200,True,DOCUMENTED_REACHABLE,API probe succeeded; browser page trigger not yet observed
+/admin/finance/withdraw/reject,YES,YES,POST,提现拒绝-wesley,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/finance/withdraw/risk/audit/export,YES,YES,POST,提现审核列表导出,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/finance/withdraw/risk/list,YES,NO,,,NO,,,UNDOCUMENTED_CANDIDATE,Referenced by current FAT bundle; absent from inventory; not executed from UI
+/admin/finance/withdraw/success,YES,YES,POST,出款成功-wesley,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/finance/withdraw/sync,YES,YES,POST,提现同步状态-wesley,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/finance/withdraws/limit/conf,YES,YES,POST,更新大量小額提款檢查配置,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/finance/withdraws/limit/list,YES,YES,GET,大量小額提款檢查列表,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/finance/withdraws/limit/state,YES,YES,GET,更新大量小額提款檢查状态,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/game/dicttypetag/insert,YES,YES,POST,+添加 <类型标签>-owen,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/game/dicttypetag/list,YES,YES,POST,+获取 <类型标签> 列表-owen,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/game/dicttypetag/update/state,YES,YES,POST,+修改 <类型标签>-owen,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/game/dictweighttag/insert,YES,YES,POST,+添加 <权重标签>-owen,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/game/dictweighttag/list,YES,YES,POST,+获取 <权重标签> 列表-owen,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/game/dictweighttag/update/state,YES,YES,POST,+修改 <权重标签>-owen,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/game/downbox,YES,YES,GET,游戏下拉框-owen,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/game/freespins,YES,YES,GET,免费旋转游戏列表,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/game/import,YES,YES,POST,游戏导入,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/game/import/failed/list,YES,YES,GET,游戏导入失败列表,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/game/insert,YES,YES,POST,游戏新增,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/game/list,YES,YES,POST,游戏列表-owen,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/game/search,YES,YES,POST,+游戏列表查询-owen-aliang,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/game/search/export,YES,YES,POST,+游戏列表查询-结果导出-owen,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/game/update,YES,YES,POST,+游戏条目更新-owen,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/game/update/compliance,YES,YES,POST,更新游戏合规状态-light/owen,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/game/update/state,YES,YES,POST,游戏更新状态,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/game/update/tags,YES,YES,POST,游戏设置排序标签,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/gameclass/insert,YES,YES,POST,+添加场馆记录-owen,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/gameclass/list,YES,YES,POST,+查询场馆列表-owen,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/gameclass/update,YES,YES,POST,+更新场馆记录-owen,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/gamev2/manufacturer-list/export,YES,NO,,,NO,,,UNDOCUMENTED_CANDIDATE,Referenced by current FAT bundle; absent from inventory; not executed from UI
+/admin/gamev2/venue-settings/export,YES,NO,,,NO,,,UNDOCUMENTED_CANDIDATE,Referenced by current FAT bundle; absent from inventory; not executed from UI
+/admin/google/info,YES,NO,,,NO,,,UNDOCUMENTED_CANDIDATE,Referenced by current FAT bundle; absent from inventory; not executed from UI
+/admin/google/qrcode/info,YES,YES,GET,获取谷歌令牌密钥-seven,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/google/secret/update,YES,YES,POST,绑定谷歌令牌-seven,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/google/unbind,YES,YES,GET,谷歌令牌解绑,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/google/verify,YES,YES,GET,谷歌令牌验证-seven,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/group/insert,YES,YES,POST,新增角色 --yasser,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/group/list,YES,YES,GET,角色列表 --yasser,YES,200,True,DOCUMENTED_REACHABLE,API probe succeeded; browser page trigger not yet observed
+/admin/group/update,YES,YES,POST,更新角色--yasser | 权限列表保存,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/home/section/batch-upsert,YES,YES,POST,發佈,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/home/section/create,YES,YES,POST,新增自定义板块,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/home/section/detail,YES,YES,GET,详情,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/home/section/list,YES,YES,GET,列表,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/home/section/update,YES,YES,POST,更新基础分类板块 | 更新系统板块 | 更新自定义板块,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/hotBetNotice/config/detail,YES,YES,GET,爆彩设置查询,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/hotBetNotice/config/update,YES,YES,POST,爆彩设置更新,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/hotBetNotice/displayBlacklist/insert,YES,YES,POST,爆彩黑名单新增,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/hotBetNotice/displayBlacklist/list,YES,YES,GET,爆彩黑名单列表,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/hotBetNotice/displayBlacklist/remove,YES,YES,POST,爆彩黑名单删除,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/hotBetNotice/export,YES,YES,GET,爆彩列表导出,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/hotBetNotice/list,YES,YES,GET,爆彩列表查询,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/kyc/approve,YES,YES,POST,kyc 审核通过 - double,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/kyc/approved/count,YES,YES,GET,统计每天审核通过数量,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/kyc/config/edit,YES,YES,POST,ekyc配置编辑,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/kyc/config/info,YES,YES,GET,获取ekyc相关配置,YES,200,True,DOCUMENTED_REACHABLE,API probe succeeded; browser page trigger not yet observed
+/admin/kyc/detail,YES,YES,GET,kyc详情 | 获取 kyc 详情 - double,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/kyc/details,YES,YES,POST,uid数组查询详情页,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/kyc/edit,YES,YES,POST,ekyc编辑,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/kyc/ekyc/log,YES,YES,GET,异动记录,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/kyc/list,YES,YES,POST,获取 kyc 列表 - double/owen,YES,200,True,DOCUMENTED_REACHABLE,API probe succeeded; browser page trigger not yet observed
+/admin/kyc/reject,YES,YES,POST,kyc 审核驳回 - double,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/kyc/rejectFinal,YES,NO,,,NO,,,UNDOCUMENTED_CANDIDATE,Referenced by current FAT bundle; absent from inventory; not executed from UI
+/admin/kyc/update,YES,YES,POST,更新 kyc - double,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/kyc/upload,YES,NO,,,NO,,,UNDOCUMENTED_CANDIDATE,Referenced by current FAT bundle; absent from inventory; not executed from UI
+/admin/log/export,YES,NO,,,NO,,,UNDOCUMENTED_CANDIDATE,Referenced by current FAT bundle; absent from inventory; not executed from UI
+/admin/log/list,YES,YES,GET,操作日志 | 日志-seven,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/login,YES,YES,POST,后端账号登陆-seven,YES,200,True,DOCUMENTED_REACHABLE,API probe succeeded; browser page trigger not yet observed
+/admin/login/auth,YES,YES,POST,后端账号登陆（前置验证）-seven,YES,200,True,DOCUMENTED_REACHABLE,API probe succeeded; browser page trigger not yet observed
+/admin/logout,YES,YES,GET,后台登出-seven,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/mall/goods/export,YES,YES,GET,产品导出-todo,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/mall/goods/import,YES,YES,GET,产品导入-todo,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/mall/goods/insert,YES,YES,POST,新增商城商品-todo,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/mall/goods/list,YES,YES,GET,获取产品列表-todo,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/mall/goods/update,YES,YES,POST,更新商城商品-todo,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/mall/order/delivery,YES,YES,POST,手动发货-todo,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/mall/order/detail,YES,YES,GET,商城订单详情-todo,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/mall/order/export,YES,YES,GET,商城订单导出-todo,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/mall/order/list,YES,YES,GET,商城订单列表-todo,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/mall/orders/export,YES,NO,,,NO,,,UNDOCUMENTED_CANDIDATE,Referenced by current FAT bundle; absent from inventory; not executed from UI
+/admin/mall/orders/list,YES,NO,,,NO,,,UNDOCUMENTED_CANDIDATE,Referenced by current FAT bundle; absent from inventory; not executed from UI
+/admin/marquee/add,YES,YES,POST,添加,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/marquee/delete,YES,YES,POST,删除,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/marquee/list,YES,YES,GET,列表,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/marquee/update,YES,YES,POST,修改/启用停止切换,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/me/detail,YES,YES,GET,后台账户详情(当前登陆信息)-seven,YES,200,True,DOCUMENTED_REACHABLE,API probe succeeded; browser page trigger not yet observed
+/admin/member/become/agent,YES,NO,,,NO,,,UNDOCUMENTED_CANDIDATE,Referenced by current FAT bundle; absent from inventory; not executed from UI
+/admin/member/buyfeature/list,YES,YES,GET,会员购买免费旋转记录,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/member/buyfeature/state/set,YES,YES,POST,更新会员购买免费旋转记录,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/member/change/logs,YES,YES,GET,获取会员变更记录,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/member/deposit/multiple/log,YES,YES,GET,用户充值倍率调整日志列表-aliang,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/member/deposit/multiple/update,YES,YES,POST,用户充值倍率调整-aliang,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/member/detail,YES,YES,GET,会员详情 - seven/double,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/member/exemption/insert,YES,YES,POST,豁免清单导入,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/member/exemption/list,YES,YES,GET,豁免清单列表,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/member/export,YES,YES,GET,数据导出 - seven/double,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/member/insert,YES,YES,POST,新增会员 - seven/double,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/member/limitation/state/info,YES,YES,GET,会员限制状态列表,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/member/limitation/state/update,YES,YES,POST,更新会员限制状态,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/member/list,YES,YES,GET,会员列表 - seven/double,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/member/log/list,YES,YES,GET,会员登录日志-seven,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/member/log/listv1,YES,YES,GET,会员登录日志v1,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/member/retrieve/password,YES,YES,POST,后台会员密码otp重置,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/member/risk/log,YES,YES,GET,风控日志,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/member/risk/update,YES,YES,POST,风控调整,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/member/turnover/clear,YES,YES,POST,会员流水清理-light,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/member/unbind,YES,YES,POST,三方账号解绑,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/member/unblock,YES,YES,POST,block解封,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/member/update,YES,YES,POST,更新会员 - seven/double,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/member/update/password,YES,YES,POST,重置会员密码,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/member/vip/level/list,YES,YES,GET,会员vip等级记录,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/member/vip/level/manual/upgrade,YES,YES,POST,会员vip手动升级,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/message/export,YES,YES,GET,站内信导出-todo,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/message/list,YES,YES,GET,已阅读名单-todo | 获取消息列表-todo,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/message/reads,YES,NO,,,NO,,,UNDOCUMENTED_CANDIDATE,Referenced by current FAT bundle; absent from inventory; not executed from UI
+/admin/message/revoke,YES,YES,POST,撤销站内信-todo,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/message/send,YES,YES,POST,发送站内信消息 | 发送站内信消息-todo,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/message/templates/export,YES,YES,GET,消息模板导出-todo,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/message/templates/list,YES,YES,GET,获取消息模板列表-todo,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/message/templates/update,YES,YES,POST,更新消息模板-todo,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/message/user/list,YES,YES,GET,更新用户列表,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/notify/audit/alarm,YES,YES,GET,获取系统通知数量-wesley/owen,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/ops-tools/first-deposit-no-second/export,YES,YES,GET,首存未二存,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/ops-tools/turnover/export,YES,YES,GET,首存导出,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/platform/gametype,YES,YES,GET,获取厂商支持的场馆,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/platform/insert,YES,YES,POST,+添加厂商记录-owen,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/platform/list,YES,YES,POST,场馆列表-owen,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/platform/search,YES,YES,POST,+查询厂商列表-owen,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/platform/update,YES,YES,POST,+更新厂商记录-owen,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/platform/update/state,YES,YES,POST,场馆更新状态-owen,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/priv/by/group,YES,YES,GET,角色权限列表,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/priv/check,YES,YES,GET,权限检查,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/priv/list,YES,YES,GET,权限列表,YES,200,True,DOCUMENTED_REACHABLE,API probe succeeded; browser page trigger not yet observed
+/admin/promo/bonus/export,YES,YES,GET,导出礼金明细 - felix,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/promo/bonus/list,YES,YES,GET,礼金明细 - felix,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/promo/cq9/bonus/export,YES,YES,GET,导出礼金明细-seven,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/promo/cq9/bonus/list,YES,YES,GET,礼金明细-seven,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/promo/deposit/bonus/export,YES,NO,,,NO,,,UNDOCUMENTED_CANDIDATE,Referenced by current FAT bundle; absent from inventory; not executed from UI
+/admin/promo/deposit/bonus/list,YES,NO,,,NO,,,UNDOCUMENTED_CANDIDATE,Referenced by current FAT bundle; absent from inventory; not executed from UI
+/admin/promo/deposit/first/export,YES,NO,,,NO,,,UNDOCUMENTED_CANDIDATE,Referenced by current FAT bundle; absent from inventory; not executed from UI
+/admin/promo/deposit/first/list,YES,NO,,,NO,,,UNDOCUMENTED_CANDIDATE,Referenced by current FAT bundle; absent from inventory; not executed from UI
+/admin/promo/deposit/repeatedly/export,YES,NO,,,NO,,,UNDOCUMENTED_CANDIDATE,Referenced by current FAT bundle; absent from inventory; not executed from UI
+/admin/promo/deposit/repeatedly/list,YES,NO,,,NO,,,UNDOCUMENTED_CANDIDATE,Referenced by current FAT bundle; absent from inventory; not executed from UI
+/admin/promo/deposit/restore/export,YES,NO,,,NO,,,UNDOCUMENTED_CANDIDATE,Referenced by current FAT bundle; absent from inventory; not executed from UI
+/admin/promo/deposit/restore/list,YES,NO,,,NO,,,UNDOCUMENTED_CANDIDATE,Referenced by current FAT bundle; absent from inventory; not executed from UI
+/admin/promo/export,YES,YES,GET,导出活动列表 - felix,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/promo/flip/card/export,YES,NO,,,NO,,,UNDOCUMENTED_CANDIDATE,Referenced by current FAT bundle; absent from inventory; not executed from UI
+/admin/promo/flip/card/report,YES,NO,,,NO,,,UNDOCUMENTED_CANDIDATE,Referenced by current FAT bundle; absent from inventory; not executed from UI
+/admin/promo/free/spin/detail,YES,YES,GET,详情,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/promo/free/spin/export,YES,YES,GET,导出,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/promo/free/spin/import,YES,YES,POST,批量派发,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/promo/free/spin/import/export,YES,YES,GET,失败清单下载,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/promo/free/spin/import/fail,YES,YES,GET,失败明细,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/promo/free/spin/import/log,YES,YES,GET,fs批量派发记录,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/promo/free/spin/insert,YES,YES,POST,手动派发,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/promo/free/spin/invalid,YES,YES,POST,作废,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/promo/free/spin/list,YES,YES,GET,列表,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/promo/free/spin/synchronous,YES,YES,GET,同步,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/promo/invite/base/export,YES,YES,GET,基础奖励数据导出,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/promo/invite/base/list,YES,YES,GET,邀请基础奖励列表,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/promo/invite/commission/export,YES,YES,GET,结算佣金奖励导出,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/promo/invite/commission/list,YES,YES,GET,结算佣金列表,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/promo/invite/config/info,YES,YES,GET,获取配置信息,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/promo/invite/config/update,YES,YES,POST,保存配置信息,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/promo/invite/friends/transfer,YES,YES,POST,好友转线,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/promo/invite/friends/transfer/export,YES,YES,GET,好友转线导出,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/promo/invite/friends/transfer/list,YES,YES,GET,好友转线列表,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/promo/invite/statistics/export,YES,YES,GET,派发佣金统计导出,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/promo/invite/statistics/list,YES,YES,GET,派发佣金统计列表,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/promo/invite/upgrade/export,YES,YES,GET,里程碑奖励导出,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/promo/invite/upgrade/list,YES,YES,GET,邀请里程碑奖励列表,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/promo/list,YES,YES,GET,活动列表 - felix,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/promo/login/bonus/export,YES,NO,,,NO,,,UNDOCUMENTED_CANDIDATE,Referenced by current FAT bundle; absent from inventory; not executed from UI
+/admin/promo/login/bonus/list,YES,NO,,,NO,,,UNDOCUMENTED_CANDIDATE,Referenced by current FAT bundle; absent from inventory; not executed from UI
+/admin/promo/lottery/task/insert,YES,NO,,,NO,,,UNDOCUMENTED_CANDIDATE,Referenced by current FAT bundle; absent from inventory; not executed from UI
+/admin/promo/lottery/task/record/export,YES,NO,,,NO,,,UNDOCUMENTED_CANDIDATE,Referenced by current FAT bundle; absent from inventory; not executed from UI
+/admin/promo/lottery/task/record/list,YES,NO,,,NO,,,UNDOCUMENTED_CANDIDATE,Referenced by current FAT bundle; absent from inventory; not executed from UI
+/admin/promo/lottery/user/clear,YES,NO,,,NO,,,UNDOCUMENTED_CANDIDATE,Referenced by current FAT bundle; absent from inventory; not executed from UI
+/admin/promo/lottery/user/record/export,YES,NO,,,NO,,,UNDOCUMENTED_CANDIDATE,Referenced by current FAT bundle; absent from inventory; not executed from UI
+/admin/promo/lottery/user/record/list,YES,NO,,,NO,,,UNDOCUMENTED_CANDIDATE,Referenced by current FAT bundle; absent from inventory; not executed from UI
+/admin/promo/lottery/user/win/export,YES,NO,,,NO,,,UNDOCUMENTED_CANDIDATE,Referenced by current FAT bundle; absent from inventory; not executed from UI
+/admin/promo/lottery/user/win/list,YES,NO,,,NO,,,UNDOCUMENTED_CANDIDATE,Referenced by current FAT bundle; absent from inventory; not executed from UI
+/admin/promo/pt/export,YES,YES,GET,导出,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/promo/pt/list,YES,YES,GET,列表,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/promo/rebate/rebat/export,YES,YES,GET,返水列表导出,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/promo/rebate/rebat/report,YES,YES,GET,返水列表,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/promo/rotate/bet/export,YES,NO,,,NO,,,UNDOCUMENTED_CANDIDATE,Referenced by current FAT bundle; absent from inventory; not executed from UI
+/admin/promo/rotate/bet/list,YES,NO,,,NO,,,UNDOCUMENTED_CANDIDATE,Referenced by current FAT bundle; absent from inventory; not executed from UI
+/admin/promo/rotate/deposit/export,YES,NO,,,NO,,,UNDOCUMENTED_CANDIDATE,Referenced by current FAT bundle; absent from inventory; not executed from UI
+/admin/promo/rotate/deposit/list,YES,NO,,,NO,,,UNDOCUMENTED_CANDIDATE,Referenced by current FAT bundle; absent from inventory; not executed from UI
+/admin/promo/rotate/kyc/export,YES,YES,GET,导出,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/promo/rotate/kyc/list,YES,YES,GET,列表,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/promo/rotate/reg/export,YES,NO,,,NO,,,UNDOCUMENTED_CANDIDATE,Referenced by current FAT bundle; absent from inventory; not executed from UI
+/admin/promo/rotate/reg/list,YES,NO,,,NO,,,UNDOCUMENTED_CANDIDATE,Referenced by current FAT bundle; absent from inventory; not executed from UI
+/admin/promo/rotate/telemarketing/export,YES,NO,,,NO,,,UNDOCUMENTED_CANDIDATE,Referenced by current FAT bundle; absent from inventory; not executed from UI
+/admin/promo/rotate/telemarketing/import,YES,NO,,,NO,,,UNDOCUMENTED_CANDIDATE,Referenced by current FAT bundle; absent from inventory; not executed from UI
+/admin/promo/rotate/telemarketing/list,YES,NO,,,NO,,,UNDOCUMENTED_CANDIDATE,Referenced by current FAT bundle; absent from inventory; not executed from UI
+/admin/promo/slot/machine/export,YES,NO,,,NO,,,UNDOCUMENTED_CANDIDATE,Referenced by current FAT bundle; absent from inventory; not executed from UI
+/admin/promo/slot/machine/list,YES,NO,,,NO,,,UNDOCUMENTED_CANDIDATE,Referenced by current FAT bundle; absent from inventory; not executed from UI
+/admin/promo/super/login/bonus/export,YES,NO,,,NO,,,UNDOCUMENTED_CANDIDATE,Referenced by current FAT bundle; absent from inventory; not executed from UI
+/admin/promo/super/login/bonus/list,YES,NO,,,NO,,,UNDOCUMENTED_CANDIDATE,Referenced by current FAT bundle; absent from inventory; not executed from UI
+/admin/promo/task/all,YES,YES,GET,任务清单(账变)-seven,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/promo/task/export,YES,YES,GET,任务中心导出-seven,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/promo/task/insert,YES,YES,POST,新增任务-seven,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/promo/task/list,YES,YES,GET,任务中心列表-seven,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/promo/task/transaction,YES,YES,GET,任务奖金列表-seven,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/promo/task/transaction/export,YES,YES,GET,任务奖励列表导出-seven,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/promo/task/update,YES,NO,,,NO,,,UNDOCUMENTED_CANDIDATE,Referenced by current FAT bundle; absent from inventory; not executed from UI
+/admin/promo/tpg/bonus/export,YES,NO,,,NO,,,UNDOCUMENTED_CANDIDATE,Referenced by current FAT bundle; absent from inventory; not executed from UI
+/admin/promo/tpg/bonus/insert,YES,NO,,,NO,,,UNDOCUMENTED_CANDIDATE,Referenced by current FAT bundle; absent from inventory; not executed from UI
+/admin/promo/tpg/bonus/list,YES,NO,,,NO,,,UNDOCUMENTED_CANDIDATE,Referenced by current FAT bundle; absent from inventory; not executed from UI
+/admin/promo/turntable/reward/give/export,YES,NO,,,NO,,,UNDOCUMENTED_CANDIDATE,Referenced by current FAT bundle; absent from inventory; not executed from UI
+/admin/promo/turntable/reward/give/list,YES,NO,,,NO,,,UNDOCUMENTED_CANDIDATE,Referenced by current FAT bundle; absent from inventory; not executed from UI
+/admin/promo/turntable/reward/goods/insert,YES,NO,,,NO,,,UNDOCUMENTED_CANDIDATE,Referenced by current FAT bundle; absent from inventory; not executed from UI
+/admin/promo/turntable/reward/goods/list,YES,NO,,,NO,,,UNDOCUMENTED_CANDIDATE,Referenced by current FAT bundle; absent from inventory; not executed from UI
+/admin/promo/turntable/reward/goods/update,YES,NO,,,NO,,,UNDOCUMENTED_CANDIDATE,Referenced by current FAT bundle; absent from inventory; not executed from UI
+/admin/promo/turntable/reward/lottery/export,YES,NO,,,NO,,,UNDOCUMENTED_CANDIDATE,Referenced by current FAT bundle; absent from inventory; not executed from UI
+/admin/promo/turntable/reward/lottery/list,YES,NO,,,NO,,,UNDOCUMENTED_CANDIDATE,Referenced by current FAT bundle; absent from inventory; not executed from UI
+/admin/promo/turntable/reward/menu/clear,YES,NO,,,NO,,,UNDOCUMENTED_CANDIDATE,Referenced by current FAT bundle; absent from inventory; not executed from UI
+/admin/promo/update,YES,YES,POST,活动编辑,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/promo/vip/daily/loss/export,YES,YES,GET,每日负盈利活动记录-导出-aliang,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/promo/vip/daily/loss/list,YES,YES,GET,每日负盈利活动记录-aliang,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/promo/vip/half/moon/export,YES,YES,GET,半月礼金活动记录-导出-aliang,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/promo/vip/half/moon/list,YES,YES,GET,半月礼金活动记录列表-aliang,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/promo/vip/log/export,YES,YES,GET,奖励表-导出-aliang,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/promo/vip/log/list,YES,YES,GET,奖励表列表-aliang,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/promo/vip/sign/in/export,YES,YES,GET,每日签到导出,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/promo/vip/sign/in/list,YES,YES,GET,每日签到列表,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/promo/world/cup/bti/cancel,YES,NO,,,NO,,,UNDOCUMENTED_CANDIDATE,Referenced by current FAT bundle; absent from inventory; not executed from UI
+/admin/promo/world/cup/bti/export,YES,NO,,,NO,,,UNDOCUMENTED_CANDIDATE,Referenced by current FAT bundle; absent from inventory; not executed from UI
+/admin/promo/world/cup/bti/list,YES,NO,,,NO,,,UNDOCUMENTED_CANDIDATE,Referenced by current FAT bundle; absent from inventory; not executed from UI
+/admin/promo/world/cup/bti/retry,YES,NO,,,NO,,,UNDOCUMENTED_CANDIDATE,Referenced by current FAT bundle; absent from inventory; not executed from UI
+/admin/promo/world/cup/bti/sync,YES,NO,,,NO,,,UNDOCUMENTED_CANDIDATE,Referenced by current FAT bundle; absent from inventory; not executed from UI
+/admin/promo/world/cup/rank,YES,NO,,,NO,,,UNDOCUMENTED_CANDIDATE,Referenced by current FAT bundle; absent from inventory; not executed from UI
+/admin/rechargeCard/listForSelect,YES,YES,GET,获取充值卡下拉列表-todo,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/record/bet,YES,YES,POST,游戏记录-wesley,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/record/game,YES,NO,,,NO,,,UNDOCUMENTED_CANDIDATE,Referenced by current FAT bundle; absent from inventory; not executed from UI
+/admin/reports/agency,YES,YES,GET,代理统计报表,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/reports/agency/export,YES,YES,GET,代理统计导出,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/reports/balance,YES,NO,,,NO,,,UNDOCUMENTED_CANDIDATE,Referenced by current FAT bundle; absent from inventory; not executed from UI
+/admin/reports/bi/basic,YES,YES,GET,首页BI,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/reports/bi/chart,YES,NO,,,NO,,,UNDOCUMENTED_CANDIDATE,Referenced by current FAT bundle; absent from inventory; not executed from UI
+/admin/reports/bi/gnode,YES,YES,GET,首页,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/reports/channel,YES,YES,GET,渠道报表-todo | 渠道报表导出-todo | 渠道日报表-sandy,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/reports/channel/detail,YES,YES,GET,渠道报表明细-todo | 渠道日报表明细-wesley,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/reports/channel/detail/export,YES,YES,GET,渠道报表明细导出-todo | 渠道日报表明细导出,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/reports/channel/export,YES,YES,GET,渠道日报表导出,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/reports/daily,YES,NO,,,NO,,,UNDOCUMENTED_CANDIDATE,Referenced by current FAT bundle; absent from inventory; not executed from UI
+/admin/reports/game,YES,YES,GET,游戏报表,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/reports/game/adjust,YES,YES,POST,游戏报表校准,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/reports/game/export,YES,YES,GET,游戏报表导出,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/reports/game/node,YES,YES,GET,游戏线路报表,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/reports/game/node/export,YES,YES,GET,游戏线路报表导出,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/reports/gameclass,YES,YES,GET,游戏类型报表,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/reports/gameclass/export,YES,YES,GET,游戏类型报表导出,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/reports/gameclass/node,YES,YES,GET,游戏类型线路报表,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/reports/gameclass/node/export,YES,YES,GET,游戏类型线路报表导出,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/reports/gnode,YES,YES,GET,业绩管理,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/reports/invite,YES,YES,GET,邀请统计--列表,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/reports/invite/detail,YES,YES,GET,邀请统计--查看,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/reports/invite/detail/export,YES,YES,GET,邀请统计--查看--导出,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/reports/invite/export,YES,YES,GET,邀请统计--导出,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/reports/member,YES,YES,GET,个人统计--列表,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/reports/member-daily-game/aggregate,YES,YES,GET,会员每日游戏报表--汇总列表,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/reports/member-daily-game/aggregate/export,YES,YES,GET,会员每日游戏报表--汇总导出,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/reports/member-daily-game/detail,YES,YES,GET,会员每日游戏报表--每日明细,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/reports/member/detail,YES,YES,GET,个人统计--查看,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/reports/member/detail/export,YES,YES,GET,个人统计--查看--导出,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/reports/member/export,YES,YES,GET,个人统计--导出,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/reports/platform,YES,YES,GET,厂商业绩报表--yasser,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/reports/profit,YES,YES,GET,平台业绩报表,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/reports/profit/export,YES,YES,GET,平台业绩报表导出,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/reports/provider/order/compare/daily,YES,YES,GET,列表,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/reports/reg,YES,YES,GET,新增用户报表,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/reports/reg/detail,YES,YES,GET,新增用户详情报表,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/reports/reg/detail/export,YES,YES,GET,新增用户详情报表导出,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/reports/reg/export,YES,YES,GET,新增用户报表导出,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/reports/venue,YES,YES,GET,厂商报表 | 场馆业绩报表--yasser,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/reports/venue/export,YES,YES,GET,厂商报表导出,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/reports/venue/node,YES,YES,GET,厂商线路报表,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/reports/venue/node/export,YES,YES,GET,厂商线路报表导出,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/shop/gs/list,YES,YES,GET,门店列表,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/shop/gs/update,YES,YES,POST,更新场馆状态,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/sms/auth,YES,YES,GET,短信验证码查看,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/sms/conf/list,YES,YES,GET,短信配置,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/sms/conf/sort,YES,YES,POST,短信排序更新,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/sms/conf/state,YES,YES,POST,短信状态更新,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/sms/list,YES,YES,GET,短信列表-seven,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/superior/log,YES,YES,GET,会员转线log,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/superior/one,YES,YES,GET,代理查询,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/superior/update,YES,YES,POST,会员转线,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/sys/config/compliance/detail,YES,NO,,,NO,,,UNDOCUMENTED_CANDIDATE,Referenced by current FAT bundle; absent from inventory; not executed from UI
+/admin/sys/config/compliance/status,YES,NO,,,NO,,,UNDOCUMENTED_CANDIDATE,Referenced by current FAT bundle; absent from inventory; not executed from UI
+/admin/sys/config/compliance/update,YES,NO,,,NO,,,UNDOCUMENTED_CANDIDATE,Referenced by current FAT bundle; absent from inventory; not executed from UI
+/admin/sys/config/deposit/multiple/list,YES,YES,GET,平台充值倍率列表-aliang,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/sys/config/deposit/multiple/log,YES,YES,GET,平台充值倍率异动记录-aliang,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/sys/config/deposit/multiple/update,YES,YES,POST,平台充值倍率更新-aliang,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/sys/config/gnode/submit,YES,YES,POST,集成参数提交,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/sys/config/list,YES,NO,,,NO,,,UNDOCUMENTED_CANDIDATE,Referenced by current FAT bundle; absent from inventory; not executed from UI
+/admin/sys/config/set,YES,NO,,,NO,,,UNDOCUMENTED_CANDIDATE,Referenced by current FAT bundle; absent from inventory; not executed from UI
+/admin/sys/config/update,YES,NO,,,NO,,,UNDOCUMENTED_CANDIDATE,Referenced by current FAT bundle; absent from inventory; not executed from UI
+/admin/todo/reminder,YES,YES,GET,待办事项提示器-todo,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/trd/list,YES,YES,GET,列表,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/trd/update,YES,YES,POST,修改,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/user/insert,YES,YES,POST,新增账户-seven,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/user/list,YES,YES,GET,后台账户列表-seven,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/user/update,YES,YES,POST,修改账户信息-seven,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/user/update/password,YES,YES,POST,后台员工修改密码,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/vip/config/comparison,YES,YES,GET,获取XP对照表,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/vip/config/edit,YES,YES,POST,配置编辑,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/vip/config/listv2,YES,YES,GET,配置列表,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/vip/level/detail,YES,YES,GET,VIP配置详情-todo,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/vip/level/list,YES,YES,GET,VIP配置列表-todo,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/vip/level/range/detail,YES,YES,GET,VIP等级区间详情-todo,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/vip/level/update,YES,YES,POST,VIP配置编辑-todo,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/vip/xp/export,YES,YES,GET,导出xp成长日志 - felix,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/vip/xp/list,YES,YES,GET,xp成长日志 - felix,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/whiteList/delete,YES,YES,GET,删除白名单 --yasser,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/whiteList/insert,YES,YES,POST,新增白名单 --yasser,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/whiteList/list,YES,YES,GET,白名单列表 --yasser,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI
+/admin/whiteList/update,YES,YES,POST,更新白名单 --yasser,NO,,,DOCUMENTED_UNVERIFIED,Referenced by current FAT bundle; not executed from UI

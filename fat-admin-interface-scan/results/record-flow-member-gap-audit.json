@@ -1,0 +1,290 @@
+{
+  "generated_at": "2026-09-03",
+  "environment": "FAT",
+  "scope": "read-only gap audit for Member list and Member Detail",
+  "execution": {
+    "admin_login_performed": false,
+    "business_requests_performed": false,
+    "business_writes_performed": false,
+    "shared_inventory_or_catalog_modified": false
+  },
+  "source_assets": [
+    "record-flow-member-control-matrix.csv",
+    "record-flow-member-action-endpoint.csv",
+    "record-flow-member-write-action-endpoint.csv",
+    "record-flow-member-write-prerequisites.csv",
+    "record-flow-member-details-controls.json",
+    "record-flow-member-tab-overflow-retry.json",
+    "record-flow-member-safe-read-actions.json",
+    "fat-admin-page-action-interface.csv",
+    "fat-admin-static-interface-comparison.csv",
+    "api/inventory/interfaces.csv",
+    "api/catalog/admin.csv"
+  ],
+  "observed_coverage": {
+    "member_detail_tabs_opened": "17/17",
+    "detail_safe_entry_actions_opened": "11/11",
+    "record_flow_read_action_endpoint_rows": 48,
+    "record_flow_read_unique_endpoints": 30,
+    "record_flow_write_rows": 24,
+    "record_flow_write_unique_triggered_endpoints": 11,
+    "important_limit": "Opening a tab proves its initialization requests only; it does not prove every filter, pagination, export, secondary action, or write branch inside that tab."
+  },
+  "classification_corrections": [
+    {
+      "method": "POST",
+      "path": "/admin/member/list",
+      "current_dynamic_label": "UNDOCUMENTED_ACTIVE",
+      "recommended_label": "MISCLASSIFIED",
+      "reason": "The shared inventory documents the same path as GET, while FAT UI actually uses POST with a CBOR body. This is method/document drift, not an absent documented path."
+    },
+    {
+      "method": "POST",
+      "path": "/admin/finance/tokens/transaction/list",
+      "current_record_flow_label": "UNDOCUMENTED_ACTIVE",
+      "recommended_label": "MISCLASSIFIED",
+      "reason": "The shared inventory documents the same path as GET, while the Member Detail token-wallet tab actually uses POST."
+    },
+    {
+      "asset": "record-flow-member-control-matrix.csv and record-flow-member-write-prerequisites.csv",
+      "recommended_label": "STALE_INTERNAL_STATUS",
+      "reason": "They still mark current-run UID waiting and some Risk Control/Convert to Agent branches as blocked, but newer write-flow evidence proves Risk Control was restored and Convert to Agent was executed terminally. Use record-flow-member-write-action-endpoint.csv as the newer truth."
+    }
+  ],
+  "gaps": [
+    {
+      "priority": 1,
+      "page": "Member",
+      "route": "/member-center/list",
+      "control": "Export",
+      "candidate_interfaces": ["GET /admin/member/export"],
+      "status": "VISIBLE_NOT_TRIGGERED",
+      "legal_prerequisite": "Use current filters or the current-run member filter; download may be captured without preserving member rows.",
+      "recommended_sequence": "Set a bounded filter, click Export, capture response headers/status and delete the local download after structural inspection."
+    },
+    {
+      "priority": 2,
+      "page": "Member",
+      "route": "/member-center/list",
+      "control": "Batch query and remaining filter families",
+      "candidate_interfaces": ["POST /admin/member/list"],
+      "status": "PARTIALLY_TRIGGERED",
+      "legal_prerequisite": "Use only synthetic current-run account identifiers and valid select values from the UI.",
+      "recommended_sequence": "Probe Batch query, one value from each select family, page 2, and a changed page size. Do not count each filter as a new endpoint; record parameter-source coverage."
+    },
+    {
+      "priority": 3,
+      "page": "Member",
+      "route": "/member-center/list",
+      "control": "Add Member -> OK",
+      "candidate_interfaces": ["POST /admin/member/insert"],
+      "status": "FORM_MAPPED_NOT_SUBMITTED",
+      "legal_prerequisite": "Allocate a dedicated synthetic account/email/phone that is not used by another lane; preserve the created target reference before submission.",
+      "recommended_sequence": "Create this additional lane before terminal password/agent/VIP operations so it can be used for later state-specific controls."
+    },
+    {
+      "priority": 4,
+      "page": "Member Detail / Balance",
+      "route": "/member-center/detail/{uid}",
+      "control": "Credit or Debit",
+      "candidate_interfaces": ["POST /admin/finance/adjust/insert", "POST /admin/finance/adjust/list", "GET /admin/finance/member/wallet"],
+      "status": "FORM_MAPPED_NOT_SUBMITTED",
+      "legal_prerequisite": "Current-run approved member, wallet baseline, small bounded amount, valid reason and approval TOTP.",
+      "recommended_sequence": "Credit a small amount, verify wallet and adjustment ledger, debit the same amount, then verify exact restoration. Run before turnover-clear or terminal operations."
+    },
+    {
+      "priority": 5,
+      "page": "Member Detail / Token Wallet Transaction",
+      "route": "/member-center/detail/{uid}",
+      "control": "Token Top-Up and Withdrawal",
+      "candidate_interfaces": ["POST /admin/finance/tokens/adjust", "POST /admin/finance/tokens/transaction/list"],
+      "status": "FORM_MAPPED_NOT_SUBMITTED",
+      "legal_prerequisite": "Current-run member, token-wallet baseline, small bounded token amount, valid reason and approval TOTP.",
+      "recommended_sequence": "Top up, verify token ledger, withdraw the identical amount, and verify restoration; do not use Reset/Clear until all reversible checks are complete."
+    },
+    {
+      "priority": 6,
+      "page": "Member Detail / Remaining Turnover Requirement",
+      "route": "/member-center/detail/{uid}",
+      "control": "流水要求调整: 增加 / 扣除 / 清零",
+      "candidate_interfaces": ["POST /admin/finance/turnover/add", "POST /admin/finance/turnover/sub", "POST /admin/finance/turnover/clear", "GET /admin/finance/turnover/list"],
+      "status": "TREE_MAPPED_WRITE_NOT_TRIGGERED",
+      "legal_prerequisite": "Exact zero/non-zero turnover baseline, one explicitly selected game or bounded game group, small amount, reason and approval TOTP.",
+      "recommended_sequence": "Increase on one game, verify detail, deduct the same amount and verify restoration. Execute Clear only last and only on requirements created by this flow."
+    },
+    {
+      "priority": 7,
+      "page": "Member Detail / Turnover Detail",
+      "route": "/member-center/detail/{uid}",
+      "control": "异动记录",
+      "candidate_interfaces": ["GET /admin/finance/turnover/change/types", "GET /admin/finance/turnover/change/list"],
+      "status": "VISIBLE_NOT_TRIGGERED",
+      "legal_prerequisite": "Current-run member; ideally run after the reversible turnover pair so the result is non-empty.",
+      "recommended_sequence": "Open after turnover add/sub and capture type lookup, list parameters, pagination and response structure."
+    },
+    {
+      "priority": 8,
+      "page": "Member Detail / Function Limitation",
+      "route": "/member-center/detail/{uid}",
+      "control": "Withdraw Unlock -> Lock restore",
+      "candidate_interfaces": ["POST /admin/member/limitation/state/update", "GET /admin/member/limitation/state/info"],
+      "status": "BRANCH_NOT_TRIGGERED",
+      "legal_prerequisite": "A current-run member whose saved baseline is Withdraw=Forbidden and a valid approval TOTP.",
+      "recommended_sequence": "Because the baseline is Forbidden, unlock temporarily, prove Allowed, then lock again and prove the original Forbidden baseline."
+    },
+    {
+      "priority": 9,
+      "page": "Member Detail / Risk Control Log",
+      "route": "/member-center/detail/{uid}",
+      "control": "Risk Control Adjustment",
+      "candidate_interfaces": ["POST /admin/member/risk/update", "GET /admin/member/risk/log"],
+      "status": "VISIBLE_NOT_FORM_MAPPED",
+      "legal_prerequisite": "Current-run member, exact risk-tag/level baseline, reversible option, reason and approval TOTP if requested.",
+      "recommended_sequence": "Open and map the form first. Execute only if the same UI supplies a deterministic restoration value. Do not confuse this endpoint with Details-page Risk Control, which used POST /admin/member/update."
+    },
+    {
+      "priority": 10,
+      "page": "Member Detail / VIP Level Log",
+      "route": "/member-center/detail/{uid}",
+      "control": "Manual Adjust VIP",
+      "candidate_interfaces": ["POST /admin/member/vip/level/manual/upgrade", "GET /admin/member/vip/level/list"],
+      "status": "VISIBLE_ON_EXISTING_RECORD_BUT_NOT_CURRENT_LANE",
+      "legal_prerequisite": "Dedicated current-run member below the desired VIP level; original/manual level captured. The documented endpoint is upgrade-only, so downgrade recovery must not be assumed.",
+      "recommended_sequence": "Probe visibility/form on the new lane. If only upgrade exists, execute once as a terminal operation after all balance, turnover and token checks."
+    },
+    {
+      "priority": 11,
+      "page": "Member Detail / multiple record tabs",
+      "route": "/member-center/detail/{uid}",
+      "control": "Export buttons",
+      "candidate_interfaces": [
+        "POST /admin/finance/deposit/export",
+        "POST /admin/finance/withdraw/export",
+        "GET /admin/bonus/export",
+        "GET /admin/vip/xp/export",
+        "GET /admin/finance/tokens/transaction/export",
+        "GET /admin/reports/member/export",
+        "GET /admin/log/export (bundle-only candidate)"
+      ],
+      "status": "VISIBLE_NOT_TRIGGERED",
+      "legal_prerequisite": "Keep the route-injected current-run UID and bounded date range; do not persist downloaded member data.",
+      "recommended_sequence": "Scan Deposit, Withdrawal, Bonus, XP, Token, Daily Statistics, then both Login Log versions. Treat /admin/log/export as UNDOCUMENTED_ACTIVE only if Network proves it."
+    },
+    {
+      "priority": 12,
+      "page": "Member Detail / record tabs",
+      "route": "/member-center/detail/{uid}",
+      "control": "Query, Reset, filters and pagination inside each opened tab",
+      "candidate_interfaces": [
+        "POST /admin/finance/transaction/list",
+        "POST /admin/record/bet",
+        "POST /admin/finance/deposit/list",
+        "POST /admin/finance/withdraw/list",
+        "GET /admin/bonus/list",
+        "GET /admin/finance/turnover/list",
+        "GET /admin/member/vip/level/list",
+        "GET /admin/vip/xp/list",
+        "GET /admin/member/risk/log",
+        "GET /admin/member/log/listv1",
+        "GET /admin/member/log/list",
+        "POST /admin/finance/tokens/transaction/list",
+        "GET /admin/reports/member/detail",
+        "GET /admin/reports/member-daily-game/detail"
+      ],
+      "status": "INITIALIZATION_PROVED_PARAMETER_COVERAGE_INCOMPLETE",
+      "legal_prerequisite": "Current-run member and valid UI filter values; expand time only enough to obtain representative data.",
+      "recommended_sequence": "For each tab, exercise one meaningful filter combination plus pagination where available; reuse the already proven endpoint classification and add parameter origins."
+    },
+    {
+      "priority": 13,
+      "page": "Member Detail / Bonus Log",
+      "route": "/member-center/detail/{uid}",
+      "control": "Approved Order Count",
+      "candidate_interfaces": ["GET /admin/bonus/list"],
+      "status": "VISIBLE_SEMANTICS_UNVERIFIED",
+      "legal_prerequisite": "Current-run member; read-only.",
+      "recommended_sequence": "Click once and determine whether it is a filter/preset, modal, or independent request. Do not invent a count endpoint from the label."
+    },
+    {
+      "priority": 14,
+      "page": "Member Detail / free-spin purchase records",
+      "route": "/member-center/detail/{uid}",
+      "control": "Record-row state action when a current-run purchase exists",
+      "candidate_interfaces": ["POST /admin/member/buyfeature/state/set", "GET /admin/member/buyfeature/list"],
+      "status": "CONDITIONAL_CONTROL_NOT_OBSERVED",
+      "legal_prerequisite": "A free-spin purchase created by the current flow; record its baseline and prove a reversible state transition.",
+      "recommended_sequence": "Do not manufacture historical data. Scan only if the client thread creates a qualifying current-run record."
+    },
+    {
+      "priority": 15,
+      "page": "Member Detail / Security",
+      "route": "/member-center/detail/{uid}",
+      "control": "Reset Login Password / list Reset Password",
+      "candidate_interfaces": ["POST /admin/member/update/password"],
+      "status": "FORM_MAPPED_NOT_SUBMITTED",
+      "legal_prerequisite": "Dedicated terminal member and a valid member notification verification code; original password cannot be restored.",
+      "recommended_sequence": "Execute only after that member is no longer needed for client-side login or other recoverable scans."
+    },
+    {
+      "priority": 16,
+      "page": "Member and Member Detail / inviter transfer",
+      "route": "/member-center/list and /member-center/detail/{uid}",
+      "control": "Transfer and changed / 转移代理线",
+      "candidate_interfaces": ["POST /admin/promo/invite/friends/transfer", "GET /admin/superior/one", "POST /admin/superior/update", "GET /admin/superior/log"],
+      "status": "TWO_FORMS_MAPPED_NOT_SUBMITTED",
+      "legal_prerequisite": "Proven current-run member and valid current-run inviter/agent relationship, with the original upline captured and an accepted restoration path.",
+      "recommended_sequence": "Defer until ordinary Member scanning is complete. The two UI forms likely represent different transfer semantics and must be captured separately."
+    },
+    {
+      "priority": 17,
+      "page": "Member Detail / unnamed edit controls",
+      "route": "/member-center/detail/{uid}",
+      "control": "Contextual pencil/edit icons for editable member fields",
+      "candidate_interfaces": ["POST /admin/member/update"],
+      "status": "VISIBLE_BUT_CONTEXT_INVENTORY_INCOMPLETE",
+      "legal_prerequisite": "Use a reversible current-run member and capture exact field label/value before opening each edit modal.",
+      "recommended_sequence": "Inventory icons by surrounding description label, not coordinates or ordinal indexes; map nickname/email or other editable fields separately and restore each value immediately."
+    },
+    {
+      "priority": 18,
+      "page": "Member Detail / Wallet Transaction Change",
+      "route": "/member-center/detail/{uid}",
+      "control": "Clear Turnover Requirement",
+      "candidate_interfaces": ["POST /admin/member/turnover/clear", "POST /admin/finance/turnover/clear"],
+      "status": "VISIBLE_ON_EXISTING_DATA_BUT_ABSENT_ON_CURRENT_LANE",
+      "legal_prerequisite": "A transaction/turnover record created by this flow and positively selected by the UI; irreversible source requirements must not belong to unrelated data.",
+      "recommended_sequence": "Run last, only after Network distinguishes the two documented clear paths and the selected target is current-run-owned."
+    }
+  ],
+  "recommended_execution_order": [
+    "Member list filters, pagination, Batch query and Export",
+    "Create one additional synthetic Member lane via Add Member",
+    "Credit -> ledger/wallet verification -> equal Debit -> baseline verification",
+    "Token top-up -> ledger verification -> equal withdrawal -> baseline verification",
+    "Turnover increase -> detail verification -> equal deduct -> change-log verification",
+    "Withdraw limitation Unlock -> Lock baseline restoration",
+    "Risk Control Adjustment form and reversible branch",
+    "All record-tab exports and meaningful query/pagination variants",
+    "Conditional free-spin record action only if current-run data exists",
+    "VIP manual adjustment as a terminal member operation",
+    "Password reset as a terminal member operation",
+    "Inviter/agent transfers after ordinary Member coverage is complete",
+    "Turnover Clear/Reset actions last and only on current-run-created requirements"
+  ],
+  "not_gaps": [
+    "Member Detail initialization visible data sources are already proven: GET /admin/member/detail, GET /admin/kyc/detail and GET /admin/finance/member/wallet.",
+    "All 17 detail tabs were opened and their initialization endpoints were captured.",
+    "The 11 registered safe detail entries were opened.",
+    "Bet and Login limitation reversible branches are complete.",
+    "Details-page Risk Control is complete and restored.",
+    "Convert to Agent is complete on the terminal lane.",
+    "General recharge-rate log is ACTIVE; Custom update is already truthfully classified ACTIVE_FAILED and should not be retried merely to manufacture success.",
+    "The turnover game tree itself is complete: 7 categories, 72 category/provider combinations and 5731 games."
+  ],
+  "safety": {
+    "contains_raw_uid": false,
+    "contains_phone": false,
+    "contains_credentials": false,
+    "contains_token_cookie_or_otp": false
+  }
+}

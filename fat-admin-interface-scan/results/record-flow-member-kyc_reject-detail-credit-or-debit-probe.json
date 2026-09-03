@@ -1,0 +1,407 @@
+{
+  "captured_at": "2026-09-03T08:43:35.547Z",
+  "environment": "FAT",
+  "lane": "kyc_reject",
+  "target_ref": "FAT-KYC-REJECT-01",
+  "page_route": "/member-center/detail/{uid}",
+  "tab_name": "",
+  "action_name": "Credit or Debit",
+  "control_present": true,
+  "control_disabled": false,
+  "available_buttons": [
+    "View History",
+    "View History",
+    "Ban Records",
+    "Unblock",
+    "Risk Control",
+    "Turnover Details",
+    "Credit or Debit",
+    "流水要求调整",
+    "records",
+    "operating record",
+    "changed",
+    "View History",
+    "Login Logs",
+    "XP Turnover",
+    "View Token Wallet",
+    "View Credit/Debit Records"
+  ],
+  "form": {
+    "title": "Credit/Debit Request / Wallet Reset",
+    "text_head": "Credit/Debit Request / Wallet Reset Phone Number Member Account ID Member UID Member Account Status Wallet Balance at Submission Adjustment Type Credit Top‑up Debit Deduction Empty Balance Adjustment Amount Turnover Requirement for Top‑up Withdrawal 倍 Google Verification Code Adjustment Reason 0 / 500 Cancel OK",
+    "fields": [
+      {
+        "index": 0,
+        "label": "Phone Number",
+        "required": false,
+        "controls": [
+          {
+            "type": "text",
+            "placeholder": "Please enter",
+            "disabled": true
+          }
+        ]
+      },
+      {
+        "index": 1,
+        "label": "Member Account ID",
+        "required": false,
+        "controls": [
+          {
+            "type": "text",
+            "placeholder": "Please enter",
+            "disabled": true
+          }
+        ]
+      },
+      {
+        "index": 2,
+        "label": "Member UID",
+        "required": false,
+        "controls": [
+          {
+            "type": "text",
+            "placeholder": "Please enter",
+            "disabled": true
+          }
+        ]
+      },
+      {
+        "index": 3,
+        "label": "Member Account Status",
+        "required": false,
+        "controls": [
+          {
+            "type": "text",
+            "placeholder": "Please enter",
+            "disabled": true
+          }
+        ]
+      },
+      {
+        "index": 4,
+        "label": "Wallet Balance at Submission",
+        "required": false,
+        "controls": [
+          {
+            "type": "text",
+            "placeholder": "Please enter",
+            "disabled": true
+          }
+        ]
+      },
+      {
+        "index": 5,
+        "label": "Adjustment Type",
+        "required": true,
+        "controls": [
+          {
+            "type": "radio",
+            "placeholder": "",
+            "disabled": false
+          },
+          {
+            "type": "radio",
+            "placeholder": "",
+            "disabled": false
+          },
+          {
+            "type": "radio",
+            "placeholder": "",
+            "disabled": false
+          }
+        ]
+      },
+      {
+        "index": 6,
+        "label": "Adjustment Amount",
+        "required": true,
+        "controls": [
+          {
+            "type": "input",
+            "placeholder": "Only non-zero positive values allowed, up to two decimal places",
+            "disabled": false
+          }
+        ]
+      },
+      {
+        "index": 7,
+        "label": "Turnover Requirement for Top‑up Withdrawal",
+        "required": true,
+        "controls": [
+          {
+            "type": "input",
+            "placeholder": "0–99, top‑up adjustments only, must be an integer",
+            "disabled": false
+          }
+        ]
+      },
+      {
+        "index": 8,
+        "label": "Google Verification Code",
+        "required": true,
+        "controls": [
+          {
+            "type": "text",
+            "placeholder": "Please enter",
+            "disabled": false
+          }
+        ]
+      },
+      {
+        "index": 9,
+        "label": "Adjustment Reason",
+        "required": true,
+        "controls": [
+          {
+            "type": "textarea",
+            "placeholder": "Text 1~500 characters",
+            "disabled": false
+          }
+        ]
+      }
+    ],
+    "radio_labels": [
+      "Credit Top‑up",
+      "Debit Deduction",
+      "Empty Balance"
+    ],
+    "select_texts": [],
+    "select_options": [],
+    "buttons": [
+      "",
+      "Cancel",
+      "OK"
+    ]
+  },
+  "submitted": false,
+  "writes": 0,
+  "raw_phone_or_uid_persisted": false,
+  "network": [
+    {
+      "action": "login",
+      "method": "GET",
+      "path": "/admin/me/detail",
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": false,
+      "response_values_persisted": false
+    },
+    {
+      "action": "login",
+      "method": "POST",
+      "path": "/admin/login/auth",
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_values_persisted": false
+    },
+    {
+      "action": "login",
+      "method": "POST",
+      "path": "/admin/login",
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_values_persisted": false
+    },
+    {
+      "action": "login",
+      "method": "GET",
+      "path": "/admin/me/detail",
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_values_persisted": false
+    },
+    {
+      "action": "open_member_detail",
+      "method": "GET",
+      "path": "/admin/me/detail",
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_values_persisted": false
+    },
+    {
+      "action": "open_member_detail",
+      "method": "GET",
+      "path": "/admin/sys/config/compliance/status",
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_values_persisted": false
+    },
+    {
+      "action": "open_member_detail",
+      "method": "GET",
+      "path": "/admin/kyc/detail",
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_values_persisted": false
+    },
+    {
+      "action": "open_member_detail",
+      "method": "GET",
+      "path": "/admin/priv/check",
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_values_persisted": false
+    },
+    {
+      "action": "open_member_detail",
+      "method": "GET",
+      "path": "/admin/finance/member/wallet",
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_values_persisted": false
+    },
+    {
+      "action": "open_member_detail",
+      "method": "GET",
+      "path": "/admin/notify/audit/alarm",
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_values_persisted": false
+    },
+    {
+      "action": "open_member_detail",
+      "method": "POST",
+      "path": "/admin/gameclass/list",
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_values_persisted": false
+    },
+    {
+      "action": "open_member_detail",
+      "method": "GET",
+      "path": "/admin/member/detail",
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_values_persisted": false
+    },
+    {
+      "action": "open_member_detail",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_values_persisted": false
+    },
+    {
+      "action": "open_member_detail",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_values_persisted": false
+    },
+    {
+      "action": "open_member_detail",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_values_persisted": false
+    },
+    {
+      "action": "open_member_detail",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_values_persisted": false
+    },
+    {
+      "action": "open_member_detail",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_values_persisted": false
+    },
+    {
+      "action": "open_member_detail",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_values_persisted": false
+    },
+    {
+      "action": "open_member_detail",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_values_persisted": false
+    },
+    {
+      "action": "open_member_detail",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_values_persisted": false
+    },
+    {
+      "action": "open_member_detail",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_values_persisted": false
+    },
+    {
+      "action": "open_member_detail",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_values_persisted": false
+    },
+    {
+      "action": "open_member_detail",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_values_persisted": false
+    },
+    {
+      "action": "open_member_detail",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_values_persisted": false
+    },
+    {
+      "action": "open:Credit or Debit",
+      "method": "GET",
+      "path": "/admin/member/detail",
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_values_persisted": false
+    }
+  ]
+}

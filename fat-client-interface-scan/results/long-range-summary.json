@@ -1,0 +1,91 @@
+{
+  "scannedAt": "2026-09-03T06:40:02.717Z",
+  "environment": "FAT",
+  "timezone": "Asia/Manila",
+  "pages": 4,
+  "nonEmptyAt7Days": 4,
+  "newEndpoints": 0,
+  "observedEndpoints": [
+    "GET /finance/deposit/list",
+    "GET /finance/withdraw/list",
+    "GET /member/game/bet/list",
+    "GET /promo/blindbox/transaction/bonus"
+  ],
+  "pageMaximumLegalRanges": {
+    "Transaction / Deposit": "Last 30 days",
+    "Transaction / Withdraw": "Last 30 days",
+    "Bet History": "Last 30 days",
+    "Bonus": "Last 30 days"
+  },
+  "pagination": {
+    "Transaction / Deposit": {
+      "attempted": true,
+      "captured": true,
+      "method": "progressive viewport wheel scroll",
+      "page": "2",
+      "pageSize": "10",
+      "httpStatus": 200,
+      "businessStatus": true,
+      "responseStructure": {
+        "topLevelKeys": [
+          "data",
+          "status"
+        ],
+        "dataType": "object",
+        "dataKeys": [
+          "d",
+          "s",
+          "t"
+        ],
+        "arrayPaths": [
+          "data.d"
+        ]
+      },
+      "recordCount": 2,
+      "totalCount": 12,
+      "nonEmpty": true
+    },
+    "Transaction / Withdraw": {
+      "attempted": false,
+      "reason": "no second page required: total does not exceed page size"
+    },
+    "Bet History": {
+      "attempted": true,
+      "captured": true,
+      "method": "progressive viewport wheel scroll",
+      "page": "2",
+      "pageSize": "10",
+      "httpStatus": 200,
+      "businessStatus": true,
+      "responseStructure": {
+        "topLevelKeys": [
+          "data",
+          "status"
+        ],
+        "dataType": "object",
+        "dataKeys": [
+          "bt",
+          "d",
+          "t",
+          "wt"
+        ],
+        "arrayPaths": [
+          "data.d"
+        ]
+      },
+      "recordCount": 10,
+      "totalCount": 102,
+      "nonEmpty": true
+    },
+    "Bonus": {
+      "attempted": false,
+      "reason": "no second page required: total does not exceed page size"
+    }
+  },
+  "notes": [
+    "All four pages returned non-empty data at 7 days, so 30/90/365-day requests were not executed.",
+    "The UI exposes Today, Yesterday, Last 7 days, Last 15 days, and Last 30 days; 90/365-day and All Time options are not available.",
+    "Page size remained 10. Page 2 was sampled only where total count exceeded 10.",
+    "No endpoint was added; this run strengthens time-range and pagination evidence for four previously observed endpoints."
+  ]
+}

@@ -1,0 +1,85 @@
+menu,page,page_route,action,control_type,status,final_url,request_count,error_or_blocker,evidence
+Home,Home (guest),/,page initialization,page,COMPLETED,https://client-fat.filbet2025.com/,20,,fat-client-page-progress.json action=home_guest__page_initialization
+Sidebar,Sidebar (guest),/,page initialization,page,COMPLETED,https://client-fat.filbet2025.com/,18,,fat-client-page-progress.json action=sidebar_guest__page_initialization
+Sidebar,Sidebar (guest),/,primary navigation/action,button,COMPLETED,https://client-fat.filbet2025.com/,6,,fat-client-page-progress.json action=sidebar_guest__primary_navigation_action
+Authentication,Login,/,page initialization,page,COMPLETED,https://client-fat.filbet2025.com/,20,,fat-client-page-progress.json action=login__page_initialization
+Authentication,Login,/,primary navigation/action,button,COMPLETED,https://client-fat.filbet2025.com/?action=login&payload=omRzdGVwbmxvZ2luLXBhc3N3b3JkZGRhdGH3,3,,fat-client-page-progress.json action=login__primary_navigation_action
+Authentication,Login,/,switch Password tab,tab,COMPLETED,https://client-fat.filbet2025.com/?action=login&payload=omRzdGVwbmxvZ2luLXBhc3N3b3JkZGRhdGH3,2,,fat-client-page-progress.json action=login__switch_password_tab
+Authentication,Login,/,switch SMS OTP tab,tab,COMPLETED,https://client-fat.filbet2025.com/?action=login&payload=omRzdGVwbmxvZ2luLXBhc3N3b3JkZGRhdGH3,0,,fat-client-page-progress.json action=login__switch_sms_otp_tab
+Authentication,Login,/,request SMS code,button,FAILED,https://client-fat.filbet2025.com/?action=login&payload=omRzdGVwbmxvZ2luLXBhc3N3b3JkZGRhdGH3,1,"locator.click: Timeout 4000ms exceeded. Call log: [2m - waiting for getByRole('button', { name: /^Get Code$/i }).first()[22m [2m - locator resolved to <button class=""sc-e7uih2-0 djSLFo e1xexaod0 css-17g9al6 e1w0qefm0"">Get Code</button>[22m [2m - attempting click action[22m [2m 2 × waiting for",fat-client-page-progress.json action=login__request_sms_code
+Authentication,Register,/,page initialization,page,COMPLETED,https://client-fat.filbet2025.com/,19,,fat-client-page-progress.json action=register__page_initialization
+Authentication,Register,/,primary navigation/action,button,COMPLETED,https://client-fat.filbet2025.com/?action=register&payload=omRzdGVwbXJlZ2lzdGVyLWZvcm1kZGF0Yfc%3D,6,,fat-client-page-progress.json action=register__primary_navigation_action
+Authentication,Login,/,password login,submit,COMPLETED,https://client-fat.filbet2025.com/,41,,fat-client-page-progress.json action=login_success__password_login
+Home,Home,/,page initialization,page,COMPLETED,https://client-fat.filbet2025.com/,48,,fat-client-page-progress.json action=home__page_initialization
+Home,Home,/,open Daily Rewards,button,COMPLETED,https://client-fat.filbet2025.com/daily_deposits,1,,fat-client-page-progress.json action=home__open_daily_rewards
+Home,Home,/,refresh balance,button,COMPLETED,https://client-fat.filbet2025.com/,46,,fat-client-page-progress.json action=home__refresh_balance
+Home,Home,/,favorite first game,button,BLOCKED_DATA_SCOPE,https://client-fat.filbet2025.com/,0,would change existing member favorites; no game record created by this scan,fat-client-page-progress.json action=home__favorite_first_game
+Sidebar,Sidebar,/,page initialization,page,COMPLETED,https://client-fat.filbet2025.com/,45,,fat-client-page-progress.json action=sidebar__page_initialization
+Sidebar,Sidebar,/,primary navigation/action,button,COMPLETED,https://client-fat.filbet2025.com/,11,,fat-client-page-progress.json action=sidebar__primary_navigation_action
+My,My,/my,page initialization,page,COMPLETED,https://client-fat.filbet2025.com/my,43,,fat-client-page-progress.json action=my__page_initialization
+My,My,/my,refresh balance,button,COMPLETED,https://client-fat.filbet2025.com/my,1,,fat-client-page-progress.json action=my__refresh_balance
+My,My,/my,copy member ID,button,BLOCKED_DATA_SCOPE,https://client-fat.filbet2025.com/my,0,clipboard/member identifier is deliberately not captured in repository evidence,fat-client-page-progress.json action=my__copy_member_id
+My,My,/my,affiliate application,card,BLOCKED_DATA_SCOPE,https://client-fat.filbet2025.com/my,0,would mutate existing member state; no affiliate record created by this scan,fat-client-page-progress.json action=my__affiliate_application
+Rewards,Rewards,/welfare,page initialization,page,COMPLETED,https://client-fat.filbet2025.com/welfare,38,,fat-client-page-progress.json action=rewards__page_initialization
+Rewards,Rewards,/welfare,select All tab,tab,COMPLETED,https://client-fat.filbet2025.com/welfare,0,,fat-client-page-progress.json action=rewards__select_all_tab
+Rewards,Rewards,/welfare,select Newcomer tab,tab,COMPLETED,https://client-fat.filbet2025.com/welfare,0,,fat-client-page-progress.json action=rewards__select_newcomer_tab
+Rewards,Rewards,/welfare,select Daily tab,tab,COMPLETED,https://client-fat.filbet2025.com/welfare,0,,fat-client-page-progress.json action=rewards__select_daily_tab
+Rewards,Rewards,/welfare,open Lucky 7 rules,button,COMPLETED,https://client-fat.filbet2025.com/welfare,1,,fat-client-page-progress.json action=rewards__open_lucky_7_rules
+Rewards,Rewards,/welfare,Check In,button,BLOCKED_DATA_SCOPE,https://client-fat.filbet2025.com/welfare,0,would change the existing member's reward state; no member created by this scan,fat-client-page-progress.json action=rewards__check_in
+Rewards,My Free Spins,/welfare,page initialization,page,COMPLETED,https://client-fat.filbet2025.com/welfare,38,,fat-client-page-progress.json action=free_spins__page_initialization
+Rewards,My Free Spins,/welfare,primary navigation/action,button,COMPLETED,https://client-fat.filbet2025.com/my-free-spins,4,,fat-client-page-progress.json action=free_spins__primary_navigation_action
+Rewards,My Free Spins,/welfare,select Available tab,tab,COMPLETED,https://client-fat.filbet2025.com/my-free-spins,0,,fat-client-page-progress.json action=free_spins__select_available_tab
+Rewards,My Free Spins,/welfare,select In Use tab,tab,COMPLETED,https://client-fat.filbet2025.com/my-free-spins/in-use,2,,fat-client-page-progress.json action=free_spins__select_in_use_tab
+Rewards,My Free Spins,/welfare,select Ended tab,tab,COMPLETED,https://client-fat.filbet2025.com/my-free-spins/ended,3,,fat-client-page-progress.json action=free_spins__select_ended_tab
+Rewards,My Free Spins,/welfare,start first free-spin game,button,COMPLETED,https://client-fat.filbet2025.com/my-free-spins,36,,fat-client-page-progress.json action=free_spins__start_first_free_spin_game
+Filcoins,Earn Filcoins,/s-points-v2,page initialization,page,COMPLETED,https://client-fat.filbet2025.com/s-points-v2,37,,fat-client-page-progress.json action=earn_filcoins__page_initialization
+Filcoins,Earn Filcoins,/s-points-v2,daily task Go 1,button,COMPLETED,https://client-fat.filbet2025.com/s-game-category-v2/gameType/3,38,,fat-client-page-progress.json action=earn_filcoins__daily_task_go_1
+Filcoins,Earn Filcoins,/s-points-v2,daily task Go 2,button,COMPLETED,https://client-fat.filbet2025.com/s-game-category-v2/gameType/1,38,,fat-client-page-progress.json action=earn_filcoins__daily_task_go_2
+Filcoins,Earn Filcoins,/s-points-v2,daily task Go 3,button,COMPLETED,https://client-fat.filbet2025.com/s-game-category-v2/gameType/3,38,,fat-client-page-progress.json action=earn_filcoins__daily_task_go_3
+Filcoins,Earn Filcoins,/s-points-v2,daily task Go 4,button,COMPLETED,https://client-fat.filbet2025.com/s-game-category-v2/gameType/3,38,,fat-client-page-progress.json action=earn_filcoins__daily_task_go_4
+Filcoins,Earn Filcoins,/s-points-v2,daily task Go 5,button,COMPLETED,https://client-fat.filbet2025.com/s-game-category-v2/gameType/3,38,,fat-client-page-progress.json action=earn_filcoins__daily_task_go_5
+Filcoins,Earn Filcoins,/s-points-v2,daily task Go 6,button,COMPLETED,https://client-fat.filbet2025.com/,50,,fat-client-page-progress.json action=earn_filcoins__daily_task_go_6
+Filcoins,Earn Filcoins,/s-points-v2,daily task Go 7,button,COMPLETED,https://client-fat.filbet2025.com/,50,,fat-client-page-progress.json action=earn_filcoins__daily_task_go_7
+Filcoins,Earn Filcoins,/s-points-v2,daily task Go 8,button,COMPLETED,https://client-fat.filbet2025.com/,50,,fat-client-page-progress.json action=earn_filcoins__daily_task_go_8
+Filcoins,Earn Filcoins,/s-points-v2,daily task Go 9,button,COMPLETED_WITH_POTENTIAL_SIDE_EFFECT,https://client-fat.filbet2025.com/s-points-v2,40,,fat-client-page-progress.json action=earn_filcoins__daily_task_go_9
+Filcoins,Filcoins Mall,/s-points-v2,page initialization,page,COMPLETED,https://client-fat.filbet2025.com/s-points-v2,41,,fat-client-page-progress.json action=filcoins_mall__page_initialization
+Filcoins,Filcoins Mall,/s-points-v2,primary navigation/action,button,COMPLETED,https://client-fat.filbet2025.com/s-points-v2/mall,1,,fat-client-page-progress.json action=filcoins_mall__primary_navigation_action
+Filcoins,Filcoins Mall,/s-points-v2,select Popular sort,filter,COMPLETED,https://client-fat.filbet2025.com/s-points-v2/mall,0,,fat-client-page-progress.json action=filcoins_mall__select_popular_sort
+Filcoins,Filcoins Mall,/s-points-v2,select All Filcoins range,filter,COMPLETED,https://client-fat.filbet2025.com/s-points-v2/mall,1,,fat-client-page-progress.json action=filcoins_mall__select_all_filcoins_range
+Filcoins,Filcoins Mall,/s-points-v2,redeem first product,button,BLOCKED_DATA_SCOPE,https://client-fat.filbet2025.com/s-points-v2/mall,0,would consume existing member Filcoins; no balance created by this scan,fat-client-page-progress.json action=filcoins_mall__redeem_first_product
+Game,Game,/s-game-category-v2/gameType/3,page initialization,page,COMPLETED,https://client-fat.filbet2025.com/s-game-category-v2/gameType/3,32,,fat-client-page-progress.json action=game__page_initialization
+Game,Game,/s-game-category-v2/gameType/3,select Slot tab,tab,COMPLETED,https://client-fat.filbet2025.com/s-game-category-v2/gameType/3,4,,fat-client-page-progress.json action=game__select_slot_tab
+Game,Game,/s-game-category-v2/gameType/3,select Live tab,tab,COMPLETED,https://client-fat.filbet2025.com/s-game-category-v2/gameType/1,1,,fat-client-page-progress.json action=game__select_live_tab
+Game,Game,/s-game-category-v2/gameType/3,select Table tab,tab,COMPLETED,https://client-fat.filbet2025.com/s-game-category-v2/gameType/5,1,,fat-client-page-progress.json action=game__select_table_tab
+Game,Game,/s-game-category-v2/gameType/3,select Arcade tab,tab,COMPLETED,https://client-fat.filbet2025.com/s-game-category-v2/gameType/6,2,,fat-client-page-progress.json action=game__select_arcade_tab
+Game,Game,/s-game-category-v2/gameType/3,select Lottery tab,tab,COMPLETED,https://client-fat.filbet2025.com/s-game-category-v2/gameType/7,1,,fat-client-page-progress.json action=game__select_lottery_tab
+Game,Game,/s-game-category-v2/gameType/3,open Sort By,filter,COMPLETED,https://client-fat.filbet2025.com/s-game-category-v2/gameType/7?sort=1,1,,fat-client-page-progress.json action=game__open_sort_by
+Game,Game,/s-game-category-v2/gameType/3,sort Newest,filter,COMPLETED,https://client-fat.filbet2025.com/s-game-category-v2/gameType/7?sort=2,1,,fat-client-page-progress.json action=game__sort_newest
+Game,Game,/s-game-category-v2/gameType/3,sort A-Z,filter,FAILED,https://client-fat.filbet2025.com/s-game-category-v2/gameType/7?sort=2,0,control not found: A-Z,fat-client-page-progress.json action=game__sort_a_z
+Game,Game,/s-game-category-v2/gameType/3,sort Z-A,filter,FAILED,https://client-fat.filbet2025.com/s-game-category-v2/gameType/7?sort=2,0,control not found: Z-A,fat-client-page-progress.json action=game__sort_z_a
+Game,Game,/s-game-category-v2/gameType/3,sort Popular,filter,FAILED,https://client-fat.filbet2025.com/s-game-category-v2/gameType/7?sort=2,0,control not found: Popular,fat-client-page-progress.json action=game__sort_popular
+Game,Game,/s-game-category-v2/gameType/3,open Providers,filter,COMPLETED,https://client-fat.filbet2025.com/s-game-category-v2/providers/mi,1,,fat-client-page-progress.json action=game__open_providers
+Game,Game,/s-game-category-v2/gameType/3,reset Providers,button,FAILED,https://client-fat.filbet2025.com/s-game-category-v2/providers/mi,0,control not found: Reset,fat-client-page-progress.json action=game__reset_providers
+Game,Game,/s-game-category-v2/gameType/3,confirm Providers,button,FAILED,https://client-fat.filbet2025.com/s-game-category-v2/providers/mi,0,control not found: Confirm,fat-client-page-progress.json action=game__confirm_providers
+Game,Game,/s-game-category-v2/gameType/3,scroll/load more,pagination,COMPLETED,https://client-fat.filbet2025.com/s-game-category-v2/providers/mi,0,,fat-client-page-progress.json action=game__scroll_load_more
+VIP,VIP Center,/my,page initialization,page,COMPLETED,https://client-fat.filbet2025.com/my,42,,fat-client-page-progress.json action=vip__page_initialization
+VIP,VIP Center,/my,primary navigation/action,button,COMPLETED,https://client-fat.filbet2025.com/s-vip-optimization-v2,10,,fat-client-page-progress.json action=vip__primary_navigation_action
+My,Deposit,/my?action=deposit,page initialization,page,COMPLETED,https://client-fat.filbet2025.com/my?action=deposit,44,,fat-client-page-progress.json action=deposit__page_initialization
+My,Deposit,/my?action=deposit,Deposit now,submit,BLOCKED_DATA_SCOPE,https://client-fat.filbet2025.com/my?action=deposit,0,no deposit order created by this scan; submitting would mutate an existing account without a scan-owned order chain,fat-client-page-progress.json action=deposit__deposit_now
+My,Withdraw,/my?action=withdraw,page initialization,page,COMPLETED,https://client-fat.filbet2025.com/my?action=withdraw,49,,fat-client-page-progress.json action=withdraw__page_initialization
+My,Withdraw,/my?action=withdraw,Withdraw Now,submit,BLOCKED_DATA_SCOPE,https://client-fat.filbet2025.com/my?action=withdraw,0,no scan-owned funds/order chain; submitting would mutate an existing account,fat-client-page-progress.json action=withdraw__withdraw_now
+My,Transaction,/my,page initialization,page,COMPLETED,https://client-fat.filbet2025.com/my,42,,fat-client-page-progress.json action=transaction__page_initialization
+My,Transaction,/my,primary navigation/action,button,COMPLETED,https://client-fat.filbet2025.com/transaction-record/transaction/deposit,1,,fat-client-page-progress.json action=transaction__primary_navigation_action
+My,Transaction,/my,select Deposit tab,tab,COMPLETED,https://client-fat.filbet2025.com/transaction-record/transaction/deposit,0,,fat-client-page-progress.json action=transaction__select_deposit_tab
+My,Transaction,/my,select Withdraw tab,tab,COMPLETED,https://client-fat.filbet2025.com/transaction-record/transaction/withdraw,1,,fat-client-page-progress.json action=transaction__select_withdraw_tab
+My,Transaction,/my,select Adjustment tab,tab,FAILED,https://client-fat.filbet2025.com/transaction-record/transaction/withdraw,0,control not found: Adjustment,fat-client-page-progress.json action=transaction__select_adjustment_tab
+My,Transaction,/my,select All tab,tab,FAILED,https://client-fat.filbet2025.com/transaction-record/transaction/withdraw,0,control not found: All,fat-client-page-progress.json action=transaction__select_all_tab
+My,Transaction,/my,open All Status filter,filter,COMPLETED,https://client-fat.filbet2025.com/transaction-record/transaction/withdraw,1,,fat-client-page-progress.json action=transaction__open_all_status_filter
+My,Transaction,/my,open Today filter,filter,COMPLETED,https://client-fat.filbet2025.com/transaction-record/transaction/withdraw,0,,fat-client-page-progress.json action=transaction__open_today_filter
+My,Bet History,/my,page initialization,page,COMPLETED,https://client-fat.filbet2025.com/my,42,,fat-client-page-progress.json action=bet_history__page_initialization
+My,Bet History,/my,primary navigation/action,button,COMPLETED,https://client-fat.filbet2025.com/bet-record,1,,fat-client-page-progress.json action=bet_history__primary_navigation_action
+My,Bonus,/my,page initialization,page,COMPLETED,https://client-fat.filbet2025.com/my,42,,fat-client-page-progress.json action=bonus__page_initialization
+My,Bonus,/my,primary navigation/action,button,COMPLETED,https://client-fat.filbet2025.com/transaction-record/bonus,1,,fat-client-page-progress.json action=bonus__primary_navigation_action
+My,Account,/my,page initialization,page,COMPLETED,https://client-fat.filbet2025.com/my,42,,fat-client-page-progress.json action=account__page_initialization
+My,Account,/my,primary navigation/action,button,COMPLETED,https://client-fat.filbet2025.com/withdraw-accounts,9,,fat-client-page-progress.json action=account__primary_navigation_action
+My,Account,/my,add withdrawal account,button,BLOCKED_DATA_SCOPE,https://client-fat.filbet2025.com/withdraw-accounts,0,would add an account to an existing member; no member created by this scan,fat-client-page-progress.json action=account__add_withdrawal_account

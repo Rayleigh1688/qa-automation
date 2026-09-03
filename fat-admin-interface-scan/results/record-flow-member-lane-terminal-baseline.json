@@ -1,0 +1,356 @@
+{
+  "captured_at": "2026-09-03T08:06:45.917Z",
+  "environment": "FAT",
+  "lane": "terminal",
+  "target_ref": "FAT-MEMBER-END-01",
+  "uid_ref": "FAT-UID-END-01",
+  "list_query_match": true,
+  "detail_route_uid_observed": true,
+  "state": {
+    "/admin/kyc/detail": {
+      "kyc_status": 5,
+      "status": "<present>",
+      "review_times": 0,
+      "ocr_status": 0
+    },
+    "/admin/finance/member/wallet": {
+      "balance": "<present>",
+      "locked": "<present>",
+      "withdrawable": "<present>"
+    },
+    "/admin/member/detail": {
+      "status": 0,
+      "block_state": 0,
+      "banned_state": 0,
+      "risk_level": "<present>",
+      "is_agent": true,
+      "deposit_multiple": "-",
+      "vip_level": 0,
+      "vip_manual_level": 0,
+      "left_turnover": "<present>",
+      "left_turnover_count": 0,
+      "has_login_password": true
+    }
+  },
+  "network": [
+    {
+      "action": "login",
+      "method": "GET",
+      "path": "/admin/me/detail",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": false,
+      "response_type": "string",
+      "response_values_persisted": false
+    },
+    {
+      "action": "login",
+      "method": "POST",
+      "path": "/admin/login/auth",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "number",
+      "response_values_persisted": false
+    },
+    {
+      "action": "login",
+      "method": "POST",
+      "path": "/admin/login",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "string",
+      "response_values_persisted": false
+    },
+    {
+      "action": "login",
+      "method": "GET",
+      "path": "/admin/me/detail",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_values_persisted": false
+    },
+    {
+      "action": "terminal:query exact current-run member",
+      "method": "GET",
+      "path": "/admin/me/detail",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_values_persisted": false
+    },
+    {
+      "action": "terminal:query exact current-run member",
+      "method": "GET",
+      "path": "/admin/sys/config/compliance/status",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_values_persisted": false
+    },
+    {
+      "action": "terminal:query exact current-run member",
+      "method": "GET",
+      "path": "/admin/channel/manage/dict",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "list",
+      "response_values_persisted": false
+    },
+    {
+      "action": "terminal:query exact current-run member",
+      "method": "POST",
+      "path": "/admin/gameclass/list",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_values_persisted": false
+    },
+    {
+      "action": "terminal:query exact current-run member",
+      "method": "GET",
+      "path": "/admin/notify/audit/alarm",
+      "query_fields": [
+        "t"
+      ],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_values_persisted": false
+    },
+    {
+      "action": "terminal:query exact current-run member",
+      "method": "POST",
+      "path": "/admin/member/list",
+      "query_fields": [],
+      "body_fields": [
+        "end_time",
+        "page",
+        "page_size",
+        "start_time"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_values_persisted": false
+    },
+    {
+      "action": "terminal:query exact current-run member",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_values_persisted": false
+    },
+    {
+      "action": "terminal:query exact current-run member",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_values_persisted": false
+    },
+    {
+      "action": "terminal:query exact current-run member",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_values_persisted": false
+    },
+    {
+      "action": "terminal:query exact current-run member",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_values_persisted": false
+    },
+    {
+      "action": "terminal:query exact current-run member",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_values_persisted": false
+    },
+    {
+      "action": "terminal:query exact current-run member",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_values_persisted": false
+    },
+    {
+      "action": "terminal:query exact current-run member",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_values_persisted": false
+    },
+    {
+      "action": "terminal:query exact current-run member",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_values_persisted": false
+    },
+    {
+      "action": "terminal:query exact current-run member",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_values_persisted": false
+    },
+    {
+      "action": "terminal:query exact current-run member",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_values_persisted": false
+    },
+    {
+      "action": "terminal:query exact current-run member",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_values_persisted": false
+    },
+    {
+      "action": "terminal:query exact current-run member",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_values_persisted": false
+    },
+    {
+      "action": "terminal:query exact current-run member",
+      "method": "POST",
+      "path": "/admin/member/list",
+      "query_fields": [],
+      "body_fields": [
+        "page",
+        "page_size",
+        "phone"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_values_persisted": false
+    },
+    {
+      "action": "terminal:open View Details",
+      "method": "GET",
+      "path": "/admin/kyc/detail",
+      "query_fields": [
+        "uid"
+      ],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_values_persisted": false
+    },
+    {
+      "action": "terminal:open View Details",
+      "method": "GET",
+      "path": "/admin/priv/check",
+      "query_fields": [
+        "path"
+      ],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_values_persisted": false
+    },
+    {
+      "action": "terminal:open View Details",
+      "method": "GET",
+      "path": "/admin/finance/member/wallet",
+      "query_fields": [
+        "uid"
+      ],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_values_persisted": false
+    },
+    {
+      "action": "terminal:open View Details",
+      "method": "GET",
+      "path": "/admin/member/detail",
+      "query_fields": [
+        "uid"
+      ],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_values_persisted": false
+    }
+  ],
+  "writes_executed": 0,
+  "side_effects": [],
+  "raw_phone_or_uid_persisted": false
+}

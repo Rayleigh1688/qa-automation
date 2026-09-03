@@ -1,0 +1,1338 @@
+{
+  "captured_at": "2026-09-03T08:13:56.195Z",
+  "environment": "FAT",
+  "target_ref": "FAT-KYC-REJECT-01",
+  "page": "/kyc",
+  "top_controls": {
+    "table_headers": [
+      "Serial Number",
+      "Submission Time",
+      "KYC Status",
+      "Member Information",
+      "KYC Information",
+      "Documents",
+      "Verification Result",
+      "Registration Information",
+      "Reviewer",
+      "Review Time",
+      "User Comment",
+      "Remarks",
+      "Actions"
+    ],
+    "inputs": [
+      {
+        "type": "text",
+        "placeholder": "",
+        "disabled": false
+      },
+      {
+        "type": "text",
+        "placeholder": "Please Enter Phone Number",
+        "disabled": false
+      },
+      {
+        "type": "text",
+        "placeholder": "Please Enter First Name",
+        "disabled": false
+      },
+      {
+        "type": "text",
+        "placeholder": "Please Enter Middle Name",
+        "disabled": false
+      },
+      {
+        "type": "text",
+        "placeholder": "Please Enter Last Name",
+        "disabled": false
+      },
+      {
+        "type": "search",
+        "placeholder": "",
+        "disabled": false
+      },
+      {
+        "type": "text",
+        "placeholder": "Start Date",
+        "disabled": false
+      },
+      {
+        "type": "text",
+        "placeholder": "End Date",
+        "disabled": false
+      },
+      {
+        "type": "text",
+        "placeholder": "Please Enter Registration IP",
+        "disabled": false
+      },
+      {
+        "type": "search",
+        "placeholder": "",
+        "disabled": false
+      }
+    ],
+    "buttons": [
+      {
+        "text": "",
+        "title": "",
+        "aria": "",
+        "disabled": false
+      },
+      {
+        "text": "",
+        "title": "",
+        "aria": "",
+        "disabled": false
+      },
+      {
+        "text": "",
+        "title": "",
+        "aria": "",
+        "disabled": false
+      },
+      {
+        "text": "",
+        "title": "",
+        "aria": "",
+        "disabled": false
+      },
+      {
+        "text": "",
+        "title": "",
+        "aria": "",
+        "disabled": false
+      },
+      {
+        "text": "",
+        "title": "",
+        "aria": "",
+        "disabled": false
+      },
+      {
+        "text": "",
+        "title": "",
+        "aria": "",
+        "disabled": false
+      },
+      {
+        "text": "Reset",
+        "title": "",
+        "aria": "",
+        "disabled": false
+      },
+      {
+        "text": "Query",
+        "title": "",
+        "aria": "",
+        "disabled": false
+      },
+      {
+        "text": "",
+        "title": "",
+        "aria": "",
+        "disabled": false
+      },
+      {
+        "text": "Add New",
+        "title": "",
+        "aria": "",
+        "disabled": true
+      },
+      {
+        "text": "EKYC Config",
+        "title": "",
+        "aria": "",
+        "disabled": false
+      },
+      {
+        "text": "",
+        "title": "",
+        "aria": "",
+        "disabled": false
+      },
+      {
+        "text": "",
+        "title": "",
+        "aria": "",
+        "disabled": false
+      },
+      {
+        "text": "",
+        "title": "",
+        "aria": "",
+        "disabled": false
+      },
+      {
+        "text": "Edit",
+        "title": "",
+        "aria": "",
+        "disabled": false
+      },
+      {
+        "text": "Review",
+        "title": "",
+        "aria": "",
+        "disabled": false
+      },
+      {
+        "text": "Change Log",
+        "title": "",
+        "aria": "",
+        "disabled": false
+      },
+      {
+        "text": "",
+        "title": "",
+        "aria": "",
+        "disabled": true
+      },
+      {
+        "text": "",
+        "title": "",
+        "aria": "",
+        "disabled": true
+      }
+    ],
+    "selects": [
+      {
+        "text": "Under Review",
+        "class_name": "ant-select ant-select-outlined ant-select-in-form-item ant-pro-filed-search-select css-jcwvac ant-select-multiple ant-select-allow-clear ant-select-show-arrow ant-select-show-search"
+      },
+      {
+        "text": "20 / page",
+        "class_name": "ant-select ant-select-sm ant-select-outlined ant-pagination-options-size-changer css-jcwvac ant-select-single ant-select-show-arrow ant-select-show-search"
+      }
+    ]
+  },
+  "row_found": true,
+  "row_action_controls": [
+    {
+      "text": "",
+      "title": "",
+      "aria": "",
+      "disabled": false,
+      "icon": "copy",
+      "class_name": "ant-btn css-jcwvac ant-btn-text ant-btn-color-default ant-btn-variant-text ant-btn-sm ant-btn-icon-only"
+    },
+    {
+      "text": "",
+      "title": "",
+      "aria": "",
+      "disabled": false,
+      "icon": "copy",
+      "class_name": "ant-btn css-jcwvac ant-btn-text ant-btn-color-default ant-btn-variant-text ant-btn-sm ant-btn-icon-only"
+    },
+    {
+      "text": "",
+      "title": "",
+      "aria": "",
+      "disabled": false,
+      "icon": "copy",
+      "class_name": "ant-btn css-jcwvac ant-btn-text ant-btn-color-default ant-btn-variant-text ant-btn-sm ant-btn-icon-only"
+    },
+    {
+      "text": "Edit",
+      "title": "",
+      "aria": "",
+      "disabled": false,
+      "icon": "",
+      "class_name": "ant-btn css-jcwvac ant-btn-link ant-btn-color-link ant-btn-variant-link"
+    },
+    {
+      "text": "Review",
+      "title": "",
+      "aria": "",
+      "disabled": false,
+      "icon": "",
+      "class_name": "ant-btn css-jcwvac ant-btn-link ant-btn-color-link ant-btn-variant-link"
+    },
+    {
+      "text": "Change Log",
+      "title": "",
+      "aria": "",
+      "disabled": false,
+      "icon": "",
+      "class_name": "ant-btn css-jcwvac ant-btn-link ant-btn-color-link ant-btn-variant-link"
+    }
+  ],
+  "actions": [
+    {
+      "name": "open KYC page",
+      "status": "COMPLETED",
+      "final_path": "/kyc",
+      "dialog_or_drawer_controls": null,
+      "network_event_indexes": [
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "error": ""
+    },
+    {
+      "name": "open EKYC Config",
+      "status": "COMPLETED",
+      "final_path": "/kyc",
+      "dialog_or_drawer_controls": {
+        "title": "EKYC Config",
+        "tabs": [],
+        "inputs": [],
+        "selects": [],
+        "buttons": [
+          {
+            "text": "",
+            "title": "",
+            "aria": "Close",
+            "disabled": false
+          },
+          {
+            "text": "",
+            "title": "",
+            "aria": "",
+            "disabled": false
+          },
+          {
+            "text": "",
+            "title": "",
+            "aria": "",
+            "disabled": false
+          },
+          {
+            "text": "Close",
+            "title": "",
+            "aria": "",
+            "disabled": false
+          },
+          {
+            "text": "Save",
+            "title": "",
+            "aria": "",
+            "disabled": false
+          }
+        ],
+        "labels": []
+      },
+      "network_event_indexes": [
+        10,
+        11
+      ],
+      "error": ""
+    },
+    {
+      "name": "confirm under review status",
+      "status": "COMPLETED",
+      "final_path": "/kyc",
+      "dialog_or_drawer_controls": null,
+      "network_event_indexes": [
+        12,
+        13,
+        14,
+        15
+      ],
+      "error": ""
+    },
+    {
+      "name": "query configured read-only KYC member",
+      "status": "COMPLETED",
+      "final_path": "/kyc",
+      "dialog_or_drawer_controls": null,
+      "network_event_indexes": [
+        16,
+        17,
+        18,
+        19,
+        20,
+        21
+      ],
+      "error": ""
+    },
+    {
+      "name": "open this-run KYC Edit",
+      "status": "COMPLETED",
+      "final_path": "/kyc",
+      "dialog_or_drawer_controls": {
+        "title": "",
+        "tabs": [],
+        "inputs": [],
+        "selects": [],
+        "buttons": [
+          {
+            "text": "No",
+            "title": "",
+            "aria": "",
+            "disabled": false
+          },
+          {
+            "text": "Yes",
+            "title": "",
+            "aria": "",
+            "disabled": false
+          }
+        ],
+        "labels": []
+      },
+      "network_event_indexes": [
+        23
+      ],
+      "error": ""
+    },
+    {
+      "name": "open this-run KYC Change Log",
+      "status": "COMPLETED",
+      "final_path": "/kyc",
+      "dialog_or_drawer_controls": {
+        "title": "Change Log",
+        "tabs": [],
+        "inputs": [],
+        "selects": [],
+        "buttons": [
+          {
+            "text": "",
+            "title": "",
+            "aria": "Close",
+            "disabled": false
+          }
+        ],
+        "labels": []
+      },
+      "network_event_indexes": [
+        24
+      ],
+      "error": ""
+    },
+    {
+      "name": "open this-run KYC Review",
+      "status": "COMPLETED",
+      "final_path": "/kyc",
+      "dialog_or_drawer_controls": {
+        "title": "Review",
+        "tabs": [],
+        "inputs": [
+          {
+            "type": "text",
+            "placeholder": "",
+            "disabled": false
+          },
+          {
+            "type": "search",
+            "placeholder": "",
+            "disabled": false
+          },
+          {
+            "type": "textarea",
+            "placeholder": "Please Enter Remarks",
+            "disabled": false
+          }
+        ],
+        "selects": [
+          "Approve ApplicationApprove Application"
+        ],
+        "buttons": [
+          {
+            "text": "",
+            "title": "",
+            "aria": "Close",
+            "disabled": false
+          },
+          {
+            "text": "",
+            "title": "",
+            "aria": "",
+            "disabled": true
+          },
+          {
+            "text": "",
+            "title": "",
+            "aria": "",
+            "disabled": false
+          },
+          {
+            "text": "Cancel",
+            "title": "",
+            "aria": "",
+            "disabled": false
+          },
+          {
+            "text": "OK",
+            "title": "",
+            "aria": "",
+            "disabled": false
+          }
+        ],
+        "labels": [
+          "User Comment",
+          "User Comment",
+          "操作审核",
+          "操作审核",
+          "Remarks",
+          "Remarks"
+        ]
+      },
+      "network_event_indexes": [],
+      "error": ""
+    },
+    {
+      "name": "confirm Reject Application selection",
+      "status": "COMPLETED",
+      "final_path": "/kyc",
+      "dialog_or_drawer_controls": null,
+      "network_event_indexes": [
+        25,
+        26,
+        27
+      ],
+      "error": ""
+    }
+  ],
+  "network": [
+    {
+      "action": "login",
+      "method": "GET",
+      "path": "/admin/me/detail",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": false,
+      "response_shape": {
+        "top_level_keys": [
+          "data",
+          "status"
+        ],
+        "data_type": "string",
+        "data_keys": []
+      },
+      "response_summary": {}
+    },
+    {
+      "action": "login",
+      "method": "POST",
+      "path": "/admin/login/auth",
+      "query_fields": [],
+      "body_fields": [
+        "email",
+        "password"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_shape": {
+        "top_level_keys": [
+          "data",
+          "status"
+        ],
+        "data_type": "number",
+        "data_keys": []
+      },
+      "response_summary": {}
+    },
+    {
+      "action": "login",
+      "method": "POST",
+      "path": "/admin/login",
+      "query_fields": [],
+      "body_fields": [
+        "email",
+        "google_code",
+        "google_secret",
+        "password"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_shape": {
+        "top_level_keys": [
+          "data",
+          "status"
+        ],
+        "data_type": "string",
+        "data_keys": []
+      },
+      "response_summary": {}
+    },
+    {
+      "action": "login",
+      "method": "GET",
+      "path": "/admin/me/detail",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_shape": {
+        "top_level_keys": [
+          "data",
+          "status"
+        ],
+        "data_type": "object",
+        "data_keys": [
+          "avatar",
+          "bind_time",
+          "button_permission_ids",
+          "cmpl",
+          "create_name",
+          "created_at",
+          "email",
+          "google_secret",
+          "group_id",
+          "id",
+          "last_login_ip",
+          "last_login_time",
+          "login_password",
+          "nickname",
+          "operator_name",
+          "pwd_edit_time",
+          "roles",
+          "sid",
+          "status",
+          "stores",
+          "updated_at",
+          "username"
+        ]
+      },
+      "response_summary": {}
+    },
+    {
+      "action": "open KYC page",
+      "method": "GET",
+      "path": "/admin/me/detail",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_shape": {
+        "top_level_keys": [
+          "data",
+          "status"
+        ],
+        "data_type": "object",
+        "data_keys": [
+          "avatar",
+          "bind_time",
+          "button_permission_ids",
+          "cmpl",
+          "create_name",
+          "created_at",
+          "email",
+          "google_secret",
+          "group_id",
+          "id",
+          "last_login_ip",
+          "last_login_time",
+          "login_password",
+          "nickname",
+          "operator_name",
+          "pwd_edit_time",
+          "roles",
+          "sid",
+          "status",
+          "stores",
+          "updated_at",
+          "username"
+        ]
+      },
+      "response_summary": {}
+    },
+    {
+      "action": "open KYC page",
+      "method": "GET",
+      "path": "/admin/sys/config/compliance/status",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_shape": {
+        "top_level_keys": [
+          "data",
+          "status"
+        ],
+        "data_type": "object",
+        "data_keys": [
+          "effective_open",
+          "effective_reason",
+          "effective_status_msg"
+        ]
+      },
+      "response_summary": {}
+    },
+    {
+      "action": "open KYC page",
+      "method": "GET",
+      "path": "/admin/kyc/approved/count",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_shape": {
+        "top_level_keys": [
+          "data",
+          "status"
+        ],
+        "data_type": "object",
+        "data_keys": [
+          "kyc_approved",
+          "kyc_under_review"
+        ]
+      },
+      "response_summary": {}
+    },
+    {
+      "action": "open KYC page",
+      "method": "POST",
+      "path": "/admin/gameclass/list",
+      "query_fields": [],
+      "body_fields": [
+        "page",
+        "page_size"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_shape": {
+        "top_level_keys": [
+          "data",
+          "status"
+        ],
+        "data_type": "object",
+        "data_keys": [
+          "list",
+          "page",
+          "page_size",
+          "s",
+          "t"
+        ]
+      },
+      "response_summary": {
+        "list_count": 7,
+        "total": 7,
+        "secondary_count": 7
+      }
+    },
+    {
+      "action": "open KYC page",
+      "method": "GET",
+      "path": "/admin/notify/audit/alarm",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_shape": {
+        "top_level_keys": [
+          "data",
+          "status"
+        ],
+        "data_type": "object",
+        "data_keys": [
+          "bonus_review_pending",
+          "feedback_pending",
+          "kyc_pending",
+          "mall_order_pending",
+          "withdraw_pending"
+        ]
+      },
+      "response_summary": {}
+    },
+    {
+      "action": "open KYC page",
+      "method": "POST",
+      "path": "/admin/kyc/list",
+      "query_fields": [],
+      "body_fields": [
+        "created_end_time",
+        "created_start_time",
+        "kyc_status",
+        "page",
+        "page_size",
+        "source"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_shape": {
+        "top_level_keys": [
+          "data",
+          "status"
+        ],
+        "data_type": "object",
+        "data_keys": [
+          "d",
+          "s",
+          "t"
+        ]
+      },
+      "response_summary": {
+        "list_count": 1,
+        "total": 1
+      }
+    },
+    {
+      "action": "open KYC page",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "body_fields": [
+        "page",
+        "page_size"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_shape": {
+        "top_level_keys": [
+          "data",
+          "status"
+        ],
+        "data_type": "object",
+        "data_keys": [
+          "ids",
+          "list",
+          "page",
+          "page_size",
+          "s",
+          "t"
+        ]
+      },
+      "response_summary": {
+        "list_count": 500,
+        "total": 5731,
+        "secondary_count": 500
+      }
+    },
+    {
+      "action": "open EKYC Config",
+      "method": "GET",
+      "path": "/admin/kyc/config/info",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_shape": {
+        "top_level_keys": [
+          "data",
+          "status"
+        ],
+        "data_type": "object",
+        "data_keys": [
+          "auto_review",
+          "ekyc",
+          "id"
+        ]
+      },
+      "response_summary": {}
+    },
+    {
+      "action": "open EKYC Config",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "body_fields": [
+        "page",
+        "page_size"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_shape": {
+        "top_level_keys": [
+          "data",
+          "status"
+        ],
+        "data_type": "object",
+        "data_keys": [
+          "ids",
+          "list",
+          "page",
+          "page_size",
+          "s",
+          "t"
+        ]
+      },
+      "response_summary": {
+        "list_count": 500,
+        "total": 5731,
+        "secondary_count": 500
+      }
+    },
+    {
+      "action": "confirm under review status",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "body_fields": [
+        "page",
+        "page_size"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_shape": {
+        "top_level_keys": [
+          "data",
+          "status"
+        ],
+        "data_type": "object",
+        "data_keys": [
+          "ids",
+          "list",
+          "page",
+          "page_size",
+          "s",
+          "t"
+        ]
+      },
+      "response_summary": {
+        "list_count": 500,
+        "total": 5731,
+        "secondary_count": 500
+      }
+    },
+    {
+      "action": "confirm under review status",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "body_fields": [
+        "page",
+        "page_size"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_shape": {
+        "top_level_keys": [
+          "data",
+          "status"
+        ],
+        "data_type": "object",
+        "data_keys": [
+          "ids",
+          "list",
+          "page",
+          "page_size",
+          "s",
+          "t"
+        ]
+      },
+      "response_summary": {
+        "list_count": 500,
+        "total": 5731,
+        "secondary_count": 500
+      }
+    },
+    {
+      "action": "confirm under review status",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "body_fields": [
+        "page",
+        "page_size"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_shape": {
+        "top_level_keys": [
+          "data",
+          "status"
+        ],
+        "data_type": "object",
+        "data_keys": [
+          "ids",
+          "list",
+          "page",
+          "page_size",
+          "s",
+          "t"
+        ]
+      },
+      "response_summary": {
+        "list_count": 500,
+        "total": 5731,
+        "secondary_count": 500
+      }
+    },
+    {
+      "action": "query configured read-only KYC member",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "body_fields": [
+        "page",
+        "page_size"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_shape": {
+        "top_level_keys": [
+          "data",
+          "status"
+        ],
+        "data_type": "object",
+        "data_keys": [
+          "ids",
+          "list",
+          "page",
+          "page_size",
+          "s",
+          "t"
+        ]
+      },
+      "response_summary": {
+        "list_count": 500,
+        "total": 5731,
+        "secondary_count": 500
+      }
+    },
+    {
+      "action": "query configured read-only KYC member",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "body_fields": [
+        "page",
+        "page_size"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_shape": {
+        "top_level_keys": [
+          "data",
+          "status"
+        ],
+        "data_type": "object",
+        "data_keys": [
+          "ids",
+          "list",
+          "page",
+          "page_size",
+          "s",
+          "t"
+        ]
+      },
+      "response_summary": {
+        "list_count": 500,
+        "total": 5731,
+        "secondary_count": 500
+      }
+    },
+    {
+      "action": "query configured read-only KYC member",
+      "method": "POST",
+      "path": "/admin/kyc/list",
+      "query_fields": [],
+      "body_fields": [
+        "created_end_time",
+        "created_start_time",
+        "kyc_status",
+        "page",
+        "page_size",
+        "phone",
+        "source"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_shape": {
+        "top_level_keys": [
+          "data",
+          "status"
+        ],
+        "data_type": "object",
+        "data_keys": [
+          "d",
+          "s",
+          "t"
+        ]
+      },
+      "response_summary": {
+        "list_count": 1,
+        "total": 1
+      }
+    },
+    {
+      "action": "query configured read-only KYC member",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "body_fields": [
+        "page",
+        "page_size"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_shape": {
+        "top_level_keys": [
+          "data",
+          "status"
+        ],
+        "data_type": "object",
+        "data_keys": [
+          "ids",
+          "list",
+          "page",
+          "page_size",
+          "s",
+          "t"
+        ]
+      },
+      "response_summary": {
+        "list_count": 500,
+        "total": 5731,
+        "secondary_count": 500
+      }
+    },
+    {
+      "action": "query configured read-only KYC member",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "body_fields": [
+        "page",
+        "page_size"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_shape": {
+        "top_level_keys": [
+          "data",
+          "status"
+        ],
+        "data_type": "object",
+        "data_keys": [
+          "ids",
+          "list",
+          "page",
+          "page_size",
+          "s",
+          "t"
+        ]
+      },
+      "response_summary": {
+        "list_count": 500,
+        "total": 5731,
+        "secondary_count": 500
+      }
+    },
+    {
+      "action": "query configured read-only KYC member",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "body_fields": [
+        "page",
+        "page_size"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_shape": {
+        "top_level_keys": [
+          "data",
+          "status"
+        ],
+        "data_type": "object",
+        "data_keys": [
+          "ids",
+          "list",
+          "page",
+          "page_size",
+          "s",
+          "t"
+        ]
+      },
+      "response_summary": {
+        "list_count": 500,
+        "total": 5731,
+        "secondary_count": 500
+      }
+    },
+    {
+      "action": "query configured read-only KYC member",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "body_fields": [
+        "page",
+        "page_size"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_shape": {
+        "top_level_keys": [
+          "data",
+          "status"
+        ],
+        "data_type": "object",
+        "data_keys": [
+          "ids",
+          "list",
+          "page",
+          "page_size",
+          "s",
+          "t"
+        ]
+      },
+      "response_summary": {
+        "list_count": 500,
+        "total": 5731,
+        "secondary_count": 500
+      }
+    },
+    {
+      "action": "open this-run KYC Edit",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "body_fields": [
+        "page",
+        "page_size"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_shape": {
+        "top_level_keys": [
+          "data",
+          "status"
+        ],
+        "data_type": "object",
+        "data_keys": [
+          "ids",
+          "list",
+          "page",
+          "page_size",
+          "s",
+          "t"
+        ]
+      },
+      "response_summary": {
+        "list_count": 231,
+        "total": 5731,
+        "secondary_count": 231
+      }
+    },
+    {
+      "action": "open this-run KYC Change Log",
+      "method": "GET",
+      "path": "/admin/kyc/ekyc/log",
+      "query_fields": [
+        "uid"
+      ],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_shape": {
+        "top_level_keys": [
+          "data",
+          "status"
+        ],
+        "data_type": "object",
+        "data_keys": [
+          "d",
+          "t"
+        ]
+      },
+      "response_summary": {
+        "list_count": 1,
+        "total": 1
+      }
+    },
+    {
+      "action": "confirm Reject Application selection",
+      "method": "POST",
+      "path": "/admin/kyc/reject",
+      "query_fields": [],
+      "body_fields": [
+        "comment",
+        "final",
+        "issue",
+        "uid"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_shape": {
+        "top_level_keys": [
+          "data",
+          "status"
+        ],
+        "data_type": "null",
+        "data_keys": []
+      },
+      "response_summary": {}
+    },
+    {
+      "action": "confirm Reject Application selection",
+      "method": "GET",
+      "path": "/admin/kyc/detail",
+      "query_fields": [
+        "uid"
+      ],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_shape": {
+        "top_level_keys": [
+          "data",
+          "status"
+        ],
+        "data_type": "object",
+        "data_keys": [
+          "attachments",
+          "birthday",
+          "blacklist_status",
+          "comment",
+          "country_code",
+          "created_at",
+          "current_address",
+          "external_information",
+          "extra_details",
+          "first_name",
+          "gender",
+          "id_number",
+          "id_type",
+          "issue",
+          "issue_fields",
+          "issue_msg",
+          "kyc_status",
+          "last_name",
+          "member",
+          "middle_name",
+          "nationality",
+          "nature_of_work",
+          "nearest_branch",
+          "occupation",
+          "ocr",
+          "ocr_result",
+          "ocr_status",
+          "permanent_address",
+          "phone",
+          "place_of_birth",
+          "review_times",
+          "reviewer",
+          "same_uids",
+          "same_uids_count",
+          "sid",
+          "signature_id",
+          "source_of_income",
+          "status",
+          "tokens",
+          "uid",
+          "updated_at",
+          "user_message",
+          "version"
+        ]
+      },
+      "response_summary": {}
+    },
+    {
+      "action": "confirm Reject Application selection",
+      "method": "GET",
+      "path": "/admin/kyc/approved/count",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_shape": {
+        "top_level_keys": [
+          "data",
+          "status"
+        ],
+        "data_type": "object",
+        "data_keys": [
+          "kyc_approved",
+          "kyc_under_review"
+        ]
+      },
+      "response_summary": {}
+    }
+  ]
+}

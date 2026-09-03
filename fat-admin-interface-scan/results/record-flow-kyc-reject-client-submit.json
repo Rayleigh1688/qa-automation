@@ -1,0 +1,4817 @@
+{
+  "captured_at": "2026-09-03T08:08:23.011Z",
+  "environment": "FAT",
+  "target_ref": "FAT-KYC-REJECT-01",
+  "uid_ref": "UID-REF-72308BB9CDDB",
+  "data_scope": "THIS_RUN_CREATED",
+  "terminal": "SUBMITTED_PENDING",
+  "steps": [
+    {
+      "name": "password login for this-run member",
+      "status": "COMPLETED",
+      "route": "/",
+      "controls": [
+        {
+          "index": 0,
+          "tag": "button",
+          "type": "",
+          "placeholder": "",
+          "text": "Verify Now",
+          "accept": "",
+          "class_name": "sc-gnOvAp eNbnHe css-1715b75 e1pqt8w20",
+          "disabled": false
+        }
+      ],
+      "network_indexes": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33
+      ]
+    },
+    {
+      "name": "open KYC form",
+      "status": "COMPLETED",
+      "route": "/s-kyc-v2",
+      "controls": [
+        {
+          "index": 0,
+          "tag": "button",
+          "type": "",
+          "placeholder": "",
+          "text": "Verify Now",
+          "accept": "",
+          "class_name": "sc-gnOvAp eNbnHe sc-jCYaJk flBvkm css-1715b75 e1pqt8w20",
+          "disabled": false
+        },
+        {
+          "index": 1,
+          "tag": "button",
+          "type": "",
+          "placeholder": "",
+          "text": "Do it later",
+          "accept": "",
+          "class_name": "sc-ez4bp8-0 qxLtg css-1715b75 e1pqt8w20",
+          "disabled": false
+        }
+      ],
+      "network_indexes": [
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47,
+        48,
+        49,
+        50,
+        51,
+        52,
+        53,
+        54,
+        55,
+        56,
+        57,
+        58,
+        59,
+        60,
+        61,
+        62
+      ]
+    },
+    {
+      "name": "confirm KYC upgrade",
+      "status": "COMPLETED",
+      "route": "/s-kyc-v2?step=form_1",
+      "controls": [
+        {
+          "index": 0,
+          "tag": "input",
+          "type": "text",
+          "placeholder": "Select your ID type",
+          "text": "",
+          "accept": "",
+          "class_name": "sc-dHPQih jooOBA",
+          "disabled": true
+        },
+        {
+          "index": 1,
+          "tag": "button",
+          "type": "",
+          "placeholder": "",
+          "text": "Add a file",
+          "accept": "",
+          "class_name": "sc-12xm9nl-0 cKckZi action_button",
+          "disabled": false
+        },
+        {
+          "index": 2,
+          "tag": "button",
+          "type": "",
+          "placeholder": "",
+          "text": "Add a file",
+          "accept": "",
+          "class_name": "sc-12xm9nl-0 cKckZi action_button",
+          "disabled": false
+        },
+        {
+          "index": 3,
+          "tag": "button",
+          "type": "",
+          "placeholder": "",
+          "text": "Add a file",
+          "accept": "",
+          "class_name": "sc-12xm9nl-0 cKckZi action_button",
+          "disabled": false
+        },
+        {
+          "index": 4,
+          "tag": "button",
+          "type": "",
+          "placeholder": "",
+          "text": "Next",
+          "accept": "",
+          "class_name": "sc-gnOvAp eNbnHe css-1715b75 e1pqt8w20",
+          "disabled": false
+        }
+      ],
+      "network_indexes": []
+    },
+    {
+      "name": "open ID type selector",
+      "status": "COMPLETED",
+      "route": "/s-kyc-v2?step=form_1",
+      "controls": [
+        {
+          "index": 0,
+          "tag": "input",
+          "type": "text",
+          "placeholder": "Select your ID type",
+          "text": "",
+          "accept": "",
+          "class_name": "sc-dHPQih jooOBA",
+          "disabled": true
+        },
+        {
+          "index": 1,
+          "tag": "button",
+          "type": "",
+          "placeholder": "",
+          "text": "Add a file",
+          "accept": "",
+          "class_name": "sc-12xm9nl-0 cKckZi action_button",
+          "disabled": false
+        },
+        {
+          "index": 2,
+          "tag": "button",
+          "type": "",
+          "placeholder": "",
+          "text": "Add a file",
+          "accept": "",
+          "class_name": "sc-12xm9nl-0 cKckZi action_button",
+          "disabled": false
+        },
+        {
+          "index": 3,
+          "tag": "button",
+          "type": "",
+          "placeholder": "",
+          "text": "Add a file",
+          "accept": "",
+          "class_name": "sc-12xm9nl-0 cKckZi action_button",
+          "disabled": false
+        },
+        {
+          "index": 4,
+          "tag": "button",
+          "type": "",
+          "placeholder": "",
+          "text": "Next",
+          "accept": "",
+          "class_name": "sc-gnOvAp eNbnHe css-1715b75 e1pqt8w20",
+          "disabled": false
+        },
+        {
+          "index": 5,
+          "tag": "button",
+          "type": "",
+          "placeholder": "",
+          "text": "National ID",
+          "accept": "",
+          "class_name": "sc-bdirRy iWOQb css-owx3qp e1t1fdn50",
+          "disabled": false
+        },
+        {
+          "index": 6,
+          "tag": "button",
+          "type": "",
+          "placeholder": "",
+          "text": "Unified Multi-Purpose ID (UMID)",
+          "accept": "",
+          "class_name": "sc-bdirRy iWOQb css-owx3qp e1t1fdn50",
+          "disabled": false
+        },
+        {
+          "index": 7,
+          "tag": "button",
+          "type": "",
+          "placeholder": "",
+          "text": "Driver's License",
+          "accept": "",
+          "class_name": "sc-bdirRy iWOQb css-owx3qp e1t1fdn50",
+          "disabled": false
+        },
+        {
+          "index": 8,
+          "tag": "button",
+          "type": "",
+          "placeholder": "",
+          "text": "Passport",
+          "accept": "",
+          "class_name": "sc-bdirRy iWOQb css-owx3qp e1t1fdn50",
+          "disabled": false
+        },
+        {
+          "index": 9,
+          "tag": "button",
+          "type": "",
+          "placeholder": "",
+          "text": "PhilHealth ID",
+          "accept": "",
+          "class_name": "sc-bdirRy iWOQb css-owx3qp e1t1fdn50",
+          "disabled": false
+        },
+        {
+          "index": 10,
+          "tag": "button",
+          "type": "",
+          "placeholder": "",
+          "text": "SSS (Social Security System) ID",
+          "accept": "",
+          "class_name": "sc-bdirRy iWOQb css-owx3qp e1t1fdn50",
+          "disabled": false
+        },
+        {
+          "index": 11,
+          "tag": "button",
+          "type": "",
+          "placeholder": "",
+          "text": "Postal ID",
+          "accept": "",
+          "class_name": "sc-bdirRy iWOQb css-owx3qp e1t1fdn50",
+          "disabled": false
+        },
+        {
+          "index": 12,
+          "tag": "button",
+          "type": "",
+          "placeholder": "",
+          "text": "PRC ID",
+          "accept": "",
+          "class_name": "sc-bdirRy iWOQb css-owx3qp e1t1fdn50",
+          "disabled": false
+        },
+        {
+          "index": 13,
+          "tag": "button",
+          "type": "",
+          "placeholder": "",
+          "text": "TIN – New Version",
+          "accept": "",
+          "class_name": "sc-bdirRy iWOQb css-owx3qp e1t1fdn50",
+          "disabled": false
+        },
+        {
+          "index": 14,
+          "tag": "button",
+          "type": "",
+          "placeholder": "",
+          "text": "Confirm",
+          "accept": "",
+          "class_name": "sc-1szc99t-1 koJjun",
+          "disabled": false
+        }
+      ],
+      "network_indexes": []
+    },
+    {
+      "name": "select National ID and upload controlled files",
+      "status": "COMPLETED",
+      "route": "/s-kyc-v2?step=form_1",
+      "controls": [
+        {
+          "index": 0,
+          "tag": "input",
+          "type": "text",
+          "placeholder": "Select your ID type",
+          "text": "",
+          "accept": "",
+          "class_name": "sc-dHPQih jooOBA",
+          "disabled": true
+        },
+        {
+          "index": 1,
+          "tag": "button",
+          "type": "",
+          "placeholder": "",
+          "text": "Next",
+          "accept": "",
+          "class_name": "sc-gnOvAp eNbnHe css-1715b75 e1pqt8w20",
+          "disabled": false
+        }
+      ],
+      "network_indexes": []
+    },
+    {
+      "name": "continue from identity uploads",
+      "status": "COMPLETED",
+      "route": "/s-kyc-v2?step=form_2",
+      "controls": [
+        {
+          "index": 0,
+          "tag": "textarea",
+          "type": "",
+          "placeholder": "Enter your permanent address",
+          "text": "",
+          "accept": "",
+          "class_name": "sc-WLLlu krWLXD",
+          "disabled": false
+        },
+        {
+          "index": 1,
+          "tag": "textarea",
+          "type": "",
+          "placeholder": "Enter your current address",
+          "text": "",
+          "accept": "",
+          "class_name": "sc-WLLlu bIxgsm",
+          "disabled": true
+        },
+        {
+          "index": 2,
+          "tag": "input",
+          "type": "text",
+          "placeholder": "Select your nearest branch",
+          "text": "",
+          "accept": "",
+          "class_name": "sc-dHPQih jooOBA",
+          "disabled": true
+        },
+        {
+          "index": 3,
+          "tag": "input",
+          "type": "text",
+          "placeholder": "Select your nature of work",
+          "text": "",
+          "accept": "",
+          "class_name": "sc-dHPQih jooOBA",
+          "disabled": true
+        },
+        {
+          "index": 4,
+          "tag": "input",
+          "type": "text",
+          "placeholder": "Select your source of income",
+          "text": "",
+          "accept": "",
+          "class_name": "sc-dHPQih jooOBA",
+          "disabled": true
+        },
+        {
+          "index": 5,
+          "tag": "button",
+          "type": "",
+          "placeholder": "",
+          "text": "Previous",
+          "accept": "",
+          "class_name": "sc-VHjGu jxCHBI css-1715b75 e1pqt8w20",
+          "disabled": false
+        },
+        {
+          "index": 6,
+          "tag": "button",
+          "type": "",
+          "placeholder": "",
+          "text": "Next",
+          "accept": "",
+          "class_name": "sc-gnOvAp eNbnHe css-1715b75 e1pqt8w20",
+          "disabled": true
+        }
+      ],
+      "network_indexes": []
+    },
+    {
+      "name": "fill controlled address and employment fields",
+      "status": "COMPLETED",
+      "route": "/s-kyc-v2?step=form_2",
+      "controls": [
+        {
+          "index": 0,
+          "tag": "textarea",
+          "type": "",
+          "placeholder": "Enter your permanent address",
+          "text": "",
+          "accept": "",
+          "class_name": "sc-WLLlu krWLXD",
+          "disabled": false
+        },
+        {
+          "index": 1,
+          "tag": "textarea",
+          "type": "",
+          "placeholder": "Enter your current address",
+          "text": "",
+          "accept": "",
+          "class_name": "sc-WLLlu bIxgsm",
+          "disabled": true
+        },
+        {
+          "index": 2,
+          "tag": "input",
+          "type": "text",
+          "placeholder": "Select your nearest branch",
+          "text": "",
+          "accept": "",
+          "class_name": "sc-dHPQih jooOBA",
+          "disabled": true
+        },
+        {
+          "index": 3,
+          "tag": "input",
+          "type": "text",
+          "placeholder": "Select your nature of work",
+          "text": "",
+          "accept": "",
+          "class_name": "sc-dHPQih jooOBA",
+          "disabled": true
+        },
+        {
+          "index": 4,
+          "tag": "input",
+          "type": "text",
+          "placeholder": "Select your source of income",
+          "text": "",
+          "accept": "",
+          "class_name": "sc-dHPQih jooOBA",
+          "disabled": true
+        },
+        {
+          "index": 5,
+          "tag": "button",
+          "type": "",
+          "placeholder": "",
+          "text": "Previous",
+          "accept": "",
+          "class_name": "sc-VHjGu jxCHBI css-1715b75 e1pqt8w20",
+          "disabled": false
+        },
+        {
+          "index": 6,
+          "tag": "button",
+          "type": "",
+          "placeholder": "",
+          "text": "Next",
+          "accept": "",
+          "class_name": "sc-gnOvAp eNbnHe css-1715b75 e1pqt8w20",
+          "disabled": false
+        }
+      ],
+      "network_indexes": []
+    },
+    {
+      "name": "continue from address form",
+      "status": "COMPLETED",
+      "route": "/s-kyc-v2?step=form_0",
+      "controls": [
+        {
+          "index": 0,
+          "tag": "input",
+          "type": "text",
+          "placeholder": "Enter your first name",
+          "text": "",
+          "accept": "",
+          "class_name": "sc-dHPQih jooOBA",
+          "disabled": false
+        },
+        {
+          "index": 1,
+          "tag": "input",
+          "type": "text",
+          "placeholder": "Enter your middle name",
+          "text": "",
+          "accept": "",
+          "class_name": "sc-dHPQih jooOBA",
+          "disabled": false
+        },
+        {
+          "index": 2,
+          "tag": "input",
+          "type": "text",
+          "placeholder": "Enter your last name",
+          "text": "",
+          "accept": "",
+          "class_name": "sc-dHPQih jooOBA",
+          "disabled": false
+        },
+        {
+          "index": 3,
+          "tag": "button",
+          "type": "",
+          "placeholder": "",
+          "text": "Male",
+          "accept": "",
+          "class_name": "css-o353t0 ewul5mf0",
+          "disabled": false
+        },
+        {
+          "index": 4,
+          "tag": "button",
+          "type": "",
+          "placeholder": "",
+          "text": "Female",
+          "accept": "",
+          "class_name": "css-o353t0 ewul5mf0",
+          "disabled": false
+        },
+        {
+          "index": 5,
+          "tag": "input",
+          "type": "text",
+          "placeholder": "Select Date",
+          "text": "",
+          "accept": "",
+          "class_name": "sc-dHPQih jooOBA",
+          "disabled": true
+        },
+        {
+          "index": 6,
+          "tag": "input",
+          "type": "text",
+          "placeholder": "Select your nationality",
+          "text": "",
+          "accept": "",
+          "class_name": "sc-dHPQih jooOBA",
+          "disabled": true
+        },
+        {
+          "index": 7,
+          "tag": "input",
+          "type": "text",
+          "placeholder": "Enter province",
+          "text": "",
+          "accept": "",
+          "class_name": "sc-dHPQih jooOBA",
+          "disabled": false
+        },
+        {
+          "index": 8,
+          "tag": "button",
+          "type": "",
+          "placeholder": "",
+          "text": "Previous",
+          "accept": "",
+          "class_name": "sc-VHjGu jxCHBI css-1715b75 e1pqt8w20",
+          "disabled": false
+        },
+        {
+          "index": 9,
+          "tag": "button",
+          "type": "",
+          "placeholder": "",
+          "text": "Next",
+          "accept": "",
+          "class_name": "sc-gnOvAp eNbnHe css-1715b75 e1pqt8w20",
+          "disabled": false
+        }
+      ],
+      "network_indexes": []
+    },
+    {
+      "name": "fill controlled personal fields and open birth date",
+      "status": "COMPLETED",
+      "route": "/s-kyc-v2?step=form_0",
+      "controls": [
+        {
+          "index": 0,
+          "tag": "input",
+          "type": "text",
+          "placeholder": "Enter your first name",
+          "text": "",
+          "accept": "",
+          "class_name": "sc-dHPQih jooOBA",
+          "disabled": false
+        },
+        {
+          "index": 1,
+          "tag": "input",
+          "type": "text",
+          "placeholder": "Enter your middle name",
+          "text": "",
+          "accept": "",
+          "class_name": "sc-dHPQih jooOBA",
+          "disabled": false
+        },
+        {
+          "index": 2,
+          "tag": "input",
+          "type": "text",
+          "placeholder": "Enter your last name",
+          "text": "",
+          "accept": "",
+          "class_name": "sc-dHPQih jooOBA",
+          "disabled": false
+        },
+        {
+          "index": 3,
+          "tag": "button",
+          "type": "",
+          "placeholder": "",
+          "text": "Male",
+          "accept": "",
+          "class_name": "css-o353t0 ewul5mf0",
+          "disabled": false
+        },
+        {
+          "index": 4,
+          "tag": "button",
+          "type": "",
+          "placeholder": "",
+          "text": "Female",
+          "accept": "",
+          "class_name": "css-o353t0 ewul5mf0",
+          "disabled": false
+        },
+        {
+          "index": 5,
+          "tag": "input",
+          "type": "text",
+          "placeholder": "Select Date",
+          "text": "",
+          "accept": "",
+          "class_name": "sc-dHPQih jooOBA",
+          "disabled": true
+        },
+        {
+          "index": 6,
+          "tag": "input",
+          "type": "text",
+          "placeholder": "Select your nationality",
+          "text": "",
+          "accept": "",
+          "class_name": "sc-dHPQih jooOBA",
+          "disabled": true
+        },
+        {
+          "index": 7,
+          "tag": "input",
+          "type": "text",
+          "placeholder": "Enter province",
+          "text": "",
+          "accept": "",
+          "class_name": "sc-dHPQih fmLOXN",
+          "disabled": false
+        },
+        {
+          "index": 8,
+          "tag": "button",
+          "type": "",
+          "placeholder": "",
+          "text": "Previous",
+          "accept": "",
+          "class_name": "sc-VHjGu jxCHBI css-1715b75 e1pqt8w20",
+          "disabled": false
+        },
+        {
+          "index": 9,
+          "tag": "button",
+          "type": "",
+          "placeholder": "",
+          "text": "Next",
+          "accept": "",
+          "class_name": "sc-gnOvAp eNbnHe css-1715b75 e1pqt8w20",
+          "disabled": false
+        },
+        {
+          "index": 10,
+          "tag": "button",
+          "type": "",
+          "placeholder": "",
+          "text": "Confirm",
+          "accept": "",
+          "class_name": "sc-gnOvAp eNbnHe css-1715b75 e1pqt8w20",
+          "disabled": false
+        }
+      ],
+      "overlay_structure": [
+        {
+          "tag": "div",
+          "class_name": "modal-slide-up-modal css-1raygmg ee2km640",
+          "text": ""
+        },
+        {
+          "tag": "div",
+          "class_name": "css-a1jlk4 edtl0060",
+          "text": ""
+        },
+        {
+          "tag": "div",
+          "class_name": "header",
+          "text": ""
+        },
+        {
+          "tag": "div",
+          "class_name": "title",
+          "text": "Date of Birth"
+        },
+        {
+          "tag": "div",
+          "class_name": "close-icon-wrapper",
+          "text": ""
+        },
+        {
+          "tag": "div",
+          "class_name": "content",
+          "text": ""
+        },
+        {
+          "tag": "div",
+          "class_name": "sc-18udpjg-0 kIylFV",
+          "text": ""
+        },
+        {
+          "tag": "div",
+          "class_name": "sc-18udpjg-2 ieqHMg",
+          "text": ""
+        },
+        {
+          "tag": "div",
+          "class_name": "sc-18udpjg-3 dNXWIJ",
+          "text": "January"
+        },
+        {
+          "tag": "div",
+          "class_name": "sc-18udpjg-3 kmTvZy",
+          "text": "February"
+        },
+        {
+          "tag": "div",
+          "class_name": "sc-18udpjg-3 jItmMn",
+          "text": "March"
+        },
+        {
+          "tag": "div",
+          "class_name": "sc-18udpjg-3 bRlkEo",
+          "text": "April"
+        },
+        {
+          "tag": "div",
+          "class_name": "sc-18udpjg-3 bmLbrd",
+          "text": "May"
+        },
+        {
+          "tag": "div",
+          "class_name": "sc-18udpjg-3 fCdooi",
+          "text": "June"
+        },
+        {
+          "tag": "div",
+          "class_name": "sc-18udpjg-3 eXDfaX",
+          "text": "July"
+        },
+        {
+          "tag": "div",
+          "class_name": "sc-18udpjg-3 ivQMrU",
+          "text": "August"
+        },
+        {
+          "tag": "div",
+          "class_name": "sc-18udpjg-3 hRqDeJ",
+          "text": "September"
+        },
+        {
+          "tag": "div",
+          "class_name": "sc-18udpjg-2 ieqHMg",
+          "text": ""
+        },
+        {
+          "tag": "div",
+          "class_name": "sc-18udpjg-3 eXDfaX",
+          "text": "01"
+        },
+        {
+          "tag": "div",
+          "class_name": "sc-18udpjg-3 ivQMrU",
+          "text": "02"
+        },
+        {
+          "tag": "div",
+          "class_name": "sc-18udpjg-3 hRqDeJ",
+          "text": "03"
+        },
+        {
+          "tag": "div",
+          "class_name": "sc-18udpjg-2 ieqHMg",
+          "text": ""
+        },
+        {
+          "tag": "div",
+          "class_name": "sc-18udpjg-3 hRqDeJ",
+          "text": "2005"
+        },
+        {
+          "tag": "div",
+          "class_name": "sc-18udpjg-3 ivQMrU",
+          "text": "2004"
+        },
+        {
+          "tag": "div",
+          "class_name": "sc-18udpjg-3 eXDfaX",
+          "text": "2003"
+        },
+        {
+          "tag": "div",
+          "class_name": "sc-18udpjg-3 fCdooi",
+          "text": "2002"
+        },
+        {
+          "tag": "div",
+          "class_name": "sc-18udpjg-3 bmLbrd",
+          "text": "2001"
+        },
+        {
+          "tag": "div",
+          "class_name": "sc-18udpjg-3 bRlkEo",
+          "text": "2000"
+        },
+        {
+          "tag": "div",
+          "class_name": "sc-18udpjg-3 jItmMn",
+          "text": "1999"
+        },
+        {
+          "tag": "div",
+          "class_name": "sc-18udpjg-3 kmTvZy",
+          "text": "1998"
+        },
+        {
+          "tag": "div",
+          "class_name": "sc-18udpjg-3 dNXWIJ",
+          "text": "1997"
+        },
+        {
+          "tag": "div",
+          "class_name": "sc-18udpjg-3 esyfVU",
+          "text": "1996"
+        },
+        {
+          "tag": "div",
+          "class_name": "sc-18udpjg-3 Nbjyc",
+          "text": "1995"
+        },
+        {
+          "tag": "div",
+          "class_name": "sc-18udpjg-3 dhmdAB",
+          "text": "1994"
+        },
+        {
+          "tag": "div",
+          "class_name": "sc-18udpjg-3 cokpGa",
+          "text": "1993"
+        },
+        {
+          "tag": "div",
+          "class_name": "sc-18udpjg-3 eIvjIz",
+          "text": "1992"
+        },
+        {
+          "tag": "div",
+          "class_name": "sc-18udpjg-3 ikFxoU",
+          "text": "1991"
+        },
+        {
+          "tag": "div",
+          "class_name": "sc-18udpjg-3 kEQrrt",
+          "text": "1990"
+        },
+        {
+          "tag": "div",
+          "class_name": "sc-18udpjg-3 jLODwS",
+          "text": "1989"
+        },
+        {
+          "tag": "div",
+          "class_name": "sc-18udpjg-3 QDOav",
+          "text": "1988"
+        },
+        {
+          "tag": "div",
+          "class_name": "sc-18udpjg-3 cjkPng",
+          "text": "1987"
+        },
+        {
+          "tag": "div",
+          "class_name": "sc-18udpjg-3 eDvJpF",
+          "text": "1986"
+        },
+        {
+          "tag": "div",
+          "class_name": "sc-18udpjg-3 fnDUMz",
+          "text": "1985"
+        },
+        {
+          "tag": "div",
+          "class_name": "sc-18udpjg-3 bfktOa",
+          "text": "1984"
+        },
+        {
+          "tag": "div",
+          "class_name": "sc-18udpjg-3 ZGIyZ",
+          "text": "1983"
+        },
+        {
+          "tag": "div",
+          "class_name": "sc-18udpjg-3 igIQZw",
+          "text": "1982"
+        },
+        {
+          "tag": "div",
+          "class_name": "sc-18udpjg-3 bvMzev",
+          "text": "1981"
+        },
+        {
+          "tag": "div",
+          "class_name": "sc-18udpjg-3 iCOHES",
+          "text": "1980"
+        },
+        {
+          "tag": "div",
+          "class_name": "sc-18udpjg-3 ixkWpR",
+          "text": "1979"
+        },
+        {
+          "tag": "div",
+          "class_name": "sc-18udpjg-3 eoRvrs",
+          "text": "1978"
+        },
+        {
+          "tag": "div",
+          "class_name": "sc-18udpjg-3 gJNABD",
+          "text": "1977"
+        },
+        {
+          "tag": "div",
+          "class_name": "sc-18udpjg-3 cBtZDe",
+          "text": "1976"
+        },
+        {
+          "tag": "div",
+          "class_name": "sc-18udpjg-3 jiJuTm",
+          "text": "1975"
+        },
+        {
+          "tag": "div",
+          "class_name": "sc-18udpjg-3 nyFwP",
+          "text": "1974"
+        },
+        {
+          "tag": "div",
+          "class_name": "sc-18udpjg-3 fhXNJM",
+          "text": "1973"
+        },
+        {
+          "tag": "div",
+          "class_name": "sc-18udpjg-3 hCiHMl",
+          "text": "1972"
+        },
+        {
+          "tag": "div",
+          "class_name": "sc-18udpjg-3 fqRZli",
+          "text": "1971"
+        },
+        {
+          "tag": "div",
+          "class_name": "sc-18udpjg-3 hLcTnH",
+          "text": "1970"
+        },
+        {
+          "tag": "div",
+          "class_name": "sc-18udpjg-3 bqgsbI",
+          "text": "1969"
+        },
+        {
+          "tag": "div",
+          "class_name": "sc-18udpjg-3 dKrmeh",
+          "text": "1968"
+        },
+        {
+          "tag": "div",
+          "class_name": "sc-18udpjg-3 kETaIq",
+          "text": "1967"
+        },
+        {
+          "tag": "div",
+          "class_name": "sc-18udpjg-3 bJIllT",
+          "text": "1966"
+        },
+        {
+          "tag": "div",
+          "class_name": "sc-18udpjg-3 bCLRcF",
+          "text": "1965"
+        },
+        {
+          "tag": "div",
+          "class_name": "sc-18udpjg-3 iJNZDc",
+          "text": "1964"
+        },
+        {
+          "tag": "div",
+          "class_name": "sc-18udpjg-3 cQJsgD",
+          "text": "1963"
+        },
+        {
+          "tag": "div",
+          "class_name": "sc-18udpjg-3 jXLAHa",
+          "text": "1962"
+        },
+        {
+          "tag": "div",
+          "class_name": "sc-18udpjg-3 kUfyVN",
+          "text": "1961"
+        },
+        {
+          "tag": "div",
+          "class_name": "sc-18udpjg-3 gLLXXo",
+          "text": "1960"
+        },
+        {
+          "tag": "div",
+          "class_name": "sc-18udpjg-3 SHqAP",
+          "text": "1959"
+        },
+        {
+          "tag": "div",
+          "class_name": "sc-18udpjg-3 hZJzbm",
+          "text": "1958"
+        },
+        {
+          "tag": "div",
+          "class_name": "sc-18udpjg-3 cYVwRJ",
+          "text": "1957"
+        },
+        {
+          "tag": "div",
+          "class_name": "sc-18udpjg-3 kfXFsg",
+          "text": "1956"
+        },
+        {
+          "tag": "div",
+          "class_name": "sc-18udpjg-3 fxRrjs",
+          "text": "1955"
+        },
+        {
+          "tag": "div",
+          "class_name": "sc-18udpjg-3 hScllR",
+          "text": "1954"
+        },
+        {
+          "tag": "div",
+          "class_name": "sc-18udpjg-3 gZaxrq",
+          "text": "1953"
+        },
+        {
+          "tag": "div",
+          "class_name": "sc-18udpjg-3 jtlrtP",
+          "text": "1952"
+        },
+        {
+          "tag": "div",
+          "class_name": "sc-18udpjg-3 dzPpDE",
+          "text": "1951"
+        },
+        {
+          "tag": "div",
+          "class_name": "sc-18udpjg-3 fUajGd",
+          "text": "1950"
+        },
+        {
+          "tag": "div",
+          "class_name": "sc-18udpjg-3 faYvLC",
+          "text": "1949"
+        },
+        {
+          "tag": "div",
+          "class_name": "sc-18udpjg-3 hvjpOb",
+          "text": "1948"
+        },
+        {
+          "tag": "div",
+          "class_name": "sc-18udpjg-3 gUaWYw",
+          "text": "1947"
+        },
+        {
+          "tag": "div",
+          "class_name": "sc-18udpjg-3 jolRaV",
+          "text": "1946"
+        },
+        {
+          "tag": "div",
+          "class_name": "sc-18udpjg-3 jYucxP",
+          "text": "1945"
+        },
+        {
+          "tag": "div",
+          "class_name": "sc-18udpjg-3 fQaBzq",
+          "text": "1944"
+        },
+        {
+          "tag": "div",
+          "class_name": "sc-18udpjg-3 fKwQkp",
+          "text": "1943"
+        },
+        {
+          "tag": "div",
+          "class_name": "sc-18udpjg-3 bCdplQ",
+          "text": "1942"
+        },
+        {
+          "tag": "div",
+          "class_name": "sc-18udpjg-3 iasaSb",
+          "text": "1941"
+        },
+        {
+          "tag": "div",
+          "class_name": "sc-18udpjg-3 dRYzTC",
+          "text": "1940"
+        },
+        {
+          "tag": "div",
+          "class_name": "sc-18udpjg-3 dMuOEB",
+          "text": "1939"
+        },
+        {
+          "tag": "div",
+          "class_name": "sc-18udpjg-3 kTwXeY",
+          "text": "1938"
+        },
+        {
+          "tag": "div",
+          "class_name": "sc-18udpjg-3 fhYNX",
+          "text": "1937"
+        },
+        {
+          "tag": "div",
+          "class_name": "sc-18udpjg-3 hmkhou",
+          "text": "1936"
+        },
+        {
+          "tag": "div",
+          "class_name": "sc-18udpjg-3 cEdTfG",
+          "text": "1935"
+        },
+        {
+          "tag": "div",
+          "class_name": "sc-18udpjg-3 eYoNif",
+          "text": "1934"
+        },
+        {
+          "tag": "div",
+          "class_name": "sc-18udpjg-3 jSNVvc",
+          "text": "1933"
+        },
+        {
+          "tag": "div",
+          "class_name": "sc-18udpjg-3 XDfYF",
+          "text": "1932"
+        },
+        {
+          "tag": "div",
+          "class_name": "sc-18udpjg-3 GbRzS",
+          "text": "1931"
+        },
+        {
+          "tag": "div",
+          "class_name": "sc-18udpjg-3 damLCr",
+          "text": "1930"
+        },
+        {
+          "tag": "div",
+          "class_name": "sc-18udpjg-3 hULTPo",
+          "text": "1929"
+        },
+        {
+          "tag": "div",
+          "class_name": "sc-18udpjg-3 koWNRN",
+          "text": "1928"
+        },
+        {
+          "tag": "div",
+          "class_name": "sc-18udpjg-3 eanyUK",
+          "text": "1927"
+        },
+        {
+          "tag": "div",
+          "class_name": "sc-18udpjg-3 guysXj",
+          "text": "1926"
+        },
+        {
+          "tag": "div",
+          "class_name": "sc-18udpjg-3 edYMul",
+          "text": "1925"
+        },
+        {
+          "tag": "div",
+          "class_name": "sc-18udpjg-3 llaUUI",
+          "text": "1924"
+        },
+        {
+          "tag": "div",
+          "class_name": "sc-18udpjg-3 frWnyj",
+          "text": "1923"
+        },
+        {
+          "tag": "div",
+          "class_name": "sc-18udpjg-3 bjCMzK",
+          "text": "1922"
+        },
+        {
+          "tag": "div",
+          "class_name": "sc-18udpjg-3 mhqMh",
+          "text": "1921"
+        },
+        {
+          "tag": "div",
+          "class_name": "sc-18udpjg-3 htjzmE",
+          "text": "1920"
+        },
+        {
+          "tag": "div",
+          "class_name": "sc-18udpjg-3 bAeRQf",
+          "text": "1919"
+        },
+        {
+          "tag": "div",
+          "class_name": "sc-18udpjg-3 iHhaqC",
+          "text": "1918"
+        },
+        {
+          "tag": "div",
+          "class_name": "sc-18udpjg-3 crxVCt",
+          "text": "1917"
+        },
+        {
+          "tag": "div",
+          "class_name": "sc-18udpjg-3 jyAecQ",
+          "text": "1916"
+        },
+        {
+          "tag": "div",
+          "class_name": "sc-18udpjg-3 hZemAY",
+          "text": "1915"
+        },
+        {
+          "tag": "div",
+          "class_name": "sc-18udpjg-3 ktpgDx",
+          "text": "1914"
+        },
+        {
+          "tag": "div",
+          "class_name": "sc-18udpjg-3 jAnsIW",
+          "text": "1913"
+        },
+        {
+          "tag": "div",
+          "class_name": "sc-18udpjg-3 FcDmz",
+          "text": "1912"
+        },
+        {
+          "tag": "div",
+          "class_name": "sc-18udpjg-3 ehmQSU",
+          "text": "1911"
+        },
+        {
+          "tag": "div",
+          "class_name": "sc-18udpjg-3 gBxKVt",
+          "text": "1910"
+        },
+        {
+          "tag": "div",
+          "class_name": "sc-18udpjg-3 fIvXaS",
+          "text": "1909"
+        },
+        {
+          "tag": "div",
+          "class_name": "sc-18udpjg-3 icGRdr",
+          "text": "1908"
+        },
+        {
+          "tag": "div",
+          "class_name": "sc-18udpjg-3 gmDvJg",
+          "text": "1907"
+        },
+        {
+          "tag": "div",
+          "class_name": "sc-18udpjg-3 iGOpLF",
+          "text": "1906"
+        },
+        {
+          "tag": "div",
+          "class_name": "sc-18udpjg-3 jHXURM",
+          "text": "1905"
+        },
+        {
+          "tag": "div",
+          "class_name": "sc-18udpjg-3 jKghKd",
+          "text": "1904"
+        },
+        {
+          "tag": "div",
+          "class_name": "sc-18udpjg-3 foNiTC",
+          "text": "1903"
+        },
+        {
+          "tag": "div",
+          "class_name": "sc-18udpjg-3 fqVvLT",
+          "text": "1902"
+        },
+        {
+          "tag": "div",
+          "class_name": "sc-18udpjg-3 gcmUTc",
+          "text": "1901"
+        },
+        {
+          "tag": "div",
+          "class_name": "sc-18udpjg-3 gevhLt",
+          "text": "1900"
+        },
+        {
+          "tag": "div",
+          "class_name": "sc-18udpjg-1 jvWHQm",
+          "text": ""
+        },
+        {
+          "tag": "div",
+          "class_name": "footer",
+          "text": ""
+        },
+        {
+          "tag": "button",
+          "class_name": "sc-gnOvAp eNbnHe css-1715b75 e1pqt8w20",
+          "text": "Confirm"
+        }
+      ],
+      "network_indexes": []
+    },
+    {
+      "name": "confirm picker default legal adult birth date",
+      "status": "COMPLETED",
+      "route": "/s-kyc-v2?step=form_0",
+      "controls": [
+        {
+          "index": 0,
+          "tag": "input",
+          "type": "text",
+          "placeholder": "Enter your first name",
+          "text": "",
+          "accept": "",
+          "class_name": "sc-dHPQih jooOBA",
+          "disabled": false
+        },
+        {
+          "index": 1,
+          "tag": "input",
+          "type": "text",
+          "placeholder": "Enter your middle name",
+          "text": "",
+          "accept": "",
+          "class_name": "sc-dHPQih jooOBA",
+          "disabled": false
+        },
+        {
+          "index": 2,
+          "tag": "input",
+          "type": "text",
+          "placeholder": "Enter your last name",
+          "text": "",
+          "accept": "",
+          "class_name": "sc-dHPQih jooOBA",
+          "disabled": false
+        },
+        {
+          "index": 3,
+          "tag": "button",
+          "type": "",
+          "placeholder": "",
+          "text": "Male",
+          "accept": "",
+          "class_name": "css-o353t0 ewul5mf0",
+          "disabled": false
+        },
+        {
+          "index": 4,
+          "tag": "button",
+          "type": "",
+          "placeholder": "",
+          "text": "Female",
+          "accept": "",
+          "class_name": "css-o353t0 ewul5mf0",
+          "disabled": false
+        },
+        {
+          "index": 5,
+          "tag": "input",
+          "type": "text",
+          "placeholder": "Select Date",
+          "text": "",
+          "accept": "",
+          "class_name": "sc-dHPQih jooOBA",
+          "disabled": true
+        },
+        {
+          "index": 6,
+          "tag": "input",
+          "type": "text",
+          "placeholder": "Select your nationality",
+          "text": "",
+          "accept": "",
+          "class_name": "sc-dHPQih jooOBA",
+          "disabled": true
+        },
+        {
+          "index": 7,
+          "tag": "input",
+          "type": "text",
+          "placeholder": "Enter province",
+          "text": "",
+          "accept": "",
+          "class_name": "sc-dHPQih jooOBA",
+          "disabled": false
+        },
+        {
+          "index": 8,
+          "tag": "button",
+          "type": "",
+          "placeholder": "",
+          "text": "Previous",
+          "accept": "",
+          "class_name": "sc-VHjGu jxCHBI css-1715b75 e1pqt8w20",
+          "disabled": false
+        },
+        {
+          "index": 9,
+          "tag": "button",
+          "type": "",
+          "placeholder": "",
+          "text": "Next",
+          "accept": "",
+          "class_name": "sc-gnOvAp eNbnHe css-1715b75 e1pqt8w20",
+          "disabled": false
+        }
+      ],
+      "overlay_structure": [],
+      "network_indexes": []
+    },
+    {
+      "name": "select controlled nationality",
+      "status": "COMPLETED",
+      "route": "/s-kyc-v2?step=form_0",
+      "controls": [
+        {
+          "index": 0,
+          "tag": "input",
+          "type": "text",
+          "placeholder": "Enter your first name",
+          "text": "",
+          "accept": "",
+          "class_name": "sc-dHPQih jooOBA",
+          "disabled": false
+        },
+        {
+          "index": 1,
+          "tag": "input",
+          "type": "text",
+          "placeholder": "Enter your middle name",
+          "text": "",
+          "accept": "",
+          "class_name": "sc-dHPQih jooOBA",
+          "disabled": false
+        },
+        {
+          "index": 2,
+          "tag": "input",
+          "type": "text",
+          "placeholder": "Enter your last name",
+          "text": "",
+          "accept": "",
+          "class_name": "sc-dHPQih jooOBA",
+          "disabled": false
+        },
+        {
+          "index": 3,
+          "tag": "button",
+          "type": "",
+          "placeholder": "",
+          "text": "Male",
+          "accept": "",
+          "class_name": "css-o353t0 ewul5mf0",
+          "disabled": false
+        },
+        {
+          "index": 4,
+          "tag": "button",
+          "type": "",
+          "placeholder": "",
+          "text": "Female",
+          "accept": "",
+          "class_name": "css-o353t0 ewul5mf0",
+          "disabled": false
+        },
+        {
+          "index": 5,
+          "tag": "input",
+          "type": "text",
+          "placeholder": "Select Date",
+          "text": "",
+          "accept": "",
+          "class_name": "sc-dHPQih jooOBA",
+          "disabled": true
+        },
+        {
+          "index": 6,
+          "tag": "input",
+          "type": "text",
+          "placeholder": "Select your nationality",
+          "text": "",
+          "accept": "",
+          "class_name": "sc-dHPQih jooOBA",
+          "disabled": true
+        },
+        {
+          "index": 7,
+          "tag": "input",
+          "type": "text",
+          "placeholder": "Enter province",
+          "text": "",
+          "accept": "",
+          "class_name": "sc-dHPQih jooOBA",
+          "disabled": false
+        },
+        {
+          "index": 8,
+          "tag": "button",
+          "type": "",
+          "placeholder": "",
+          "text": "Previous",
+          "accept": "",
+          "class_name": "sc-VHjGu jxCHBI css-1715b75 e1pqt8w20",
+          "disabled": false
+        },
+        {
+          "index": 9,
+          "tag": "button",
+          "type": "",
+          "placeholder": "",
+          "text": "Next",
+          "accept": "",
+          "class_name": "sc-gnOvAp eNbnHe css-1715b75 e1pqt8w20",
+          "disabled": false
+        }
+      ],
+      "network_indexes": []
+    },
+    {
+      "name": "continue to KYC review",
+      "status": "COMPLETED",
+      "route": "/s-kyc-v2?step=form_3",
+      "controls": [
+        {
+          "index": 0,
+          "tag": "button",
+          "type": "",
+          "placeholder": "",
+          "text": "Previous",
+          "accept": "",
+          "class_name": "sc-VHjGu jxCHBI css-1715b75 e1pqt8w20",
+          "disabled": false
+        },
+        {
+          "index": 1,
+          "tag": "button",
+          "type": "",
+          "placeholder": "",
+          "text": "Submit",
+          "accept": "",
+          "class_name": "sc-gnOvAp eNbnHe css-1715b75 e1pqt8w20",
+          "disabled": false
+        }
+      ],
+      "network_indexes": []
+    },
+    {
+      "name": "submit this-run KYC record",
+      "status": "COMPLETED",
+      "route": "/s-kyc-v2?step=result_0",
+      "controls": [
+        {
+          "index": 0,
+          "tag": "button",
+          "type": "",
+          "placeholder": "",
+          "text": "Return to Homepage (5)",
+          "accept": "",
+          "class_name": "sc-gnOvAp eNbnHe css-1715b75 e1pqt8w20",
+          "disabled": false
+        }
+      ],
+      "network_indexes": [
+        63,
+        64,
+        65,
+        66
+      ]
+    },
+    {
+      "name": "refresh submitted KYC status",
+      "status": "COMPLETED",
+      "route": "/s-kyc-v2?step=result_0",
+      "controls": [
+        {
+          "index": 0,
+          "tag": "button",
+          "type": "",
+          "placeholder": "",
+          "text": "Return to Homepage (3)",
+          "accept": "",
+          "class_name": "sc-gnOvAp eNbnHe css-1715b75 e1pqt8w20",
+          "disabled": false
+        }
+      ],
+      "network_indexes": [
+        67,
+        68,
+        69,
+        70,
+        71,
+        72,
+        73,
+        74,
+        75,
+        76,
+        77,
+        78,
+        79,
+        80,
+        81,
+        82,
+        83,
+        84,
+        85,
+        86,
+        87,
+        88,
+        89,
+        90,
+        91,
+        92,
+        93,
+        94,
+        95,
+        96,
+        97,
+        98,
+        99,
+        100,
+        101,
+        102,
+        103,
+        104
+      ]
+    }
+  ],
+  "network": [
+    {
+      "action": "password login for this-run member",
+      "method": "GET",
+      "path": "/config/brand-policy.json",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": null,
+      "response_shape": {
+        "top_level_keys": [],
+        "data_type": "undefined",
+        "data_keys": []
+      }
+    },
+    {
+      "action": "password login for this-run member",
+      "method": "GET",
+      "path": "/member/buriedPoint/detailV2",
+      "query_fields": [
+        "ad_id"
+      ],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_shape": {
+        "top_level_keys": [
+          "data",
+          "status"
+        ],
+        "data_type": "list",
+        "data_keys": []
+      }
+    },
+    {
+      "action": "password login for this-run member",
+      "method": "POST",
+      "path": "/member/channel/trackclick",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_shape": {
+        "top_level_keys": [
+          "data",
+          "status"
+        ],
+        "data_type": "string",
+        "data_keys": []
+      }
+    },
+    {
+      "action": "password login for this-run member",
+      "method": "GET",
+      "path": "/member/fb/list",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_shape": {
+        "top_level_keys": [
+          "data",
+          "status"
+        ],
+        "data_type": "list",
+        "data_keys": []
+      }
+    },
+    {
+      "action": "password login for this-run member",
+      "method": "GET",
+      "path": "/member/materials/list",
+      "query_fields": [
+        "material_type_code",
+        "platform_code"
+      ],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_shape": {
+        "top_level_keys": [
+          "data",
+          "status"
+        ],
+        "data_type": "list",
+        "data_keys": []
+      }
+    },
+    {
+      "action": "password login for this-run member",
+      "method": "GET",
+      "path": "/member/materials/list",
+      "query_fields": [
+        "material_type_code",
+        "platform_code"
+      ],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_shape": {
+        "top_level_keys": [
+          "data",
+          "status"
+        ],
+        "data_type": "list",
+        "data_keys": []
+      }
+    },
+    {
+      "action": "password login for this-run member",
+      "method": "GET",
+      "path": "/member/materials/list",
+      "query_fields": [
+        "material_type_code",
+        "platform_code"
+      ],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_shape": {
+        "top_level_keys": [
+          "data",
+          "status"
+        ],
+        "data_type": "list",
+        "data_keys": []
+      }
+    },
+    {
+      "action": "password login for this-run member",
+      "method": "POST",
+      "path": "/member/game/rank",
+      "query_fields": [],
+      "body_fields": [
+        "game_type",
+        "page",
+        "page_size",
+        "strategy",
+        "time_range"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_shape": {
+        "top_level_keys": [
+          "data",
+          "status"
+        ],
+        "data_type": "object",
+        "data_keys": [
+          "d",
+          "e",
+          "s",
+          "t"
+        ]
+      }
+    },
+    {
+      "action": "password login for this-run member",
+      "method": "POST",
+      "path": "/member/game/rank",
+      "query_fields": [],
+      "body_fields": [
+        "game_type",
+        "page",
+        "page_size",
+        "strategy",
+        "time_range"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_shape": {
+        "top_level_keys": [
+          "data",
+          "status"
+        ],
+        "data_type": "object",
+        "data_keys": [
+          "d",
+          "e",
+          "s",
+          "t"
+        ]
+      }
+    },
+    {
+      "action": "password login for this-run member",
+      "method": "GET",
+      "path": "/member/index",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_shape": {
+        "top_level_keys": [
+          "data",
+          "status"
+        ],
+        "data_type": "object",
+        "data_keys": [
+          "banners",
+          "bottom",
+          "cmpl",
+          "cmpl_end",
+          "cmpl_start",
+          "list",
+          "loading",
+          "logo",
+          "media",
+          "middle",
+          "nav",
+          "singup",
+          "top",
+          "version",
+          "vip"
+        ]
+      }
+    },
+    {
+      "action": "password login for this-run member",
+      "method": "GET",
+      "path": "/member/bigprize/list",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_shape": {
+        "top_level_keys": [
+          "data",
+          "status"
+        ],
+        "data_type": "object",
+        "data_keys": [
+          "d",
+          "t"
+        ]
+      }
+    },
+    {
+      "action": "password login for this-run member",
+      "method": "GET",
+      "path": "/member/v2/index",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_shape": {
+        "top_level_keys": [
+          "data",
+          "status"
+        ],
+        "data_type": "object",
+        "data_keys": [
+          "banners",
+          "bottom",
+          "cmpl",
+          "cmpl_end",
+          "cmpl_start",
+          "hot",
+          "list",
+          "loading",
+          "logo",
+          "media",
+          "middle",
+          "nav",
+          "new",
+          "singup",
+          "top",
+          "version",
+          "vip"
+        ]
+      }
+    },
+    {
+      "action": "password login for this-run member",
+      "method": "GET",
+      "path": "/member/home/sections",
+      "query_fields": [
+        "brand"
+      ],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_shape": {
+        "top_level_keys": [
+          "data",
+          "status"
+        ],
+        "data_type": "object",
+        "data_keys": [
+          "sections"
+        ]
+      }
+    },
+    {
+      "action": "password login for this-run member",
+      "method": "GET",
+      "path": "/promo/rotate/bet/detail",
+      "query_fields": [
+        "is_welfare",
+        "pid"
+      ],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_shape": {
+        "top_level_keys": [
+          "data",
+          "status"
+        ],
+        "data_type": "object",
+        "data_keys": [
+          "barrage_data",
+          "bet_amount",
+          "conf",
+          "cur_time",
+          "deposit_amount",
+          "deposit_unallocated_num",
+          "end_time",
+          "game_list",
+          "kyc_game_list",
+          "kyc_unallocated_num",
+          "net_amount",
+          "remaining_spins",
+          "reward_ladder",
+          "spins_consumed",
+          "start_time",
+          "total_bonus",
+          "total_collection_spins",
+          "turntable_unallocated_num",
+          "unallocated_num",
+          "vip_list",
+          "yesterday_ladder"
+        ]
+      }
+    },
+    {
+      "action": "password login for this-run member",
+      "method": "GET",
+      "path": "/member/v2/index",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_shape": {
+        "top_level_keys": [
+          "data",
+          "status"
+        ],
+        "data_type": "object",
+        "data_keys": [
+          "banners",
+          "bottom",
+          "cmpl",
+          "cmpl_end",
+          "cmpl_start",
+          "hot",
+          "list",
+          "loading",
+          "logo",
+          "media",
+          "middle",
+          "nav",
+          "new",
+          "singup",
+          "top",
+          "version",
+          "vip"
+        ]
+      }
+    },
+    {
+      "action": "password login for this-run member",
+      "method": "GET",
+      "path": "/promo/rotate/bet/detail",
+      "query_fields": [
+        "is_welfare",
+        "pid"
+      ],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_shape": {
+        "top_level_keys": [
+          "data",
+          "status"
+        ],
+        "data_type": "object",
+        "data_keys": [
+          "barrage_data",
+          "bet_amount",
+          "conf",
+          "cur_time",
+          "deposit_amount",
+          "deposit_unallocated_num",
+          "end_time",
+          "game_list",
+          "kyc_game_list",
+          "kyc_unallocated_num",
+          "net_amount",
+          "remaining_spins",
+          "reward_ladder",
+          "spins_consumed",
+          "start_time",
+          "total_bonus",
+          "total_collection_spins",
+          "turntable_unallocated_num",
+          "unallocated_num",
+          "vip_list",
+          "yesterday_ladder"
+        ]
+      }
+    },
+    {
+      "action": "password login for this-run member",
+      "method": "GET",
+      "path": "/member/materials/list",
+      "query_fields": [
+        "material_type_code",
+        "platform_code"
+      ],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_shape": {
+        "top_level_keys": [
+          "data",
+          "status"
+        ],
+        "data_type": "list",
+        "data_keys": []
+      }
+    },
+    {
+      "action": "password login for this-run member",
+      "method": "GET",
+      "path": "/member/system",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_shape": {
+        "top_level_keys": [
+          "data",
+          "status"
+        ],
+        "data_type": "object",
+        "data_keys": [
+          "agency_enabled"
+        ]
+      }
+    },
+    {
+      "action": "password login for this-run member",
+      "method": "POST",
+      "path": "/member/v2/login",
+      "query_fields": [],
+      "body_fields": [
+        "login_text",
+        "password"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_shape": {
+        "top_level_keys": [
+          "data",
+          "status"
+        ],
+        "data_type": "string",
+        "data_keys": []
+      }
+    },
+    {
+      "action": "password login for this-run member",
+      "method": "GET",
+      "path": "/member/detail",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_shape": {
+        "top_level_keys": [
+          "data",
+          "status"
+        ],
+        "data_type": "object",
+        "data_keys": [
+          "ad_id",
+          "adc_id",
+          "apply_agency_status",
+          "avatar",
+          "balance",
+          "banned_state",
+          "birthday",
+          "block_state",
+          "can_apply_agency",
+          "channel_id",
+          "channel_promo_id",
+          "country_code",
+          "created_at",
+          "created_ip",
+          "deposit_count",
+          "deposit_total",
+          "device_number",
+          "domain",
+          "email",
+          "email_check_state",
+          "first_deposit",
+          "gender",
+          "has_email",
+          "has_login_password",
+          "has_phone_number",
+          "has_wallet_password",
+          "invite_uid",
+          "kyc_real_name",
+          "kyc_status",
+          "last_deposit",
+          "last_login_at",
+          "last_login_device",
+          "last_login_ip",
+          "last_withdraw",
+          "manual_member_state",
+          "member_extra",
+          "member_state",
+          "nationality",
+          "nick_name",
+          "note",
+          "oauth_secrets",
+          "parent_name",
+          "parent_uid",
+          "password",
+          "phone",
+          "phone_check_state",
+          "photo_frame",
+          "real_username",
+          "referral_code",
+          "referrer_id",
+          "reg_device",
+          "reg_device_no",
+          "reg_ip",
+          "risk_level",
+          "risk_tag",
+          "second_deposit",
+          "shared_code",
+          "sid",
+          "site_id",
+          "skin",
+          "source",
+          "state",
+          "tags",
+          "tester",
+          "third_deposit",
+          "third_party",
+          "third_party_name",
+          "third_party_ty",
+          "tokens_balance",
+          "uid",
+          "updated_at",
+          "username",
+          "vip",
+          "withdraw_count",
+          "withdraw_total",
+          "xp"
+        ],
+        "kyc_status": 0
+      }
+    },
+    {
+      "action": "password login for this-run member",
+      "method": "GET",
+      "path": "/promo/rotate/kyc/detail",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_shape": {
+        "top_level_keys": [
+          "data",
+          "status"
+        ],
+        "data_type": "object",
+        "data_keys": [
+          "cumulative_bonuses",
+          "cur_time",
+          "end_time",
+          "game_list",
+          "game_use",
+          "popup",
+          "rotate_num",
+          "start_time",
+          "state",
+          "total_free_spins_Left"
+        ]
+      }
+    },
+    {
+      "action": "password login for this-run member",
+      "method": "GET",
+      "path": "/member/fav/list",
+      "query_fields": [
+        "page",
+        "page_size"
+      ],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_shape": {
+        "top_level_keys": [
+          "data",
+          "status"
+        ],
+        "data_type": "object",
+        "data_keys": [
+          "d",
+          "s",
+          "t"
+        ]
+      }
+    },
+    {
+      "action": "password login for this-run member",
+      "method": "GET",
+      "path": "/promo/turntable/detail",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": false,
+      "response_shape": {
+        "top_level_keys": [
+          "data",
+          "status"
+        ],
+        "data_type": "object",
+        "data_keys": []
+      }
+    },
+    {
+      "action": "password login for this-run member",
+      "method": "GET",
+      "path": "/promo/slot/machine/detail",
+      "query_fields": [
+        "pid"
+      ],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_shape": {
+        "top_level_keys": [
+          "data",
+          "status"
+        ],
+        "data_type": "object",
+        "data_keys": [
+          "bet_info",
+          "cur_time",
+          "first_info",
+          "scroll_rankings",
+          "today_rankings",
+          "today_rankings_num"
+        ]
+      }
+    },
+    {
+      "action": "password login for this-run member",
+      "method": "GET",
+      "path": "/promo/filpcard/detail",
+      "query_fields": [
+        "pid"
+      ],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_shape": {
+        "top_level_keys": [
+          "data",
+          "status"
+        ],
+        "data_type": "object",
+        "data_keys": [
+          "activity_state",
+          "before_bonus",
+          "bonus",
+          "cur_time",
+          "end_time",
+          "initial_amount",
+          "lottery_records",
+          "start_time",
+          "state",
+          "venue"
+        ]
+      }
+    },
+    {
+      "action": "password login for this-run member",
+      "method": "GET",
+      "path": "/promo/blindbox/query/bonus",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_shape": {
+        "top_level_keys": [
+          "data",
+          "status"
+        ],
+        "data_type": "object",
+        "data_keys": [
+          "bonus",
+          "box_id",
+          "created_at",
+          "day",
+          "expire_second",
+          "is_expired",
+          "state",
+          "task_state"
+        ]
+      }
+    },
+    {
+      "action": "password login for this-run member",
+      "method": "GET",
+      "path": "/finance/wallet",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_shape": {
+        "top_level_keys": [
+          "data",
+          "status"
+        ],
+        "data_type": "object",
+        "data_keys": [
+          "balance",
+          "locked",
+          "uid",
+          "withdrawable"
+        ]
+      }
+    },
+    {
+      "action": "password login for this-run member",
+      "method": "GET",
+      "path": "/promo/turntable/num",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_shape": {
+        "top_level_keys": [
+          "data",
+          "status"
+        ],
+        "data_type": "object",
+        "data_keys": [
+          "num_total"
+        ]
+      }
+    },
+    {
+      "action": "password login for this-run member",
+      "method": "GET",
+      "path": "/promo/vip/sign/in/config",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_shape": {
+        "top_level_keys": [
+          "data",
+          "status"
+        ],
+        "data_type": "object",
+        "data_keys": [
+          "cl_mk_cd",
+          "conn_days",
+          "d16_ci_amount",
+          "d16_ci_sp",
+          "d17ci_amount",
+          "d17ci_sp",
+          "d26_ci_amount",
+          "d26_ci_sp",
+          "d27ci_amount",
+          "d27ci_sp",
+          "d6_ci_amount",
+          "d6_ci_sp",
+          "d7ci_amount",
+          "d7ci_sp",
+          "day",
+          "is_sign_in",
+          "level",
+          "mk_list",
+          "mk_lmt",
+          "ty"
+        ]
+      }
+    },
+    {
+      "action": "password login for this-run member",
+      "method": "GET",
+      "path": "/member/v2/index",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_shape": {
+        "top_level_keys": [
+          "data",
+          "status"
+        ],
+        "data_type": "object",
+        "data_keys": [
+          "banners",
+          "bottom",
+          "cmpl",
+          "cmpl_end",
+          "cmpl_start",
+          "hot",
+          "list",
+          "loading",
+          "logo",
+          "media",
+          "middle",
+          "nav",
+          "new",
+          "singup",
+          "top",
+          "version",
+          "vip"
+        ]
+      }
+    },
+    {
+      "action": "password login for this-run member",
+      "method": "GET",
+      "path": "/promo/rotate/bet/detail",
+      "query_fields": [
+        "is_welfare",
+        "pid"
+      ],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_shape": {
+        "top_level_keys": [
+          "data",
+          "status"
+        ],
+        "data_type": "object",
+        "data_keys": [
+          "barrage_data",
+          "bet_amount",
+          "conf",
+          "cur_time",
+          "deposit_amount",
+          "deposit_unallocated_num",
+          "end_time",
+          "game_list",
+          "kyc_game_list",
+          "kyc_unallocated_num",
+          "net_amount",
+          "remaining_spins",
+          "reward_ladder",
+          "spins_consumed",
+          "start_time",
+          "total_bonus",
+          "total_collection_spins",
+          "turntable_game_list",
+          "turntable_unallocated_num",
+          "unallocated_num",
+          "vip_list",
+          "yesterday_ladder"
+        ]
+      }
+    },
+    {
+      "action": "password login for this-run member",
+      "method": "GET",
+      "path": "/promo/rotate/kyc/detail",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_shape": {
+        "top_level_keys": [
+          "data",
+          "status"
+        ],
+        "data_type": "object",
+        "data_keys": [
+          "cumulative_bonuses",
+          "cur_time",
+          "end_time",
+          "game_list",
+          "game_use",
+          "popup",
+          "rotate_num",
+          "start_time",
+          "state",
+          "total_free_spins_Left"
+        ]
+      }
+    },
+    {
+      "action": "password login for this-run member",
+      "method": "GET",
+      "path": "/member/message/popup_list",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_shape": {
+        "top_level_keys": [
+          "data",
+          "status"
+        ],
+        "data_type": "list",
+        "data_keys": []
+      }
+    },
+    {
+      "action": "password login for this-run member",
+      "method": "GET",
+      "path": "/promo/blindbox/detail",
+      "query_fields": [
+        "pid",
+        "ym"
+      ],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_shape": {
+        "top_level_keys": [
+          "data",
+          "status"
+        ],
+        "data_type": "object",
+        "data_keys": [
+          "claimed",
+          "data",
+          "not_received",
+          "total",
+          "unclaimed"
+        ]
+      }
+    },
+    {
+      "action": "open KYC form",
+      "method": "GET",
+      "path": "/config/brand-policy.json",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": null,
+      "response_shape": {
+        "top_level_keys": [],
+        "data_type": "undefined",
+        "data_keys": []
+      }
+    },
+    {
+      "action": "open KYC form",
+      "method": "GET",
+      "path": "/member/materials/list",
+      "query_fields": [
+        "material_type_code",
+        "platform_code"
+      ],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_shape": {
+        "top_level_keys": [
+          "data",
+          "status"
+        ],
+        "data_type": "list",
+        "data_keys": []
+      }
+    },
+    {
+      "action": "open KYC form",
+      "method": "GET",
+      "path": "/member/materials/list",
+      "query_fields": [
+        "material_type_code",
+        "platform_code"
+      ],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_shape": {
+        "top_level_keys": [
+          "data",
+          "status"
+        ],
+        "data_type": "list",
+        "data_keys": []
+      }
+    },
+    {
+      "action": "open KYC form",
+      "method": "GET",
+      "path": "/member/materials/list",
+      "query_fields": [
+        "material_type_code",
+        "platform_code"
+      ],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_shape": {
+        "top_level_keys": [
+          "data",
+          "status"
+        ],
+        "data_type": "list",
+        "data_keys": []
+      }
+    },
+    {
+      "action": "open KYC form",
+      "method": "GET",
+      "path": "/member/index",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_shape": {
+        "top_level_keys": [
+          "data",
+          "status"
+        ],
+        "data_type": "object",
+        "data_keys": [
+          "banners",
+          "bottom",
+          "cmpl",
+          "cmpl_end",
+          "cmpl_start",
+          "list",
+          "loading",
+          "logo",
+          "media",
+          "middle",
+          "nav",
+          "singup",
+          "top",
+          "version",
+          "vip"
+        ]
+      }
+    },
+    {
+      "action": "open KYC form",
+      "method": "GET",
+      "path": "/member/v2/index",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_shape": {
+        "top_level_keys": [
+          "data",
+          "status"
+        ],
+        "data_type": "object",
+        "data_keys": [
+          "banners",
+          "bottom",
+          "cmpl",
+          "cmpl_end",
+          "cmpl_start",
+          "hot",
+          "list",
+          "loading",
+          "logo",
+          "media",
+          "middle",
+          "nav",
+          "new",
+          "singup",
+          "top",
+          "version",
+          "vip"
+        ]
+      }
+    },
+    {
+      "action": "open KYC form",
+      "method": "POST",
+      "path": "/member/channel/trackclick",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_shape": {
+        "top_level_keys": [
+          "data",
+          "status"
+        ],
+        "data_type": "string",
+        "data_keys": []
+      }
+    },
+    {
+      "action": "open KYC form",
+      "method": "GET",
+      "path": "/promo/turntable/detail",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": false,
+      "response_shape": {
+        "top_level_keys": [
+          "data",
+          "status"
+        ],
+        "data_type": "object",
+        "data_keys": []
+      }
+    },
+    {
+      "action": "open KYC form",
+      "method": "GET",
+      "path": "/member/buriedPoint/detailV2",
+      "query_fields": [
+        "ad_id"
+      ],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_shape": {
+        "top_level_keys": [
+          "data",
+          "status"
+        ],
+        "data_type": "list",
+        "data_keys": []
+      }
+    },
+    {
+      "action": "open KYC form",
+      "method": "GET",
+      "path": "/promo/filpcard/detail",
+      "query_fields": [
+        "pid"
+      ],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_shape": {
+        "top_level_keys": [
+          "data",
+          "status"
+        ],
+        "data_type": "object",
+        "data_keys": [
+          "activity_state",
+          "before_bonus",
+          "bonus",
+          "cur_time",
+          "end_time",
+          "initial_amount",
+          "lottery_records",
+          "start_time",
+          "state",
+          "venue"
+        ]
+      }
+    },
+    {
+      "action": "open KYC form",
+      "method": "GET",
+      "path": "/member/detail",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_shape": {
+        "top_level_keys": [
+          "data",
+          "status"
+        ],
+        "data_type": "object",
+        "data_keys": [
+          "ad_id",
+          "adc_id",
+          "apply_agency_status",
+          "avatar",
+          "balance",
+          "banned_state",
+          "birthday",
+          "block_state",
+          "can_apply_agency",
+          "channel_id",
+          "channel_promo_id",
+          "country_code",
+          "created_at",
+          "created_ip",
+          "deposit_count",
+          "deposit_total",
+          "device_number",
+          "domain",
+          "email",
+          "email_check_state",
+          "first_deposit",
+          "gender",
+          "has_email",
+          "has_login_password",
+          "has_phone_number",
+          "has_wallet_password",
+          "invite_uid",
+          "kyc_real_name",
+          "kyc_status",
+          "last_deposit",
+          "last_login_at",
+          "last_login_device",
+          "last_login_ip",
+          "last_withdraw",
+          "manual_member_state",
+          "member_extra",
+          "member_state",
+          "nationality",
+          "nick_name",
+          "note",
+          "oauth_secrets",
+          "parent_name",
+          "parent_uid",
+          "password",
+          "phone",
+          "phone_check_state",
+          "photo_frame",
+          "real_username",
+          "referral_code",
+          "referrer_id",
+          "reg_device",
+          "reg_device_no",
+          "reg_ip",
+          "risk_level",
+          "risk_tag",
+          "second_deposit",
+          "shared_code",
+          "sid",
+          "site_id",
+          "skin",
+          "source",
+          "state",
+          "tags",
+          "tester",
+          "third_deposit",
+          "third_party",
+          "third_party_name",
+          "third_party_ty",
+          "tokens_balance",
+          "uid",
+          "updated_at",
+          "username",
+          "vip",
+          "withdraw_count",
+          "withdraw_total",
+          "xp"
+        ],
+        "kyc_status": 0
+      }
+    },
+    {
+      "action": "open KYC form",
+      "method": "GET",
+      "path": "/member/fb/list",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_shape": {
+        "top_level_keys": [
+          "data",
+          "status"
+        ],
+        "data_type": "list",
+        "data_keys": []
+      }
+    },
+    {
+      "action": "open KYC form",
+      "method": "POST",
+      "path": "/member/kyc/shops",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_shape": {
+        "top_level_keys": [
+          "data",
+          "status"
+        ],
+        "data_type": "list",
+        "data_keys": []
+      }
+    },
+    {
+      "action": "open KYC form",
+      "method": "GET",
+      "path": "/member/kyc/detail",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_shape": {
+        "top_level_keys": [
+          "data",
+          "status"
+        ],
+        "data_type": "object",
+        "data_keys": [
+          "attachments",
+          "birthday",
+          "blacklist_status",
+          "comment",
+          "country_code",
+          "created_at",
+          "current_address",
+          "external_information",
+          "extra_details",
+          "first_name",
+          "gender",
+          "id_number",
+          "id_type",
+          "issue",
+          "issue_fields",
+          "issue_msg",
+          "kyc_status",
+          "last_name",
+          "middle_name",
+          "nationality",
+          "nature_of_work",
+          "nearest_branch",
+          "occupation",
+          "ocr",
+          "ocr_status",
+          "permanent_address",
+          "phone",
+          "place_of_birth",
+          "review_times",
+          "reviewer",
+          "sid",
+          "source_of_income",
+          "status",
+          "tokens",
+          "uid",
+          "updated_at",
+          "version"
+        ],
+        "kyc_status": 0
+      }
+    },
+    {
+      "action": "open KYC form",
+      "method": "GET",
+      "path": "/promo/rotate/kyc/detail",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_shape": {
+        "top_level_keys": [
+          "data",
+          "status"
+        ],
+        "data_type": "object",
+        "data_keys": [
+          "cumulative_bonuses",
+          "cur_time",
+          "end_time",
+          "game_list",
+          "game_use",
+          "popup",
+          "rotate_num",
+          "start_time",
+          "state",
+          "total_free_spins_Left"
+        ]
+      }
+    },
+    {
+      "action": "open KYC form",
+      "method": "GET",
+      "path": "/member/kyc/ekyc/info",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_shape": {
+        "top_level_keys": [
+          "data",
+          "status"
+        ],
+        "data_type": "object",
+        "data_keys": [
+          "signature_id",
+          "state"
+        ]
+      }
+    },
+    {
+      "action": "open KYC form",
+      "method": "GET",
+      "path": "/member/detail",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_shape": {
+        "top_level_keys": [
+          "data",
+          "status"
+        ],
+        "data_type": "object",
+        "data_keys": [
+          "ad_id",
+          "adc_id",
+          "apply_agency_status",
+          "avatar",
+          "balance",
+          "banned_state",
+          "birthday",
+          "block_state",
+          "can_apply_agency",
+          "channel_id",
+          "channel_promo_id",
+          "country_code",
+          "created_at",
+          "created_ip",
+          "deposit_count",
+          "deposit_total",
+          "device_number",
+          "domain",
+          "email",
+          "email_check_state",
+          "first_deposit",
+          "gender",
+          "has_email",
+          "has_login_password",
+          "has_phone_number",
+          "has_wallet_password",
+          "invite_uid",
+          "kyc_real_name",
+          "kyc_status",
+          "last_deposit",
+          "last_login_at",
+          "last_login_device",
+          "last_login_ip",
+          "last_withdraw",
+          "manual_member_state",
+          "member_extra",
+          "member_state",
+          "nationality",
+          "nick_name",
+          "note",
+          "oauth_secrets",
+          "parent_name",
+          "parent_uid",
+          "password",
+          "phone",
+          "phone_check_state",
+          "photo_frame",
+          "real_username",
+          "referral_code",
+          "referrer_id",
+          "reg_device",
+          "reg_device_no",
+          "reg_ip",
+          "risk_level",
+          "risk_tag",
+          "second_deposit",
+          "shared_code",
+          "sid",
+          "site_id",
+          "skin",
+          "source",
+          "state",
+          "tags",
+          "tester",
+          "third_deposit",
+          "third_party",
+          "third_party_name",
+          "third_party_ty",
+          "tokens_balance",
+          "uid",
+          "updated_at",
+          "username",
+          "vip",
+          "withdraw_count",
+          "withdraw_total",
+          "xp"
+        ],
+        "kyc_status": 0
+      }
+    },
+    {
+      "action": "open KYC form",
+      "method": "GET",
+      "path": "/member/fav/list",
+      "query_fields": [
+        "page",
+        "page_size"
+      ],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_shape": {
+        "top_level_keys": [
+          "data",
+          "status"
+        ],
+        "data_type": "object",
+        "data_keys": [
+          "d",
+          "s",
+          "t"
+        ]
+      }
+    },
+    {
+      "action": "open KYC form",
+      "method": "GET",
+      "path": "/finance/wallet",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_shape": {
+        "top_level_keys": [
+          "data",
+          "status"
+        ],
+        "data_type": "object",
+        "data_keys": [
+          "balance",
+          "locked",
+          "uid",
+          "withdrawable"
+        ]
+      }
+    },
+    {
+      "action": "open KYC form",
+      "method": "GET",
+      "path": "/promo/turntable/detail",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": false,
+      "response_shape": {
+        "top_level_keys": [
+          "data",
+          "status"
+        ],
+        "data_type": "object",
+        "data_keys": []
+      }
+    },
+    {
+      "action": "open KYC form",
+      "method": "GET",
+      "path": "/promo/slot/machine/detail",
+      "query_fields": [
+        "pid"
+      ],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_shape": {
+        "top_level_keys": [
+          "data",
+          "status"
+        ],
+        "data_type": "object",
+        "data_keys": [
+          "bet_info",
+          "cur_time",
+          "first_info",
+          "scroll_rankings",
+          "today_rankings",
+          "today_rankings_num"
+        ]
+      }
+    },
+    {
+      "action": "open KYC form",
+      "method": "GET",
+      "path": "/promo/rotate/kyc/detail",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_shape": {
+        "top_level_keys": [
+          "data",
+          "status"
+        ],
+        "data_type": "object",
+        "data_keys": [
+          "cumulative_bonuses",
+          "cur_time",
+          "end_time",
+          "game_list",
+          "game_use",
+          "popup",
+          "rotate_num",
+          "start_time",
+          "state",
+          "total_free_spins_Left"
+        ]
+      }
+    },
+    {
+      "action": "open KYC form",
+      "method": "GET",
+      "path": "/member/v2/index",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_shape": {
+        "top_level_keys": [
+          "data",
+          "status"
+        ],
+        "data_type": "object",
+        "data_keys": [
+          "banners",
+          "bottom",
+          "cmpl",
+          "cmpl_end",
+          "cmpl_start",
+          "hot",
+          "list",
+          "loading",
+          "logo",
+          "media",
+          "middle",
+          "nav",
+          "new",
+          "singup",
+          "top",
+          "version",
+          "vip"
+        ]
+      }
+    },
+    {
+      "action": "open KYC form",
+      "method": "GET",
+      "path": "/promo/turntable/num",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_shape": {
+        "top_level_keys": [
+          "data",
+          "status"
+        ],
+        "data_type": "object",
+        "data_keys": [
+          "num_total"
+        ]
+      }
+    },
+    {
+      "action": "open KYC form",
+      "method": "GET",
+      "path": "/member/message/popup_list",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_shape": {
+        "top_level_keys": [
+          "data",
+          "status"
+        ],
+        "data_type": "list",
+        "data_keys": []
+      }
+    },
+    {
+      "action": "open KYC form",
+      "method": "GET",
+      "path": "/promo/filpcard/detail",
+      "query_fields": [
+        "pid"
+      ],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_shape": {
+        "top_level_keys": [
+          "data",
+          "status"
+        ],
+        "data_type": "object",
+        "data_keys": [
+          "activity_state",
+          "before_bonus",
+          "bonus",
+          "cur_time",
+          "end_time",
+          "initial_amount",
+          "lottery_records",
+          "start_time",
+          "state",
+          "venue"
+        ]
+      }
+    },
+    {
+      "action": "open KYC form",
+      "method": "GET",
+      "path": "/promo/rotate/kyc/detail",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_shape": {
+        "top_level_keys": [
+          "data",
+          "status"
+        ],
+        "data_type": "object",
+        "data_keys": [
+          "cumulative_bonuses",
+          "cur_time",
+          "end_time",
+          "game_list",
+          "game_use",
+          "popup",
+          "rotate_num",
+          "start_time",
+          "state",
+          "total_free_spins_Left"
+        ]
+      }
+    },
+    {
+      "action": "open KYC form",
+      "method": "GET",
+      "path": "/promo/rotate/kyc/detail",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_shape": {
+        "top_level_keys": [
+          "data",
+          "status"
+        ],
+        "data_type": "object",
+        "data_keys": [
+          "cumulative_bonuses",
+          "cur_time",
+          "end_time",
+          "game_list",
+          "game_use",
+          "popup",
+          "rotate_num",
+          "start_time",
+          "state",
+          "total_free_spins_Left"
+        ]
+      }
+    },
+    {
+      "action": "open KYC form",
+      "method": "GET",
+      "path": "/promo/rotate/kyc/detail",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_shape": {
+        "top_level_keys": [
+          "data",
+          "status"
+        ],
+        "data_type": "object",
+        "data_keys": [
+          "cumulative_bonuses",
+          "cur_time",
+          "end_time",
+          "game_list",
+          "game_use",
+          "popup",
+          "rotate_num",
+          "start_time",
+          "state",
+          "total_free_spins_Left"
+        ]
+      }
+    },
+    {
+      "action": "submit this-run KYC record",
+      "method": "POST",
+      "path": "/member/oss/upload",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_shape": {
+        "top_level_keys": [
+          "data",
+          "status"
+        ],
+        "data_type": "object",
+        "data_keys": [
+          "object_key",
+          "signed_url"
+        ]
+      }
+    },
+    {
+      "action": "submit this-run KYC record",
+      "method": "POST",
+      "path": "/member/oss/upload",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_shape": {
+        "top_level_keys": [
+          "data",
+          "status"
+        ],
+        "data_type": "object",
+        "data_keys": [
+          "object_key",
+          "signed_url"
+        ]
+      }
+    },
+    {
+      "action": "submit this-run KYC record",
+      "method": "POST",
+      "path": "/member/oss/upload",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_shape": {
+        "top_level_keys": [
+          "data",
+          "status"
+        ],
+        "data_type": "object",
+        "data_keys": [
+          "object_key",
+          "signed_url"
+        ]
+      }
+    },
+    {
+      "action": "submit this-run KYC record",
+      "method": "POST",
+      "path": "/member/kyc/v2/insert",
+      "query_fields": [],
+      "body_fields": [
+        "attachments",
+        "birthday",
+        "country_code",
+        "current_address",
+        "first_name",
+        "gender",
+        "id_type",
+        "last_name",
+        "middle_name",
+        "nationality",
+        "nature_of_work",
+        "nearest_branch",
+        "occupation",
+        "permanent_address",
+        "phone",
+        "place_of_birth",
+        "shop_id",
+        "signature_id",
+        "source_of_income",
+        "user_message"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_shape": {
+        "top_level_keys": [
+          "data",
+          "status"
+        ],
+        "data_type": "null",
+        "data_keys": []
+      }
+    },
+    {
+      "action": "refresh submitted KYC status",
+      "method": "GET",
+      "path": "/config/brand-policy.json",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": null,
+      "response_shape": {
+        "top_level_keys": [],
+        "data_type": "undefined",
+        "data_keys": []
+      }
+    },
+    {
+      "action": "refresh submitted KYC status",
+      "method": "GET",
+      "path": "/member/materials/list",
+      "query_fields": [
+        "material_type_code",
+        "platform_code"
+      ],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_shape": {
+        "top_level_keys": [
+          "data",
+          "status"
+        ],
+        "data_type": "list",
+        "data_keys": []
+      }
+    },
+    {
+      "action": "refresh submitted KYC status",
+      "method": "GET",
+      "path": "/member/materials/list",
+      "query_fields": [
+        "material_type_code",
+        "platform_code"
+      ],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_shape": {
+        "top_level_keys": [
+          "data",
+          "status"
+        ],
+        "data_type": "list",
+        "data_keys": []
+      }
+    },
+    {
+      "action": "refresh submitted KYC status",
+      "method": "GET",
+      "path": "/member/materials/list",
+      "query_fields": [
+        "material_type_code",
+        "platform_code"
+      ],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_shape": {
+        "top_level_keys": [
+          "data",
+          "status"
+        ],
+        "data_type": "list",
+        "data_keys": []
+      }
+    },
+    {
+      "action": "refresh submitted KYC status",
+      "method": "GET",
+      "path": "/member/index",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_shape": {
+        "top_level_keys": [
+          "data",
+          "status"
+        ],
+        "data_type": "object",
+        "data_keys": [
+          "banners",
+          "bottom",
+          "cmpl",
+          "cmpl_end",
+          "cmpl_start",
+          "list",
+          "loading",
+          "logo",
+          "media",
+          "middle",
+          "nav",
+          "singup",
+          "top",
+          "version",
+          "vip"
+        ]
+      }
+    },
+    {
+      "action": "refresh submitted KYC status",
+      "method": "GET",
+      "path": "/member/v2/index",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_shape": {
+        "top_level_keys": [
+          "data",
+          "status"
+        ],
+        "data_type": "object",
+        "data_keys": [
+          "banners",
+          "bottom",
+          "cmpl",
+          "cmpl_end",
+          "cmpl_start",
+          "hot",
+          "list",
+          "loading",
+          "logo",
+          "media",
+          "middle",
+          "nav",
+          "new",
+          "singup",
+          "top",
+          "version",
+          "vip"
+        ]
+      }
+    },
+    {
+      "action": "refresh submitted KYC status",
+      "method": "GET",
+      "path": "/promo/turntable/detail",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": false,
+      "response_shape": {
+        "top_level_keys": [
+          "data",
+          "status"
+        ],
+        "data_type": "object",
+        "data_keys": []
+      }
+    },
+    {
+      "action": "refresh submitted KYC status",
+      "method": "GET",
+      "path": "/promo/filpcard/detail",
+      "query_fields": [
+        "pid"
+      ],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_shape": {
+        "top_level_keys": [
+          "data",
+          "status"
+        ],
+        "data_type": "object",
+        "data_keys": [
+          "activity_state",
+          "before_bonus",
+          "bonus",
+          "cur_time",
+          "end_time",
+          "initial_amount",
+          "lottery_records",
+          "start_time",
+          "state",
+          "venue"
+        ]
+      }
+    },
+    {
+      "action": "refresh submitted KYC status",
+      "method": "GET",
+      "path": "/member/buriedPoint/detailV2",
+      "query_fields": [
+        "ad_id"
+      ],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_shape": {
+        "top_level_keys": [
+          "data",
+          "status"
+        ],
+        "data_type": "list",
+        "data_keys": []
+      }
+    },
+    {
+      "action": "refresh submitted KYC status",
+      "method": "POST",
+      "path": "/member/channel/trackclick",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_shape": {
+        "top_level_keys": [
+          "data",
+          "status"
+        ],
+        "data_type": "string",
+        "data_keys": []
+      }
+    },
+    {
+      "action": "refresh submitted KYC status",
+      "method": "GET",
+      "path": "/member/detail",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_shape": {
+        "top_level_keys": [
+          "data",
+          "status"
+        ],
+        "data_type": "object",
+        "data_keys": [
+          "ad_id",
+          "adc_id",
+          "apply_agency_status",
+          "avatar",
+          "balance",
+          "banned_state",
+          "birthday",
+          "block_state",
+          "can_apply_agency",
+          "channel_id",
+          "channel_promo_id",
+          "country_code",
+          "created_at",
+          "created_ip",
+          "deposit_count",
+          "deposit_total",
+          "device_number",
+          "domain",
+          "email",
+          "email_check_state",
+          "first_deposit",
+          "gender",
+          "has_email",
+          "has_login_password",
+          "has_phone_number",
+          "has_wallet_password",
+          "invite_uid",
+          "kyc_real_name",
+          "kyc_status",
+          "last_deposit",
+          "last_login_at",
+          "last_login_device",
+          "last_login_ip",
+          "last_withdraw",
+          "manual_member_state",
+          "member_extra",
+          "member_state",
+          "nationality",
+          "nick_name",
+          "note",
+          "oauth_secrets",
+          "parent_name",
+          "parent_uid",
+          "password",
+          "phone",
+          "phone_check_state",
+          "photo_frame",
+          "real_username",
+          "referral_code",
+          "referrer_id",
+          "reg_device",
+          "reg_device_no",
+          "reg_ip",
+          "risk_level",
+          "risk_tag",
+          "second_deposit",
+          "shared_code",
+          "sid",
+          "site_id",
+          "skin",
+          "source",
+          "state",
+          "tags",
+          "tester",
+          "third_deposit",
+          "third_party",
+          "third_party_name",
+          "third_party_ty",
+          "tokens_balance",
+          "uid",
+          "updated_at",
+          "username",
+          "vip",
+          "withdraw_count",
+          "withdraw_total",
+          "xp"
+        ],
+        "kyc_status": 2
+      }
+    },
+    {
+      "action": "refresh submitted KYC status",
+      "method": "GET",
+      "path": "/promo/rotate/kyc/detail",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_shape": {
+        "top_level_keys": [
+          "data",
+          "status"
+        ],
+        "data_type": "object",
+        "data_keys": [
+          "cumulative_bonuses",
+          "cur_time",
+          "end_time",
+          "game_list",
+          "game_use",
+          "popup",
+          "rotate_num",
+          "start_time",
+          "state",
+          "total_free_spins_Left"
+        ]
+      }
+    },
+    {
+      "action": "refresh submitted KYC status",
+      "method": "GET",
+      "path": "/member/fb/list",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_shape": {
+        "top_level_keys": [
+          "data",
+          "status"
+        ],
+        "data_type": "list",
+        "data_keys": []
+      }
+    },
+    {
+      "action": "refresh submitted KYC status",
+      "method": "POST",
+      "path": "/member/kyc/shops",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_shape": {
+        "top_level_keys": [
+          "data",
+          "status"
+        ],
+        "data_type": "list",
+        "data_keys": []
+      }
+    },
+    {
+      "action": "refresh submitted KYC status",
+      "method": "GET",
+      "path": "/member/kyc/detail",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_shape": {
+        "top_level_keys": [
+          "data",
+          "status"
+        ],
+        "data_type": "object",
+        "data_keys": [
+          "attachments",
+          "birthday",
+          "blacklist_status",
+          "comment",
+          "country_code",
+          "created_at",
+          "current_address",
+          "external_information",
+          "extra_details",
+          "first_name",
+          "gender",
+          "id_number",
+          "id_type",
+          "issue",
+          "issue_fields",
+          "issue_msg",
+          "kyc_status",
+          "last_name",
+          "middle_name",
+          "nationality",
+          "nature_of_work",
+          "nearest_branch",
+          "occupation",
+          "ocr",
+          "ocr_status",
+          "permanent_address",
+          "phone",
+          "place_of_birth",
+          "review_times",
+          "reviewer",
+          "sid",
+          "source_of_income",
+          "status",
+          "tokens",
+          "uid",
+          "updated_at",
+          "version"
+        ],
+        "kyc_status": 2
+      }
+    },
+    {
+      "action": "refresh submitted KYC status",
+      "method": "GET",
+      "path": "/member/kyc/ekyc/info",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_shape": {
+        "top_level_keys": [
+          "data",
+          "status"
+        ],
+        "data_type": "object",
+        "data_keys": [
+          "signature_id",
+          "state"
+        ]
+      }
+    },
+    {
+      "action": "refresh submitted KYC status",
+      "method": "POST",
+      "path": "/member/kyc/shops",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_shape": {
+        "top_level_keys": [
+          "data",
+          "status"
+        ],
+        "data_type": "list",
+        "data_keys": []
+      }
+    },
+    {
+      "action": "refresh submitted KYC status",
+      "method": "GET",
+      "path": "/member/kyc/detail",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_shape": {
+        "top_level_keys": [
+          "data",
+          "status"
+        ],
+        "data_type": "object",
+        "data_keys": [
+          "attachments",
+          "birthday",
+          "blacklist_status",
+          "comment",
+          "country_code",
+          "created_at",
+          "current_address",
+          "external_information",
+          "extra_details",
+          "first_name",
+          "gender",
+          "id_number",
+          "id_type",
+          "issue",
+          "issue_fields",
+          "issue_msg",
+          "kyc_status",
+          "last_name",
+          "middle_name",
+          "nationality",
+          "nature_of_work",
+          "nearest_branch",
+          "occupation",
+          "ocr",
+          "ocr_status",
+          "permanent_address",
+          "phone",
+          "place_of_birth",
+          "review_times",
+          "reviewer",
+          "sid",
+          "source_of_income",
+          "status",
+          "tokens",
+          "uid",
+          "updated_at",
+          "version"
+        ],
+        "kyc_status": 2
+      }
+    },
+    {
+      "action": "refresh submitted KYC status",
+      "method": "GET",
+      "path": "/member/detail",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_shape": {
+        "top_level_keys": [
+          "data",
+          "status"
+        ],
+        "data_type": "object",
+        "data_keys": [
+          "ad_id",
+          "adc_id",
+          "apply_agency_status",
+          "avatar",
+          "balance",
+          "banned_state",
+          "birthday",
+          "block_state",
+          "can_apply_agency",
+          "channel_id",
+          "channel_promo_id",
+          "country_code",
+          "created_at",
+          "created_ip",
+          "deposit_count",
+          "deposit_total",
+          "device_number",
+          "domain",
+          "email",
+          "email_check_state",
+          "first_deposit",
+          "gender",
+          "has_email",
+          "has_login_password",
+          "has_phone_number",
+          "has_wallet_password",
+          "invite_uid",
+          "kyc_real_name",
+          "kyc_status",
+          "last_deposit",
+          "last_login_at",
+          "last_login_device",
+          "last_login_ip",
+          "last_withdraw",
+          "manual_member_state",
+          "member_extra",
+          "member_state",
+          "nationality",
+          "nick_name",
+          "note",
+          "oauth_secrets",
+          "parent_name",
+          "parent_uid",
+          "password",
+          "phone",
+          "phone_check_state",
+          "photo_frame",
+          "real_username",
+          "referral_code",
+          "referrer_id",
+          "reg_device",
+          "reg_device_no",
+          "reg_ip",
+          "risk_level",
+          "risk_tag",
+          "second_deposit",
+          "shared_code",
+          "sid",
+          "site_id",
+          "skin",
+          "source",
+          "state",
+          "tags",
+          "tester",
+          "third_deposit",
+          "third_party",
+          "third_party_name",
+          "third_party_ty",
+          "tokens_balance",
+          "uid",
+          "updated_at",
+          "username",
+          "vip",
+          "withdraw_count",
+          "withdraw_total",
+          "xp"
+        ],
+        "kyc_status": 2
+      }
+    },
+    {
+      "action": "refresh submitted KYC status",
+      "method": "GET",
+      "path": "/member/fav/list",
+      "query_fields": [
+        "page",
+        "page_size"
+      ],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_shape": {
+        "top_level_keys": [
+          "data",
+          "status"
+        ],
+        "data_type": "object",
+        "data_keys": [
+          "d",
+          "s",
+          "t"
+        ]
+      }
+    },
+    {
+      "action": "refresh submitted KYC status",
+      "method": "GET",
+      "path": "/promo/rotate/kyc/detail",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_shape": {
+        "top_level_keys": [
+          "data",
+          "status"
+        ],
+        "data_type": "object",
+        "data_keys": [
+          "cumulative_bonuses",
+          "cur_time",
+          "end_time",
+          "game_list",
+          "game_use",
+          "popup",
+          "rotate_num",
+          "start_time",
+          "state",
+          "total_free_spins_Left"
+        ]
+      }
+    },
+    {
+      "action": "refresh submitted KYC status",
+      "method": "GET",
+      "path": "/member/kyc/ekyc/info",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_shape": {
+        "top_level_keys": [
+          "data",
+          "status"
+        ],
+        "data_type": "object",
+        "data_keys": [
+          "signature_id",
+          "state"
+        ]
+      }
+    },
+    {
+      "action": "refresh submitted KYC status",
+      "method": "GET",
+      "path": "/promo/turntable/detail",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": false,
+      "response_shape": {
+        "top_level_keys": [
+          "data",
+          "status"
+        ],
+        "data_type": "object",
+        "data_keys": []
+      }
+    },
+    {
+      "action": "refresh submitted KYC status",
+      "method": "GET",
+      "path": "/promo/turntable/num",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_shape": {
+        "top_level_keys": [
+          "data",
+          "status"
+        ],
+        "data_type": "object",
+        "data_keys": [
+          "num_total"
+        ]
+      }
+    },
+    {
+      "action": "refresh submitted KYC status",
+      "method": "GET",
+      "path": "/promo/filpcard/detail",
+      "query_fields": [
+        "pid"
+      ],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_shape": {
+        "top_level_keys": [
+          "data",
+          "status"
+        ],
+        "data_type": "object",
+        "data_keys": [
+          "activity_state",
+          "before_bonus",
+          "bonus",
+          "cur_time",
+          "end_time",
+          "initial_amount",
+          "lottery_records",
+          "start_time",
+          "state",
+          "venue"
+        ]
+      }
+    },
+    {
+      "action": "refresh submitted KYC status",
+      "method": "GET",
+      "path": "/promo/slot/machine/detail",
+      "query_fields": [
+        "pid"
+      ],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_shape": {
+        "top_level_keys": [
+          "data",
+          "status"
+        ],
+        "data_type": "object",
+        "data_keys": [
+          "bet_info",
+          "cur_time",
+          "first_info",
+          "scroll_rankings",
+          "today_rankings",
+          "today_rankings_num"
+        ]
+      }
+    },
+    {
+      "action": "refresh submitted KYC status",
+      "method": "GET",
+      "path": "/finance/wallet",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_shape": {
+        "top_level_keys": [
+          "data",
+          "status"
+        ],
+        "data_type": "object",
+        "data_keys": [
+          "balance",
+          "locked",
+          "uid",
+          "withdrawable"
+        ]
+      }
+    },
+    {
+      "action": "refresh submitted KYC status",
+      "method": "GET",
+      "path": "/member/message/popup_list",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_shape": {
+        "top_level_keys": [
+          "data",
+          "status"
+        ],
+        "data_type": "list",
+        "data_keys": []
+      }
+    },
+    {
+      "action": "refresh submitted KYC status",
+      "method": "GET",
+      "path": "/member/v2/index",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_shape": {
+        "top_level_keys": [
+          "data",
+          "status"
+        ],
+        "data_type": "object",
+        "data_keys": [
+          "banners",
+          "bottom",
+          "cmpl",
+          "cmpl_end",
+          "cmpl_start",
+          "hot",
+          "list",
+          "loading",
+          "logo",
+          "media",
+          "middle",
+          "nav",
+          "new",
+          "singup",
+          "top",
+          "version",
+          "vip"
+        ]
+      }
+    },
+    {
+      "action": "refresh submitted KYC status",
+      "method": "GET",
+      "path": "/promo/rotate/kyc/detail",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_shape": {
+        "top_level_keys": [
+          "data",
+          "status"
+        ],
+        "data_type": "object",
+        "data_keys": [
+          "cumulative_bonuses",
+          "cur_time",
+          "end_time",
+          "game_list",
+          "game_use",
+          "popup",
+          "rotate_num",
+          "start_time",
+          "state",
+          "total_free_spins_Left"
+        ]
+      }
+    },
+    {
+      "action": "refresh submitted KYC status",
+      "method": "GET",
+      "path": "/member/detail",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_shape": {
+        "top_level_keys": [
+          "data",
+          "status"
+        ],
+        "data_type": "object",
+        "data_keys": [
+          "ad_id",
+          "adc_id",
+          "apply_agency_status",
+          "avatar",
+          "balance",
+          "banned_state",
+          "birthday",
+          "block_state",
+          "can_apply_agency",
+          "channel_id",
+          "channel_promo_id",
+          "country_code",
+          "created_at",
+          "created_ip",
+          "deposit_count",
+          "deposit_total",
+          "device_number",
+          "domain",
+          "email",
+          "email_check_state",
+          "first_deposit",
+          "gender",
+          "has_email",
+          "has_login_password",
+          "has_phone_number",
+          "has_wallet_password",
+          "invite_uid",
+          "kyc_real_name",
+          "kyc_status",
+          "last_deposit",
+          "last_login_at",
+          "last_login_device",
+          "last_login_ip",
+          "last_withdraw",
+          "manual_member_state",
+          "member_extra",
+          "member_state",
+          "nationality",
+          "nick_name",
+          "note",
+          "oauth_secrets",
+          "parent_name",
+          "parent_uid",
+          "password",
+          "phone",
+          "phone_check_state",
+          "photo_frame",
+          "real_username",
+          "referral_code",
+          "referrer_id",
+          "reg_device",
+          "reg_device_no",
+          "reg_ip",
+          "risk_level",
+          "risk_tag",
+          "second_deposit",
+          "shared_code",
+          "sid",
+          "site_id",
+          "skin",
+          "source",
+          "state",
+          "tags",
+          "tester",
+          "third_deposit",
+          "third_party",
+          "third_party_name",
+          "third_party_ty",
+          "tokens_balance",
+          "uid",
+          "updated_at",
+          "username",
+          "vip",
+          "withdraw_count",
+          "withdraw_total",
+          "xp"
+        ],
+        "kyc_status": 2
+      }
+    },
+    {
+      "action": "refresh submitted KYC status",
+      "method": "GET",
+      "path": "/promo/rotate/kyc/detail",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_shape": {
+        "top_level_keys": [
+          "data",
+          "status"
+        ],
+        "data_type": "object",
+        "data_keys": [
+          "cumulative_bonuses",
+          "cur_time",
+          "end_time",
+          "game_list",
+          "game_use",
+          "popup",
+          "rotate_num",
+          "start_time",
+          "state",
+          "total_free_spins_Left"
+        ]
+      }
+    },
+    {
+      "action": "refresh submitted KYC status",
+      "method": "GET",
+      "path": "/promo/blindbox/query/bonus",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_shape": {
+        "top_level_keys": [
+          "data",
+          "status"
+        ],
+        "data_type": "object",
+        "data_keys": [
+          "bonus",
+          "box_id",
+          "created_at",
+          "day",
+          "expire_second",
+          "is_expired",
+          "state",
+          "task_state"
+        ]
+      }
+    },
+    {
+      "action": "refresh submitted KYC status",
+      "method": "GET",
+      "path": "/promo/vip/sign/in/config",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_shape": {
+        "top_level_keys": [
+          "data",
+          "status"
+        ],
+        "data_type": "object",
+        "data_keys": [
+          "cl_mk_cd",
+          "conn_days",
+          "d16_ci_amount",
+          "d16_ci_sp",
+          "d17ci_amount",
+          "d17ci_sp",
+          "d26_ci_amount",
+          "d26_ci_sp",
+          "d27ci_amount",
+          "d27ci_sp",
+          "d6_ci_amount",
+          "d6_ci_sp",
+          "d7ci_amount",
+          "d7ci_sp",
+          "day",
+          "is_sign_in",
+          "level",
+          "mk_list",
+          "mk_lmt",
+          "ty"
+        ]
+      }
+    },
+    {
+      "action": "refresh submitted KYC status",
+      "method": "GET",
+      "path": "/promo/rotate/kyc/detail",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_shape": {
+        "top_level_keys": [
+          "data",
+          "status"
+        ],
+        "data_type": "object",
+        "data_keys": [
+          "cumulative_bonuses",
+          "cur_time",
+          "end_time",
+          "game_list",
+          "game_use",
+          "popup",
+          "rotate_num",
+          "start_time",
+          "state",
+          "total_free_spins_Left"
+        ]
+      }
+    },
+    {
+      "action": "refresh submitted KYC status",
+      "method": "GET",
+      "path": "/promo/blindbox/detail",
+      "query_fields": [
+        "pid",
+        "ym"
+      ],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_shape": {
+        "top_level_keys": [
+          "data",
+          "status"
+        ],
+        "data_type": "object",
+        "data_keys": [
+          "claimed",
+          "data",
+          "not_received",
+          "total",
+          "unclaimed"
+        ]
+      }
+    },
+    {
+      "action": "refresh submitted KYC status",
+      "method": "GET",
+      "path": "/promo/rotate/kyc/detail",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_shape": {
+        "top_level_keys": [
+          "data",
+          "status"
+        ],
+        "data_type": "object",
+        "data_keys": [
+          "cumulative_bonuses",
+          "cur_time",
+          "end_time",
+          "game_list",
+          "game_use",
+          "popup",
+          "rotate_num",
+          "start_time",
+          "state",
+          "total_free_spins_Left"
+        ]
+      }
+    },
+    {
+      "action": "refresh submitted KYC status",
+      "method": "GET",
+      "path": "/promo/rotate/kyc/detail",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_shape": {
+        "top_level_keys": [
+          "data",
+          "status"
+        ],
+        "data_type": "object",
+        "data_keys": [
+          "cumulative_bonuses",
+          "cur_time",
+          "end_time",
+          "game_list",
+          "game_use",
+          "popup",
+          "rotate_num",
+          "start_time",
+          "state",
+          "total_free_spins_Left"
+        ]
+      }
+    }
+  ]
+}

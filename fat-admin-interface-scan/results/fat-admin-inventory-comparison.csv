@@ -1,0 +1,582 @@
+method,normalized_path,classification,documented_name,module,source_file,ui_observed,note
+GET,/admin/ad/material/delete,DOCUMENTED_UNVERIFIED,删除素材,other,后台/运营管理/客户端管理/素材管理/删除素材.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/admin/ad/material/detail,DOCUMENTED_UNVERIFIED,素材详情,other,后台/运营管理/客户端管理/素材管理/素材详情.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/admin/ad/material/platform/menu,ACTIVE,素材管理支持的平台枚举,other,后台/运营管理/客户端管理/素材管理/素材管理支持的平台枚举.bru,YES,
+GET,/admin/ad/material/type/delete,DOCUMENTED_UNVERIFIED,删除素材类型,other,后台/运营管理/客户端管理/素材管理/删除素材类型.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/admin/ad/material/type/list,ACTIVE,素材种类列表,other,后台/运营管理/客户端管理/素材管理/素材种类列表.bru,YES,
+GET,/admin/banner/delete,DOCUMENTED_UNVERIFIED,轮播图删除,other,后台/轮播图-首页弹窗/轮播图删除.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/admin/banner/menu,ACTIVE,轮播图菜单,other,后台/轮播图-首页弹窗/轮播图菜单.bru,YES,
+GET,/admin/banner/user/count,DOCUMENTED_UNVERIFIED,名单数量-todo,other,后台/轮播图-首页弹窗/名单数量-todo.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/admin/banner/user/list,DOCUMENTED_UNVERIFIED,查看名单-todo,other,后台/轮播图-首页弹窗/查看名单-todo.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/admin/bonus/activity/list,DOCUMENTED_UNVERIFIED,活动列表 - felix.bru,promo,后台/礼金/活动列表 - felix.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/admin/bonus/export,DOCUMENTED_UNVERIFIED,导出礼金列表 - felix,other,后台/VIP/导出礼金列表 - felix.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/admin/bonus/list,DOCUMENTED_UNVERIFIED,礼金列表 - felix,other,后台/VIP/礼金列表 - felix.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/admin/bonus/review/export,DOCUMENTED_UNVERIFIED,导出待审订单 - felix.bru,other,后台/礼金/导出待审订单 - felix.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/admin/bonus/review/list,ACTIVE,待审订单列表 - felix.bru,other,后台/礼金/待审订单列表 - felix.bru,YES,
+GET,/admin/bonus/review/noneed/list,ACTIVE,导出过审礼金列表 - felix.bru,other,后台/礼金/导出过审礼金列表 - felix.bru,YES,
+GET,/admin/bonus/review/userinfo,DOCUMENTED_UNVERIFIED,获取用户信息 - felix.bru,other,后台/礼金/获取用户信息 - felix.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/admin/buriedPoint/list,ACTIVE,埋点列表-todo,other,后台/埋点/埋点列表-todo.bru,YES,
+GET,/admin/channel/delete,DOCUMENTED_UNVERIFIED,删除渠道-todo,other,后台/运营管理/渠道管理/引流渠道管理/删除渠道-todo.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/admin/channel/dict,ACTIVE,渠道字典,report,后台/报表/渠道字典.bru,YES,
+GET,/admin/channel/exchangeRate/list,DOCUMENTED_UNVERIFIED,渠道汇率列表-todo,other,后台/运营管理/推广管理/渠道管理/渠道汇率/渠道汇率列表-todo.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/admin/channel/group/dict,ACTIVE,渠道分组字黄-todo,permission,后台/运营管理/推广管理/渠道管理/渠道分组/渠道分组字黄-todo.bru,YES,
+GET,/admin/channel/group/list,ACTIVE,渠道分组列表-todo,permission,后台/运营管理/推广管理/渠道管理/渠道分组/渠道分组列表-todo.bru,YES,
+GET,/admin/channel/manage/detail,DOCUMENTED_UNVERIFIED,渠道管理详情-todo,other,后台/运营管理/推广管理/渠道管理/渠道管理详情-todo.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/admin/channel/manage/dict,ACTIVE,渠道管理字典-todo,other,后台/运营管理/推广管理/渠道管理/渠道管理字典-todo.bru,YES,
+GET,/admin/channel/manage/export,DOCUMENTED_UNVERIFIED,渠道管理导出-todo,other,后台/运营管理/推广管理/渠道管理/渠道管理导出-todo.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/admin/channel/manage/list,ACTIVE,渠道管理列表-todo,other,后台/运营管理/推广管理/渠道管理/渠道管理列表-todo.bru,YES,
+GET,/admin/channel/menus,DOCUMENTED_UNVERIFIED,渠道菜单-todo,other,后台/运营管理/渠道管理/引流渠道管理/渠道菜单-todo.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/admin/channel/promoData/consumption,ACTIVE,推广数据面板消耗详情-todo,promo,后台/运营管理/推广管理/推广数据/推广数据面板消耗详情-todo.bru,YES,
+GET,/admin/channel/promoData/detail,DOCUMENTED_UNVERIFIED,推广数据详细-todo,promo,后台/运营管理/推广管理/推广数据/推广数据详细-todo.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/admin/channel/promoData/list,ACTIVE,推广数据列表-todo,promo,后台/运营管理/推广管理/推广数据/推广数据列表-todo.bru,YES,
+GET,/admin/channel/promoData/logs,ACTIVE,推广数据日志-todo,promo,后台/运营管理/推广管理/推广数据/推广数据日志-todo.bru,YES,
+GET,/admin/channel/promotion/deposit/list,ACTIVE,充值模版列表,finance,后台/渠道推广-充值模版/充值模版列表.bru,YES,
+GET,/admin/channel/promotion/domain/list,ACTIVE,列表,promo,后台/渠道推广-域名管理/列表.bru,YES,
+GET,/admin/client/version/list,ACTIVE,版本管理列表,other,后台/运营管理/客户端管理/版本号管理/版本管理列表.bru,YES,
+GET,/admin/dict/venues,DOCUMENTED_UNVERIFIED,厂商名称字典,report,后台/报表/厂商名称字典.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/admin/domain/delete,DOCUMENTED_UNVERIFIED,删除域名-todo,other,后台/运营管理/渠道管理/域名库管理/删除域名-todo.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/admin/domain/listForSelect,ACTIVE,域名选项列表-todo,other,后台/域名/域名选项列表-todo.bru,YES,
+GET,/admin/domain/menus,DOCUMENTED_UNVERIFIED,域名菜单-todo,other,后台/运营管理/渠道管理/域名库管理/域名菜单-todo.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/admin/feedback/category/list,DOCUMENTED_UNVERIFIED,反馈问题分类列表,other,后台/运营管理/会员反馈/问题分类/反馈问题分类列表.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/admin/feedback/list,DOCUMENTED_UNVERIFIED,反馈列表,other,后台/运营管理/会员反馈/反馈列表.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/admin/feedback/template/list,DOCUMENTED_UNVERIFIED,反馈问题模版列表,other,后台/运营管理/会员反馈/问题模版/反馈问题模版列表.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/admin/filcoin/order/export,DOCUMENTED_UNVERIFIED,代币商城订单导出-todo,finance,后台/财务管理/代币商城订单/代币商城订单导出-todo.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/admin/filcoin/order/list,ACTIVE,代币商城订单列表-todo,finance,后台/财务管理/代币商城订单/代币商城订单列表-todo.bru,YES,
+GET,/admin/finance/adjust/import/failure/list,DOCUMENTED_UNVERIFIED,批量上下分失败列表,finance,后台/风控管理/上下分记录/批量上下分失败列表.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/admin/finance/adjust/list,DOCUMENTED_UNVERIFIED,手动上下分列表-wesley,finance,后台/风控管理/上下分记录/手动上下分列表-wesley.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/admin/finance/deposit/manual/success,DOCUMENTED_UNVERIFIED,充值补单-wesley,finance,后台/风控管理/存-提审核/充值补单-wesley.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/admin/finance/deposit/risk/list,DOCUMENTED_UNVERIFIED,充值列表-wesley,finance,后台/风控管理/存-提审核/充值列表-wesley.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/admin/finance/member/wallet,ACTIVE,会员钱包 - wesley,finance,后台/会员列表/会员钱包 - wesley.bru,YES,
+GET,/admin/finance/member/wallet/pwd/clear,DOCUMENTED_UNVERIFIED,清空提款密码 -- ducky,finance,后台/会员列表/清空提款密码 -- ducky.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/admin/finance/payment/Delete,DOCUMENTED_UNVERIFIED,x-删除支付渠道-cold,finance,后台/财务管理/支付渠道/x-删除支付渠道-cold.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/admin/finance/payment/bank/list,ACTIVE,银行卡列表,finance,后台/财务管理/银行卡/银行卡列表.bru,YES,
+GET,/admin/finance/payment/channel/delete,DOCUMENTED_UNVERIFIED,删除支付渠道通道,finance,后台/财务管理/支付渠道/删除支付渠道通道.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/admin/finance/payment/channel/list,ACTIVE,支付渠道通道列表,finance,后台/财务管理/支付渠道/支付渠道通道列表.bru,YES,
+GET,/admin/finance/payment/deposit/channels,ACTIVE,支付渠道列表-cold,finance,后台/财务管理/存款记录/支付渠道列表-cold.bru,YES,
+GET,/admin/finance/payment/list,DOCUMENTED_UNVERIFIED,x-支付渠道列表-cold,finance,后台/财务管理/支付渠道/x-支付渠道列表-cold.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/admin/finance/payment/platform/list,ACTIVE,支付平台列表,finance,后台/财务管理/支付渠道/支付平台列表.bru,YES,
+GET,/admin/finance/payment/withdraw/channels,ACTIVE,提现渠道列表-cold,finance,合规/财务管理/财务记录/提现渠道列表-cold.bru,YES,
+GET,/admin/finance/tokens/transaction/export,DOCUMENTED_UNVERIFIED,代币账变导出,finance,后台/vip代币钱包/代币账变导出.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/admin/finance/tokens/transaction/list,DOCUMENTED_UNVERIFIED,代币账变列表,finance,后台/vip代币钱包/代币账变列表.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/admin/finance/transaction/types,ACTIVE,账变类型- wesley,finance,后台/财务管理/会员钱包账变/账变类型- wesley.bru,YES,
+GET,/admin/finance/turnover/change/list,DOCUMENTED_UNVERIFIED,会员流水-异动记录,finance,后台/会员流水/会员流水-异动记录.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/admin/finance/turnover/change/types,DOCUMENTED_UNVERIFIED,会员流水-异动记录-类型列表,finance,后台/会员流水/会员流水-异动记录-类型列表.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/admin/finance/turnover/list,DOCUMENTED_UNVERIFIED,会员流水明细,finance,后台/会员流水/会员流水明细.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/admin/finance/withdraw/risk/audit/list,DOCUMENTED_UNVERIFIED,提现审核列表-wesley,finance,后台/风控管理/存-提审核/提现审核列表-wesley.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/admin/finance/withdraws/limit/list,ACTIVE,大量小額提款檢查列表,finance,后台/风控管理/大量小額提款檢查/大量小額提款檢查列表.bru,YES,
+GET,/admin/finance/withdraws/limit/state,DOCUMENTED_UNVERIFIED,更新大量小額提款檢查状态,finance,后台/风控管理/大量小額提款檢查/更新大量小額提款檢查状态.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/admin/game/downbox,DOCUMENTED_UNVERIFIED,游戏下拉框-owen,game,后台/game管理/游戏管理/游戏下拉框-owen.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/admin/game/freespins,DOCUMENTED_UNVERIFIED,免费旋转游戏列表,game,后台/game管理/免费旋转游戏列表.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/admin/game/import/failed/list,DOCUMENTED_UNVERIFIED,游戏导入失败列表,game,后台/game管理/游戏管理/游戏导入失败列表.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/admin/google/qrcode/info,DOCUMENTED_UNVERIFIED,获取谷歌令牌密钥-seven,other,后台/后台账号管理/获取谷歌令牌密钥-seven.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/admin/google/unbind,DOCUMENTED_UNVERIFIED,谷歌令牌解绑,other,后台/后台账号管理/谷歌令牌解绑.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/admin/google/verify,DOCUMENTED_UNVERIFIED,谷歌令牌验证-seven,other,后台/后台账号管理/谷歌令牌验证-seven.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/admin/group/list,ACTIVE,角色列表 --yasser,permission,后台/系统管理/角色管理/角色列表 --yasser.bru,YES,
+GET,/admin/home/section/detail,ACTIVE,详情,other,后台/运营管理/首页板块配置/详情.bru,YES,
+GET,/admin/home/section/list,ACTIVE,列表,other,后台/运营管理/首页板块配置/列表.bru,YES,
+GET,/admin/hotBetNotice/config/detail,DOCUMENTED_UNVERIFIED,爆彩设置查询,other,后台/爆彩/爆彩设置查询.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/admin/hotBetNotice/displayBlacklist/list,DOCUMENTED_UNVERIFIED,爆彩黑名单列表,other,后台/爆彩/爆彩黑名单列表.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/admin/hotBetNotice/export,DOCUMENTED_UNVERIFIED,爆彩列表导出,other,后台/爆彩/爆彩列表导出.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/admin/hotBetNotice/list,ACTIVE,爆彩列表查询,other,后台/爆彩/爆彩列表查询.bru,YES,
+GET,/admin/kyc/approved/count,ACTIVE,统计每天审核通过数量,kyc,后台/kyc/统计每天审核通过数量.bru,YES,
+GET,/admin/kyc/config/info,ACTIVE,获取ekyc相关配置,kyc,后台/kyc/获取ekyc相关配置.bru,YES,
+GET,/admin/kyc/detail,ACTIVE,获取 kyc 详情 - double,kyc,后台/kyc/获取 kyc 详情 - double.bru,YES,
+GET,/admin/kyc/ekyc/log,DOCUMENTED_UNVERIFIED,异动记录,kyc,后台/kyc/异动记录.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/admin/kyc/pending/count,DOCUMENTED_REACHABLE,获取 kyc 待审批数量,kyc,后台/kyc/获取 kyc 待审批数量.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/admin/log/list,ACTIVE,操作日志,other,代理管理后台/系统/操作日志.bru,YES,
+GET,/admin/logout,DOCUMENTED_UNVERIFIED,后台登出-seven,auth,后台/后台账号管理/后台登出-seven.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/admin/mall/goods/detail,DOCUMENTED_UNVERIFIED,产品详情,other,后台/商城管理/产品详情-todo.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/admin/mall/goods/export,DOCUMENTED_UNVERIFIED,产品导出-todo,other,后台/商城管理/产品导出-todo.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/admin/mall/goods/import,DOCUMENTED_UNVERIFIED,产品导入-todo,other,后台/商城管理/产品导入-todo.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/admin/mall/goods/list,ACTIVE,获取产品列表-todo,other,后台/商城管理/获取产品列表-todo.bru,YES,
+GET,/admin/mall/order/detail,DOCUMENTED_UNVERIFIED,商城订单详情-todo,other,后台/商城订单记录/商城订单详情-todo.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/admin/mall/order/export,DOCUMENTED_UNVERIFIED,商城订单导出-todo,other,后台/商城订单记录/商城订单导出-todo.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/admin/mall/order/list,ACTIVE,商城订单列表-todo,other,后台/商城订单记录/商城订单列表-todo.bru,YES,
+GET,/admin/marquee/list,ACTIVE,列表,other,后台/跑马灯/列表.bru,YES,
+GET,/admin/me/detail,ACTIVE,后台账户详情(当前登陆信息)-seven,other,后台/后台账号管理/后台账户详情(当前登陆信息)-seven.bru,YES,
+GET,/admin/member/buyfeature/list,DOCUMENTED_UNVERIFIED,会员购买免费旋转记录,member,后台/会员列表/会员购买免费旋转记录.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/admin/member/change/logs,DOCUMENTED_UNVERIFIED,获取会员变更记录,member,后台/会员列表/获取会员变更记录.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/admin/member/deposit/multiple/log,DOCUMENTED_UNVERIFIED,用户充值倍率调整日志列表-aliang,finance,后台/后台账号管理/用户充值倍率调整日志列表-aliang.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/admin/member/detail,ACTIVE,会员详情 - seven/double,member,后台/会员列表/会员详情 - seven-double.bru,YES,
+GET,/admin/member/exemption/list,DOCUMENTED_UNVERIFIED,豁免清单列表,member,后台/集成后台参数/接口管理/集成参数/豁免清单列表.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/admin/member/export,DOCUMENTED_UNVERIFIED,数据导出 - seven/double,member,后台/会员列表/数据导出 - seven-double.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/admin/member/limitation/state/info,DOCUMENTED_UNVERIFIED,会员限制状态列表,member,后台/会员列表/会员限制状态列表.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/admin/member/list,DOCUMENTED_UNVERIFIED,会员列表 - seven/double,member,后台/会员列表/会员列表 - seven-double.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/admin/member/log/list,DOCUMENTED_UNVERIFIED,会员登录日志-seven,member,后台/后台日志/会员登录日志-seven.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/admin/member/log/listv1,DOCUMENTED_UNVERIFIED,会员登录日志v1,member,后台/后台日志/会员登录日志v1.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/admin/member/risk/log,ACTIVE,风控日志,member,后台/会员列表/风控日志.bru,YES,
+GET,/admin/member/vip/level/list,DOCUMENTED_UNVERIFIED,会员vip等级记录,member,后台/Vipv2/会员vip等级记录.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/admin/message/export,DOCUMENTED_UNVERIFIED,站内信导出-todo,other,后台/运营管理/站内信管理/站内信导出-todo.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/admin/message/list,ACTIVE,已阅读名单-todo,other,后台/运营管理/站内信管理/已阅读名单-todo.bru,YES,
+GET,/admin/message/templates/export,DOCUMENTED_UNVERIFIED,消息模板导出-todo,other,后台/运营管理/消息模板/消息模板导出-todo.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/admin/message/templates/list,ACTIVE,获取消息模板列表-todo,other,后台/运营管理/消息模板/获取消息模板列表-todo.bru,YES,
+GET,/admin/message/user/list,DOCUMENTED_UNVERIFIED,更新用户列表,other,后台/运营管理/消息模板/更新用户列表.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/admin/notify/audit/alarm,ACTIVE,获取系统通知数量-wesley/owen,other,后台/系统管理/通知中心/获取系统通知数量-wesley-owen.bru,YES,
+GET,/admin/ops-tools/first-deposit-no-second/export,DOCUMENTED_UNVERIFIED,首存未二存,finance,后台/运营管理/运营小工具/首存未二存.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/admin/ops-tools/turnover/export,DOCUMENTED_UNVERIFIED,首存导出,other,后台/运营管理/运营小工具/首存导出.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/admin/platform/gametype,DOCUMENTED_UNVERIFIED,获取厂商支持的场馆,game,后台/game管理/厂商管理/获取厂商支持的场馆.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/admin/priv/by/group,ACTIVE,角色权限列表,permission,后台/系统管理/权限管理/角色权限列表.bru,YES,
+GET,/admin/priv/check,ACTIVE,权限检查,permission,后台/系统管理/权限管理/权限检查.bru,YES,
+GET,/admin/priv/list,ACTIVE,权限列表,permission,后台/系统管理/权限管理/权限列表.bru,YES,
+GET,/admin/promo/bonus/export,DOCUMENTED_UNVERIFIED,导出礼金明细 - felix,promo,后台/活动/导出礼金明细 - felix.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/admin/promo/bonus/list,DOCUMENTED_UNVERIFIED,礼金明细 - felix,promo,后台/活动/礼金明细 - felix.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/admin/promo/bti/world/cup/list,DOCUMENTED_UNVERIFIED,freebet活动管理-重新发放,game,后台/game管理/freebet活动管理/freebet活动管理-重新发放.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/admin/promo/cq9/bonus/export,DOCUMENTED_UNVERIFIED,导出礼金明细-seven,promo,后台/活动/cq9返水/导出礼金明细-seven.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/admin/promo/cq9/bonus/list,DOCUMENTED_UNVERIFIED,礼金明细-seven,promo,后台/活动/cq9返水/礼金明细-seven.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/admin/promo/export,DOCUMENTED_UNVERIFIED,导出活动列表 - felix,promo,后台/活动/导出活动列表 - felix.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/admin/promo/free/spin/detail,DOCUMENTED_UNVERIFIED,详情,promo,活动/后台-活动管理/freeSpin/详情.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/admin/promo/free/spin/export,DOCUMENTED_UNVERIFIED,导出,promo,活动/后台-活动管理/freeSpin/导出.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/admin/promo/free/spin/import/export,DOCUMENTED_UNVERIFIED,失败清单下载,promo,活动/后台-活动管理/freeSpin/失败清单下载.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/admin/promo/free/spin/import/fail,DOCUMENTED_UNVERIFIED,失败明细,promo,活动/后台-活动管理/freeSpin/失败明细.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/admin/promo/free/spin/import/log,ACTIVE,fs批量派发记录,promo,活动/后台-活动管理/freeSpin/fs批量派发记录.bru,YES,
+GET,/admin/promo/free/spin/list,ACTIVE,列表,promo,活动/后台-活动管理/freeSpin/列表.bru,YES,
+GET,/admin/promo/free/spin/synchronous,DOCUMENTED_UNVERIFIED,同步,promo,活动/后台-活动管理/freeSpin/同步.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/admin/promo/invite/base/export,DOCUMENTED_UNVERIFIED,基础奖励数据导出,promo,后台/运营管理/邀请好友/基础奖励数据导出.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/admin/promo/invite/base/list,ACTIVE,邀请基础奖励列表,promo,后台/运营管理/邀请好友/邀请基础奖励列表.bru,YES,
+GET,/admin/promo/invite/commission/export,DOCUMENTED_UNVERIFIED,结算佣金奖励导出,promo,后台/运营管理/邀请好友/结算佣金奖励导出.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/admin/promo/invite/commission/list,DOCUMENTED_UNVERIFIED,结算佣金列表,promo,后台/运营管理/邀请好友/结算佣金列表.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/admin/promo/invite/config/info,DOCUMENTED_UNVERIFIED,获取配置信息,promo,后台/运营管理/邀请好友/获取配置信息.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/admin/promo/invite/friends/transfer/export,DOCUMENTED_UNVERIFIED,好友转线导出,promo,后台/运营管理/邀请好友/好友转线导出.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/admin/promo/invite/friends/transfer/list,ACTIVE,好友转线列表,promo,后台/运营管理/邀请好友/好友转线列表.bru,YES,
+GET,/admin/promo/invite/statistics/export,DOCUMENTED_UNVERIFIED,派发佣金统计导出,report,后台/运营管理/邀请好友/派发佣金统计导出.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/admin/promo/invite/statistics/list,DOCUMENTED_UNVERIFIED,派发佣金统计列表,report,后台/运营管理/邀请好友/派发佣金统计列表.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/admin/promo/invite/upgrade/export,DOCUMENTED_UNVERIFIED,里程碑奖励导出,promo,后台/运营管理/邀请好友/里程碑奖励导出.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/admin/promo/invite/upgrade/list,DOCUMENTED_UNVERIFIED,邀请里程碑奖励列表,promo,后台/运营管理/邀请好友/邀请里程碑奖励列表.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/admin/promo/list,ACTIVE,活动列表 - felix,promo,后台/活动/活动列表 - felix.bru,YES,
+GET,/admin/promo/pt/export,DOCUMENTED_UNVERIFIED,导出,promo,活动/后台-活动管理/pt排行榜/导出.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/admin/promo/pt/list,DOCUMENTED_UNVERIFIED,列表,promo,活动/后台-活动管理/pt排行榜/列表.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/admin/promo/rebate/rebat/export,DOCUMENTED_UNVERIFIED,返水列表导出,promo,活动/后台-活动管理/投注返水/返水列表导出.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/admin/promo/rebate/rebat/report,DOCUMENTED_UNVERIFIED,返水列表,report,活动/后台-活动管理/投注返水/返水列表.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/admin/promo/rotate/kyc/export,DOCUMENTED_UNVERIFIED,导出,kyc,活动/后台-活动管理/KYC通过送免费旋转/导出.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/admin/promo/rotate/kyc/list,DOCUMENTED_UNVERIFIED,列表,kyc,活动/后台-活动管理/KYC通过送免费旋转/列表.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/admin/promo/task/all,DOCUMENTED_UNVERIFIED,任务清单(账变)-seven,promo,后台/vip任务中心/任务清单(账变)-seven.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/admin/promo/task/export,DOCUMENTED_UNVERIFIED,任务中心导出-seven,promo,后台/vip任务中心/任务中心导出-seven.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/admin/promo/task/list,DOCUMENTED_UNVERIFIED,任务中心列表-seven,promo,后台/vip任务中心/任务中心列表-seven.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/admin/promo/task/transaction,DOCUMENTED_UNVERIFIED,任务奖金列表-seven,finance,后台/vip任务中心/任务奖金列表-seven.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/admin/promo/task/transaction/export,DOCUMENTED_UNVERIFIED,任务奖励列表导出-seven,finance,后台/vip任务中心/任务奖励列表导出-seven.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/admin/promo/vip/daily/loss/export,DOCUMENTED_UNVERIFIED,每日负盈利活动记录-导出-aliang,promo,后台/Vipv2/每日负盈利活动记录-导出-aliang.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/admin/promo/vip/daily/loss/list,DOCUMENTED_UNVERIFIED,每日负盈利活动记录-aliang,promo,后台/Vipv2/每日负盈利活动记录-aliang.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/admin/promo/vip/half/moon/export,DOCUMENTED_UNVERIFIED,半月礼金活动记录-导出-aliang,promo,后台/Vipv2/半月礼金活动记录-导出-aliang.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/admin/promo/vip/half/moon/list,DOCUMENTED_UNVERIFIED,半月礼金活动记录列表-aliang,promo,后台/Vipv2/半月礼金活动记录列表-aliang.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/admin/promo/vip/log/export,DOCUMENTED_UNVERIFIED,奖励表-导出-aliang,promo,后台/Vipv2/奖励表-导出-aliang.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/admin/promo/vip/log/list,ACTIVE,奖励表列表-aliang,promo,后台/Vipv2/奖励表列表-aliang.bru,YES,
+GET,/admin/promo/vip/sign/in/export,DOCUMENTED_UNVERIFIED,每日签到导出,promo,后台/Vipv2/每日签到导出.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/admin/promo/vip/sign/in/list,ACTIVE,每日签到列表,promo,后台/Vipv2/每日签到列表.bru,YES,
+GET,/admin/promotion_effect,DOCUMENTED_UNVERIFIED,推广效果评估,promo,后台/推广管理/推广效果评估.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/admin/promotion_first_deposit,DOCUMENTED_UNVERIFIED,首充日活分析,finance,后台/推广管理/首充日活分析.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/admin/promotion_register,DOCUMENTED_UNVERIFIED,注册日活分析,auth,后台/推广管理/注册日活分析.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/admin/promotion_satistic,DOCUMENTED_UNVERIFIED,推广统计报表,report,后台/推广管理/推广统计报表.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/admin/rechargeCard/listForSelect,DOCUMENTED_UNVERIFIED,获取充值卡下拉列表-todo,other,后台/其它/获取充值卡下拉列表-todo.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/admin/reports/agency,ACTIVE,代理统计报表,report,后台/代理管理/代理统计报表.bru,YES,
+GET,/admin/reports/agency/export,DOCUMENTED_UNVERIFIED,代理统计导出,report,后台/代理管理/代理统计导出.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/admin/reports/bi/basic,ACTIVE,首页BI,report,后台/报表/首页BI.bru,YES,
+GET,/admin/reports/bi/gnode,DOCUMENTED_UNVERIFIED,首页,report,后台/集成后台参数/首页/首页.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/admin/reports/channel,ACTIVE,渠道日报表-sandy,report,后台/报表/渠道报表/渠道日报表-sandy.bru,YES,
+GET,/admin/reports/channel/detail,DOCUMENTED_UNVERIFIED,渠道日报表明细-wesley,report,后台/报表/渠道报表/渠道日报表明细-wesley.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/admin/reports/channel/detail/export,DOCUMENTED_UNVERIFIED,渠道日报表明细导出,report,后台/报表/渠道报表/渠道日报表明细导出.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/admin/reports/channel/export,DOCUMENTED_UNVERIFIED,渠道日报表导出,report,后台/报表/渠道报表/渠道日报表导出.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/admin/reports/game,DOCUMENTED_UNVERIFIED,游戏报表,game,后台/报表/游戏报表/游戏报表.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/admin/reports/game/export,DOCUMENTED_UNVERIFIED,游戏报表导出,game,后台/报表/游戏报表/游戏报表导出.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/admin/reports/game/node,ACTIVE,游戏线路报表,game,后台/报表/游戏报表/游戏线路报表.bru,YES,
+GET,/admin/reports/game/node/export,DOCUMENTED_UNVERIFIED,游戏线路报表导出,game,后台/报表/游戏报表/游戏线路报表导出.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/admin/reports/gameclass,DOCUMENTED_UNVERIFIED,游戏类型报表,game,后台/报表/游戏类型报表/游戏类型报表.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/admin/reports/gameclass/export,DOCUMENTED_UNVERIFIED,游戏类型报表导出,game,后台/报表/游戏类型报表/游戏类型报表导出.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/admin/reports/gameclass/node,ACTIVE,游戏类型线路报表,game,后台/报表/游戏类型报表/游戏类型线路报表.bru,YES,
+GET,/admin/reports/gameclass/node/export,DOCUMENTED_UNVERIFIED,游戏类型线路报表导出,game,后台/报表/游戏类型报表/游戏类型线路报表导出.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/admin/reports/gnode,DOCUMENTED_UNVERIFIED,业绩管理,report,后台/集成后台参数/接口管理/任务管理/业绩管理.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/admin/reports/invite,ACTIVE,邀请统计--列表,report,后台/报表管理/邀请统计--列表.bru,YES,
+GET,/admin/reports/invite/detail,DOCUMENTED_UNVERIFIED,邀请统计--查看,report,后台/报表管理/邀请统计--查看.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/admin/reports/invite/detail/export,DOCUMENTED_UNVERIFIED,邀请统计--查看--导出,report,后台/报表管理/邀请统计--查看--导出.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/admin/reports/invite/export,DOCUMENTED_UNVERIFIED,邀请统计--导出,report,后台/报表管理/邀请统计--导出.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/admin/reports/member,ACTIVE,个人统计--列表,report,后台/报表管理/个人统计--列表.bru,YES,
+GET,/admin/reports/member-daily-game/aggregate,ACTIVE,会员每日游戏报表--汇总列表,game,后台/报表管理/会员每日游戏报表--汇总列表.bru,YES,
+GET,/admin/reports/member-daily-game/aggregate/export,DOCUMENTED_UNVERIFIED,会员每日游戏报表--汇总导出,game,后台/报表管理/会员每日游戏报表--汇总导出.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/admin/reports/member-daily-game/detail,DOCUMENTED_UNVERIFIED,会员每日游戏报表--每日明细,game,后台/报表管理/会员每日游戏报表--每日明细.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/admin/reports/member/detail,DOCUMENTED_UNVERIFIED,个人统计--查看,report,后台/报表管理/个人统计--查看.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/admin/reports/member/detail/export,DOCUMENTED_UNVERIFIED,个人统计--查看--导出,report,后台/报表管理/个人统计--查看--导出.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/admin/reports/member/export,DOCUMENTED_UNVERIFIED,个人统计--导出,report,后台/报表管理/个人统计--导出.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/admin/reports/platform,DOCUMENTED_UNVERIFIED,厂商业绩报表--yasser,report,后台/运营管理/厂商业绩报表--yasser.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/admin/reports/profit,DOCUMENTED_UNVERIFIED,平台业绩报表,report,后台/报表/首页BI/平台业绩报表.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/admin/reports/profit/export,DOCUMENTED_UNVERIFIED,平台业绩报表导出,report,后台/报表/首页BI/平台业绩报表导出.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/admin/reports/provider/order/compare/daily,ACTIVE,列表,report,后台/报表/厂商注单对比日报/列表.bru,YES,
+GET,/admin/reports/reg,DOCUMENTED_UNVERIFIED,新增用户报表,report,后台/报表/新增会员报表/新增用户报表.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/admin/reports/reg/detail,DOCUMENTED_UNVERIFIED,新增用户详情报表,report,后台/报表/新增会员报表/新增用户详情报表.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/admin/reports/reg/detail/export,DOCUMENTED_UNVERIFIED,新增用户详情报表导出,report,后台/报表/新增会员报表/新增用户详情报表导出.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/admin/reports/reg/export,DOCUMENTED_UNVERIFIED,新增用户报表导出,report,后台/报表/新增会员报表/新增用户报表导出.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/admin/reports/venue,DOCUMENTED_UNVERIFIED,厂商报表,game,后台/报表/游戏平台报表/厂商报表.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/admin/reports/venue/export,DOCUMENTED_UNVERIFIED,厂商报表导出,game,后台/报表/游戏平台报表/厂商报表导出.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/admin/reports/venue/node,ACTIVE,厂商线路报表,game,后台/报表/游戏平台报表/厂商线路报表.bru,YES,
+GET,/admin/reports/venue/node/export,DOCUMENTED_UNVERIFIED,厂商线路报表导出,game,后台/报表/游戏平台报表/厂商线路报表导出.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/admin/shop/gs/list,ACTIVE,门店列表,other,后台/运营管理/客户端管理/门店客户端/门店列表.bru,YES,
+GET,/admin/sms/auth,DOCUMENTED_UNVERIFIED,短信验证码查看,auth,后台/短信发送列表/短信验证码查看.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/admin/sms/conf/list,ACTIVE,短信配置,auth,后台/短信发送列表/短信配置.bru,YES,
+GET,/admin/sms/list,ACTIVE,短信列表-seven,auth,后台/短信发送列表/短信列表-seven.bru,YES,
+GET,/admin/superior/log,DOCUMENTED_UNVERIFIED,会员转线log,other,后台/会员列表/会员转线log.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/admin/superior/one,DOCUMENTED_UNVERIFIED,代理查询,other,后台/会员列表/代理查询.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/admin/sys/config/deposit/multiple/list,DOCUMENTED_UNVERIFIED,平台充值倍率列表-aliang,finance,后台/运营管理/客户端管理/平台倍率/平台充值倍率列表-aliang.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/admin/sys/config/deposit/multiple/log,DOCUMENTED_UNVERIFIED,平台充值倍率异动记录-aliang,finance,后台/运营管理/客户端管理/平台倍率/平台充值倍率异动记录-aliang.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/admin/todo/reminder,DOCUMENTED_UNVERIFIED,待办事项提示器-todo,other,后台/其它/待办事项提示器-todo.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/admin/trd/list,DOCUMENTED_UNVERIFIED,列表,other,后台/运营管理/客户端管理/三方登录开关/列表.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/admin/user/delete,DOCUMENTED_UNVERIFIED,后台删除账户-seven,other,后台/后台账号管理/后台删除账户-seven.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/admin/user/detail,DOCUMENTED_UNVERIFIED,后台账户详情-seven,other,后台/后台账号管理/后台账户详情-seven.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/admin/user/list,DOCUMENTED_UNVERIFIED,后台账户列表-seven,other,后台/后台账号管理/后台账户列表-seven.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/admin/vip/config/comparison,DOCUMENTED_UNVERIFIED,获取XP对照表,other,后台/Vipv2/获取XP对照表.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/admin/vip/config/listv2,ACTIVE,配置列表,other,后台/Vipv2/配置列表.bru,YES,
+GET,/admin/vip/level/detail,DOCUMENTED_UNVERIFIED,VIP配置详情-todo,other,后台/VIP/VIP配置详情-todo.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/admin/vip/level/list,DOCUMENTED_UNVERIFIED,VIP配置列表-todo,other,后台/VIP/VIP配置列表-todo.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/admin/vip/level/range/detail,DOCUMENTED_UNVERIFIED,VIP等级区间详情-todo,other,后台/VIP/VIP等级区间详情-todo.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/admin/vip/xp/export,DOCUMENTED_UNVERIFIED,导出xp成长日志 - felix,other,后台/VIP/导出xp成长日志 - felix.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/admin/vip/xp/list,ACTIVE,xp成长日志 - felix,other,后台/VIP/xp成长日志 - felix.bru,YES,
+GET,/admin/whiteList/delete,DOCUMENTED_UNVERIFIED,删除白名单 --yasser,other,后台/系统管理/白名单管理/删除白名单 --yasser.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/admin/whiteList/list,ACTIVE,白名单列表 --yasser,other,后台/系统管理/白名单管理/白名单列表 --yasser.bru,YES,
+GET,/agency/finance/transaction/types,DOCUMENTED_UNVERIFIED,账变类型- wesley,finance,代理管理后台/财务管理/财务报表/账变类型- wesley.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/agency/message/list,DOCUMENTED_UNVERIFIED,获取消息列表,other,代理后台/消息管理/获取消息列表.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/backend/agency/detail,DOCUMENTED_UNVERIFIED,后台账户详情-seven,other,代理管理后台/后台账号管理/后台账户详情-seven.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/backend/agency/google/qrcode/info,DOCUMENTED_UNVERIFIED,获取谷歌令牌密钥-seven,other,代理管理后台/后台账号管理/获取谷歌令牌密钥-seven.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/backend/agency/google/unbind,DOCUMENTED_UNVERIFIED,谷歌令牌解绑,other,代理管理后台/后台账号管理/谷歌令牌解绑.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/backend/agency/google/verify,DOCUMENTED_UNVERIFIED,谷歌令牌验证-seven,other,代理管理后台/后台账号管理/谷歌令牌验证-seven.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/backend/agency/logout,DOCUMENTED_UNVERIFIED,后台登出,auth,代理管理后台/后台账号管理/后台登出.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/backend/agency/me/detail,DOCUMENTED_UNVERIFIED,后台账户详情(当前登陆信息),other,代理管理后台/后台账号管理/后台账户详情(当前登陆信息).bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/backend/agency/sys/config/list,DOCUMENTED_UNVERIFIED,代理开关列表,other,代理管理后台/代理管理/代理设置/代理开关/代理开关列表.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/backend/agency/user/list,DOCUMENTED_UNVERIFIED,后台账户列表,other,代理管理后台/后台账号管理/后台账户列表.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/cmpl/banner/delete,DOCUMENTED_UNVERIFIED,轮播图删除,other,合规/轮播图/轮播图删除.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/cmpl/finance/deposit/list,DOCUMENTED_UNVERIFIED,充值记录-wesley,finance,合规/财务管理/财务记录/充值记录-wesley.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/cmpl/finance/payment/deposit/channels,DOCUMENTED_UNVERIFIED,支付渠道列表-cold,finance,合规/财务管理/财务记录/支付渠道列表-cold.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/cmpl/finance/transaction/list,DOCUMENTED_UNVERIFIED,交易记录- wesley,finance,合规/交易管理/交易记录- wesley.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/cmpl/finance/transaction/types,DOCUMENTED_UNVERIFIED,账变类型- wesley,finance,合规/交易管理/账变类型- wesley.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/cmpl/finance/withdraw/list,DOCUMENTED_UNVERIFIED,提现记录-wesley,finance,合规/财务管理/财务记录/提现记录-wesley.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/cmpl/game/list,DOCUMENTED_UNVERIFIED,游戏列表,game,合规/游戏管理/游戏列表.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/cmpl/game/transaction,DOCUMENTED_UNVERIFIED,game/transaction （fat）,finance,mx/game-transaction （fat）.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/cmpl/group/list,DOCUMENTED_UNVERIFIED,角色列表 --yasser,permission,合规/系统管理/角色管理/角色列表 --yasser.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/cmpl/kyc/detail,DOCUMENTED_UNVERIFIED,获取 kyc 详情 - owen,kyc,合规/kyc/获取 kyc 详情 - owen.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/cmpl/kyc/pending/count,DOCUMENTED_UNVERIFIED,获取 kyc 待审批数量,kyc,合规/kyc/获取 kyc 待审批数量.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/cmpl/logout,DOCUMENTED_UNVERIFIED,后台登出-seven,auth,合规/后台账号管理/后台登出-seven.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/cmpl/me/detail,DOCUMENTED_UNVERIFIED,后台账户详情(当前登陆信息)-seven,other,合规/后台账号管理/后台账户详情(当前登陆信息)-seven.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/cmpl/member/export,DOCUMENTED_UNVERIFIED,数据导出 - seven/double,member,合规/会员列表/数据导出 - seven-double.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/cmpl/member/list,DOCUMENTED_UNVERIFIED,会员列表 - seven/double,member,合规/会员列表/会员列表 - seven-double.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/cmpl/member/log/list,DOCUMENTED_UNVERIFIED,会员登录日志-seven,member,合规/后台日志/会员登录日志-seven.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/cmpl/member/withdrawal/limit,DOCUMENTED_UNVERIFIED,提现限额,finance,合规/会员列表/提现限额.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/cmpl/notify/audit/alarm,DOCUMENTED_UNVERIFIED,获取系统通知数量-wesley,other,合规/系统管理/通知中心/获取系统通知数量-wesley.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/cmpl/online/count,DOCUMENTED_UNVERIFIED,获取在线会员数,other,合规/在线用户/获取在线会员数.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/cmpl/online/list,DOCUMENTED_UNVERIFIED,在线会员列表,other,合规/在线用户/在线会员列表.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/cmpl/platform/list,DOCUMENTED_UNVERIFIED,场馆列表,other,合规/场馆管理/场馆列表.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/cmpl/priv/by/group,DOCUMENTED_UNVERIFIED,角色权限列表,permission,合规/系统管理/权限管理/角色权限列表.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/cmpl/priv/list,DOCUMENTED_UNVERIFIED,权限列表,permission,合规/系统管理/权限管理/权限列表.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/cmpl/shop/list,DOCUMENTED_UNVERIFIED,门店列表,other,合规/门店/门店列表.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/cmpl/user/delete,DOCUMENTED_UNVERIFIED,后台删除账户-seven,other,合规/后台账号管理/后台删除账户-seven.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/cmpl/user/detail,DOCUMENTED_UNVERIFIED,后台账户详情-seven,other,合规/后台账号管理/后台账户详情-seven.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/cmpl/user/list,DOCUMENTED_UNVERIFIED,后台账户列表-seven,other,合规/后台账号管理/后台账户列表-seven.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/cmpl/venue/list,DOCUMENTED_UNVERIFIED,厂商列表-light,other,合规/厂商管理/厂商列表-light.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/cmpl/whiteList/delete,DOCUMENTED_UNVERIFIED,删除白名单 --yasser,other,合规/系统管理/白名单管理/删除白名单 --yasser.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/cmpl/whiteList/list,DOCUMENTED_UNVERIFIED,白名单列表 --yasser,other,合规/系统管理/白名单管理/白名单列表 --yasser.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/platform/game/list,DOCUMENTED_UNVERIFIED,游戏列表,game,游戏集成平台/游戏管理/游戏列表.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/platform/game/name/list,DOCUMENTED_UNVERIFIED,游戏名称列表,game,游戏集成平台/游戏管理/游戏名称列表.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/platform/group/list,DOCUMENTED_UNVERIFIED,角色列表,game,游戏集成平台/系统管理/角色管理/角色列表.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/platform/logout,DOCUMENTED_UNVERIFIED,后台登出-seven,auth,游戏集成平台/系统管理/用户管理/后台登出-seven.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/platform/me/detail,DOCUMENTED_UNVERIFIED,后台账户详情(当前登陆信息)-seven,game,游戏集成平台/系统管理/用户管理/后台账户详情(当前登陆信息)-seven.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/platform/member/export,DOCUMENTED_UNVERIFIED,玩家管理导出,game,游戏集成平台/商户管理/玩家管理导出.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/platform/member/list,DOCUMENTED_UNVERIFIED,玩家管理,game,游戏集成平台/商户管理/玩家管理.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/platform/merchant/list,DOCUMENTED_UNVERIFIED,商户列表,game,游戏集成平台/商户管理/商户列表.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/platform/priv/by/group,DOCUMENTED_UNVERIFIED,角色权限列表,game,游戏集成平台/系统管理/角色管理/角色权限列表.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/platform/priv/list,DOCUMENTED_UNVERIFIED,权限列表,game,游戏集成平台/系统管理/角色管理/权限列表.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/platform/record/export,DOCUMENTED_UNVERIFIED,注单管理导出,game,游戏集成平台/商户管理/注单管理导出.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/platform/report/bi,DOCUMENTED_UNVERIFIED,首页,game,游戏集成平台/首页.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/platform/user/delete,DOCUMENTED_UNVERIFIED,后台删除账户-seven,game,游戏集成平台/系统管理/用户管理/后台删除账户-seven.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/platform/user/detail,DOCUMENTED_UNVERIFIED,后台账户详情-seven,game,游戏集成平台/系统管理/用户管理/后台账户详情-seven.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/platform/user/list,DOCUMENTED_UNVERIFIED,后台账户列表-seven,game,游戏集成平台/系统管理/用户管理/后台账户列表-seven.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/platform/venue/list,DOCUMENTED_UNVERIFIED,厂商管理,game,游戏集成平台/游戏管理/厂商管理.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/platform/venue/name/list,DOCUMENTED_UNVERIFIED,厂商名称列表,game,游戏集成平台/游戏管理/厂商名称列表.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/sys/config/compliance/detail,DOCUMENTED_UNVERIFIED,合规化开关详情,other,后台/运营管理/客户端配置/合规化开关详情.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/sys/config/compliance/status,DOCUMENTED_UNVERIFIED,合规化开关状态,other,后台/运营管理/客户端配置/合规化开关状态.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/sys/config/list,DOCUMENTED_UNVERIFIED,系统配置列表 --wesley,other,后台/系统管理/系统配置/系统配置列表 --wesley.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,"/OrderId           string          `json:""order_id""`           //销售订单ID",DOCUMENTED_UNVERIFIED,lazada订单-owen,finance,后台/财务管理/lazada订单-owen.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/admin/ad/material/insert,DOCUMENTED_UNVERIFIED,新增素材,other,后台/运营管理/客户端管理/素材管理/新增素材.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/admin/ad/material/list,ACTIVE,素材列表,other,后台/运营管理/客户端管理/素材管理/素材列表.bru,YES,
+POST,/admin/ad/material/type/insert,DOCUMENTED_UNVERIFIED,新增素材种类,other,后台/运营管理/客户端管理/素材管理/新增素材种类.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/admin/ad/material/type/update,DOCUMENTED_UNVERIFIED,编辑素材种类,other,后台/运营管理/客户端管理/素材管理/编辑素材种类.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/admin/ad/material/type/update/state,DOCUMENTED_UNVERIFIED,更新素材种类状态,other,后台/运营管理/客户端管理/素材管理/更新素材种类状态.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/admin/ad/material/update,DOCUMENTED_UNVERIFIED,编辑素材,other,后台/运营管理/客户端管理/素材管理/编辑素材.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/admin/ad/material/update/state,DOCUMENTED_UNVERIFIED,更新素材状态或排序,other,后台/运营管理/客户端管理/素材管理/更新素材状态或排序.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/admin/agency/audit/agree,DOCUMENTED_UNVERIFIED,代理审核同意-wesley,other,代理管理后台/代理管理/代理审核/代理审核同意-wesley.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/admin/agency/audit/reject,DOCUMENTED_UNVERIFIED,代理审核拒绝-wesley,other,代理管理后台/代理管理/代理审核/代理审核拒绝-wesley.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/admin/banner/insert,DOCUMENTED_UNVERIFIED,新增轮播图,other,后台/轮播图-首页弹窗/新增轮播图.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/admin/banner/list,ACTIVE,轮播图列表,other,后台/轮播图-首页弹窗/轮播图列表.bru,YES,
+POST,/admin/banner/update,DOCUMENTED_UNVERIFIED,轮播图修改,other,后台/轮播图-首页弹窗/轮播图修改.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/admin/banner/update/state,DOCUMENTED_UNVERIFIED,轮播图更新状态,other,后台/轮播图-首页弹窗/轮播图更新状态.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/admin/bonus/manual/send,DOCUMENTED_UNVERIFIED,手动发放礼金,promo,后台/活动/手动发放礼金 - felix.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/admin/bonus/review/approve,DOCUMENTED_UNVERIFIED,批量审批 - felix.bru,other,后台/礼金/批量审批 - felix.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/admin/bonus/review/send,DOCUMENTED_UNVERIFIED,批量补发 - felix.bru,other,后台/礼金/批量补发 - felix.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/admin/buriedPoint/delete,DOCUMENTED_UNVERIFIED,删除埋点-todo,other,后台/埋点/删除埋点-todo.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/admin/buriedPoint/insert,DOCUMENTED_UNVERIFIED,新增埋点-todo,other,后台/埋点/新增埋点-todo.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/admin/buriedPoint/update,DOCUMENTED_UNVERIFIED,修改埋点-todo,other,后台/埋点/修改埋点-todo.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/admin/channel/exchangeRate/update,DOCUMENTED_UNVERIFIED,更新渠道汇率-todo,other,后台/运营管理/推广管理/渠道管理/渠道汇率/更新渠道汇率-todo.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/admin/channel/export,DOCUMENTED_UNVERIFIED,渠道列表导出-todo,other,后台/运营管理/渠道管理/引流渠道管理/渠道列表导出-todo.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/admin/channel/group/delete,DOCUMENTED_UNVERIFIED,删除渠道分组-todo,permission,后台/运营管理/推广管理/渠道管理/渠道分组/删除渠道分组-todo.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/admin/channel/group/insert,DOCUMENTED_UNVERIFIED,新增渠道分组-todo,permission,后台/运营管理/推广管理/渠道管理/渠道分组/新增渠道分组-todo.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/admin/channel/group/update,DOCUMENTED_UNVERIFIED,更新渠道分组-todo,permission,后台/运营管理/推广管理/渠道管理/渠道分组/更新渠道分组-todo.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/admin/channel/insert,DOCUMENTED_UNVERIFIED,新增渠道-todo,other,后台/运营管理/渠道管理/引流渠道管理/新增渠道-todo.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/admin/channel/list,DOCUMENTED_UNVERIFIED,渠道列表-todo,other,后台/运营管理/渠道管理/引流渠道管理/渠道列表-todo.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/admin/channel/manage/delete,DOCUMENTED_UNVERIFIED,删除渠道管理-todo,other,后台/运营管理/推广管理/渠道管理/删除渠道管理-todo.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/admin/channel/manage/insert,DOCUMENTED_UNVERIFIED,新增渠道管理-todo,other,后台/运营管理/推广管理/渠道管理/新增渠道管理-todo.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/admin/channel/manage/update,DOCUMENTED_UNVERIFIED,更新渠道管理-todo,other,后台/运营管理/推广管理/渠道管理/更新渠道管理-todo.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/admin/channel/manage/update/group,DOCUMENTED_UNVERIFIED,更新渠道管理分组-todo,permission,后台/运营管理/推广管理/渠道管理/更新渠道管理分组-todo.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/admin/channel/manage/update/state,DOCUMENTED_UNVERIFIED,更新渠道管理状态-todo,other,后台/运营管理/推广管理/渠道管理/更新渠道管理状态-todo.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/admin/channel/promoData/update,DOCUMENTED_UNVERIFIED,更新推广数据-todo,promo,后台/运营管理/推广管理/推广数据/更新推广数据-todo.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/admin/channel/promoData/update/consumption,DOCUMENTED_UNVERIFIED,更新推广数据面板消耗-todo,promo,后台/运营管理/推广管理/推广数据/更新推广数据面板消耗-todo.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/admin/channel/promotion/deposit/update,DOCUMENTED_UNVERIFIED,更新模版,finance,后台/渠道推广-充值模版/更新模版.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/admin/channel/promotion/domain/insert,DOCUMENTED_UNVERIFIED,新增,promo,后台/渠道推广-域名管理/新增.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/admin/channel/promotion/domain/update,DOCUMENTED_UNVERIFIED,修改,promo,后台/渠道推广-域名管理/修改.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/admin/channel/update,DOCUMENTED_UNVERIFIED,编辑渠道-todo,other,后台/运营管理/渠道管理/引流渠道管理/编辑渠道-todo.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/admin/client/version/insert,DOCUMENTED_UNVERIFIED,版本管理新增,other,后台/运营管理/客户端管理/版本号管理/版本管理新增.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/admin/client/version/update,DOCUMENTED_UNVERIFIED,版本管理更新,other,后台/运营管理/客户端管理/版本号管理/版本管理更新.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/admin/domain/export,DOCUMENTED_UNVERIFIED,域名列表导出-todo,other,后台/运营管理/渠道管理/域名库管理/域名列表导出-todo.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/admin/domain/insert,DOCUMENTED_UNVERIFIED,新增域名-todo,other,后台/运营管理/渠道管理/域名库管理/新增域名-todo.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/admin/domain/list,DOCUMENTED_UNVERIFIED,域名列表,other,后台/域名/域名列表.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/admin/domain/update,DOCUMENTED_UNVERIFIED,编辑域名-todo,other,后台/运营管理/渠道管理/域名库管理/编辑域名-todo.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/admin/feedback/category/edit,DOCUMENTED_UNVERIFIED,反馈问题分类修改,other,后台/运营管理/会员反馈/问题分类/反馈问题分类修改.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/admin/feedback/category/insert,DOCUMENTED_UNVERIFIED,反馈问题分类添加,other,后台/运营管理/会员反馈/问题分类/反馈问题分类添加.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/admin/feedback/category/update/state,DOCUMENTED_UNVERIFIED,反馈问题分类停用启用,other,后台/运营管理/会员反馈/问题分类/反馈问题分类停用启用.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/admin/feedback/pending,DOCUMENTED_UNVERIFIED,反馈挂起,other,后台/运营管理/会员反馈/反馈挂起.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/admin/feedback/reply,DOCUMENTED_UNVERIFIED,反馈回复,other,后台/运营管理/会员反馈/反馈回复.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/admin/feedback/reply/update,DOCUMENTED_UNVERIFIED,反馈回复修改,other,后台/运营管理/会员反馈/反馈回复修改.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/admin/feedback/template/edit,DOCUMENTED_UNVERIFIED,反馈问题模版修改,other,后台/运营管理/会员反馈/问题模版/反馈问题模版修改.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/admin/feedback/template/insert,DOCUMENTED_UNVERIFIED,反馈问题模版添加,other,后台/运营管理/会员反馈/问题模版/反馈问题模版添加.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/admin/feedback/template/update/state,DOCUMENTED_UNVERIFIED,反馈问题模版停用启用,other,后台/运营管理/会员反馈/问题模版/反馈问题模版停用启用.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/admin/finance/adjust/export,DOCUMENTED_UNVERIFIED,手动上下分数据导出 - owen,finance,后台/风控管理/上下分记录/手动上下分数据导出 - owen.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/admin/finance/adjust/import,DOCUMENTED_UNVERIFIED,批量上下分,finance,后台/风控管理/上下分记录/批量上下分.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/admin/finance/adjust/insert,DOCUMENTED_UNVERIFIED,余额调整,finance,代理管理后台/代理管理/代理列表/余额调整.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/admin/finance/adjust/list,ACTIVE,系统调整,finance,代理管理后台/财务管理/财务报表/系统调整.bru,YES,
+POST,/admin/finance/deposit/export,DOCUMENTED_UNVERIFIED,充值记录导出-wesley,finance,后台/财务管理/存款记录/充值记录导出-wesley.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/admin/finance/deposit/list,ACTIVE,充值列表-wesley,finance,后台/财务管理/存款记录/充值列表-wesley.bru,YES,
+POST,/admin/finance/deposit/sync,DOCUMENTED_UNVERIFIED,充值同步状态-wesley,finance,后台/财务管理/存款记录/充值同步状态-wesley.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/admin/finance/lazada/order/list,ACTIVE,lazada-订单列表-owen,finance,后台/财务管理/lazada订单/lazada-订单列表-owen.bru,YES,
+POST,/admin/finance/lazada/send/sms,DOCUMENTED_UNVERIFIED,lazada-重新发货-owen,finance,后台/财务管理/lazada订单/lazada-重新发货-owen.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/admin/finance/payment/bank/enable,DOCUMENTED_UNVERIFIED,开启关闭按钮,finance,后台/财务管理/银行卡/开启关闭按钮.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/admin/finance/payment/bank/insert,DOCUMENTED_UNVERIFIED,银行卡添加,finance,后台/财务管理/银行卡/银行卡添加.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/admin/finance/payment/bank/update,DOCUMENTED_UNVERIFIED,银行卡编辑,finance,后台/财务管理/银行卡/银行卡编辑.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/admin/finance/payment/channel/insert,DOCUMENTED_UNVERIFIED,添加支付渠道通道,finance,后台/财务管理/支付渠道/添加支付渠道通道.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/admin/finance/payment/channel/update,DOCUMENTED_UNVERIFIED,更新支付渠道通道,finance,后台/财务管理/支付渠道/更新支付渠道通道.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/admin/finance/payment/insert,DOCUMENTED_UNVERIFIED,x-添加支付渠道-cold,finance,后台/财务管理/支付渠道/x-添加支付渠道-cold.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/admin/finance/payment/platform/enable,DOCUMENTED_UNVERIFIED,支付平台开关,finance,后台/财务管理/支付渠道/支付平台开关.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/admin/finance/payment/platform/insert,DOCUMENTED_UNVERIFIED,添加支付平台,finance,后台/财务管理/支付渠道/添加支付平台.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/admin/finance/payment/platform/update,DOCUMENTED_UNVERIFIED,更新支付平台,finance,后台/财务管理/支付渠道/更新支付平台.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/admin/finance/payment/update,DOCUMENTED_UNVERIFIED,x-更新支付渠道-cold,finance,后台/财务管理/支付渠道/x-更新支付渠道-cold.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/admin/finance/tokens/adjust,DOCUMENTED_UNVERIFIED,代币上下分,finance,后台/vip代币钱包/代币上下分.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/admin/finance/transaction/list,ACTIVE,账变列表- wesley,finance,后台/财务管理/会员钱包账变/账变列表- wesley.bru,YES,
+POST,/admin/finance/turnover/add,DOCUMENTED_UNVERIFIED,会员流水-增加,finance,后台/会员流水/会员流水-增加.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/admin/finance/turnover/clear,DOCUMENTED_UNVERIFIED,会员流水-清零,finance,后台/会员流水/会员流水-清零.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/admin/finance/turnover/sub,DOCUMENTED_UNVERIFIED,会员流水-扣减,finance,后台/会员流水/会员流水-扣减.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/admin/finance/withdraw/agree,DOCUMENTED_UNVERIFIED,提现同意-wesley,finance,后台/风控管理/存-提审核/提现同意-wesley.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/admin/finance/withdraw/batch/agree,DOCUMENTED_UNVERIFIED,批量提现同意-cold,finance,后台/风控管理/存-提审核/批量提现同意-cold.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/admin/finance/withdraw/batch/reject,DOCUMENTED_UNVERIFIED,批量提现拒绝-cold,finance,后台/风控管理/存-提审核/批量提现拒绝-cold.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/admin/finance/withdraw/export,DOCUMENTED_UNVERIFIED,提现记录导出-wesley,finance,后台/财务管理/提现记录/提现记录导出-wesley.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/admin/finance/withdraw/fail,DOCUMENTED_UNVERIFIED,出款失败-wesley,finance,后台/风控管理/存-提审核/出款失败-wesley.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/admin/finance/withdraw/list,ACTIVE,提现列表-wesley,finance,后台/财务管理/提现记录/提现列表-wesley.bru,YES,
+POST,/admin/finance/withdraw/reject,DOCUMENTED_UNVERIFIED,提现拒绝-wesley,finance,后台/风控管理/存-提审核/提现拒绝-wesley.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/admin/finance/withdraw/risk/audit/export,DOCUMENTED_UNVERIFIED,提现审核列表导出,finance,后台/风控管理/存-提审核/提现审核列表导出.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/admin/finance/withdraw/success,DOCUMENTED_UNVERIFIED,出款成功-wesley,finance,后台/风控管理/存-提审核/出款成功-wesley.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/admin/finance/withdraw/sync,DOCUMENTED_UNVERIFIED,提现同步状态-wesley,finance,后台/财务管理/提现记录/提现同步状态-wesley.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/admin/finance/withdraws/limit/conf,DOCUMENTED_UNVERIFIED,更新大量小額提款檢查配置,finance,后台/风控管理/大量小額提款檢查/更新大量小額提款檢查配置.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/admin/game/bindvenue,DOCUMENTED_UNVERIFIED,+游戏绑定到场馆-owen,game,后台/game管理/游戏管理/+游戏绑定到场馆-owen.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/admin/game/dicttypetag/insert,DOCUMENTED_UNVERIFIED,+添加 <类型标签>-owen,game,后台/game管理/游戏管理/+添加 -类型标签--owen.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/admin/game/dicttypetag/list,ACTIVE,+获取 <类型标签> 列表-owen,game,后台/game管理/游戏管理/+获取 -类型标签- 列表-owen.bru,YES,
+POST,/admin/game/dicttypetag/update/state,DOCUMENTED_UNVERIFIED,+修改 <类型标签>-owen,game,后台/game管理/游戏管理/+修改 -类型标签--owen.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/admin/game/dictweighttag/insert,DOCUMENTED_UNVERIFIED,+添加 <权重标签>-owen,game,后台/game管理/游戏管理/+添加 -权重标签--owen.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/admin/game/dictweighttag/list,ACTIVE,+获取 <权重标签> 列表-owen,game,后台/game管理/游戏管理/+获取 -权重标签- 列表-owen.bru,YES,
+POST,/admin/game/dictweighttag/update/state,DOCUMENTED_UNVERIFIED,+修改 <权重标签>-owen,game,后台/game管理/游戏管理/+修改 -权重标签--owen.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/admin/game/gameweighttag/insert,DOCUMENTED_UNVERIFIED,+给游戏添加权重标签-owen,game,后台/game管理/游戏管理/+给游戏添加权重标签-owen.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/admin/game/import,DOCUMENTED_UNVERIFIED,游戏导入,game,后台/game管理/游戏管理/游戏导入.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/admin/game/insert,DOCUMENTED_UNVERIFIED,游戏新增,game,后台/game管理/游戏管理/游戏新增.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/admin/game/list,DOCUMENTED_UNVERIFIED,游戏列表-owen,game,后台/game管理/游戏管理/游戏列表-owen.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/admin/game/search,ACTIVE,+游戏列表查询-owen-aliang,game,后台/game管理/游戏管理/+游戏列表查询-owen-aliang.bru,YES,
+POST,/admin/game/search/export,DOCUMENTED_UNVERIFIED,+游戏列表查询-结果导出-owen,game,后台/game管理/游戏管理/+游戏列表查询-结果导出-owen.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/admin/game/update,DOCUMENTED_UNVERIFIED,+游戏条目更新-owen,game,后台/game管理/游戏管理/+游戏条目更新-owen.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/admin/game/update/compliance,DOCUMENTED_UNVERIFIED,更新游戏合规状态-light/owen,game,后台/game管理/游戏管理/更新游戏合规状态-light-owen.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/admin/game/update/state,DOCUMENTED_UNVERIFIED,游戏更新状态,game,后台/game管理/游戏管理/游戏更新状态.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/admin/game/update/tags,DOCUMENTED_UNVERIFIED,游戏设置排序标签,game,后台/game管理/游戏管理/游戏设置排序标签.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/admin/gameclass/insert,DOCUMENTED_UNVERIFIED,+添加场馆记录-owen,game,后台/game管理/场馆管理/+添加场馆记录-owen.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/admin/gameclass/list,ACTIVE,+查询场馆列表-owen,game,后台/game管理/场馆管理/+查询场馆列表-owen.bru,YES,
+POST,/admin/gameclass/member/index,DOCUMENTED_UNVERIFIED,查询缓存-owen,game,后台/game管理/场馆管理/查询缓存-owen.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/admin/gameclass/update,DOCUMENTED_UNVERIFIED,+更新场馆记录-owen,game,后台/game管理/场馆管理/+更新场馆记录-owen.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/admin/google/secret/update,DOCUMENTED_UNVERIFIED,绑定谷歌令牌-seven,other,后台/后台账号管理/绑定谷歌令牌-seven.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/admin/group/insert,DOCUMENTED_UNVERIFIED,新增角色 --yasser,permission,后台/系统管理/角色管理/新增角色 --yasser.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/admin/group/update,DOCUMENTED_UNVERIFIED,权限列表保存,permission,后台/系统管理/权限管理/权限列表保存.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/admin/home/section/batch-upsert,DOCUMENTED_UNVERIFIED,發佈,other,后台/运营管理/首页板块配置/發佈.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/admin/home/section/cache/rebuild,DOCUMENTED_UNVERIFIED,重建缓存,other,后台/运营管理/首页板块配置/重建缓存.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/admin/home/section/create,DOCUMENTED_UNVERIFIED,新增自定义板块,other,后台/运营管理/首页板块配置/新增自定义板块.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/admin/home/section/update,DOCUMENTED_UNVERIFIED,更新基础分类板块,other,后台/运营管理/首页板块配置/更新基础分类板块.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/admin/hotBetNotice/config/update,DOCUMENTED_UNVERIFIED,爆彩设置更新,other,后台/爆彩/爆彩设置更新.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/admin/hotBetNotice/displayBlacklist/insert,DOCUMENTED_UNVERIFIED,爆彩黑名单新增,other,后台/爆彩/爆彩黑名单新增.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/admin/hotBetNotice/displayBlacklist/remove,DOCUMENTED_UNVERIFIED,爆彩黑名单删除,other,后台/爆彩/爆彩黑名单删除.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/admin/kyc/approve,DOCUMENTED_UNVERIFIED,kyc 审核通过 - double,kyc,后台/kyc/kyc 审核通过 - double.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/admin/kyc/config/edit,DOCUMENTED_UNVERIFIED,ekyc配置编辑,kyc,后台/kyc/ekyc配置编辑.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/admin/kyc/details,DOCUMENTED_UNVERIFIED,uid数组查询详情页,kyc,后台/kyc/uid数组查询详情页.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/admin/kyc/edit,DOCUMENTED_UNVERIFIED,ekyc编辑,kyc,后台/kyc/ekyc编辑.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/admin/kyc/list,ACTIVE,获取 kyc 列表 - double/owen,kyc,后台/kyc/获取 kyc 列表 - double-owen.bru,YES,
+POST,/admin/kyc/reject,DOCUMENTED_UNVERIFIED,kyc 审核驳回 - double,kyc,后台/kyc/kyc 审核驳回 - double.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/admin/kyc/update,DOCUMENTED_UNVERIFIED,更新 kyc - double,kyc,后台/kyc/更新 kyc - double.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/admin/login,ACTIVE,后端账号登陆-seven,auth,后台/后台账号管理/后端账号登陆-seven.bru,YES,
+POST,/admin/login/auth,ACTIVE,后端账号登陆（前置验证）-seven,auth,后台/后台账号管理/后端账号登陆（前置验证）-seven.bru,YES,
+POST,/admin/mall/goods/insert,DOCUMENTED_UNVERIFIED,新增商城商品-todo,other,后台/商城管理/新增商城商品-todo.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/admin/mall/goods/update,DOCUMENTED_UNVERIFIED,更新商城商品-todo,other,后台/商城管理/更新商城商品-todo.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/admin/mall/order/delivery,DOCUMENTED_UNVERIFIED,手动发货-todo,other,后台/商城订单记录/手动发货-todo.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/admin/marquee/add,ACTIVE,添加,other,后台/跑马灯/添加.bru,YES,
+POST,/admin/marquee/delete,ACTIVE,删除,other,后台/跑马灯/删除.bru,YES,
+POST,/admin/marquee/update,ACTIVE,修改/启用停止切换,other,后台/跑马灯/修改-启用停止切换.bru,YES,
+POST,/admin/member/buyfeature/state/set,DOCUMENTED_UNVERIFIED,更新会员购买免费旋转记录,member,后台/会员列表/更新会员购买免费旋转记录.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/admin/member/deposit/multiple/update,DOCUMENTED_UNVERIFIED,用户充值倍率调整-aliang,finance,后台/后台账号管理/用户充值倍率调整-aliang.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/admin/member/exemption/insert,DOCUMENTED_UNVERIFIED,豁免清单导入,member,后台/集成后台参数/接口管理/集成参数/豁免清单导入.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/admin/member/insert,DOCUMENTED_UNVERIFIED,新增会员 - seven/double,member,后台/会员列表/新增会员 - seven-double.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/admin/member/limitation/state/update,DOCUMENTED_UNVERIFIED,更新会员限制状态,member,后台/会员列表/更新会员限制状态.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/admin/member/retrieve/password,DOCUMENTED_UNVERIFIED,后台会员密码otp重置,auth,后台/后台账号管理/后台会员密码otp重置.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/admin/member/risk/update,DOCUMENTED_UNVERIFIED,风控调整,member,后台/会员列表/风控调整.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/admin/member/turnover/clear,DOCUMENTED_UNVERIFIED,会员流水清理-light,member,后台/会员列表/会员流水清理-light.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/admin/member/unbind,DOCUMENTED_UNVERIFIED,三方账号解绑,member,后台/会员列表/三方账号解绑.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/admin/member/unblock,DOCUMENTED_UNVERIFIED,block解封,member,后台/会员列表/block解封.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/admin/member/update,DOCUMENTED_UNVERIFIED,更新会员 - seven/double,member,后台/会员列表/更新会员 - seven-double.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/admin/member/update/password,DOCUMENTED_UNVERIFIED,重置会员密码,auth,后台/会员列表/重置会员密码.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/admin/member/vip/level/manual/upgrade,DOCUMENTED_UNVERIFIED,会员vip手动升级,member,后台/Vipv2/会员vip手动升级.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/admin/message/revoke,DOCUMENTED_UNVERIFIED,撤销站内信-todo,other,后台/运营管理/站内信管理/撤销站内信-todo.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/admin/message/send,DOCUMENTED_UNVERIFIED,发送站内信消息,other,代理后台/消息管理/发送站内信消息.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/admin/message/templates/update,DOCUMENTED_UNVERIFIED,更新消息模板-todo,other,后台/运营管理/消息模板/更新消息模板-todo.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/admin/platform/insert,DOCUMENTED_UNVERIFIED,+添加厂商记录-owen,game,后台/game管理/厂商管理/+添加厂商记录-owen.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/admin/platform/list,DOCUMENTED_UNVERIFIED,场馆列表-owen,game,后台/game管理/场馆管理/场馆列表-owen.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/admin/platform/search,ACTIVE,+查询厂商列表-owen,game,后台/game管理/厂商管理/+查询厂商列表-owen.bru,YES,
+POST,/admin/platform/update,DOCUMENTED_UNVERIFIED,+更新厂商记录-owen,game,后台/game管理/厂商管理/+更新厂商记录-owen.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/admin/platform/update/state,DOCUMENTED_UNVERIFIED,场馆更新状态-owen,game,后台/game管理/场馆管理/场馆更新状态-owen.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/admin/promo/bonus/game/insert,DOCUMENTED_UNVERIFIED,游戏插入,game,后台/活动/游戏插入 - felix.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/admin/promo/bti/world/cup/bti/syn,DOCUMENTED_UNVERIFIED,freebet活动管理-同步状态,game,后台/game管理/freebet活动管理/freebet活动管理-同步状态.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/admin/promo/bti/world/cup/cancel,DOCUMENTED_UNVERIFIED,freebet活动管理-取消免费投注,game,后台/game管理/freebet活动管理/freebet活动管理-取消免费投注.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/admin/promo/free/spin/import,DOCUMENTED_UNVERIFIED,批量派发,promo,活动/后台-活动管理/freeSpin/批量派发.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/admin/promo/free/spin/insert,DOCUMENTED_UNVERIFIED,手动派发,promo,活动/后台-活动管理/freeSpin/手动派发.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/admin/promo/free/spin/invalid,DOCUMENTED_UNVERIFIED,作废,promo,活动/后台-活动管理/freeSpin/作废.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/admin/promo/insert,DOCUMENTED_UNVERIFIED,活动充值 - whisper,promo,后台/活动/活动充值 - whisper.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/admin/promo/invite/config/update,DOCUMENTED_UNVERIFIED,保存配置信息,promo,后台/运营管理/邀请好友/保存配置信息.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/admin/promo/invite/friends/transfer,DOCUMENTED_UNVERIFIED,好友转线,promo,后台/运营管理/邀请好友/好友转线.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/admin/promo/task/insert,DOCUMENTED_UNVERIFIED,新增任务-seven,promo,后台/vip任务中心/新增任务-seven.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/admin/promo/update,DOCUMENTED_UNVERIFIED,活动编辑,promo,后台/Vipv2/活动编辑.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/admin/record/bet,ACTIVE,游戏记录-wesley,finance,后台/财务管理/注单管理/游戏记录-wesley.bru,YES,
+POST,/admin/reports/game/adjust,DOCUMENTED_UNVERIFIED,游戏报表校准,game,后台/报表/游戏报表校准.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/admin/shop/gs/update,DOCUMENTED_UNVERIFIED,更新场馆状态,other,后台/运营管理/客户端管理/门店客户端/更新场馆状态.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/admin/sms/conf/sort,DOCUMENTED_UNVERIFIED,短信排序更新,auth,后台/短信发送列表/短信排序更新.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/admin/sms/conf/state,DOCUMENTED_UNVERIFIED,短信状态更新,auth,后台/短信发送列表/短信状态更新.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/admin/superior/update,DOCUMENTED_UNVERIFIED,会员转线,other,后台/会员列表/会员转线.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/admin/sys/config/deposit/multiple/update,DOCUMENTED_UNVERIFIED,平台充值倍率更新-aliang,finance,后台/运营管理/客户端管理/平台倍率/平台充值倍率更新-aliang.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/admin/sys/config/gnode/list,DOCUMENTED_UNVERIFIED,集成参数获取,other,后台/集成后台参数/接口管理/集成参数/集成参数获取.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/admin/sys/config/gnode/submit,DOCUMENTED_UNVERIFIED,集成参数提交,other,后台/集成后台参数/接口管理/集成参数/集成参数提交.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/admin/trd/update,DOCUMENTED_UNVERIFIED,修改,other,后台/运营管理/客户端管理/三方登录开关/修改.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/admin/upload/private,DOCUMENTED_UNVERIFIED,上传-临时访问 - double,permission,后台/上传/上传-临时访问 - double.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/admin/upload/public,DOCUMENTED_UNVERIFIED,上传-公开访问 - double,other,后台/上传/上传-公开访问 - double.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/admin/user/insert,DOCUMENTED_UNVERIFIED,新增账户-seven,other,后台/后台账号管理/新增账户-seven.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/admin/user/update,DOCUMENTED_UNVERIFIED,修改账户信息-seven,other,后台/后台账号管理/修改账户信息-seven.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/admin/user/update/password,DOCUMENTED_UNVERIFIED,后台员工修改密码,auth,后台/后台账号管理/后台员工修改密码.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/admin/venue/list,DOCUMENTED_UNVERIFIED,厂商列表-light/owen,game,后台/game管理/厂商管理/厂商列表-light-owen.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/admin/vip/config/edit,DOCUMENTED_UNVERIFIED,配置编辑,other,后台/Vipv2/配置编辑.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/admin/vip/level/update,DOCUMENTED_UNVERIFIED,VIP配置编辑-todo,other,后台/VIP/VIP配置编辑-todo.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/admin/webauthn/bind/execute,DOCUMENTED_UNVERIFIED,webauthn绑定-owen,auth,后台/后台账号管理/webauthn/webauthn绑定-owen.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/admin/webauthn/bind/option,DOCUMENTED_UNVERIFIED,webauthn绑定配置-owen,auth,后台/后台账号管理/webauthn/webauthn绑定配置-owen.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/admin/webauthn/temporary/execute,DOCUMENTED_UNVERIFIED,webauthn临时验证-owen,auth,后台/后台账号管理/webauthn/webauthn临时验证-owen.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/admin/webauthn/temporary/option,DOCUMENTED_UNVERIFIED,webauthn临时验证配置-owen,auth,后台/后台账号管理/webauthn/webauthn临时验证配置-owen.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/admin/webauthn/unbind,DOCUMENTED_UNVERIFIED,webauthn解绑-owen,auth,后台/后台账号管理/webauthn/webauthn解绑-owen.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/admin/webauthn/verify/execute,DOCUMENTED_UNVERIFIED,webauthn验证-owen,auth,后台/后台账号管理/webauthn/webauthn验证-owen.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/admin/webauthn/verify/option,DOCUMENTED_UNVERIFIED,webauthn验证配置-owen,auth,后台/后台账号管理/webauthn/webauthn验证配置-owen.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/admin/whiteList/insert,DOCUMENTED_UNVERIFIED,新增白名单 --yasser,other,后台/系统管理/白名单管理/新增白名单 --yasser.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/admin/whiteList/update,DOCUMENTED_UNVERIFIED,更新白名单 --yasser,other,后台/系统管理/白名单管理/更新白名单 --yasser.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/agency/member/update/password,DOCUMENTED_UNVERIFIED,重置会员密码,auth,代理后台/会员列表/重置会员密码.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/backend/agency/banner/insert,DOCUMENTED_UNVERIFIED,新增轮播图,other,代理管理后台/推广素材/新增轮播图.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/backend/agency/banner/list,DOCUMENTED_UNVERIFIED,轮播图列表,other,代理管理后台/推广素材/轮播图列表.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/backend/agency/banner/update/state,DOCUMENTED_UNVERIFIED,轮播图更新状态,other,代理管理后台/推广素材/轮播图更新状态.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/backend/agency/google/secret/update,DOCUMENTED_UNVERIFIED,绑定谷歌令牌-seven,other,代理管理后台/后台账号管理/绑定谷歌令牌-seven.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/backend/agency/login,DOCUMENTED_UNVERIFIED,后端账号登陆,auth,代理管理后台/后台账号管理/后端账号登陆.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/backend/agency/login/auth,DOCUMENTED_UNVERIFIED,后端账号登陆（前置验证）-seven,auth,代理管理后台/后台账号管理/后端账号登陆（前置验证）-seven.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/backend/agency/member/retrieve/password,DOCUMENTED_UNVERIFIED,后台会员密码otp重置,auth,代理管理后台/后台账号管理/后台会员密码otp重置.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/backend/agency/sys/config/set,DOCUMENTED_UNVERIFIED,系统配置设置,other,代理管理后台/代理管理/代理设置/活跃会员/系统配置设置.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/backend/agency/user/insert,DOCUMENTED_UNVERIFIED,新增账户,other,代理管理后台/后台账号管理/新增账户.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/backend/agency/user/update,DOCUMENTED_UNVERIFIED,修改账户信息,other,代理管理后台/后台账号管理/修改账户信息.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/backend/agency/user/update/password,DOCUMENTED_UNVERIFIED,后台员工修改密码,auth,代理管理后台/后台账号管理/后台员工修改密码.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/channel/promotion/deposit/insert,DOCUMENTED_UNVERIFIED,新增模版,finance,后台/渠道推广-充值模版/新增模版.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/cmpl/banner/insert,DOCUMENTED_UNVERIFIED,新增轮播图,other,合规/轮播图/新增轮播图.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/cmpl/banner/list,DOCUMENTED_UNVERIFIED,轮播图列表,other,合规/轮播图/轮播图列表.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/cmpl/banner/update,DOCUMENTED_UNVERIFIED,轮播图修改,other,合规/轮播图/轮播图修改.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/cmpl/banner/update/state,DOCUMENTED_UNVERIFIED,轮播图更新状态,other,合规/轮播图/轮播图更新状态.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/cmpl/finance/deposit/export,DOCUMENTED_UNVERIFIED,充值记录导出-wesley,finance,合规/财务管理/财务记录/充值记录导出-wesley.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/cmpl/finance/transaction/export,DOCUMENTED_UNVERIFIED,交易记录导出-wesley,finance,合规/交易管理/交易记录导出-wesley.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/cmpl/finance/withdraw/export,DOCUMENTED_UNVERIFIED,提现记录导出-wesley,finance,合规/财务管理/财务记录/提现记录导出-wesley.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/cmpl/game/update/state,DOCUMENTED_UNVERIFIED,游戏更新状态,game,合规/游戏管理/游戏更新状态.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/cmpl/group/insert,DOCUMENTED_UNVERIFIED,新增角色 --yasser,permission,合规/系统管理/角色管理/新增角色 --yasser.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/cmpl/group/update,DOCUMENTED_UNVERIFIED,更新角色--yasser,permission,合规/系统管理/角色管理/更新角色--yasser.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/cmpl/jackpot/export,DOCUMENTED_UNVERIFIED,jackpot记录导出-owen,game,合规/游戏记录/jackpot记录导出-owen.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/cmpl/jackpot/list,DOCUMENTED_UNVERIFIED,jackpot记录-owen,game,合规/游戏记录/jackpot记录-owen.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/cmpl/kyc/approve,DOCUMENTED_UNVERIFIED,kyc 审核通过 - owen,kyc,合规/kyc/kyc 审核通过 - owen.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/cmpl/kyc/list,DOCUMENTED_UNVERIFIED,获取 kyc 列表 - owen,kyc,合规/kyc/获取 kyc 列表 - owen.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/cmpl/kyc/reject,DOCUMENTED_UNVERIFIED,kyc 审核驳回 - owen,kyc,合规/kyc/kyc 审核驳回 - owen.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/cmpl/kyc/update,DOCUMENTED_UNVERIFIED,更新 kyc - owen,kyc,合规/kyc/更新 kyc - owen.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/cmpl/log/list,DOCUMENTED_UNVERIFIED,日志-seven,other,合规/后台日志/日志-seven.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/cmpl/login,DOCUMENTED_UNVERIFIED,后端账号登陆-seven,auth,合规/后台账号管理/后端账号登陆-seven.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/cmpl/member/insert,DOCUMENTED_UNVERIFIED,新增会员 - seven/double,member,合规/会员列表/新增会员 - seven-double.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/cmpl/member/retrieve/password,DOCUMENTED_UNVERIFIED,后台会员密码otp重置,auth,合规/后台账号管理/后台会员密码otp重置.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/cmpl/member/update,DOCUMENTED_UNVERIFIED,更新会员 - seven/double,member,合规/会员列表/更新会员 - seven-double.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/cmpl/member/update/password,DOCUMENTED_UNVERIFIED,重置会员密码,auth,合规/会员列表/重置会员密码.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/cmpl/platform/update/state,DOCUMENTED_UNVERIFIED,场馆更新状态,other,合规/场馆管理/场馆更新状态.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/cmpl/record/api,DOCUMENTED_UNVERIFIED,拉单API - light,report,合规/报表/拉单API - light.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/cmpl/record/bet,DOCUMENTED_UNVERIFIED,全平台投注记录-wesley/owen,game,合规/游戏记录/全平台投注记录-wesley-owen.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/cmpl/record/export,DOCUMENTED_UNVERIFIED,游戏记录导出-wesley/owen,game,合规/游戏记录/游戏记录导出-wesley-owen.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/cmpl/report/pagcor/dictionary,DOCUMENTED_UNVERIFIED,pagcor 数据字典 - owen,report,合规/报表/pagcor 数据字典 - owen.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/cmpl/report/pagcor/export,DOCUMENTED_UNVERIFIED,pagcor 导出 - owen,report,合规/报表/pagcor 导出 - owen.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/cmpl/report/pagcor/list,DOCUMENTED_UNVERIFIED,pagcor 报表 - owen,report,合规/报表/pagcor 报表 - owen.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/cmpl/report/shop/export,DOCUMENTED_UNVERIFIED,门店报表导出 - owen,report,合规/报表/门店报表导出 - owen.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/cmpl/report/shop/list,DOCUMENTED_UNVERIFIED,门店报表 - owen,report,合规/报表/门店报表 - owen.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/cmpl/report/summary/list,DOCUMENTED_UNVERIFIED,报表-报告摘要,report,合规/报表/报表-报告摘要.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/cmpl/shop/insert,DOCUMENTED_UNVERIFIED,新增门店,other,合规/门店/新增门店.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/cmpl/shop/update,DOCUMENTED_UNVERIFIED,修改门店,other,合规/门店/修改门店.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/cmpl/upload/private,DOCUMENTED_UNVERIFIED,上传-临时访问 - double,permission,合规/上传/上传-临时访问 - double.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/cmpl/upload/public,DOCUMENTED_UNVERIFIED,上传-公开访问 - double,other,合规/上传/上传-公开访问 - double.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/cmpl/user/insert,DOCUMENTED_UNVERIFIED,新增账户-seven,other,合规/后台账号管理/新增账户-seven.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/cmpl/user/update,DOCUMENTED_UNVERIFIED,修改账户信息-seven,other,合规/后台账号管理/修改账户信息-seven.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/cmpl/user/update/password,DOCUMENTED_UNVERIFIED,后台员工修改密码,auth,合规/后台账号管理/后台员工修改密码.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/cmpl/whiteList/insert,DOCUMENTED_UNVERIFIED,新增白名单 --yasser,other,合规/系统管理/白名单管理/新增白名单 --yasser.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/cmpl/whiteList/update,DOCUMENTED_UNVERIFIED,更新白名单 --yasser,other,合规/系统管理/白名单管理/更新白名单 --yasser.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/finance/withdraw/risk/list,DOCUMENTED_UNVERIFIED,提现订单,finance,后台/风控管理/存-提审核/提现订单.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/member/oss/upload,DOCUMENTED_UNVERIFIED,上传 kyc 相关图片 - double,kyc,前台/oss/上传 kyc 相关图片 - double.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/platform/game/dicttypetag/list,DOCUMENTED_UNVERIFIED,+获取 <类型标签> 列表-owen,game,游戏集成平台/游戏管理/+获取 -类型标签- 列表-owen.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/platform/game/dictweighttag/list,DOCUMENTED_UNVERIFIED,+获取 <权重标签> 列表-owen,game,游戏集成平台/游戏管理/+获取 -权重标签- 列表-owen.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/platform/game/export,DOCUMENTED_UNVERIFIED,游戏导出,game,游戏集成平台/游戏管理/游戏导出.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/platform/game/update,DOCUMENTED_UNVERIFIED,游戏编辑,game,游戏集成平台/游戏管理/游戏编辑.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/platform/game/update/state,DOCUMENTED_UNVERIFIED,游戏更新状态,game,游戏集成平台/游戏管理/游戏更新状态.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/platform/gameclass/list,DOCUMENTED_UNVERIFIED,+查询场馆列表-owen,game,游戏集成平台/游戏管理/+查询场馆列表-owen.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/platform/group/insert,DOCUMENTED_UNVERIFIED,新增角色,game,游戏集成平台/系统管理/角色管理/新增角色.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/platform/group/update,DOCUMENTED_UNVERIFIED,更新角色,game,游戏集成平台/系统管理/角色管理/更新角色.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/platform/login,DOCUMENTED_UNVERIFIED,后端账号登陆-seven,auth,游戏集成平台/系统管理/用户管理/后端账号登陆-seven.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/platform/login/auth,DOCUMENTED_UNVERIFIED,谷歌验证码校验,auth,游戏集成平台/系统管理/用户管理/谷歌验证码校验.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/platform/merchant/resetkey,DOCUMENTED_UNVERIFIED,商户key生成,game,游戏集成平台/商户管理/商户key生成.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/platform/merchant/update/state,DOCUMENTED_UNVERIFIED,商户更新,game,游戏集成平台/商户管理/商户更新.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/platform/record/bet,DOCUMENTED_UNVERIFIED,注单管理,game,游戏集成平台/商户管理/注单管理.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/platform/record/bet/stat,DOCUMENTED_UNVERIFIED,注单管理合计,game,游戏集成平台/商户管理/注单管理合计.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/platform/report/bi,DOCUMENTED_UNVERIFIED,首页报表,game,游戏集成平台/报表/首页报表.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/platform/user/insert,DOCUMENTED_UNVERIFIED,新增账户-seven,game,游戏集成平台/系统管理/用户管理/新增账户-seven.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/platform/user/update,DOCUMENTED_UNVERIFIED,修改账户信息-seven,game,游戏集成平台/系统管理/用户管理/修改账户信息-seven.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/platform/user/update/password,DOCUMENTED_UNVERIFIED,后台员工修改密码,auth,游戏集成平台/系统管理/用户管理/后台员工修改密码.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/platform/venue/update/state,DOCUMENTED_UNVERIFIED,厂商管理更新,game,游戏集成平台/游戏管理/厂商管理更新.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/sys/config/compliance/update,DOCUMENTED_UNVERIFIED,合规化开关更新,other,后台/运营管理/客户端配置/合规化开关更新.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/sys/config/set,DOCUMENTED_UNVERIFIED,系统配置设置--wesley,other,后台/系统管理/系统配置/系统配置设置--wesley.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+POST,/sys/config/update,DOCUMENTED_UNVERIFIED,系统配置更新--wesley,other,后台/系统管理/系统配置/系统配置更新--wesley.bru,NO,No STALE/REPLACED_BY decision without replacement or non-use evidence
+GET,/admin/channel/promotion/effect,UNDOCUMENTED_ACTIVE,,,,YES,Observed in FAT UI; absent from inventory
+GET,/admin/channel/promotion/firstDeposit,UNDOCUMENTED_ACTIVE,,,,YES,Observed in FAT UI; absent from inventory
+GET,/admin/channel/promotion/register,UNDOCUMENTED_ACTIVE,,,,YES,Observed in FAT UI; absent from inventory
+GET,/admin/channel/promotion/satistic,UNDOCUMENTED_ACTIVE,,,,YES,Observed in FAT UI; absent from inventory
+GET,/admin/message/reads,UNDOCUMENTED_ACTIVE,,,,YES,Observed in FAT UI; absent from inventory
+GET,/admin/promo/flip/card/report,UNDOCUMENTED_ACTIVE,,,,YES,Observed in FAT UI; absent from inventory
+GET,/admin/promo/turntable/reward/give/list,MISCLASSIFIED,发放报表,report,活动/后台-活动管理/大转盘/发放报表.bru,YES,Observed from admin UI but inventory surface is unknown
+GET,/admin/promo/turntable/reward/goods/list,MISCLASSIFIED,大转盘-奖励商品列表,promo,活动/后台-活动管理/大转盘/大转盘-奖励商品列表.bru,YES,Observed from admin UI but inventory surface is unknown
+GET,/admin/promo/turntable/reward/lottery/list,UNDOCUMENTED_ACTIVE,,,,YES,Observed in FAT UI; absent from inventory
+GET,/admin/reports/bi/chart,UNDOCUMENTED_ACTIVE,,,,YES,Observed in FAT UI; absent from inventory
+GET,/admin/sys/config/compliance/status,UNDOCUMENTED_ACTIVE,,,,YES,Observed in FAT UI; absent from inventory
+POST,/admin/dict/venues,UNDOCUMENTED_ACTIVE,,,,YES,Observed in FAT UI; absent from inventory
+POST,/admin/finance/deposit/risk/list,UNDOCUMENTED_ACTIVE,,,,YES,Observed in FAT UI; absent from inventory
+POST,/admin/finance/tokens/transaction/list,UNDOCUMENTED_ACTIVE,,,,YES,Observed in FAT UI; absent from inventory
+POST,/admin/finance/withdraw/risk/audit/list,UNDOCUMENTED_ACTIVE,,,,YES,Observed in FAT UI; absent from inventory
+POST,/admin/finance/withdraw/risk/list,UNDOCUMENTED_ACTIVE,,,,YES,Observed in FAT UI; absent from inventory
+POST,/admin/member/list,UNDOCUMENTED_ACTIVE,,,,YES,Observed in FAT UI; absent from inventory
+POST,/admin/promo/task/list,UNDOCUMENTED_ACTIVE,,,,YES,Observed in FAT UI; absent from inventory
+POST,/admin/record/game,UNDOCUMENTED_ACTIVE,,,,YES,Observed in FAT UI; absent from inventory
+POST,/admin/user/list,UNDOCUMENTED_ACTIVE,,,,YES,Observed in FAT UI; absent from inventory

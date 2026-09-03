@@ -1,0 +1,304 @@
+{
+  "captured_at": "2026-09-03T08:04:07.291Z",
+  "environment": "FAT",
+  "lane": "terminal",
+  "target_ref": "FAT-MEMBER-END-01",
+  "action_name": "Transfer",
+  "control_present": true,
+  "control_disabled": false,
+  "available_buttons": [
+    "",
+    "",
+    "",
+    "XP Growth Log",
+    "Transfer",
+    "T5",
+    "<redacted-ip>",
+    "",
+    "H5",
+    "",
+    "<redacted-ip>",
+    "",
+    "0.00",
+    "0.00",
+    "P 0.00",
+    "P 0.00",
+    "View Details",
+    "Unblock",
+    "Risk Control",
+    "Reset Password",
+    "Convert to Agent"
+  ],
+  "form": {
+    "title": "Inviter Transfer",
+    "text_head": "Inviter Transfer Transferred Member filbet_yTTP2J (<redacted>) Transfer Tips The transferred member must have no subordinates and no inviter. After the update, the system will recalculate friend invitation rewards and milestone rewards. Target Inviter Phone Number Note 0 / 200 Cancel OK",
+    "fields": [
+      {
+        "index": 0,
+        "label": "Transferred Member",
+        "required": false,
+        "controls": []
+      },
+      {
+        "index": 1,
+        "label": "",
+        "required": false,
+        "controls": []
+      },
+      {
+        "index": 2,
+        "label": "Target Inviter Phone Number",
+        "required": true,
+        "controls": [
+          {
+            "type": "search",
+            "placeholder": "Please enter the target inviter phone number",
+            "disabled": false
+          }
+        ]
+      },
+      {
+        "index": 3,
+        "label": "Note",
+        "required": true,
+        "controls": [
+          {
+            "type": "textarea",
+            "placeholder": "Please enter a note",
+            "disabled": false
+          }
+        ]
+      }
+    ],
+    "radio_labels": [],
+    "select_texts": [],
+    "buttons": [
+      "",
+      "",
+      "Cancel",
+      "OK"
+    ]
+  },
+  "submitted": false,
+  "writes": 0,
+  "side_effects": [],
+  "raw_phone_or_uid_persisted": false,
+  "network": [
+    {
+      "action": "login",
+      "method": "GET",
+      "path": "/admin/me/detail",
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": false,
+      "response_values_persisted": false
+    },
+    {
+      "action": "login",
+      "method": "POST",
+      "path": "/admin/login/auth",
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_values_persisted": false
+    },
+    {
+      "action": "login",
+      "method": "POST",
+      "path": "/admin/login",
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_values_persisted": false
+    },
+    {
+      "action": "login",
+      "method": "GET",
+      "path": "/admin/me/detail",
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_values_persisted": false
+    },
+    {
+      "action": "login",
+      "method": "GET",
+      "path": "/admin/me/detail",
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_values_persisted": false
+    },
+    {
+      "action": "login",
+      "method": "GET",
+      "path": "/admin/sys/config/compliance/status",
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_values_persisted": false
+    },
+    {
+      "action": "login",
+      "method": "POST",
+      "path": "/admin/gameclass/list",
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_values_persisted": false
+    },
+    {
+      "action": "login",
+      "method": "GET",
+      "path": "/admin/notify/audit/alarm",
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_values_persisted": false
+    },
+    {
+      "action": "login",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_values_persisted": false
+    },
+    {
+      "action": "login",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_values_persisted": false
+    },
+    {
+      "action": "login",
+      "method": "GET",
+      "path": "/admin/channel/manage/dict",
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_values_persisted": false
+    },
+    {
+      "action": "login",
+      "method": "POST",
+      "path": "/admin/member/list",
+      "body_fields": [
+        "end_time",
+        "page",
+        "page_size",
+        "start_time"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_values_persisted": false
+    },
+    {
+      "action": "login",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_values_persisted": false
+    },
+    {
+      "action": "login",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_values_persisted": false
+    },
+    {
+      "action": "login",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_values_persisted": false
+    },
+    {
+      "action": "login",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_values_persisted": false
+    },
+    {
+      "action": "login",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_values_persisted": false
+    },
+    {
+      "action": "login",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_values_persisted": false
+    },
+    {
+      "action": "login",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_values_persisted": false
+    },
+    {
+      "action": "login",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_values_persisted": false
+    },
+    {
+      "action": "login",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_values_persisted": false
+    },
+    {
+      "action": "login",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_values_persisted": false
+    },
+    {
+      "action": "transfer:query target",
+      "method": "POST",
+      "path": "/admin/member/list",
+      "body_fields": [
+        "page",
+        "page_size",
+        "phone"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_values_persisted": false
+    }
+  ]
+}

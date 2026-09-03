@@ -1,0 +1,29 @@
+{
+  "environment": "FAT",
+  "data_scope": "THIS_RUN_CREATED_ONLY",
+  "rows": 32,
+  "unique_live_endpoints": 18,
+  "classifications": {
+    "ACTIVE": 21,
+    "DOCUMENTED_UNVERIFIED": 6,
+    "UNDOCUMENTED_ACTIVE": 1,
+    "ACTIVE_FAILED": 1,
+    "MISCLASSIFIED": 3
+  },
+  "restored_flows": [
+    "Bet limitation",
+    "Login limitation",
+    "Risk Control",
+    "Wallet Credit/Debit",
+    "VIP manual level",
+    "Member recharge rate",
+    "Turnover requirement +1/-1"
+  ],
+  "terminal_flows": [
+    "Convert to Agent"
+  ],
+  "kyc_transition": "0 → 2 → 3 → 2 → 5",
+  "unrestored_accidental_side_effects": 0,
+  "pending_intentional_state": "FAT-KYC-REJECT-01 is approved (kyc_status=5); token-list branch returned business status=false with no state change; turnover add/sub restored FAT-MEMBER-REV-01 to left_turnover_count=0",
+  "raw_phone_uid_or_otp_persisted": false
+}

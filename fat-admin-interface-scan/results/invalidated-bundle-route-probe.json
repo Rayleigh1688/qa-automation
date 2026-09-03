@@ -1,0 +1,6103 @@
+{
+  "captured_at": "2026-09-03T05:29:43.971Z",
+  "environment": "FAT",
+  "headed": true,
+  "routes": [
+    "/home",
+    "/kyc",
+    "/member-management",
+    "/member-management/vip-config",
+    "/member-management/vip-rewards",
+    "/member-management/vip-checkin-log",
+    "/member-management/inviter-transfer-records",
+    "/agency-management",
+    "/agency-management/agency-statistical",
+    "/report-management",
+    "/report-management/game-reports/list",
+    "/report-management/game-types-report/list",
+    "/report-management/game-platform-report/list",
+    "/report-management/member-daily-stats",
+    "/report-management/member-daily-game-stats",
+    "/payment",
+    "/payment/recharge-orders/list",
+    "/payment/withdraw-orders/list",
+    "/payment/betting-slip/list",
+    "/payment/transaction-orders",
+    "/payment/channel-ordersV2",
+    "/payment/recharge-card-orders/list",
+    "/operations",
+    "/operations/daily-reports",
+    "/operations/client-config",
+    "/operations/material-management",
+    "/operations/activity-list",
+    "/operations/advertisement-tracking",
+    "/operations/mall-management",
+    "/operations/activity-expenditure-audit",
+    "/operations/in-site-message",
+    "/operations/friend-invite",
+    "/operations/jackpot-board",
+    "/operations/message-templates",
+    "/operations/recharge-template",
+    "/operations/ops-tools",
+    "/operations/marquee-management",
+    "/operations/home-sections",
+    "/site-management",
+    "/site-management/domain-management",
+    "/risk-control",
+    "/risk-control/dw-audit",
+    "/risk-control/up-down-score",
+    "/risk-control/temporary-restriction-list",
+    "/risk-control/risk-logs",
+    "/promo-marketing",
+    "/promo-marketing/channels",
+    "/promo-marketing/statistical-reports",
+    "/promo-marketing/effect-evaluation",
+    "/promo-marketing/register-daily-active",
+    "/promo-marketing/first-deposit-daily-active",
+    "/promo-marketing/promotion-data",
+    "/game",
+    "/game/bet-orders",
+    "/gamev2",
+    "/gamev2/venue-settings",
+    "/gamev2/manufacturer-management",
+    "/gamev2/game-management",
+    "/gamev2/freespin-grants",
+    "/gamev2/freespin-import-logs",
+    "/system",
+    "/system/role",
+    "/system/staff",
+    "/system/sms-otp",
+    "/system/order-monitor",
+    "/whitelist/list",
+    "/logs/list",
+    "/member-center/list",
+    "/aggregation",
+    "/aggregation/home",
+    "/aggregation/settings",
+    "/aggregation/business"
+  ],
+  "pages": [
+    {
+      "order": 1,
+      "route": "/home",
+      "final_url": "https://admin-fat.filbet2025.com/home",
+      "title": "Filbet Admin",
+      "controls": {
+        "headings": [
+          "Filbet Admin"
+        ],
+        "buttons": [
+          "Reset",
+          "Search",
+          "Line Chart Mode",
+          "Bar Chart Mode",
+          "On\nClosed"
+        ],
+        "tabs": [
+          "Home"
+        ],
+        "input_placeholders": [
+          "Year/Month/Day"
+        ],
+        "select_count": 0,
+        "table_count": 0
+      },
+      "actions": [
+        "query"
+      ],
+      "request_count": 6,
+      "active_count": 6,
+      "failed_count": 0,
+      "error": null
+    },
+    {
+      "order": 2,
+      "route": "/kyc",
+      "final_url": "https://admin-fat.filbet2025.com/kyc",
+      "title": "Filbet Admin",
+      "controls": {
+        "headings": [
+          "Filbet Admin"
+        ],
+        "buttons": [
+          "Reset",
+          "Query",
+          "EKYC Config"
+        ],
+        "tabs": [
+          "Home",
+          "KYC",
+          "Bonus Reissue\nApproved Today (0)\nPending Review (44)",
+          "Bonus Order Count\nApproved Today (0)\nPending Review (0)"
+        ],
+        "input_placeholders": [
+          "Please Enter Phone Number",
+          "Please Enter First Name",
+          "Please Enter Middle Name",
+          "Please Enter Last Name",
+          "Start Date",
+          "End Date",
+          "Please Enter Registration IP"
+        ],
+        "select_count": 1,
+        "table_count": 3
+      },
+      "actions": [
+        "tab_2",
+        "tab_3",
+        "tab_4"
+      ],
+      "request_count": 4,
+      "active_count": 4,
+      "failed_count": 0,
+      "error": null
+    },
+    {
+      "order": 3,
+      "route": "/member-management",
+      "final_url": "https://admin-fat.filbet2025.com/member-center/list",
+      "title": "Filbet Admin",
+      "controls": {
+        "headings": [
+          "Filbet Admin"
+        ],
+        "buttons": [
+          "Batch query",
+          "Reset",
+          "Query",
+          "Add Member",
+          "Export",
+          "XP Growth Log",
+          "Transfer",
+          "T5",
+          "61.28.141.85",
+          "H5",
+          "0.00",
+          "P 0.00",
+          "View Details",
+          "Unblock",
+          "Risk Control",
+          "Reset Password",
+          "Convert to Agent",
+          "138.84.137.186",
+          "8.212.155.55",
+          "PC",
+          "500.00",
+          "P 708.00",
+          "9451000000",
+          "202.187.225.43"
+        ],
+        "tabs": [
+          "Member"
+        ],
+        "input_placeholders": [
+          "Please enter",
+          "Start Date",
+          "End Date",
+          "Minimum Value",
+          "Maximum Value"
+        ],
+        "select_count": 10,
+        "table_count": 3
+      },
+      "actions": [],
+      "request_count": 16,
+      "active_count": 16,
+      "failed_count": 0,
+      "error": null
+    },
+    {
+      "order": 4,
+      "route": "/member-management/vip-config",
+      "final_url": "https://admin-fat.filbet2025.com/member-management/vip-config",
+      "title": "Filbet Admin",
+      "controls": {
+        "headings": [
+          "Filbet Admin",
+          "VIP Configuration"
+        ],
+        "buttons": [
+          "System Overview",
+          "Reward Flow",
+          "XP Calculation"
+        ],
+        "tabs": [
+          "Member",
+          "VIP Config"
+        ],
+        "input_placeholders": [],
+        "select_count": 0,
+        "table_count": 3
+      },
+      "actions": [
+        "tab_2"
+      ],
+      "request_count": 5,
+      "active_count": 5,
+      "failed_count": 0,
+      "error": null
+    },
+    {
+      "order": 5,
+      "route": "/member-management/vip-rewards",
+      "final_url": "https://admin-fat.filbet2025.com/member-management/vip-rewards",
+      "title": "Filbet Admin",
+      "controls": {
+        "headings": [
+          "Filbet Admin",
+          "VIP Rewards"
+        ],
+        "buttons": [
+          "Reward Flow",
+          "Search",
+          "Reset",
+          "Export Excel"
+        ],
+        "tabs": [
+          "Member",
+          "VIP Config",
+          "VIP Rewards"
+        ],
+        "input_placeholders": [
+          "Member Account",
+          "Member UID",
+          "Start date",
+          "End date"
+        ],
+        "select_count": 4,
+        "table_count": 2
+      },
+      "actions": [
+        "tab_2",
+        "tab_3"
+      ],
+      "request_count": 1,
+      "active_count": 1,
+      "failed_count": 0,
+      "error": null
+    },
+    {
+      "order": 6,
+      "route": "/member-management/vip-checkin-log",
+      "final_url": "https://admin-fat.filbet2025.com/member-management/vip-checkin-log",
+      "title": "Filbet Admin",
+      "controls": {
+        "headings": [
+          "Filbet Admin",
+          "VIP Check-in Log"
+        ],
+        "buttons": [
+          "Check-in Cycle",
+          "Reset",
+          "Query",
+          "Export"
+        ],
+        "tabs": [
+          "Member",
+          "VIP Config",
+          "VIP Rewards",
+          "VIP Check-in Log"
+        ],
+        "input_placeholders": [
+          "Please enter"
+        ],
+        "select_count": 2,
+        "table_count": 2
+      },
+      "actions": [
+        "tab_2",
+        "tab_3",
+        "tab_4"
+      ],
+      "request_count": 1,
+      "active_count": 1,
+      "failed_count": 0,
+      "error": null
+    },
+    {
+      "order": 7,
+      "route": "/member-management/inviter-transfer-records",
+      "final_url": "https://admin-fat.filbet2025.com/member-management/inviter-transfer-records",
+      "title": "Filbet Admin",
+      "controls": {
+        "headings": [
+          "Filbet Admin",
+          "Inviter Transfer Records"
+        ],
+        "buttons": [
+          "Reset",
+          "Query",
+          "Export"
+        ],
+        "tabs": [
+          "Member",
+          "VIP Config",
+          "VIP Rewards",
+          "VIP Check-in Log",
+          "Inviter Transfer Records"
+        ],
+        "input_placeholders": [
+          "Enter phone number",
+          "Start time",
+          "End time"
+        ],
+        "select_count": 1,
+        "table_count": 2
+      },
+      "actions": [
+        "tab_2",
+        "tab_3",
+        "tab_4",
+        "tab_5"
+      ],
+      "request_count": 1,
+      "active_count": 1,
+      "failed_count": 0,
+      "error": null
+    },
+    {
+      "order": 8,
+      "route": "/agency-management",
+      "final_url": "https://admin-fat.filbet2025.com/member-management/inviter-transfer-records",
+      "title": "Filbet Admin",
+      "controls": {
+        "headings": [
+          "Filbet Admin"
+        ],
+        "buttons": [
+          "Reset",
+          "Query",
+          "Export",
+          "filbet_mXsXYn"
+        ],
+        "tabs": [
+          "Member",
+          "VIP Config",
+          "VIP Rewards",
+          "VIP Check-in Log",
+          "Inviter Transfer Records",
+          "Agency statistical report"
+        ],
+        "input_placeholders": [
+          "Please enter the agent account",
+          "Start Date",
+          "End Date"
+        ],
+        "select_count": 1,
+        "table_count": 3
+      },
+      "actions": [
+        "tab_2",
+        "tab_3",
+        "tab_4",
+        "tab_5"
+      ],
+      "request_count": 1,
+      "active_count": 1,
+      "failed_count": 0,
+      "error": null
+    },
+    {
+      "order": 9,
+      "route": "/agency-management/agency-statistical",
+      "final_url": "https://admin-fat.filbet2025.com/member-management/inviter-transfer-records",
+      "title": "Filbet Admin",
+      "controls": {
+        "headings": [
+          "Filbet Admin"
+        ],
+        "buttons": [
+          "Reset",
+          "Query",
+          "Export",
+          "filbet_mXsXYn"
+        ],
+        "tabs": [
+          "Member",
+          "VIP Config",
+          "VIP Rewards",
+          "VIP Check-in Log",
+          "Inviter Transfer Records",
+          "Agency statistical report"
+        ],
+        "input_placeholders": [
+          "Please enter the agent account",
+          "Start Date",
+          "End Date"
+        ],
+        "select_count": 1,
+        "table_count": 3
+      },
+      "actions": [
+        "tab_2",
+        "tab_3",
+        "tab_4",
+        "tab_5"
+      ],
+      "request_count": 0,
+      "active_count": 0,
+      "failed_count": 0,
+      "error": null
+    },
+    {
+      "order": 10,
+      "route": "/report-management",
+      "final_url": "https://admin-fat.filbet2025.com/member-management/inviter-transfer-records",
+      "title": "Filbet Admin",
+      "controls": {
+        "headings": [
+          "Filbet Admin"
+        ],
+        "buttons": [
+          "Reset",
+          "Query",
+          "Export",
+          "Recalculate"
+        ],
+        "tabs": [
+          "Member",
+          "VIP Config",
+          "VIP Rewards",
+          "VIP Check-in Log",
+          "Inviter Transfer Records",
+          "Agency statistical report",
+          "Game Reports"
+        ],
+        "input_placeholders": [
+          "Please enter game name",
+          "Start Date",
+          "End Date"
+        ],
+        "select_count": 4,
+        "table_count": 2
+      },
+      "actions": [
+        "pagination_2",
+        "tab_2",
+        "tab_3",
+        "tab_4",
+        "tab_5"
+      ],
+      "request_count": 5,
+      "active_count": 5,
+      "failed_count": 0,
+      "error": null
+    },
+    {
+      "order": 11,
+      "route": "/report-management/game-reports/list",
+      "final_url": "https://admin-fat.filbet2025.com/member-management/inviter-transfer-records",
+      "title": "Filbet Admin",
+      "controls": {
+        "headings": [
+          "Filbet Admin"
+        ],
+        "buttons": [
+          "Reset",
+          "Query",
+          "Export",
+          "Recalculate"
+        ],
+        "tabs": [
+          "Member",
+          "VIP Config",
+          "VIP Rewards",
+          "VIP Check-in Log",
+          "Inviter Transfer Records",
+          "Agency statistical report",
+          "Game Reports"
+        ],
+        "input_placeholders": [
+          "Please enter game name",
+          "Start Date",
+          "End Date"
+        ],
+        "select_count": 4,
+        "table_count": 2
+      },
+      "actions": [
+        "pagination_2",
+        "tab_2",
+        "tab_3",
+        "tab_4",
+        "tab_5"
+      ],
+      "request_count": 1,
+      "active_count": 1,
+      "failed_count": 0,
+      "error": null
+    },
+    {
+      "order": 12,
+      "route": "/report-management/game-types-report/list",
+      "final_url": "https://admin-fat.filbet2025.com/member-management/inviter-transfer-records",
+      "title": "Filbet Admin",
+      "controls": {
+        "headings": [
+          "Filbet Admin"
+        ],
+        "buttons": [
+          "Reset",
+          "Query",
+          "Export",
+          "Recalculate"
+        ],
+        "tabs": [
+          "Member",
+          "VIP Config",
+          "VIP Rewards",
+          "VIP Check-in Log",
+          "Inviter Transfer Records",
+          "Agency statistical report",
+          "Game Reports",
+          "Game Type Reports"
+        ],
+        "input_placeholders": [
+          "Start Date",
+          "End Date"
+        ],
+        "select_count": 4,
+        "table_count": 2
+      },
+      "actions": [
+        "pagination_2",
+        "tab_2",
+        "tab_3",
+        "tab_4",
+        "tab_5"
+      ],
+      "request_count": 5,
+      "active_count": 5,
+      "failed_count": 0,
+      "error": null
+    },
+    {
+      "order": 13,
+      "route": "/report-management/game-platform-report/list",
+      "final_url": "https://admin-fat.filbet2025.com/member-management/inviter-transfer-records",
+      "title": "Filbet Admin",
+      "controls": {
+        "headings": [
+          "Filbet Admin"
+        ],
+        "buttons": [
+          "Reset",
+          "Query",
+          "Export",
+          "Recalculate"
+        ],
+        "tabs": [
+          "Member",
+          "VIP Config",
+          "VIP Rewards",
+          "VIP Check-in Log",
+          "Inviter Transfer Records",
+          "Agency statistical report",
+          "Game Reports",
+          "Game Type Reports",
+          "Game Platform Reports"
+        ],
+        "input_placeholders": [
+          "Start Date",
+          "End Date"
+        ],
+        "select_count": 3,
+        "table_count": 2
+      },
+      "actions": [
+        "pagination_2",
+        "tab_2",
+        "tab_3",
+        "tab_4",
+        "tab_5"
+      ],
+      "request_count": 6,
+      "active_count": 6,
+      "failed_count": 0,
+      "error": null
+    },
+    {
+      "order": 14,
+      "route": "/report-management/member-daily-stats",
+      "final_url": "https://admin-fat.filbet2025.com/member-management/inviter-transfer-records",
+      "title": "Filbet Admin",
+      "controls": {
+        "headings": [
+          "Filbet Admin"
+        ],
+        "buttons": [
+          "Personal",
+          "Invite",
+          "查 询",
+          "重 置",
+          "数据导出"
+        ],
+        "tabs": [
+          "Member",
+          "VIP Config",
+          "VIP Rewards",
+          "VIP Check-in Log",
+          "Inviter Transfer Records",
+          "Agency statistical report",
+          "Game Reports",
+          "Game Type Reports",
+          "Game Platform Reports",
+          "Member Daily Stats"
+        ],
+        "input_placeholders": [
+          "Please enter",
+          "输入邀请人账号",
+          "Start Date",
+          "End Date"
+        ],
+        "select_count": 2,
+        "table_count": 4
+      },
+      "actions": [
+        "query",
+        "tab_2",
+        "tab_3",
+        "tab_4",
+        "tab_5"
+      ],
+      "request_count": 4,
+      "active_count": 4,
+      "failed_count": 0,
+      "error": null
+    },
+    {
+      "order": 15,
+      "route": "/report-management/member-daily-game-stats",
+      "final_url": "https://admin-fat.filbet2025.com/report-management/member-daily-game-stats",
+      "title": "Filbet Admin",
+      "controls": {
+        "headings": [
+          "Filbet Admin"
+        ],
+        "buttons": [
+          "查 询",
+          "Reset Data",
+          "Export"
+        ],
+        "tabs": [
+          "Home",
+          "Member Daily Game Stats"
+        ],
+        "input_placeholders": [
+          "Please enter",
+          "Enter inviter account",
+          "Start Date",
+          "End Date"
+        ],
+        "select_count": 3,
+        "table_count": 4
+      },
+      "actions": [
+        "query",
+        "tab_2"
+      ],
+      "request_count": 5,
+      "active_count": 5,
+      "failed_count": 0,
+      "error": null
+    },
+    {
+      "order": 16,
+      "route": "/payment",
+      "final_url": "https://admin-fat.filbet2025.com/payment/recharge-orders/list",
+      "title": "Filbet Admin",
+      "controls": {
+        "headings": [
+          "Filbet Admin"
+        ],
+        "buttons": [
+          "Reset",
+          "Query",
+          "Export"
+        ],
+        "tabs": [
+          "Home",
+          "Member Daily Game Stats",
+          "Deposit Record"
+        ],
+        "input_placeholders": [
+          "Supports batch query, 1–5000 characters, separated by commas",
+          "Minimum Amount",
+          "Maximum Amount",
+          "Start Date",
+          "End Date"
+        ],
+        "select_count": 3,
+        "table_count": 3
+      },
+      "actions": [
+        "tab_2",
+        "tab_3"
+      ],
+      "request_count": 2,
+      "active_count": 2,
+      "failed_count": 0,
+      "error": null
+    },
+    {
+      "order": 17,
+      "route": "/payment/recharge-orders/list",
+      "final_url": "https://admin-fat.filbet2025.com/payment/recharge-orders/list",
+      "title": "Filbet Admin",
+      "controls": {
+        "headings": [
+          "Filbet Admin"
+        ],
+        "buttons": [
+          "Reset",
+          "Query",
+          "Export"
+        ],
+        "tabs": [
+          "Home",
+          "Member Daily Game Stats",
+          "Deposit Record"
+        ],
+        "input_placeholders": [
+          "Supports batch query, 1–5000 characters, separated by commas",
+          "Minimum Amount",
+          "Maximum Amount",
+          "Start Date",
+          "End Date"
+        ],
+        "select_count": 3,
+        "table_count": 3
+      },
+      "actions": [
+        "tab_2",
+        "tab_3"
+      ],
+      "request_count": 0,
+      "active_count": 0,
+      "failed_count": 0,
+      "error": null
+    },
+    {
+      "order": 18,
+      "route": "/payment/withdraw-orders/list",
+      "final_url": "https://admin-fat.filbet2025.com/payment/withdraw-orders/list",
+      "title": "Filbet Admin",
+      "controls": {
+        "headings": [
+          "Filbet Admin"
+        ],
+        "buttons": [
+          "Reset",
+          "Query",
+          "Export"
+        ],
+        "tabs": [
+          "Home",
+          "Member Daily Game Stats",
+          "Deposit Record",
+          "Withdrawal Record"
+        ],
+        "input_placeholders": [
+          "Supports batch query, 1–5000 characters, separated by commas",
+          "Minimum Amount",
+          "Maximum Amount",
+          "Start Date",
+          "End Date"
+        ],
+        "select_count": 2,
+        "table_count": 3
+      },
+      "actions": [
+        "tab_2",
+        "tab_3",
+        "tab_4"
+      ],
+      "request_count": 2,
+      "active_count": 2,
+      "failed_count": 0,
+      "error": null
+    },
+    {
+      "order": 19,
+      "route": "/payment/betting-slip/list",
+      "final_url": "https://admin-fat.filbet2025.com/payment/betting-slip/list",
+      "title": "Filbet Admin",
+      "controls": {
+        "headings": [
+          "Filbet Admin"
+        ],
+        "buttons": [
+          "Reset",
+          "Query"
+        ],
+        "tabs": [
+          "Home",
+          "Member Daily Game Stats",
+          "Deposit Record",
+          "Withdrawal Record",
+          "Bet Management",
+          "Platform Bet Slip Management",
+          "Live Casino",
+          "Fishing",
+          "Slot",
+          "Sports",
+          "Table Games",
+          "Mini Games",
+          "Lottery",
+          "ALL"
+        ],
+        "input_placeholders": [
+          "Supports batch query, 1–5000 characters, separated by commas",
+          "Minimum Amount",
+          "Maximum Amount",
+          "Start Date",
+          "End Date"
+        ],
+        "select_count": 3,
+        "table_count": 3
+      },
+      "actions": [
+        "tab_2",
+        "tab_3",
+        "tab_4",
+        "tab_5"
+      ],
+      "request_count": 1,
+      "active_count": 1,
+      "failed_count": 0,
+      "error": null
+    },
+    {
+      "order": 20,
+      "route": "/payment/transaction-orders",
+      "final_url": "https://admin-fat.filbet2025.com/payment/betting-slip/list",
+      "title": "Filbet Admin",
+      "controls": {
+        "headings": [
+          "Filbet Admin"
+        ],
+        "buttons": [
+          "Reset",
+          "Query",
+          "filbet_Mn6OeM",
+          "filbet_lfUA4c"
+        ],
+        "tabs": [
+          "Home",
+          "Member Daily Game Stats",
+          "Deposit Record",
+          "Withdrawal Record",
+          "Bet Management",
+          "Member Wallet Transactions"
+        ],
+        "input_placeholders": [
+          "Supports batch query, 1–5000 characters, separated by commas",
+          "Start Date",
+          "End Date",
+          "Minimum Amount",
+          "Maximum Amount"
+        ],
+        "select_count": 2,
+        "table_count": 3
+      },
+      "actions": [
+        "tab_2",
+        "tab_3",
+        "tab_4",
+        "tab_5"
+      ],
+      "request_count": 2,
+      "active_count": 2,
+      "failed_count": 0,
+      "error": null
+    },
+    {
+      "order": 21,
+      "route": "/payment/channel-ordersV2",
+      "final_url": "https://admin-fat.filbet2025.com/payment/betting-slip/list",
+      "title": "Filbet Admin",
+      "controls": {
+        "headings": [
+          "Filbet Admin"
+        ],
+        "buttons": [
+          "Reset",
+          "Query",
+          "添加存款渠道",
+          "是\n否",
+          "编辑"
+        ],
+        "tabs": [
+          "Home",
+          "Member Daily Game Stats",
+          "Deposit Record",
+          "Withdrawal Record",
+          "Bet Management",
+          "Member Wallet Transactions",
+          "Payment Channels",
+          "Deposit Channel Config",
+          "Deposit Merchant Config",
+          "Withdrawal Channel Config",
+          "提现商户配置",
+          "银行列表"
+        ],
+        "input_placeholders": [
+          "支持模糊查询，1-100个字符长度",
+          "Start Date",
+          "End Date",
+          "Please enter"
+        ],
+        "select_count": 2,
+        "table_count": 3
+      },
+      "actions": [
+        "tab_2",
+        "tab_3",
+        "tab_4",
+        "tab_5"
+      ],
+      "request_count": 1,
+      "active_count": 1,
+      "failed_count": 0,
+      "error": null
+    },
+    {
+      "order": 22,
+      "route": "/payment/recharge-card-orders/list",
+      "final_url": "https://admin-fat.filbet2025.com/payment/betting-slip/list",
+      "title": "Filbet Admin",
+      "controls": {
+        "headings": [
+          "Filbet Admin"
+        ],
+        "buttons": [
+          "Reset",
+          "Query"
+        ],
+        "tabs": [
+          "Home",
+          "Member Daily Game Stats",
+          "Deposit Record",
+          "Withdrawal Record",
+          "Bet Management",
+          "Member Wallet Transactions",
+          "Payment Channels",
+          "Recharge Card Order",
+          "Lazada Orders",
+          "Token Mall Orders"
+        ],
+        "input_placeholders": [
+          "Supports batch query, separated by ',' up to 5000 items",
+          "Supports fuzzy search",
+          "Start Date",
+          "End Date"
+        ],
+        "select_count": 2,
+        "table_count": 4
+      },
+      "actions": [
+        "tab_2",
+        "tab_3",
+        "tab_4",
+        "tab_5"
+      ],
+      "request_count": 2,
+      "active_count": 2,
+      "failed_count": 0,
+      "error": null
+    },
+    {
+      "order": 23,
+      "route": "/operations",
+      "final_url": "https://admin-fat.filbet2025.com/payment/betting-slip/list",
+      "title": "Filbet Admin",
+      "controls": {
+        "headings": [
+          "Filbet Admin"
+        ],
+        "buttons": [
+          "pages.404.buttonText"
+        ],
+        "tabs": [
+          "Home",
+          "Member Daily Game Stats",
+          "Deposit Record",
+          "Withdrawal Record",
+          "Bet Management",
+          "Member Wallet Transactions",
+          "Payment Channels",
+          "Recharge Card Order",
+          "/operations/dailyreports"
+        ],
+        "input_placeholders": [],
+        "select_count": 0,
+        "table_count": 0
+      },
+      "actions": [
+        "tab_2",
+        "tab_3",
+        "tab_4",
+        "tab_5"
+      ],
+      "request_count": 0,
+      "active_count": 0,
+      "failed_count": 0,
+      "error": null
+    },
+    {
+      "order": 24,
+      "route": "/operations/daily-reports",
+      "final_url": "https://admin-fat.filbet2025.com/payment/betting-slip/list",
+      "title": "Filbet Admin",
+      "controls": {
+        "headings": [
+          "Filbet Admin"
+        ],
+        "buttons": [
+          "Reset",
+          "Query",
+          "Export"
+        ],
+        "tabs": [
+          "Home",
+          "Member Daily Game Stats",
+          "Deposit Record",
+          "Withdrawal Record",
+          "Bet Management",
+          "Member Wallet Transactions",
+          "Payment Channels",
+          "Recharge Card Order",
+          "/operations/dailyreports",
+          "Daily Report",
+          "Source Performance"
+        ],
+        "input_placeholders": [
+          "Start Date",
+          "End Date"
+        ],
+        "select_count": 1,
+        "table_count": 3
+      },
+      "actions": [
+        "tab_2",
+        "tab_3",
+        "tab_4",
+        "tab_5"
+      ],
+      "request_count": 2,
+      "active_count": 2,
+      "failed_count": 0,
+      "error": null
+    },
+    {
+      "order": 25,
+      "route": "/operations/client-config",
+      "final_url": "https://admin-fat.filbet2025.com/payment/betting-slip/list",
+      "title": "Filbet Admin",
+      "controls": {
+        "headings": [
+          "Filbet Admin"
+        ],
+        "buttons": [
+          "Reset",
+          "Query",
+          "Add New",
+          "Online\nOffline",
+          "Edit"
+        ],
+        "tabs": [
+          "Home",
+          "Member Daily Game Stats",
+          "Deposit Record",
+          "Withdrawal Record",
+          "Bet Management",
+          "Member Wallet Transactions",
+          "Payment Channels",
+          "Recharge Card Order",
+          "/operations/dailyreports",
+          "Daily Report",
+          "Client Configuration",
+          "顶部banner",
+          "中间banner",
+          "加载页banner",
+          "站点logo",
+          "首页弹窗",
+          "自媒体号",
+          "底部公示",
+          "版本号管理",
+          "pagor声明",
+          "Terms of Services",
+          "Privacy Policy",
+          "FAQ",
+          "VIP",
+          "rewards(welfare)",
+          "充值倍率设置",
+          "登录素材",
+          "三方登录开关",
+          "Compliance Switch",
+          "Shop Client",
+          "h5/app Flibet",
+          "h5/app Fligame",
+          "h5/app Filslots",
+          "h5/app Filplay",
+          "glife1",
+          "glife2",
+          "maya",
+          "lazada"
+        ],
+        "input_placeholders": [
+          "Please enter",
+          "Start Date",
+          "End Date"
+        ],
+        "select_count": 2,
+        "table_count": 3
+      },
+      "actions": [
+        "tab_2",
+        "tab_3",
+        "tab_4",
+        "tab_5"
+      ],
+      "request_count": 4,
+      "active_count": 4,
+      "failed_count": 0,
+      "error": null
+    },
+    {
+      "order": 26,
+      "route": "/operations/material-management",
+      "final_url": "https://admin-fat.filbet2025.com/operations/material-management",
+      "title": "Filbet Admin",
+      "controls": {
+        "headings": [
+          "Filbet Admin"
+        ],
+        "buttons": [
+          "Reset",
+          "Query",
+          "Material Type Settings",
+          "Add",
+          "Details",
+          "Edit",
+          "Delete"
+        ],
+        "tabs": [
+          "Home",
+          "Member Daily Game Stats",
+          "Deposit Record",
+          "Withdrawal Record",
+          "Bet Management",
+          "Member Wallet Transactions",
+          "Payment Channels",
+          "Recharge Card Order",
+          "/operations/dailyreports",
+          "Daily Report",
+          "Client Configuration",
+          "Material Management"
+        ],
+        "input_placeholders": [
+          "Start Date",
+          "End Date"
+        ],
+        "select_count": 4,
+        "table_count": 2
+      },
+      "actions": [
+        "pagination_2",
+        "tab_2",
+        "tab_3",
+        "tab_4",
+        "tab_5"
+      ],
+      "request_count": 5,
+      "active_count": 5,
+      "failed_count": 0,
+      "error": null
+    },
+    {
+      "order": 27,
+      "route": "/operations/activity-list",
+      "final_url": "https://admin-fat.filbet2025.com/operations/activity-list",
+      "title": "Filbet Admin",
+      "controls": {
+        "headings": [
+          "Filbet Admin"
+        ],
+        "buttons": [
+          "Reset",
+          "Query",
+          "Export",
+          "View Report",
+          "Modify Configuration",
+          "View Give Record",
+          "View Rotation Record"
+        ],
+        "tabs": [
+          "Home",
+          "Member Daily Game Stats",
+          "Deposit Record",
+          "Withdrawal Record",
+          "Bet Management",
+          "Member Wallet Transactions",
+          "Payment Channels",
+          "Recharge Card Order",
+          "/operations/dailyreports",
+          "Daily Report",
+          "Client Configuration",
+          "Material Management",
+          "Promotion List",
+          "Limited-Time Event (Active)",
+          "Limited-Time Event (Expired)",
+          "VIP Task Center"
+        ],
+        "input_placeholders": [
+          "Please enter",
+          "Start Date",
+          "End Date"
+        ],
+        "select_count": 3,
+        "table_count": 3
+      },
+      "actions": [
+        "tab_2",
+        "tab_3",
+        "tab_4",
+        "tab_5"
+      ],
+      "request_count": 3,
+      "active_count": 3,
+      "failed_count": 0,
+      "error": null
+    },
+    {
+      "order": 28,
+      "route": "/operations/advertisement-tracking",
+      "final_url": "https://admin-fat.filbet2025.com/operations/advertisement-tracking",
+      "title": "Filbet Admin",
+      "controls": {
+        "headings": [
+          "Filbet Admin"
+        ],
+        "buttons": [
+          "Add Ad",
+          "Modify"
+        ],
+        "tabs": [
+          "Home",
+          "Member Daily Game Stats",
+          "Deposit Record",
+          "Withdrawal Record",
+          "Bet Management",
+          "Member Wallet Transactions",
+          "Payment Channels",
+          "Recharge Card Order",
+          "/operations/dailyreports",
+          "Daily Report",
+          "Client Configuration",
+          "Material Management",
+          "Promotion List",
+          "Ad Tracking/Buried Point",
+          "Specific Tracking Point",
+          "Full-site Tracking"
+        ],
+        "input_placeholders": [],
+        "select_count": 1,
+        "table_count": 3
+      },
+      "actions": [
+        "tab_2",
+        "tab_3",
+        "tab_4",
+        "tab_5"
+      ],
+      "request_count": 2,
+      "active_count": 2,
+      "failed_count": 0,
+      "error": null
+    },
+    {
+      "order": 29,
+      "route": "/operations/mall-management",
+      "final_url": "https://admin-fat.filbet2025.com/operations/mall-management",
+      "title": "Filbet Admin",
+      "controls": {
+        "headings": [
+          "Filbet Admin"
+        ],
+        "buttons": [
+          "Reset",
+          "Query",
+          "Add Product",
+          "Export",
+          "View",
+          "Edit"
+        ],
+        "tabs": [
+          "Home",
+          "Member Daily Game Stats",
+          "Deposit Record",
+          "Withdrawal Record",
+          "Bet Management",
+          "Member Wallet Transactions",
+          "Payment Channels",
+          "Recharge Card Order",
+          "/operations/dailyreports",
+          "Daily Report",
+          "Client Configuration",
+          "Material Management",
+          "Promotion List",
+          "Ad Tracking/Buried Point",
+          "Market Management",
+          "Maeket Management",
+          "Mall Order Records\n9",
+          "oken Transaction Summary"
+        ],
+        "input_placeholders": [
+          "Please enter",
+          "Supports batch query, 1–5000 characters, separated by commas",
+          "Start Date",
+          "End Date"
+        ],
+        "select_count": 4,
+        "table_count": 3
+      },
+      "actions": [
+        "pagination_2",
+        "tab_2",
+        "tab_3",
+        "tab_4",
+        "tab_5"
+      ],
+      "request_count": 3,
+      "active_count": 3,
+      "failed_count": 0,
+      "error": null
+    },
+    {
+      "order": 30,
+      "route": "/operations/activity-expenditure-audit",
+      "final_url": "https://admin-fat.filbet2025.com/operations/activity-expenditure-audit",
+      "title": "Filbet Admin",
+      "controls": {
+        "headings": [
+          "Filbet Admin"
+        ],
+        "buttons": [
+          "Reset",
+          "Query",
+          "Manual Reissue",
+          "Export"
+        ],
+        "tabs": [
+          "Home",
+          "Member Daily Game Stats",
+          "Deposit Record",
+          "Withdrawal Record",
+          "Bet Management",
+          "Member Wallet Transactions",
+          "Payment Channels",
+          "Recharge Card Order",
+          "/operations/dailyreports",
+          "Daily Report",
+          "Client Configuration",
+          "Material Management",
+          "Promotion List",
+          "Ad Tracking/Buried Point",
+          "Market Management",
+          "Promotion Spend Audit",
+          "Pending Bonus\n7",
+          "Approved Bonus"
+        ],
+        "input_placeholders": [
+          "Supports batch query, 1–5000 characters, separated by commas",
+          "Start Date",
+          "End Date",
+          "Minimum Amount",
+          "Maximum Amount"
+        ],
+        "select_count": 0,
+        "table_count": 3
+      },
+      "actions": [
+        "tab_2",
+        "tab_3",
+        "tab_4",
+        "tab_5"
+      ],
+      "request_count": 1,
+      "active_count": 1,
+      "failed_count": 0,
+      "error": null
+    }
+  ],
+  "network": [
+    {
+      "page_route": "login",
+      "control_type": "page_initialization",
+      "action_name": "open login page",
+      "method": "GET",
+      "path": "/admin/me/detail",
+      "query_fields": [],
+      "body_fields": [],
+      "header_fields": [
+        "accept",
+        "accept-language",
+        "client-id",
+        "client-version",
+        "d",
+        "lang",
+        "referer",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform",
+        "user-agent",
+        "x-device-id"
+      ],
+      "http_status": 200,
+      "business_status": false,
+      "response_data_type": "string",
+      "response_data_keys": []
+    },
+    {
+      "page_route": "login",
+      "control_type": "button",
+      "action_name": "login credentials submit",
+      "method": "POST",
+      "path": "/admin/login/auth",
+      "query_fields": [],
+      "body_fields": [],
+      "header_fields": [
+        "accept",
+        "accept-language",
+        "client-id",
+        "client-version",
+        "content-type",
+        "d",
+        "lang",
+        "referer",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform",
+        "user-agent",
+        "x-device-id"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "number",
+      "response_data_keys": []
+    },
+    {
+      "page_route": "login",
+      "control_type": "button",
+      "action_name": "Google verification confirm",
+      "method": "POST",
+      "path": "/admin/login",
+      "query_fields": [],
+      "body_fields": [],
+      "header_fields": [
+        "accept",
+        "accept-language",
+        "client-id",
+        "client-version",
+        "content-type",
+        "d",
+        "lang",
+        "referer",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform",
+        "user-agent",
+        "x-device-id"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "string",
+      "response_data_keys": []
+    },
+    {
+      "page_route": "login",
+      "control_type": "button",
+      "action_name": "Google verification confirm",
+      "method": "GET",
+      "path": "/admin/me/detail",
+      "query_fields": [],
+      "body_fields": [],
+      "header_fields": [
+        "accept",
+        "accept-language",
+        "client-id",
+        "client-version",
+        "d",
+        "lang",
+        "referer",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform",
+        "t",
+        "user-agent",
+        "x-device-id"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "avatar",
+        "bind_time",
+        "button_permission_ids",
+        "cmpl",
+        "create_name",
+        "created_at",
+        "email",
+        "google_secret",
+        "group_id",
+        "id",
+        "last_login_ip",
+        "last_login_time",
+        "login_password",
+        "nickname",
+        "operator_name",
+        "pwd_edit_time",
+        "roles",
+        "sid",
+        "status",
+        "stores",
+        "updated_at",
+        "username"
+      ]
+    },
+    {
+      "page_route": "login",
+      "control_type": "button",
+      "action_name": "Google verification confirm",
+      "method": "GET",
+      "path": "/admin/sys/config/compliance/status",
+      "query_fields": [],
+      "body_fields": [],
+      "header_fields": [
+        "accept",
+        "accept-language",
+        "client-id",
+        "client-version",
+        "d",
+        "lang",
+        "referer",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform",
+        "t",
+        "user-agent",
+        "x-device-id"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "effective_open",
+        "effective_reason",
+        "effective_status_msg"
+      ]
+    },
+    {
+      "page_route": "login",
+      "control_type": "button",
+      "action_name": "Google verification confirm",
+      "method": "GET",
+      "path": "/admin/notify/audit/alarm",
+      "query_fields": [
+        "t"
+      ],
+      "body_fields": [],
+      "header_fields": [
+        "accept",
+        "accept-language",
+        "client-id",
+        "client-version",
+        "d",
+        "lang",
+        "referer",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform",
+        "t",
+        "user-agent",
+        "x-device-id"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "bonus_review_pending",
+        "feedback_pending",
+        "kyc_pending",
+        "mall_order_pending",
+        "withdraw_pending"
+      ]
+    },
+    {
+      "page_route": "login",
+      "control_type": "button",
+      "action_name": "Google verification confirm",
+      "method": "POST",
+      "path": "/admin/gameclass/list",
+      "query_fields": [],
+      "body_fields": [],
+      "header_fields": [
+        "accept",
+        "accept-language",
+        "client-id",
+        "client-version",
+        "content-type",
+        "d",
+        "lang",
+        "referer",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform",
+        "t",
+        "user-agent",
+        "x-device-id"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ]
+    },
+    {
+      "page_route": "login",
+      "control_type": "button",
+      "action_name": "Google verification confirm",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "body_fields": [],
+      "header_fields": [
+        "accept",
+        "accept-language",
+        "client-id",
+        "client-version",
+        "content-type",
+        "d",
+        "lang",
+        "referer",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform",
+        "t",
+        "user-agent",
+        "x-device-id"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "ids",
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ]
+    },
+    {
+      "page_route": "login",
+      "control_type": "button",
+      "action_name": "Google verification confirm",
+      "method": "GET",
+      "path": "/admin/reports/bi/chart",
+      "query_fields": [
+        "time_range"
+      ],
+      "body_fields": [],
+      "header_fields": [
+        "accept",
+        "accept-language",
+        "client-id",
+        "client-version",
+        "d",
+        "lang",
+        "referer",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform",
+        "t",
+        "user-agent",
+        "x-device-id"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "d"
+      ]
+    },
+    {
+      "page_route": "login",
+      "control_type": "button",
+      "action_name": "Google verification confirm",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "body_fields": [],
+      "header_fields": [
+        "accept",
+        "accept-language",
+        "client-id",
+        "client-version",
+        "content-type",
+        "d",
+        "lang",
+        "referer",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform",
+        "t",
+        "user-agent",
+        "x-device-id"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "ids",
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ]
+    },
+    {
+      "page_route": "login",
+      "control_type": "button",
+      "action_name": "Google verification confirm",
+      "method": "GET",
+      "path": "/admin/reports/bi/basic",
+      "query_fields": [
+        "report_type"
+      ],
+      "body_fields": [],
+      "header_fields": [
+        "accept",
+        "accept-language",
+        "client-id",
+        "client-version",
+        "d",
+        "lang",
+        "referer",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform",
+        "t",
+        "user-agent",
+        "x-device-id"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "arppu",
+        "arpu",
+        "balance",
+        "bets_deposit",
+        "bets_people",
+        "deposit_amount",
+        "deposit_people",
+        "dw_diff",
+        "ebingo_ggr",
+        "first_deposit",
+        "first_deposit_amount",
+        "game_ggr",
+        "ggr",
+        "injection_rate",
+        "login_count",
+        "new_deposit",
+        "new_deposit_amount",
+        "refill_deposit",
+        "refill_deposit_amount",
+        "reg_count",
+        "report_type",
+        "sports_ggr",
+        "valid_bet_amount",
+        "withdraw_amount",
+        "withdraw_people",
+        "ws_ggr"
+      ]
+    },
+    {
+      "page_route": "login",
+      "control_type": "button",
+      "action_name": "Google verification confirm",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "body_fields": [],
+      "header_fields": [
+        "accept",
+        "accept-language",
+        "client-id",
+        "client-version",
+        "content-type",
+        "d",
+        "lang",
+        "referer",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform",
+        "t",
+        "user-agent",
+        "x-device-id"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "ids",
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ]
+    },
+    {
+      "page_route": "login",
+      "control_type": "button",
+      "action_name": "Google verification confirm",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "body_fields": [],
+      "header_fields": [
+        "accept",
+        "accept-language",
+        "client-id",
+        "client-version",
+        "content-type",
+        "d",
+        "lang",
+        "referer",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform",
+        "t",
+        "user-agent",
+        "x-device-id"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "ids",
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ]
+    },
+    {
+      "page_route": "login",
+      "control_type": "button",
+      "action_name": "Google verification confirm",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "body_fields": [],
+      "header_fields": [
+        "accept",
+        "accept-language",
+        "client-id",
+        "client-version",
+        "content-type",
+        "d",
+        "lang",
+        "referer",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform",
+        "t",
+        "user-agent",
+        "x-device-id"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "ids",
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ]
+    },
+    {
+      "page_route": "login",
+      "control_type": "button",
+      "action_name": "Google verification confirm",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "body_fields": [],
+      "header_fields": [
+        "accept",
+        "accept-language",
+        "client-id",
+        "client-version",
+        "content-type",
+        "d",
+        "lang",
+        "referer",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform",
+        "t",
+        "user-agent",
+        "x-device-id"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "ids",
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ]
+    },
+    {
+      "page_route": "login",
+      "control_type": "button",
+      "action_name": "Google verification confirm",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "body_fields": [],
+      "header_fields": [
+        "accept",
+        "accept-language",
+        "client-id",
+        "client-version",
+        "content-type",
+        "d",
+        "lang",
+        "referer",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform",
+        "t",
+        "user-agent",
+        "x-device-id"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "ids",
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ]
+    },
+    {
+      "page_route": "/home",
+      "control_type": "page_initialization",
+      "action_name": "open /home",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "body_fields": [],
+      "header_fields": [
+        "accept",
+        "accept-language",
+        "client-id",
+        "client-version",
+        "content-type",
+        "d",
+        "lang",
+        "referer",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform",
+        "t",
+        "user-agent",
+        "x-device-id"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "ids",
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ]
+    },
+    {
+      "page_route": "/home",
+      "control_type": "page_initialization",
+      "action_name": "open /home",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "body_fields": [],
+      "header_fields": [
+        "accept",
+        "accept-language",
+        "client-id",
+        "client-version",
+        "content-type",
+        "d",
+        "lang",
+        "referer",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform",
+        "t",
+        "user-agent",
+        "x-device-id"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "ids",
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ]
+    },
+    {
+      "page_route": "/home",
+      "control_type": "page_initialization",
+      "action_name": "open /home",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "body_fields": [],
+      "header_fields": [
+        "accept",
+        "accept-language",
+        "client-id",
+        "client-version",
+        "content-type",
+        "d",
+        "lang",
+        "referer",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform",
+        "t",
+        "user-agent",
+        "x-device-id"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "ids",
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ]
+    },
+    {
+      "page_route": "/home",
+      "control_type": "page_initialization",
+      "action_name": "open /home",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "body_fields": [],
+      "header_fields": [
+        "accept",
+        "accept-language",
+        "client-id",
+        "client-version",
+        "content-type",
+        "d",
+        "lang",
+        "referer",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform",
+        "t",
+        "user-agent",
+        "x-device-id"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "ids",
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ]
+    },
+    {
+      "page_route": "/home",
+      "control_type": "page_initialization",
+      "action_name": "open /home",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "body_fields": [],
+      "header_fields": [
+        "accept",
+        "accept-language",
+        "client-id",
+        "client-version",
+        "content-type",
+        "d",
+        "lang",
+        "referer",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform",
+        "t",
+        "user-agent",
+        "x-device-id"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "ids",
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ]
+    },
+    {
+      "page_route": "/home",
+      "control_type": "button",
+      "action_name": "Search",
+      "method": "GET",
+      "path": "/admin/reports/bi/basic",
+      "query_fields": [
+        "report_type"
+      ],
+      "body_fields": [],
+      "header_fields": [
+        "accept",
+        "accept-language",
+        "client-id",
+        "client-version",
+        "d",
+        "lang",
+        "referer",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform",
+        "t",
+        "user-agent",
+        "x-device-id"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "arppu",
+        "arpu",
+        "balance",
+        "bets_deposit",
+        "bets_people",
+        "deposit_amount",
+        "deposit_people",
+        "dw_diff",
+        "ebingo_ggr",
+        "first_deposit",
+        "first_deposit_amount",
+        "game_ggr",
+        "ggr",
+        "injection_rate",
+        "login_count",
+        "new_deposit",
+        "new_deposit_amount",
+        "refill_deposit",
+        "refill_deposit_amount",
+        "reg_count",
+        "report_type",
+        "sports_ggr",
+        "valid_bet_amount",
+        "withdraw_amount",
+        "withdraw_people",
+        "ws_ggr"
+      ]
+    },
+    {
+      "page_route": "/kyc",
+      "control_type": "page_initialization",
+      "action_name": "open /kyc",
+      "method": "GET",
+      "path": "/admin/notify/audit/alarm",
+      "query_fields": [
+        "t"
+      ],
+      "body_fields": [],
+      "header_fields": [
+        "accept",
+        "accept-language",
+        "client-id",
+        "client-version",
+        "d",
+        "lang",
+        "referer",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform",
+        "t",
+        "user-agent",
+        "x-device-id"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "bonus_review_pending",
+        "feedback_pending",
+        "kyc_pending",
+        "mall_order_pending",
+        "withdraw_pending"
+      ]
+    },
+    {
+      "page_route": "/kyc",
+      "control_type": "page_initialization",
+      "action_name": "open /kyc",
+      "method": "GET",
+      "path": "/admin/kyc/approved/count",
+      "query_fields": [],
+      "body_fields": [],
+      "header_fields": [
+        "accept",
+        "accept-language",
+        "client-id",
+        "client-version",
+        "d",
+        "lang",
+        "referer",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform",
+        "t",
+        "user-agent",
+        "x-device-id"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "kyc_approved",
+        "kyc_under_review"
+      ]
+    },
+    {
+      "page_route": "/kyc",
+      "control_type": "page_initialization",
+      "action_name": "open /kyc",
+      "method": "POST",
+      "path": "/admin/kyc/list",
+      "query_fields": [],
+      "body_fields": [],
+      "header_fields": [
+        "accept",
+        "accept-language",
+        "client-id",
+        "client-version",
+        "content-type",
+        "d",
+        "lang",
+        "referer",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform",
+        "t",
+        "user-agent",
+        "x-device-id"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "d",
+        "s",
+        "t"
+      ]
+    },
+    {
+      "page_route": "/kyc",
+      "control_type": "tab",
+      "action_name": "Bonus Order Count\nApproved Today (0)\nPending Review (0)",
+      "method": "POST",
+      "path": "/admin/kyc/list",
+      "query_fields": [],
+      "body_fields": [],
+      "header_fields": [
+        "accept",
+        "accept-language",
+        "client-id",
+        "client-version",
+        "content-type",
+        "d",
+        "lang",
+        "referer",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform",
+        "t",
+        "user-agent",
+        "x-device-id"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "d",
+        "s",
+        "t"
+      ]
+    },
+    {
+      "page_route": "/member-management",
+      "control_type": "page_initialization",
+      "action_name": "open /member-management",
+      "method": "GET",
+      "path": "/admin/channel/manage/dict",
+      "query_fields": [],
+      "body_fields": [],
+      "header_fields": [
+        "accept",
+        "accept-language",
+        "client-id",
+        "client-version",
+        "d",
+        "lang",
+        "referer",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform",
+        "t",
+        "user-agent",
+        "x-device-id"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "list",
+      "response_data_keys": []
+    },
+    {
+      "page_route": "/member-management",
+      "control_type": "page_initialization",
+      "action_name": "open /member-management",
+      "method": "POST",
+      "path": "/admin/member/list",
+      "query_fields": [],
+      "body_fields": [
+        "end_time",
+        "page",
+        "page_size",
+        "start_time"
+      ],
+      "header_fields": [
+        "accept",
+        "accept-language",
+        "client-id",
+        "client-version",
+        "content-type",
+        "d",
+        "lang",
+        "referer",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform",
+        "t",
+        "user-agent",
+        "x-device-id"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "d",
+        "page",
+        "page_size",
+        "summary",
+        "t"
+      ]
+    },
+    {
+      "page_route": "/member-management",
+      "control_type": "page_initialization",
+      "action_name": "open /member-management",
+      "method": "GET",
+      "path": "/admin/me/detail",
+      "query_fields": [],
+      "body_fields": [],
+      "header_fields": [
+        "accept",
+        "accept-language",
+        "client-id",
+        "client-version",
+        "d",
+        "lang",
+        "referer",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform",
+        "t",
+        "user-agent",
+        "x-device-id"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "avatar",
+        "bind_time",
+        "button_permission_ids",
+        "cmpl",
+        "create_name",
+        "created_at",
+        "email",
+        "google_secret",
+        "group_id",
+        "id",
+        "last_login_ip",
+        "last_login_time",
+        "login_password",
+        "nickname",
+        "operator_name",
+        "pwd_edit_time",
+        "roles",
+        "sid",
+        "status",
+        "stores",
+        "updated_at",
+        "username"
+      ]
+    },
+    {
+      "page_route": "/member-management",
+      "control_type": "page_initialization",
+      "action_name": "open /member-management",
+      "method": "GET",
+      "path": "/admin/sys/config/compliance/status",
+      "query_fields": [],
+      "body_fields": [],
+      "header_fields": [
+        "accept",
+        "accept-language",
+        "client-id",
+        "client-version",
+        "d",
+        "lang",
+        "referer",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform",
+        "t",
+        "user-agent",
+        "x-device-id"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "effective_open",
+        "effective_reason",
+        "effective_status_msg"
+      ]
+    },
+    {
+      "page_route": "/member-management",
+      "control_type": "page_initialization",
+      "action_name": "open /member-management",
+      "method": "POST",
+      "path": "/admin/gameclass/list",
+      "query_fields": [],
+      "body_fields": [],
+      "header_fields": [
+        "accept",
+        "accept-language",
+        "client-id",
+        "client-version",
+        "content-type",
+        "d",
+        "lang",
+        "referer",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform",
+        "t",
+        "user-agent",
+        "x-device-id"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ]
+    },
+    {
+      "page_route": "/member-management",
+      "control_type": "page_initialization",
+      "action_name": "open /member-management",
+      "method": "GET",
+      "path": "/admin/notify/audit/alarm",
+      "query_fields": [
+        "t"
+      ],
+      "body_fields": [],
+      "header_fields": [
+        "accept",
+        "accept-language",
+        "client-id",
+        "client-version",
+        "d",
+        "lang",
+        "referer",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform",
+        "t",
+        "user-agent",
+        "x-device-id"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "bonus_review_pending",
+        "feedback_pending",
+        "kyc_pending",
+        "mall_order_pending",
+        "withdraw_pending"
+      ]
+    },
+    {
+      "page_route": "/member-management",
+      "control_type": "page_initialization",
+      "action_name": "open /member-management",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "body_fields": [],
+      "header_fields": [
+        "accept",
+        "accept-language",
+        "client-id",
+        "client-version",
+        "content-type",
+        "d",
+        "lang",
+        "referer",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform",
+        "t",
+        "user-agent",
+        "x-device-id"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "ids",
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ]
+    },
+    {
+      "page_route": "/member-management",
+      "control_type": "page_initialization",
+      "action_name": "open /member-management",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "body_fields": [],
+      "header_fields": [
+        "accept",
+        "accept-language",
+        "client-id",
+        "client-version",
+        "content-type",
+        "d",
+        "lang",
+        "referer",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform",
+        "t",
+        "user-agent",
+        "x-device-id"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "ids",
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ]
+    },
+    {
+      "page_route": "/member-management",
+      "control_type": "page_initialization",
+      "action_name": "open /member-management",
+      "method": "GET",
+      "path": "/admin/channel/manage/dict",
+      "query_fields": [],
+      "body_fields": [],
+      "header_fields": [
+        "accept",
+        "accept-language",
+        "client-id",
+        "client-version",
+        "d",
+        "lang",
+        "referer",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform",
+        "t",
+        "user-agent",
+        "x-device-id"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "list",
+      "response_data_keys": []
+    },
+    {
+      "page_route": "/member-management",
+      "control_type": "page_initialization",
+      "action_name": "open /member-management",
+      "method": "POST",
+      "path": "/admin/member/list",
+      "query_fields": [],
+      "body_fields": [
+        "end_time",
+        "page",
+        "page_size",
+        "start_time"
+      ],
+      "header_fields": [
+        "accept",
+        "accept-language",
+        "client-id",
+        "client-version",
+        "content-type",
+        "d",
+        "lang",
+        "referer",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform",
+        "t",
+        "user-agent",
+        "x-device-id"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "d",
+        "page",
+        "page_size",
+        "summary",
+        "t"
+      ]
+    },
+    {
+      "page_route": "/member-management",
+      "control_type": "page_initialization",
+      "action_name": "open /member-management",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "body_fields": [],
+      "header_fields": [
+        "accept",
+        "accept-language",
+        "client-id",
+        "client-version",
+        "content-type",
+        "d",
+        "lang",
+        "referer",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform",
+        "t",
+        "user-agent",
+        "x-device-id"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "ids",
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ]
+    },
+    {
+      "page_route": "/member-management",
+      "control_type": "page_initialization",
+      "action_name": "open /member-management",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "body_fields": [],
+      "header_fields": [
+        "accept",
+        "accept-language",
+        "client-id",
+        "client-version",
+        "content-type",
+        "d",
+        "lang",
+        "referer",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform",
+        "t",
+        "user-agent",
+        "x-device-id"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "ids",
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ]
+    },
+    {
+      "page_route": "/member-management",
+      "control_type": "page_initialization",
+      "action_name": "open /member-management",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "body_fields": [],
+      "header_fields": [
+        "accept",
+        "accept-language",
+        "client-id",
+        "client-version",
+        "content-type",
+        "d",
+        "lang",
+        "referer",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform",
+        "t",
+        "user-agent",
+        "x-device-id"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "ids",
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ]
+    },
+    {
+      "page_route": "/member-management",
+      "control_type": "page_initialization",
+      "action_name": "open /member-management",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "body_fields": [],
+      "header_fields": [
+        "accept",
+        "accept-language",
+        "client-id",
+        "client-version",
+        "content-type",
+        "d",
+        "lang",
+        "referer",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform",
+        "t",
+        "user-agent",
+        "x-device-id"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "ids",
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ]
+    },
+    {
+      "page_route": "/member-management",
+      "control_type": "page_initialization",
+      "action_name": "open /member-management",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "body_fields": [],
+      "header_fields": [
+        "accept",
+        "accept-language",
+        "client-id",
+        "client-version",
+        "content-type",
+        "d",
+        "lang",
+        "referer",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform",
+        "t",
+        "user-agent",
+        "x-device-id"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "ids",
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ]
+    },
+    {
+      "page_route": "/member-management",
+      "control_type": "page_initialization",
+      "action_name": "open /member-management",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "body_fields": [],
+      "header_fields": [
+        "accept",
+        "accept-language",
+        "client-id",
+        "client-version",
+        "content-type",
+        "d",
+        "lang",
+        "referer",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform",
+        "t",
+        "user-agent",
+        "x-device-id"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "ids",
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ]
+    },
+    {
+      "page_route": "/member-management/vip-config",
+      "control_type": "page_initialization",
+      "action_name": "open /member-management/vip-config",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "body_fields": [],
+      "header_fields": [
+        "accept",
+        "accept-language",
+        "client-id",
+        "client-version",
+        "content-type",
+        "d",
+        "lang",
+        "referer",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform",
+        "t",
+        "user-agent",
+        "x-device-id"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "ids",
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ]
+    },
+    {
+      "page_route": "/member-management/vip-config",
+      "control_type": "page_initialization",
+      "action_name": "open /member-management/vip-config",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "body_fields": [],
+      "header_fields": [
+        "accept",
+        "accept-language",
+        "client-id",
+        "client-version",
+        "content-type",
+        "d",
+        "lang",
+        "referer",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform",
+        "t",
+        "user-agent",
+        "x-device-id"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "ids",
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ]
+    },
+    {
+      "page_route": "/member-management/vip-config",
+      "control_type": "page_initialization",
+      "action_name": "open /member-management/vip-config",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "body_fields": [],
+      "header_fields": [
+        "accept",
+        "accept-language",
+        "client-id",
+        "client-version",
+        "content-type",
+        "d",
+        "lang",
+        "referer",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform",
+        "t",
+        "user-agent",
+        "x-device-id"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "ids",
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ]
+    },
+    {
+      "page_route": "/member-management/vip-config",
+      "control_type": "page_initialization",
+      "action_name": "open /member-management/vip-config",
+      "method": "GET",
+      "path": "/admin/vip/config/listv2",
+      "query_fields": [],
+      "body_fields": [],
+      "header_fields": [
+        "accept",
+        "accept-language",
+        "client-id",
+        "client-version",
+        "d",
+        "lang",
+        "referer",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform",
+        "t",
+        "user-agent",
+        "x-device-id"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "d",
+        "t"
+      ]
+    },
+    {
+      "page_route": "/member-management/vip-config",
+      "control_type": "page_initialization",
+      "action_name": "open /member-management/vip-config",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "body_fields": [],
+      "header_fields": [
+        "accept",
+        "accept-language",
+        "client-id",
+        "client-version",
+        "content-type",
+        "d",
+        "lang",
+        "referer",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform",
+        "t",
+        "user-agent",
+        "x-device-id"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "ids",
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ]
+    },
+    {
+      "page_route": "/member-management/vip-rewards",
+      "control_type": "page_initialization",
+      "action_name": "open /member-management/vip-rewards",
+      "method": "GET",
+      "path": "/admin/promo/vip/log/list",
+      "query_fields": [
+        "page",
+        "page_size"
+      ],
+      "body_fields": [],
+      "header_fields": [
+        "accept",
+        "accept-language",
+        "client-id",
+        "client-version",
+        "d",
+        "lang",
+        "referer",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform",
+        "t",
+        "user-agent",
+        "x-device-id"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "list",
+        "summary",
+        "t"
+      ]
+    },
+    {
+      "page_route": "/member-management/vip-checkin-log",
+      "control_type": "page_initialization",
+      "action_name": "open /member-management/vip-checkin-log",
+      "method": "GET",
+      "path": "/admin/promo/vip/sign/in/list",
+      "query_fields": [
+        "end_time",
+        "page",
+        "page_size",
+        "start_time"
+      ],
+      "body_fields": [],
+      "header_fields": [
+        "accept",
+        "accept-language",
+        "client-id",
+        "client-version",
+        "d",
+        "lang",
+        "referer",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform",
+        "t",
+        "user-agent",
+        "x-device-id"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "a",
+        "d",
+        "t"
+      ]
+    },
+    {
+      "page_route": "/member-management/inviter-transfer-records",
+      "control_type": "page_initialization",
+      "action_name": "open /member-management/inviter-transfer-records",
+      "method": "GET",
+      "path": "/admin/promo/invite/friends/transfer/list",
+      "query_fields": [
+        "page",
+        "page_size"
+      ],
+      "body_fields": [],
+      "header_fields": [
+        "accept",
+        "accept-language",
+        "client-id",
+        "client-version",
+        "d",
+        "lang",
+        "referer",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform",
+        "t",
+        "user-agent",
+        "x-device-id"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "d",
+        "t"
+      ]
+    },
+    {
+      "page_route": "/agency-management",
+      "control_type": "page_initialization",
+      "action_name": "open /agency-management",
+      "method": "GET",
+      "path": "/admin/reports/agency",
+      "query_fields": [
+        "end_time",
+        "field",
+        "page",
+        "page_size",
+        "sort",
+        "start_time"
+      ],
+      "body_fields": [],
+      "header_fields": [
+        "accept",
+        "accept-language",
+        "client-id",
+        "client-version",
+        "d",
+        "lang",
+        "referer",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform",
+        "t",
+        "user-agent",
+        "x-device-id"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "a",
+        "d",
+        "t"
+      ]
+    },
+    {
+      "page_route": "/report-management",
+      "control_type": "page_initialization",
+      "action_name": "open /report-management",
+      "method": "GET",
+      "path": "/admin/priv/check",
+      "query_fields": [
+        "path"
+      ],
+      "body_fields": [],
+      "header_fields": [
+        "accept",
+        "accept-language",
+        "client-id",
+        "client-version",
+        "d",
+        "lang",
+        "referer",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform",
+        "t",
+        "user-agent",
+        "x-device-id"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "rights"
+      ]
+    },
+    {
+      "page_route": "/report-management",
+      "control_type": "page_initialization",
+      "action_name": "open /report-management",
+      "method": "GET",
+      "path": "/admin/priv/check",
+      "query_fields": [
+        "path"
+      ],
+      "body_fields": [],
+      "header_fields": [
+        "accept",
+        "accept-language",
+        "client-id",
+        "client-version",
+        "d",
+        "lang",
+        "referer",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform",
+        "t",
+        "user-agent",
+        "x-device-id"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "rights"
+      ]
+    },
+    {
+      "page_route": "/report-management",
+      "control_type": "page_initialization",
+      "action_name": "open /report-management",
+      "method": "POST",
+      "path": "/admin/dict/venues",
+      "query_fields": [],
+      "body_fields": [],
+      "header_fields": [
+        "accept",
+        "accept-language",
+        "client-id",
+        "client-version",
+        "content-type",
+        "d",
+        "lang",
+        "referer",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform",
+        "t",
+        "user-agent",
+        "x-device-id"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "list",
+      "response_data_keys": []
+    },
+    {
+      "page_route": "/report-management",
+      "control_type": "page_initialization",
+      "action_name": "open /report-management",
+      "method": "GET",
+      "path": "/admin/reports/game/node",
+      "query_fields": [
+        "end_time",
+        "field",
+        "page",
+        "page_size",
+        "start_time"
+      ],
+      "body_fields": [],
+      "header_fields": [
+        "accept",
+        "accept-language",
+        "client-id",
+        "client-version",
+        "d",
+        "lang",
+        "referer",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform",
+        "t",
+        "user-agent",
+        "x-device-id"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "a",
+        "d",
+        "s",
+        "t"
+      ]
+    },
+    {
+      "page_route": "/report-management",
+      "control_type": "pagination",
+      "action_name": "page 2",
+      "method": "GET",
+      "path": "/admin/reports/game/node",
+      "query_fields": [
+        "end_time",
+        "field",
+        "page",
+        "page_size",
+        "start_time"
+      ],
+      "body_fields": [],
+      "header_fields": [
+        "accept",
+        "accept-language",
+        "client-id",
+        "client-version",
+        "d",
+        "lang",
+        "referer",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform",
+        "t",
+        "user-agent",
+        "x-device-id"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "a",
+        "d",
+        "s",
+        "t"
+      ]
+    },
+    {
+      "page_route": "/report-management/game-reports/list",
+      "control_type": "page_initialization",
+      "action_name": "open /report-management/game-reports/list",
+      "method": "GET",
+      "path": "/admin/sys/config/compliance/status",
+      "query_fields": [],
+      "body_fields": [],
+      "header_fields": [
+        "accept",
+        "accept-language",
+        "client-id",
+        "client-version",
+        "d",
+        "lang",
+        "referer",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform",
+        "t",
+        "user-agent",
+        "x-device-id"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "effective_open",
+        "effective_reason",
+        "effective_status_msg"
+      ]
+    },
+    {
+      "page_route": "/report-management/game-types-report/list",
+      "control_type": "page_initialization",
+      "action_name": "open /report-management/game-types-report/list",
+      "method": "GET",
+      "path": "/admin/priv/check",
+      "query_fields": [
+        "path"
+      ],
+      "body_fields": [],
+      "header_fields": [
+        "accept",
+        "accept-language",
+        "client-id",
+        "client-version",
+        "d",
+        "lang",
+        "referer",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform",
+        "t",
+        "user-agent",
+        "x-device-id"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "rights"
+      ]
+    },
+    {
+      "page_route": "/report-management/game-types-report/list",
+      "control_type": "page_initialization",
+      "action_name": "open /report-management/game-types-report/list",
+      "method": "GET",
+      "path": "/admin/priv/check",
+      "query_fields": [
+        "path"
+      ],
+      "body_fields": [],
+      "header_fields": [
+        "accept",
+        "accept-language",
+        "client-id",
+        "client-version",
+        "d",
+        "lang",
+        "referer",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform",
+        "t",
+        "user-agent",
+        "x-device-id"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "rights"
+      ]
+    },
+    {
+      "page_route": "/report-management/game-types-report/list",
+      "control_type": "page_initialization",
+      "action_name": "open /report-management/game-types-report/list",
+      "method": "POST",
+      "path": "/admin/dict/venues",
+      "query_fields": [],
+      "body_fields": [],
+      "header_fields": [
+        "accept",
+        "accept-language",
+        "client-id",
+        "client-version",
+        "content-type",
+        "d",
+        "lang",
+        "referer",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform",
+        "t",
+        "user-agent",
+        "x-device-id"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "list",
+      "response_data_keys": []
+    },
+    {
+      "page_route": "/report-management/game-types-report/list",
+      "control_type": "page_initialization",
+      "action_name": "open /report-management/game-types-report/list",
+      "method": "GET",
+      "path": "/admin/reports/gameclass/node",
+      "query_fields": [
+        "end_time",
+        "field",
+        "page",
+        "page_size",
+        "start_time"
+      ],
+      "body_fields": [],
+      "header_fields": [
+        "accept",
+        "accept-language",
+        "client-id",
+        "client-version",
+        "d",
+        "lang",
+        "referer",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform",
+        "t",
+        "user-agent",
+        "x-device-id"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "a",
+        "d",
+        "s",
+        "t"
+      ]
+    },
+    {
+      "page_route": "/report-management/game-types-report/list",
+      "control_type": "pagination",
+      "action_name": "page 2",
+      "method": "GET",
+      "path": "/admin/reports/gameclass/node",
+      "query_fields": [
+        "end_time",
+        "field",
+        "page",
+        "page_size",
+        "start_time"
+      ],
+      "body_fields": [],
+      "header_fields": [
+        "accept",
+        "accept-language",
+        "client-id",
+        "client-version",
+        "d",
+        "lang",
+        "referer",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform",
+        "t",
+        "user-agent",
+        "x-device-id"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "a",
+        "d",
+        "s",
+        "t"
+      ]
+    },
+    {
+      "page_route": "/report-management/game-platform-report/list",
+      "control_type": "page_initialization",
+      "action_name": "open /report-management/game-platform-report/list",
+      "method": "GET",
+      "path": "/admin/priv/check",
+      "query_fields": [
+        "path"
+      ],
+      "body_fields": [],
+      "header_fields": [
+        "accept",
+        "accept-language",
+        "client-id",
+        "client-version",
+        "d",
+        "lang",
+        "referer",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform",
+        "t",
+        "user-agent",
+        "x-device-id"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "rights"
+      ]
+    },
+    {
+      "page_route": "/report-management/game-platform-report/list",
+      "control_type": "page_initialization",
+      "action_name": "open /report-management/game-platform-report/list",
+      "method": "GET",
+      "path": "/admin/priv/check",
+      "query_fields": [
+        "path"
+      ],
+      "body_fields": [],
+      "header_fields": [
+        "accept",
+        "accept-language",
+        "client-id",
+        "client-version",
+        "d",
+        "lang",
+        "referer",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform",
+        "t",
+        "user-agent",
+        "x-device-id"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "rights"
+      ]
+    },
+    {
+      "page_route": "/report-management/game-platform-report/list",
+      "control_type": "page_initialization",
+      "action_name": "open /report-management/game-platform-report/list",
+      "method": "POST",
+      "path": "/admin/dict/venues",
+      "query_fields": [],
+      "body_fields": [],
+      "header_fields": [
+        "accept",
+        "accept-language",
+        "client-id",
+        "client-version",
+        "content-type",
+        "d",
+        "lang",
+        "referer",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform",
+        "t",
+        "user-agent",
+        "x-device-id"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "list",
+      "response_data_keys": []
+    },
+    {
+      "page_route": "/report-management/game-platform-report/list",
+      "control_type": "page_initialization",
+      "action_name": "open /report-management/game-platform-report/list",
+      "method": "GET",
+      "path": "/admin/reports/venue/node",
+      "query_fields": [
+        "end_time",
+        "field",
+        "page",
+        "page_size",
+        "start_time"
+      ],
+      "body_fields": [],
+      "header_fields": [
+        "accept",
+        "accept-language",
+        "client-id",
+        "client-version",
+        "d",
+        "lang",
+        "referer",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform",
+        "t",
+        "user-agent",
+        "x-device-id"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "a",
+        "d",
+        "s",
+        "t"
+      ]
+    },
+    {
+      "page_route": "/report-management/game-platform-report/list",
+      "control_type": "pagination",
+      "action_name": "page 2",
+      "method": "GET",
+      "path": "/admin/reports/venue/node",
+      "query_fields": [
+        "end_time",
+        "field",
+        "page",
+        "page_size",
+        "start_time"
+      ],
+      "body_fields": [],
+      "header_fields": [
+        "accept",
+        "accept-language",
+        "client-id",
+        "client-version",
+        "d",
+        "lang",
+        "referer",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform",
+        "t",
+        "user-agent",
+        "x-device-id"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "a",
+        "d",
+        "s",
+        "t"
+      ]
+    },
+    {
+      "page_route": "/report-management/game-platform-report/list",
+      "control_type": "tab",
+      "action_name": "VIP Config",
+      "method": "GET",
+      "path": "/admin/sys/config/compliance/status",
+      "query_fields": [],
+      "body_fields": [],
+      "header_fields": [
+        "accept",
+        "accept-language",
+        "client-id",
+        "client-version",
+        "d",
+        "lang",
+        "referer",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform",
+        "t",
+        "user-agent",
+        "x-device-id"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "effective_open",
+        "effective_reason",
+        "effective_status_msg"
+      ]
+    },
+    {
+      "page_route": "/report-management/member-daily-stats",
+      "control_type": "page_initialization",
+      "action_name": "open /report-management/member-daily-stats",
+      "method": "GET",
+      "path": "/admin/reports/member",
+      "query_fields": [
+        "end_time",
+        "field",
+        "page",
+        "page_size",
+        "start_time"
+      ],
+      "body_fields": [],
+      "header_fields": [
+        "accept",
+        "accept-language",
+        "client-id",
+        "client-version",
+        "d",
+        "lang",
+        "referer",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform",
+        "t",
+        "user-agent",
+        "x-device-id"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "a",
+        "d",
+        "s",
+        "t"
+      ]
+    },
+    {
+      "page_route": "/report-management/member-daily-stats",
+      "control_type": "button",
+      "action_name": "查 询",
+      "method": "GET",
+      "path": "/admin/reports/member",
+      "query_fields": [
+        "end_time",
+        "field",
+        "page",
+        "page_size",
+        "start_time"
+      ],
+      "body_fields": [],
+      "header_fields": [
+        "accept",
+        "accept-language",
+        "client-id",
+        "client-version",
+        "d",
+        "lang",
+        "referer",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform",
+        "t",
+        "user-agent",
+        "x-device-id"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "a",
+        "d",
+        "s",
+        "t"
+      ]
+    },
+    {
+      "page_route": "/report-management/member-daily-stats",
+      "control_type": "tab",
+      "action_name": "VIP Config",
+      "method": "GET",
+      "path": "/admin/sys/config/compliance/status",
+      "query_fields": [],
+      "body_fields": [],
+      "header_fields": [
+        "accept",
+        "accept-language",
+        "client-id",
+        "client-version",
+        "d",
+        "lang",
+        "referer",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform",
+        "t",
+        "user-agent",
+        "x-device-id"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "effective_open",
+        "effective_reason",
+        "effective_status_msg"
+      ]
+    },
+    {
+      "page_route": "/report-management/member-daily-stats",
+      "control_type": "tab",
+      "action_name": "VIP Rewards",
+      "method": "GET",
+      "path": "/admin/sys/config/compliance/status",
+      "query_fields": [],
+      "body_fields": [],
+      "header_fields": [
+        "accept",
+        "accept-language",
+        "client-id",
+        "client-version",
+        "d",
+        "lang",
+        "referer",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform",
+        "t",
+        "user-agent",
+        "x-device-id"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "effective_open",
+        "effective_reason",
+        "effective_status_msg"
+      ]
+    },
+    {
+      "page_route": "/report-management/member-daily-game-stats",
+      "control_type": "page_initialization",
+      "action_name": "open /report-management/member-daily-game-stats",
+      "method": "POST",
+      "path": "/admin/gameclass/list",
+      "query_fields": [],
+      "body_fields": [],
+      "header_fields": [
+        "accept",
+        "accept-language",
+        "client-id",
+        "client-version",
+        "content-type",
+        "d",
+        "lang",
+        "referer",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform",
+        "t",
+        "user-agent",
+        "x-device-id"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ]
+    },
+    {
+      "page_route": "/report-management/member-daily-game-stats",
+      "control_type": "page_initialization",
+      "action_name": "open /report-management/member-daily-game-stats",
+      "method": "GET",
+      "path": "/admin/reports/member-daily-game/aggregate",
+      "query_fields": [
+        "end_date",
+        "field",
+        "page",
+        "page_size",
+        "start_date"
+      ],
+      "body_fields": [],
+      "header_fields": [
+        "accept",
+        "accept-language",
+        "client-id",
+        "client-version",
+        "d",
+        "lang",
+        "referer",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform",
+        "t",
+        "user-agent",
+        "x-device-id"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "a",
+        "d",
+        "s",
+        "subtotal",
+        "t"
+      ]
+    },
+    {
+      "page_route": "/report-management/member-daily-game-stats",
+      "control_type": "button",
+      "action_name": "查 询",
+      "method": "GET",
+      "path": "/admin/reports/member-daily-game/aggregate",
+      "query_fields": [
+        "end_date",
+        "field",
+        "page",
+        "page_size",
+        "start_date"
+      ],
+      "body_fields": [],
+      "header_fields": [
+        "accept",
+        "accept-language",
+        "client-id",
+        "client-version",
+        "d",
+        "lang",
+        "referer",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform",
+        "t",
+        "user-agent",
+        "x-device-id"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "a",
+        "d",
+        "s",
+        "subtotal",
+        "t"
+      ]
+    },
+    {
+      "page_route": "/report-management/member-daily-game-stats",
+      "control_type": "tab",
+      "action_name": "VIP Config",
+      "method": "GET",
+      "path": "/admin/sys/config/compliance/status",
+      "query_fields": [],
+      "body_fields": [],
+      "header_fields": [
+        "accept",
+        "accept-language",
+        "client-id",
+        "client-version",
+        "d",
+        "lang",
+        "referer",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform",
+        "t",
+        "user-agent",
+        "x-device-id"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "effective_open",
+        "effective_reason",
+        "effective_status_msg"
+      ]
+    },
+    {
+      "page_route": "login",
+      "control_type": "page_initialization",
+      "action_name": "open login page",
+      "method": "GET",
+      "path": "/admin/me/detail",
+      "query_fields": [],
+      "body_fields": [],
+      "header_fields": [
+        "accept",
+        "accept-language",
+        "client-id",
+        "client-version",
+        "d",
+        "lang",
+        "referer",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform",
+        "user-agent",
+        "x-device-id"
+      ],
+      "http_status": 200,
+      "business_status": false,
+      "response_data_type": "string",
+      "response_data_keys": []
+    },
+    {
+      "page_route": "login",
+      "control_type": "button",
+      "action_name": "login credentials submit",
+      "method": "POST",
+      "path": "/admin/login/auth",
+      "query_fields": [],
+      "body_fields": [],
+      "header_fields": [
+        "accept",
+        "accept-language",
+        "client-id",
+        "client-version",
+        "content-type",
+        "d",
+        "lang",
+        "referer",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform",
+        "user-agent",
+        "x-device-id"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "number",
+      "response_data_keys": []
+    },
+    {
+      "page_route": "login",
+      "control_type": "button",
+      "action_name": "Google verification confirm",
+      "method": "POST",
+      "path": "/admin/login",
+      "query_fields": [],
+      "body_fields": [],
+      "header_fields": [
+        "accept",
+        "accept-language",
+        "client-id",
+        "client-version",
+        "content-type",
+        "d",
+        "lang",
+        "referer",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform",
+        "user-agent",
+        "x-device-id"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "string",
+      "response_data_keys": []
+    },
+    {
+      "page_route": "login",
+      "control_type": "button",
+      "action_name": "Google verification confirm",
+      "method": "GET",
+      "path": "/admin/me/detail",
+      "query_fields": [],
+      "body_fields": [],
+      "header_fields": [
+        "accept",
+        "accept-language",
+        "client-id",
+        "client-version",
+        "d",
+        "lang",
+        "referer",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform",
+        "t",
+        "user-agent",
+        "x-device-id"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "avatar",
+        "bind_time",
+        "button_permission_ids",
+        "cmpl",
+        "create_name",
+        "created_at",
+        "email",
+        "google_secret",
+        "group_id",
+        "id",
+        "last_login_ip",
+        "last_login_time",
+        "login_password",
+        "nickname",
+        "operator_name",
+        "pwd_edit_time",
+        "roles",
+        "sid",
+        "status",
+        "stores",
+        "updated_at",
+        "username"
+      ]
+    },
+    {
+      "page_route": "login",
+      "control_type": "button",
+      "action_name": "Google verification confirm",
+      "method": "GET",
+      "path": "/admin/sys/config/compliance/status",
+      "query_fields": [],
+      "body_fields": [],
+      "header_fields": [
+        "accept",
+        "accept-language",
+        "client-id",
+        "client-version",
+        "d",
+        "lang",
+        "referer",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform",
+        "t",
+        "user-agent",
+        "x-device-id"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "effective_open",
+        "effective_reason",
+        "effective_status_msg"
+      ]
+    },
+    {
+      "page_route": "login",
+      "control_type": "button",
+      "action_name": "Google verification confirm",
+      "method": "GET",
+      "path": "/admin/notify/audit/alarm",
+      "query_fields": [
+        "t"
+      ],
+      "body_fields": [],
+      "header_fields": [
+        "accept",
+        "accept-language",
+        "client-id",
+        "client-version",
+        "d",
+        "lang",
+        "referer",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform",
+        "t",
+        "user-agent",
+        "x-device-id"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "bonus_review_pending",
+        "feedback_pending",
+        "kyc_pending",
+        "mall_order_pending",
+        "withdraw_pending"
+      ]
+    },
+    {
+      "page_route": "login",
+      "control_type": "button",
+      "action_name": "Google verification confirm",
+      "method": "POST",
+      "path": "/admin/gameclass/list",
+      "query_fields": [],
+      "body_fields": [],
+      "header_fields": [
+        "accept",
+        "accept-language",
+        "client-id",
+        "client-version",
+        "content-type",
+        "d",
+        "lang",
+        "referer",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform",
+        "t",
+        "user-agent",
+        "x-device-id"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ]
+    },
+    {
+      "page_route": "login",
+      "control_type": "button",
+      "action_name": "Google verification confirm",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "body_fields": [],
+      "header_fields": [
+        "accept",
+        "accept-language",
+        "client-id",
+        "client-version",
+        "content-type",
+        "d",
+        "lang",
+        "referer",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform",
+        "t",
+        "user-agent",
+        "x-device-id"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "ids",
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ]
+    },
+    {
+      "page_route": "login",
+      "control_type": "button",
+      "action_name": "Google verification confirm",
+      "method": "GET",
+      "path": "/admin/reports/bi/chart",
+      "query_fields": [
+        "time_range"
+      ],
+      "body_fields": [],
+      "header_fields": [
+        "accept",
+        "accept-language",
+        "client-id",
+        "client-version",
+        "d",
+        "lang",
+        "referer",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform",
+        "t",
+        "user-agent",
+        "x-device-id"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "d"
+      ]
+    },
+    {
+      "page_route": "login",
+      "control_type": "button",
+      "action_name": "Google verification confirm",
+      "method": "GET",
+      "path": "/admin/reports/bi/basic",
+      "query_fields": [
+        "report_type"
+      ],
+      "body_fields": [],
+      "header_fields": [
+        "accept",
+        "accept-language",
+        "client-id",
+        "client-version",
+        "d",
+        "lang",
+        "referer",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform",
+        "t",
+        "user-agent",
+        "x-device-id"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "arppu",
+        "arpu",
+        "balance",
+        "bets_deposit",
+        "bets_people",
+        "deposit_amount",
+        "deposit_people",
+        "dw_diff",
+        "ebingo_ggr",
+        "first_deposit",
+        "first_deposit_amount",
+        "game_ggr",
+        "ggr",
+        "injection_rate",
+        "login_count",
+        "new_deposit",
+        "new_deposit_amount",
+        "refill_deposit",
+        "refill_deposit_amount",
+        "reg_count",
+        "report_type",
+        "sports_ggr",
+        "valid_bet_amount",
+        "withdraw_amount",
+        "withdraw_people",
+        "ws_ggr"
+      ]
+    },
+    {
+      "page_route": "login",
+      "control_type": "button",
+      "action_name": "Google verification confirm",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "body_fields": [],
+      "header_fields": [
+        "accept",
+        "accept-language",
+        "client-id",
+        "client-version",
+        "content-type",
+        "d",
+        "lang",
+        "referer",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform",
+        "t",
+        "user-agent",
+        "x-device-id"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "ids",
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ]
+    },
+    {
+      "page_route": "login",
+      "control_type": "button",
+      "action_name": "Google verification confirm",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "body_fields": [],
+      "header_fields": [
+        "accept",
+        "accept-language",
+        "client-id",
+        "client-version",
+        "content-type",
+        "d",
+        "lang",
+        "referer",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform",
+        "t",
+        "user-agent",
+        "x-device-id"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "ids",
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ]
+    },
+    {
+      "page_route": "login",
+      "control_type": "button",
+      "action_name": "Google verification confirm",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "body_fields": [],
+      "header_fields": [
+        "accept",
+        "accept-language",
+        "client-id",
+        "client-version",
+        "content-type",
+        "d",
+        "lang",
+        "referer",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform",
+        "t",
+        "user-agent",
+        "x-device-id"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "ids",
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ]
+    },
+    {
+      "page_route": "login",
+      "control_type": "button",
+      "action_name": "Google verification confirm",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "body_fields": [],
+      "header_fields": [
+        "accept",
+        "accept-language",
+        "client-id",
+        "client-version",
+        "content-type",
+        "d",
+        "lang",
+        "referer",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform",
+        "t",
+        "user-agent",
+        "x-device-id"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "ids",
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ]
+    },
+    {
+      "page_route": "login",
+      "control_type": "button",
+      "action_name": "Google verification confirm",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "body_fields": [],
+      "header_fields": [
+        "accept",
+        "accept-language",
+        "client-id",
+        "client-version",
+        "content-type",
+        "d",
+        "lang",
+        "referer",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform",
+        "t",
+        "user-agent",
+        "x-device-id"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "ids",
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ]
+    },
+    {
+      "page_route": "login",
+      "control_type": "button",
+      "action_name": "Google verification confirm",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "body_fields": [],
+      "header_fields": [
+        "accept",
+        "accept-language",
+        "client-id",
+        "client-version",
+        "content-type",
+        "d",
+        "lang",
+        "referer",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform",
+        "t",
+        "user-agent",
+        "x-device-id"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "ids",
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ]
+    },
+    {
+      "page_route": "login",
+      "control_type": "button",
+      "action_name": "Google verification confirm",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "body_fields": [],
+      "header_fields": [
+        "accept",
+        "accept-language",
+        "client-id",
+        "client-version",
+        "content-type",
+        "d",
+        "lang",
+        "referer",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform",
+        "t",
+        "user-agent",
+        "x-device-id"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "ids",
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ]
+    },
+    {
+      "page_route": "login",
+      "control_type": "button",
+      "action_name": "Google verification confirm",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "body_fields": [],
+      "header_fields": [
+        "accept",
+        "accept-language",
+        "client-id",
+        "client-version",
+        "content-type",
+        "d",
+        "lang",
+        "referer",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform",
+        "t",
+        "user-agent",
+        "x-device-id"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "ids",
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ]
+    },
+    {
+      "page_route": "login",
+      "control_type": "button",
+      "action_name": "Google verification confirm",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "body_fields": [],
+      "header_fields": [
+        "accept",
+        "accept-language",
+        "client-id",
+        "client-version",
+        "content-type",
+        "d",
+        "lang",
+        "referer",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform",
+        "t",
+        "user-agent",
+        "x-device-id"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "ids",
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ]
+    },
+    {
+      "page_route": "/report-management/member-daily-game-stats",
+      "control_type": "page_initialization",
+      "action_name": "open /report-management/member-daily-game-stats",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "body_fields": [],
+      "header_fields": [
+        "accept",
+        "accept-language",
+        "client-id",
+        "client-version",
+        "content-type",
+        "d",
+        "lang",
+        "referer",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform",
+        "t",
+        "user-agent",
+        "x-device-id"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "ids",
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ]
+    },
+    {
+      "page_route": "/report-management/member-daily-game-stats",
+      "control_type": "page_initialization",
+      "action_name": "open /report-management/member-daily-game-stats",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "body_fields": [],
+      "header_fields": [
+        "accept",
+        "accept-language",
+        "client-id",
+        "client-version",
+        "content-type",
+        "d",
+        "lang",
+        "referer",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform",
+        "t",
+        "user-agent",
+        "x-device-id"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "ids",
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ]
+    },
+    {
+      "page_route": "/report-management/member-daily-game-stats",
+      "control_type": "page_initialization",
+      "action_name": "open /report-management/member-daily-game-stats",
+      "method": "POST",
+      "path": "/admin/gameclass/list",
+      "query_fields": [],
+      "body_fields": [],
+      "header_fields": [
+        "accept",
+        "accept-language",
+        "client-id",
+        "client-version",
+        "content-type",
+        "d",
+        "lang",
+        "referer",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform",
+        "t",
+        "user-agent",
+        "x-device-id"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ]
+    },
+    {
+      "page_route": "/report-management/member-daily-game-stats",
+      "control_type": "page_initialization",
+      "action_name": "open /report-management/member-daily-game-stats",
+      "method": "GET",
+      "path": "/admin/reports/member-daily-game/aggregate",
+      "query_fields": [
+        "end_date",
+        "field",
+        "page",
+        "page_size",
+        "start_date"
+      ],
+      "body_fields": [],
+      "header_fields": [
+        "accept",
+        "accept-language",
+        "client-id",
+        "client-version",
+        "d",
+        "lang",
+        "referer",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform",
+        "t",
+        "user-agent",
+        "x-device-id"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "a",
+        "d",
+        "s",
+        "subtotal",
+        "t"
+      ]
+    },
+    {
+      "page_route": "/report-management/member-daily-game-stats",
+      "control_type": "button",
+      "action_name": "查 询",
+      "method": "GET",
+      "path": "/admin/reports/member-daily-game/aggregate",
+      "query_fields": [
+        "end_date",
+        "field",
+        "page",
+        "page_size",
+        "start_date"
+      ],
+      "body_fields": [],
+      "header_fields": [
+        "accept",
+        "accept-language",
+        "client-id",
+        "client-version",
+        "d",
+        "lang",
+        "referer",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform",
+        "t",
+        "user-agent",
+        "x-device-id"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "a",
+        "d",
+        "s",
+        "subtotal",
+        "t"
+      ]
+    },
+    {
+      "page_route": "/payment",
+      "control_type": "page_initialization",
+      "action_name": "open /payment",
+      "method": "GET",
+      "path": "/admin/finance/payment/deposit/channels",
+      "query_fields": [],
+      "body_fields": [],
+      "header_fields": [
+        "accept",
+        "accept-language",
+        "client-id",
+        "client-version",
+        "d",
+        "lang",
+        "referer",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform",
+        "t",
+        "user-agent",
+        "x-device-id"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "list",
+      "response_data_keys": []
+    },
+    {
+      "page_route": "/payment",
+      "control_type": "page_initialization",
+      "action_name": "open /payment",
+      "method": "POST",
+      "path": "/admin/finance/deposit/list",
+      "query_fields": [],
+      "body_fields": [],
+      "header_fields": [
+        "accept",
+        "accept-language",
+        "client-id",
+        "client-version",
+        "content-type",
+        "d",
+        "lang",
+        "referer",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform",
+        "t",
+        "user-agent",
+        "x-device-id"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "d",
+        "s",
+        "summary",
+        "t"
+      ]
+    },
+    {
+      "page_route": "/payment/withdraw-orders/list",
+      "control_type": "page_initialization",
+      "action_name": "open /payment/withdraw-orders/list",
+      "method": "GET",
+      "path": "/admin/finance/payment/withdraw/channels",
+      "query_fields": [],
+      "body_fields": [],
+      "header_fields": [
+        "accept",
+        "accept-language",
+        "client-id",
+        "client-version",
+        "d",
+        "lang",
+        "referer",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform",
+        "t",
+        "user-agent",
+        "x-device-id"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "list",
+      "response_data_keys": []
+    },
+    {
+      "page_route": "/payment/withdraw-orders/list",
+      "control_type": "page_initialization",
+      "action_name": "open /payment/withdraw-orders/list",
+      "method": "POST",
+      "path": "/admin/finance/withdraw/list",
+      "query_fields": [],
+      "body_fields": [],
+      "header_fields": [
+        "accept",
+        "accept-language",
+        "client-id",
+        "client-version",
+        "content-type",
+        "d",
+        "lang",
+        "referer",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform",
+        "t",
+        "user-agent",
+        "x-device-id"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "d",
+        "s",
+        "summary",
+        "t"
+      ]
+    },
+    {
+      "page_route": "/payment/betting-slip/list",
+      "control_type": "page_initialization",
+      "action_name": "open /payment/betting-slip/list",
+      "method": "POST",
+      "path": "/admin/record/bet",
+      "query_fields": [],
+      "body_fields": [],
+      "header_fields": [
+        "accept",
+        "accept-language",
+        "client-id",
+        "client-version",
+        "content-type",
+        "d",
+        "lang",
+        "referer",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform",
+        "t",
+        "user-agent",
+        "x-device-id"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "a",
+        "d",
+        "fd",
+        "s",
+        "t"
+      ]
+    },
+    {
+      "page_route": "/payment/transaction-orders",
+      "control_type": "page_initialization",
+      "action_name": "open /payment/transaction-orders",
+      "method": "GET",
+      "path": "/admin/finance/transaction/types",
+      "query_fields": [],
+      "body_fields": [],
+      "header_fields": [
+        "accept",
+        "accept-language",
+        "client-id",
+        "client-version",
+        "d",
+        "lang",
+        "referer",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform",
+        "t",
+        "user-agent",
+        "x-device-id"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "list",
+      "response_data_keys": []
+    },
+    {
+      "page_route": "/payment/transaction-orders",
+      "control_type": "page_initialization",
+      "action_name": "open /payment/transaction-orders",
+      "method": "POST",
+      "path": "/admin/finance/transaction/list",
+      "query_fields": [],
+      "body_fields": [],
+      "header_fields": [
+        "accept",
+        "accept-language",
+        "client-id",
+        "client-version",
+        "content-type",
+        "d",
+        "lang",
+        "referer",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform",
+        "t",
+        "user-agent",
+        "x-device-id"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "d",
+        "s",
+        "t"
+      ]
+    },
+    {
+      "page_route": "/payment/channel-ordersV2",
+      "control_type": "page_initialization",
+      "action_name": "open /payment/channel-ordersV2",
+      "method": "GET",
+      "path": "/admin/finance/payment/platform/list",
+      "query_fields": [
+        "mode",
+        "page",
+        "page_size"
+      ],
+      "body_fields": [],
+      "header_fields": [
+        "accept",
+        "accept-language",
+        "client-id",
+        "client-version",
+        "d",
+        "lang",
+        "referer",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform",
+        "t",
+        "user-agent",
+        "x-device-id"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "d",
+        "s",
+        "t"
+      ]
+    },
+    {
+      "page_route": "/payment/recharge-card-orders/list",
+      "control_type": "page_initialization",
+      "action_name": "open /payment/recharge-card-orders/list",
+      "method": "POST",
+      "path": "/admin/finance/lazada/order/list",
+      "query_fields": [],
+      "body_fields": [],
+      "header_fields": [
+        "accept",
+        "accept-language",
+        "client-id",
+        "client-version",
+        "content-type",
+        "d",
+        "lang",
+        "referer",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform",
+        "t",
+        "user-agent",
+        "x-device-id"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "all",
+        "list",
+        "page",
+        "sub",
+        "total"
+      ]
+    },
+    {
+      "page_route": "/payment/recharge-card-orders/list",
+      "control_type": "tab",
+      "action_name": "Deposit Record",
+      "method": "GET",
+      "path": "/admin/sys/config/compliance/status",
+      "query_fields": [],
+      "body_fields": [],
+      "header_fields": [
+        "accept",
+        "accept-language",
+        "client-id",
+        "client-version",
+        "d",
+        "lang",
+        "referer",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform",
+        "t",
+        "user-agent",
+        "x-device-id"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "effective_open",
+        "effective_reason",
+        "effective_status_msg"
+      ]
+    },
+    {
+      "page_route": "/operations/daily-reports",
+      "control_type": "page_initialization",
+      "action_name": "open /operations/daily-reports",
+      "method": "GET",
+      "path": "/admin/channel/dict",
+      "query_fields": [
+        "ty"
+      ],
+      "body_fields": [],
+      "header_fields": [
+        "accept",
+        "accept-language",
+        "client-id",
+        "client-version",
+        "d",
+        "lang",
+        "referer",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform",
+        "t",
+        "user-agent",
+        "x-device-id"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "list",
+      "response_data_keys": []
+    },
+    {
+      "page_route": "/operations/daily-reports",
+      "control_type": "page_initialization",
+      "action_name": "open /operations/daily-reports",
+      "method": "GET",
+      "path": "/admin/reports/channel",
+      "query_fields": [
+        "end_time",
+        "page",
+        "page_size",
+        "start_time"
+      ],
+      "body_fields": [],
+      "header_fields": [
+        "accept",
+        "accept-language",
+        "client-id",
+        "client-version",
+        "d",
+        "lang",
+        "referer",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform",
+        "t",
+        "user-agent",
+        "x-device-id"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "d",
+        "t"
+      ]
+    },
+    {
+      "page_route": "/operations/client-config",
+      "control_type": "page_initialization",
+      "action_name": "open /operations/client-config",
+      "method": "GET",
+      "path": "/admin/banner/menu",
+      "query_fields": [],
+      "body_fields": [],
+      "header_fields": [
+        "accept",
+        "accept-language",
+        "client-id",
+        "client-version",
+        "d",
+        "lang",
+        "referer",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform",
+        "t",
+        "user-agent",
+        "x-device-id"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "categories",
+        "tys"
+      ]
+    },
+    {
+      "page_route": "/operations/client-config",
+      "control_type": "page_initialization",
+      "action_name": "open /operations/client-config",
+      "method": "POST",
+      "path": "/admin/banner/list",
+      "query_fields": [],
+      "body_fields": [],
+      "header_fields": [
+        "accept",
+        "accept-language",
+        "client-id",
+        "client-version",
+        "content-type",
+        "d",
+        "lang",
+        "referer",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform",
+        "t",
+        "user-agent",
+        "x-device-id"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "d",
+        "s",
+        "t"
+      ]
+    },
+    {
+      "page_route": "/operations/client-config",
+      "control_type": "page_initialization",
+      "action_name": "open /operations/client-config",
+      "method": "GET",
+      "path": "/admin/promo/list",
+      "query_fields": [
+        "page_size"
+      ],
+      "body_fields": [],
+      "header_fields": [
+        "accept",
+        "accept-language",
+        "client-id",
+        "client-version",
+        "d",
+        "lang",
+        "referer",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform",
+        "t",
+        "user-agent",
+        "x-device-id"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "d",
+        "s",
+        "t",
+        "update_users"
+      ]
+    },
+    {
+      "page_route": "/operations/client-config",
+      "control_type": "tab",
+      "action_name": "Withdrawal Record",
+      "method": "GET",
+      "path": "/admin/sys/config/compliance/status",
+      "query_fields": [],
+      "body_fields": [],
+      "header_fields": [
+        "accept",
+        "accept-language",
+        "client-id",
+        "client-version",
+        "d",
+        "lang",
+        "referer",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform",
+        "t",
+        "user-agent",
+        "x-device-id"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "effective_open",
+        "effective_reason",
+        "effective_status_msg"
+      ]
+    },
+    {
+      "page_route": "/operations/material-management",
+      "control_type": "page_initialization",
+      "action_name": "open /operations/material-management",
+      "method": "GET",
+      "path": "/admin/ad/material/platform/menu",
+      "query_fields": [],
+      "body_fields": [],
+      "header_fields": [
+        "accept",
+        "accept-language",
+        "client-id",
+        "client-version",
+        "d",
+        "lang",
+        "referer",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform",
+        "t",
+        "user-agent",
+        "x-device-id"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "list",
+      "response_data_keys": []
+    },
+    {
+      "page_route": "/operations/material-management",
+      "control_type": "page_initialization",
+      "action_name": "open /operations/material-management",
+      "method": "GET",
+      "path": "/admin/ad/material/type/list",
+      "query_fields": [],
+      "body_fields": [],
+      "header_fields": [
+        "accept",
+        "accept-language",
+        "client-id",
+        "client-version",
+        "d",
+        "lang",
+        "referer",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform",
+        "t",
+        "user-agent",
+        "x-device-id"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "list",
+      "response_data_keys": []
+    },
+    {
+      "page_route": "/operations/material-management",
+      "control_type": "page_initialization",
+      "action_name": "open /operations/material-management",
+      "method": "POST",
+      "path": "/admin/ad/material/list",
+      "query_fields": [],
+      "body_fields": [],
+      "header_fields": [
+        "accept",
+        "accept-language",
+        "client-id",
+        "client-version",
+        "content-type",
+        "d",
+        "lang",
+        "referer",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform",
+        "t",
+        "user-agent",
+        "x-device-id"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "d",
+        "s",
+        "t"
+      ]
+    },
+    {
+      "page_route": "/operations/material-management",
+      "control_type": "pagination",
+      "action_name": "page 2",
+      "method": "POST",
+      "path": "/admin/ad/material/list",
+      "query_fields": [],
+      "body_fields": [],
+      "header_fields": [
+        "accept",
+        "accept-language",
+        "client-id",
+        "client-version",
+        "content-type",
+        "d",
+        "lang",
+        "referer",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform",
+        "t",
+        "user-agent",
+        "x-device-id"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "d",
+        "s",
+        "t"
+      ]
+    },
+    {
+      "page_route": "/operations/material-management",
+      "control_type": "tab",
+      "action_name": "Member Daily Game Stats",
+      "method": "GET",
+      "path": "/admin/ad/material/platform/menu",
+      "query_fields": [],
+      "body_fields": [],
+      "header_fields": [
+        "accept",
+        "accept-language",
+        "client-id",
+        "client-version",
+        "d",
+        "lang",
+        "referer",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform",
+        "t",
+        "user-agent",
+        "x-device-id"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "list",
+      "response_data_keys": []
+    },
+    {
+      "page_route": "/operations/activity-list",
+      "control_type": "page_initialization",
+      "action_name": "open /operations/activity-list",
+      "method": "POST",
+      "path": "/admin/user/list",
+      "query_fields": [],
+      "body_fields": [
+        "page",
+        "page_size"
+      ],
+      "header_fields": [
+        "accept",
+        "accept-language",
+        "client-id",
+        "client-version",
+        "content-type",
+        "d",
+        "lang",
+        "referer",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform",
+        "t",
+        "user-agent",
+        "x-device-id"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "d",
+        "t"
+      ]
+    },
+    {
+      "page_route": "/operations/activity-list",
+      "control_type": "page_initialization",
+      "action_name": "open /operations/activity-list",
+      "method": "GET",
+      "path": "/admin/promo/list",
+      "query_fields": [
+        "page",
+        "page_size"
+      ],
+      "body_fields": [],
+      "header_fields": [
+        "accept",
+        "accept-language",
+        "client-id",
+        "client-version",
+        "d",
+        "lang",
+        "referer",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform",
+        "t",
+        "user-agent",
+        "x-device-id"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "d",
+        "s",
+        "t",
+        "update_users"
+      ]
+    },
+    {
+      "page_route": "/operations/activity-list",
+      "control_type": "tab",
+      "action_name": "Withdrawal Record",
+      "method": "GET",
+      "path": "/admin/sys/config/compliance/status",
+      "query_fields": [],
+      "body_fields": [],
+      "header_fields": [
+        "accept",
+        "accept-language",
+        "client-id",
+        "client-version",
+        "d",
+        "lang",
+        "referer",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform",
+        "t",
+        "user-agent",
+        "x-device-id"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "effective_open",
+        "effective_reason",
+        "effective_status_msg"
+      ]
+    },
+    {
+      "page_route": "/operations/advertisement-tracking",
+      "control_type": "page_initialization",
+      "action_name": "open /operations/advertisement-tracking",
+      "method": "GET",
+      "path": "/admin/domain/listForSelect",
+      "query_fields": [],
+      "body_fields": [],
+      "header_fields": [
+        "accept",
+        "accept-language",
+        "client-id",
+        "client-version",
+        "d",
+        "lang",
+        "referer",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform",
+        "t",
+        "user-agent",
+        "x-device-id"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "list",
+      "response_data_keys": []
+    },
+    {
+      "page_route": "/operations/advertisement-tracking",
+      "control_type": "page_initialization",
+      "action_name": "open /operations/advertisement-tracking",
+      "method": "GET",
+      "path": "/admin/buriedPoint/list",
+      "query_fields": [
+        "page",
+        "page_size",
+        "ty"
+      ],
+      "body_fields": [],
+      "header_fields": [
+        "accept",
+        "accept-language",
+        "client-id",
+        "client-version",
+        "d",
+        "lang",
+        "referer",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform",
+        "t",
+        "user-agent",
+        "x-device-id"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "d",
+        "s",
+        "t"
+      ]
+    },
+    {
+      "page_route": "/operations/mall-management",
+      "control_type": "page_initialization",
+      "action_name": "open /operations/mall-management",
+      "method": "GET",
+      "path": "/admin/mall/goods/list",
+      "query_fields": [
+        "page",
+        "page_size"
+      ],
+      "body_fields": [],
+      "header_fields": [
+        "accept",
+        "accept-language",
+        "client-id",
+        "client-version",
+        "d",
+        "lang",
+        "referer",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform",
+        "t",
+        "user-agent",
+        "x-device-id"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "d",
+        "s",
+        "t"
+      ]
+    },
+    {
+      "page_route": "/operations/mall-management",
+      "control_type": "pagination",
+      "action_name": "page 2",
+      "method": "GET",
+      "path": "/admin/mall/goods/list",
+      "query_fields": [
+        "page",
+        "page_size"
+      ],
+      "body_fields": [],
+      "header_fields": [
+        "accept",
+        "accept-language",
+        "client-id",
+        "client-version",
+        "d",
+        "lang",
+        "referer",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform",
+        "t",
+        "user-agent",
+        "x-device-id"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "d",
+        "s",
+        "t"
+      ]
+    },
+    {
+      "page_route": "/operations/mall-management",
+      "control_type": "tab",
+      "action_name": "Deposit Record",
+      "method": "GET",
+      "path": "/admin/sys/config/compliance/status",
+      "query_fields": [],
+      "body_fields": [],
+      "header_fields": [
+        "accept",
+        "accept-language",
+        "client-id",
+        "client-version",
+        "d",
+        "lang",
+        "referer",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform",
+        "t",
+        "user-agent",
+        "x-device-id"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "effective_open",
+        "effective_reason",
+        "effective_status_msg"
+      ]
+    },
+    {
+      "page_route": "/operations/activity-expenditure-audit",
+      "control_type": "page_initialization",
+      "action_name": "open /operations/activity-expenditure-audit",
+      "method": "GET",
+      "path": "/admin/bonus/review/list",
+      "query_fields": [
+        "created_end_at",
+        "created_start_at",
+        "page",
+        "page_size"
+      ],
+      "body_fields": [],
+      "header_fields": [
+        "accept",
+        "accept-language",
+        "client-id",
+        "client-version",
+        "d",
+        "lang",
+        "referer",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform",
+        "t",
+        "user-agent",
+        "x-device-id"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "d",
+        "t"
+      ]
+    },
+    {
+      "page_route": "/operations/in-site-message",
+      "control_type": "page_initialization",
+      "action_name": "open /operations/in-site-message",
+      "method": "GET",
+      "path": "/admin/message/list",
+      "query_fields": [
+        "is_batch",
+        "page",
+        "page_size"
+      ],
+      "body_fields": [],
+      "header_fields": [
+        "accept",
+        "accept-language",
+        "client-id",
+        "client-version",
+        "d",
+        "lang",
+        "referer",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform",
+        "t",
+        "user-agent",
+        "x-device-id"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "d",
+        "page",
+        "page_size",
+        "t"
+      ]
+    },
+    {
+      "page_route": "/operations/in-site-message",
+      "control_type": "pagination",
+      "action_name": "page 2",
+      "method": "GET",
+      "path": "/admin/message/list",
+      "query_fields": [
+        "is_batch",
+        "page",
+        "page_size"
+      ],
+      "body_fields": [],
+      "header_fields": [
+        "accept",
+        "accept-language",
+        "client-id",
+        "client-version",
+        "d",
+        "lang",
+        "referer",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform",
+        "t",
+        "user-agent",
+        "x-device-id"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "d",
+        "page",
+        "page_size",
+        "t"
+      ]
+    },
+    {
+      "page_route": "/operations/in-site-message",
+      "control_type": "tab",
+      "action_name": "Deposit Record",
+      "method": "GET",
+      "path": "/admin/sys/config/compliance/status",
+      "query_fields": [],
+      "body_fields": [],
+      "header_fields": [
+        "accept",
+        "accept-language",
+        "client-id",
+        "client-version",
+        "d",
+        "lang",
+        "referer",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform",
+        "t",
+        "user-agent",
+        "x-device-id"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "effective_open",
+        "effective_reason",
+        "effective_status_msg"
+      ]
+    }
+  ],
+  "fatal_error": "Error: page.waitForTimeout: Target page, context or browser has been closed"
+}

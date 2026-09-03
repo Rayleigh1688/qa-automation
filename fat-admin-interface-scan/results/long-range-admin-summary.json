@@ -1,0 +1,67 @@
+{
+  "environment": "FAT",
+  "timezone": "Asia/Manila",
+  "menu_baseline_pages": 57,
+  "focused_pages": 28,
+  "page_results": {
+    "ACTIVE_FAILED": 1,
+    "EMPTY_TO_MAX_OBSERVED_RANGE": 1,
+    "NON_EMPTY": 24,
+    "UI_DATE_INPUT_BLOCKED": 1,
+    "UNVERIFIED_LONG_RANGE": 1
+  },
+  "business_query_requests": 47,
+  "successful_query_requests": 46,
+  "unique_endpoints": 28,
+  "new_endpoints_vs_main": 0,
+  "endpoint_classifications": {
+    "ACTIVE": 23,
+    "UNDOCUMENTED_ACTIVE": 5
+  },
+  "pages_by_result": {
+    "ACTIVE_FAILED": [
+      "Daily Report"
+    ],
+    "EMPTY_TO_MAX_OBSERVED_RANGE": [
+      "VIP Rewards"
+    ],
+    "NON_EMPTY": [
+      "KYC",
+      "Logs",
+      "Member",
+      "Inviter Transfer Records",
+      "Agency statistical report",
+      "Game Reports",
+      "Game Type Reports",
+      "Game Platform Reports",
+      "Member Daily Stats",
+      "Member Daily Game Stats",
+      "Deposit Record",
+      "Withdrawal Record",
+      "Bet Management",
+      "Member Wallet Transactions",
+      "Recharge Card Order",
+      "Promotion Spend Audit",
+      "Deposit/Withdrawal Approval",
+      "Fund Transfer Record",
+      "Risk Logs",
+      "Promo Marketing Report",
+      "First Deposit Daily Active Analysis",
+      "FS 批量派发纪录",
+      "SMS Verification Code",
+      "Bet Order Monitoring"
+    ],
+    "UI_DATE_INPUT_BLOCKED": [
+      "Temporary Restriction List"
+    ],
+    "UNVERIFIED_LONG_RANGE": [
+      "Betting Record"
+    ]
+  },
+  "changes_main_endpoint_count": false,
+  "notes": [
+    "2020-01-01 through scan date is an observed accepted fallback, not a claimed product-wide configured maximum.",
+    "Opaque POST payloads retain only content type/byte length; time parameters are evidenced by accepted UI values without inventing body fields.",
+    "No write operation or database mutation was performed."
+  ]
+}

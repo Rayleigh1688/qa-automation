@@ -1,0 +1,34 @@
+{
+  "sources_are_redacted_repository_assets": true,
+  "network_or_business_requests_sent": 0,
+  "legacy_safe_skips": 184,
+  "legacy_interaction_errors": 6,
+  "legacy_write_blockers": 60,
+  "original_status_counts": {
+    "BLOCKED_DATA_SCOPE": 43,
+    "BLOCKED_PREREQUISITE": 17,
+    "ERROR": 6,
+    "SKIPPED_NOT_ACTIONABLE": 146,
+    "SKIPPED_NOT_FILTER_CONTEXT": 37,
+    "SKIPPED_NO_OPTION": 1
+  },
+  "root_cause_counts": {
+    "CURRENT_STATE_NOT_VISIBLE": 1,
+    "MISSING_LEGAL_DATA": 60,
+    "STRICT_LOCATOR_PROBLEM": 189
+  },
+  "page_no_longer_used_findings": 0,
+  "page_no_longer_used_note": "All reviewed rows belong to the live 57-route menu evidence; absence of a request is not STALE proof.",
+  "known_method_or_classification_drifts": [
+    {
+      "ui_request": "POST /admin/member/list",
+      "documented_request": "GET /admin/member/list",
+      "classification": "MISCLASSIFIED"
+    },
+    {
+      "ui_request": "POST /admin/finance/tokens/transaction/list",
+      "documented_request": "GET /admin/finance/tokens/transaction/list",
+      "classification": "MISCLASSIFIED"
+    }
+  ]
+}

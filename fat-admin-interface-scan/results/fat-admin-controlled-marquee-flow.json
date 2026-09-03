@@ -1,0 +1,566 @@
+{
+  "captured_at": "2026-09-03T06:24:59.310Z",
+  "environment": "FAT",
+  "page": "Marquee Management",
+  "route": "/operations/marquee-management",
+  "target_type": "marquee",
+  "target_id": "<redacted-member-id>",
+  "test_marker": "codex-fat-marquee-853da059",
+  "before_state": "absent by unique marker",
+  "steps": [
+    {
+      "action": "create",
+      "status": "PASS",
+      "target_id": "",
+      "endpoint_keys": [
+        "POST /admin/marquee/add",
+        "GET /admin/marquee/list"
+      ],
+      "dialog_still_visible": false,
+      "validation_messages": []
+    },
+    {
+      "action": "verify create",
+      "status": "PASS_ROW_FOUND",
+      "target_id": "<redacted-member-id>"
+    },
+    {
+      "action": "edit",
+      "status": "PASS",
+      "endpoint_keys": [
+        "POST /admin/marquee/update",
+        "GET /admin/marquee/list"
+      ]
+    },
+    {
+      "action": "delete",
+      "status": "PASS",
+      "endpoint_keys": [
+        "POST /admin/marquee/delete",
+        "GET /admin/marquee/list"
+      ]
+    }
+  ],
+  "after_state": "target absent/not visible",
+  "cleanup": "deleted current-run record",
+  "network": [
+    {
+      "action": "login",
+      "method": "GET",
+      "path": "/admin/me/detail",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": false,
+      "response_type": "string",
+      "response_keys": []
+    },
+    {
+      "action": "login",
+      "method": "POST",
+      "path": "/admin/login/auth",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "number",
+      "response_keys": []
+    },
+    {
+      "action": "login",
+      "method": "POST",
+      "path": "/admin/login",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "string",
+      "response_keys": []
+    },
+    {
+      "action": "login",
+      "method": "GET",
+      "path": "/admin/me/detail",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "avatar",
+        "bind_time",
+        "button_permission_ids",
+        "cmpl",
+        "create_name",
+        "created_at",
+        "email",
+        "google_secret",
+        "group_id",
+        "id",
+        "last_login_ip",
+        "last_login_time",
+        "login_password",
+        "nickname",
+        "operator_name",
+        "pwd_edit_time",
+        "roles",
+        "sid",
+        "status",
+        "stores",
+        "updated_at",
+        "username"
+      ]
+    },
+    {
+      "action": "page initialization",
+      "method": "GET",
+      "path": "/admin/me/detail",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "avatar",
+        "bind_time",
+        "button_permission_ids",
+        "cmpl",
+        "create_name",
+        "created_at",
+        "email",
+        "google_secret",
+        "group_id",
+        "id",
+        "last_login_ip",
+        "last_login_time",
+        "login_password",
+        "nickname",
+        "operator_name",
+        "pwd_edit_time",
+        "roles",
+        "sid",
+        "status",
+        "stores",
+        "updated_at",
+        "username"
+      ]
+    },
+    {
+      "action": "page initialization",
+      "method": "GET",
+      "path": "/admin/priv/check",
+      "query_fields": [
+        "path"
+      ],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "rights"
+      ]
+    },
+    {
+      "action": "page initialization",
+      "method": "GET",
+      "path": "/admin/priv/check",
+      "query_fields": [
+        "path"
+      ],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "rights"
+      ]
+    },
+    {
+      "action": "page initialization",
+      "method": "GET",
+      "path": "/admin/priv/check",
+      "query_fields": [
+        "path"
+      ],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "rights"
+      ]
+    },
+    {
+      "action": "page initialization",
+      "method": "GET",
+      "path": "/admin/sys/config/compliance/status",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "effective_open",
+        "effective_reason",
+        "effective_status_msg"
+      ]
+    },
+    {
+      "action": "page initialization",
+      "method": "GET",
+      "path": "/admin/notify/audit/alarm",
+      "query_fields": [
+        "t"
+      ],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "bonus_review_pending",
+        "feedback_pending",
+        "kyc_pending",
+        "mall_order_pending",
+        "withdraw_pending"
+      ]
+    },
+    {
+      "action": "page initialization",
+      "method": "POST",
+      "path": "/admin/gameclass/list",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ]
+    },
+    {
+      "action": "page initialization",
+      "method": "GET",
+      "path": "/admin/marquee/list",
+      "query_fields": [
+        "page",
+        "page_size",
+        "ty"
+      ],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "d",
+        "t"
+      ]
+    },
+    {
+      "action": "page initialization",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "ids",
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ]
+    },
+    {
+      "action": "page initialization",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "ids",
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ]
+    },
+    {
+      "action": "page initialization",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "ids",
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ]
+    },
+    {
+      "action": "page initialization",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "ids",
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ]
+    },
+    {
+      "action": "page initialization",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "ids",
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ]
+    },
+    {
+      "action": "page initialization",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "ids",
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ]
+    },
+    {
+      "action": "page initialization",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "ids",
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ]
+    },
+    {
+      "action": "page initialization",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "ids",
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ]
+    },
+    {
+      "action": "page initialization",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "ids",
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ]
+    },
+    {
+      "action": "page initialization",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "ids",
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ]
+    },
+    {
+      "action": "page initialization",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "ids",
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ]
+    },
+    {
+      "action": "page initialization",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "ids",
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ]
+    },
+    {
+      "action": "create",
+      "method": "POST",
+      "path": "/admin/marquee/add",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "string",
+      "response_keys": []
+    },
+    {
+      "action": "create",
+      "method": "GET",
+      "path": "/admin/marquee/list",
+      "query_fields": [
+        "page",
+        "page_size",
+        "ty"
+      ],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "d",
+        "t"
+      ]
+    },
+    {
+      "action": "edit",
+      "method": "POST",
+      "path": "/admin/marquee/update",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "string",
+      "response_keys": []
+    },
+    {
+      "action": "edit",
+      "method": "GET",
+      "path": "/admin/marquee/list",
+      "query_fields": [
+        "page",
+        "page_size",
+        "ty"
+      ],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "d",
+        "t"
+      ]
+    },
+    {
+      "action": "delete",
+      "method": "POST",
+      "path": "/admin/marquee/delete",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "string",
+      "response_keys": []
+    },
+    {
+      "action": "delete",
+      "method": "GET",
+      "path": "/admin/marquee/list",
+      "query_fields": [
+        "page",
+        "page_size",
+        "ty"
+      ],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "d",
+        "t"
+      ]
+    }
+  ]
+}

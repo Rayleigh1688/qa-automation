@@ -1,0 +1,254 @@
+top_menu,parent_permission_id,parent_permission_name,operation_id,operation_name,declared_path,documented,inventory_name,inventory_file,runtime_request_status
+会员,10001,会员列表,10010,清空提款密码,/admin/finance/member/wallet/pwd/clear,YES,清空提款密码 -- ducky,后台/会员列表/清空提款密码 -- ducky.bru,NOT_TRIGGERED_FROM_UI
+会员,10001,会员列表,10009,会员导出,/admin/member/export,YES,数据导出 - seven/double,后台/会员列表/数据导出 - seven-double.bru,NOT_TRIGGERED_FROM_UI
+会员,10001,会员列表,10011,解封,/admin/member/unblock,YES,block解封,后台/会员列表/block解封.bru,NOT_TRIGGERED_FROM_UI
+会员,10001,会员列表,100010001,会员列表_敏感数据,,NO,,,NOT_TRIGGERED_FROM_UI
+会员,10002,会员详情,10005,会员kyc详情,/admin/kyc/detail,YES,kyc详情 | 获取 kyc 详情 - double,后台/kyc/获取 kyc 详情 - double.bru | 后台/会员列表/kyc详情.bru,NOT_TRIGGERED_FROM_UI
+会员,10002,会员详情,10006,会员密码otp修改,/admin/user/update/password,YES,后台员工修改密码,后台/后台账号管理/后台员工修改密码.bru,NOT_TRIGGERED_FROM_UI
+会员,10002,会员详情,10007,会员登陆日志,/admin/member/log/list,YES,会员登录日志-seven,后台/后台日志/会员登录日志-seven.bru,NOT_TRIGGERED_FROM_UI
+会员,10002,会员详情,10008,会员流水清理,/admin/member/turnover/clear,YES,会员流水清理-light,后台/会员列表/会员流水清理-light.bru,NOT_TRIGGERED_FROM_UI
+会员,10002,会员详情,100316,转为代理,/admin/member/become/agent,NO,,,NOT_TRIGGERED_FROM_UI
+会员,10002,会员详情,10014,会员转线-查询,/admin/superior/one,YES,代理查询,后台/会员列表/代理查询.bru,NOT_TRIGGERED_FROM_UI
+会员,10002,会员详情,10012,会员转线-变更,/admin/superior/update,YES,会员转线,后台/会员列表/会员转线.bru,NOT_TRIGGERED_FROM_UI
+会员,10002,会员详情,10013,会员转线-记录,/admin/superior/log,YES,会员转线log,后台/会员列表/会员转线log.bru,NOT_TRIGGERED_FROM_UI
+会员,10002,会员详情,10015,会员充值倍率调整,/admin/member/deposit/multiple/update,YES,用户充值倍率调整-aliang,后台/后台账号管理/用户充值倍率调整-aliang.bru,NOT_TRIGGERED_FROM_UI
+会员,10002,会员详情,10016,会员充值倍率操作记录,/admin/member/deposit/multiple/log,YES,用户充值倍率调整日志列表-aliang,后台/后台账号管理/用户充值倍率调整日志列表-aliang.bru,NOT_TRIGGERED_FROM_UI
+会员,10002,会员详情,10021,vip等级手动调整,/admin/member/vip/level/manual/upgrade,YES,会员vip手动升级,后台/Vipv2/会员vip手动升级.bru,NOT_TRIGGERED_FROM_UI
+会员,10300,会员奖励表,10301,会员奖励表-列表,/admin/promo/vip/log/list,YES,奖励表列表-aliang,后台/Vipv2/奖励表列表-aliang.bru,NOT_TRIGGERED_FROM_UI
+会员,10300,会员奖励表,10302,会员奖励表-导出,/admin/promo/vip/log/export,YES,奖励表-导出-aliang,后台/Vipv2/奖励表-导出-aliang.bru,NOT_TRIGGERED_FROM_UI
+财务管理,30100,存款记录,30101,存款记录-列表,/admin/finance/deposit/list,YES,充值列表-wesley,后台/财务管理/存款记录/充值列表-wesley.bru,NOT_TRIGGERED_FROM_UI
+财务管理,30100,存款记录,30102,存款记录-同步,/admin/finance/deposit/sync,YES,充值同步状态-wesley,后台/财务管理/存款记录/充值同步状态-wesley.bru,NOT_TRIGGERED_FROM_UI
+财务管理,30100,存款记录,30103,存款列表导出,/admin/finance/deposit/export,YES,充值记录导出-wesley,后台/财务管理/存款记录/充值记录导出-wesley.bru,NOT_TRIGGERED_FROM_UI
+财务管理,30200,提现记录,30201,提现记录-列表,/admin/finance/withdraw/list,YES,提现列表-wesley,后台/财务管理/提现记录/提现列表-wesley.bru,NOT_TRIGGERED_FROM_UI
+财务管理,30200,提现记录,30202,提现记录-同步,/admin/finance/withdraw/sync,YES,提现同步状态-wesley,后台/财务管理/提现记录/提现同步状态-wesley.bru,NOT_TRIGGERED_FROM_UI
+财务管理,30200,提现记录,30203,取款列表导出,/admin/finance/withdraw/export,YES,提现记录导出-wesley,后台/财务管理/提现记录/提现记录导出-wesley.bru,NOT_TRIGGERED_FROM_UI
+财务管理,30400,会员钱包帐变,30401,会员钱包帐变-类型,/admin/finance/transaction/types,YES,账变类型- wesley,后台/财务管理/会员钱包账变/账变类型- wesley.bru,NOT_TRIGGERED_FROM_UI
+财务管理,30400,会员钱包帐变,30402,会员钱包帐变-列表,/admin/finance/transaction/list,YES,账变列表- wesley,后台/财务管理/会员钱包账变/账变列表- wesley.bru,NOT_TRIGGERED_FROM_UI
+财务管理,30400,会员钱包帐变,30403,会员详情-查看钱包,/admin/finance/member/wallet,YES,会员钱包 - wesley,后台/会员列表/会员钱包 - wesley.bru,NOT_TRIGGERED_FROM_UI
+财务管理,30500,支付渠道,30505,支付渠道-通道列表,/admin/finance/payment/channel/list,YES,支付渠道通道列表,后台/财务管理/支付渠道/支付渠道通道列表.bru,NOT_TRIGGERED_FROM_UI
+财务管理,30500,支付渠道,30509,支付渠道-提款通道列表,/admin/finance/payment/withdraw/channels,YES,提现渠道列表-cold,合规/财务管理/财务记录/提现渠道列表-cold.bru | 后台/财务管理/提现记录/提现渠道列表-cold.bru,NOT_TRIGGERED_FROM_UI
+财务管理,30500,支付渠道,30506,支付渠道-通道新增,/admin/finance/payment/channel/insert,YES,添加支付渠道通道,后台/财务管理/支付渠道/添加支付渠道通道.bru,NOT_TRIGGERED_FROM_UI
+财务管理,30500,支付渠道,30510,支付渠道-充值通道列表,/admin/finance/payment/deposit/channels,YES,支付渠道列表-cold,后台/财务管理/存款记录/支付渠道列表-cold.bru,NOT_TRIGGERED_FROM_UI
+财务管理,30500,支付渠道,30507,支付渠道-通道修改,/admin/finance/payment/channel/update,YES,更新支付渠道通道,后台/财务管理/支付渠道/更新支付渠道通道.bru,NOT_TRIGGERED_FROM_UI
+财务管理,30500,支付渠道,30511,渠道配置列表,/admin/finance/payment/platform/list,YES,支付平台列表,后台/财务管理/支付渠道/支付平台列表.bru,NOT_TRIGGERED_FROM_UI
+财务管理,30500,支付渠道,30512,添加渠道,/admin/finance/payment/platform/insert,YES,添加支付平台,后台/财务管理/支付渠道/添加支付平台.bru,NOT_TRIGGERED_FROM_UI
+财务管理,30500,支付渠道,30513,编辑渠道,/admin/finance/payment/platform/update,YES,更新支付平台,后台/财务管理/支付渠道/更新支付平台.bru,NOT_TRIGGERED_FROM_UI
+财务管理,30500,支付渠道,30514,渠道开关,/admin/finance/payment/platform/enable,YES,支付平台开关,后台/财务管理/支付渠道/支付平台开关.bru,NOT_TRIGGERED_FROM_UI
+财务管理,30600,lazada订单,30601,lazada订单列表,/admin/finance/lazada/order/list,YES,lazada-订单列表-owen,后台/财务管理/lazada订单/lazada-订单列表-owen.bru,NOT_TRIGGERED_FROM_UI
+财务管理,30600,lazada订单,30602,lazada发送验证码,/admin/finance/lazada/send/sms,YES,lazada-重新发货-owen,后台/财务管理/lazada订单/lazada-重新发货-owen.bru,NOT_TRIGGERED_FROM_UI
+风控管理,40100,存/提审核,40101,提现审核通过,/admin/finance/withdraw/agree,YES,提现同意-wesley,后台/风控管理/存-提审核/提现同意-wesley.bru,NOT_TRIGGERED_FROM_UI
+风控管理,40100,存/提审核,40102,提现审核拒绝,/admin/finance/withdraw/reject,YES,提现拒绝-wesley,后台/风控管理/存-提审核/提现拒绝-wesley.bru,NOT_TRIGGERED_FROM_UI
+风控管理,40100,存/提审核,40103,存款记录-补单,/admin/finance/deposit/manual/success,YES,充值补单-wesley,后台/风控管理/存-提审核/充值补单-wesley.bru,NOT_TRIGGERED_FROM_UI
+风控管理,40100,存/提审核,40104,提现审核-列表,/admin/finance/withdraw/risk/audit/list,YES,提现审核列表-wesley,后台/风控管理/存-提审核/提现审核列表-wesley.bru,NOT_TRIGGERED_FROM_UI
+风控管理,40100,存/提审核,40105,提现订单-列表,/admin/finance/withdraw/risk/list,NO,,,NOT_TRIGGERED_FROM_UI
+风控管理,40100,存/提审核,40106,存款订单-列表,/admin/finance/deposit/risk/list,YES,充值列表-wesley,后台/风控管理/存-提审核/充值列表-wesley.bru,NOT_TRIGGERED_FROM_UI
+风控管理,40100,存/提审核,40107,提现批量审核通过,/admin/finance/withdraw/batch/agree,YES,批量提现同意-cold,后台/风控管理/存-提审核/批量提现同意-cold.bru,NOT_TRIGGERED_FROM_UI
+风控管理,40100,存/提审核,40108,提现批量审核拒绝,/admin/finance/withdraw/batch/reject,YES,批量提现拒绝-cold,后台/风控管理/存-提审核/批量提现拒绝-cold.bru,NOT_TRIGGERED_FROM_UI
+风控管理,40100,存/提审核,40109,提现订单-出款失败,/admin/finance/withdraw/fail,YES,出款失败-wesley,后台/风控管理/存-提审核/出款失败-wesley.bru,NOT_TRIGGERED_FROM_UI
+风控管理,40100,存/提审核,40110,提现订单-出款成功,/admin/finance/withdraw/success,YES,出款成功-wesley,后台/风控管理/存-提审核/出款成功-wesley.bru,NOT_TRIGGERED_FROM_UI
+风控管理,40200,上下分记录,40201,上下分记录-列表,/admin/finance/adjust/list,YES,手动上下分列表-wesley | 系统调整,代理管理后台/财务管理/财务报表/系统调整.bru | 后台/风控管理/上下分记录/手动上下分列表-wesley.bru,NOT_TRIGGERED_FROM_UI
+风控管理,40200,上下分记录,40202,上下分记录-新增,/admin/finance/adjust/insert,YES,余额调整 | 添加手动上下分-wesley,代理管理后台/代理管理/代理列表/余额调整.bru | 后台/风控管理/上下分记录/添加手动上下分-wesley.bru,NOT_TRIGGERED_FROM_UI
+风控管理,40300,流水记录,40301,流水记录-列表,/admin/finance/turnover/list,YES,会员流水明细,后台/会员流水/会员流水明细.bru,NOT_TRIGGERED_FROM_UI
+风控管理,40300,流水记录,40302,流水记录-清零,/admin/finance/turnover/clear,YES,会员流水-清零 | 会员流水清理-light,后台/会员流水/会员流水-清零.bru | 后台/会员流水/会员流水清理-light.bru,NOT_TRIGGERED_FROM_UI
+风控管理,40300,流水记录,40303,流水记录-增加,/admin/finance/turnover/add,YES,会员流水-增加,后台/会员流水/会员流水-增加.bru,NOT_TRIGGERED_FROM_UI
+风控管理,40300,流水记录,40304,流水记录-扣减,/admin/finance/turnover/sub,YES,会员流水-扣减,后台/会员流水/会员流水-扣减.bru,NOT_TRIGGERED_FROM_UI
+风控管理,40300,流水记录,40305,流水记录-异动记录,/admin/finance/turnover/change/list,YES,会员流水-异动记录,后台/会员流水/会员流水-异动记录.bru,NOT_TRIGGERED_FROM_UI
+风控管理,40400,风控日志,40401,风控日志--列表,/admin/member/risk/log,YES,风控日志,后台/会员列表/风控日志.bru,NOT_TRIGGERED_FROM_UI
+风控管理,40400,风控日志,40402,风控日志--风控调整,/admin/member/risk/update,YES,风控调整,后台/会员列表/风控调整.bru,NOT_TRIGGERED_FROM_UI
+游戏,50100,游戏记录,50101,刷新游戏,/admin/game/refresh,NO,,,NOT_TRIGGERED_FROM_UI
+游戏,50100,游戏记录,50102,更新游戏,/admin/game/update,YES,+游戏条目更新-owen,后台/game管理/游戏管理/+游戏条目更新-owen.bru,NOT_TRIGGERED_FROM_UI
+游戏,50100,游戏记录,50103,搜索游戏,/admin/game/search,YES,+游戏列表查询-owen-aliang,后台/game管理/游戏管理/+游戏列表查询-owen-aliang.bru,NOT_TRIGGERED_FROM_UI
+游戏,50100,游戏记录,50104,导出游戏列表,/admin/game/search/export,YES,+游戏列表查询-结果导出-owen,后台/game管理/游戏管理/+游戏列表查询-结果导出-owen.bru,NOT_TRIGGERED_FROM_UI
+游戏,50100,游戏记录,50105,游戏类型标签列表,/admin/game/dicttypetag/list,YES,+获取 <类型标签> 列表-owen,后台/game管理/游戏管理/+获取 -类型标签- 列表-owen.bru,NOT_TRIGGERED_FROM_UI
+游戏,50100,游戏记录,50106,新增游戏类型标签,/admin/game/dicttypetag/insert,YES,+添加 <类型标签>-owen,后台/game管理/游戏管理/+添加 -类型标签--owen.bru,NOT_TRIGGERED_FROM_UI
+游戏,50100,游戏记录,50107,更新游戏类型标签状态,/admin/game/dicttypetag/update/state,YES,+修改 <类型标签>-owen,后台/game管理/游戏管理/+修改 -类型标签--owen.bru,NOT_TRIGGERED_FROM_UI
+游戏,50100,游戏记录,50108,游戏权重标签列表,/admin/game/dictweighttag/list,YES,+获取 <权重标签> 列表-owen,后台/game管理/游戏管理/+获取 -权重标签- 列表-owen.bru,NOT_TRIGGERED_FROM_UI
+游戏,50100,游戏记录,50109,新增游戏权重标签,/admin/game/dictweighttag/insert,YES,+添加 <权重标签>-owen,后台/game管理/游戏管理/+添加 -权重标签--owen.bru,NOT_TRIGGERED_FROM_UI
+游戏,50100,游戏记录,50110,更新游戏权重标签状态,/admin/game/dictweighttag/update/state,YES,+修改 <权重标签>-owen,后台/game管理/游戏管理/+修改 -权重标签--owen.bru,NOT_TRIGGERED_FROM_UI
+游戏,50200,场馆管理,50201,场馆列表,/admin/platform/list,YES,场馆列表-owen,后台/game管理/场馆管理/场馆列表-owen.bru,NOT_TRIGGERED_FROM_UI
+游戏,50200,场馆管理,50202,场馆上线/下线,/admin/platform/update/state,YES,场馆更新状态-owen,后台/game管理/场馆管理/场馆更新状态-owen.bru,NOT_TRIGGERED_FROM_UI
+游戏,50200,场馆管理,50203,场馆分类,/admin/gameclass/list,YES,+查询场馆列表-owen,后台/game管理/场馆管理/+查询场馆列表-owen.bru,NOT_TRIGGERED_FROM_UI
+游戏,50200,场馆管理,50204,新增场馆分类,/admin/gameclass/insert,YES,+添加场馆记录-owen,后台/game管理/场馆管理/+添加场馆记录-owen.bru,NOT_TRIGGERED_FROM_UI
+游戏,50200,场馆管理,50205,更新场馆分类,/admin/gameclass/update,YES,+更新场馆记录-owen,后台/game管理/场馆管理/+更新场馆记录-owen.bru,NOT_TRIGGERED_FROM_UI
+游戏,50200,场馆管理,50206,场馆分类会员索引,/admin/gameclass/member/index,YES,查询缓存-owen,后台/game管理/场馆管理/查询缓存-owen.bru,NOT_TRIGGERED_FROM_UI
+游戏,50300,游戏管理,50301,游戏/推荐列表,/admin/game/list,YES,游戏列表-owen,后台/game管理/游戏管理/游戏列表-owen.bru,NOT_TRIGGERED_FROM_UI
+游戏,50300,游戏管理,50302,游戏上线/下线/推荐/设置热门/新游戏,/admin/game/update/state,YES,游戏更新状态,后台/game管理/游戏管理/游戏更新状态.bru,NOT_TRIGGERED_FROM_UI
+游戏,50300,游戏管理,50303,批量设置游戏合规,/admin/game/update/compliance,YES,更新游戏合规状态-light/owen,后台/game管理/游戏管理/更新游戏合规状态-light-owen.bru,NOT_TRIGGERED_FROM_UI
+游戏,50300,游戏管理,50304,游戏二级下拉框,/admin/game/downbox,YES,游戏下拉框-owen,后台/game管理/游戏管理/游戏下拉框-owen.bru,NOT_TRIGGERED_FROM_UI
+游戏,50400,厂商管理,50401,搜索平台,/admin/platform/search,YES,+查询厂商列表-owen,后台/game管理/厂商管理/+查询厂商列表-owen.bru,NOT_TRIGGERED_FROM_UI
+游戏,50400,厂商管理,50402,新增平台,/admin/platform/insert,YES,+添加厂商记录-owen,后台/game管理/厂商管理/+添加厂商记录-owen.bru,NOT_TRIGGERED_FROM_UI
+游戏,50400,厂商管理,50403,更新平台,/admin/platform/update,YES,+更新厂商记录-owen,后台/game管理/厂商管理/+更新厂商记录-owen.bru,NOT_TRIGGERED_FROM_UI
+系统,60100,角色配置,60101,角色列表,/admin/group/list,YES,角色列表 --yasser,后台/系统管理/角色管理/角色列表 --yasser.bru,NOT_TRIGGERED_FROM_UI
+系统,60100,角色配置,60102,角色列表新增,/admin/group/insert,YES,新增角色 --yasser,后台/系统管理/角色管理/新增角色 --yasser.bru,NOT_TRIGGERED_FROM_UI
+系统,60100,角色配置,60103,角色更新,/admin/group/update,YES,更新角色--yasser | 权限列表保存,后台/系统管理/权限管理/权限列表保存.bru | 后台/系统管理/角色管理/更新角色--yasser.bru,NOT_TRIGGERED_FROM_UI
+系统,60100,角色配置,60104,权限列表,/admin/priv/list,YES,权限列表,后台/系统管理/权限管理/权限列表.bru,NOT_TRIGGERED_FROM_UI
+系统,60100,角色配置,60105,角色权限列表,/admin/priv/by/group,YES,角色权限列表,后台/系统管理/权限管理/角色权限列表.bru,NOT_TRIGGERED_FROM_UI
+系统,60200,员工配置,60209,google验证码密钥解绑,/admin/google/unbind,YES,谷歌令牌解绑,后台/后台账号管理/谷歌令牌解绑.bru,NOT_TRIGGERED_FROM_UI
+系统,60200,员工配置,60201,员工列表,/admin/user/list,YES,后台账户列表-seven,后台/后台账号管理/后台账户列表-seven.bru,NOT_TRIGGERED_FROM_UI
+系统,60200,员工配置,60202,员工新增,/admin/user/insert,YES,新增账户-seven,后台/后台账号管理/新增账户-seven.bru,NOT_TRIGGERED_FROM_UI
+系统,60200,员工配置,60205,员工更新,/admin/user/update,YES,修改账户信息-seven,后台/后台账号管理/修改账户信息-seven.bru,NOT_TRIGGERED_FROM_UI
+系统,60300,短信验证码,60301,短信验证码列表,/admin/sms/list,YES,短信列表-seven,后台/短信发送列表/短信列表-seven.bru,NOT_TRIGGERED_FROM_UI
+系统,60300,短信验证码,60302,短信验证码查询,/admin/sms/auth,YES,短信验证码查看,后台/短信发送列表/短信验证码查看.bru,NOT_TRIGGERED_FROM_UI
+系统,60500,白名单,60501,白名单-列表,/admin/whiteList/list,YES,白名单列表 --yasser,后台/系统管理/白名单管理/白名单列表 --yasser.bru,NOT_TRIGGERED_FROM_UI
+系统,60500,白名单,60502,白名单-新增,/admin/whiteList/insert,YES,新增白名单 --yasser,后台/系统管理/白名单管理/新增白名单 --yasser.bru,NOT_TRIGGERED_FROM_UI
+系统,60500,白名单,60503,白名单-编辑,/admin/whiteList/update,YES,更新白名单 --yasser,后台/系统管理/白名单管理/更新白名单 --yasser.bru,NOT_TRIGGERED_FROM_UI
+系统,60500,白名单,60504,白名单-删除,/admin/whiteList/delete,YES,删除白名单 --yasser,后台/系统管理/白名单管理/删除白名单 --yasser.bru,NOT_TRIGGERED_FROM_UI
+系统,60600,注单监控,60601,注单监控列表,/admin/reports/provider/order/compare/daily,YES,列表,后台/报表/厂商注单对比日报/列表.bru,NOT_TRIGGERED_FROM_UI
+日志,70001,日志列表,70002,日志导出,/admin/log/export,NO,,,NOT_TRIGGERED_FROM_UI
+报表,80200,游戏类型报表,80201,游戏类型报表列表,/admin/reports/gameclass,YES,游戏类型报表,后台/报表/游戏类型报表/游戏类型报表.bru,NOT_TRIGGERED_FROM_UI
+报表,80200,游戏类型报表,80202,游戏类型报表导出,/admin/reports/gameclass/export,YES,游戏类型报表导出,后台/报表/游戏类型报表/游戏类型报表导出.bru,NOT_TRIGGERED_FROM_UI
+报表,80200,游戏类型报表,80203,游戏类型线路报表,/admin/reports/gameclass/node,YES,游戏类型线路报表,后台/报表/游戏类型报表/游戏类型线路报表.bru,NOT_TRIGGERED_FROM_UI
+报表,80200,游戏类型报表,80204,游戏类型线路报表导出,/admin/reports/gameclass/node/export,YES,游戏类型线路报表导出,后台/报表/游戏类型报表/游戏类型线路报表导出.bru,NOT_TRIGGERED_FROM_UI
+报表,80300,游戏厂商报表,80301,游戏厂商报表列表,/admin/reports/venue,YES,厂商报表 | 场馆业绩报表--yasser,后台/报表/游戏平台报表/厂商报表.bru | 后台/运营管理/场馆业绩报表--yasser.bru,NOT_TRIGGERED_FROM_UI
+报表,80300,游戏厂商报表,80302,游戏厂商报表导出,/admin/reports/venue/export,YES,厂商报表导出,后台/报表/游戏平台报表/厂商报表导出.bru,NOT_TRIGGERED_FROM_UI
+报表,80300,游戏厂商报表,80303,游戏厂商线路报表,/admin/reports/venue/node,YES,厂商线路报表,后台/报表/游戏平台报表/厂商线路报表.bru,NOT_TRIGGERED_FROM_UI
+报表,80300,游戏厂商报表,80304,游戏厂商线路报表导出,/admin/reports/venue/node/export,YES,厂商线路报表导出,后台/报表/游戏平台报表/厂商线路报表导出.bru,NOT_TRIGGERED_FROM_UI
+报表,80500,会员游戏日统计,80501,会员游戏日统计列表,/admin/reports/member-daily-game/aggregate,YES,会员每日游戏报表--汇总列表,后台/报表管理/会员每日游戏报表--汇总列表.bru,NOT_TRIGGERED_FROM_UI
+报表,80500,会员游戏日统计,80502,会员游戏日统计详情,/admin/reports/member-daily-game/detail,YES,会员每日游戏报表--每日明细,后台/报表管理/会员每日游戏报表--每日明细.bru,NOT_TRIGGERED_FROM_UI
+报表,80500,会员游戏日统计,80503,会员游戏日统计导出,/admin/reports/member-daily-game/aggregate/export,YES,会员每日游戏报表--汇总导出,后台/报表管理/会员每日游戏报表--汇总导出.bru,NOT_TRIGGERED_FROM_UI
+报表,80100,游戏报表,80101,游戏报表列表,/admin/reports/game,YES,游戏报表,后台/报表/游戏报表/游戏报表.bru,NOT_TRIGGERED_FROM_UI
+报表,80100,游戏报表,80102,游戏报表导出,/admin/reports/game/export,YES,游戏报表导出,后台/报表/游戏报表/游戏报表导出.bru,NOT_TRIGGERED_FROM_UI
+报表,80100,游戏报表,80103,游戏线路报表,/admin/reports/game/node,YES,游戏线路报表,后台/报表/游戏报表/游戏线路报表.bru,NOT_TRIGGERED_FROM_UI
+报表,80100,游戏报表,80104,游戏线路报表导出,/admin/reports/game/node/export,YES,游戏线路报表导出,后台/报表/游戏报表/游戏线路报表导出.bru,NOT_TRIGGERED_FROM_UI
+报表,80100,游戏报表,80105,游戏报表较正,/admin/reports/game/adjust,YES,游戏报表校准,后台/报表/游戏报表校准.bru,NOT_TRIGGERED_FROM_UI
+运营管理,92001,邀请好友,92002,邀请好友-配置信息,/admin/promo/invite/config/info,YES,获取配置信息,后台/运营管理/邀请好友/获取配置信息.bru,NOT_TRIGGERED_FROM_UI
+运营管理,92001,邀请好友,92003,邀请好友-配置保存,/admin/promo/invite/config/update,YES,保存配置信息,后台/运营管理/邀请好友/保存配置信息.bru,NOT_TRIGGERED_FROM_UI
+运营管理,92001,邀请好友,92004,邀请好友-里程碑奖励列表,/admin/promo/invite/upgrade/list,YES,邀请里程碑奖励列表,后台/运营管理/邀请好友/邀请里程碑奖励列表.bru,NOT_TRIGGERED_FROM_UI
+运营管理,92001,邀请好友,92005,邀请好友-佣金列表,/admin/promo/invite/commission/list,YES,结算佣金列表,后台/运营管理/邀请好友/结算佣金列表.bru,NOT_TRIGGERED_FROM_UI
+运营管理,92001,邀请好友,92006,邀请好友-佣金统计列表,/admin/promo/invite/statistics/list,YES,派发佣金统计列表,后台/运营管理/邀请好友/派发佣金统计列表.bru,NOT_TRIGGERED_FROM_UI
+运营管理,92001,邀请好友,92007,邀请好友-基础奖励导出,/admin/promo/invite/base/export,YES,基础奖励数据导出,后台/运营管理/邀请好友/基础奖励数据导出.bru,NOT_TRIGGERED_FROM_UI
+运营管理,92001,邀请好友,92008,邀请好友-里程碑奖励导出,/admin/promo/invite/upgrade/export,YES,里程碑奖励导出,后台/运营管理/邀请好友/里程碑奖励导出.bru,NOT_TRIGGERED_FROM_UI
+运营管理,92001,邀请好友,92009,邀请好友-佣金导出,/admin/promo/invite/commission/export,YES,结算佣金奖励导出,后台/运营管理/邀请好友/结算佣金奖励导出.bru,NOT_TRIGGERED_FROM_UI
+运营管理,92001,邀请好友,92010,邀请好友-佣金统计导出,/admin/promo/invite/statistics/export,YES,派发佣金统计导出,后台/运营管理/邀请好友/派发佣金统计导出.bru,NOT_TRIGGERED_FROM_UI
+运营管理,92001,邀请好友,92011,邀请好友-基础奖励列表,/admin/promo/invite/base/list,YES,邀请基础奖励列表,后台/运营管理/邀请好友/邀请基础奖励列表.bru,NOT_TRIGGERED_FROM_UI
+运营管理,93000,运营小工具,93001,会员流水导出,/admin/ops-tools/turnover/export,YES,首存导出,后台/运营管理/运营小工具/首存导出.bru,NOT_TRIGGERED_FROM_UI
+运营管理,93000,运营小工具,93002,首存未二存名单,/admin/ops-tools/first-deposit-no-second/expor,NO,,,NOT_TRIGGERED_FROM_UI
+运营管理,90100,系统配置,90101,系统配置更新,/admin/sys/config/update,NO,,,NOT_TRIGGERED_FROM_UI
+运营管理,90100,系统配置,90102,系统配置设置,/admin/sys/config/set,NO,,,NOT_TRIGGERED_FROM_UI
+运营管理,90100,系统配置,90103,系统配置列表,/admin/sys/config/list,NO,,,NOT_TRIGGERED_FROM_UI
+运营管理,90200,轮播图,90202,轮播图列表,/admin/banner/list,YES,轮播图列表,后台/轮播图-首页弹窗/轮播图列表.bru,NOT_TRIGGERED_FROM_UI
+运营管理,90200,轮播图,90203,轮播图新增,/admin/banner/insert,YES,新增轮播图,后台/轮播图-首页弹窗/新增轮播图.bru,NOT_TRIGGERED_FROM_UI
+运营管理,90200,轮播图,90204,轮播图编辑,/admin/banner/update,YES,轮播图修改,后台/轮播图-首页弹窗/轮播图修改.bru,NOT_TRIGGERED_FROM_UI
+运营管理,90200,轮播图,90205,轮播图更新状态,/admin/banner/update/state,YES,轮播图更新状态,后台/轮播图-首页弹窗/轮播图更新状态.bru,NOT_TRIGGERED_FROM_UI
+运营管理,90200,轮播图,90206,轮播图删除,/admin/banner/delete,YES,轮播图删除,后台/轮播图-首页弹窗/轮播图删除.bru,NOT_TRIGGERED_FROM_UI
+运营管理,90200,轮播图,90207,轮播图菜单,/admin/banner/menu,YES,轮播图菜单,后台/轮播图-首页弹窗/轮播图菜单.bru,NOT_TRIGGERED_FROM_UI
+运营管理,90300,VIP配置,90301,VIP配置列表,/vip/level/list,NO,,,NOT_TRIGGERED_FROM_UI
+运营管理,90300,VIP配置,90302,VIP配置详情,/vip/level/detail,NO,,,NOT_TRIGGERED_FROM_UI
+运营管理,90300,VIP配置,90303,VIP等级区间详情,/vip/level/range/detail,NO,,,NOT_TRIGGERED_FROM_UI
+运营管理,90300,VIP配置,90304,VIP配置编辑,/vip/level/update,NO,,,NOT_TRIGGERED_FROM_UI
+运营管理,90400,首页弹窗,90401,Banner会员导入,/admin/banner/user/import,NO,,,NOT_TRIGGERED_FROM_UI
+运营管理,90400,首页弹窗,90402,Banner会员列表,/admin/banner/user/list,YES,查看名单-todo,后台/轮播图-首页弹窗/查看名单-todo.bru,NOT_TRIGGERED_FROM_UI
+运营管理,90400,首页弹窗,90403,Banner会员数量,/admin/banner/user/count,YES,名单数量-todo,后台/轮播图-首页弹窗/名单数量-todo.bru,NOT_TRIGGERED_FROM_UI
+运营管理,90500,埋点,90501,埋点列表,/admin/buriedPoint/list ,NO,,,NOT_TRIGGERED_FROM_UI
+运营管理,90500,埋点,90502,新增埋点,/admin/buriedPoint/insert,YES,新增埋点-todo,后台/埋点/新增埋点-todo.bru,NOT_TRIGGERED_FROM_UI
+运营管理,90500,埋点,90503,修改埋点,/admin/buriedPoint/update,YES,修改埋点-todo,后台/埋点/修改埋点-todo.bru,NOT_TRIGGERED_FROM_UI
+运营管理,90600,活动支出审计,90601,批量审批,/admin/bonus/review/approve,YES,批量审批 - felix.bru,后台/礼金/批量审批 - felix.bru,NOT_TRIGGERED_FROM_UI
+运营管理,90600,活动支出审计,90602,待审礼金列表,/admin/bonus/review/list,YES,待审订单列表 - felix.bru,后台/礼金/待审订单列表 - felix.bru,NOT_TRIGGERED_FROM_UI
+运营管理,90600,活动支出审计,90603,过审礼金列表,/admin/bonus/review/noneed/list,YES,导出过审礼金列表 - felix.bru | 过审礼金列表 - felix.bru,后台/礼金/导出过审礼金列表 - felix.bru | 后台/礼金/过审礼金列表 - felix.bru,NOT_TRIGGERED_FROM_UI
+运营管理,90600,活动支出审计,90604,批量发送,/admin/bonus/review/send,YES,批量补发 - felix.bru,后台/礼金/批量补发 - felix.bru,NOT_TRIGGERED_FROM_UI
+运营管理,90600,活动支出审计,90605,导出待审,/admin/bonus/review/export,YES,导出待审订单 - felix.bru,后台/礼金/导出待审订单 - felix.bru,NOT_TRIGGERED_FROM_UI
+运营管理,90600,活动支出审计,90606,导出过审,/admin/bonus/review/noneed/export,NO,,,NOT_TRIGGERED_FROM_UI
+运营管理,90700,日常报表,90701,渠道业绩报表,/admin/reports/channel,YES,渠道报表-todo | 渠道报表导出-todo | 渠道日报表-sandy,后台/报表/渠道报表/渠道日报表-sandy.bru | 后台/运营管理/日常报表/渠道业绩/渠道报表-todo.bru | 后台/运营管理/日常报表/渠道业绩/渠道报表导出-todo.bru,NOT_TRIGGERED_FROM_UI
+运营管理,90700,日常报表,90702,渠道业绩报表明细,/admin/reports/channel/detail,YES,渠道报表明细-todo | 渠道日报表明细-wesley,后台/报表/渠道报表/渠道日报表明细-wesley.bru | 后台/运营管理/日常报表/渠道业绩/渠道报表明细-todo.bru,NOT_TRIGGERED_FROM_UI
+运营管理,90700,日常报表,90703,渠道业绩报表导出,/admin/reports/channel/export,YES,渠道日报表导出,后台/报表/渠道报表/渠道日报表导出.bru,NOT_TRIGGERED_FROM_UI
+运营管理,90700,日常报表,90704,渠道业绩报表明细导出,/admin/reports/channel/detail/export,YES,渠道报表明细导出-todo | 渠道日报表明细导出,后台/报表/渠道报表/渠道日报表明细导出.bru | 后台/运营管理/日常报表/渠道业绩/渠道报表明细导出-todo.bru,NOT_TRIGGERED_FROM_UI
+运营管理,90700,日常报表,90705,首页报表数据,/admin/reports/bi/basic,YES,首页BI,后台/报表/首页BI.bru,NOT_TRIGGERED_FROM_UI
+运营管理,90700,日常报表,90706,首页全站柱状图,/admin/reports/bi/chart,NO,,,NOT_TRIGGERED_FROM_UI
+运营管理,90800,客户端配置,90801,客户端版本新增,/admin/client/version/insert,YES,版本管理新增,后台/运营管理/客户端管理/版本号管理/版本管理新增.bru,NOT_TRIGGERED_FROM_UI
+运营管理,90800,客户端配置,90802,客户端版本编辑,/admin/client/version/update,YES,版本管理更新,后台/运营管理/客户端管理/版本号管理/版本管理更新.bru,NOT_TRIGGERED_FROM_UI
+运营管理,90800,客户端配置,90803,客户端版本列表,/admin/client/version/list,YES,版本管理列表,后台/运营管理/客户端管理/版本号管理/版本管理列表.bru,NOT_TRIGGERED_FROM_UI
+运营管理,90900,站内信,90901,站内信列表,/admin/message/list,YES,已阅读名单-todo | 获取消息列表-todo,后台/运营管理/站内信管理/已阅读名单-todo.bru | 后台/运营管理/站内信管理/获取消息列表-todo.bru,NOT_TRIGGERED_FROM_UI
+运营管理,90900,站内信,90902,创建站内信,/admin/message/send,YES,发送站内信消息 | 发送站内信消息-todo,代理后台/消息管理/发送站内信消息.bru | 后台/运营管理/站内信管理/发送站内信消息-todo.bru,NOT_TRIGGERED_FROM_UI
+运营管理,90900,站内信,90903,撤销站内信,/admin/message/revoke,YES,撤销站内信-todo,后台/运营管理/站内信管理/撤销站内信-todo.bru,NOT_TRIGGERED_FROM_UI
+运营管理,90900,站内信,90904,导出站内信列表,/admin/message/export,YES,站内信导出-todo,后台/运营管理/站内信管理/站内信导出-todo.bru,NOT_TRIGGERED_FROM_UI
+运营管理,90900,站内信,90905,站内信已阅读名单,/admin/message/reads,NO,,,NOT_TRIGGERED_FROM_UI
+运营管理,90900,站内信,90906,消息模板列表,/admin/message/templates/list,YES,获取消息模板列表-todo,后台/运营管理/消息模板/获取消息模板列表-todo.bru,NOT_TRIGGERED_FROM_UI
+运营管理,90900,站内信,90907,消息模板导出,/admin/message/templates/export,YES,消息模板导出-todo,后台/运营管理/消息模板/消息模板导出-todo.bru,NOT_TRIGGERED_FROM_UI
+运营管理,90900,站内信,90908,消息模板更新,/admin/message/templates/update,YES,更新消息模板-todo,后台/运营管理/消息模板/更新消息模板-todo.bru,NOT_TRIGGERED_FROM_UI
+运营管理,95000,跑马灯,95001,跑马灯--列表,/admin/marquee/list,YES,列表,后台/跑马灯/列表.bru,NOT_TRIGGERED_FROM_UI
+运营管理,95000,跑马灯,95002,跑马灯--添加,/admin/marquee/add,YES,添加,后台/跑马灯/添加.bru,NOT_TRIGGERED_FROM_UI
+运营管理,95000,跑马灯,95003,跑马灯--修改,/admin/marquee/update,YES,修改/启用停止切换,后台/跑马灯/修改-启用停止切换.bru,NOT_TRIGGERED_FROM_UI
+运营管理,95000,跑马灯,95004,跑马灯--删除,/admin/marquee/delete,YES,删除,后台/跑马灯/删除.bru,NOT_TRIGGERED_FROM_UI
+运营管理,96000,爆奖榜,96001,爆奖榜列表,/admin/hotBetNotice/list,YES,爆彩列表查询,后台/爆彩/爆彩列表查询.bru,NOT_TRIGGERED_FROM_UI
+运营管理,96000,爆奖榜,96002,爆奖榜导出,/admin/hotBetNotice/export,YES,爆彩列表导出,后台/爆彩/爆彩列表导出.bru,NOT_TRIGGERED_FROM_UI
+运营管理,96000,爆奖榜,96003,爆奖设置详情,/admin/hotBetNotice/config/detail,YES,爆彩设置查询,后台/爆彩/爆彩设置查询.bru,NOT_TRIGGERED_FROM_UI
+运营管理,96000,爆奖榜,96004,爆奖设置更新,/admin/hotBetNotice/config/update,YES,爆彩设置更新,后台/爆彩/爆彩设置更新.bru,NOT_TRIGGERED_FROM_UI
+运营管理,96000,爆奖榜,96005,爆奖展示黑名单列表,/admin/hotBetNotice/displayBlacklist/list,YES,爆彩黑名单列表,后台/爆彩/爆彩黑名单列表.bru,NOT_TRIGGERED_FROM_UI
+运营管理,96000,爆奖榜,96006,爆奖展示黑名单新增,/admin/hotBetNotice/displayBlacklist/insert,YES,爆彩黑名单新增,后台/爆彩/爆彩黑名单新增.bru,NOT_TRIGGERED_FROM_UI
+运营管理,96000,爆奖榜,96007,爆奖展示黑名单删除,/admin/hotBetNotice/displayBlacklist/remove,YES,爆彩黑名单删除,后台/爆彩/爆彩黑名单删除.bru,NOT_TRIGGERED_FROM_UI
+运营管理,91100,门店客户端,91002,门店客户端场馆开关,/shop/gs/update,NO,,,NOT_TRIGGERED_FROM_UI
+运营管理,91100,门店客户端,91101,门店客户端列表,/shop/gs/list,NO,,,NOT_TRIGGERED_FROM_UI
+运营管理,91200,充值倍率,91201,充值倍率列表,/admin/sys/config/deposit/multiple/list,YES,平台充值倍率列表-aliang,后台/运营管理/客户端管理/平台倍率/平台充值倍率列表-aliang.bru,NOT_TRIGGERED_FROM_UI
+运营管理,91200,充值倍率,91202,充值倍率编辑,/admin/sys/config/deposit/multiple/update,YES,平台充值倍率更新-aliang,后台/运营管理/客户端管理/平台倍率/平台充值倍率更新-aliang.bru,NOT_TRIGGERED_FROM_UI
+运营管理,91200,充值倍率,91203,充值倍率操作记录,/admin/sys/config/deposit/multiple/log,YES,平台充值倍率异动记录-aliang,后台/运营管理/客户端管理/平台倍率/平台充值倍率异动记录-aliang.bru,NOT_TRIGGERED_FROM_UI
+活动管理,100100,活动列表,100110,电销旋转导入,/admin/promo/rotate/telemarketing/import,NO,,,NOT_TRIGGERED_FROM_UI
+活动管理,100100,活动列表,100101,活动列表导出,/admin/promo/export,YES,导出活动列表 - felix,后台/活动/导出活动列表 - felix.bru,NOT_TRIGGERED_FROM_UI
+活动管理,100100,活动列表,100102,礼金明细,/admin/promo/bonus/list,YES,礼金明细 - felix,后台/活动/礼金明细 - felix.bru,NOT_TRIGGERED_FROM_UI
+活动管理,100100,活动列表,100103,礼金明细导出,/admin/promo/bonus/export,YES,导出礼金明细 - felix,后台/活动/导出礼金明细 - felix.bru,NOT_TRIGGERED_FROM_UI
+活动管理,100100,活动列表,100104,xp经验值列表,/admin/vip/xp/list,YES,xp成长日志 - felix,后台/VIP/xp成长日志 - felix.bru,NOT_TRIGGERED_FROM_UI
+活动管理,100100,活动列表,100105,xp经验值导出,/admin/vip/xp/export,YES,导出xp成长日志 - felix,后台/VIP/导出xp成长日志 - felix.bru,NOT_TRIGGERED_FROM_UI
+活动管理,100100,活动列表,100106,会员详情-礼金列表,/admin/bonus/list,YES,礼金列表 - felix,后台/VIP/礼金列表 - felix.bru,NOT_TRIGGERED_FROM_UI
+活动管理,100100,活动列表,100107,会员详情-礼金导出,/admin/bonus/export,YES,导出礼金列表 - felix,后台/VIP/导出礼金列表 - felix.bru,NOT_TRIGGERED_FROM_UI
+活动管理,100100,活动列表,100108,会员详情-手动发放礼金,/admin/bonus/manual/send,YES,手动发放礼金,后台/活动/手动发放礼金 - felix.bru,NOT_TRIGGERED_FROM_UI
+活动管理,100100,活动列表,100109,电销旋转导出,/admin/promo/rotate/telemarketing/export,NO,,,NOT_TRIGGERED_FROM_UI
+活动管理,100100,活动列表,100140,app>某个版本登录送50记录,/admin/promo/super/login/bonus/list,NO,,,NOT_TRIGGERED_FROM_UI
+活动管理,100100,活动列表,100137,电销旋转记录,/admin/promo/rotate/telemarketing/list,NO,,,NOT_TRIGGERED_FROM_UI
+活动管理,100100,活动列表,100144,返水翻牌记录,/admin/promo/flip/card/report,NO,,,NOT_TRIGGERED_FROM_UI
+活动管理,100100,活动列表,100135,免费旋转每日投注+存款记录,/admin/promo/rotate/bet/list,NO,,,NOT_TRIGGERED_FROM_UI
+活动管理,100100,活动列表,100133,免费旋转首存记录,/admin/promo/rotate/deposit/list,NO,,,NOT_TRIGGERED_FROM_UI
+活动管理,100100,活动列表,100142,返水活动记录,/admin/promo/rebate/rebat/report,YES,返水列表,活动/后台-活动管理/投注返水/返水列表.bru,NOT_TRIGGERED_FROM_UI
+活动管理,100100,活动列表,100131,免费旋转kyc记录,/admin/promo/rotate/reg/list,NO,,,NOT_TRIGGERED_FROM_UI
+活动管理,100100,活动列表,100146,首存阶梯活动记录,/admin/promo/deposit/first/list,NO,,,NOT_TRIGGERED_FROM_UI
+活动管理,100100,活动列表,100129,老虎机排行榜记录,/admin/promo/slot/machine/list,NO,,,NOT_TRIGGERED_FROM_UI
+活动管理,100100,活动列表,100127,首次app登录送20记录,/admin/promo/login/bonus/list,NO,,,NOT_TRIGGERED_FROM_UI
+活动管理,100100,活动列表,100148,复存阶梯活动记录,/admin/promo/deposit/restore/list,NO,,,NOT_TRIGGERED_FROM_UI
+活动管理,100100,活动列表,100125,充值返现活动记录,/admin/promo/deposit/bonus/list,NO,,,NOT_TRIGGERED_FROM_UI
+活动管理,100100,活动列表,100150,每日多存阶梯活动记录,/admin/promo/deposit/repeatedly/list,NO,,,NOT_TRIGGERED_FROM_UI
+活动管理,100100,活动列表,100122,tpg活动导入,/admin/promo/tpg/bonus/insert,NO,,,NOT_TRIGGERED_FROM_UI
+活动管理,100100,活动列表,100120,cq9活动礼金列表,/admin/promo/cq9/bonus/list,YES,礼金明细-seven,后台/活动/cq9返水/礼金明细-seven.bru,NOT_TRIGGERED_FROM_UI
+活动管理,100100,活动列表,100147,首存阶梯活动导出,/admin/promo/deposit/first/export,NO,,,NOT_TRIGGERED_FROM_UI
+活动管理,100100,活动列表,100149,复存阶梯活动导出,/admin/promo/deposit/restore/export,NO,,,NOT_TRIGGERED_FROM_UI
+活动管理,100100,活动列表,100145,返水翻牌导出,/admin/promo/flip/card/export,NO,,,NOT_TRIGGERED_FROM_UI
+活动管理,100100,活动列表,100151,每日多存阶梯活动导出,/admin/promo/deposit/repeatedly/export,NO,,,NOT_TRIGGERED_FROM_UI
+活动管理,100100,活动列表,100143,返水活动导出,/admin/promo/rebate/rebat/export,YES,返水列表导出,活动/后台-活动管理/投注返水/返水列表导出.bru,NOT_TRIGGERED_FROM_UI
+活动管理,100100,活动列表,100132,免费旋转kyc导出,/admin/promo/rotate/reg/export,NO,,,NOT_TRIGGERED_FROM_UI
+活动管理,100100,活动列表,100141,app>某个版本登录送50导出,/admin/promo/super/login/bonus/export,NO,,,NOT_TRIGGERED_FROM_UI
+活动管理,100100,活动列表,100136,免费旋转每日投注+存款导出,/admin/promo/rotate/bet/export,NO,,,NOT_TRIGGERED_FROM_UI
+活动管理,100100,活动列表,100134,免费旋转首存导出,/admin/promo/rotate/deposit/export,NO,,,NOT_TRIGGERED_FROM_UI
+活动管理,100100,活动列表,100130,老虎机排行榜导出,/admin/promo/slot/machine/export,NO,,,NOT_TRIGGERED_FROM_UI
+活动管理,100100,活动列表,100128,首次app登录送20导出,/admin/promo/login/bonus/export,NO,,,NOT_TRIGGERED_FROM_UI
+活动管理,100100,活动列表,100126,充值返现记录导出,/admin/promo/deposit/bonus/export,NO,,,NOT_TRIGGERED_FROM_UI
+活动管理,100100,活动列表,100124,tpg活动导出,/admin/promo/tpg/bonus/export,NO,,,NOT_TRIGGERED_FROM_UI
+活动管理,100100,活动列表,100123,tpg活动记录,/admin/promo/tpg/bonus/list,NO,,,NOT_TRIGGERED_FROM_UI
+活动管理,100100,活动列表,100121,cq9活动导出,/admin/promo/cq9/bonus/export,YES,导出礼金明细-seven,后台/活动/cq9返水/导出礼金明细-seven.bru,NOT_TRIGGERED_FROM_UI
+活动管理,100100,活动列表,100164,pt排行榜列表,/admin/promo/pt/list,YES,列表,活动/后台-活动管理/pt排行榜/列表.bru,NOT_TRIGGERED_FROM_UI
+活动管理,100100,活动列表,100165,pt排行榜导出,/admin/promo/pt/export,YES,导出,活动/后台-活动管理/pt排行榜/导出.bru,NOT_TRIGGERED_FROM_UI
+活动管理,100100,活动列表,100152,存款活动游戏配置记录,/admin/promo/deposit/game/list,NO,,,NOT_TRIGGERED_FROM_UI
+活动管理,100100,活动列表,100153,kyc送免费次数记录,/admin/promo/rotate/kyc/list,YES,列表,活动/后台-活动管理/KYC通过送免费旋转/列表.bru,NOT_TRIGGERED_FROM_UI
+活动管理,100100,活动列表,100154,kyc送免费次数导出,/admin/promo/rotate/kyc/export,YES,导出,活动/后台-活动管理/KYC通过送免费旋转/导出.bru,NOT_TRIGGERED_FROM_UI
+活动管理,100200,vip任务中心,100201,vip任务列表,/admin/promo/task/list,YES,任务中心列表-seven,后台/vip任务中心/任务中心列表-seven.bru,NOT_TRIGGERED_FROM_UI
+活动管理,100200,vip任务中心,100202,vip任务列表-导出,/admin/promo/task/export,YES,任务中心导出-seven,后台/vip任务中心/任务中心导出-seven.bru,NOT_TRIGGERED_FROM_UI
+活动管理,100200,vip任务中心,100203,vip任务列表-代币明细,/admin/promo/task/transaction,YES,任务奖金列表-seven,后台/vip任务中心/任务奖金列表-seven.bru,NOT_TRIGGERED_FROM_UI
+活动管理,100200,vip任务中心,100204,vip任务列表-代币导出,/admin/promo/task/transaction/export,YES,任务奖励列表导出-seven,后台/vip任务中心/任务奖励列表导出-seven.bru,NOT_TRIGGERED_FROM_UI
+活动管理,100300,vip商城,100301,商城产品列表,/admin/mall/goods/list,YES,获取产品列表-todo,后台/商城管理/获取产品列表-todo.bru,NOT_TRIGGERED_FROM_UI
+活动管理,100300,vip商城,100302,商城产品详情,/admin/mall/goods/detail,YES,产品详情,后台/商城管理/产品详情-todo.bru,NOT_TRIGGERED_FROM_UI
+活动管理,100300,vip商城,100303,新增商城产品,/admin/mall/goods/insert,YES,新增商城商品-todo,后台/商城管理/新增商城商品-todo.bru,NOT_TRIGGERED_FROM_UI
+活动管理,100300,vip商城,100304,修改商城产品,/admin/mall/goods/update,YES,更新商城商品-todo,后台/商城管理/更新商城商品-todo.bru,NOT_TRIGGERED_FROM_UI
+活动管理,100300,vip商城,100305,商城产品列表导出,/admin/mall/goods/export,YES,产品导出-todo,后台/商城管理/产品导出-todo.bru,NOT_TRIGGERED_FROM_UI
+活动管理,100300,vip商城,100306,商城订单列表导出,/admin/mall/order/export,YES,商城订单导出-todo,后台/商城订单记录/商城订单导出-todo.bru,NOT_TRIGGERED_FROM_UI
+活动管理,100300,vip商城,100307,商城订单手动发货,/admin/mall/order/delivery,YES,手动发货-todo,后台/商城订单记录/手动发货-todo.bru,NOT_TRIGGERED_FROM_UI
+活动管理,100300,vip商城,100308,商城订单详情,/admin/mall/order/detail,YES,商城订单详情-todo,后台/商城订单记录/商城订单详情-todo.bru,NOT_TRIGGERED_FROM_UI
+活动管理,100300,vip商城,100309,商城订单列表,/admin/mall/order/list,YES,商城订单列表-todo,后台/商城订单记录/商城订单列表-todo.bru,NOT_TRIGGERED_FROM_UI
+活动管理,100300,vip商城,100310,获取域名下拉列表,/admin/rechargeCard/listForSelect,YES,获取充值卡下拉列表-todo,后台/其它/获取充值卡下拉列表-todo.bru,NOT_TRIGGERED_FROM_UI
+活动管理,100300,vip商城,100311,代币商城订单详情,/admin/filcoin/order/export,YES,代币商城订单导出-todo,后台/财务管理/代币商城订单/代币商城订单导出-todo.bru,NOT_TRIGGERED_FROM_UI
+活动管理,100300,vip商城,100312,代币商城订单列表,/admin/filcoin/order/list,YES,代币商城订单列表-todo,后台/财务管理/代币商城订单/代币商城订单列表-todo.bru,NOT_TRIGGERED_FROM_UI
+活动管理,100300,vip商城,100313,vip代币账变列表,/admin/finance/tokens/transaction/list,YES,代币账变列表,后台/vip代币钱包/代币账变列表.bru,NOT_TRIGGERED_FROM_UI
+活动管理,100300,vip商城,100314,vip代币导出,/admin/finance/tokens/transaction/export,YES,代币账变导出,后台/vip代币钱包/代币账变导出.bru,NOT_TRIGGERED_FROM_UI
+活动管理,100300,vip商城,100315,代币上下分,/admin/finance/tokens/adjust,YES,代币上下分,后台/vip代币钱包/代币上下分.bru,NOT_TRIGGERED_FROM_UI
+活动管理,100400,世界杯活动,100401,派发记录列表,/promo/world/cup/bti/list,NO,,,NOT_TRIGGERED_FROM_UI
+活动管理,100400,世界杯活动,100402,派发记录导出,/admin/promo/world/cup/bti/export,NO,,,NOT_TRIGGERED_FROM_UI
+活动管理,100400,世界杯活动,100403,手动重试派发,/admin/promo/world/cup/bti/retry,NO,,,NOT_TRIGGERED_FROM_UI
+活动管理,100400,世界杯活动,100404,取消FreeBet,/admin/promo/world/cup/bti/cancel,NO,,,NOT_TRIGGERED_FROM_UI
+活动管理,100400,世界杯活动,100405,同步状态,/admin/promo/world/cup/bti/sync,NO,,,NOT_TRIGGERED_FROM_UI
+代理管理,120601,代理统计,120602,代理统计导出,/admin/reports/agency/export,YES,代理统计导出,后台/代理管理/代理统计导出.bru,NOT_TRIGGERED_FROM_UI
+代理管理,120601,代理统计,120603,代理统计列表,/admin/reports/agency,YES,代理统计报表,后台/代理管理/代理统计报表.bru,NOT_TRIGGERED_FROM_UI

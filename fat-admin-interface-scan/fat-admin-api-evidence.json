@@ -1,0 +1,230 @@
+[
+  {
+    "case_id": "",
+    "method": "POST",
+    "path": "/admin/login/auth",
+    "http_status": 200,
+    "business_status": true,
+    "elapsed_ms": 221,
+    "assertion_passed": true,
+    "data_type": "int",
+    "data_keys": []
+  },
+  {
+    "case_id": "",
+    "method": "POST",
+    "path": "/admin/login",
+    "http_status": 200,
+    "business_status": true,
+    "elapsed_ms": 214,
+    "assertion_passed": true,
+    "data_type": "str",
+    "data_keys": []
+  },
+  {
+    "case_id": "TC-004",
+    "method": "GET",
+    "path": "/admin/kyc/pending/count",
+    "http_status": 200,
+    "business_status": true,
+    "elapsed_ms": 156,
+    "assertion_passed": true,
+    "data_type": "str",
+    "data_keys": []
+  },
+  {
+    "case_id": "TC-005",
+    "method": "GET",
+    "path": "/admin/kyc/config/info",
+    "http_status": 200,
+    "business_status": true,
+    "elapsed_ms": 134,
+    "assertion_passed": true,
+    "data_type": "dict",
+    "data_keys": [
+      "auto_review",
+      "ekyc",
+      "id"
+    ]
+  },
+  {
+    "case_id": "TC-006",
+    "method": "POST",
+    "path": "/admin/kyc/list",
+    "http_status": 200,
+    "business_status": true,
+    "elapsed_ms": 140,
+    "assertion_passed": true,
+    "data_type": "dict",
+    "data_keys": [
+      "d",
+      "s",
+      "t"
+    ]
+  },
+  {
+    "case_id": "TC-009",
+    "method": "POST",
+    "path": "/admin/finance/deposit/risk/list",
+    "http_status": 200,
+    "business_status": true,
+    "elapsed_ms": 147,
+    "assertion_passed": true,
+    "data_type": "dict",
+    "data_keys": [
+      "d",
+      "s",
+      "summary",
+      "t"
+    ]
+  },
+  {
+    "case_id": "TC-010",
+    "method": "POST",
+    "path": "/admin/finance/deposit/list",
+    "http_status": 200,
+    "business_status": true,
+    "elapsed_ms": 138,
+    "assertion_passed": true,
+    "data_type": "dict",
+    "data_keys": [
+      "d",
+      "s",
+      "summary",
+      "t"
+    ]
+  },
+  {
+    "case_id": "TC-020",
+    "method": "GET",
+    "path": "/admin/finance/transaction/types",
+    "http_status": 200,
+    "business_status": true,
+    "elapsed_ms": 141,
+    "assertion_passed": true,
+    "data_type": "list",
+    "data_keys": []
+  },
+  {
+    "case_id": "TC-021",
+    "method": "POST",
+    "path": "/admin/finance/transaction/list",
+    "http_status": 200,
+    "business_status": true,
+    "elapsed_ms": 153,
+    "assertion_passed": true,
+    "data_type": "dict",
+    "data_keys": [
+      "d",
+      "s",
+      "t"
+    ]
+  },
+  {
+    "case_id": "TC-026",
+    "method": "POST",
+    "path": "/admin/finance/withdraw/risk/audit/list",
+    "http_status": 200,
+    "business_status": true,
+    "elapsed_ms": 144,
+    "assertion_passed": true,
+    "data_type": "dict",
+    "data_keys": [
+      "d",
+      "s",
+      "summary",
+      "t"
+    ]
+  },
+  {
+    "case_id": "TC-027",
+    "method": "POST",
+    "path": "/admin/finance/withdraw/list",
+    "http_status": 200,
+    "business_status": true,
+    "elapsed_ms": 143,
+    "assertion_passed": true,
+    "data_type": "dict",
+    "data_keys": [
+      "d",
+      "s",
+      "summary",
+      "t"
+    ]
+  },
+  {
+    "case_id": "TC-028",
+    "method": "GET",
+    "path": "/admin/me/detail",
+    "http_status": 200,
+    "business_status": true,
+    "elapsed_ms": 147,
+    "assertion_passed": true,
+    "data_type": "dict",
+    "data_keys": [
+      "avatar",
+      "bind_time",
+      "button_permission_ids",
+      "cmpl",
+      "create_name",
+      "created_at",
+      "email",
+      "google_secret",
+      "group_id",
+      "id",
+      "last_login_ip",
+      "last_login_time",
+      "login_password",
+      "nickname",
+      "operator_name",
+      "pwd_edit_time",
+      "roles",
+      "sid",
+      "status",
+      "stores",
+      "updated_at",
+      "username"
+    ]
+  },
+  {
+    "case_id": "TC-029",
+    "method": "GET",
+    "path": "/admin/priv/list",
+    "http_status": 200,
+    "business_status": true,
+    "elapsed_ms": 139,
+    "assertion_passed": true,
+    "data_type": "list",
+    "data_keys": []
+  },
+  {
+    "case_id": "TC-030",
+    "method": "GET",
+    "path": "/admin/group/list",
+    "http_status": 200,
+    "business_status": true,
+    "elapsed_ms": 138,
+    "assertion_passed": true,
+    "data_type": "dict",
+    "data_keys": [
+      "d",
+      "s",
+      "t"
+    ]
+  },
+  {
+    "case_id": "TC-031",
+    "method": "GET",
+    "path": "/admin/finance/payment/bank/list",
+    "http_status": 200,
+    "business_status": true,
+    "elapsed_ms": 150,
+    "assertion_passed": true,
+    "data_type": "dict",
+    "data_keys": [
+      "d",
+      "s",
+      "t"
+    ]
+  }
+]

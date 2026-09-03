@@ -1,0 +1,290 @@
+{
+  "scannedAt": "2026-09-03T06:40:02.717Z",
+  "environment": "FAT",
+  "timezone": "Asia/Manila",
+  "pages": [
+    {
+      "page": "Transaction / Deposit",
+      "route": "/transaction-record/transaction/deposit",
+      "endpoint": "/finance/deposit/list",
+      "status": "NON_EMPTY_FOUND",
+      "availableRangeOptions": [
+        {
+          "text": "Today",
+          "disabled": false
+        },
+        {
+          "text": "Yesterday",
+          "disabled": false
+        },
+        {
+          "text": "Last 7 days",
+          "disabled": false
+        },
+        {
+          "text": "Last 15 days",
+          "disabled": false
+        },
+        {
+          "text": "Last 30 days",
+          "disabled": false
+        }
+      ],
+      "attempts": [
+        {
+          "range": "7d",
+          "option": "Last 7 days",
+          "status": "CAPTURED",
+          "nonEmpty": true,
+          "recordCount": 10,
+          "totalCount": 12,
+          "timeParameters": {
+            "time_flag": "7",
+            "page": "1",
+            "page_size": "10"
+          }
+        }
+      ],
+      "selectedResult": {
+        "range": "7d",
+        "option": "Last 7 days",
+        "recordCount": 10,
+        "totalCount": 12,
+        "timeParameters": {
+          "time_flag": "7",
+          "page": "1",
+          "page_size": "10"
+        }
+      },
+      "paginationSample": {
+        "attempted": true,
+        "captured": true,
+        "method": "progressive viewport wheel scroll",
+        "page": "2",
+        "pageSize": "10",
+        "httpStatus": 200,
+        "businessStatus": true,
+        "responseStructure": {
+          "topLevelKeys": [
+            "data",
+            "status"
+          ],
+          "dataType": "object",
+          "dataKeys": [
+            "d",
+            "s",
+            "t"
+          ],
+          "arrayPaths": [
+            "data.d"
+          ]
+        },
+        "recordCount": 2,
+        "totalCount": 12,
+        "nonEmpty": true
+      },
+      "error": ""
+    },
+    {
+      "page": "Transaction / Withdraw",
+      "route": "/transaction-record/transaction/withdraw",
+      "endpoint": "/finance/withdraw/list",
+      "status": "NON_EMPTY_FOUND",
+      "availableRangeOptions": [
+        {
+          "text": "Today",
+          "disabled": false
+        },
+        {
+          "text": "Yesterday",
+          "disabled": false
+        },
+        {
+          "text": "Last 7 days",
+          "disabled": false
+        },
+        {
+          "text": "Last 15 days",
+          "disabled": false
+        },
+        {
+          "text": "Last 30 days",
+          "disabled": false
+        }
+      ],
+      "attempts": [
+        {
+          "range": "7d",
+          "option": "Last 7 days",
+          "status": "CAPTURED",
+          "nonEmpty": true,
+          "recordCount": 9,
+          "totalCount": 9,
+          "timeParameters": {
+            "time_flag": "7",
+            "page": "1",
+            "page_size": "10"
+          }
+        }
+      ],
+      "selectedResult": {
+        "range": "7d",
+        "option": "Last 7 days",
+        "recordCount": 9,
+        "totalCount": 9,
+        "timeParameters": {
+          "time_flag": "7",
+          "page": "1",
+          "page_size": "10"
+        }
+      },
+      "paginationSample": {
+        "attempted": false,
+        "reason": "no second page required: total does not exceed page size"
+      },
+      "error": ""
+    },
+    {
+      "page": "Bet History",
+      "route": "/bet-record",
+      "endpoint": "/member/game/bet/list",
+      "status": "NON_EMPTY_FOUND",
+      "availableRangeOptions": [
+        {
+          "text": "Today",
+          "disabled": false
+        },
+        {
+          "text": "Yesterday",
+          "disabled": false
+        },
+        {
+          "text": "Last 7 days",
+          "disabled": false
+        },
+        {
+          "text": "Last 15 days",
+          "disabled": false
+        },
+        {
+          "text": "Last 30 days",
+          "disabled": false
+        }
+      ],
+      "attempts": [
+        {
+          "range": "7d",
+          "option": "Last 7 days",
+          "status": "CAPTURED",
+          "nonEmpty": true,
+          "recordCount": 10,
+          "totalCount": 102,
+          "timeParameters": {
+            "time_flag": "7",
+            "page": "1",
+            "page_size": "10"
+          }
+        }
+      ],
+      "selectedResult": {
+        "range": "7d",
+        "option": "Last 7 days",
+        "recordCount": 10,
+        "totalCount": 102,
+        "timeParameters": {
+          "time_flag": "7",
+          "page": "1",
+          "page_size": "10"
+        }
+      },
+      "paginationSample": {
+        "attempted": true,
+        "captured": true,
+        "method": "progressive viewport wheel scroll",
+        "page": "2",
+        "pageSize": "10",
+        "httpStatus": 200,
+        "businessStatus": true,
+        "responseStructure": {
+          "topLevelKeys": [
+            "data",
+            "status"
+          ],
+          "dataType": "object",
+          "dataKeys": [
+            "bt",
+            "d",
+            "t",
+            "wt"
+          ],
+          "arrayPaths": [
+            "data.d"
+          ]
+        },
+        "recordCount": 10,
+        "totalCount": 102,
+        "nonEmpty": true
+      },
+      "error": ""
+    },
+    {
+      "page": "Bonus",
+      "route": "/transaction-record/bonus",
+      "endpoint": "/promo/blindbox/transaction/bonus",
+      "status": "NON_EMPTY_FOUND",
+      "availableRangeOptions": [
+        {
+          "text": "Today",
+          "disabled": false
+        },
+        {
+          "text": "Yesterday",
+          "disabled": false
+        },
+        {
+          "text": "Last 7 days",
+          "disabled": false
+        },
+        {
+          "text": "Last 15 days",
+          "disabled": false
+        },
+        {
+          "text": "Last 30 days",
+          "disabled": false
+        }
+      ],
+      "attempts": [
+        {
+          "range": "7d",
+          "option": "Last 7 days",
+          "status": "CAPTURED",
+          "nonEmpty": true,
+          "recordCount": 2,
+          "totalCount": 2,
+          "timeParameters": {
+            "time_flag": "7",
+            "page": "1",
+            "page_size": "10"
+          }
+        }
+      ],
+      "selectedResult": {
+        "range": "7d",
+        "option": "Last 7 days",
+        "recordCount": 2,
+        "totalCount": 2,
+        "timeParameters": {
+          "time_flag": "7",
+          "page": "1",
+          "page_size": "10"
+        }
+      },
+      "paginationSample": {
+        "attempted": false,
+        "reason": "no second page required: total does not exceed page size"
+      },
+      "error": ""
+    }
+  ]
+}

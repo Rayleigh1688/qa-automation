@@ -1,0 +1,456 @@
+{
+  "captured_at": "2026-09-03T09:25:55.770Z",
+  "environment": "FAT",
+  "target_ref": "FAT-KYC-REJECT-01",
+  "uid_ref": "FAT-UID-KYC-REJECT-01",
+  "page_route": "/member-center/detail/{uid}",
+  "operation": "Credit Top-up dynamic required fields",
+  "fields": [
+    {
+      "index": 0,
+      "label": "Phone Number",
+      "required": false,
+      "controls": [
+        {
+          "tag": "input",
+          "type": "text",
+          "role": "",
+          "placeholder": "Please enter",
+          "class_names": [
+            "ant-input",
+            "ant-input-disabled"
+          ],
+          "text": "",
+          "disabled": true
+        },
+        {
+          "tag": "button",
+          "type": "button",
+          "role": "",
+          "placeholder": "",
+          "class_names": [
+            "ant-input-clear-icon",
+            "ant-input-clear-icon-hidden"
+          ],
+          "text": "",
+          "disabled": false
+        }
+      ]
+    },
+    {
+      "index": 1,
+      "label": "Member Account ID",
+      "required": false,
+      "controls": [
+        {
+          "tag": "input",
+          "type": "text",
+          "role": "",
+          "placeholder": "Please enter",
+          "class_names": [
+            "ant-input",
+            "ant-input-disabled"
+          ],
+          "text": "",
+          "disabled": true
+        },
+        {
+          "tag": "button",
+          "type": "button",
+          "role": "",
+          "placeholder": "",
+          "class_names": [
+            "ant-input-clear-icon",
+            "ant-input-clear-icon-hidden"
+          ],
+          "text": "",
+          "disabled": false
+        }
+      ]
+    },
+    {
+      "index": 2,
+      "label": "Member UID",
+      "required": false,
+      "controls": [
+        {
+          "tag": "input",
+          "type": "text",
+          "role": "",
+          "placeholder": "Please enter",
+          "class_names": [
+            "ant-input",
+            "ant-input-disabled"
+          ],
+          "text": "",
+          "disabled": true
+        },
+        {
+          "tag": "button",
+          "type": "button",
+          "role": "",
+          "placeholder": "",
+          "class_names": [
+            "ant-input-clear-icon",
+            "ant-input-clear-icon-hidden"
+          ],
+          "text": "",
+          "disabled": false
+        }
+      ]
+    },
+    {
+      "index": 3,
+      "label": "Member Account Status",
+      "required": false,
+      "controls": [
+        {
+          "tag": "input",
+          "type": "text",
+          "role": "",
+          "placeholder": "Please enter",
+          "class_names": [
+            "ant-input",
+            "ant-input-disabled"
+          ],
+          "text": "",
+          "disabled": true
+        },
+        {
+          "tag": "button",
+          "type": "button",
+          "role": "",
+          "placeholder": "",
+          "class_names": [
+            "ant-input-clear-icon",
+            "ant-input-clear-icon-hidden"
+          ],
+          "text": "",
+          "disabled": false
+        }
+      ]
+    },
+    {
+      "index": 4,
+      "label": "Wallet Balance at Submission",
+      "required": false,
+      "controls": [
+        {
+          "tag": "input",
+          "type": "text",
+          "role": "",
+          "placeholder": "Please enter",
+          "class_names": [
+            "ant-input",
+            "ant-input-disabled"
+          ],
+          "text": "",
+          "disabled": true
+        },
+        {
+          "tag": "button",
+          "type": "button",
+          "role": "",
+          "placeholder": "",
+          "class_names": [
+            "ant-input-clear-icon",
+            "ant-input-clear-icon-hidden"
+          ],
+          "text": "",
+          "disabled": false
+        }
+      ]
+    },
+    {
+      "index": 5,
+      "label": "Adjustment Type",
+      "required": true,
+      "controls": [
+        {
+          "tag": "input",
+          "type": "radio",
+          "role": "",
+          "placeholder": "",
+          "class_names": [
+            "ant-radio-input"
+          ],
+          "text": "",
+          "disabled": false
+        },
+        {
+          "tag": "input",
+          "type": "radio",
+          "role": "",
+          "placeholder": "",
+          "class_names": [
+            "ant-radio-input"
+          ],
+          "text": "",
+          "disabled": false
+        },
+        {
+          "tag": "input",
+          "type": "radio",
+          "role": "",
+          "placeholder": "",
+          "class_names": [
+            "ant-radio-input"
+          ],
+          "text": "",
+          "disabled": false
+        }
+      ]
+    },
+    {
+      "index": 6,
+      "label": "Adjustment Amount",
+      "required": true,
+      "controls": [
+        {
+          "tag": "span",
+          "type": "",
+          "role": "button",
+          "placeholder": "",
+          "class_names": [
+            "ant-input-number-handler",
+            "ant-input-number-handler-up"
+          ],
+          "text": "",
+          "disabled": false
+        },
+        {
+          "tag": "span",
+          "type": "",
+          "role": "button",
+          "placeholder": "",
+          "class_names": [
+            "ant-input-number-handler",
+            "ant-input-number-handler-down"
+          ],
+          "text": "",
+          "disabled": false
+        },
+        {
+          "tag": "input",
+          "type": "",
+          "role": "spinbutton",
+          "placeholder": "Only non-zero positive values allowed, up to two decimal places",
+          "class_names": [
+            "ant-input-number-input"
+          ],
+          "text": "",
+          "disabled": false
+        }
+      ]
+    },
+    {
+      "index": 7,
+      "label": "Turnover Requirement for Top‑up Withdrawal",
+      "required": true,
+      "controls": [
+        {
+          "tag": "span",
+          "type": "",
+          "role": "button",
+          "placeholder": "",
+          "class_names": [
+            "ant-input-number-handler",
+            "ant-input-number-handler-up"
+          ],
+          "text": "",
+          "disabled": false
+        },
+        {
+          "tag": "span",
+          "type": "",
+          "role": "button",
+          "placeholder": "",
+          "class_names": [
+            "ant-input-number-handler",
+            "ant-input-number-handler-down"
+          ],
+          "text": "",
+          "disabled": false
+        },
+        {
+          "tag": "input",
+          "type": "",
+          "role": "spinbutton",
+          "placeholder": "0–99, top‑up adjustments only, must be an integer",
+          "class_names": [
+            "ant-input-number-input"
+          ],
+          "text": "",
+          "disabled": false
+        }
+      ]
+    },
+    {
+      "index": 8,
+      "label": "Turnover Venue/Game Restrictions",
+      "required": true,
+      "controls": [
+        {
+          "tag": "div",
+          "type": "",
+          "role": "",
+          "placeholder": "",
+          "class_names": [
+            "ant-select",
+            "ant-tree-select",
+            "ant-select-outlined",
+            "ant-select-in-form-item",
+            "ant-select-focused",
+            "ant-select-multiple"
+          ],
+          "text": "请选择",
+          "disabled": false
+        },
+        {
+          "tag": "input",
+          "type": "search",
+          "role": "combobox",
+          "placeholder": "",
+          "class_names": [
+            "ant-select-selection-search-input"
+          ],
+          "text": "",
+          "disabled": false
+        }
+      ]
+    },
+    {
+      "index": 9,
+      "label": "Google Verification Code",
+      "required": true,
+      "controls": [
+        {
+          "tag": "input",
+          "type": "text",
+          "role": "",
+          "placeholder": "Please enter",
+          "class_names": [
+            "ant-input"
+          ],
+          "text": "",
+          "disabled": false
+        },
+        {
+          "tag": "button",
+          "type": "button",
+          "role": "",
+          "placeholder": "",
+          "class_names": [
+            "ant-input-clear-icon",
+            "ant-input-clear-icon-hidden"
+          ],
+          "text": "",
+          "disabled": false
+        }
+      ]
+    },
+    {
+      "index": 10,
+      "label": "Adjustment Reason",
+      "required": true,
+      "controls": [
+        {
+          "tag": "textarea",
+          "type": "",
+          "role": "",
+          "placeholder": "Text 1~500 characters",
+          "class_names": [
+            "ant-input"
+          ],
+          "text": "",
+          "disabled": false
+        }
+      ]
+    }
+  ],
+  "candidate_labels": [
+    {
+      "index": 7,
+      "label": "Turnover Requirement for Top‑up Withdrawal",
+      "required": true,
+      "controls": [
+        {
+          "tag": "span",
+          "type": "",
+          "role": "button",
+          "placeholder": "",
+          "class_names": [
+            "ant-input-number-handler",
+            "ant-input-number-handler-up"
+          ],
+          "text": "",
+          "disabled": false
+        },
+        {
+          "tag": "span",
+          "type": "",
+          "role": "button",
+          "placeholder": "",
+          "class_names": [
+            "ant-input-number-handler",
+            "ant-input-number-handler-down"
+          ],
+          "text": "",
+          "disabled": false
+        },
+        {
+          "tag": "input",
+          "type": "",
+          "role": "spinbutton",
+          "placeholder": "0–99, top‑up adjustments only, must be an integer",
+          "class_names": [
+            "ant-input-number-input"
+          ],
+          "text": "",
+          "disabled": false
+        }
+      ]
+    },
+    {
+      "index": 8,
+      "label": "Turnover Venue/Game Restrictions",
+      "required": true,
+      "controls": [
+        {
+          "tag": "div",
+          "type": "",
+          "role": "",
+          "placeholder": "",
+          "class_names": [
+            "ant-select",
+            "ant-tree-select",
+            "ant-select-outlined",
+            "ant-select-in-form-item",
+            "ant-select-focused",
+            "ant-select-multiple"
+          ],
+          "text": "请选择",
+          "disabled": false
+        },
+        {
+          "tag": "input",
+          "type": "search",
+          "role": "combobox",
+          "placeholder": "",
+          "class_names": [
+            "ant-select-selection-search-input"
+          ],
+          "text": "",
+          "disabled": false
+        }
+      ]
+    }
+  ],
+  "tree_options": [
+    "所有游戏"
+  ],
+  "submitted": false,
+  "writes": 0,
+  "raw_phone_or_uid_persisted": false,
+  "secrets_persisted": false
+}

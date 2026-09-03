@@ -1,0 +1,16 @@
+{
+  "generated_at": "2026-09-03T05:26:16.618Z",
+  "environment": "FAT",
+  "completed_pages": 14,
+  "total_pages": 72,
+  "raw_network_events": 76,
+  "deduplicated_page_action_endpoints": 51,
+  "unique_method_paths": 25,
+  "classifications": {
+    "ACTIVE": 38,
+    "ACTIVE_FAILED": 1,
+    "UNDOCUMENTED_ACTIVE": 12
+  },
+  "page_errors": 0,
+  "fatal_error": "Error: page.waitForTimeout: Target page, context or browser has been closed"
+}

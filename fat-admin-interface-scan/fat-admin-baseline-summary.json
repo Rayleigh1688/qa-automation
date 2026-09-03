@@ -1,0 +1,12 @@
+{
+  "page_permissions": 68,
+  "permission_operations": 253,
+  "page_action_interface_rows": 252,
+  "static_ui_routes": 60,
+  "bundle_admin_api_paths": 483,
+  "bundle_documented_paths": 377,
+  "bundle_undocumented_candidates": 106,
+  "api_probe_records": 15,
+  "api_probe_successes": 15,
+  "bundle_sha256": "31416ba88570b9405c188a1884700a12a9a316829300dbe63bdc867669eed1ee"
+}

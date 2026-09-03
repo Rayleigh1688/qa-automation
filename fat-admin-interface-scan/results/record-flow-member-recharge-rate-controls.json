@@ -1,0 +1,173 @@
+{
+  "captured_at": "2026-09-03T08:52:48.223Z",
+  "environment": "FAT",
+  "target_ref": "FAT-KYC-REJECT-01",
+  "page_route": "/member-center/detail/{uid}",
+  "rate_context": {
+    "text": "General recharge rate Platform configuration operating record",
+    "clickable_count": 2,
+    "edit_icon_count": 0
+  },
+  "edit_form": {
+    "title": "General Recharge Rate",
+    "fields": [
+      {
+        "index": 0,
+        "label": "Platform General Recharge Rate",
+        "required": false,
+        "controls": []
+      },
+      {
+        "index": 1,
+        "label": "Member General Recharge Rate",
+        "required": false,
+        "controls": [
+          {
+            "type": "search",
+            "placeholder": "",
+            "disabled": false
+          }
+        ]
+      },
+      {
+        "index": 2,
+        "label": "Remarks",
+        "required": true,
+        "controls": [
+          {
+            "type": "textarea",
+            "placeholder": "1~200 characters text",
+            "disabled": false
+          }
+        ]
+      },
+      {
+        "index": 3,
+        "label": "Google Verification Code",
+        "required": true,
+        "controls": [
+          {
+            "type": "text",
+            "placeholder": "Please Enter Google Verification Code",
+            "disabled": false
+          }
+        ]
+      }
+    ],
+    "select_texts": [
+      "Platform Configuration"
+    ],
+    "buttons": [
+      "Cancel",
+      "OK"
+    ],
+    "select_options": [
+      [
+        "Platform Configuration",
+        "Custom"
+      ]
+    ],
+    "custom_mode": {
+      "title": "General Recharge Rate",
+      "fields": [
+        {
+          "index": 0,
+          "label": "Platform General Recharge Rate",
+          "required": false,
+          "controls": []
+        },
+        {
+          "index": 1,
+          "label": "Member General Recharge Rate",
+          "required": false,
+          "controls": [
+            {
+              "type": "search",
+              "placeholder": "",
+              "disabled": false
+            }
+          ]
+        },
+        {
+          "index": 2,
+          "label": "Custom Recharge Rate",
+          "required": true,
+          "controls": [
+            {
+              "type": "input",
+              "placeholder": "Please enter custom recharge rate",
+              "disabled": false
+            }
+          ]
+        },
+        {
+          "index": 3,
+          "label": "Remarks",
+          "required": true,
+          "controls": [
+            {
+              "type": "textarea",
+              "placeholder": "1~200 characters text",
+              "disabled": false
+            }
+          ]
+        },
+        {
+          "index": 4,
+          "label": "Google Verification Code",
+          "required": true,
+          "controls": [
+            {
+              "type": "text",
+              "placeholder": "Please Enter Google Verification Code",
+              "disabled": false
+            }
+          ]
+        }
+      ],
+      "select_texts": [
+        "Custom Custom"
+      ],
+      "buttons": [
+        "Cancel",
+        "OK"
+      ]
+    }
+  },
+  "operation_records": {
+    "title": "Operation Records",
+    "columns": [
+      "Change Time",
+      "Change Type",
+      "Value Before Change",
+      "Value After Change",
+      "Change Remarks",
+      "Executor"
+    ],
+    "empty": true
+  },
+  "submitted": false,
+  "writes": 0,
+  "raw_phone_or_uid_persisted": false,
+  "network": [
+    {
+      "action": "open_recharge_rate_operation_records",
+      "method": "GET",
+      "path": "/admin/member/deposit/multiple/log",
+      "query_fields": [
+        "page",
+        "page_size",
+        "uid"
+      ],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_profile": {
+        "type": "list",
+        "count": 0,
+        "item_keys": []
+      },
+      "response_values_persisted": false
+    }
+  ]
+}

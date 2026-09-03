@@ -1,0 +1,45 @@
+{
+  "generated_at": "2026-09-03T06:24:59.310Z",
+  "environment": "FAT",
+  "live_permission_roots": 12,
+  "live_menu_pages": 57,
+  "page_initialization": {
+    "pages": 57,
+    "raw_events": 844,
+    "unique_method_paths": 78,
+    "errors": 0
+  },
+  "explicit_actions": {
+    "total": 679,
+    "non_write_attempted": 615,
+    "actual_interactions": 425,
+    "skipped": 184,
+    "errors": 6,
+    "write_total": 64,
+    "write_status": {
+      "BLOCKED_DATA_SCOPE": 43,
+      "BLOCKED_PREREQUISITE": 17,
+      "EXECUTED": 3,
+      "NO_CREATE_REQUEST": 1
+    }
+  },
+  "controlled_write": {
+    "target_reference": "codex-fat-marquee-853da059",
+    "target_id": "<redacted-member-id>",
+    "before": "absent by unique marker",
+    "after": "target absent/not visible",
+    "cleanup": "deleted current-run record",
+    "executed_actions": 3,
+    "note": "Numeric target ID was over-redacted; unique marker and row lifecycle retained"
+  },
+  "unique_endpoints": 109,
+  "endpoint_classification": {
+    "ACTIVE": 89,
+    "UNDOCUMENTED_ACTIVE": 18,
+    "MISCLASSIFIED": 2
+  },
+  "endpoint_with_failures": 2,
+  "page_action_rows": 1169,
+  "inventory_comparison_rows": 581,
+  "invalidated_probe_excluded": true
+}

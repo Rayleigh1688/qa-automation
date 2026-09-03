@@ -1,0 +1,32 @@
+{
+  "environment": "FAT",
+  "purpose": "current interface-discovery controlled write targets",
+  "lanes": [
+    {
+      "target_ref": "FAT-MEMBER-REV-01",
+      "purpose": "reversible member detail writes",
+      "state": "REGISTERED",
+      "registration": "PASS",
+      "raw_evidence": "ignored api/results/provisioning/interface-discovery/member-reversible"
+    },
+    {
+      "target_ref": "FAT-MEMBER-END-01",
+      "purpose": "irreversible or terminal member operations after all other checks",
+      "state": "REGISTERED",
+      "registration": "PASS",
+      "raw_evidence": "ignored api/results/provisioning/interface-discovery/member-irreversible"
+    },
+    {
+      "target_ref": "FAT-KYC-REJECT-01",
+      "purpose": "KYC submit, reject, resubmit and final approval",
+      "state": "REGISTERED",
+      "registration": "PASS",
+      "raw_evidence": "ignored api/results/provisioning/interface-discovery/kyc-reject-resubmit"
+    }
+  ],
+  "safety": {
+    "raw_phone_or_uid_persisted": false,
+    "database_writes": false,
+    "uat_accessed": false
+  }
+}

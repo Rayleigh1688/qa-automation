@@ -1,0 +1,777 @@
+{
+  "captured_at": "2026-09-03T06:48:20.973Z",
+  "environment": "FAT",
+  "timezone": "Asia/Manila",
+  "candidates": 6,
+  "pages": [
+    {
+      "order": 1,
+      "top_menu": "Member Management",
+      "page_name": "VIP Rewards",
+      "route": "/member-management/vip-rewards",
+      "attempts": [
+        {
+          "range": "7d",
+          "start": "2026-08-27",
+          "end": "2026-09-03",
+          "accepted_inputs": {
+            "start": "2026-08-27",
+            "end": "2026-09-03"
+          },
+          "timezone": "Asia/Manila",
+          "events": [
+            {
+              "method": "GET",
+              "path": "/admin/promo/vip/log/list",
+              "query_fields": [
+                "grant_end_at",
+                "grant_start_at",
+                "page",
+                "page_size"
+              ],
+              "body_fields": [],
+              "request_payload_format": "unspecified",
+              "request_body_bytes": 0,
+              "request_body_decoded": false,
+              "time_fields": {
+                "grant_start_at": {
+                  "value": "1787760000000",
+                  "unit": "epoch_milliseconds_string"
+                },
+                "grant_end_at": {
+                  "value": "1788451199999",
+                  "unit": "epoch_milliseconds_string"
+                }
+              },
+              "page_size_fields": {
+                "page": "1",
+                "page_size": "20"
+              },
+              "http_status": 200,
+              "business_status": true,
+              "response_type": "object",
+              "response_keys": [
+                "list",
+                "summary",
+                "t"
+              ],
+              "record_count": 0,
+              "non_empty": false
+            }
+          ],
+          "non_empty": false,
+          "failed": false
+        },
+        {
+          "range": "30d",
+          "start": "2026-08-04",
+          "end": "2026-09-03",
+          "accepted_inputs": {
+            "start": "2026-08-04",
+            "end": "2026-09-03"
+          },
+          "timezone": "Asia/Manila",
+          "events": [
+            {
+              "method": "GET",
+              "path": "/admin/promo/vip/log/list",
+              "query_fields": [
+                "grant_end_at",
+                "grant_start_at",
+                "page",
+                "page_size"
+              ],
+              "body_fields": [],
+              "request_payload_format": "unspecified",
+              "request_body_bytes": 0,
+              "request_body_decoded": false,
+              "time_fields": {
+                "grant_start_at": {
+                  "value": "1785772800000",
+                  "unit": "epoch_milliseconds_string"
+                },
+                "grant_end_at": {
+                  "value": "1788451199999",
+                  "unit": "epoch_milliseconds_string"
+                }
+              },
+              "page_size_fields": {
+                "page": "1",
+                "page_size": "20"
+              },
+              "http_status": 200,
+              "business_status": true,
+              "response_type": "object",
+              "response_keys": [
+                "list",
+                "summary",
+                "t"
+              ],
+              "record_count": 0,
+              "non_empty": false
+            }
+          ],
+          "non_empty": false,
+          "failed": false
+        },
+        {
+          "range": "90d",
+          "start": "2026-06-05",
+          "end": "2026-09-03",
+          "accepted_inputs": {
+            "start": "2026-06-05",
+            "end": "2026-09-03"
+          },
+          "timezone": "Asia/Manila",
+          "events": [
+            {
+              "method": "GET",
+              "path": "/admin/promo/vip/log/list",
+              "query_fields": [
+                "grant_end_at",
+                "grant_start_at",
+                "page",
+                "page_size"
+              ],
+              "body_fields": [],
+              "request_payload_format": "unspecified",
+              "request_body_bytes": 0,
+              "request_body_decoded": false,
+              "time_fields": {
+                "grant_start_at": {
+                  "value": "1780588800000",
+                  "unit": "epoch_milliseconds_string"
+                },
+                "grant_end_at": {
+                  "value": "1788451199999",
+                  "unit": "epoch_milliseconds_string"
+                }
+              },
+              "page_size_fields": {
+                "page": "1",
+                "page_size": "20"
+              },
+              "http_status": 200,
+              "business_status": true,
+              "response_type": "object",
+              "response_keys": [
+                "list",
+                "summary",
+                "t"
+              ],
+              "record_count": 0,
+              "non_empty": false
+            }
+          ],
+          "non_empty": false,
+          "failed": false
+        },
+        {
+          "range": "365d",
+          "start": "2025-09-03",
+          "end": "2026-09-03",
+          "accepted_inputs": {
+            "start": "2025-09-03",
+            "end": "2026-09-03"
+          },
+          "timezone": "Asia/Manila",
+          "events": [
+            {
+              "method": "GET",
+              "path": "/admin/promo/vip/log/list",
+              "query_fields": [
+                "grant_end_at",
+                "grant_start_at",
+                "page",
+                "page_size"
+              ],
+              "body_fields": [],
+              "request_payload_format": "unspecified",
+              "request_body_bytes": 0,
+              "request_body_decoded": false,
+              "time_fields": {
+                "grant_start_at": {
+                  "value": "1756828800000",
+                  "unit": "epoch_milliseconds_string"
+                },
+                "grant_end_at": {
+                  "value": "1788451199999",
+                  "unit": "epoch_milliseconds_string"
+                }
+              },
+              "page_size_fields": {
+                "page": "1",
+                "page_size": "20"
+              },
+              "http_status": 200,
+              "business_status": true,
+              "response_type": "object",
+              "response_keys": [
+                "list",
+                "summary",
+                "t"
+              ],
+              "record_count": 0,
+              "non_empty": false
+            }
+          ],
+          "non_empty": false,
+          "failed": false
+        },
+        {
+          "range": "page_max_observed",
+          "start": "2020-01-01",
+          "end": "2026-09-03",
+          "accepted_inputs": {
+            "start": "2020-01-01",
+            "end": "2026-09-03"
+          },
+          "timezone": "Asia/Manila",
+          "events": [
+            {
+              "method": "GET",
+              "path": "/admin/promo/vip/log/list",
+              "query_fields": [
+                "grant_end_at",
+                "grant_start_at",
+                "page",
+                "page_size"
+              ],
+              "body_fields": [],
+              "request_payload_format": "unspecified",
+              "request_body_bytes": 0,
+              "request_body_decoded": false,
+              "time_fields": {
+                "grant_start_at": {
+                  "value": "1577808000000",
+                  "unit": "epoch_milliseconds_string"
+                },
+                "grant_end_at": {
+                  "value": "1788451199999",
+                  "unit": "epoch_milliseconds_string"
+                }
+              },
+              "page_size_fields": {
+                "page": "1",
+                "page_size": "20"
+              },
+              "http_status": 200,
+              "business_status": true,
+              "response_type": "object",
+              "response_keys": [
+                "list",
+                "summary",
+                "t"
+              ],
+              "record_count": 0,
+              "non_empty": false
+            }
+          ],
+          "non_empty": false,
+          "failed": false
+        }
+      ],
+      "result": "EMPTY_TO_MAX_RANGE",
+      "stop_range": "",
+      "error": "",
+      "query_selector_fallback": "button exact visible text",
+      "date_control": {
+        "start_placeholder": "Start date",
+        "end_placeholder": "End date",
+        "initial_values": {
+          "start": "",
+          "end": ""
+        }
+      }
+    },
+    {
+      "order": 2,
+      "top_menu": "Member Management",
+      "page_name": "Inviter Transfer Records",
+      "route": "/member-management/inviter-transfer-records",
+      "attempts": [
+        {
+          "range": "7d",
+          "start": "2026-08-27",
+          "end": "2026-09-03",
+          "accepted_inputs": {
+            "start": "2026-08-27 00:00:00",
+            "end": "2026-09-03 23:59:59"
+          },
+          "timezone": "Asia/Manila",
+          "events": [
+            {
+              "method": "GET",
+              "path": "/admin/promo/invite/friends/transfer/list",
+              "query_fields": [
+                "created_end_at",
+                "created_start_at",
+                "page",
+                "page_size"
+              ],
+              "body_fields": [],
+              "request_payload_format": "unspecified",
+              "request_body_bytes": 0,
+              "request_body_decoded": false,
+              "time_fields": {
+                "created_start_at": {
+                  "value": "1787760000000",
+                  "unit": "epoch_milliseconds_string"
+                },
+                "created_end_at": {
+                  "value": "1788451199000",
+                  "unit": "epoch_milliseconds_string"
+                }
+              },
+              "page_size_fields": {
+                "page": "1",
+                "page_size": "20"
+              },
+              "http_status": 200,
+              "business_status": true,
+              "response_type": "object",
+              "response_keys": [
+                "d",
+                "t"
+              ],
+              "record_count": 0,
+              "non_empty": false
+            }
+          ],
+          "non_empty": false,
+          "failed": false
+        },
+        {
+          "range": "30d",
+          "start": "2026-08-04",
+          "end": "2026-09-03",
+          "accepted_inputs": {
+            "start": "2026-08-04 00:00:00",
+            "end": "2026-09-03 23:59:59"
+          },
+          "timezone": "Asia/Manila",
+          "events": [
+            {
+              "method": "GET",
+              "path": "/admin/promo/invite/friends/transfer/list",
+              "query_fields": [
+                "created_end_at",
+                "created_start_at",
+                "page",
+                "page_size"
+              ],
+              "body_fields": [],
+              "request_payload_format": "unspecified",
+              "request_body_bytes": 0,
+              "request_body_decoded": false,
+              "time_fields": {
+                "created_start_at": {
+                  "value": "1785772800000",
+                  "unit": "epoch_milliseconds_string"
+                },
+                "created_end_at": {
+                  "value": "1788451199000",
+                  "unit": "epoch_milliseconds_string"
+                }
+              },
+              "page_size_fields": {
+                "page": "1",
+                "page_size": "20"
+              },
+              "http_status": 200,
+              "business_status": true,
+              "response_type": "object",
+              "response_keys": [
+                "d",
+                "t"
+              ],
+              "record_count": 0,
+              "non_empty": false
+            }
+          ],
+          "non_empty": false,
+          "failed": false
+        },
+        {
+          "range": "90d",
+          "start": "2026-06-05",
+          "end": "2026-09-03",
+          "accepted_inputs": {
+            "start": "2026-06-05 00:00:00",
+            "end": "2026-09-03 23:59:59"
+          },
+          "timezone": "Asia/Manila",
+          "events": [
+            {
+              "method": "GET",
+              "path": "/admin/promo/invite/friends/transfer/list",
+              "query_fields": [
+                "created_end_at",
+                "created_start_at",
+                "page",
+                "page_size"
+              ],
+              "body_fields": [],
+              "request_payload_format": "unspecified",
+              "request_body_bytes": 0,
+              "request_body_decoded": false,
+              "time_fields": {
+                "created_start_at": {
+                  "value": "1780588800000",
+                  "unit": "epoch_milliseconds_string"
+                },
+                "created_end_at": {
+                  "value": "1788451199000",
+                  "unit": "epoch_milliseconds_string"
+                }
+              },
+              "page_size_fields": {
+                "page": "1",
+                "page_size": "20"
+              },
+              "http_status": 200,
+              "business_status": true,
+              "response_type": "object",
+              "response_keys": [
+                "d",
+                "t"
+              ],
+              "record_count": 0,
+              "non_empty": false
+            }
+          ],
+          "non_empty": false,
+          "failed": false
+        },
+        {
+          "range": "365d",
+          "start": "2025-09-03",
+          "end": "2026-09-03",
+          "accepted_inputs": {
+            "start": "2025-09-03 00:00:00",
+            "end": "2026-09-03 23:59:59"
+          },
+          "timezone": "Asia/Manila",
+          "events": [
+            {
+              "method": "GET",
+              "path": "/admin/promo/invite/friends/transfer/list",
+              "query_fields": [
+                "created_end_at",
+                "created_start_at",
+                "page",
+                "page_size"
+              ],
+              "body_fields": [],
+              "request_payload_format": "unspecified",
+              "request_body_bytes": 0,
+              "request_body_decoded": false,
+              "time_fields": {
+                "created_start_at": {
+                  "value": "1756828800000",
+                  "unit": "epoch_milliseconds_string"
+                },
+                "created_end_at": {
+                  "value": "1788451199000",
+                  "unit": "epoch_milliseconds_string"
+                }
+              },
+              "page_size_fields": {
+                "page": "1",
+                "page_size": "20"
+              },
+              "http_status": 200,
+              "business_status": true,
+              "response_type": "object",
+              "response_keys": [
+                "d",
+                "t"
+              ],
+              "record_count": 11,
+              "non_empty": true
+            }
+          ],
+          "non_empty": true,
+          "failed": false
+        }
+      ],
+      "result": "NON_EMPTY",
+      "stop_range": "365d",
+      "error": "",
+      "date_control": {
+        "start_placeholder": "Start time",
+        "end_placeholder": "End time",
+        "initial_values": {
+          "start": "",
+          "end": ""
+        }
+      }
+    },
+    {
+      "order": 3,
+      "top_menu": "Risk Management",
+      "page_name": "Temporary Restriction List",
+      "route": "/risk-control/temporary-restriction-list",
+      "attempts": [
+        {
+          "range": "7d",
+          "start": "2026-08-27",
+          "end": "2026-09-03",
+          "accepted_inputs": {
+            "start": "",
+            "end": "2026-09-03"
+          },
+          "timezone": "Asia/Manila",
+          "events": [],
+          "non_empty": false,
+          "failed": false,
+          "validation": "REJECTED_MISMATCH"
+        }
+      ],
+      "result": "UI_DATE_INPUT_BLOCKED",
+      "stop_range": "7d",
+      "error": "",
+      "query_selector_fallback": "button exact visible text",
+      "date_control": {
+        "start_placeholder": "Start date",
+        "end_placeholder": "End date",
+        "initial_values": {
+          "start": "",
+          "end": ""
+        }
+      }
+    },
+    {
+      "order": 4,
+      "top_menu": "Promo Marketing",
+      "page_name": "Promo Marketing Report",
+      "route": "/promo-marketing/statistical-reports",
+      "attempts": [
+        {
+          "range": "7d",
+          "start": "2026-08-27",
+          "end": "2026-09-03",
+          "accepted_inputs": {
+            "start": "2026-08-27",
+            "end": "2026-09-03"
+          },
+          "timezone": "Asia/Manila",
+          "events": [
+            {
+              "method": "GET",
+              "path": "/admin/channel/manage/dict",
+              "query_fields": [],
+              "body_fields": [],
+              "request_payload_format": "unspecified",
+              "request_body_bytes": 0,
+              "request_body_decoded": false,
+              "time_fields": {},
+              "page_size_fields": {},
+              "http_status": 200,
+              "business_status": true,
+              "response_type": "list",
+              "response_keys": [],
+              "record_count": 22,
+              "non_empty": true
+            },
+            {
+              "method": "GET",
+              "path": "/admin/channel/promotion/satistic",
+              "query_fields": [
+                "end_time",
+                "page",
+                "page_size",
+                "start_time"
+              ],
+              "body_fields": [],
+              "request_payload_format": "unspecified",
+              "request_body_bytes": 0,
+              "request_body_decoded": false,
+              "time_fields": {
+                "start_time": {
+                  "value": "1787760000000",
+                  "unit": "epoch_milliseconds_string"
+                },
+                "end_time": {
+                  "value": "1788364800000",
+                  "unit": "epoch_milliseconds_string"
+                }
+              },
+              "page_size_fields": {
+                "page": "1",
+                "page_size": "10"
+              },
+              "http_status": 200,
+              "business_status": true,
+              "response_type": "object",
+              "response_keys": [
+                "d",
+                "s",
+                "t"
+              ],
+              "record_count": 6,
+              "non_empty": true
+            }
+          ],
+          "non_empty": true,
+          "failed": false
+        }
+      ],
+      "result": "NON_EMPTY",
+      "stop_range": "7d",
+      "error": "",
+      "query_selector_fallback": "button exact visible text",
+      "date_control": {
+        "start_placeholder": "Start Time",
+        "end_placeholder": "End Time",
+        "initial_values": {
+          "start": "2026-09-03",
+          "end": "2026-09-03"
+        }
+      }
+    },
+    {
+      "order": 5,
+      "top_menu": "Promo Marketing",
+      "page_name": "First Deposit Daily Active Analysis",
+      "route": "/promo-marketing/first-deposit-daily-active",
+      "attempts": [
+        {
+          "range": "7d",
+          "start": "2026-08-27",
+          "end": "2026-09-03",
+          "accepted_inputs": {
+            "start": "2026-08-27",
+            "end": "2026-09-03"
+          },
+          "timezone": "Asia/Manila",
+          "events": [
+            {
+              "method": "GET",
+              "path": "/admin/channel/promotion/firstDeposit",
+              "query_fields": [
+                "end_time",
+                "page",
+                "page_size",
+                "start_time"
+              ],
+              "body_fields": [],
+              "request_payload_format": "unspecified",
+              "request_body_bytes": 0,
+              "request_body_decoded": false,
+              "time_fields": {
+                "start_time": {
+                  "value": "1787760000000",
+                  "unit": "epoch_milliseconds_string"
+                },
+                "end_time": {
+                  "value": "1788364800000",
+                  "unit": "epoch_milliseconds_string"
+                }
+              },
+              "page_size_fields": {
+                "page": "1",
+                "page_size": "20"
+              },
+              "http_status": 200,
+              "business_status": true,
+              "response_type": "object",
+              "response_keys": [
+                "d",
+                "s",
+                "t"
+              ],
+              "record_count": 1,
+              "non_empty": true
+            }
+          ],
+          "non_empty": true,
+          "failed": false
+        }
+      ],
+      "result": "NON_EMPTY",
+      "stop_range": "7d",
+      "error": "",
+      "query_selector_fallback": "button exact visible text",
+      "date_control": {
+        "start_placeholder": "Start Time",
+        "end_placeholder": "End Time",
+        "initial_values": {
+          "start": "2026-09-03",
+          "end": "2026-09-03"
+        }
+      }
+    },
+    {
+      "order": 6,
+      "top_menu": "Game",
+      "page_name": "FS 批量派发纪录",
+      "route": "/gamev2/freespin-import-logs",
+      "attempts": [
+        {
+          "range": "7d",
+          "start": "2026-08-27",
+          "end": "2026-09-03",
+          "accepted_inputs": {
+            "start": "2026-08-27 00:00:00",
+            "end": "2026-09-03 23:59:59"
+          },
+          "timezone": "Asia/Manila",
+          "events": [
+            {
+              "method": "GET",
+              "path": "/admin/promo/free/spin/import/log",
+              "query_fields": [
+                "created_etime",
+                "created_stime",
+                "page",
+                "page_size"
+              ],
+              "body_fields": [],
+              "request_payload_format": "unspecified",
+              "request_body_bytes": 0,
+              "request_body_decoded": false,
+              "time_fields": {
+                "created_stime": {
+                  "value": "1787760000000",
+                  "unit": "epoch_milliseconds_string"
+                },
+                "created_etime": {
+                  "value": "1788451199000",
+                  "unit": "epoch_milliseconds_string"
+                }
+              },
+              "page_size_fields": {
+                "page": "1",
+                "page_size": "20"
+              },
+              "http_status": 200,
+              "business_status": true,
+              "response_type": "object",
+              "response_keys": [
+                "d",
+                "t"
+              ],
+              "record_count": 2,
+              "non_empty": true
+            }
+          ],
+          "non_empty": true,
+          "failed": false
+        }
+      ],
+      "result": "NON_EMPTY",
+      "stop_range": "7d",
+      "error": "",
+      "query_selector_fallback": "button exact visible text",
+      "date_control": {
+        "start_placeholder": "Start Time",
+        "end_placeholder": "End Time",
+        "initial_values": {
+          "start": "2026-09-03 00:00:00",
+          "end": "2026-09-03 23:59:59"
+        }
+      }
+    }
+  ]
+}

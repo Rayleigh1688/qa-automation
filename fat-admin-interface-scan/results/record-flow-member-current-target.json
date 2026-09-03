@@ -1,0 +1,760 @@
+{
+  "captured_at": "2026-09-03T07:23:35.496Z",
+  "environment": "FAT",
+  "phase": "current_target_readonly_prerequisite",
+  "target_ref": "KYC-RUN-B9CA6D6A0704",
+  "uid_ref": "UID-REF-26913CC85458",
+  "source_file_mode": "0600",
+  "raw_uid_persisted": false,
+  "raw_phone_persisted": false,
+  "list_query": {
+    "route": "/member-center/list",
+    "field": "Phone Number",
+    "row_match_verified": true,
+    "response_values_persisted": false
+  },
+  "detail": {
+    "route": "/member-center/detail/{uid}",
+    "route_uid_verified": true,
+    "state": {
+      "/admin/kyc/detail": {
+        "kyc_status": 5,
+        "status": "<redacted-or-present>",
+        "blacklist_status": 0,
+        "review_times": 1788420124449,
+        "ocr_status": 0
+      },
+      "/admin/finance/member/wallet": {
+        "balance": "<redacted-or-present>",
+        "locked": "<redacted-or-present>",
+        "withdrawable": "<redacted-or-present>"
+      },
+      "/admin/member/detail": {
+        "status": 0,
+        "block_state": 0,
+        "banned_state": 0,
+        "risk_level": "<redacted-or-present>",
+        "risk_tag": "<redacted-or-present>",
+        "is_agent": false,
+        "deposit_multiple": "-",
+        "deposit_multiple_type": 1,
+        "platform_deposit_multiple": "<redacted-or-present>",
+        "vip_level": 0,
+        "vip_manual_level": 0,
+        "left_turnover": "<redacted-or-present>",
+        "left_turnover_count": 0,
+        "has_login_password": true,
+        "balance": "<redacted-or-present>",
+        "available_balance": "<redacted-or-present>",
+        "withdrawable_balance": "<redacted-or-present>",
+        "tokens_balance": "<redacted-or-present>",
+        "locked": "<redacted-or-present>",
+        "has_parent_uid": true
+      }
+    },
+    "limitation_rows": [
+      "Function Auto Rules Manual Lock Final Result Action",
+      "Deposit — + Lock Allowed —",
+      "Withdraw — + Lock Allowed —",
+      "Bet — + Lock Allowed —",
+      "Login — + Lock Allowed —",
+      "Time Operator Function Action Source Reason / Remark",
+      "No records"
+    ],
+    "limitation_buttons": [
+      {
+        "index": 0,
+        "text": "+ Lock",
+        "disabled": false,
+        "row_text": "Deposit — + Lock Allowed —"
+      },
+      {
+        "index": 1,
+        "text": "+ Lock",
+        "disabled": false,
+        "row_text": "Withdraw — + Lock Allowed —"
+      },
+      {
+        "index": 2,
+        "text": "+ Lock",
+        "disabled": false,
+        "row_text": "Bet — + Lock Allowed —"
+      },
+      {
+        "index": 3,
+        "text": "+ Lock",
+        "disabled": false,
+        "row_text": "Login — + Lock Allowed —"
+      }
+    ]
+  },
+  "visible_reversible_prerequisite_controls": [
+    "+ Lock"
+  ],
+  "network": [
+    {
+      "action": "login",
+      "method": "GET",
+      "path": "/admin/me/detail",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": false,
+      "response_type": "string",
+      "response_keys": [],
+      "target_value_persisted": false
+    },
+    {
+      "action": "login",
+      "method": "POST",
+      "path": "/admin/login/auth",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "number",
+      "response_keys": [],
+      "target_value_persisted": false
+    },
+    {
+      "action": "login",
+      "method": "POST",
+      "path": "/admin/login",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "string",
+      "response_keys": [],
+      "target_value_persisted": false
+    },
+    {
+      "action": "login",
+      "method": "GET",
+      "path": "/admin/me/detail",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "avatar",
+        "bind_time",
+        "button_permission_ids",
+        "cmpl",
+        "create_name",
+        "created_at",
+        "email",
+        "google_secret",
+        "group_id",
+        "id",
+        "last_login_ip",
+        "last_login_time",
+        "login_password",
+        "nickname",
+        "operator_name",
+        "pwd_edit_time",
+        "roles",
+        "sid",
+        "status",
+        "stores",
+        "updated_at",
+        "username"
+      ],
+      "target_value_persisted": false
+    },
+    {
+      "action": "current_target:list query by Phone Number",
+      "method": "GET",
+      "path": "/admin/me/detail",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "avatar",
+        "bind_time",
+        "button_permission_ids",
+        "cmpl",
+        "create_name",
+        "created_at",
+        "email",
+        "google_secret",
+        "group_id",
+        "id",
+        "last_login_ip",
+        "last_login_time",
+        "login_password",
+        "nickname",
+        "operator_name",
+        "pwd_edit_time",
+        "roles",
+        "sid",
+        "status",
+        "stores",
+        "updated_at",
+        "username"
+      ],
+      "target_value_persisted": false
+    },
+    {
+      "action": "current_target:list query by Phone Number",
+      "method": "GET",
+      "path": "/admin/channel/manage/dict",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "list",
+      "response_keys": [],
+      "target_value_persisted": false
+    },
+    {
+      "action": "current_target:list query by Phone Number",
+      "method": "GET",
+      "path": "/admin/sys/config/compliance/status",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "effective_open",
+        "effective_reason",
+        "effective_status_msg"
+      ],
+      "target_value_persisted": false
+    },
+    {
+      "action": "current_target:list query by Phone Number",
+      "method": "GET",
+      "path": "/admin/notify/audit/alarm",
+      "query_fields": [
+        "t"
+      ],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "bonus_review_pending",
+        "feedback_pending",
+        "kyc_pending",
+        "mall_order_pending",
+        "withdraw_pending"
+      ],
+      "target_value_persisted": false
+    },
+    {
+      "action": "current_target:list query by Phone Number",
+      "method": "POST",
+      "path": "/admin/gameclass/list",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ],
+      "target_value_persisted": false
+    },
+    {
+      "action": "current_target:list query by Phone Number",
+      "method": "POST",
+      "path": "/admin/member/list",
+      "query_fields": [],
+      "body_fields": [
+        "end_time",
+        "page",
+        "page_size",
+        "start_time"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "d",
+        "page",
+        "page_size",
+        "summary",
+        "t"
+      ],
+      "target_value_persisted": false
+    },
+    {
+      "action": "current_target:list query by Phone Number",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "ids",
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ],
+      "target_value_persisted": false
+    },
+    {
+      "action": "current_target:list query by Phone Number",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "ids",
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ],
+      "target_value_persisted": false
+    },
+    {
+      "action": "current_target:list query by Phone Number",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "ids",
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ],
+      "target_value_persisted": false
+    },
+    {
+      "action": "current_target:list query by Phone Number",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "ids",
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ],
+      "target_value_persisted": false
+    },
+    {
+      "action": "current_target:list query by Phone Number",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "ids",
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ],
+      "target_value_persisted": false
+    },
+    {
+      "action": "current_target:list query by Phone Number",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "ids",
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ],
+      "target_value_persisted": false
+    },
+    {
+      "action": "current_target:list query by Phone Number",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "ids",
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ],
+      "target_value_persisted": false
+    },
+    {
+      "action": "current_target:list query by Phone Number",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "ids",
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ],
+      "target_value_persisted": false
+    },
+    {
+      "action": "current_target:list query by Phone Number",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "ids",
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ],
+      "target_value_persisted": false
+    },
+    {
+      "action": "current_target:list query by Phone Number",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "ids",
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ],
+      "target_value_persisted": false
+    },
+    {
+      "action": "current_target:list query by Phone Number",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "ids",
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ],
+      "target_value_persisted": false
+    },
+    {
+      "action": "current_target:list query by Phone Number",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "ids",
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ],
+      "target_value_persisted": false
+    },
+    {
+      "action": "current_target:list query by Phone Number",
+      "method": "POST",
+      "path": "/admin/member/list",
+      "query_fields": [],
+      "body_fields": [
+        "page",
+        "page_size",
+        "phone"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "d",
+        "page",
+        "page_size",
+        "summary",
+        "t"
+      ],
+      "target_value_persisted": false
+    },
+    {
+      "action": "current_target:list matched row View Details",
+      "method": "GET",
+      "path": "/admin/kyc/detail",
+      "query_fields": [
+        "uid"
+      ],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "attachments",
+        "birthday",
+        "blacklist_status",
+        "comment",
+        "country_code",
+        "created_at",
+        "current_address",
+        "external_information",
+        "extra_details",
+        "first_name",
+        "gender",
+        "id_number",
+        "id_type",
+        "issue",
+        "issue_fields",
+        "issue_msg",
+        "kyc_status",
+        "last_name",
+        "member",
+        "middle_name",
+        "nationality",
+        "nature_of_work",
+        "nearest_branch",
+        "occupation",
+        "ocr",
+        "ocr_result",
+        "ocr_status",
+        "permanent_address",
+        "phone",
+        "place_of_birth",
+        "review_times",
+        "reviewer",
+        "same_uids",
+        "same_uids_count",
+        "sid",
+        "signature_id",
+        "source_of_income",
+        "status",
+        "tokens",
+        "uid",
+        "updated_at",
+        "user_message",
+        "version"
+      ],
+      "target_value_persisted": false
+    },
+    {
+      "action": "current_target:list matched row View Details",
+      "method": "GET",
+      "path": "/admin/priv/check",
+      "query_fields": [
+        "path"
+      ],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "rights"
+      ],
+      "target_value_persisted": false
+    },
+    {
+      "action": "current_target:list matched row View Details",
+      "method": "GET",
+      "path": "/admin/finance/member/wallet",
+      "query_fields": [
+        "uid"
+      ],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "balance",
+        "locked",
+        "uid",
+        "withdrawable"
+      ],
+      "target_value_persisted": false
+    },
+    {
+      "action": "current_target:list matched row View Details",
+      "method": "GET",
+      "path": "/admin/member/detail",
+      "query_fields": [
+        "uid"
+      ],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "activity_gift",
+        "agent_opened_at",
+        "agent_settle_type",
+        "associated_parties",
+        "available_balance",
+        "available_coin",
+        "avatar",
+        "balance",
+        "banned_state",
+        "bet_amount",
+        "bet_count",
+        "betting_turnover",
+        "block_state",
+        "buy_feature_finished",
+        "change_count",
+        "channel_name",
+        "created_at",
+        "created_note",
+        "currency_type",
+        "customer_channels",
+        "deposit_amount",
+        "deposit_count",
+        "deposit_multiple",
+        "deposit_multiple_type",
+        "difference",
+        "direct_referral_count",
+        "email",
+        "gender",
+        "ggr",
+        "has_login_password",
+        "indirect_referral_count",
+        "is_agent",
+        "last_changed_at",
+        "last_login_at",
+        "last_login_device",
+        "left_turnover",
+        "left_turnover_count",
+        "locked",
+        "nickname",
+        "note",
+        "parent_uid",
+        "phone",
+        "platform_deposit_multiple",
+        "referral_code",
+        "risk_level",
+        "risk_tag",
+        "sid",
+        "source",
+        "status",
+        "store_name",
+        "tags",
+        "tester",
+        "third_party_name",
+        "third_party_ty",
+        "tokens_balance",
+        "total_up",
+        "uid",
+        "unavailable_balance",
+        "updated_at",
+        "upline_count",
+        "username",
+        "version",
+        "vip_category",
+        "vip_level",
+        "vip_manual_level",
+        "vip_score",
+        "visit_count",
+        "wallet",
+        "win_amount",
+        "withdraw_method",
+        "withdrawable_balance",
+        "withdrawal_amount",
+        "withdrawal_count",
+        "xp"
+      ],
+      "target_value_persisted": false
+    },
+    {
+      "action": "current_target:Function Limitation baseline",
+      "method": "GET",
+      "path": "/admin/priv/check",
+      "query_fields": [
+        "path"
+      ],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "rights"
+      ],
+      "target_value_persisted": false
+    },
+    {
+      "action": "current_target:Function Limitation baseline",
+      "method": "GET",
+      "path": "/admin/member/limitation/state/info",
+      "query_fields": [
+        "uid"
+      ],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "d",
+        "manual_member_state",
+        "member_state"
+      ],
+      "target_value_persisted": false
+    }
+  ],
+  "writes_executed": 0,
+  "side_effects": [],
+  "kyc_phase_guard": "pre-submission; no member state-changing control clicked"
+}

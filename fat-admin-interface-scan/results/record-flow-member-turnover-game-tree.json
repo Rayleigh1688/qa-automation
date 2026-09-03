@@ -1,0 +1,1524 @@
+{
+  "captured_at": "2026-09-03T08:40:53.497Z",
+  "environment": "FAT",
+  "target_ref": "FAT-KYC-REJECT-01",
+  "page_route": "/member-center/detail/{uid}",
+  "action_name": "流水要求调整 → 流水游戏限制",
+  "tree_model": "all games → category → provider → game",
+  "initial_nodes": [
+    {
+      "title": "所有游戏",
+      "depth": 1,
+      "expanded": false,
+      "has_switcher": true
+    }
+  ],
+  "category_count": 7,
+  "categories": [
+    {
+      "category": "Slot",
+      "found": true,
+      "providers_seen": 9,
+      "providers": [],
+      "new_network_event_indexes": [
+        26,
+        26
+      ]
+    },
+    {
+      "category": "Lottery",
+      "found": true,
+      "providers_seen": 7,
+      "providers": [],
+      "new_network_event_indexes": [
+        26,
+        26
+      ]
+    },
+    {
+      "category": "Table",
+      "found": true,
+      "providers_seen": 7,
+      "providers": [],
+      "new_network_event_indexes": [
+        26,
+        26
+      ]
+    },
+    {
+      "category": "Live",
+      "found": true,
+      "providers_seen": 6,
+      "providers": [],
+      "new_network_event_indexes": [
+        26,
+        26
+      ]
+    },
+    {
+      "category": "Arcade",
+      "found": true,
+      "providers_seen": 4,
+      "providers": [],
+      "new_network_event_indexes": [
+        26,
+        26
+      ]
+    },
+    {
+      "category": "Fish",
+      "found": true,
+      "providers_seen": 4,
+      "providers": [],
+      "new_network_event_indexes": [
+        26,
+        26
+      ]
+    },
+    {
+      "category": "Sport",
+      "found": true,
+      "providers_seen": 2,
+      "providers": [],
+      "new_network_event_indexes": [
+        26,
+        26
+      ]
+    }
+  ],
+  "api_hierarchy": [
+    {
+      "category": "Arcade",
+      "game_count": 72,
+      "providers": [
+        {
+          "provider": "cq9",
+          "game_count": 1
+        },
+        {
+          "provider": "gemini",
+          "game_count": 1
+        },
+        {
+          "provider": "jili",
+          "game_count": 19
+        },
+        {
+          "provider": "nlc",
+          "game_count": 1
+        },
+        {
+          "provider": "panda",
+          "game_count": 22
+        },
+        {
+          "provider": "playtech",
+          "game_count": 3
+        },
+        {
+          "provider": "we",
+          "game_count": 25
+        }
+      ]
+    },
+    {
+      "category": "Fish",
+      "game_count": 25,
+      "providers": [
+        {
+          "provider": "cq9",
+          "game_count": 1
+        },
+        {
+          "provider": "fastspin",
+          "game_count": 2
+        },
+        {
+          "provider": "jili",
+          "game_count": 14
+        },
+        {
+          "provider": "simpleplay",
+          "game_count": 2
+        },
+        {
+          "provider": "tpg",
+          "game_count": 6
+        }
+      ]
+    },
+    {
+      "category": "Live",
+      "game_count": 599,
+      "providers": [
+        {
+          "provider": "evo",
+          "game_count": 297
+        },
+        {
+          "provider": "habanero",
+          "game_count": 63
+        },
+        {
+          "provider": "playtech",
+          "game_count": 149
+        },
+        {
+          "provider": "pp",
+          "game_count": 18
+        },
+        {
+          "provider": "sa",
+          "game_count": 40
+        },
+        {
+          "provider": "sexy",
+          "game_count": 12
+        },
+        {
+          "provider": "we",
+          "game_count": 20
+        }
+      ]
+    },
+    {
+      "category": "Lottery",
+      "game_count": 68,
+      "providers": [
+        {
+          "provider": "cq9",
+          "game_count": 1
+        },
+        {
+          "provider": "fc",
+          "game_count": 5
+        },
+        {
+          "provider": "jdb",
+          "game_count": 9
+        },
+        {
+          "provider": "jili",
+          "game_count": 17
+        },
+        {
+          "provider": "we",
+          "game_count": 8
+        },
+        {
+          "provider": "yellowbat",
+          "game_count": 9
+        },
+        {
+          "provider": "ygr",
+          "game_count": 19
+        }
+      ]
+    },
+    {
+      "category": "Slot",
+      "game_count": 4681,
+      "providers": [
+        {
+          "provider": "bng",
+          "game_count": 102
+        },
+        {
+          "provider": "btg",
+          "game_count": 4
+        },
+        {
+          "provider": "cq9",
+          "game_count": 194
+        },
+        {
+          "provider": "fastspin",
+          "game_count": 60
+        },
+        {
+          "provider": "fc",
+          "game_count": 67
+        },
+        {
+          "provider": "funky",
+          "game_count": 54
+        },
+        {
+          "provider": "galaxsys",
+          "game_count": 46
+        },
+        {
+          "provider": "gemini",
+          "game_count": 44
+        },
+        {
+          "provider": "habanero",
+          "game_count": 188
+        },
+        {
+          "provider": "hacksaw",
+          "game_count": 870
+        },
+        {
+          "provider": "jdb",
+          "game_count": 95
+        },
+        {
+          "provider": "jili",
+          "game_count": 128
+        },
+        {
+          "provider": "maxwin",
+          "game_count": 17
+        },
+        {
+          "provider": "mi",
+          "game_count": 5
+        },
+        {
+          "provider": "netent",
+          "game_count": 207
+        },
+        {
+          "provider": "nlc",
+          "game_count": 103
+        },
+        {
+          "provider": "op",
+          "game_count": 25
+        },
+        {
+          "provider": "panda",
+          "game_count": 4
+        },
+        {
+          "provider": "pg",
+          "game_count": 149
+        },
+        {
+          "provider": "playstar",
+          "game_count": 88
+        },
+        {
+          "provider": "playtech",
+          "game_count": 552
+        },
+        {
+          "provider": "pp",
+          "game_count": 585
+        },
+        {
+          "provider": "redtiger",
+          "game_count": 295
+        },
+        {
+          "provider": "rtg",
+          "game_count": 200
+        },
+        {
+          "provider": "simpleplay",
+          "game_count": 63
+        },
+        {
+          "provider": "tpg",
+          "game_count": 90
+        },
+        {
+          "provider": "uu",
+          "game_count": 86
+        },
+        {
+          "provider": "we",
+          "game_count": 167
+        },
+        {
+          "provider": "yellowbat",
+          "game_count": 36
+        },
+        {
+          "provider": "ygr",
+          "game_count": 157
+        }
+      ]
+    },
+    {
+      "category": "Sport",
+      "game_count": 33,
+      "providers": [
+        {
+          "provider": "bti",
+          "game_count": 1
+        },
+        {
+          "provider": "we",
+          "game_count": 32
+        }
+      ]
+    },
+    {
+      "category": "Table",
+      "game_count": 253,
+      "providers": [
+        {
+          "provider": "cq9",
+          "game_count": 5
+        },
+        {
+          "provider": "funky",
+          "game_count": 28
+        },
+        {
+          "provider": "gemini",
+          "game_count": 11
+        },
+        {
+          "provider": "jdb",
+          "game_count": 27
+        },
+        {
+          "provider": "jili",
+          "game_count": 45
+        },
+        {
+          "provider": "netent",
+          "game_count": 1
+        },
+        {
+          "provider": "panda",
+          "game_count": 21
+        },
+        {
+          "provider": "pg",
+          "game_count": 1
+        },
+        {
+          "provider": "playtech",
+          "game_count": 57
+        },
+        {
+          "provider": "rtg",
+          "game_count": 28
+        },
+        {
+          "provider": "sa",
+          "game_count": 2
+        },
+        {
+          "provider": "simpleplay",
+          "game_count": 14
+        },
+        {
+          "provider": "tpg",
+          "game_count": 7
+        },
+        {
+          "provider": "yellowbat",
+          "game_count": 6
+        }
+      ]
+    }
+  ],
+  "response_profiles": {
+    "/admin/gameclass/list": {
+      "type": "list",
+      "count": 7,
+      "item_keys": [
+        "en_name",
+        "en_name2",
+        "game_class",
+        "game_count",
+        "logo",
+        "logo2",
+        "maintainer",
+        "tg_name",
+        "tg_name2",
+        "updated_at",
+        "weight"
+      ]
+    },
+    "/admin/game/search": {
+      "type": "list",
+      "count": 5731,
+      "item_keys": [
+        "box_state",
+        "compliance",
+        "en_name",
+        "ex_game_state",
+        "game_id",
+        "game_type",
+        "game_type_name",
+        "hot_until",
+        "id",
+        "is_freespin",
+        "is_hot",
+        "is_new",
+        "logo",
+        "logo2",
+        "maintained",
+        "maintained_et",
+        "maintained_st",
+        "new_until",
+        "pagcor_type_names",
+        "platform_id",
+        "platform_name",
+        "tg_name",
+        "type_tag_ids",
+        "type_tags",
+        "updated_at",
+        "updated_name",
+        "venue_id",
+        "venue_name",
+        "weight",
+        "weight_sum",
+        "weight_tag_ids",
+        "weight_tags"
+      ]
+    }
+  },
+  "unique_endpoints": [
+    {
+      "method": "POST",
+      "path": "/admin/gameclass/list"
+    },
+    {
+      "method": "POST",
+      "path": "/admin/game/search"
+    }
+  ],
+  "network": [
+    {
+      "action": "login",
+      "method": "GET",
+      "path": "/admin/me/detail",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": false,
+      "response_profile": {
+        "type": "string"
+      },
+      "response_values_persisted": false
+    },
+    {
+      "action": "login",
+      "method": "POST",
+      "path": "/admin/login/auth",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_profile": {
+        "type": "number"
+      },
+      "response_values_persisted": false
+    },
+    {
+      "action": "login",
+      "method": "POST",
+      "path": "/admin/login",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_profile": {
+        "type": "string"
+      },
+      "response_values_persisted": false
+    },
+    {
+      "action": "login",
+      "method": "GET",
+      "path": "/admin/me/detail",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_profile": {
+        "type": "object",
+        "keys": [
+          "avatar",
+          "bind_time",
+          "button_permission_ids",
+          "cmpl",
+          "create_name",
+          "created_at",
+          "email",
+          "google_secret",
+          "group_id",
+          "id",
+          "last_login_ip",
+          "last_login_time",
+          "login_password",
+          "nickname",
+          "operator_name",
+          "pwd_edit_time",
+          "roles",
+          "sid",
+          "status",
+          "stores",
+          "updated_at",
+          "username"
+        ],
+        "list_counts": {}
+      },
+      "response_values_persisted": false
+    },
+    {
+      "action": "open_member_detail",
+      "method": "GET",
+      "path": "/admin/me/detail",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_profile": {
+        "type": "object",
+        "keys": [
+          "avatar",
+          "bind_time",
+          "button_permission_ids",
+          "cmpl",
+          "create_name",
+          "created_at",
+          "email",
+          "google_secret",
+          "group_id",
+          "id",
+          "last_login_ip",
+          "last_login_time",
+          "login_password",
+          "nickname",
+          "operator_name",
+          "pwd_edit_time",
+          "roles",
+          "sid",
+          "status",
+          "stores",
+          "updated_at",
+          "username"
+        ],
+        "list_counts": {}
+      },
+      "response_values_persisted": false
+    },
+    {
+      "action": "open_member_detail",
+      "method": "GET",
+      "path": "/admin/sys/config/compliance/status",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_profile": {
+        "type": "object",
+        "keys": [
+          "effective_open",
+          "effective_reason",
+          "effective_status_msg"
+        ],
+        "list_counts": {}
+      },
+      "response_values_persisted": false
+    },
+    {
+      "action": "open_member_detail",
+      "method": "GET",
+      "path": "/admin/notify/audit/alarm",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_profile": {
+        "type": "object",
+        "keys": [
+          "bonus_review_pending",
+          "feedback_pending",
+          "kyc_pending",
+          "mall_order_pending",
+          "withdraw_pending"
+        ],
+        "list_counts": {}
+      },
+      "response_values_persisted": false
+    },
+    {
+      "action": "open_member_detail",
+      "method": "POST",
+      "path": "/admin/gameclass/list",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_profile": {
+        "type": "list",
+        "count": 7,
+        "item_keys": [
+          "en_name",
+          "en_name2",
+          "game_class",
+          "game_count",
+          "logo",
+          "logo2",
+          "maintainer",
+          "tg_name",
+          "tg_name2",
+          "updated_at",
+          "weight"
+        ]
+      },
+      "response_values_persisted": false
+    },
+    {
+      "action": "open_member_detail",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_profile": {
+        "type": "list",
+        "count": 500,
+        "item_keys": [
+          "box_state",
+          "compliance",
+          "en_name",
+          "ex_game_state",
+          "game_id",
+          "game_type",
+          "game_type_name",
+          "hot_until",
+          "id",
+          "is_freespin",
+          "is_hot",
+          "is_new",
+          "logo",
+          "logo2",
+          "maintained",
+          "maintained_et",
+          "maintained_st",
+          "new_until",
+          "pagcor_type_names",
+          "platform_id",
+          "platform_name",
+          "tg_name",
+          "type_tag_ids",
+          "type_tags",
+          "updated_at",
+          "updated_name",
+          "venue_id",
+          "venue_name",
+          "weight",
+          "weight_sum",
+          "weight_tag_ids",
+          "weight_tags"
+        ]
+      },
+      "response_values_persisted": false
+    },
+    {
+      "action": "open_member_detail",
+      "method": "GET",
+      "path": "/admin/kyc/detail",
+      "query_fields": [
+        "uid"
+      ],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_profile": {
+        "type": "object",
+        "keys": [
+          "attachments",
+          "birthday",
+          "blacklist_status",
+          "comment",
+          "country_code",
+          "created_at",
+          "current_address",
+          "external_information",
+          "extra_details",
+          "first_name",
+          "gender",
+          "id_number",
+          "id_type",
+          "issue",
+          "issue_fields",
+          "issue_msg",
+          "kyc_status",
+          "last_name",
+          "member",
+          "middle_name",
+          "nationality",
+          "nature_of_work",
+          "nearest_branch",
+          "occupation",
+          "ocr",
+          "ocr_result",
+          "ocr_status",
+          "permanent_address",
+          "phone",
+          "place_of_birth",
+          "review_times",
+          "reviewer",
+          "same_uids",
+          "same_uids_count",
+          "sid",
+          "signature_id",
+          "source_of_income",
+          "status",
+          "tokens",
+          "uid",
+          "updated_at",
+          "user_message",
+          "version"
+        ],
+        "list_counts": {
+          "tokens": 0
+        }
+      },
+      "response_values_persisted": false
+    },
+    {
+      "action": "open_member_detail",
+      "method": "GET",
+      "path": "/admin/priv/check",
+      "query_fields": [
+        "path"
+      ],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_profile": {
+        "type": "object",
+        "keys": [
+          "rights"
+        ],
+        "list_counts": {}
+      },
+      "response_values_persisted": false
+    },
+    {
+      "action": "open_member_detail",
+      "method": "GET",
+      "path": "/admin/finance/member/wallet",
+      "query_fields": [
+        "uid"
+      ],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_profile": {
+        "type": "object",
+        "keys": [
+          "balance",
+          "locked",
+          "uid",
+          "withdrawable"
+        ],
+        "list_counts": {}
+      },
+      "response_values_persisted": false
+    },
+    {
+      "action": "open_member_detail",
+      "method": "GET",
+      "path": "/admin/member/detail",
+      "query_fields": [
+        "uid"
+      ],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_profile": {
+        "type": "object",
+        "keys": [
+          "activity_gift",
+          "agent_opened_at",
+          "agent_settle_type",
+          "associated_parties",
+          "available_balance",
+          "available_coin",
+          "avatar",
+          "balance",
+          "banned_state",
+          "bet_amount",
+          "bet_count",
+          "betting_turnover",
+          "block_state",
+          "buy_feature_finished",
+          "change_count",
+          "channel_name",
+          "created_at",
+          "created_note",
+          "currency_type",
+          "customer_channels",
+          "deposit_amount",
+          "deposit_count",
+          "deposit_multiple",
+          "deposit_multiple_type",
+          "difference",
+          "direct_referral_count",
+          "email",
+          "gender",
+          "ggr",
+          "has_login_password",
+          "indirect_referral_count",
+          "is_agent",
+          "last_changed_at",
+          "last_login_at",
+          "last_login_device",
+          "left_turnover",
+          "left_turnover_count",
+          "locked",
+          "nickname",
+          "note",
+          "parent_uid",
+          "phone",
+          "platform_deposit_multiple",
+          "referral_code",
+          "risk_level",
+          "risk_tag",
+          "sid",
+          "source",
+          "status",
+          "store_name",
+          "tags",
+          "tester",
+          "third_party_name",
+          "third_party_ty",
+          "tokens_balance",
+          "total_up",
+          "uid",
+          "unavailable_balance",
+          "updated_at",
+          "upline_count",
+          "username",
+          "version",
+          "vip_category",
+          "vip_level",
+          "vip_manual_level",
+          "vip_score",
+          "visit_count",
+          "wallet",
+          "win_amount",
+          "withdraw_method",
+          "withdrawable_balance",
+          "withdrawal_amount",
+          "withdrawal_count",
+          "xp"
+        ],
+        "list_counts": {
+          "wallet": 2
+        }
+      },
+      "response_values_persisted": false
+    },
+    {
+      "action": "open_member_detail",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_profile": {
+        "type": "list",
+        "count": 500,
+        "item_keys": [
+          "box_state",
+          "compliance",
+          "en_name",
+          "ex_game_state",
+          "game_id",
+          "game_type",
+          "game_type_name",
+          "hot_until",
+          "id",
+          "is_freespin",
+          "is_hot",
+          "is_new",
+          "logo",
+          "logo2",
+          "maintained",
+          "maintained_et",
+          "maintained_st",
+          "new_until",
+          "pagcor_type_names",
+          "platform_id",
+          "platform_name",
+          "tg_name",
+          "type_tag_ids",
+          "type_tags",
+          "updated_at",
+          "updated_name",
+          "venue_id",
+          "venue_name",
+          "weight",
+          "weight_sum",
+          "weight_tag_ids",
+          "weight_tags"
+        ]
+      },
+      "response_values_persisted": false
+    },
+    {
+      "action": "open_member_detail",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_profile": {
+        "type": "list",
+        "count": 500,
+        "item_keys": [
+          "box_state",
+          "compliance",
+          "en_name",
+          "ex_game_state",
+          "game_id",
+          "game_type",
+          "game_type_name",
+          "hot_until",
+          "id",
+          "is_freespin",
+          "is_hot",
+          "is_new",
+          "logo",
+          "logo2",
+          "maintained",
+          "maintained_et",
+          "maintained_st",
+          "new_until",
+          "pagcor_type_names",
+          "platform_id",
+          "platform_name",
+          "tg_name",
+          "type_tag_ids",
+          "type_tags",
+          "updated_at",
+          "updated_name",
+          "venue_id",
+          "venue_name",
+          "weight",
+          "weight_sum",
+          "weight_tag_ids",
+          "weight_tags"
+        ]
+      },
+      "response_values_persisted": false
+    },
+    {
+      "action": "open_member_detail",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_profile": {
+        "type": "list",
+        "count": 500,
+        "item_keys": [
+          "box_state",
+          "compliance",
+          "en_name",
+          "ex_game_state",
+          "game_id",
+          "game_type",
+          "game_type_name",
+          "hot_until",
+          "id",
+          "is_freespin",
+          "is_hot",
+          "is_new",
+          "logo",
+          "logo2",
+          "maintained",
+          "maintained_et",
+          "maintained_st",
+          "new_until",
+          "pagcor_type_names",
+          "platform_id",
+          "platform_name",
+          "tg_name",
+          "type_tag_ids",
+          "type_tags",
+          "updated_at",
+          "updated_name",
+          "venue_id",
+          "venue_name",
+          "weight",
+          "weight_sum",
+          "weight_tag_ids",
+          "weight_tags"
+        ]
+      },
+      "response_values_persisted": false
+    },
+    {
+      "action": "open_member_detail",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_profile": {
+        "type": "list",
+        "count": 500,
+        "item_keys": [
+          "box_state",
+          "compliance",
+          "en_name",
+          "ex_game_state",
+          "game_id",
+          "game_type",
+          "game_type_name",
+          "hot_until",
+          "id",
+          "is_freespin",
+          "is_hot",
+          "is_new",
+          "logo",
+          "logo2",
+          "maintained",
+          "maintained_et",
+          "maintained_st",
+          "new_until",
+          "pagcor_type_names",
+          "platform_id",
+          "platform_name",
+          "tg_name",
+          "type_tag_ids",
+          "type_tags",
+          "updated_at",
+          "updated_name",
+          "venue_id",
+          "venue_name",
+          "weight",
+          "weight_sum",
+          "weight_tag_ids",
+          "weight_tags"
+        ]
+      },
+      "response_values_persisted": false
+    },
+    {
+      "action": "open_member_detail",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_profile": {
+        "type": "list",
+        "count": 500,
+        "item_keys": [
+          "box_state",
+          "compliance",
+          "en_name",
+          "ex_game_state",
+          "game_id",
+          "game_type",
+          "game_type_name",
+          "hot_until",
+          "id",
+          "is_freespin",
+          "is_hot",
+          "is_new",
+          "logo",
+          "logo2",
+          "maintained",
+          "maintained_et",
+          "maintained_st",
+          "new_until",
+          "pagcor_type_names",
+          "platform_id",
+          "platform_name",
+          "tg_name",
+          "type_tag_ids",
+          "type_tags",
+          "updated_at",
+          "updated_name",
+          "venue_id",
+          "venue_name",
+          "weight",
+          "weight_sum",
+          "weight_tag_ids",
+          "weight_tags"
+        ]
+      },
+      "response_values_persisted": false
+    },
+    {
+      "action": "open_member_detail",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_profile": {
+        "type": "list",
+        "count": 500,
+        "item_keys": [
+          "box_state",
+          "compliance",
+          "en_name",
+          "ex_game_state",
+          "game_id",
+          "game_type",
+          "game_type_name",
+          "hot_until",
+          "id",
+          "is_freespin",
+          "is_hot",
+          "is_new",
+          "logo",
+          "logo2",
+          "maintained",
+          "maintained_et",
+          "maintained_st",
+          "new_until",
+          "pagcor_type_names",
+          "platform_id",
+          "platform_name",
+          "tg_name",
+          "type_tag_ids",
+          "type_tags",
+          "updated_at",
+          "updated_name",
+          "venue_id",
+          "venue_name",
+          "weight",
+          "weight_sum",
+          "weight_tag_ids",
+          "weight_tags"
+        ]
+      },
+      "response_values_persisted": false
+    },
+    {
+      "action": "open_member_detail",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_profile": {
+        "type": "list",
+        "count": 500,
+        "item_keys": [
+          "box_state",
+          "compliance",
+          "en_name",
+          "ex_game_state",
+          "game_id",
+          "game_type",
+          "game_type_name",
+          "hot_until",
+          "id",
+          "is_freespin",
+          "is_hot",
+          "is_new",
+          "logo",
+          "logo2",
+          "maintained",
+          "maintained_et",
+          "maintained_st",
+          "new_until",
+          "pagcor_type_names",
+          "platform_id",
+          "platform_name",
+          "tg_name",
+          "type_tag_ids",
+          "type_tags",
+          "updated_at",
+          "updated_name",
+          "venue_id",
+          "venue_name",
+          "weight",
+          "weight_sum",
+          "weight_tag_ids",
+          "weight_tags"
+        ]
+      },
+      "response_values_persisted": false
+    },
+    {
+      "action": "open_member_detail",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_profile": {
+        "type": "list",
+        "count": 500,
+        "item_keys": [
+          "box_state",
+          "compliance",
+          "en_name",
+          "ex_game_state",
+          "game_id",
+          "game_type",
+          "game_type_name",
+          "hot_until",
+          "id",
+          "is_freespin",
+          "is_hot",
+          "is_new",
+          "logo",
+          "logo2",
+          "maintained",
+          "maintained_et",
+          "maintained_st",
+          "new_until",
+          "pagcor_type_names",
+          "platform_id",
+          "platform_name",
+          "tg_name",
+          "type_tag_ids",
+          "type_tags",
+          "updated_at",
+          "updated_name",
+          "venue_id",
+          "venue_name",
+          "weight",
+          "weight_sum",
+          "weight_tag_ids",
+          "weight_tags"
+        ]
+      },
+      "response_values_persisted": false
+    },
+    {
+      "action": "open_member_detail",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_profile": {
+        "type": "list",
+        "count": 500,
+        "item_keys": [
+          "box_state",
+          "compliance",
+          "en_name",
+          "ex_game_state",
+          "game_id",
+          "game_type",
+          "game_type_name",
+          "hot_until",
+          "id",
+          "is_freespin",
+          "is_hot",
+          "is_new",
+          "logo",
+          "logo2",
+          "maintained",
+          "maintained_et",
+          "maintained_st",
+          "new_until",
+          "pagcor_type_names",
+          "platform_id",
+          "platform_name",
+          "tg_name",
+          "type_tag_ids",
+          "type_tags",
+          "updated_at",
+          "updated_name",
+          "venue_id",
+          "venue_name",
+          "weight",
+          "weight_sum",
+          "weight_tag_ids",
+          "weight_tags"
+        ]
+      },
+      "response_values_persisted": false
+    },
+    {
+      "action": "open_member_detail",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_profile": {
+        "type": "list",
+        "count": 500,
+        "item_keys": [
+          "box_state",
+          "compliance",
+          "en_name",
+          "ex_game_state",
+          "game_id",
+          "game_type",
+          "game_type_name",
+          "hot_until",
+          "id",
+          "is_freespin",
+          "is_hot",
+          "is_new",
+          "logo",
+          "logo2",
+          "maintained",
+          "maintained_et",
+          "maintained_st",
+          "new_until",
+          "pagcor_type_names",
+          "platform_id",
+          "platform_name",
+          "tg_name",
+          "type_tag_ids",
+          "type_tags",
+          "updated_at",
+          "updated_name",
+          "venue_id",
+          "venue_name",
+          "weight",
+          "weight_sum",
+          "weight_tag_ids",
+          "weight_tags"
+        ]
+      },
+      "response_values_persisted": false
+    },
+    {
+      "action": "open_member_detail",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_profile": {
+        "type": "list",
+        "count": 231,
+        "item_keys": [
+          "box_state",
+          "compliance",
+          "en_name",
+          "ex_game_state",
+          "game_id",
+          "game_type",
+          "game_type_name",
+          "hot_until",
+          "id",
+          "is_freespin",
+          "is_hot",
+          "is_new",
+          "logo",
+          "logo2",
+          "maintained",
+          "maintained_et",
+          "maintained_st",
+          "new_until",
+          "pagcor_type_names",
+          "platform_id",
+          "platform_name",
+          "tg_name",
+          "type_tag_ids",
+          "type_tags",
+          "updated_at",
+          "updated_name",
+          "venue_id",
+          "venue_name",
+          "weight",
+          "weight_sum",
+          "weight_tag_ids",
+          "weight_tags"
+        ]
+      },
+      "response_values_persisted": false
+    },
+    {
+      "action": "open_turnover_adjustment",
+      "method": "POST",
+      "path": "/admin/gameclass/list",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_profile": {
+        "type": "list",
+        "count": 7,
+        "item_keys": [
+          "en_name",
+          "en_name2",
+          "game_class",
+          "game_count",
+          "logo",
+          "logo2",
+          "maintainer",
+          "tg_name",
+          "tg_name2",
+          "updated_at",
+          "weight"
+        ]
+      },
+      "response_values_persisted": false
+    },
+    {
+      "action": "open_turnover_adjustment",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_profile": {
+        "type": "list",
+        "count": 5731,
+        "item_keys": [
+          "box_state",
+          "compliance",
+          "en_name",
+          "ex_game_state",
+          "game_id",
+          "game_type",
+          "game_type_name",
+          "hot_until",
+          "id",
+          "is_freespin",
+          "is_hot",
+          "is_new",
+          "logo",
+          "logo2",
+          "maintained",
+          "maintained_et",
+          "maintained_st",
+          "new_until",
+          "pagcor_type_names",
+          "platform_id",
+          "platform_name",
+          "tg_name",
+          "type_tag_ids",
+          "type_tags",
+          "updated_at",
+          "updated_name",
+          "venue_id",
+          "venue_name",
+          "weight",
+          "weight_sum",
+          "weight_tag_ids",
+          "weight_tags"
+        ]
+      },
+      "response_values_persisted": false
+    }
+  ],
+  "writes": 0,
+  "selections_made": 0,
+  "raw_phone_or_uid_persisted": false
+}

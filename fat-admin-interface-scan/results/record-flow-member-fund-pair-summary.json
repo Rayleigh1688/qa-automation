@@ -1,0 +1,58 @@
+{
+  "captured_at": "2026-09-03T09:27:24.046Z",
+  "environment": "FAT",
+  "target_ref": "FAT-KYC-REJECT-01",
+  "uid_ref": "FAT-UID-KYC-REJECT-01",
+  "scope": "Member Detail Credit/Debit and Token Wallet reversible pair",
+  "wallet_pair": {
+    "status": "EXECUTED_RESTORED",
+    "amount": "0.01",
+    "writes_confirmed": 2,
+    "state_chain": [
+      "wallet=0",
+      "wallet=0.01",
+      "wallet=0"
+    ],
+    "restored": true,
+    "write_endpoint": "POST /admin/finance/adjust/insert",
+    "log_endpoint": "POST /admin/finance/adjust/list",
+    "credit_body_fields": [
+      "action",
+      "amount",
+      "bet_multiplier",
+      "google_code",
+      "plats",
+      "remark",
+      "uid"
+    ],
+    "debit_body_fields": [
+      "action",
+      "amount",
+      "google_code",
+      "remark",
+      "uid"
+    ]
+  },
+  "token_pair": {
+    "status": "BLOCKED_UPSTREAM_BUSINESS_FAILURE",
+    "writes_confirmed": 0,
+    "state": "tokens_balance=0.00000000 unchanged",
+    "failed_endpoint": "POST /admin/finance/tokens/transaction/list",
+    "http_status": 200,
+    "business_status": false,
+    "adjust_endpoint": "POST /admin/finance/tokens/adjust",
+    "adjust_request_triggered": false
+  },
+  "unique_observed_endpoints": [
+    "POST /admin/finance/adjust/insert",
+    "POST /admin/finance/adjust/list",
+    "POST /admin/finance/tokens/transaction/list"
+  ],
+  "classifications": {
+    "ACTIVE": 2,
+    "ACTIVE_FAILED": 1,
+    "DOCUMENTED_UNVERIFIED": 1
+  },
+  "raw_phone_or_uid_persisted": false,
+  "secrets_persisted": false
+}

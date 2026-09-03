@@ -1,0 +1,13 @@
+form,field_order,field_name,required_marker,control_types,placeholders,dependency,submission_status,cleanup_status,evidence
+Add Member,0,Account,yes,text,Please enter,none observed,NOT_SUBMITTED,UNPROVEN,empty form DOM; no member values captured
+Add Member,1,Nickname,no,text,Please enter,none observed,NOT_SUBMITTED,UNPROVEN,empty form DOM; no member values captured
+Add Member,2,Gender,no,select | search,,select options require runtime lookup,NOT_SUBMITTED,UNPROVEN,empty form DOM; no member values captured
+Add Member,3,Date of Birth,no,input,Please Select Date of Birth,none observed,NOT_SUBMITTED,UNPROVEN,empty form DOM; no member values captured
+Add Member,4,Email,yes,text,Please enter,none observed,NOT_SUBMITTED,UNPROVEN,empty form DOM; no member values captured
+Add Member,5,Phone Number,yes,text,Please Enter Phone Number,none observed,NOT_SUBMITTED,UNPROVEN,empty form DOM; no member values captured
+Add Member,6,Status,no,select | search,,select options require runtime lookup,NOT_SUBMITTED,UNPROVEN,empty form DOM; no member values captured
+Add Member,7,Referral Code,no,text,Please enter,none observed,NOT_SUBMITTED,UNPROVEN,empty form DOM; no member values captured
+Add Member,8,Is Top‑Level User,no,radio | radio,,none observed,NOT_SUBMITTED,UNPROVEN,empty form DOM; no member values captured
+Add Member,9,Upline ID,no,text,Please enter,none observed,NOT_SUBMITTED,UNPROVEN,empty form DOM; no member values captured
+Add Member,10,Remarks,no,textarea,Please Enter Remarks,none observed,NOT_SUBMITTED,UNPROVEN,empty form DOM; no member values captured
+Add Member,11,Tags,no,,,none observed,NOT_SUBMITTED,UNPROVEN,empty form DOM; no member values captured

@@ -1,0 +1,18 @@
+{
+  "environment": "FAT",
+  "scope": "admin UI dynamic evidence through member-list/detail gap completion",
+  "unique_admin_method_paths": 135,
+  "classifications": {
+    "ACTIVE": 113,
+    "ACTIVE_FAILED": 1,
+    "MISCLASSIFIED": 3,
+    "UNDOCUMENTED_ACTIVE": 18
+  },
+  "shared_inventory_or_catalog_modified": false,
+  "member_list_actions": 30,
+  "member_detail_tabs": 17,
+  "member_detail_ui_action_decisions": 72,
+  "member_detail_action_endpoint_rows": 76,
+  "turnover_reversible_flow": "0 → 1 → 0",
+  "unrestored_side_effects": 0
+}

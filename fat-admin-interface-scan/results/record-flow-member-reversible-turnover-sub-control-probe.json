@@ -1,0 +1,638 @@
+{
+  "captured_at": "2026-09-03T10:18:49.232Z",
+  "environment": "FAT",
+  "target_ref": "FAT-MEMBER-REV-01",
+  "uid_ref": "FAT-UID-REV-01",
+  "page_route": "/member-center/detail/{uid}",
+  "operation": "Turnover subtract branch read-only probe",
+  "before": {
+    "left_turnover_count": 1,
+    "left_turnover_type": "string",
+    "left_turnover_item_count": null,
+    "left_turnover_keys": []
+  },
+  "controls": [
+    {
+      "tag": "input",
+      "type": "text",
+      "placeholder": "请输入",
+      "label": "手机号",
+      "disabled": true
+    },
+    {
+      "tag": "input",
+      "type": "text",
+      "placeholder": "请输入",
+      "label": "会员账号ID",
+      "disabled": true
+    },
+    {
+      "tag": "input",
+      "type": "text",
+      "placeholder": "请输入",
+      "label": "会员UID",
+      "disabled": true
+    },
+    {
+      "tag": "input",
+      "type": "radio",
+      "placeholder": "",
+      "label": "调整类型",
+      "disabled": false
+    },
+    {
+      "tag": "input",
+      "type": "radio",
+      "placeholder": "",
+      "label": "调整类型",
+      "disabled": false
+    },
+    {
+      "tag": "input",
+      "type": "radio",
+      "placeholder": "",
+      "label": "调整类型",
+      "disabled": false
+    },
+    {
+      "tag": "input",
+      "type": null,
+      "placeholder": "只填非零正值，最多两位小数",
+      "label": "调整金额",
+      "disabled": false
+    },
+    {
+      "tag": "input",
+      "type": "search",
+      "placeholder": "",
+      "label": "流水游戏限制",
+      "disabled": true
+    },
+    {
+      "tag": "input",
+      "type": "text",
+      "placeholder": "请输入",
+      "label": "Google验证码",
+      "disabled": false
+    },
+    {
+      "tag": "textarea",
+      "type": null,
+      "placeholder": "1~500字文本",
+      "label": "调整理由",
+      "disabled": false
+    }
+  ],
+  "selects": [
+    "请选择"
+  ],
+  "tree_titles": [],
+  "footer_buttons": [
+    {
+      "text": "取 消",
+      "type": "button",
+      "role": null,
+      "class_names": [
+        "ant-btn",
+        "ant-btn-color-default",
+        "ant-btn-default",
+        "ant-btn-variant-outlined",
+        "css-jcwvac"
+      ]
+    },
+    {
+      "text": "确 定",
+      "type": "button",
+      "role": null,
+      "class_names": [
+        "ant-btn",
+        "ant-btn-color-primary",
+        "ant-btn-primary",
+        "ant-btn-variant-solid",
+        "css-jcwvac"
+      ]
+    }
+  ],
+  "writes": 0,
+  "side_effects": [
+    "existing current-run +1 awaiting recovery"
+  ],
+  "raw_phone_or_uid_persisted": false,
+  "network": [
+    {
+      "action": "validate shared session and read turnover before",
+      "method": "GET",
+      "path": "/admin/me/detail",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "avatar",
+        "bind_time",
+        "button_permission_ids",
+        "cmpl",
+        "create_name",
+        "created_at",
+        "email",
+        "google_secret",
+        "group_id",
+        "id",
+        "last_login_ip",
+        "last_login_time",
+        "login_password",
+        "nickname",
+        "operator_name",
+        "pwd_edit_time",
+        "roles",
+        "sid",
+        "status",
+        "stores",
+        "updated_at",
+        "username"
+      ],
+      "response_values_persisted": false
+    },
+    {
+      "action": "validate shared session and read turnover before",
+      "method": "GET",
+      "path": "/admin/kyc/detail",
+      "query_fields": [
+        "uid"
+      ],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "attachments",
+        "birthday",
+        "blacklist_status",
+        "comment",
+        "country_code",
+        "created_at",
+        "current_address",
+        "external_information",
+        "extra_details",
+        "first_name",
+        "gender",
+        "id_number",
+        "id_type",
+        "issue",
+        "issue_fields",
+        "issue_msg",
+        "kyc_status",
+        "last_name",
+        "member",
+        "middle_name",
+        "nationality",
+        "nature_of_work",
+        "nearest_branch",
+        "occupation",
+        "ocr",
+        "ocr_result",
+        "ocr_status",
+        "permanent_address",
+        "phone",
+        "place_of_birth",
+        "review_times",
+        "reviewer",
+        "same_uids",
+        "same_uids_count",
+        "sid",
+        "signature_id",
+        "source_of_income",
+        "status",
+        "tokens",
+        "uid",
+        "updated_at",
+        "user_message",
+        "version"
+      ],
+      "response_values_persisted": false
+    },
+    {
+      "action": "validate shared session and read turnover before",
+      "method": "GET",
+      "path": "/admin/priv/check",
+      "query_fields": [
+        "path"
+      ],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "rights"
+      ],
+      "response_values_persisted": false
+    },
+    {
+      "action": "validate shared session and read turnover before",
+      "method": "GET",
+      "path": "/admin/sys/config/compliance/status",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "effective_open",
+        "effective_reason",
+        "effective_status_msg"
+      ],
+      "response_values_persisted": false
+    },
+    {
+      "action": "validate shared session and read turnover before",
+      "method": "GET",
+      "path": "/admin/finance/member/wallet",
+      "query_fields": [
+        "uid"
+      ],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "balance",
+        "locked",
+        "uid",
+        "withdrawable"
+      ],
+      "response_values_persisted": false
+    },
+    {
+      "action": "validate shared session and read turnover before",
+      "method": "GET",
+      "path": "/admin/notify/audit/alarm",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "bonus_review_pending",
+        "feedback_pending",
+        "kyc_pending",
+        "mall_order_pending",
+        "withdraw_pending"
+      ],
+      "response_values_persisted": false
+    },
+    {
+      "action": "validate shared session and read turnover before",
+      "method": "POST",
+      "path": "/admin/gameclass/list",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ],
+      "response_values_persisted": false
+    },
+    {
+      "action": "validate shared session and read turnover before",
+      "method": "GET",
+      "path": "/admin/member/detail",
+      "query_fields": [
+        "uid"
+      ],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "activity_gift",
+        "agent_opened_at",
+        "agent_settle_type",
+        "associated_parties",
+        "available_balance",
+        "available_coin",
+        "avatar",
+        "balance",
+        "banned_state",
+        "bet_amount",
+        "bet_count",
+        "betting_turnover",
+        "block_state",
+        "buy_feature_finished",
+        "change_count",
+        "channel_name",
+        "created_at",
+        "created_note",
+        "currency_type",
+        "customer_channels",
+        "deposit_amount",
+        "deposit_count",
+        "deposit_multiple",
+        "deposit_multiple_type",
+        "difference",
+        "direct_referral_count",
+        "email",
+        "gender",
+        "ggr",
+        "has_login_password",
+        "indirect_referral_count",
+        "is_agent",
+        "last_changed_at",
+        "last_login_at",
+        "last_login_device",
+        "left_turnover",
+        "left_turnover_count",
+        "locked",
+        "nickname",
+        "note",
+        "parent_uid",
+        "phone",
+        "platform_deposit_multiple",
+        "referral_code",
+        "risk_level",
+        "risk_tag",
+        "sid",
+        "source",
+        "status",
+        "store_name",
+        "tags",
+        "tester",
+        "third_party_name",
+        "third_party_ty",
+        "tokens_balance",
+        "total_up",
+        "uid",
+        "unavailable_balance",
+        "updated_at",
+        "upline_count",
+        "username",
+        "version",
+        "vip_category",
+        "vip_level",
+        "vip_manual_level",
+        "vip_score",
+        "visit_count",
+        "wallet",
+        "win_amount",
+        "withdraw_method",
+        "withdrawable_balance",
+        "withdrawal_amount",
+        "withdrawal_count",
+        "xp"
+      ],
+      "response_values_persisted": false
+    },
+    {
+      "action": "validate shared session and read turnover before",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "ids",
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ],
+      "response_values_persisted": false
+    },
+    {
+      "action": "validate shared session and read turnover before",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "ids",
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ],
+      "response_values_persisted": false
+    },
+    {
+      "action": "validate shared session and read turnover before",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "ids",
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ],
+      "response_values_persisted": false
+    },
+    {
+      "action": "validate shared session and read turnover before",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "ids",
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ],
+      "response_values_persisted": false
+    },
+    {
+      "action": "validate shared session and read turnover before",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "ids",
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ],
+      "response_values_persisted": false
+    },
+    {
+      "action": "validate shared session and read turnover before",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "ids",
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ],
+      "response_values_persisted": false
+    },
+    {
+      "action": "validate shared session and read turnover before",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "ids",
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ],
+      "response_values_persisted": false
+    },
+    {
+      "action": "validate shared session and read turnover before",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "ids",
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ],
+      "response_values_persisted": false
+    },
+    {
+      "action": "validate shared session and read turnover before",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "ids",
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ],
+      "response_values_persisted": false
+    },
+    {
+      "action": "validate shared session and read turnover before",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "ids",
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ],
+      "response_values_persisted": false
+    },
+    {
+      "action": "validate shared session and read turnover before",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "ids",
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ],
+      "response_values_persisted": false
+    },
+    {
+      "action": "validate shared session and read turnover before",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "ids",
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ],
+      "response_values_persisted": false
+    },
+    {
+      "action": "open turnover adjustment",
+      "method": "POST",
+      "path": "/admin/gameclass/list",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ],
+      "response_values_persisted": false
+    }
+  ]
+}

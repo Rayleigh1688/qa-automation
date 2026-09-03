@@ -1,0 +1,29 @@
+method,normalized_path,classification,success_events,failed_events,non_empty_events,pages,ranges,already_in_main_endpoint_summary,original_module,original_name,original_source_file
+GET,/admin/bonus/review/list,ACTIVE,3,0,1,/operations/activity-expenditure-audit,30d | 7d | 90d,yes,other,待审订单列表 - felix.bru,后台/礼金/待审订单列表 - felix.bru
+GET,/admin/channel/manage/dict,ACTIVE,1,0,1,/promo-marketing/statistical-reports,7d,yes,other,渠道管理字典-todo,后台/运营管理/推广管理/渠道管理/渠道管理字典-todo.bru
+GET,/admin/channel/promotion/firstDeposit,UNDOCUMENTED_ACTIVE,1,0,1,/promo-marketing/first-deposit-daily-active,7d,yes,,,
+GET,/admin/channel/promotion/satistic,UNDOCUMENTED_ACTIVE,1,0,1,/promo-marketing/statistical-reports,7d,yes,,,
+GET,/admin/log/list,ACTIVE,1,0,1,/logs/list,7d,yes,other,操作日志,代理管理后台/系统/操作日志.bru
+GET,/admin/member/risk/log,ACTIVE,4,0,1,/risk-control/risk-logs,30d | 365d | 7d | 90d,yes,member,风控日志,后台/会员列表/风控日志.bru
+GET,/admin/promo/free/spin/import/log,ACTIVE,1,0,1,/gamev2/freespin-import-logs,7d,yes,promo,fs批量派发记录,活动/后台-活动管理/freeSpin/fs批量派发记录.bru
+GET,/admin/promo/invite/friends/transfer/list,ACTIVE,4,0,1,/member-management/inviter-transfer-records,30d | 365d | 7d | 90d,yes,promo,好友转线列表,后台/运营管理/邀请好友/好友转线列表.bru
+GET,/admin/promo/vip/log/list,ACTIVE,5,0,0,/member-management/vip-rewards,30d | 365d | 7d | 90d | page_max_observed,yes,promo,奖励表列表-aliang,后台/Vipv2/奖励表列表-aliang.bru
+GET,/admin/reports/agency,ACTIVE,1,0,1,/agency-management/agency-statistical,7d,yes,report,代理统计报表,后台/代理管理/代理统计报表.bru
+GET,/admin/reports/channel,ACTIVE,2,1,1,/operations/daily-reports,30d | 7d | 90d,yes,report,渠道日报表-sandy,后台/报表/渠道报表/渠道日报表-sandy.bru
+GET,/admin/reports/game/node,ACTIVE,1,0,1,/report-management/game-reports/list,7d,yes,game,游戏线路报表,后台/报表/游戏报表/游戏线路报表.bru
+GET,/admin/reports/gameclass/node,ACTIVE,1,0,1,/report-management/game-types-report/list,7d,yes,game,游戏类型线路报表,后台/报表/游戏类型报表/游戏类型线路报表.bru
+GET,/admin/reports/member,ACTIVE,1,0,1,/report-management/member-daily-stats,7d,yes,report,个人统计--列表,后台/报表管理/个人统计--列表.bru
+GET,/admin/reports/member-daily-game/aggregate,ACTIVE,1,0,1,/report-management/member-daily-game-stats,7d,yes,game,会员每日游戏报表--汇总列表,后台/报表管理/会员每日游戏报表--汇总列表.bru
+GET,/admin/reports/provider/order/compare/daily,ACTIVE,1,0,1,/system/order-monitor,7d,yes,report,列表,后台/报表/厂商注单对比日报/列表.bru
+GET,/admin/reports/venue/node,ACTIVE,1,0,1,/report-management/game-platform-report/list,7d,yes,game,厂商线路报表,后台/报表/游戏平台报表/厂商线路报表.bru
+GET,/admin/sms/list,ACTIVE,1,0,1,/system/sms-otp,7d,yes,auth,短信列表-seven,后台/短信发送列表/短信列表-seven.bru
+POST,/admin/finance/adjust/list,ACTIVE,2,0,1,/risk-control/up-down-score,30d | 7d,yes,finance,系统调整,代理管理后台/财务管理/财务报表/系统调整.bru
+POST,/admin/finance/deposit/list,ACTIVE,1,0,1,/payment/recharge-orders/list,7d,yes,finance,充值列表-wesley,后台/财务管理/存款记录/充值列表-wesley.bru
+POST,/admin/finance/lazada/order/list,ACTIVE,5,0,1,/payment/recharge-card-orders/list,30d | 365d | 7d | 90d | page_max_observed,yes,finance,lazada-订单列表-owen,后台/财务管理/lazada订单/lazada-订单列表-owen.bru
+POST,/admin/finance/transaction/list,ACTIVE,1,0,1,/payment/transaction-orders,7d,yes,finance,账变列表- wesley,后台/财务管理/会员钱包账变/账变列表- wesley.bru
+POST,/admin/finance/withdraw/list,ACTIVE,1,0,1,/payment/withdraw-orders/list,7d,yes,finance,提现列表-wesley,后台/财务管理/提现记录/提现列表-wesley.bru
+POST,/admin/finance/withdraw/risk/audit/list,UNDOCUMENTED_ACTIVE,1,0,1,/risk-control/dw-audit,7d,yes,,,
+POST,/admin/kyc/list,ACTIVE,1,0,1,/kyc,7d,yes,kyc,获取 kyc 列表 - double/owen,后台/kyc/获取 kyc 列表 - double-owen.bru
+POST,/admin/member/list,UNDOCUMENTED_ACTIVE,1,0,1,/member-center/list,7d,yes,,,
+POST,/admin/record/bet,ACTIVE,1,0,1,/payment/betting-slip/list,7d,yes,finance,游戏记录-wesley,后台/财务管理/注单管理/游戏记录-wesley.bru
+POST,/admin/record/game,UNDOCUMENTED_ACTIVE,1,0,0,/game/bet-orders,7d,yes,,,

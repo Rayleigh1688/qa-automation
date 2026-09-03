@@ -1,0 +1,29 @@
+order,top_menu,page_name,page_route,result,stop_range,attempted_ranges,successful_query_requests,business_query_requests,endpoints,blocking_scope,evidence
+1,KYC,KYC,/kyc,NON_EMPTY,7d,7d,1,1,POST /admin/kyc/list,,long-range-admin-results.json + long-range-admin-retry-results.json
+2,Logs,Logs,/logs/list,NON_EMPTY,7d,7d,1,1,GET /admin/log/list,,long-range-admin-results.json + long-range-admin-retry-results.json
+3,Member Management,Member,/member-center/list,NON_EMPTY,7d,7d,1,1,POST /admin/member/list,,long-range-admin-results.json + long-range-admin-retry-results.json
+1,Member Management,VIP Rewards,/member-management/vip-rewards,EMPTY_TO_MAX_OBSERVED_RANGE,page_max_observed,7d | 30d | 90d | 365d | page_max_observed,5,5,GET /admin/promo/vip/log/list,,long-range-admin-results.json + long-range-admin-retry-results.json
+2,Member Management,Inviter Transfer Records,/member-management/inviter-transfer-records,NON_EMPTY,365d,7d | 30d | 90d | 365d,4,4,GET /admin/promo/invite/friends/transfer/list,,long-range-admin-results.json + long-range-admin-retry-results.json
+6,Agent Management,Agency statistical report,/agency-management/agency-statistical,NON_EMPTY,7d,7d,1,1,GET /admin/reports/agency,,long-range-admin-results.json + long-range-admin-retry-results.json
+7,Report Management,Game Reports,/report-management/game-reports/list,NON_EMPTY,7d,7d,1,1,GET /admin/reports/game/node,,long-range-admin-results.json + long-range-admin-retry-results.json
+8,Report Management,Game Type Reports,/report-management/game-types-report/list,NON_EMPTY,7d,7d,1,1,GET /admin/reports/gameclass/node,,long-range-admin-results.json + long-range-admin-retry-results.json
+9,Report Management,Game Platform Reports,/report-management/game-platform-report/list,NON_EMPTY,7d,7d,1,1,GET /admin/reports/venue/node,,long-range-admin-results.json + long-range-admin-retry-results.json
+10,Report Management,Member Daily Stats,/report-management/member-daily-stats,NON_EMPTY,7d,7d,1,1,GET /admin/reports/member,,long-range-admin-results.json + long-range-admin-retry-results.json
+11,Report Management,Member Daily Game Stats,/report-management/member-daily-game-stats,NON_EMPTY,7d,7d,1,1,GET /admin/reports/member-daily-game/aggregate,,long-range-admin-results.json + long-range-admin-retry-results.json
+12,Finance Management,Deposit Record,/payment/recharge-orders/list,NON_EMPTY,7d,7d,1,1,POST /admin/finance/deposit/list,,long-range-admin-results.json + long-range-admin-retry-results.json
+13,Finance Management,Withdrawal Record,/payment/withdraw-orders/list,NON_EMPTY,7d,7d,1,1,POST /admin/finance/withdraw/list,,long-range-admin-results.json + long-range-admin-retry-results.json
+14,Finance Management,Bet Management,/payment/betting-slip/list,NON_EMPTY,7d,7d,1,1,POST /admin/record/bet,,long-range-admin-results.json + long-range-admin-retry-results.json
+15,Finance Management,Member Wallet Transactions,/payment/transaction-orders,NON_EMPTY,7d,7d,1,1,POST /admin/finance/transaction/list,,long-range-admin-results.json + long-range-admin-retry-results.json
+16,Finance Management,Recharge Card Order,/payment/recharge-card-orders/list,NON_EMPTY,page_max_observed,7d | 30d | 90d | 365d | page_max_observed,5,5,POST /admin/finance/lazada/order/list,,long-range-admin-results.json + long-range-admin-retry-results.json
+17,Operation Management,Daily Report,/operations/daily-reports,ACTIVE_FAILED,90d,7d | 30d | 90d,2,3,GET /admin/reports/channel,business failure at 90d; retained without a later success override,long-range-admin-results.json + long-range-admin-retry-results.json
+18,Operation Management,Promotion Spend Audit,/operations/activity-expenditure-audit,NON_EMPTY,90d,7d | 30d | 90d,3,3,GET /admin/bonus/review/list,,long-range-admin-results.json + long-range-admin-retry-results.json
+19,Risk Management,Deposit/Withdrawal Approval,/risk-control/dw-audit,NON_EMPTY,7d,7d,1,1,POST /admin/finance/withdraw/risk/audit/list,,long-range-admin-results.json + long-range-admin-retry-results.json
+20,Risk Management,Fund Transfer Record,/risk-control/up-down-score,NON_EMPTY,30d,7d | 30d,2,2,POST /admin/finance/adjust/list,,long-range-admin-results.json + long-range-admin-retry-results.json
+3,Risk Management,Temporary Restriction List,/risk-control/temporary-restriction-list,UI_DATE_INPUT_BLOCKED,7d,7d,0,0,,date control rejected target value; query not clicked,long-range-admin-results.json + long-range-admin-retry-results.json
+22,Risk Management,Risk Logs,/risk-control/risk-logs,NON_EMPTY,365d,7d | 30d | 90d | 365d,4,4,GET /admin/member/risk/log,,long-range-admin-results.json + long-range-admin-retry-results.json
+4,Promo Marketing,Promo Marketing Report,/promo-marketing/statistical-reports,NON_EMPTY,7d,7d,2,2,GET /admin/channel/manage/dict | GET /admin/channel/promotion/satistic,,long-range-admin-results.json + long-range-admin-retry-results.json
+5,Promo Marketing,First Deposit Daily Active Analysis,/promo-marketing/first-deposit-daily-active,NON_EMPTY,7d,7d,1,1,GET /admin/channel/promotion/firstDeposit,,long-range-admin-results.json + long-range-admin-retry-results.json
+25,Game,Betting Record,/game/bet-orders,UNVERIFIED_LONG_RANGE,30d,7d | 30d | 90d | 365d | page_max_observed,1,1,POST /admin/record/game,QUERY_NOT_TRIGGERED_AFTER_7D: only the 7d empty response is verified; 30/90/365/max are unverified,long-range-admin-results.json + long-range-admin-retry-results.json
+6,Game,FS 批量派发纪录,/gamev2/freespin-import-logs,NON_EMPTY,7d,7d,1,1,GET /admin/promo/free/spin/import/log,,long-range-admin-results.json + long-range-admin-retry-results.json
+27,System,SMS Verification Code,/system/sms-otp,NON_EMPTY,7d,7d,1,1,GET /admin/sms/list,,long-range-admin-results.json + long-range-admin-retry-results.json
+28,System,Bet Order Monitoring,/system/order-monitor,NON_EMPTY,7d,7d,1,1,GET /admin/reports/provider/order/compare/daily,,long-range-admin-results.json + long-range-admin-retry-results.json

@@ -1,0 +1,1726 @@
+{
+  "captured_at": "2026-09-03T05:35:21.184Z",
+  "environment": "FAT",
+  "source": "live /admin/priv/list responses + rendered sidebar DOM",
+  "permission_calls": [
+    {
+      "method": "GET",
+      "path": "/admin/priv/list",
+      "query_fields": [
+        "pid"
+      ],
+      "pid": "0",
+      "http_status": 200,
+      "business_status": true,
+      "data": [
+        {
+          "id": "10000",
+          "pid": "0",
+          "name": "会员",
+          "route_name": "Member",
+          "module": "/member",
+          "sort_level": "001",
+          "state": 1,
+          "flag": 1,
+          "is_button_permission": false
+        },
+        {
+          "id": "20000",
+          "pid": "0",
+          "name": "KYC",
+          "route_name": "KYC",
+          "module": "/kyc",
+          "sort_level": "002",
+          "state": 1,
+          "flag": 1,
+          "is_button_permission": false
+        },
+        {
+          "id": "30000",
+          "pid": "0",
+          "name": "财务管理",
+          "route_name": "Finance",
+          "module": "/finance",
+          "sort_level": "003",
+          "state": 1,
+          "flag": 1,
+          "is_button_permission": false
+        },
+        {
+          "id": "40000",
+          "pid": "0",
+          "name": "风控管理",
+          "route_name": "RiskControl",
+          "module": "/risk/control",
+          "sort_level": "004",
+          "state": 1,
+          "flag": 1,
+          "is_button_permission": false
+        },
+        {
+          "id": "50000",
+          "pid": "0",
+          "name": "游戏",
+          "route_name": "Game",
+          "module": "/game",
+          "sort_level": "005",
+          "state": 1,
+          "flag": 1,
+          "is_button_permission": false
+        },
+        {
+          "id": "60000",
+          "pid": "0",
+          "name": "系统",
+          "route_name": "System",
+          "module": "/system",
+          "sort_level": "006",
+          "state": 1,
+          "flag": 1,
+          "is_button_permission": false
+        },
+        {
+          "id": "70000",
+          "pid": "0",
+          "name": "日志",
+          "route_name": "Log",
+          "module": "/log",
+          "sort_level": "007",
+          "state": 1,
+          "flag": 1,
+          "is_button_permission": false
+        },
+        {
+          "id": "80000",
+          "pid": "0",
+          "name": "报表",
+          "route_name": "Report",
+          "module": "/report",
+          "sort_level": "008",
+          "state": 1,
+          "flag": 1,
+          "is_button_permission": false
+        },
+        {
+          "id": "90000",
+          "pid": "0",
+          "name": "运营管理",
+          "route_name": "Operation",
+          "module": "/operation",
+          "sort_level": "009",
+          "state": 1,
+          "flag": 1,
+          "is_button_permission": false
+        },
+        {
+          "id": "100000",
+          "pid": "0",
+          "name": "活动管理",
+          "route_name": "Promo",
+          "module": "/promo",
+          "sort_level": "010",
+          "state": 1,
+          "flag": 1,
+          "is_button_permission": false
+        },
+        {
+          "id": "120600",
+          "pid": "0",
+          "name": "代理管理",
+          "route_name": "",
+          "module": "/admin/report",
+          "sort_level": "0120600",
+          "state": 1,
+          "flag": 1,
+          "is_button_permission": false
+        },
+        {
+          "id": "130000",
+          "pid": "0",
+          "name": "素材管理",
+          "route_name": "",
+          "module": "/admin/ad/material",
+          "sort_level": "13",
+          "state": 1,
+          "flag": 1,
+          "is_button_permission": false
+        }
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/admin/priv/list",
+      "query_fields": [
+        "pid"
+      ],
+      "pid": "10000",
+      "http_status": 200,
+      "business_status": true,
+      "data": [
+        {
+          "id": "10001",
+          "pid": "10000",
+          "name": "会员列表",
+          "route_name": "",
+          "module": "/admin/member/list",
+          "sort_level": "001001",
+          "state": 1,
+          "flag": 1,
+          "is_button_permission": false
+        },
+        {
+          "id": "10002",
+          "pid": "10000",
+          "name": "会员详情",
+          "route_name": "",
+          "module": "/admin/member/detail",
+          "sort_level": "001002",
+          "state": 1,
+          "flag": 1,
+          "is_button_permission": false
+        },
+        {
+          "id": "10003",
+          "pid": "10000",
+          "name": "会员新增",
+          "route_name": "",
+          "module": "/admin/member/insert",
+          "sort_level": "001003",
+          "state": 1,
+          "flag": 1,
+          "is_button_permission": false
+        },
+        {
+          "id": "10004",
+          "pid": "10000",
+          "name": "会员更新",
+          "route_name": "",
+          "module": "/admin/member/update",
+          "sort_level": "001004",
+          "state": 1,
+          "flag": 1,
+          "is_button_permission": false
+        },
+        {
+          "id": "10300",
+          "pid": "10000",
+          "name": "会员奖励表",
+          "route_name": "",
+          "module": "/admin/promo/vip/log",
+          "sort_level": "001030",
+          "state": 1,
+          "flag": 1,
+          "is_button_permission": false
+        }
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/admin/priv/list",
+      "query_fields": [
+        "pid"
+      ],
+      "pid": "20000",
+      "http_status": 200,
+      "business_status": true,
+      "data": [
+        {
+          "id": "20001",
+          "pid": "20000",
+          "name": "KYC列表",
+          "route_name": "",
+          "module": "/admin/kyc/list",
+          "sort_level": "002001",
+          "state": 1,
+          "flag": 1,
+          "is_button_permission": false
+        },
+        {
+          "id": "20002",
+          "pid": "20000",
+          "name": "KYC拒绝",
+          "route_name": "",
+          "module": "/admin/kyc/reject",
+          "sort_level": "002002",
+          "state": 1,
+          "flag": 1,
+          "is_button_permission": false
+        },
+        {
+          "id": "20003",
+          "pid": "20000",
+          "name": "KYC通过",
+          "route_name": "",
+          "module": "/admin/kyc/approve",
+          "sort_level": "002003",
+          "state": 1,
+          "flag": 1,
+          "is_button_permission": false
+        },
+        {
+          "id": "20004",
+          "pid": "20000",
+          "name": "KYC删除",
+          "route_name": "",
+          "module": "/admin/kyc/delete",
+          "sort_level": "002004",
+          "state": 1,
+          "flag": 1,
+          "is_button_permission": false
+        },
+        {
+          "id": "20006",
+          "pid": "20000",
+          "name": "KYC编辑",
+          "route_name": "",
+          "module": "/admin/kyc/edit",
+          "sort_level": "002006",
+          "state": 1,
+          "flag": 1,
+          "is_button_permission": false
+        },
+        {
+          "id": "20007",
+          "pid": "20000",
+          "name": "KYC异动记录",
+          "route_name": "",
+          "module": "/admin/kyc/ekyc/log",
+          "sort_level": "002007",
+          "state": 1,
+          "flag": 1,
+          "is_button_permission": false
+        }
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/admin/priv/list",
+      "query_fields": [
+        "pid"
+      ],
+      "pid": "30000",
+      "http_status": 200,
+      "business_status": true,
+      "data": [
+        {
+          "id": "30100",
+          "pid": "30000",
+          "name": "存款记录",
+          "route_name": "",
+          "module": "/finance/deposit",
+          "sort_level": "003001",
+          "state": 1,
+          "flag": 1,
+          "is_button_permission": false
+        },
+        {
+          "id": "30200",
+          "pid": "30000",
+          "name": "提现记录",
+          "route_name": "",
+          "module": "/finance/withdraw",
+          "sort_level": "003002",
+          "state": 1,
+          "flag": 1,
+          "is_button_permission": false
+        },
+        {
+          "id": "30300",
+          "pid": "30000",
+          "name": "注单管理",
+          "route_name": "",
+          "module": "/admin/record/bet",
+          "sort_level": "003003",
+          "state": 1,
+          "flag": 1,
+          "is_button_permission": false
+        },
+        {
+          "id": "30400",
+          "pid": "30000",
+          "name": "会员钱包帐变",
+          "route_name": "",
+          "module": "/finance/transaction",
+          "sort_level": "003004",
+          "state": 1,
+          "flag": 1,
+          "is_button_permission": false
+        },
+        {
+          "id": "30500",
+          "pid": "30000",
+          "name": "支付渠道",
+          "route_name": "",
+          "module": "/finance/cate",
+          "sort_level": "003005",
+          "state": 1,
+          "flag": 1,
+          "is_button_permission": false
+        },
+        {
+          "id": "30600",
+          "pid": "30000",
+          "name": "lazada订单",
+          "route_name": "",
+          "module": "/finance/lazada",
+          "sort_level": "003006",
+          "state": 1,
+          "flag": 1,
+          "is_button_permission": false
+        }
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/admin/priv/list",
+      "query_fields": [
+        "pid"
+      ],
+      "pid": "40000",
+      "http_status": 200,
+      "business_status": true,
+      "data": [
+        {
+          "id": "40100",
+          "pid": "40000",
+          "name": "存/提审核",
+          "route_name": "",
+          "module": "/risk/control/wd",
+          "sort_level": "004001",
+          "state": 1,
+          "flag": 1,
+          "is_button_permission": false
+        },
+        {
+          "id": "40200",
+          "pid": "40000",
+          "name": "上下分记录",
+          "route_name": "",
+          "module": "/risk/control/adjust",
+          "sort_level": "004002",
+          "state": 1,
+          "flag": 1,
+          "is_button_permission": false
+        },
+        {
+          "id": "40300",
+          "pid": "40000",
+          "name": "流水记录",
+          "route_name": "Turnover",
+          "module": "/risk/turnover",
+          "sort_level": "004003",
+          "state": 1,
+          "flag": 1,
+          "is_button_permission": false
+        },
+        {
+          "id": "40400",
+          "pid": "40000",
+          "name": "风控日志",
+          "route_name": "",
+          "module": "/admin/member/risk",
+          "sort_level": "004003",
+          "state": 1,
+          "flag": 1,
+          "is_button_permission": false
+        }
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/admin/priv/list",
+      "query_fields": [
+        "pid"
+      ],
+      "pid": "50000",
+      "http_status": 200,
+      "business_status": true,
+      "data": [
+        {
+          "id": "50100",
+          "pid": "50000",
+          "name": "游戏记录",
+          "route_name": "",
+          "module": "/admin/record/game",
+          "sort_level": "005001",
+          "state": 1,
+          "flag": 1,
+          "is_button_permission": false
+        },
+        {
+          "id": "50200",
+          "pid": "50000",
+          "name": "场馆管理",
+          "route_name": "",
+          "module": "/game/platform",
+          "sort_level": "005002",
+          "state": 1,
+          "flag": 1,
+          "is_button_permission": false
+        },
+        {
+          "id": "50300",
+          "pid": "50000",
+          "name": "游戏管理",
+          "route_name": "",
+          "module": "/game/game",
+          "sort_level": "005003",
+          "state": 1,
+          "flag": 1,
+          "is_button_permission": false
+        },
+        {
+          "id": "50400",
+          "pid": "50000",
+          "name": "厂商管理",
+          "route_name": "",
+          "module": "/admin/platform",
+          "sort_level": "0050400",
+          "state": 1,
+          "flag": 1,
+          "is_button_permission": false
+        }
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/admin/priv/list",
+      "query_fields": [
+        "pid"
+      ],
+      "pid": "60000",
+      "http_status": 200,
+      "business_status": true,
+      "data": [
+        {
+          "id": "60100",
+          "pid": "60000",
+          "name": "角色配置",
+          "route_name": "Group",
+          "module": "/group",
+          "sort_level": "006001",
+          "state": 1,
+          "flag": 1,
+          "is_button_permission": false
+        },
+        {
+          "id": "60200",
+          "pid": "60000",
+          "name": "员工配置",
+          "route_name": "User",
+          "module": "/user",
+          "sort_level": "006002",
+          "state": 1,
+          "flag": 1,
+          "is_button_permission": false
+        },
+        {
+          "id": "60300",
+          "pid": "60000",
+          "name": "短信验证码",
+          "route_name": "Sms",
+          "module": "/sms",
+          "sort_level": "006003",
+          "state": 1,
+          "flag": 1,
+          "is_button_permission": false
+        },
+        {
+          "id": "60500",
+          "pid": "60000",
+          "name": "白名单",
+          "route_name": "WhiteList",
+          "module": "/whitelist",
+          "sort_level": "006005",
+          "state": 1,
+          "flag": 1,
+          "is_button_permission": false
+        },
+        {
+          "id": "60600",
+          "pid": "60000",
+          "name": "注单监控",
+          "route_name": "",
+          "module": "/admin/reports/provider/order/compare",
+          "sort_level": "60600",
+          "state": 1,
+          "flag": 1,
+          "is_button_permission": false
+        }
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/admin/priv/list",
+      "query_fields": [
+        "pid"
+      ],
+      "pid": "70000",
+      "http_status": 200,
+      "business_status": true,
+      "data": [
+        {
+          "id": "70001",
+          "pid": "70000",
+          "name": "日志列表",
+          "route_name": "",
+          "module": "/admin/log/list",
+          "sort_level": "007001",
+          "state": 1,
+          "flag": 1,
+          "is_button_permission": false
+        }
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/admin/priv/list",
+      "query_fields": [
+        "pid"
+      ],
+      "pid": "80000",
+      "http_status": 200,
+      "business_status": true,
+      "data": [
+        {
+          "id": "80200",
+          "pid": "80000",
+          "name": "游戏类型报表",
+          "route_name": "",
+          "module": "/admin/reportsGameClass",
+          "sort_level": "00800200",
+          "state": 1,
+          "flag": 1,
+          "is_button_permission": false
+        },
+        {
+          "id": "80300",
+          "pid": "80000",
+          "name": "游戏厂商报表",
+          "route_name": "",
+          "module": "/admin/reportsVenue",
+          "sort_level": "00800300",
+          "state": 1,
+          "flag": 1,
+          "is_button_permission": false
+        },
+        {
+          "id": "80500",
+          "pid": "80000",
+          "name": "会员游戏日统计",
+          "route_name": "",
+          "module": "/admin/reports/member-daily-game",
+          "sort_level": "00800500",
+          "state": 1,
+          "flag": 1,
+          "is_button_permission": false
+        },
+        {
+          "id": "80100",
+          "pid": "80000",
+          "name": "游戏报表",
+          "route_name": "",
+          "module": "/admin/reportsGame",
+          "sort_level": "0080100",
+          "state": 1,
+          "flag": 1,
+          "is_button_permission": false
+        }
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/admin/priv/list",
+      "query_fields": [
+        "pid"
+      ],
+      "pid": "90000",
+      "http_status": 200,
+      "business_status": true,
+      "data": [
+        {
+          "id": "92001",
+          "pid": "90000",
+          "name": "邀请好友",
+          "route_name": "",
+          "module": "/admin/promo/invite",
+          "sort_level": "00092001",
+          "state": 1,
+          "flag": 1,
+          "is_button_permission": false
+        },
+        {
+          "id": "93000",
+          "pid": "90000",
+          "name": "运营小工具",
+          "route_name": "",
+          "module": "/admin/ops-tools",
+          "sort_level": "00093000",
+          "state": 1,
+          "flag": 1,
+          "is_button_permission": false
+        },
+        {
+          "id": "90100",
+          "pid": "90000",
+          "name": "系统配置",
+          "route_name": "",
+          "module": "/operation/config",
+          "sort_level": "009001",
+          "state": 1,
+          "flag": 1,
+          "is_button_permission": false
+        },
+        {
+          "id": "90200",
+          "pid": "90000",
+          "name": "轮播图",
+          "route_name": "Banner",
+          "module": "/banner",
+          "sort_level": "009002",
+          "state": 1,
+          "flag": 1,
+          "is_button_permission": false
+        },
+        {
+          "id": "90300",
+          "pid": "90000",
+          "name": "VIP配置",
+          "route_name": "",
+          "module": "/vip",
+          "sort_level": "009003000",
+          "state": 1,
+          "flag": 1,
+          "is_button_permission": false
+        },
+        {
+          "id": "90400",
+          "pid": "90000",
+          "name": "首页弹窗",
+          "route_name": "banner",
+          "module": "/admin/banner",
+          "sort_level": "0090400",
+          "state": 1,
+          "flag": 1,
+          "is_button_permission": false
+        },
+        {
+          "id": "90500",
+          "pid": "90000",
+          "name": "埋点",
+          "route_name": "buriedPoint",
+          "module": "/admin/buriedPoint",
+          "sort_level": "0090500",
+          "state": 1,
+          "flag": 1,
+          "is_button_permission": false
+        },
+        {
+          "id": "90600",
+          "pid": "90000",
+          "name": "活动支出审计",
+          "route_name": "",
+          "module": "/admin/bonus",
+          "sort_level": "0090600",
+          "state": 1,
+          "flag": 1,
+          "is_button_permission": false
+        },
+        {
+          "id": "90700",
+          "pid": "90000",
+          "name": "日常报表",
+          "route_name": "",
+          "module": "/admin/reports",
+          "sort_level": "0090700",
+          "state": 1,
+          "flag": 1,
+          "is_button_permission": false
+        },
+        {
+          "id": "90800",
+          "pid": "90000",
+          "name": "客户端配置",
+          "route_name": "",
+          "module": "",
+          "sort_level": "0090800",
+          "state": 1,
+          "flag": 1,
+          "is_button_permission": false
+        },
+        {
+          "id": "90900",
+          "pid": "90000",
+          "name": "站内信",
+          "route_name": "",
+          "module": "/admin/message",
+          "sort_level": "0090900",
+          "state": 1,
+          "flag": 1,
+          "is_button_permission": false
+        },
+        {
+          "id": "91000",
+          "pid": "90000",
+          "name": "消息模板",
+          "route_name": "",
+          "module": "/admin/message/templates",
+          "sort_level": "0091000",
+          "state": 1,
+          "flag": 1,
+          "is_button_permission": false
+        },
+        {
+          "id": "95000",
+          "pid": "90000",
+          "name": "跑马灯",
+          "route_name": "marquee",
+          "module": "/marquee",
+          "sort_level": "009500",
+          "state": 1,
+          "flag": 1,
+          "is_button_permission": false
+        },
+        {
+          "id": "96000",
+          "pid": "90000",
+          "name": "爆奖榜",
+          "route_name": "HotBetNotice",
+          "module": "/admin/hotBetNotice",
+          "sort_level": "009600",
+          "state": 1,
+          "flag": 1,
+          "is_button_permission": false
+        },
+        {
+          "id": "91100",
+          "pid": "90000",
+          "name": "门店客户端",
+          "route_name": "Shop/gs",
+          "module": "/shop/gs",
+          "sort_level": "091000",
+          "state": 1,
+          "flag": 1,
+          "is_button_permission": false
+        },
+        {
+          "id": "91200",
+          "pid": "90000",
+          "name": "充值倍率",
+          "route_name": "",
+          "module": "/admin/sys/config/deposit/multiple",
+          "sort_level": "091200",
+          "state": 1,
+          "flag": 1,
+          "is_button_permission": false
+        }
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/admin/priv/list",
+      "query_fields": [
+        "pid"
+      ],
+      "pid": "100000",
+      "http_status": 200,
+      "business_status": true,
+      "data": [
+        {
+          "id": "100100",
+          "pid": "100000",
+          "name": "活动列表",
+          "route_name": "",
+          "module": "/admin/promo/list",
+          "sort_level": "010001",
+          "state": 1,
+          "flag": 1,
+          "is_button_permission": false
+        },
+        {
+          "id": "100200",
+          "pid": "100000",
+          "name": "vip任务中心",
+          "route_name": "",
+          "module": "/admin/promo/task",
+          "sort_level": "0100200",
+          "state": 1,
+          "flag": 1,
+          "is_button_permission": false
+        },
+        {
+          "id": "100300",
+          "pid": "100000",
+          "name": "vip商城",
+          "route_name": "",
+          "module": "/admin/mall",
+          "sort_level": "0100200",
+          "state": 1,
+          "flag": 1,
+          "is_button_permission": false
+        },
+        {
+          "id": "100400",
+          "pid": "100000",
+          "name": "世界杯活动",
+          "route_name": "",
+          "module": "/promo/world",
+          "sort_level": "0100400",
+          "state": 1,
+          "flag": 1,
+          "is_button_permission": false
+        }
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/admin/priv/list",
+      "query_fields": [
+        "pid"
+      ],
+      "pid": "120600",
+      "http_status": 200,
+      "business_status": true,
+      "data": [
+        {
+          "id": "120601",
+          "pid": "120600",
+          "name": "代理统计",
+          "route_name": "",
+          "module": "/admin/reports/agencys",
+          "sort_level": "0120601",
+          "state": 1,
+          "flag": 1,
+          "is_button_permission": false
+        }
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/admin/priv/list",
+      "query_fields": [
+        "pid"
+      ],
+      "pid": "130000",
+      "http_status": 200,
+      "business_status": true,
+      "data": [
+        {
+          "id": "130001",
+          "pid": "130000",
+          "name": "素材列表",
+          "route_name": "",
+          "module": "/admin/ad/material/list",
+          "sort_level": "130001",
+          "state": 1,
+          "flag": 1,
+          "is_button_permission": false
+        },
+        {
+          "id": "130002",
+          "pid": "130000",
+          "name": "素材详情",
+          "route_name": "",
+          "module": "/admin/ad/material/detail",
+          "sort_level": "130002",
+          "state": 1,
+          "flag": 1,
+          "is_button_permission": false
+        },
+        {
+          "id": "130003",
+          "pid": "130000",
+          "name": "素材新增",
+          "route_name": "",
+          "module": "/admin/ad/material/insert",
+          "sort_level": "130003",
+          "state": 1,
+          "flag": 1,
+          "is_button_permission": false
+        },
+        {
+          "id": "130004",
+          "pid": "130000",
+          "name": "素材编辑",
+          "route_name": "",
+          "module": "/admin/ad/material/update",
+          "sort_level": "130004",
+          "state": 1,
+          "flag": 1,
+          "is_button_permission": false
+        },
+        {
+          "id": "130005",
+          "pid": "130000",
+          "name": "素材更新状态",
+          "route_name": "",
+          "module": "/admin/ad/material/update/state",
+          "sort_level": "130005",
+          "state": 1,
+          "flag": 1,
+          "is_button_permission": false
+        },
+        {
+          "id": "130006",
+          "pid": "130000",
+          "name": "素材删除",
+          "route_name": "",
+          "module": "/admin/ad/material/delete",
+          "sort_level": "130006",
+          "state": 1,
+          "flag": 1,
+          "is_button_permission": false
+        },
+        {
+          "id": "130007",
+          "pid": "130000",
+          "name": "平台选单",
+          "route_name": "",
+          "module": "/admin/ad/material/platform/menu",
+          "sort_level": "130007",
+          "state": 1,
+          "flag": 1,
+          "is_button_permission": false
+        },
+        {
+          "id": "130008",
+          "pid": "130000",
+          "name": "素材类型列表",
+          "route_name": "",
+          "module": "/admin/ad/material/type/list",
+          "sort_level": "130008",
+          "state": 1,
+          "flag": 1,
+          "is_button_permission": false
+        },
+        {
+          "id": "130009",
+          "pid": "130000",
+          "name": "素材类型新增",
+          "route_name": "",
+          "module": "/admin/ad/material/type/insert",
+          "sort_level": "130009",
+          "state": 1,
+          "flag": 1,
+          "is_button_permission": false
+        },
+        {
+          "id": "130010",
+          "pid": "130000",
+          "name": "素材类型编辑",
+          "route_name": "",
+          "module": "/admin/ad/material/type/update",
+          "sort_level": "130010",
+          "state": 1,
+          "flag": 1,
+          "is_button_permission": false
+        },
+        {
+          "id": "130011",
+          "pid": "130000",
+          "name": "素材类型更新状态",
+          "route_name": "",
+          "module": "/admin/ad/material/type/update/state",
+          "sort_level": "130011",
+          "state": 1,
+          "flag": 1,
+          "is_button_permission": false
+        },
+        {
+          "id": "130012",
+          "pid": "130000",
+          "name": "素材类型删除",
+          "route_name": "",
+          "module": "/admin/ad/material/type/delete",
+          "sort_level": "130012",
+          "state": 1,
+          "flag": 1,
+          "is_button_permission": false
+        }
+      ]
+    }
+  ],
+  "rendered_root_submenu_count": 11,
+  "permission_root_count": 12,
+  "rendered_menu_item_count": 57,
+  "menu_pages": [
+    {
+      "order": 1,
+      "menu_path": [],
+      "page_name": "Home",
+      "anchor_href": "/home",
+      "raw_label": "Home",
+      "route": "/home",
+      "route_source": "sidebar anchor href",
+      "click_error": ""
+    },
+    {
+      "order": 2,
+      "menu_path": [],
+      "page_name": "KYC",
+      "anchor_href": "/kyc",
+      "raw_label": "KYC44",
+      "route": "/kyc",
+      "route_source": "sidebar anchor href",
+      "click_error": ""
+    },
+    {
+      "order": 3,
+      "menu_path": [],
+      "page_name": "Logs",
+      "anchor_href": "/logs/list",
+      "raw_label": "Logs",
+      "route": "/logs/list",
+      "route_source": "sidebar anchor href",
+      "click_error": ""
+    },
+    {
+      "order": 4,
+      "menu_path": [
+        "Member Management"
+      ],
+      "page_name": "Member",
+      "anchor_href": "/member-center/list",
+      "raw_label": "Member",
+      "route": "/member-center/list",
+      "route_source": "sidebar anchor href",
+      "click_error": ""
+    },
+    {
+      "order": 5,
+      "menu_path": [
+        "Member Management"
+      ],
+      "page_name": "VIP Config",
+      "anchor_href": "/member-management/vip-config",
+      "raw_label": "VIP Config",
+      "route": "/member-management/vip-config",
+      "route_source": "sidebar anchor href",
+      "click_error": ""
+    },
+    {
+      "order": 6,
+      "menu_path": [
+        "Member Management"
+      ],
+      "page_name": "VIP Rewards",
+      "anchor_href": "/member-management/vip-rewards",
+      "raw_label": "VIP Rewards",
+      "route": "/member-management/vip-rewards",
+      "route_source": "sidebar anchor href",
+      "click_error": ""
+    },
+    {
+      "order": 7,
+      "menu_path": [
+        "Member Management"
+      ],
+      "page_name": "VIP Check-in Log",
+      "anchor_href": "/member-management/vip-checkin-log",
+      "raw_label": "VIP Check-in Log",
+      "route": "/member-management/vip-checkin-log",
+      "route_source": "sidebar anchor href",
+      "click_error": ""
+    },
+    {
+      "order": 8,
+      "menu_path": [
+        "Member Management"
+      ],
+      "page_name": "Inviter Transfer Records",
+      "anchor_href": "/member-management/inviter-transfer-records",
+      "raw_label": "Inviter Transfer Records",
+      "route": "/member-management/inviter-transfer-records",
+      "route_source": "sidebar anchor href",
+      "click_error": ""
+    },
+    {
+      "order": 9,
+      "menu_path": [
+        "Agent Management"
+      ],
+      "page_name": "Agency statistical report",
+      "anchor_href": "/agency-management/agency-statistical",
+      "raw_label": "Agency statistical report",
+      "route": "/agency-management/agency-statistical",
+      "route_source": "sidebar anchor href",
+      "click_error": ""
+    },
+    {
+      "order": 10,
+      "menu_path": [
+        "Report Management"
+      ],
+      "page_name": "Game Reports",
+      "anchor_href": "/report-management/game-reports/list",
+      "raw_label": "Game Reports",
+      "route": "/report-management/game-reports/list",
+      "route_source": "sidebar anchor href",
+      "click_error": ""
+    },
+    {
+      "order": 11,
+      "menu_path": [
+        "Report Management"
+      ],
+      "page_name": "Game Type Reports",
+      "anchor_href": "/report-management/game-types-report/list",
+      "raw_label": "Game Type Reports",
+      "route": "/report-management/game-types-report/list",
+      "route_source": "sidebar anchor href",
+      "click_error": ""
+    },
+    {
+      "order": 12,
+      "menu_path": [
+        "Report Management"
+      ],
+      "page_name": "Game Platform Reports",
+      "anchor_href": "/report-management/game-platform-report/list",
+      "raw_label": "Game Platform Reports",
+      "route": "/report-management/game-platform-report/list",
+      "route_source": "sidebar anchor href",
+      "click_error": ""
+    },
+    {
+      "order": 13,
+      "menu_path": [
+        "Report Management"
+      ],
+      "page_name": "Member Daily Stats",
+      "anchor_href": "/report-management/member-daily-stats",
+      "raw_label": "Member Daily Stats",
+      "route": "/report-management/member-daily-stats",
+      "route_source": "sidebar anchor href",
+      "click_error": ""
+    },
+    {
+      "order": 14,
+      "menu_path": [
+        "Report Management"
+      ],
+      "page_name": "Member Daily Game Stats",
+      "anchor_href": "/report-management/member-daily-game-stats",
+      "raw_label": "Member Daily Game Stats",
+      "route": "/report-management/member-daily-game-stats",
+      "route_source": "sidebar anchor href",
+      "click_error": ""
+    },
+    {
+      "order": 15,
+      "menu_path": [
+        "Finance Management"
+      ],
+      "page_name": "Deposit Record",
+      "anchor_href": "/payment/recharge-orders/list",
+      "raw_label": "Deposit Record",
+      "route": "/payment/recharge-orders/list",
+      "route_source": "sidebar anchor href",
+      "click_error": ""
+    },
+    {
+      "order": 16,
+      "menu_path": [
+        "Finance Management"
+      ],
+      "page_name": "Withdrawal Record",
+      "anchor_href": "/payment/withdraw-orders/list",
+      "raw_label": "Withdrawal Record",
+      "route": "/payment/withdraw-orders/list",
+      "route_source": "sidebar anchor href",
+      "click_error": ""
+    },
+    {
+      "order": 17,
+      "menu_path": [
+        "Finance Management"
+      ],
+      "page_name": "Bet Management",
+      "anchor_href": "/payment/betting-slip/list",
+      "raw_label": "Bet Management",
+      "route": "/payment/betting-slip/list",
+      "route_source": "sidebar anchor href",
+      "click_error": ""
+    },
+    {
+      "order": 18,
+      "menu_path": [
+        "Finance Management"
+      ],
+      "page_name": "Member Wallet Transactions",
+      "anchor_href": "/payment/transaction-orders",
+      "raw_label": "Member Wallet Transactions",
+      "route": "/payment/transaction-orders",
+      "route_source": "sidebar anchor href",
+      "click_error": ""
+    },
+    {
+      "order": 19,
+      "menu_path": [
+        "Finance Management"
+      ],
+      "page_name": "Payment Channels",
+      "anchor_href": "/payment/channel-ordersV2",
+      "raw_label": "Payment Channels",
+      "route": "/payment/channel-ordersV2",
+      "route_source": "sidebar anchor href",
+      "click_error": ""
+    },
+    {
+      "order": 20,
+      "menu_path": [
+        "Finance Management"
+      ],
+      "page_name": "Recharge Card Order",
+      "anchor_href": "/payment/recharge-card-orders/list",
+      "raw_label": "Recharge Card Order",
+      "route": "/payment/recharge-card-orders/list",
+      "route_source": "sidebar anchor href",
+      "click_error": ""
+    },
+    {
+      "order": 21,
+      "menu_path": [
+        "Operation Management"
+      ],
+      "page_name": "Recharge Template",
+      "anchor_href": "/operations/recharge-template",
+      "raw_label": "Recharge Template",
+      "route": "/operations/recharge-template",
+      "route_source": "sidebar anchor href",
+      "click_error": ""
+    },
+    {
+      "order": 22,
+      "menu_path": [
+        "Operation Management"
+      ],
+      "page_name": "Daily Report",
+      "anchor_href": "/operations/daily-reports",
+      "raw_label": "Daily Report",
+      "route": "/operations/daily-reports",
+      "route_source": "sidebar anchor href",
+      "click_error": ""
+    },
+    {
+      "order": 23,
+      "menu_path": [
+        "Operation Management"
+      ],
+      "page_name": "Client Configuration",
+      "anchor_href": "/operations/client-config",
+      "raw_label": "Client Configuration",
+      "route": "/operations/client-config",
+      "route_source": "sidebar anchor href",
+      "click_error": ""
+    },
+    {
+      "order": 24,
+      "menu_path": [
+        "Operation Management"
+      ],
+      "page_name": "Material Management",
+      "anchor_href": "/operations/material-management",
+      "raw_label": "Material Management",
+      "route": "/operations/material-management",
+      "route_source": "sidebar anchor href",
+      "click_error": ""
+    },
+    {
+      "order": 25,
+      "menu_path": [
+        "Operation Management"
+      ],
+      "page_name": "Market Management",
+      "anchor_href": "/operations/mall-management",
+      "raw_label": "Market Management9",
+      "route": "/operations/mall-management",
+      "route_source": "sidebar anchor href",
+      "click_error": ""
+    },
+    {
+      "order": 26,
+      "menu_path": [
+        "Operation Management"
+      ],
+      "page_name": "Promotion List",
+      "anchor_href": "/operations/activity-list",
+      "raw_label": "Promotion List",
+      "route": "/operations/activity-list",
+      "route_source": "sidebar anchor href",
+      "click_error": ""
+    },
+    {
+      "order": 27,
+      "menu_path": [
+        "Operation Management"
+      ],
+      "page_name": "Promotion Spend Audit",
+      "anchor_href": "/operations/activity-expenditure-audit",
+      "raw_label": "Promotion Spend Audit7",
+      "route": "/operations/activity-expenditure-audit",
+      "route_source": "sidebar anchor href",
+      "click_error": ""
+    },
+    {
+      "order": 28,
+      "menu_path": [
+        "Operation Management"
+      ],
+      "page_name": "Ad Tracking/Buried Point",
+      "anchor_href": "/operations/advertisement-tracking",
+      "raw_label": "Ad Tracking/Buried Point",
+      "route": "/operations/advertisement-tracking",
+      "route_source": "sidebar anchor href",
+      "click_error": ""
+    },
+    {
+      "order": 29,
+      "menu_path": [
+        "Operation Management"
+      ],
+      "page_name": "Message Templates",
+      "anchor_href": "/operations/message-templates",
+      "raw_label": "Message Templates",
+      "route": "/operations/message-templates",
+      "route_source": "sidebar anchor href",
+      "click_error": ""
+    },
+    {
+      "order": 30,
+      "menu_path": [
+        "Operation Management"
+      ],
+      "page_name": "Member station message",
+      "anchor_href": "/operations/in-site-message",
+      "raw_label": "Member station message",
+      "route": "/operations/in-site-message",
+      "route_source": "sidebar anchor href",
+      "click_error": ""
+    },
+    {
+      "order": 31,
+      "menu_path": [
+        "Operation Management"
+      ],
+      "page_name": "Friend Invite",
+      "anchor_href": "/operations/friend-invite",
+      "raw_label": "Friend Invite",
+      "route": "/operations/friend-invite",
+      "route_source": "sidebar anchor href",
+      "click_error": ""
+    },
+    {
+      "order": 32,
+      "menu_path": [
+        "Operation Management"
+      ],
+      "page_name": "Jackpot Board",
+      "anchor_href": "/operations/jackpot-board",
+      "raw_label": "Jackpot Board",
+      "route": "/operations/jackpot-board",
+      "route_source": "sidebar anchor href",
+      "click_error": ""
+    },
+    {
+      "order": 33,
+      "menu_path": [
+        "Operation Management"
+      ],
+      "page_name": "Ops tools",
+      "anchor_href": "/operations/ops-tools",
+      "raw_label": "Ops tools",
+      "route": "/operations/ops-tools",
+      "route_source": "sidebar anchor href",
+      "click_error": ""
+    },
+    {
+      "order": 34,
+      "menu_path": [
+        "Operation Management"
+      ],
+      "page_name": "Marquee Management",
+      "anchor_href": "/operations/marquee-management",
+      "raw_label": "Marquee Management",
+      "route": "/operations/marquee-management",
+      "route_source": "sidebar anchor href",
+      "click_error": ""
+    },
+    {
+      "order": 35,
+      "menu_path": [
+        "Operation Management"
+      ],
+      "page_name": "Home Sections Config",
+      "anchor_href": "/operations/home-sections",
+      "raw_label": "Home Sections Config",
+      "route": "/operations/home-sections",
+      "route_source": "sidebar anchor href",
+      "click_error": ""
+    },
+    {
+      "order": 36,
+      "menu_path": [
+        "Risk Management"
+      ],
+      "page_name": "Deposit/Withdrawal Approval",
+      "anchor_href": "/risk-control/dw-audit",
+      "raw_label": "Deposit/Withdrawal Approval84",
+      "route": "/risk-control/dw-audit",
+      "route_source": "sidebar anchor href",
+      "click_error": ""
+    },
+    {
+      "order": 37,
+      "menu_path": [
+        "Risk Management"
+      ],
+      "page_name": "Fund Transfer Record",
+      "anchor_href": "/risk-control/up-down-score",
+      "raw_label": "Fund Transfer Record",
+      "route": "/risk-control/up-down-score",
+      "route_source": "sidebar anchor href",
+      "click_error": ""
+    },
+    {
+      "order": 38,
+      "menu_path": [
+        "Risk Management"
+      ],
+      "page_name": "Temporary Restriction List",
+      "anchor_href": "/risk-control/temporary-restriction-list",
+      "raw_label": "Temporary Restriction List",
+      "route": "/risk-control/temporary-restriction-list",
+      "route_source": "sidebar anchor href",
+      "click_error": ""
+    },
+    {
+      "order": 39,
+      "menu_path": [
+        "Risk Management"
+      ],
+      "page_name": "Risk Logs",
+      "anchor_href": "/risk-control/risk-logs",
+      "raw_label": "Risk Logs",
+      "route": "/risk-control/risk-logs",
+      "route_source": "sidebar anchor href",
+      "click_error": ""
+    },
+    {
+      "order": 40,
+      "menu_path": [
+        "Promo Marketing"
+      ],
+      "page_name": "Channel Management",
+      "anchor_href": "/promo-marketing/channels",
+      "raw_label": "Channel Management",
+      "route": "/promo-marketing/channels",
+      "route_source": "sidebar anchor href",
+      "click_error": ""
+    },
+    {
+      "order": 41,
+      "menu_path": [
+        "Promo Marketing"
+      ],
+      "page_name": "Promo Marketing Report",
+      "anchor_href": "/promo-marketing/statistical-reports",
+      "raw_label": "Promo Marketing Report",
+      "route": "/promo-marketing/statistical-reports",
+      "route_source": "sidebar anchor href",
+      "click_error": ""
+    },
+    {
+      "order": 42,
+      "menu_path": [
+        "Promo Marketing"
+      ],
+      "page_name": "Promo Marketing Effect",
+      "anchor_href": "/promo-marketing/effect-evaluation",
+      "raw_label": "Promo Marketing Effect",
+      "route": "/promo-marketing/effect-evaluation",
+      "route_source": "sidebar anchor href",
+      "click_error": ""
+    },
+    {
+      "order": 43,
+      "menu_path": [
+        "Promo Marketing"
+      ],
+      "page_name": "Register Daily Active",
+      "anchor_href": "/promo-marketing/register-daily-active",
+      "raw_label": "Register Daily Active",
+      "route": "/promo-marketing/register-daily-active",
+      "route_source": "sidebar anchor href",
+      "click_error": ""
+    },
+    {
+      "order": 44,
+      "menu_path": [
+        "Promo Marketing"
+      ],
+      "page_name": "First Deposit Daily Active Analysis",
+      "anchor_href": "/promo-marketing/first-deposit-daily-active",
+      "raw_label": "First Deposit Daily Active Analysis",
+      "route": "/promo-marketing/first-deposit-daily-active",
+      "route_source": "sidebar anchor href",
+      "click_error": ""
+    },
+    {
+      "order": 45,
+      "menu_path": [
+        "Promo Marketing"
+      ],
+      "page_name": "Promo Data",
+      "anchor_href": "/promo-marketing/promotion-data",
+      "raw_label": "Promo Data",
+      "route": "/promo-marketing/promotion-data",
+      "route_source": "sidebar anchor href",
+      "click_error": ""
+    },
+    {
+      "order": 46,
+      "menu_path": [
+        "Site Management"
+      ],
+      "page_name": "Domain Management",
+      "anchor_href": "/site-management/domain-management",
+      "raw_label": "Domain Management",
+      "route": "/site-management/domain-management",
+      "route_source": "sidebar anchor href",
+      "click_error": ""
+    },
+    {
+      "order": 47,
+      "menu_path": [
+        "Game"
+      ],
+      "page_name": "Betting Record",
+      "anchor_href": "/game/bet-orders",
+      "raw_label": "Betting Record",
+      "route": "/game/bet-orders",
+      "route_source": "sidebar anchor href",
+      "click_error": ""
+    },
+    {
+      "order": 48,
+      "menu_path": [
+        "Game"
+      ],
+      "page_name": "Venue Management",
+      "anchor_href": "/gamev2/venue-settings",
+      "raw_label": "Venue Management",
+      "route": "/gamev2/venue-settings",
+      "route_source": "sidebar anchor href",
+      "click_error": ""
+    },
+    {
+      "order": 49,
+      "menu_path": [
+        "Game"
+      ],
+      "page_name": "Provider Management",
+      "anchor_href": "/gamev2/manufacturer-management",
+      "raw_label": "Provider Management",
+      "route": "/gamev2/manufacturer-management",
+      "route_source": "sidebar anchor href",
+      "click_error": ""
+    },
+    {
+      "order": 50,
+      "menu_path": [
+        "Game"
+      ],
+      "page_name": "Game List Management",
+      "anchor_href": "/gamev2/game-management",
+      "raw_label": "Game List Management",
+      "route": "/gamev2/game-management",
+      "route_source": "sidebar anchor href",
+      "click_error": ""
+    },
+    {
+      "order": 51,
+      "menu_path": [
+        "Game"
+      ],
+      "page_name": "FS 派发管理",
+      "anchor_href": "/gamev2/freespin-grants",
+      "raw_label": "FS 派发管理",
+      "route": "/gamev2/freespin-grants",
+      "route_source": "sidebar anchor href",
+      "click_error": ""
+    },
+    {
+      "order": 52,
+      "menu_path": [
+        "Game"
+      ],
+      "page_name": "FS 批量派发纪录",
+      "anchor_href": "/gamev2/freespin-import-logs",
+      "raw_label": "FS 批量派发纪录",
+      "route": "/gamev2/freespin-import-logs",
+      "route_source": "sidebar anchor href",
+      "click_error": ""
+    },
+    {
+      "order": 53,
+      "menu_path": [
+        "System"
+      ],
+      "page_name": "Role Configuration",
+      "anchor_href": "/system/role",
+      "raw_label": "Role Configuration",
+      "route": "/system/role",
+      "route_source": "sidebar anchor href",
+      "click_error": ""
+    },
+    {
+      "order": 54,
+      "menu_path": [
+        "System"
+      ],
+      "page_name": "Staff Configuration",
+      "anchor_href": "/system/staff",
+      "raw_label": "Staff Configuration",
+      "route": "/system/staff",
+      "route_source": "sidebar anchor href",
+      "click_error": ""
+    },
+    {
+      "order": 55,
+      "menu_path": [
+        "System"
+      ],
+      "page_name": "SMS Verification Code",
+      "anchor_href": "/system/sms-otp",
+      "raw_label": "SMS Verification Code",
+      "route": "/system/sms-otp",
+      "route_source": "sidebar anchor href",
+      "click_error": ""
+    },
+    {
+      "order": 56,
+      "menu_path": [
+        "System"
+      ],
+      "page_name": "Bet Order Monitoring",
+      "anchor_href": "/system/order-monitor",
+      "raw_label": "Bet Order Monitoring",
+      "route": "/system/order-monitor",
+      "route_source": "sidebar anchor href",
+      "click_error": ""
+    },
+    {
+      "order": 57,
+      "menu_path": [
+        "System"
+      ],
+      "page_name": "Whitelist",
+      "anchor_href": "/whitelist/list",
+      "raw_label": "Whitelist",
+      "route": "/whitelist/list",
+      "route_source": "sidebar anchor href",
+      "click_error": ""
+    }
+  ]
+}

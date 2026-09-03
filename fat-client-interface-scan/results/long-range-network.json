@@ -1,0 +1,311 @@
+{
+  "scannedAt": "2026-09-03T06:40:02.717Z",
+  "environment": "FAT",
+  "timezone": "Asia/Manila",
+  "records": [
+    {
+      "page": "Transaction / Deposit",
+      "pageRoute": "/transaction-record/transaction/deposit",
+      "action": "page initialization",
+      "method": "GET",
+      "normalizedPath": "/finance/deposit/list",
+      "timeParameters": {
+        "time_flag": "0",
+        "page": "1",
+        "page_size": "10"
+      },
+      "timeUnit": "time_flag interpreted from selected UI day-range label",
+      "timezone": "Asia/Manila",
+      "httpStatus": 200,
+      "businessStatus": true,
+      "responseStructure": {
+        "topLevelKeys": [
+          "data",
+          "status"
+        ],
+        "dataType": "object",
+        "dataKeys": [
+          "d",
+          "s",
+          "t"
+        ],
+        "arrayPaths": []
+      },
+      "recordCount": 0,
+      "totalCount": 0,
+      "nonEmpty": false,
+      "classification": "ACTIVE",
+      "auth": "authenticated client session (t header); values not stored",
+      "sideEffect": "none; historical list query",
+      "ts": "2026-09-03T06:39:52.470Z"
+    },
+    {
+      "page": "Transaction / Deposit",
+      "pageRoute": "/transaction-record/transaction/deposit",
+      "action": "select Last 7 days",
+      "method": "GET",
+      "normalizedPath": "/finance/deposit/list",
+      "timeParameters": {
+        "time_flag": "7",
+        "page": "1",
+        "page_size": "10"
+      },
+      "timeUnit": "time_flag interpreted from selected UI day-range label",
+      "timezone": "Asia/Manila",
+      "httpStatus": 200,
+      "businessStatus": true,
+      "responseStructure": {
+        "topLevelKeys": [
+          "data",
+          "status"
+        ],
+        "dataType": "object",
+        "dataKeys": [
+          "d",
+          "s",
+          "t"
+        ],
+        "arrayPaths": [
+          "data.d"
+        ]
+      },
+      "recordCount": 10,
+      "totalCount": 12,
+      "nonEmpty": true,
+      "classification": "ACTIVE",
+      "auth": "authenticated client session (t header); values not stored",
+      "sideEffect": "none; historical list query",
+      "ts": "2026-09-03T06:39:53.838Z",
+      "requestedRange": "7d",
+      "selectedUiLabel": "Last 7 days"
+    },
+    {
+      "page": "Transaction / Withdraw",
+      "pageRoute": "/transaction-record/transaction/withdraw",
+      "action": "page initialization",
+      "method": "GET",
+      "normalizedPath": "/finance/withdraw/list",
+      "timeParameters": {
+        "time_flag": "0",
+        "page": "1",
+        "page_size": "10"
+      },
+      "timeUnit": "time_flag interpreted from selected UI day-range label",
+      "timezone": "Asia/Manila",
+      "httpStatus": 200,
+      "businessStatus": true,
+      "responseStructure": {
+        "topLevelKeys": [
+          "data",
+          "status"
+        ],
+        "dataType": "object",
+        "dataKeys": [
+          "d",
+          "s",
+          "t"
+        ],
+        "arrayPaths": []
+      },
+      "recordCount": 0,
+      "totalCount": 0,
+      "nonEmpty": false,
+      "classification": "ACTIVE",
+      "auth": "authenticated client session (t header); values not stored",
+      "sideEffect": "none; historical list query",
+      "ts": "2026-09-03T06:39:55.877Z"
+    },
+    {
+      "page": "Transaction / Withdraw",
+      "pageRoute": "/transaction-record/transaction/withdraw",
+      "action": "select Last 7 days",
+      "method": "GET",
+      "normalizedPath": "/finance/withdraw/list",
+      "timeParameters": {
+        "time_flag": "7",
+        "page": "1",
+        "page_size": "10"
+      },
+      "timeUnit": "time_flag interpreted from selected UI day-range label",
+      "timezone": "Asia/Manila",
+      "httpStatus": 200,
+      "businessStatus": true,
+      "responseStructure": {
+        "topLevelKeys": [
+          "data",
+          "status"
+        ],
+        "dataType": "object",
+        "dataKeys": [
+          "d",
+          "s",
+          "t"
+        ],
+        "arrayPaths": [
+          "data.d"
+        ]
+      },
+      "recordCount": 9,
+      "totalCount": 9,
+      "nonEmpty": true,
+      "classification": "ACTIVE",
+      "auth": "authenticated client session (t header); values not stored",
+      "sideEffect": "none; historical list query",
+      "ts": "2026-09-03T06:39:57.256Z",
+      "requestedRange": "7d",
+      "selectedUiLabel": "Last 7 days"
+    },
+    {
+      "page": "Bet History",
+      "pageRoute": "/bet-record",
+      "action": "page initialization",
+      "method": "GET",
+      "normalizedPath": "/member/game/bet/list",
+      "timeParameters": {
+        "time_flag": "0",
+        "page": "1",
+        "page_size": "10"
+      },
+      "timeUnit": "time_flag interpreted from selected UI day-range label",
+      "timezone": "Asia/Manila",
+      "httpStatus": 200,
+      "businessStatus": true,
+      "responseStructure": {
+        "topLevelKeys": [
+          "data",
+          "status"
+        ],
+        "dataType": "object",
+        "dataKeys": [
+          "bt",
+          "d",
+          "t",
+          "wt"
+        ],
+        "arrayPaths": []
+      },
+      "recordCount": 0,
+      "totalCount": 0,
+      "nonEmpty": false,
+      "classification": "ACTIVE",
+      "auth": "authenticated client session (t header); values not stored",
+      "sideEffect": "none; historical list query",
+      "ts": "2026-09-03T06:39:57.700Z"
+    },
+    {
+      "page": "Bet History",
+      "pageRoute": "/bet-record",
+      "action": "select Last 7 days",
+      "method": "GET",
+      "normalizedPath": "/member/game/bet/list",
+      "timeParameters": {
+        "time_flag": "7",
+        "page": "1",
+        "page_size": "10"
+      },
+      "timeUnit": "time_flag interpreted from selected UI day-range label",
+      "timezone": "Asia/Manila",
+      "httpStatus": 200,
+      "businessStatus": true,
+      "responseStructure": {
+        "topLevelKeys": [
+          "data",
+          "status"
+        ],
+        "dataType": "object",
+        "dataKeys": [
+          "bt",
+          "d",
+          "t",
+          "wt"
+        ],
+        "arrayPaths": [
+          "data.d"
+        ]
+      },
+      "recordCount": 10,
+      "totalCount": 102,
+      "nonEmpty": true,
+      "classification": "ACTIVE",
+      "auth": "authenticated client session (t header); values not stored",
+      "sideEffect": "none; historical list query",
+      "ts": "2026-09-03T06:39:59.076Z",
+      "requestedRange": "7d",
+      "selectedUiLabel": "Last 7 days"
+    },
+    {
+      "page": "Bonus",
+      "pageRoute": "/transaction-record/bonus",
+      "action": "page initialization",
+      "method": "GET",
+      "normalizedPath": "/promo/blindbox/transaction/bonus",
+      "timeParameters": {
+        "time_flag": "0",
+        "page": "1",
+        "page_size": "10"
+      },
+      "timeUnit": "time_flag interpreted from selected UI day-range label",
+      "timezone": "Asia/Manila",
+      "httpStatus": 200,
+      "businessStatus": true,
+      "responseStructure": {
+        "topLevelKeys": [
+          "data",
+          "status"
+        ],
+        "dataType": "object",
+        "dataKeys": [
+          "list",
+          "t"
+        ],
+        "arrayPaths": []
+      },
+      "recordCount": 0,
+      "totalCount": 0,
+      "nonEmpty": false,
+      "classification": "ACTIVE",
+      "auth": "authenticated client session (t header); values not stored",
+      "sideEffect": "none; historical list query",
+      "ts": "2026-09-03T06:40:01.335Z"
+    },
+    {
+      "page": "Bonus",
+      "pageRoute": "/transaction-record/bonus",
+      "action": "select Last 7 days",
+      "method": "GET",
+      "normalizedPath": "/promo/blindbox/transaction/bonus",
+      "timeParameters": {
+        "time_flag": "7",
+        "page": "1",
+        "page_size": "10"
+      },
+      "timeUnit": "time_flag interpreted from selected UI day-range label",
+      "timezone": "Asia/Manila",
+      "httpStatus": 200,
+      "businessStatus": true,
+      "responseStructure": {
+        "topLevelKeys": [
+          "data",
+          "status"
+        ],
+        "dataType": "object",
+        "dataKeys": [
+          "list",
+          "t"
+        ],
+        "arrayPaths": [
+          "data.list"
+        ]
+      },
+      "recordCount": 2,
+      "totalCount": 2,
+      "nonEmpty": true,
+      "classification": "ACTIVE",
+      "auth": "authenticated client session (t header); values not stored",
+      "sideEffect": "none; historical list query",
+      "ts": "2026-09-03T06:40:02.717Z",
+      "requestedRange": "7d",
+      "selectedUiLabel": "Last 7 days"
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "generated_at": "2026-09-03T05:41:14.218Z",
+  "environment": "FAT",
+  "completed_pages": 57,
+  "total_pages": 57,
+  "raw_network_events": 844,
+  "deduplicated_page_action_endpoints": 423,
+  "unique_method_paths": 78,
+  "classifications": {
+    "ACTIVE": 350,
+    "ACTIVE_FAILED": 1,
+    "UNDOCUMENTED_ACTIVE": 72
+  },
+  "page_errors": 0,
+  "fatal_error": null
+}

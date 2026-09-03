@@ -1,0 +1,36 @@
+{
+  "scannedAt": "2026-09-03T05:34:25.935Z",
+  "environment": "FAT",
+  "pages": 19,
+  "actions": 84,
+  "completedActions": 68,
+  "failedActions": 8,
+  "blockedActions": 8,
+  "failedOrBlockedActions": 16,
+  "potentialSideEffectActions": 1,
+  "rawXhrFetchRequests": 1285,
+  "firstPartyBusinessRequests": 1059,
+  "uniqueFirstPartyBusinessEndpoints": 53,
+  "mappingRows": 796,
+  "mappingRowClassificationCounts": {
+    "ACTIVE": 538,
+    "ACTIVE_FAILED": 27,
+    "MISCLASSIFIED": 156,
+    "THIRD_PARTY": 75
+  },
+  "uniqueEndpointClassificationCounts": {
+    "ACTIVE": 42,
+    "ACTIVE_FAILED": 1,
+    "MISCLASSIFIED": 10,
+    "THIRD_PARTY": 7
+  },
+  "documentedClientEndpoints": 170,
+  "documentedClientObserved": 42,
+  "documentedClientUnverified": 128,
+  "notes": [
+    "The earlier navigation-polluted FAQ/Bonus run was overwritten and is not included.",
+    "Discovery defect: Daily task Go 9 unexpectedly emitted GET /promo/task/daily/claim on an existing test member. It is recorded as POTENTIAL_REWARD_CLAIM with unavailable before state and must not be replayed.",
+    "ACTIVE means successfully observed real FAT UI traffic; levels are intentionally not assigned yet.",
+    "Failed UI controls remain in page progress and are not promoted to successful endpoint mappings."
+  ]
+}

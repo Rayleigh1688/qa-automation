@@ -1,0 +1,27 @@
+{
+  "captured_at": "2026-09-03T18:25:00+08:00",
+  "environment": "FAT",
+  "target_ref": "FAT-MEMBER-REV-01",
+  "uid_ref": "FAT-UID-REV-01",
+  "source": "read-only MySQL query against fat.fb_members_turnover",
+  "filter": {
+    "uid_source": "mode-0600 runtime target file; value not persisted",
+    "remark": "FAT reversible turnover restore"
+  },
+  "matched_rows": 1,
+  "completed_rows": 1,
+  "row_summary": {
+    "turnover_type": 4,
+    "state": 2,
+    "turnover": "1.00",
+    "finished": "1.00",
+    "locked": "0.00",
+    "multiple": "1.00",
+    "game_restriction_entry_count": 5731,
+    "timestamp_unit_digits": 13
+  },
+  "interpretation": "The current-run add created one risk-adjustment turnover row; the matching sub completed the same row and changed its final remark to the recovery reason. No active amount or lock remains.",
+  "database_writes": 0,
+  "raw_phone_or_uid_persisted": false,
+  "secrets_persisted": false
+}

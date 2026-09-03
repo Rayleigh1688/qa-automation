@@ -554,12 +554,18 @@ def prepare_login_password(
 
 def main() -> None:
     parser = argparse.ArgumentParser(
-        description="Create one test member, approve KYC, and credit one controlled deposit."
+        description="Create one test member and optionally stop after registration or KYC approval."
     )
     parser.add_argument("--env", default=os.environ.get("ENV_FILE", ".env.fat"))
     parser.add_argument("--start-phone", default="")
     parser.add_argument("--scan-limit", type=int, default=200)
     parser.add_argument("--execute", action="store_true", help="Perform registration, KYC approval, and deposit credit")
+    parser.add_argument(
+        "--stop-after",
+        choices=("register", "kyc", "deposit"),
+        default="deposit",
+        help="Stop the controlled initialization after the selected successful stage",
+    )
     parser.add_argument(
         "--prepare-withdrawal",
         action="store_true",
@@ -699,7 +705,7 @@ def main() -> None:
             return
 
         image_path = Path(args.kyc_image or os.environ.get("KYC_IMAGE") or "21000000008072.webp")
-        if not image_path.is_file():
+        if args.stop_after != "register" and not image_path.is_file():
             raise ProvisioningError(f"KYC image does not exist: {image_path}")
         if exact_member_exists(args, phone):
             raise ProvisioningError("selected phone became registered before execution")
@@ -742,6 +748,12 @@ def main() -> None:
         summary["stages"]["register"] = "PASS"
         secure_write(summary_path, summary)
         print("stage_register=PASS")
+        if args.stop_after == "register":
+            summary["status"] = "PASS"
+            summary["stopped_after"] = "register"
+            secure_write(summary_path, summary)
+            print(f"provisioning=PASS stopped_after=register summary={summary_path}")
+            return
 
         kyc_records = run_stage(
             "kyc",
@@ -769,6 +781,12 @@ def main() -> None:
         summary["stages"]["kyc"] = "PASS"
         secure_write(summary_path, summary)
         print("stage_kyc=PASS")
+        if args.stop_after == "kyc":
+            summary["status"] = "PASS"
+            summary["stopped_after"] = "kyc"
+            secure_write(summary_path, summary)
+            print(f"provisioning=PASS stopped_after=kyc summary={summary_path}")
+            return
 
         deposit_arguments = [
             "--env", args.env,

@@ -1,0 +1,3550 @@
+{
+  "captured_at": "2026-09-03T10:08:26.898Z",
+  "environment": "FAT",
+  "lane": "A_member_list_readonly",
+  "page": "Member List",
+  "menu": "Member",
+  "route": "/member-center/list",
+  "dom_inventory": {
+    "form_items": [
+      {
+        "index": 0,
+        "label": "Phone Number",
+        "input": {
+          "type": "text",
+          "placeholder": "Please enter"
+        },
+        "select": false
+      },
+      {
+        "index": 1,
+        "label": "Member Status",
+        "input": {
+          "type": "search",
+          "placeholder": ""
+        },
+        "select": true
+      },
+      {
+        "index": 2,
+        "label": "Agent Qualification",
+        "input": {
+          "type": "search",
+          "placeholder": ""
+        },
+        "select": true
+      },
+      {
+        "index": 3,
+        "label": "Account Type",
+        "input": {
+          "type": "search",
+          "placeholder": ""
+        },
+        "select": true
+      },
+      {
+        "index": 4,
+        "label": "Registration IP",
+        "input": {
+          "type": "text",
+          "placeholder": "Please enter"
+        },
+        "select": false
+      },
+      {
+        "index": 5,
+        "label": "Superior Agent Phone",
+        "input": {
+          "type": "text",
+          "placeholder": "Please enter"
+        },
+        "select": false
+      },
+      {
+        "index": 6,
+        "label": "Member Level",
+        "input": {
+          "type": "search",
+          "placeholder": ""
+        },
+        "select": true
+      },
+      {
+        "index": 7,
+        "label": "Creation Time",
+        "input": {
+          "type": "input",
+          "placeholder": "Start Date"
+        },
+        "select": false
+      },
+      {
+        "index": 8,
+        "label": "First deposit time",
+        "input": {
+          "type": "input",
+          "placeholder": "Start Date"
+        },
+        "select": false
+      },
+      {
+        "index": 9,
+        "label": "Last deposit time",
+        "input": {
+          "type": "input",
+          "placeholder": "Start Date"
+        },
+        "select": false
+      },
+      {
+        "index": 10,
+        "label": "Last withdrawal time",
+        "input": {
+          "type": "input",
+          "placeholder": "Start Date"
+        },
+        "select": false
+      },
+      {
+        "index": 11,
+        "label": "KYC Status",
+        "input": {
+          "type": "search",
+          "placeholder": ""
+        },
+        "select": true
+      },
+      {
+        "index": 12,
+        "label": "Restricted Status",
+        "input": {
+          "type": "search",
+          "placeholder": ""
+        },
+        "select": true
+      },
+      {
+        "index": 13,
+        "label": "Referrer Information",
+        "input": {
+          "type": "search",
+          "placeholder": ""
+        },
+        "select": true
+      },
+      {
+        "index": 14,
+        "label": "Deposit Count",
+        "input": {
+          "type": "input",
+          "placeholder": "Minimum Value"
+        },
+        "select": false
+      },
+      {
+        "index": 15,
+        "label": "邀请人",
+        "input": {
+          "type": "search",
+          "placeholder": ""
+        },
+        "select": true
+      },
+      {
+        "index": 16,
+        "label": "Lead Source",
+        "input": {
+          "type": "search",
+          "placeholder": ""
+        },
+        "select": true
+      },
+      {
+        "index": 17,
+        "label": "",
+        "input": null,
+        "select": false
+      }
+    ],
+    "buttons": [
+      "Batch query",
+      "Reset",
+      "Query",
+      "Add Member",
+      "Export",
+      "XP Growth Log",
+      "Transfer",
+      "T5",
+      "<redacted-dynamic-label>",
+      "H5",
+      "<redacted-dynamic-label>",
+      "0.00",
+      "0.00",
+      "P 0.00",
+      "P 0.00",
+      "View Details",
+      "Unblock",
+      "Risk Control",
+      "Reset Password",
+      "Convert to Agent",
+      "XP Growth Log",
+      "Transfer",
+      "T5",
+      "<redacted-dynamic-label>",
+      "H5",
+      "<redacted-dynamic-label>",
+      "0.00",
+      "0.00",
+      "P 0.00",
+      "P 0.00",
+      "View Details",
+      "Unblock",
+      "Risk Control",
+      "Reset Password",
+      "Convert to Agent",
+      "XP Growth Log",
+      "Transfer",
+      "T5",
+      "<redacted-dynamic-label>",
+      "H5",
+      "<redacted-dynamic-label>",
+      "0.00",
+      "0.00",
+      "P 0.00",
+      "P 0.00",
+      "View Details",
+      "Unblock",
+      "Risk Control",
+      "Reset Password",
+      "Convert to Agent",
+      "XP Growth Log",
+      "Transfer",
+      "T5",
+      "<redacted-dynamic-label>",
+      "H5",
+      "<redacted-dynamic-label>",
+      "0.00",
+      "0.00",
+      "P 0.00",
+      "P 0.00",
+      "View Details",
+      "Unblock",
+      "Risk Control",
+      "Reset Password",
+      "Convert to Agent",
+      "XP Growth Log",
+      "Transfer",
+      "T5",
+      "<redacted-dynamic-label>",
+      "H5",
+      "<redacted-dynamic-label>",
+      "0.00",
+      "0.00",
+      "P 0.00",
+      "P 0.00",
+      "View Details",
+      "Unblock",
+      "Risk Control",
+      "Reset Password",
+      "Convert to Agent",
+      "XP Growth Log",
+      "Transfer",
+      "T5",
+      "<redacted-dynamic-label>",
+      "H5",
+      "<redacted-dynamic-label>",
+      "0.00",
+      "0.00",
+      "P 0.00",
+      "P 0.00",
+      "View Details",
+      "Unblock",
+      "Risk Control",
+      "Reset Password",
+      "Convert to Agent",
+      "XP Growth Log",
+      "Transfer",
+      "T5",
+      "<redacted-dynamic-label>",
+      "H5",
+      "<redacted-dynamic-label>",
+      "0.00",
+      "0.00",
+      "P 0.00",
+      "P 0.00",
+      "View Details",
+      "Unblock",
+      "Risk Control",
+      "Reset Password",
+      "Convert to Agent",
+      "XP Growth Log",
+      "Transfer",
+      "T5",
+      "<redacted-dynamic-label>",
+      "H5",
+      "<redacted-dynamic-label>",
+      "0.00",
+      "0.00",
+      "P 0.00",
+      "P 0.00",
+      "View Details",
+      "Unblock",
+      "Risk Control",
+      "Reset Password",
+      "Convert to Agent",
+      "XP Growth Log",
+      "Transfer",
+      "T5",
+      "<redacted-dynamic-label>",
+      "H5",
+      "<redacted-dynamic-label>",
+      "0.00",
+      "0.00",
+      "P 0.00",
+      "P 0.00",
+      "View Details",
+      "Unblock",
+      "Risk Control",
+      "Reset Password",
+      "Convert to Agent",
+      "XP Growth Log",
+      "Transfer",
+      "T5",
+      "<redacted-dynamic-label>",
+      "PC",
+      "<redacted-dynamic-label>",
+      "500.00",
+      "0.00",
+      "P 708.00",
+      "P 0.00",
+      "View Details",
+      "Unblock",
+      "Risk Control",
+      "Reset Password",
+      "Convert to Agent",
+      "XP Growth Log",
+      "<redacted-dynamic-label>",
+      "T5",
+      "<redacted-dynamic-label>",
+      "PC",
+      "<redacted-dynamic-label>",
+      "0.00",
+      "0.00",
+      "P 0.00",
+      "P 0.00",
+      "View Details",
+      "Unblock",
+      "Risk Control",
+      "Reset Password",
+      "Convert to Agent",
+      "XP Growth Log",
+      "Transfer",
+      "T5",
+      "<redacted-dynamic-label>",
+      "H5",
+      "<redacted-dynamic-label>",
+      "0.00",
+      "0.00",
+      "P 0.00",
+      "P 0.00",
+      "View Details",
+      "Unblock",
+      "Risk Control",
+      "Reset Password",
+      "Convert to Agent",
+      "XP Growth Log",
+      "Transfer",
+      "T5",
+      "<redacted-dynamic-label>",
+      "H5",
+      "<redacted-dynamic-label>",
+      "0.00",
+      "0.00",
+      "P 0.00",
+      "P 0.00",
+      "View Details",
+      "Unblock",
+      "Risk Control",
+      "Reset Password",
+      "Convert to Agent"
+    ],
+    "pagination": {
+      "items": [
+        "1"
+      ],
+      "page_size_text": "20 / page"
+    },
+    "row_buttons": [
+      "XP Growth Log",
+      "Transfer",
+      "T5",
+      "<redacted-dynamic-label>",
+      "H5",
+      "0.00",
+      "P 0.00",
+      "View Details",
+      "Unblock",
+      "Risk Control",
+      "Reset Password",
+      "Convert to Agent"
+    ]
+  },
+  "select_inventories": [
+    {
+      "label": "Member Status",
+      "status": "OPTIONS_ENUMERATED",
+      "options": [
+        "Basic",
+        "Verifying",
+        "Verified"
+      ]
+    },
+    {
+      "label": "Agent Qualification",
+      "status": "OPTIONS_ENUMERATED",
+      "options": [
+        "All",
+        "Enabled",
+        "Disabled"
+      ]
+    },
+    {
+      "label": "Account Type",
+      "status": "OPTIONS_ENUMERATED",
+      "options": [
+        "Regular Member",
+        "Test Member",
+        "Agency",
+        "Test Agency"
+      ]
+    },
+    {
+      "label": "Member Level",
+      "status": "OPTIONS_ENUMERATED",
+      "options": [
+        "VIP0",
+        "VIP1",
+        "VIP2",
+        "VIP3",
+        "VIP4",
+        "VIP5",
+        "VIP6",
+        "VIP7",
+        "VIP8",
+        "VIP9"
+      ]
+    },
+    {
+      "label": "KYC Status",
+      "status": "OPTIONS_ENUMERATED",
+      "options": [
+        "Pending",
+        "Under Review",
+        "Resubmit Required",
+        "Approved"
+      ]
+    },
+    {
+      "label": "Restricted Status",
+      "status": "OPTIONS_ENUMERATED",
+      "options": [
+        "Risk",
+        "Frozen",
+        "Banned",
+        "Block"
+      ]
+    },
+    {
+      "label": "Referrer Information",
+      "status": "OPTIONS_ENUMERATED",
+      "options": [
+        "T1",
+        "T2",
+        "T3",
+        "T4",
+        "T5"
+      ]
+    },
+    {
+      "label": "邀请人",
+      "status": "OPTIONS_ENUMERATED",
+      "options": [
+        "Has inviter",
+        "No inviter"
+      ]
+    },
+    {
+      "label": "Lead Source",
+      "status": "OPTIONS_ENUMERATED",
+      "options": [
+        "官方渠道",
+        "Rayleigh-常规",
+        "Rayleigh-FB-API",
+        "Rayleigh-FB-Pixel",
+        "Rayleigh-H5",
+        "Rayleigh-001",
+        "Rayleigh-Donwload",
+        "im bigbig one",
+        "Rayleigh-APP",
+        "adjust"
+      ]
+    }
+  ],
+  "batch_form": {
+    "presentation": "overlay",
+    "title": "Batch query members",
+    "form_items": [],
+    "buttons": [
+      "Cancel",
+      "Apply filter"
+    ]
+  },
+  "actions": [
+    {
+      "name": "member_list:filter:Phone Number",
+      "status": "EXECUTED_READ_ONLY",
+      "network_event_indexes": [
+        18,
+        19
+      ],
+      "side_effect": "none"
+    },
+    {
+      "name": "member_list:filter:Registration IP",
+      "status": "EXECUTED_READ_ONLY",
+      "network_event_indexes": [
+        21,
+        22
+      ],
+      "side_effect": "none"
+    },
+    {
+      "name": "member_list:filter:Superior Agent Phone",
+      "status": "EXECUTED_READ_ONLY",
+      "network_event_indexes": [
+        24,
+        25
+      ],
+      "side_effect": "none"
+    },
+    {
+      "name": "member_list:filter:Creation Time",
+      "status": "EXECUTED_READ_ONLY",
+      "network_event_indexes": [
+        27,
+        28
+      ],
+      "side_effect": "none"
+    },
+    {
+      "name": "member_list:filter:First deposit time",
+      "status": "EXECUTED_READ_ONLY",
+      "network_event_indexes": [
+        30,
+        31
+      ],
+      "side_effect": "none"
+    },
+    {
+      "name": "member_list:filter:Last deposit time",
+      "status": "EXECUTED_READ_ONLY",
+      "network_event_indexes": [
+        32,
+        33
+      ],
+      "side_effect": "none"
+    },
+    {
+      "name": "member_list:filter:Last withdrawal time",
+      "status": "EXECUTED_READ_ONLY",
+      "network_event_indexes": [
+        35,
+        36
+      ],
+      "side_effect": "none"
+    },
+    {
+      "name": "member_list:filter:Deposit Count",
+      "status": "EXECUTED_READ_ONLY",
+      "network_event_indexes": [
+        37,
+        38
+      ],
+      "side_effect": "none"
+    },
+    {
+      "name": "member_list:filter:Member Status:Basic",
+      "status": "EXECUTED_READ_ONLY",
+      "network_event_indexes": [
+        40,
+        41
+      ],
+      "side_effect": "none"
+    },
+    {
+      "name": "member_list:filter:Agent Qualification:Enabled",
+      "status": "EXECUTED_READ_ONLY",
+      "network_event_indexes": [
+        43,
+        44
+      ],
+      "side_effect": "none"
+    },
+    {
+      "name": "member_list:filter:Account Type:Regular Member",
+      "status": "EXECUTED_READ_ONLY",
+      "network_event_indexes": [
+        46,
+        47
+      ],
+      "side_effect": "none"
+    },
+    {
+      "name": "member_list:filter:Member Level:VIP0",
+      "status": "EXECUTED_READ_ONLY",
+      "network_event_indexes": [
+        49,
+        51
+      ],
+      "side_effect": "none"
+    },
+    {
+      "name": "member_list:filter:KYC Status:Pending",
+      "status": "EXECUTED_READ_ONLY",
+      "network_event_indexes": [
+        53,
+        54
+      ],
+      "side_effect": "none"
+    },
+    {
+      "name": "member_list:filter:Restricted Status:Risk",
+      "status": "EXECUTED_READ_ONLY",
+      "network_event_indexes": [
+        56,
+        57
+      ],
+      "side_effect": "none"
+    },
+    {
+      "name": "member_list:filter:Referrer Information:T1",
+      "status": "EXECUTED_READ_ONLY",
+      "network_event_indexes": [
+        59,
+        60
+      ],
+      "side_effect": "none"
+    },
+    {
+      "name": "member_list:filter:邀请人:Has inviter",
+      "status": "EXECUTED_READ_ONLY",
+      "network_event_indexes": [
+        62,
+        63
+      ],
+      "side_effect": "none"
+    },
+    {
+      "name": "member_list:filter:Level:Level 1",
+      "status": "EXECUTED_READ_ONLY",
+      "network_event_indexes": [
+        65,
+        66
+      ],
+      "side_effect": "none"
+    },
+    {
+      "name": "member_list:filter:Lead Source:官方渠道",
+      "status": "EXECUTED_READ_ONLY",
+      "network_event_indexes": [
+        68,
+        69
+      ],
+      "side_effect": "none"
+    },
+    {
+      "name": "member_list:combined_filter:text_plus_enum",
+      "status": "EXECUTED_READ_ONLY",
+      "network_event_indexes": [
+        71,
+        72
+      ],
+      "side_effect": "none"
+    },
+    {
+      "name": "member_list:Export bounded current-window result",
+      "status": "CLICKED_NO_INTERFACE_EVIDENCE",
+      "trigger_status": "NOT_OBSERVED",
+      "save_confirmation": "NOT_REQUIRED_NOT_ATTEMPTED",
+      "network_event_indexes": [
+        90,
+        90
+      ],
+      "side_effect": "none",
+      "error": "Prior semantic click produced no captured request/response or download event; not retried per export policy"
+    },
+    {
+      "name": "member_list:Batch query bounded synthetic no-match",
+      "status": "EXECUTED_READ_ONLY",
+      "network_event_indexes": [
+        108,
+        110
+      ],
+      "side_effect": "none"
+    },
+    {
+      "name": "member_list:pagination:page_size_change",
+      "status": "EXECUTED_READ_ONLY",
+      "network_event_indexes": [
+        128,
+        129
+      ],
+      "side_effect": "none"
+    },
+    {
+      "name": "member_list:pagination:page_2",
+      "status": "EXECUTED_READ_ONLY",
+      "network_event_indexes": [
+        129,
+        130
+      ],
+      "side_effect": "none"
+    }
+  ],
+  "row_actions": [
+    {
+      "action": "XP Growth Log",
+      "status": "OPENED_READ_ONLY",
+      "route_after": "/member-center/detail/{uid}",
+      "network_event_indexes": [
+        130,
+        132
+      ]
+    },
+    {
+      "action": "View Details",
+      "status": "OPENED_READ_ONLY",
+      "route_after": "/member-center/detail/{uid}",
+      "network_event_indexes": [
+        135,
+        135
+      ]
+    },
+    {
+      "action": "Transfer",
+      "status": "BLOCKED_DATA_SCOPE",
+      "reason": "No A-line dedicated write member; control intentionally not clicked"
+    },
+    {
+      "action": "Risk Control",
+      "status": "BLOCKED_DATA_SCOPE",
+      "reason": "No A-line dedicated write member; control intentionally not clicked"
+    },
+    {
+      "action": "Reset Password",
+      "status": "BLOCKED_DATA_SCOPE",
+      "reason": "No A-line dedicated write member; control intentionally not clicked"
+    },
+    {
+      "action": "Convert to Agent",
+      "status": "BLOCKED_DATA_SCOPE",
+      "reason": "No A-line dedicated write member; control intentionally not clicked"
+    },
+    {
+      "action": "Unblock",
+      "status": "BLOCKED_DATA_SCOPE",
+      "reason": "No A-line dedicated write member; control intentionally not clicked"
+    }
+  ],
+  "network": [
+    {
+      "action": "member_list:initialization from reused storage state",
+      "method": "GET",
+      "path": "/admin/me/detail",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "avatar",
+        "bind_time",
+        "button_permission_ids",
+        "cmpl",
+        "create_name",
+        "created_at",
+        "email",
+        "google_secret",
+        "group_id",
+        "id",
+        "last_login_ip",
+        "last_login_time",
+        "login_password",
+        "nickname",
+        "operator_name",
+        "pwd_edit_time",
+        "roles",
+        "sid",
+        "status",
+        "stores",
+        "updated_at",
+        "username"
+      ],
+      "record_count": null
+    },
+    {
+      "action": "member_list:initialization from reused storage state",
+      "method": "GET",
+      "path": "/admin/channel/manage/dict",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "list",
+      "response_keys": [],
+      "record_count": 22
+    },
+    {
+      "action": "member_list:initialization from reused storage state",
+      "method": "GET",
+      "path": "/admin/sys/config/compliance/status",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "effective_open",
+        "effective_reason",
+        "effective_status_msg"
+      ],
+      "record_count": null
+    },
+    {
+      "action": "member_list:initialization from reused storage state",
+      "method": "GET",
+      "path": "/admin/notify/audit/alarm",
+      "query_fields": [
+        "t"
+      ],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "bonus_review_pending",
+        "feedback_pending",
+        "kyc_pending",
+        "mall_order_pending",
+        "withdraw_pending"
+      ],
+      "record_count": null
+    },
+    {
+      "action": "member_list:initialization from reused storage state",
+      "method": "POST",
+      "path": "/admin/gameclass/list",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ],
+      "record_count": 7
+    },
+    {
+      "action": "member_list:initialization from reused storage state",
+      "method": "POST",
+      "path": "/admin/member/list",
+      "query_fields": [],
+      "body_fields": [
+        "end_time",
+        "page",
+        "page_size",
+        "start_time"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "d",
+        "page",
+        "page_size",
+        "summary",
+        "t"
+      ],
+      "record_count": 13
+    },
+    {
+      "action": "member_list:initialization from reused storage state",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "ids",
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ],
+      "record_count": 500
+    },
+    {
+      "action": "member_list:initialization from reused storage state",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "ids",
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ],
+      "record_count": 500
+    },
+    {
+      "action": "member_list:initialization from reused storage state",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "ids",
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ],
+      "record_count": 500
+    },
+    {
+      "action": "member_list:initialization from reused storage state",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "ids",
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ],
+      "record_count": 500
+    },
+    {
+      "action": "member_list:initialization from reused storage state",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "ids",
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ],
+      "record_count": 500
+    },
+    {
+      "action": "member_list:initialization from reused storage state",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "ids",
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ],
+      "record_count": 500
+    },
+    {
+      "action": "member_list:initialization from reused storage state",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "ids",
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ],
+      "record_count": 500
+    },
+    {
+      "action": "member_list:initialization from reused storage state",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "ids",
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ],
+      "record_count": 500
+    },
+    {
+      "action": "member_list:initialization from reused storage state",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "ids",
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ],
+      "record_count": 500
+    },
+    {
+      "action": "member_list:initialization from reused storage state",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "ids",
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ],
+      "record_count": 500
+    },
+    {
+      "action": "member_list:initialization from reused storage state",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "ids",
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ],
+      "record_count": 500
+    },
+    {
+      "action": "member_list:initialization from reused storage state",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "ids",
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ],
+      "record_count": 231
+    },
+    {
+      "action": "member_list:filter:Phone Number",
+      "method": "POST",
+      "path": "/admin/member/list",
+      "query_fields": [],
+      "body_fields": [
+        "page",
+        "page_size",
+        "phone"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "d",
+        "page",
+        "page_size",
+        "summary",
+        "t"
+      ],
+      "record_count": 0
+    },
+    {
+      "action": "member_list:filter:Phone Number",
+      "method": "GET",
+      "path": "/admin/channel/manage/dict",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "list",
+      "response_keys": [],
+      "record_count": 22
+    },
+    {
+      "action": "member_list:filter:Phone Number",
+      "method": "POST",
+      "path": "/admin/member/list",
+      "query_fields": [],
+      "body_fields": [
+        "end_time",
+        "page",
+        "page_size",
+        "start_time"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "d",
+        "page",
+        "page_size",
+        "summary",
+        "t"
+      ],
+      "record_count": 13
+    },
+    {
+      "action": "member_list:filter:Registration IP",
+      "method": "POST",
+      "path": "/admin/member/list",
+      "query_fields": [],
+      "body_fields": [
+        "end_time",
+        "page",
+        "page_size",
+        "reg_ip",
+        "start_time"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "d",
+        "page",
+        "page_size",
+        "summary",
+        "t"
+      ],
+      "record_count": null
+    },
+    {
+      "action": "member_list:filter:Registration IP",
+      "method": "GET",
+      "path": "/admin/channel/manage/dict",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "list",
+      "response_keys": [],
+      "record_count": 22
+    },
+    {
+      "action": "member_list:filter:Registration IP",
+      "method": "POST",
+      "path": "/admin/member/list",
+      "query_fields": [],
+      "body_fields": [
+        "end_time",
+        "page",
+        "page_size",
+        "start_time"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "d",
+        "page",
+        "page_size",
+        "summary",
+        "t"
+      ],
+      "record_count": 13
+    },
+    {
+      "action": "member_list:filter:Superior Agent Phone",
+      "method": "POST",
+      "path": "/admin/member/list",
+      "query_fields": [],
+      "body_fields": [
+        "page",
+        "page_size",
+        "parent_phone"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "d",
+        "page",
+        "page_size",
+        "summary",
+        "t"
+      ],
+      "record_count": 0
+    },
+    {
+      "action": "member_list:filter:Superior Agent Phone",
+      "method": "GET",
+      "path": "/admin/channel/manage/dict",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "list",
+      "response_keys": [],
+      "record_count": 22
+    },
+    {
+      "action": "member_list:filter:Superior Agent Phone",
+      "method": "POST",
+      "path": "/admin/member/list",
+      "query_fields": [],
+      "body_fields": [
+        "end_time",
+        "page",
+        "page_size",
+        "start_time"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "d",
+        "page",
+        "page_size",
+        "summary",
+        "t"
+      ],
+      "record_count": 13
+    },
+    {
+      "action": "member_list:filter:Creation Time",
+      "method": "POST",
+      "path": "/admin/member/list",
+      "query_fields": [],
+      "body_fields": [
+        "end_time",
+        "page",
+        "page_size",
+        "start_time"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "d",
+        "page",
+        "page_size",
+        "summary",
+        "t"
+      ],
+      "record_count": 13
+    },
+    {
+      "action": "member_list:filter:Creation Time",
+      "method": "GET",
+      "path": "/admin/channel/manage/dict",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "list",
+      "response_keys": [],
+      "record_count": 22
+    },
+    {
+      "action": "member_list:filter:Creation Time",
+      "method": "POST",
+      "path": "/admin/member/list",
+      "query_fields": [],
+      "body_fields": [
+        "end_time",
+        "page",
+        "page_size",
+        "start_time"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "d",
+        "page",
+        "page_size",
+        "summary",
+        "t"
+      ],
+      "record_count": 13
+    },
+    {
+      "action": "member_list:filter:First deposit time",
+      "method": "POST",
+      "path": "/admin/member/list",
+      "query_fields": [],
+      "body_fields": [
+        "end_time",
+        "page",
+        "page_size",
+        "start_time"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "d",
+        "page",
+        "page_size",
+        "summary",
+        "t"
+      ],
+      "record_count": 13
+    },
+    {
+      "action": "member_list:filter:First deposit time",
+      "method": "POST",
+      "path": "/admin/member/list",
+      "query_fields": [],
+      "body_fields": [
+        "end_time",
+        "page",
+        "page_size",
+        "start_time"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "d",
+        "page",
+        "page_size",
+        "summary",
+        "t"
+      ],
+      "record_count": 13
+    },
+    {
+      "action": "member_list:filter:Last deposit time",
+      "method": "POST",
+      "path": "/admin/member/list",
+      "query_fields": [],
+      "body_fields": [
+        "end_time",
+        "page",
+        "page_size",
+        "start_time"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "d",
+        "page",
+        "page_size",
+        "summary",
+        "t"
+      ],
+      "record_count": 13
+    },
+    {
+      "action": "member_list:filter:Last deposit time",
+      "method": "GET",
+      "path": "/admin/channel/manage/dict",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "list",
+      "response_keys": [],
+      "record_count": 22
+    },
+    {
+      "action": "member_list:filter:Last deposit time",
+      "method": "POST",
+      "path": "/admin/member/list",
+      "query_fields": [],
+      "body_fields": [
+        "end_time",
+        "page",
+        "page_size",
+        "start_time"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "d",
+        "page",
+        "page_size",
+        "summary",
+        "t"
+      ],
+      "record_count": 13
+    },
+    {
+      "action": "member_list:filter:Last withdrawal time",
+      "method": "POST",
+      "path": "/admin/member/list",
+      "query_fields": [],
+      "body_fields": [
+        "end_time",
+        "page",
+        "page_size",
+        "start_time"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "d",
+        "page",
+        "page_size",
+        "summary",
+        "t"
+      ],
+      "record_count": 13
+    },
+    {
+      "action": "member_list:filter:Last withdrawal time",
+      "method": "POST",
+      "path": "/admin/member/list",
+      "query_fields": [],
+      "body_fields": [
+        "end_time",
+        "page",
+        "page_size",
+        "start_time"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "d",
+        "page",
+        "page_size",
+        "summary",
+        "t"
+      ],
+      "record_count": 13
+    },
+    {
+      "action": "member_list:filter:Deposit Count",
+      "method": "POST",
+      "path": "/admin/member/list",
+      "query_fields": [],
+      "body_fields": [
+        "end_time",
+        "page",
+        "page_size",
+        "start_time"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "d",
+        "page",
+        "page_size",
+        "summary",
+        "t"
+      ],
+      "record_count": 13
+    },
+    {
+      "action": "member_list:filter:Deposit Count",
+      "method": "GET",
+      "path": "/admin/channel/manage/dict",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "list",
+      "response_keys": [],
+      "record_count": 22
+    },
+    {
+      "action": "member_list:filter:Deposit Count",
+      "method": "POST",
+      "path": "/admin/member/list",
+      "query_fields": [],
+      "body_fields": [
+        "end_time",
+        "page",
+        "page_size",
+        "start_time"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "d",
+        "page",
+        "page_size",
+        "summary",
+        "t"
+      ],
+      "record_count": 13
+    },
+    {
+      "action": "member_list:filter:Member Status:Basic",
+      "method": "POST",
+      "path": "/admin/member/list",
+      "query_fields": [],
+      "body_fields": [
+        "end_time",
+        "page",
+        "page_size",
+        "start_time",
+        "state"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "d",
+        "page",
+        "page_size",
+        "summary",
+        "t"
+      ],
+      "record_count": null
+    },
+    {
+      "action": "member_list:filter:Member Status:Basic",
+      "method": "GET",
+      "path": "/admin/channel/manage/dict",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "list",
+      "response_keys": [],
+      "record_count": 22
+    },
+    {
+      "action": "member_list:filter:Member Status:Basic",
+      "method": "POST",
+      "path": "/admin/member/list",
+      "query_fields": [],
+      "body_fields": [
+        "end_time",
+        "page",
+        "page_size",
+        "start_time"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "d",
+        "page",
+        "page_size",
+        "summary",
+        "t"
+      ],
+      "record_count": 13
+    },
+    {
+      "action": "member_list:filter:Agent Qualification:Enabled",
+      "method": "POST",
+      "path": "/admin/member/list",
+      "query_fields": [],
+      "body_fields": [
+        "agent_status",
+        "end_time",
+        "page",
+        "page_size",
+        "start_time"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "d",
+        "page",
+        "page_size",
+        "summary",
+        "t"
+      ],
+      "record_count": 1
+    },
+    {
+      "action": "member_list:filter:Agent Qualification:Enabled",
+      "method": "GET",
+      "path": "/admin/channel/manage/dict",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "list",
+      "response_keys": [],
+      "record_count": 22
+    },
+    {
+      "action": "member_list:filter:Agent Qualification:Enabled",
+      "method": "POST",
+      "path": "/admin/member/list",
+      "query_fields": [],
+      "body_fields": [
+        "end_time",
+        "page",
+        "page_size",
+        "start_time"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "d",
+        "page",
+        "page_size",
+        "summary",
+        "t"
+      ],
+      "record_count": 13
+    },
+    {
+      "action": "member_list:filter:Account Type:Regular Member",
+      "method": "POST",
+      "path": "/admin/member/list",
+      "query_fields": [],
+      "body_fields": [
+        "end_time",
+        "page",
+        "page_size",
+        "start_time",
+        "tester"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "d",
+        "page",
+        "page_size",
+        "summary",
+        "t"
+      ],
+      "record_count": 12
+    },
+    {
+      "action": "member_list:filter:Account Type:Regular Member",
+      "method": "GET",
+      "path": "/admin/channel/manage/dict",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "list",
+      "response_keys": [],
+      "record_count": 22
+    },
+    {
+      "action": "member_list:filter:Account Type:Regular Member",
+      "method": "POST",
+      "path": "/admin/member/list",
+      "query_fields": [],
+      "body_fields": [
+        "end_time",
+        "page",
+        "page_size",
+        "start_time"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "d",
+        "page",
+        "page_size",
+        "summary",
+        "t"
+      ],
+      "record_count": 13
+    },
+    {
+      "action": "member_list:filter:Member Level:VIP0",
+      "method": "GET",
+      "path": "/admin/sys/config/compliance/status",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "effective_open",
+        "effective_reason",
+        "effective_status_msg"
+      ],
+      "record_count": null
+    },
+    {
+      "action": "member_list:filter:Member Level:VIP0",
+      "method": "POST",
+      "path": "/admin/member/list",
+      "query_fields": [],
+      "body_fields": [
+        "end_time",
+        "page",
+        "page_size",
+        "start_time",
+        "vip"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "d",
+        "page",
+        "page_size",
+        "summary",
+        "t"
+      ],
+      "record_count": 12
+    },
+    {
+      "action": "member_list:filter:Member Level:VIP0",
+      "method": "GET",
+      "path": "/admin/channel/manage/dict",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "list",
+      "response_keys": [],
+      "record_count": 22
+    },
+    {
+      "action": "member_list:filter:Member Level:VIP0",
+      "method": "POST",
+      "path": "/admin/member/list",
+      "query_fields": [],
+      "body_fields": [
+        "end_time",
+        "page",
+        "page_size",
+        "start_time"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "d",
+        "page",
+        "page_size",
+        "summary",
+        "t"
+      ],
+      "record_count": 13
+    },
+    {
+      "action": "member_list:filter:KYC Status:Pending",
+      "method": "POST",
+      "path": "/admin/member/list",
+      "query_fields": [],
+      "body_fields": [
+        "end_time",
+        "kyc_status",
+        "page",
+        "page_size",
+        "start_time"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "d",
+        "page",
+        "page_size",
+        "summary",
+        "t"
+      ],
+      "record_count": 8
+    },
+    {
+      "action": "member_list:filter:KYC Status:Pending",
+      "method": "GET",
+      "path": "/admin/channel/manage/dict",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "list",
+      "response_keys": [],
+      "record_count": 22
+    },
+    {
+      "action": "member_list:filter:KYC Status:Pending",
+      "method": "POST",
+      "path": "/admin/member/list",
+      "query_fields": [],
+      "body_fields": [
+        "end_time",
+        "page",
+        "page_size",
+        "start_time"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "d",
+        "page",
+        "page_size",
+        "summary",
+        "t"
+      ],
+      "record_count": 13
+    },
+    {
+      "action": "member_list:filter:Restricted Status:Risk",
+      "method": "POST",
+      "path": "/admin/member/list",
+      "query_fields": [],
+      "body_fields": [
+        "end_time",
+        "page",
+        "page_size",
+        "start_time",
+        "sub_state"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "d",
+        "page",
+        "page_size",
+        "summary",
+        "t"
+      ],
+      "record_count": null
+    },
+    {
+      "action": "member_list:filter:Restricted Status:Risk",
+      "method": "GET",
+      "path": "/admin/channel/manage/dict",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "list",
+      "response_keys": [],
+      "record_count": 22
+    },
+    {
+      "action": "member_list:filter:Restricted Status:Risk",
+      "method": "POST",
+      "path": "/admin/member/list",
+      "query_fields": [],
+      "body_fields": [
+        "end_time",
+        "page",
+        "page_size",
+        "start_time"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "d",
+        "page",
+        "page_size",
+        "summary",
+        "t"
+      ],
+      "record_count": 13
+    },
+    {
+      "action": "member_list:filter:Referrer Information:T1",
+      "method": "POST",
+      "path": "/admin/member/list",
+      "query_fields": [],
+      "body_fields": [
+        "end_time",
+        "page",
+        "page_size",
+        "risk_level",
+        "start_time"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "d",
+        "page",
+        "page_size",
+        "summary",
+        "t"
+      ],
+      "record_count": null
+    },
+    {
+      "action": "member_list:filter:Referrer Information:T1",
+      "method": "GET",
+      "path": "/admin/channel/manage/dict",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "list",
+      "response_keys": [],
+      "record_count": 22
+    },
+    {
+      "action": "member_list:filter:Referrer Information:T1",
+      "method": "POST",
+      "path": "/admin/member/list",
+      "query_fields": [],
+      "body_fields": [
+        "end_time",
+        "page",
+        "page_size",
+        "start_time"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "d",
+        "page",
+        "page_size",
+        "summary",
+        "t"
+      ],
+      "record_count": 13
+    },
+    {
+      "action": "member_list:filter:邀请人:Has inviter",
+      "method": "POST",
+      "path": "/admin/member/list",
+      "query_fields": [],
+      "body_fields": [
+        "page",
+        "page_size"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "d",
+        "page",
+        "page_size",
+        "summary",
+        "t"
+      ],
+      "record_count": 20
+    },
+    {
+      "action": "member_list:filter:邀请人:Has inviter",
+      "method": "GET",
+      "path": "/admin/channel/manage/dict",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "list",
+      "response_keys": [],
+      "record_count": 22
+    },
+    {
+      "action": "member_list:filter:邀请人:Has inviter",
+      "method": "POST",
+      "path": "/admin/member/list",
+      "query_fields": [],
+      "body_fields": [
+        "end_time",
+        "invite_level",
+        "page",
+        "page_size",
+        "start_time"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "d",
+        "page",
+        "page_size",
+        "summary",
+        "t"
+      ],
+      "record_count": 13
+    },
+    {
+      "action": "member_list:filter:Level:Level 1",
+      "method": "POST",
+      "path": "/admin/member/list",
+      "query_fields": [],
+      "body_fields": [
+        "end_time",
+        "invite_level",
+        "page",
+        "page_size",
+        "start_time"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "d",
+        "page",
+        "page_size",
+        "summary",
+        "t"
+      ],
+      "record_count": 13
+    },
+    {
+      "action": "member_list:filter:Level:Level 1",
+      "method": "GET",
+      "path": "/admin/channel/manage/dict",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "list",
+      "response_keys": [],
+      "record_count": 22
+    },
+    {
+      "action": "member_list:filter:Level:Level 1",
+      "method": "POST",
+      "path": "/admin/member/list",
+      "query_fields": [],
+      "body_fields": [
+        "end_time",
+        "invite_level",
+        "page",
+        "page_size",
+        "start_time"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "d",
+        "page",
+        "page_size",
+        "summary",
+        "t"
+      ],
+      "record_count": 13
+    },
+    {
+      "action": "member_list:filter:Lead Source:官方渠道",
+      "method": "POST",
+      "path": "/admin/member/list",
+      "query_fields": [],
+      "body_fields": [
+        "channel_promo_id",
+        "end_time",
+        "invite_level",
+        "page",
+        "page_size",
+        "start_time"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "d",
+        "page",
+        "page_size",
+        "summary",
+        "t"
+      ],
+      "record_count": 13
+    },
+    {
+      "action": "member_list:filter:Lead Source:官方渠道",
+      "method": "GET",
+      "path": "/admin/channel/manage/dict",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "list",
+      "response_keys": [],
+      "record_count": 22
+    },
+    {
+      "action": "member_list:filter:Lead Source:官方渠道",
+      "method": "POST",
+      "path": "/admin/member/list",
+      "query_fields": [],
+      "body_fields": [
+        "end_time",
+        "invite_level",
+        "page",
+        "page_size",
+        "start_time"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "d",
+        "page",
+        "page_size",
+        "summary",
+        "t"
+      ],
+      "record_count": 13
+    },
+    {
+      "action": "member_list:combined_filter:text_plus_enum",
+      "method": "POST",
+      "path": "/admin/member/list",
+      "query_fields": [],
+      "body_fields": [
+        "invite_level",
+        "page",
+        "page_size",
+        "phone",
+        "state"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "d",
+        "page",
+        "page_size",
+        "summary",
+        "t"
+      ],
+      "record_count": 0
+    },
+    {
+      "action": "member_list:prepare bounded current-window Export",
+      "method": "GET",
+      "path": "/admin/me/detail",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "avatar",
+        "bind_time",
+        "button_permission_ids",
+        "cmpl",
+        "create_name",
+        "created_at",
+        "email",
+        "google_secret",
+        "group_id",
+        "id",
+        "last_login_ip",
+        "last_login_time",
+        "login_password",
+        "nickname",
+        "operator_name",
+        "pwd_edit_time",
+        "roles",
+        "sid",
+        "status",
+        "stores",
+        "updated_at",
+        "username"
+      ],
+      "record_count": null
+    },
+    {
+      "action": "member_list:prepare bounded current-window Export",
+      "method": "GET",
+      "path": "/admin/channel/manage/dict",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "list",
+      "response_keys": [],
+      "record_count": 22
+    },
+    {
+      "action": "member_list:prepare bounded current-window Export",
+      "method": "GET",
+      "path": "/admin/sys/config/compliance/status",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "effective_open",
+        "effective_reason",
+        "effective_status_msg"
+      ],
+      "record_count": null
+    },
+    {
+      "action": "member_list:prepare bounded current-window Export",
+      "method": "GET",
+      "path": "/admin/notify/audit/alarm",
+      "query_fields": [
+        "t"
+      ],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "bonus_review_pending",
+        "feedback_pending",
+        "kyc_pending",
+        "mall_order_pending",
+        "withdraw_pending"
+      ],
+      "record_count": null
+    },
+    {
+      "action": "member_list:prepare bounded current-window Export",
+      "method": "POST",
+      "path": "/admin/gameclass/list",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ],
+      "record_count": 7
+    },
+    {
+      "action": "member_list:prepare bounded current-window Export",
+      "method": "POST",
+      "path": "/admin/member/list",
+      "query_fields": [],
+      "body_fields": [
+        "end_time",
+        "page",
+        "page_size",
+        "start_time"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "d",
+        "page",
+        "page_size",
+        "summary",
+        "t"
+      ],
+      "record_count": 13
+    },
+    {
+      "action": "member_list:prepare bounded current-window Export",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "ids",
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ],
+      "record_count": 500
+    },
+    {
+      "action": "member_list:prepare bounded current-window Export",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "ids",
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ],
+      "record_count": 500
+    },
+    {
+      "action": "member_list:prepare bounded current-window Export",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "ids",
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ],
+      "record_count": 500
+    },
+    {
+      "action": "member_list:prepare bounded current-window Export",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "ids",
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ],
+      "record_count": 500
+    },
+    {
+      "action": "member_list:prepare bounded current-window Export",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "ids",
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ],
+      "record_count": 500
+    },
+    {
+      "action": "member_list:prepare bounded current-window Export",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "ids",
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ],
+      "record_count": 500
+    },
+    {
+      "action": "member_list:prepare bounded current-window Export",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "ids",
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ],
+      "record_count": 500
+    },
+    {
+      "action": "member_list:prepare bounded current-window Export",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "ids",
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ],
+      "record_count": 500
+    },
+    {
+      "action": "member_list:prepare bounded current-window Export",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "ids",
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ],
+      "record_count": 500
+    },
+    {
+      "action": "member_list:prepare bounded current-window Export",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "ids",
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ],
+      "record_count": 500
+    },
+    {
+      "action": "member_list:prepare bounded current-window Export",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "ids",
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ],
+      "record_count": 500
+    },
+    {
+      "action": "member_list:prepare bounded current-window Export",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "ids",
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ],
+      "record_count": 231
+    },
+    {
+      "action": "member_list:restore after Export",
+      "method": "GET",
+      "path": "/admin/me/detail",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "avatar",
+        "bind_time",
+        "button_permission_ids",
+        "cmpl",
+        "create_name",
+        "created_at",
+        "email",
+        "google_secret",
+        "group_id",
+        "id",
+        "last_login_ip",
+        "last_login_time",
+        "login_password",
+        "nickname",
+        "operator_name",
+        "pwd_edit_time",
+        "roles",
+        "sid",
+        "status",
+        "stores",
+        "updated_at",
+        "username"
+      ],
+      "record_count": null
+    },
+    {
+      "action": "member_list:restore after Export",
+      "method": "GET",
+      "path": "/admin/channel/manage/dict",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "list",
+      "response_keys": [],
+      "record_count": 22
+    },
+    {
+      "action": "member_list:restore after Export",
+      "method": "GET",
+      "path": "/admin/sys/config/compliance/status",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "effective_open",
+        "effective_reason",
+        "effective_status_msg"
+      ],
+      "record_count": null
+    },
+    {
+      "action": "member_list:restore after Export",
+      "method": "POST",
+      "path": "/admin/gameclass/list",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ],
+      "record_count": 7
+    },
+    {
+      "action": "member_list:restore after Export",
+      "method": "GET",
+      "path": "/admin/notify/audit/alarm",
+      "query_fields": [
+        "t"
+      ],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "bonus_review_pending",
+        "feedback_pending",
+        "kyc_pending",
+        "mall_order_pending",
+        "withdraw_pending"
+      ],
+      "record_count": null
+    },
+    {
+      "action": "member_list:restore after Export",
+      "method": "POST",
+      "path": "/admin/member/list",
+      "query_fields": [],
+      "body_fields": [
+        "end_time",
+        "page",
+        "page_size",
+        "start_time"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "d",
+        "page",
+        "page_size",
+        "summary",
+        "t"
+      ],
+      "record_count": 13
+    },
+    {
+      "action": "member_list:restore after Export",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "ids",
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ],
+      "record_count": 500
+    },
+    {
+      "action": "member_list:restore after Export",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "ids",
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ],
+      "record_count": 500
+    },
+    {
+      "action": "member_list:restore after Export",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "ids",
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ],
+      "record_count": 500
+    },
+    {
+      "action": "member_list:restore after Export",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "ids",
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ],
+      "record_count": 500
+    },
+    {
+      "action": "member_list:restore after Export",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "ids",
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ],
+      "record_count": 500
+    },
+    {
+      "action": "member_list:restore after Export",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "ids",
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ],
+      "record_count": 500
+    },
+    {
+      "action": "member_list:restore after Export",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "ids",
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ],
+      "record_count": 500
+    },
+    {
+      "action": "member_list:restore after Export",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "ids",
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ],
+      "record_count": 500
+    },
+    {
+      "action": "member_list:restore after Export",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "ids",
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ],
+      "record_count": 500
+    },
+    {
+      "action": "member_list:restore after Export",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "ids",
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ],
+      "record_count": 500
+    },
+    {
+      "action": "member_list:restore after Export",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "ids",
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ],
+      "record_count": 500
+    },
+    {
+      "action": "member_list:restore after Export",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "ids",
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ],
+      "record_count": 231
+    },
+    {
+      "action": "member_list:Batch query bounded synthetic no-match",
+      "method": "POST",
+      "path": "/admin/member/list",
+      "query_fields": [],
+      "body_fields": [
+        "page",
+        "page_size",
+        "phone",
+        "uid"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "d",
+        "page",
+        "page_size",
+        "summary",
+        "t"
+      ],
+      "record_count": 0
+    },
+    {
+      "action": "member_list:Batch query bounded synthetic no-match",
+      "method": "POST",
+      "path": "/admin/member/list",
+      "query_fields": [],
+      "body_fields": [
+        "page",
+        "page_size",
+        "phone",
+        "uid"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "d",
+        "page",
+        "page_size",
+        "summary",
+        "t"
+      ],
+      "record_count": 0
+    },
+    {
+      "action": "member_list:restore after Batch query",
+      "method": "GET",
+      "path": "/admin/me/detail",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "avatar",
+        "bind_time",
+        "button_permission_ids",
+        "cmpl",
+        "create_name",
+        "created_at",
+        "email",
+        "google_secret",
+        "group_id",
+        "id",
+        "last_login_ip",
+        "last_login_time",
+        "login_password",
+        "nickname",
+        "operator_name",
+        "pwd_edit_time",
+        "roles",
+        "sid",
+        "status",
+        "stores",
+        "updated_at",
+        "username"
+      ],
+      "record_count": null
+    },
+    {
+      "action": "member_list:restore after Batch query",
+      "method": "GET",
+      "path": "/admin/channel/manage/dict",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "list",
+      "response_keys": [],
+      "record_count": 22
+    },
+    {
+      "action": "member_list:restore after Batch query",
+      "method": "GET",
+      "path": "/admin/sys/config/compliance/status",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "effective_open",
+        "effective_reason",
+        "effective_status_msg"
+      ],
+      "record_count": null
+    },
+    {
+      "action": "member_list:restore after Batch query",
+      "method": "GET",
+      "path": "/admin/notify/audit/alarm",
+      "query_fields": [
+        "t"
+      ],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "bonus_review_pending",
+        "feedback_pending",
+        "kyc_pending",
+        "mall_order_pending",
+        "withdraw_pending"
+      ],
+      "record_count": null
+    },
+    {
+      "action": "member_list:restore after Batch query",
+      "method": "POST",
+      "path": "/admin/gameclass/list",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ],
+      "record_count": 7
+    },
+    {
+      "action": "member_list:restore after Batch query",
+      "method": "POST",
+      "path": "/admin/member/list",
+      "query_fields": [],
+      "body_fields": [
+        "end_time",
+        "page",
+        "page_size",
+        "start_time"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "d",
+        "page",
+        "page_size",
+        "summary",
+        "t"
+      ],
+      "record_count": 13
+    },
+    {
+      "action": "member_list:restore after Batch query",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "ids",
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ],
+      "record_count": 500
+    },
+    {
+      "action": "member_list:restore after Batch query",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "ids",
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ],
+      "record_count": 500
+    },
+    {
+      "action": "member_list:restore after Batch query",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "ids",
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ],
+      "record_count": 500
+    },
+    {
+      "action": "member_list:restore after Batch query",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "ids",
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ],
+      "record_count": 500
+    },
+    {
+      "action": "member_list:restore after Batch query",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "ids",
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ],
+      "record_count": 500
+    },
+    {
+      "action": "member_list:restore after Batch query",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "ids",
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ],
+      "record_count": 500
+    },
+    {
+      "action": "member_list:restore after Batch query",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "ids",
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ],
+      "record_count": 500
+    },
+    {
+      "action": "member_list:restore after Batch query",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "ids",
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ],
+      "record_count": 500
+    },
+    {
+      "action": "member_list:restore after Batch query",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "ids",
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ],
+      "record_count": 500
+    },
+    {
+      "action": "member_list:restore after Batch query",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "ids",
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ],
+      "record_count": 500
+    },
+    {
+      "action": "member_list:restore after Batch query",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "ids",
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ],
+      "record_count": 500
+    },
+    {
+      "action": "member_list:restore after Batch query",
+      "method": "POST",
+      "path": "/admin/game/search",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "ids",
+        "list",
+        "page",
+        "page_size",
+        "s",
+        "t"
+      ],
+      "record_count": 231
+    },
+    {
+      "action": "member_list:pagination:page_size_change",
+      "method": "POST",
+      "path": "/admin/member/list",
+      "query_fields": [],
+      "body_fields": [
+        "end_time",
+        "page",
+        "page_size",
+        "start_time"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "d",
+        "page",
+        "page_size",
+        "summary",
+        "t"
+      ],
+      "record_count": 10
+    },
+    {
+      "action": "member_list:pagination:page_2",
+      "method": "POST",
+      "path": "/admin/member/list",
+      "query_fields": [],
+      "body_fields": [
+        "end_time",
+        "page",
+        "page_size",
+        "start_time"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "d",
+        "page",
+        "page_size",
+        "summary",
+        "t"
+      ],
+      "record_count": 3
+    },
+    {
+      "action": "member_list:row:XP Growth Log",
+      "method": "GET",
+      "path": "/admin/priv/check",
+      "query_fields": [
+        "path"
+      ],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "rights"
+      ],
+      "record_count": null
+    },
+    {
+      "action": "member_list:row:XP Growth Log",
+      "method": "GET",
+      "path": "/admin/vip/xp/list",
+      "query_fields": [
+        "end_at",
+        "page",
+        "page_size",
+        "start_at",
+        "uid"
+      ],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "d",
+        "summary",
+        "t"
+      ],
+      "record_count": 0
+    },
+    {
+      "action": "member_list:row:XP Growth Log",
+      "method": "GET",
+      "path": "/admin/kyc/detail",
+      "query_fields": [
+        "uid"
+      ],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "attachments",
+        "birthday",
+        "blacklist_status",
+        "comment",
+        "country_code",
+        "created_at",
+        "current_address",
+        "external_information",
+        "extra_details",
+        "first_name",
+        "gender",
+        "id_number",
+        "id_type",
+        "issue",
+        "issue_fields",
+        "issue_msg",
+        "kyc_status",
+        "last_name",
+        "member",
+        "middle_name",
+        "nationality",
+        "nature_of_work",
+        "nearest_branch",
+        "occupation",
+        "ocr",
+        "ocr_result",
+        "ocr_status",
+        "permanent_address",
+        "phone",
+        "place_of_birth",
+        "review_times",
+        "reviewer",
+        "same_uids",
+        "same_uids_count",
+        "sid",
+        "signature_id",
+        "source_of_income",
+        "status",
+        "tokens",
+        "uid",
+        "updated_at",
+        "user_message",
+        "version"
+      ],
+      "record_count": null
+    },
+    {
+      "action": "member_list:row:XP Growth Log",
+      "method": "GET",
+      "path": "/admin/finance/member/wallet",
+      "query_fields": [
+        "uid"
+      ],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "balance",
+        "locked",
+        "uid",
+        "withdrawable"
+      ],
+      "record_count": null
+    },
+    {
+      "action": "member_list:row:XP Growth Log",
+      "method": "GET",
+      "path": "/admin/member/detail",
+      "query_fields": [
+        "uid"
+      ],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_type": "object",
+      "response_keys": [
+        "activity_gift",
+        "agent_opened_at",
+        "agent_settle_type",
+        "associated_parties",
+        "available_balance",
+        "available_coin",
+        "avatar",
+        "balance",
+        "banned_state",
+        "bet_amount",
+        "bet_count",
+        "betting_turnover",
+        "block_state",
+        "buy_feature_finished",
+        "change_count",
+        "channel_name",
+        "created_at",
+        "created_note",
+        "currency_type",
+        "customer_channels",
+        "deposit_amount",
+        "deposit_count",
+        "deposit_multiple",
+        "deposit_multiple_type",
+        "difference",
+        "direct_referral_count",
+        "email",
+        "gender",
+        "ggr",
+        "has_login_password",
+        "indirect_referral_count",
+        "is_agent",
+        "last_changed_at",
+        "last_login_at",
+        "last_login_device",
+        "left_turnover",
+        "left_turnover_count",
+        "locked",
+        "nickname",
+        "note",
+        "parent_uid",
+        "phone",
+        "platform_deposit_multiple",
+        "referral_code",
+        "risk_level",
+        "risk_tag",
+        "sid",
+        "source",
+        "status",
+        "store_name",
+        "tags",
+        "tester",
+        "third_party_name",
+        "third_party_ty",
+        "tokens_balance",
+        "total_up",
+        "uid",
+        "unavailable_balance",
+        "updated_at",
+        "upline_count",
+        "username",
+        "version",
+        "vip_category",
+        "vip_level",
+        "vip_manual_level",
+        "vip_score",
+        "visit_count",
+        "wallet",
+        "win_amount",
+        "withdraw_method",
+        "withdrawable_balance",
+        "withdrawal_amount",
+        "withdrawal_count",
+        "xp"
+      ],
+      "record_count": null
+    }
+  ],
+  "method_drift": {
+    "ui_actual": "POST /admin/member/list",
+    "documented": "GET /admin/member/list",
+    "classification": "MISCLASSIFIED"
+  },
+  "permissions": "authenticated FAT main-admin session; actual button permissions inherited from /admin/me/detail",
+  "side_effects": [],
+  "safety": {
+    "writes_executed": 0,
+    "raw_uid_persisted": false,
+    "raw_phone_persisted": false,
+    "export_rows_persisted": false,
+    "storage_state_persisted_in_repository": false
+  }
+}
