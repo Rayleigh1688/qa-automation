@@ -1,0 +1,4 @@
+surface,dynamic_first_party,active,active_failed,undocumented_active,misclassified,third_party,documented_recorded,documented_usable,exact_document_match,dynamic_without_exact_document_match,documented_usable_not_observed,dynamic_to_document_ratio,exact_document_coverage
+client,59,47,1,0,11,7,170,169,47,12,122,34.9%,27.8%
+admin,135,113,1,18,3,0,561,561,113,22,448,24.1%,20.1%
+total,194,160,2,18,14,7,731,730,160,34,570,26.6%,21.9%

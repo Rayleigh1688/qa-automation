@@ -140,8 +140,8 @@
 - 客户端首轮有效扫描已完成：19 个页面/逻辑页面、84 个明确动作，68 个完成；动态发现 53 个首方业务接口和 7 个第三方接口。首方接口分类为 `ACTIVE 42`、`ACTIVE_FAILED 1`、`MISCLASSIFIED 10`。结果见 [`../fat-client-interface-scan/results/`](../fat-client-interface-scan/results/)。
 - 管理后台已按“菜单发现 → 页面初始化 → 显式操作”完成首轮扫描：12 个一级权限、57 个真实侧栏页面、679 个清洗后动作；615 个非写动作逐项尝试，425 个实际交互。动态发现 109 个唯一接口，分类为 `ACTIVE 89`、`UNDOCUMENTED_ACTIVE 18`、`MISCLASSIFIED 2`。结果见 [`../fat-admin-interface-scan/results/fat-admin-final-report.md`](../fat-admin-interface-scan/results/fat-admin-final-report.md)。
 - 首轮页面扫描合计动态观察到 162 个不重复首方 `method + path`；完成 KYC、会员列表内部操作和会员详情记录级补扫后，客户端为 59 个、管理后台独立合并为 135 个，当前合计 194 个；另有 7 个客户端第三方接口。该合并结果位于 `fat-admin-interface-scan/results/member-gap-merged-endpoint-summary.csv`，尚未修改共享 inventory/catalog。
-- 按 `method + 标准化 path` 去重，原接口文档当前包含客户端 170 个、管理后台 561 个，合计 731 个可用文档接口；当前动态观察量比文档量少 548 个，观察量/文档量为 25.0%。这只是数量差，不等同于废弃接口数。
-- 逐项集合对账后，151 个文档接口已在正确调用端观察到，580 个文档接口尚未从对应 UI 观察到；另有 32 个 UI 实际调用接口在对应端文档中不存在或调用端/业务分类不一致。后续须结合合法参数、前置状态和替代关系再细分，不能直接把 580 个归为 `STALE`。
+- 按 `method + 标准化 path` 去重，原接口文档记录客户端 170 个、管理后台 561 个；客户端其中 1 条 `PUT` path 实际是误扫入的 Go 函数代码，因此可用文档口径为客户端 169 个、管理后台 561 个，合计 730 个。
+- 逐项集合对账后，客户端 47 个、管理后台 113 个文档接口已按同调用端 `method + path` 精确观察，合计 160 个；可用文档中仍有客户端 122 个、管理后台 448 个未从对应 UI 观察，合计 570 个。另有客户端 12 个、管理后台 22 个动态接口没有同调用端精确文档匹配，包含未登记、method drift 和分类错误，不能全部视为真正未文档化。完整对比见 [`current-interface-comparison.md`](current-interface-comparison.md)，不能直接把 570 个归为 `STALE`。
 - 长时间范围补扫已完成。客户端 4 个重点记录页均在 7 天范围取得非空数据，充值和投注列表另以 UI 渐进滚动验证第 2 页；没有新增 endpoint。管理后台补扫 28/57 个重点列表、报表、日志、订单和审核页，24 页取得非空数据，捕获 47 次业务查询（46 次成功）和 28 个唯一 endpoint；这些 endpoint 均已包含在主扫描的 109 个中，因此合计动态接口数仍为 162。
 - 管理后台补扫异常保持原样：VIP Rewards 在每档均发出真实请求但最大观察范围仍为空；Daily Report 在 90 天范围返回 HTTP 200、业务失败并停止；Temporary Restriction 日期控件拒绝目标值；Betting Record 仅验证 7 天请求为空，后续范围未产生请求，不能声称已验证到最大范围。
 - KYC 已新增拒绝/重提状态链：本轮专用会员完成 `0 → 2 → 3 → 2 → 5`，分别验证客户端首提、后台 `POST /admin/kyc/reject`、拒绝态 `Re-KYC verification` 重提以及后台 `POST /admin/kyc/approve`。首提和重提均实际调用 `POST /member/kyc/v2/insert`，没有发现单独的旧版或 update 提交接口。
