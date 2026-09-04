@@ -1,0 +1,40 @@
+{
+  "captured_at": "2026-09-03T11:07:01.401Z",
+  "gate": {
+    "status": "PASS",
+    "authenticated_at": "2026-09-03T11:07:01.400Z",
+    "expected_origin": "https://admin-pagcor-fat.filbet2025.com",
+    "actual_origin": "https://admin-pagcor-fat.filbet2025.com",
+    "initial_post_login_route": "/#/reportCenter/pagcor",
+    "token_captured_in_memory_only": true,
+    "me_detail_business_success": true,
+    "rendered_navigation_visible": true,
+    "rendered_menu_controls_at_gate": 0,
+    "navigation_structure": "single hash-route top navigation; no traditional sidebar menu items",
+    "traditional_sidebar_verified": false,
+    "business_page_initialization_success": true,
+    "context_isolation": "exclusive-context-b583346ff05a",
+    "storage_state_exported": false
+  },
+  "counts": {
+    "permission_pids": 63,
+    "menu_items": 1,
+    "routes": 1,
+    "pages_scanned": 1,
+    "actions": 15,
+    "downloads_observed_not_saved": 0,
+    "network_events": 33,
+    "third_party": 4,
+    "unique_endpoints": 5,
+    "classification": {
+      "ACTIVE": 5,
+      "DOCUMENTED_REACHABLE": 1,
+      "DOCUMENTED_UNVERIFIED": 65
+    }
+  },
+  "write_operations": {
+    "executed": 0,
+    "restored": 0,
+    "blocked_reason": "No current-run owned data and no real-time business TOTP seed; persistent writes were not attempted"
+  }
+}

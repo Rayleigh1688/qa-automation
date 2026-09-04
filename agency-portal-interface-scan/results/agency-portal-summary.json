@@ -1,0 +1,49 @@
+{
+  "captured_at": "2026-09-03T11:24:31.926Z",
+  "login_gate": {
+    "success": true,
+    "login_origin": "https://agency-fat.filbet2025.com",
+    "login_path": "/user/login",
+    "authenticated_origin": "https://agency-fat.filbet2025.com",
+    "authenticated_path": "/",
+    "title": "Filbet Affiliate",
+    "get_code_clicked": true,
+    "login_request_success": true,
+    "profile_request_success": true,
+    "profile_evidence": [
+      "GET /agency/profile:200:true",
+      "GET /agency/profile:200:true"
+    ],
+    "navigation_shell_visible": false,
+    "login_dom": {
+      "input_types": [
+        "text",
+        "text"
+      ],
+      "input_placeholders": [
+        "Please enter phone number",
+        "Please enter verification code"
+      ],
+      "button_labels": [
+        "Get Code",
+        "Login"
+      ]
+    }
+  },
+  "document_scope": "top_domain=代理后台 only",
+  "documented_endpoints": 20,
+  "menu_pages": 5,
+  "resolved_routes": 5,
+  "scanned_pages": 5,
+  "page_errors": 0,
+  "dom_controls": 47,
+  "actions": 30,
+  "network_events": 19,
+  "unique_endpoints": 11,
+  "classifications": {
+    "ACTIVE": 11
+  },
+  "persistent_write_operations": 0,
+  "recovery": "Pagination/local navigation restoration attempted; no persistent mutation submitted.",
+  "fatal_error": ""
+}

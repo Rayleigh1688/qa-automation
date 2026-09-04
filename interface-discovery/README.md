@@ -25,9 +25,13 @@
 
 不进入 UAT，不处理 Jenkins，不用 API 直连代替失败的 UI 操作制造通过，也不直接修改数据库业务数据。
 
-后续另有两个独立 FAT 调用端待当前扫描完成后再建清单：合规管理后台 `https://admin-pagcor-fat.filbet2025.com/`、代理管理后台 `https://admin-agency-fat.filbet2025.com/`，以及代理前台 `https://agency-fat.filbet2025.com/`。它们当前不纳入本轮客户端/主管理后台计数；登录凭据只在用户会话中按需使用，禁止写入仓库。
+合规管理后台 `https://admin-pagcor-fat.filbet2025.com/`、代理管理后台 `https://admin-agency-fat.filbet2025.com/` 和代理前台 `https://agency-fat.filbet2025.com/` 已分别建立独立扫描资产；它们不纳入客户端/主管理后台的既有计数，也不与彼此或其他调用端共享 Token/storage state。登录凭据只在用户会话中按需使用，禁止写入仓库。
 
-## 双线程
+## 当前执行状态
+
+2026-09-04 起本专项暂停，现有结果冻结为阶段快照。当前不继续补扫页面、不评审接口等级，也不回填共享 `api/inventory/interfaces.csv` 或 `api/catalog/`；项目第一优先级转为让 P0 完全由确定性脚本执行。只有用户明确恢复接口发现专项时，才从现有证据继续按页面补扫。
+
+## 首轮双线程
 
 ### 线程 A：客户端
 
@@ -139,6 +143,10 @@
 - 客户端页面与控件清单已建立，包含 13 张脱敏参考截图。
 - 客户端首轮有效扫描已完成：19 个页面/逻辑页面、84 个明确动作，68 个完成；动态发现 53 个首方业务接口和 7 个第三方接口。首方接口分类为 `ACTIVE 42`、`ACTIVE_FAILED 1`、`MISCLASSIFIED 10`。结果见 [`../fat-client-interface-scan/results/`](../fat-client-interface-scan/results/)。
 - 管理后台已按“菜单发现 → 页面初始化 → 显式操作”完成首轮扫描：12 个一级权限、57 个真实侧栏页面、679 个清洗后动作；615 个非写动作逐项尝试，425 个实际交互。动态发现 109 个唯一接口，分类为 `ACTIVE 89`、`UNDOCUMENTED_ACTIVE 18`、`MISCLASSIFIED 2`。结果见 [`../fat-admin-interface-scan/results/fat-admin-final-report.md`](../fat-admin-interface-scan/results/fat-admin-final-report.md)。
+- 合规管理后台已使用独立 Playwright context 完成当前账号真实权限面的扫描：登录门禁通过，实际 hash 路由为 `/#/reportCenter/pagcor`；权限树 63/63 个 PID 查询成功并返回 62 个节点，当前 UI 仅渲染 1 个报表路由。该页形成 32 个 DOM 控件/表格快照、15 个安全动作和 33 条首方 Network 事件，动态 5 个唯一接口均为 `ACTIVE`；权限接口为 `DOCUMENTED_REACHABLE`，另有 65 个合规文档接口因当前角色/UI 未观察保持 `DOCUMENTED_UNVERIFIED`。五个筛选、日期快捷范围、查询和重置已覆盖；导出点击无 Network/download，记录为 `CLICKED_NO_INTERFACE_EVIDENCE`，未保存文件。结果见 [`../pagcor-admin-interface-scan/results/pagcor-admin-report.md`](../pagcor-admin-interface-scan/results/pagcor-admin-report.md)。
+- 代理管理后台使用新二维码的实时 SHA256 TOTP 和单一独立 Playwright context 从零重扫：登录后实际路由 `/home`，最终登录与当前用户接口均业务成功，渲染 11 个菜单且 11/11 页面通过 origin、pathname 和已认证侧栏硬门禁。形成 359 个 DOM 控件、71 个动作结论和 62 条首方 Network 事件，动态 18 个唯一接口分类为 `ACTIVE 16`、`UNDOCUMENTED_ACTIVE 1`、`MISCLASSIFIED 1`。查询、重置、页签、筛选、分页前进/恢复和详情弹层已有证据；3 个表单重绘后的额外筛选 locator 失效保留为交互错误。持久写为 0。结果见 [`../agency-admin-interface-scan/results/agency-admin-report.md`](../agency-admin-interface-scan/results/agency-admin-report.md)。
+- 代理前台已用独立 Playwright context 和 Code Login 完成扫描：`POST /agency/otp/login` 与 `GET /agency/profile` 均业务成功，登录后路由 `/`。当前账号的 5 个导航路由 `/`、`/a-member-list`、`/betting-record`、`/commission-report`、`/commission-rule` 均以实际 pathname、页面控件和初始化 Network 动态核对通过；形成 47 个 DOM 控件、30 个操作/可见性结论和 19 条首方 Network 事件，动态 11 个唯一接口均为 `ACTIVE`。静态对照只取顶层“代理后台”，未混入“代理管理后台”；未观察项保持 `DOCUMENTED_UNVERIFIED`，持久写为 0。结果见 [`../agency-portal-interface-scan/results/agency-portal-report.md`](../agency-portal-interface-scan/results/agency-portal-report.md)。
+- 两个新增后台均未发现同时满足“本轮自有目标 + 明确恢复路径 + 必要实时业务 TOTP”的持久写操作，因此本轮持久写请求为 0；没有恢复遗留。当前 DOM 未渲染的分页、详情、弹窗、抽屉或 Overflow 只记录权限/可见性事实，不判失败或 `STALE`。共享 `api/inventory/interfaces.csv` 和 `api/catalog/` 尚未修改。
 - 首轮页面扫描合计动态观察到 162 个不重复首方 `method + path`；完成 KYC、会员列表内部操作和会员详情记录级补扫后，客户端为 59 个、管理后台独立合并为 135 个，当前合计 194 个；另有 7 个客户端第三方接口。该合并结果位于 `fat-admin-interface-scan/results/member-gap-merged-endpoint-summary.csv`，尚未修改共享 inventory/catalog。
 - 按 `method + 标准化 path` 去重，原接口文档记录客户端 170 个、管理后台 561 个；客户端其中 1 条 `PUT` path 实际是误扫入的 Go 函数代码，因此可用文档口径为客户端 169 个、管理后台 561 个，合计 730 个。
 - 逐项集合对账后，客户端 47 个、管理后台 113 个文档接口已按同调用端 `method + path` 精确观察，合计 160 个；可用文档中仍有客户端 122 个、管理后台 448 个未从对应 UI 观察，合计 570 个。另有客户端 12 个、管理后台 22 个动态接口没有同调用端精确文档匹配，包含未登记、method drift 和分类错误，不能全部视为真正未文档化。完整对比见 [`current-interface-comparison.md`](current-interface-comparison.md)，不能直接把 570 个归为 `STALE`。

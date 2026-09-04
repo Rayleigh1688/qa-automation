@@ -1,0 +1,48 @@
+page_name,route,control_type,control,evidence
+Data Overview,/,inputs,"{""type"": ""text"", ""placeholder"": ""Start date"", ""name"": """", ""disabled"": false}",visible DOM; values and table content omitted
+Data Overview,/,inputs,"{""type"": ""text"", ""placeholder"": ""End date"", ""name"": """", ""disabled"": false}",visible DOM; values and table content omitted
+Data Overview,/,buttons,"{""label"": ""Today 09-03"", ""disabled"": false}",visible DOM; values and table content omitted
+Data Overview,/,buttons,"{""label"": ""Yesterday"", ""disabled"": false}",visible DOM; values and table content omitted
+Data Overview,/,buttons,"{""label"": ""This week"", ""disabled"": false}",visible DOM; values and table content omitted
+Data Overview,/,buttons,"{""label"": ""Last week"", ""disabled"": false}",visible DOM; values and table content omitted
+Data Overview,/,buttons,"{""label"": ""This month"", ""disabled"": false}",visible DOM; values and table content omitted
+Data Overview,/,buttons,"{""label"": ""Last month"", ""disabled"": false}",visible DOM; values and table content omitted
+Data Overview,/,buttons,"{""label"": ""Search"", ""disabled"": false}",visible DOM; values and table content omitted
+Data Overview,/,buttons,"{""label"": ""Reset"", ""disabled"": false}",visible DOM; values and table content omitted
+Data Overview,/,buttons,"{""label"": ""Copy"", ""disabled"": false}",visible DOM; values and table content omitted
+Data Overview,/,buttons,"{""label"": ""Copy Link"", ""disabled"": false}",visible DOM; values and table content omitted
+Data Overview,/,buttons,"{""label"": ""Promo Poster"", ""disabled"": false}",visible DOM; values and table content omitted
+Member List,/a-member-list,inputs,"{""type"": ""text"", ""placeholder"": ""Please enter member account"", ""name"": """", ""disabled"": false}",visible DOM; values and table content omitted
+Member List,/a-member-list,inputs,"{""type"": ""text"", ""placeholder"": ""Start Time"", ""name"": """", ""disabled"": false}",visible DOM; values and table content omitted
+Member List,/a-member-list,inputs,"{""type"": ""text"", ""placeholder"": ""End Time"", ""name"": """", ""disabled"": false}",visible DOM; values and table content omitted
+Member List,/a-member-list,buttons,"{""label"": """", ""disabled"": false}",visible DOM; values and table content omitted
+Member List,/a-member-list,buttons,"{""label"": ""Reset"", ""disabled"": false}",visible DOM; values and table content omitted
+Member List,/a-member-list,buttons,"{""label"": ""Search / Query"", ""disabled"": false}",visible DOM; values and table content omitted
+Betting Record,/betting-record,inputs,"{""type"": ""text"", ""placeholder"": ""Please enter member account"", ""name"": """", ""disabled"": false}",visible DOM; values and table content omitted
+Betting Record,/betting-record,inputs,"{""type"": ""text"", ""placeholder"": ""Start Time"", ""name"": """", ""disabled"": false}",visible DOM; values and table content omitted
+Betting Record,/betting-record,inputs,"{""type"": ""text"", ""placeholder"": ""End Time"", ""name"": """", ""disabled"": false}",visible DOM; values and table content omitted
+Betting Record,/betting-record,inputs,"{""type"": ""search"", ""placeholder"": """", ""name"": """", ""disabled"": false}",visible DOM; values and table content omitted
+Betting Record,/betting-record,inputs,"{""type"": ""search"", ""placeholder"": """", ""name"": """", ""disabled"": false}",visible DOM; values and table content omitted
+Betting Record,/betting-record,inputs,"{""type"": ""search"", ""placeholder"": """", ""name"": """", ""disabled"": false}",visible DOM; values and table content omitted
+Betting Record,/betting-record,selects,"{""label"": """", ""disabled"": false}",visible DOM; values and table content omitted
+Betting Record,/betting-record,selects,"{""label"": """", ""disabled"": false}",visible DOM; values and table content omitted
+Betting Record,/betting-record,selects,"{""label"": """", ""disabled"": false}",visible DOM; values and table content omitted
+Betting Record,/betting-record,selects,"{""label"": """", ""disabled"": false}",visible DOM; values and table content omitted
+Betting Record,/betting-record,selects,"{""label"": """", ""disabled"": false}",visible DOM; values and table content omitted
+Betting Record,/betting-record,selects,"{""label"": """", ""disabled"": false}",visible DOM; values and table content omitted
+Betting Record,/betting-record,buttons,"{""label"": """", ""disabled"": false}",visible DOM; values and table content omitted
+Betting Record,/betting-record,buttons,"{""label"": ""Reset"", ""disabled"": false}",visible DOM; values and table content omitted
+Betting Record,/betting-record,buttons,"{""label"": ""Search / Query"", ""disabled"": false}",visible DOM; values and table content omitted
+Commission Report,/commission-report,inputs,"{""type"": ""text"", ""placeholder"": ""Start Date"", ""name"": """", ""disabled"": false}",visible DOM; values and table content omitted
+Commission Report,/commission-report,inputs,"{""type"": ""text"", ""placeholder"": ""End Date"", ""name"": """", ""disabled"": false}",visible DOM; values and table content omitted
+Commission Report,/commission-report,inputs,"{""type"": ""search"", ""placeholder"": """", ""name"": """", ""disabled"": false}",visible DOM; values and table content omitted
+Commission Report,/commission-report,selects,"{""label"": """", ""disabled"": false}",visible DOM; values and table content omitted
+Commission Report,/commission-report,selects,"{""label"": """", ""disabled"": false}",visible DOM; values and table content omitted
+Commission Report,/commission-report,buttons,"{""label"": ""Reset"", ""disabled"": false}",visible DOM; values and table content omitted
+Commission Report,/commission-report,buttons,"{""label"": ""Search / Query"", ""disabled"": false}",visible DOM; values and table content omitted
+Commission Rule,/commission-rule,tabs,"{""label"": ""Commission Rate Tier Table"", ""selected"": """"}",visible DOM; values and table content omitted
+Commission Rule,/commission-rule,tabs,"{""label"": ""Commission Rate Tier Table"", ""selected"": ""true""}",visible DOM; values and table content omitted
+Commission Rule,/commission-rule,tabs,"{""label"": ""PAGCOR Tax Rate"", ""selected"": """"}",visible DOM; values and table content omitted
+Commission Rule,/commission-rule,tabs,"{""label"": ""PAGCOR Tax Rate"", ""selected"": ""false""}",visible DOM; values and table content omitted
+Commission Rule,/commission-rule,tabs,"{""label"": ""Vendor Rate"", ""selected"": """"}",visible DOM; values and table content omitted
+Commission Rule,/commission-rule,tabs,"{""label"": ""Vendor Rate"", ""selected"": ""false""}",visible DOM; values and table content omitted

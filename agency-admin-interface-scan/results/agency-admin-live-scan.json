@@ -1,0 +1,6011 @@
+{
+  "captured_at": "2026-09-03T11:38:36.352Z",
+  "environment": "FAT",
+  "surface": "agency_admin",
+  "base_origin": "https://admin-agency-fat.filbet2025.com",
+  "context_policy": "fresh dedicated Playwright browser context; no storage state/token reuse",
+  "login_gate": {
+    "success": true,
+    "origin": "https://admin-agency-fat.filbet2025.com",
+    "pathname": "/home",
+    "title": "Filbet Admin",
+    "rendered_menu_items": 11,
+    "required_request_evidence": [
+      "POST /backend/agency/login:200:true",
+      "GET /backend/agency/me/detail:200:true"
+    ],
+    "identity_or_permission_evidence": [
+      "GET /backend/agency/me/detail:200:false",
+      "GET /backend/agency/me/detail:200:true"
+    ],
+    "body_shell_present": true
+  },
+  "login_network": [
+    {
+      "route": "login",
+      "action": "login flow",
+      "method": "GET",
+      "path": "/backend/agency/me/detail",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": false,
+      "response_data_type": "string",
+      "response_data_keys": []
+    },
+    {
+      "route": "login",
+      "action": "login flow",
+      "method": "POST",
+      "path": "/backend/agency/login/auth",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "number",
+      "response_data_keys": []
+    },
+    {
+      "route": "login",
+      "action": "login flow",
+      "method": "POST",
+      "path": "/backend/agency/login",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "string",
+      "response_data_keys": []
+    },
+    {
+      "route": "login",
+      "action": "login flow",
+      "method": "GET",
+      "path": "/backend/agency/me/detail",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "avatar",
+        "bind_time",
+        "cmpl",
+        "create_name",
+        "created_at",
+        "email",
+        "google_secret",
+        "group_id",
+        "id",
+        "last_login_ip",
+        "last_login_time",
+        "login_password",
+        "nickname",
+        "operator_name",
+        "pwd_edit_time",
+        "roles",
+        "sid",
+        "status",
+        "stores",
+        "updated_at",
+        "username"
+      ]
+    },
+    {
+      "route": "login",
+      "action": "login flow",
+      "method": "GET",
+      "path": "/admin/agency/reports/bi/chart",
+      "query_fields": [
+        "time_range"
+      ],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "d"
+      ]
+    },
+    {
+      "route": "login",
+      "action": "login flow",
+      "method": "GET",
+      "path": "/admin/agency/reports/bi/basic",
+      "query_fields": [
+        "report_type"
+      ],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "bets",
+        "bets_people",
+        "bonus",
+        "deposit_amount",
+        "deposit_people",
+        "dw_diff",
+        "first_deposit",
+        "first_deposit_amount",
+        "ggr",
+        "members_total",
+        "rate",
+        "reg_count",
+        "settle_amount",
+        "valid_bet_amount",
+        "withdraw_amount",
+        "withdraw_people"
+      ]
+    }
+  ],
+  "menu": [
+    {
+      "order": 1,
+      "menu_path": [],
+      "page_name": "Home",
+      "route": "/home",
+      "route_source": "anchor_href"
+    },
+    {
+      "order": 2,
+      "menu_path": [
+        "Agent Management"
+      ],
+      "page_name": "Agent Review",
+      "route": "/agent/agent-review",
+      "route_source": "anchor_href"
+    },
+    {
+      "order": 3,
+      "menu_path": [
+        "Agent Management"
+      ],
+      "page_name": "Agent List",
+      "route": "/agent/agent-list",
+      "route_source": "anchor_href"
+    },
+    {
+      "order": 4,
+      "menu_path": [
+        "Agent Management"
+      ],
+      "page_name": "Member List",
+      "route": "/agent/user-list",
+      "route_source": "anchor_href"
+    },
+    {
+      "order": 5,
+      "menu_path": [
+        "Agent Management"
+      ],
+      "page_name": "Agent Settings",
+      "route": "/agent/agent-setting",
+      "route_source": "anchor_href"
+    },
+    {
+      "order": 6,
+      "menu_path": [
+        "Agent Management"
+      ],
+      "page_name": "Agent Domain",
+      "route": "/agent/domain",
+      "route_source": "anchor_href"
+    },
+    {
+      "order": 7,
+      "menu_path": [
+        "Finance Management"
+      ],
+      "page_name": "Commission Review",
+      "route": "/financial/commission-review",
+      "route_source": "anchor_href"
+    },
+    {
+      "order": 8,
+      "menu_path": [
+        "Finance Management"
+      ],
+      "page_name": "Commission Report",
+      "route": "/financial/commission-list",
+      "route_source": "anchor_href"
+    },
+    {
+      "order": 9,
+      "menu_path": [
+        "Finance Management"
+      ],
+      "page_name": "Financial Report",
+      "route": "/financial/financial-statements",
+      "route_source": "anchor_href"
+    },
+    {
+      "order": 10,
+      "menu_path": [
+        "System"
+      ],
+      "page_name": "Role Configuration",
+      "route": "/system/role",
+      "route_source": "anchor_href"
+    },
+    {
+      "order": 11,
+      "menu_path": [
+        "System"
+      ],
+      "page_name": "Staff Configuration",
+      "route": "/system/staff",
+      "route_source": "anchor_href"
+    }
+  ],
+  "pages": [
+    {
+      "order": 1,
+      "menu_path": [],
+      "page_name": "Home",
+      "route": "/home",
+      "final_origin": "https://admin-agency-fat.filbet2025.com",
+      "final_route": "/home",
+      "title": "Filbet Admin",
+      "rendered_menu_items": 1,
+      "scan_status": "SCANNED",
+      "controls": {
+        "inputs": [
+          {
+            "type": "input",
+            "placeholder": "Year/Month/Day",
+            "name": "",
+            "disabled": false
+          },
+          {
+            "type": "input",
+            "placeholder": "Year/Month/Day",
+            "name": "",
+            "disabled": false
+          }
+        ],
+        "selects": [],
+        "buttons": [
+          {
+            "text": "",
+            "title": "",
+            "aria_label": "",
+            "disabled": false
+          },
+          {
+            "text": "Search",
+            "title": "",
+            "aria_label": "",
+            "disabled": false
+          },
+          {
+            "text": "Reset",
+            "title": "",
+            "aria_label": "",
+            "disabled": false
+          },
+          {
+            "text": "Line Chart Mode",
+            "title": "",
+            "aria_label": "",
+            "disabled": false
+          },
+          {
+            "text": "Bar Chart Mode",
+            "title": "",
+            "aria_label": "",
+            "disabled": false
+          },
+          {
+            "text": "On\nClosed",
+            "title": "",
+            "aria_label": "",
+            "disabled": false
+          }
+        ],
+        "tabs": [
+          {
+            "text": "Home",
+            "selected": ""
+          },
+          {
+            "text": "Home",
+            "selected": "true"
+          }
+        ],
+        "pagination": [],
+        "links": [
+          {
+            "text": "Home",
+            "href": "/home"
+          }
+        ]
+      },
+      "initialization_events": [
+        {
+          "route": "/home",
+          "action": "page initialization",
+          "method": "GET",
+          "path": "/backend/agency/me/detail",
+          "query_fields": [],
+          "body_fields": [],
+          "http_status": 200,
+          "business_status": true,
+          "response_data_type": "object",
+          "response_data_keys": [
+            "avatar",
+            "bind_time",
+            "cmpl",
+            "create_name",
+            "created_at",
+            "email",
+            "google_secret",
+            "group_id",
+            "id",
+            "last_login_ip",
+            "last_login_time",
+            "login_password",
+            "nickname",
+            "operator_name",
+            "pwd_edit_time",
+            "roles",
+            "sid",
+            "status",
+            "stores",
+            "updated_at",
+            "username"
+          ]
+        },
+        {
+          "route": "/home",
+          "action": "page initialization",
+          "method": "GET",
+          "path": "/admin/agency/reports/bi/chart",
+          "query_fields": [
+            "time_range"
+          ],
+          "body_fields": [],
+          "http_status": 200,
+          "business_status": true,
+          "response_data_type": "object",
+          "response_data_keys": [
+            "d"
+          ]
+        },
+        {
+          "route": "/home",
+          "action": "page initialization",
+          "method": "GET",
+          "path": "/admin/agency/reports/bi/basic",
+          "query_fields": [
+            "report_type"
+          ],
+          "body_fields": [],
+          "http_status": 200,
+          "business_status": true,
+          "response_data_type": "object",
+          "response_data_keys": [
+            "bets",
+            "bets_people",
+            "bonus",
+            "deposit_amount",
+            "deposit_people",
+            "dw_diff",
+            "first_deposit",
+            "first_deposit_amount",
+            "ggr",
+            "members_total",
+            "rate",
+            "reg_count",
+            "settle_amount",
+            "valid_bet_amount",
+            "withdraw_amount",
+            "withdraw_people"
+          ]
+        }
+      ],
+      "error": ""
+    },
+    {
+      "order": 2,
+      "menu_path": [
+        "Agent Management"
+      ],
+      "page_name": "Agent Review",
+      "route": "/agent/agent-review",
+      "final_origin": "https://admin-agency-fat.filbet2025.com",
+      "final_route": "/agent/agent-review",
+      "title": "Filbet Admin",
+      "rendered_menu_items": 6,
+      "scan_status": "SCANNED",
+      "controls": {
+        "inputs": [
+          {
+            "type": "text",
+            "placeholder": "Please enter",
+            "name": "",
+            "disabled": false
+          },
+          {
+            "type": "input",
+            "placeholder": "Start Date",
+            "name": "",
+            "disabled": false
+          },
+          {
+            "type": "input",
+            "placeholder": "End Date",
+            "name": "",
+            "disabled": false
+          },
+          {
+            "type": "search",
+            "placeholder": "",
+            "name": "",
+            "disabled": false
+          },
+          {
+            "type": "search",
+            "placeholder": "",
+            "name": "",
+            "disabled": false
+          }
+        ],
+        "selects": [
+          {
+            "text": "Please select",
+            "aria_label": ""
+          },
+          {
+            "text": "",
+            "aria_label": ""
+          },
+          {
+            "text": "20 / page",
+            "aria_label": "Page Size"
+          },
+          {
+            "text": "",
+            "aria_label": "Page Size"
+          }
+        ],
+        "buttons": [
+          {
+            "text": "",
+            "title": "",
+            "aria_label": "",
+            "disabled": false
+          },
+          {
+            "text": "Reset",
+            "title": "",
+            "aria_label": "",
+            "disabled": false
+          },
+          {
+            "text": "Query",
+            "title": "",
+            "aria_label": "",
+            "disabled": false
+          },
+          {
+            "text": "",
+            "title": "",
+            "aria_label": "",
+            "disabled": false
+          },
+          {
+            "text": "查看",
+            "title": "",
+            "aria_label": "",
+            "disabled": false
+          },
+          {
+            "text": "Approve",
+            "title": "",
+            "aria_label": "",
+            "disabled": true
+          },
+          {
+            "text": "Rejected",
+            "title": "",
+            "aria_label": "",
+            "disabled": true
+          },
+          {
+            "text": "",
+            "title": "",
+            "aria_label": "",
+            "disabled": true
+          },
+          {
+            "text": "",
+            "title": "",
+            "aria_label": "",
+            "disabled": true
+          }
+        ],
+        "tabs": [
+          {
+            "text": "Agent Review",
+            "selected": ""
+          },
+          {
+            "text": "Agent Review",
+            "selected": "true"
+          }
+        ],
+        "pagination": [
+          {
+            "text": "",
+            "title": "",
+            "aria_label": ""
+          },
+          {
+            "text": "1",
+            "title": "",
+            "aria_label": ""
+          },
+          {
+            "text": "",
+            "title": "",
+            "aria_label": ""
+          }
+        ],
+        "links": [
+          {
+            "text": "Home",
+            "href": "/home"
+          },
+          {
+            "text": "Agent Review",
+            "href": "/agent/agent-review"
+          },
+          {
+            "text": "Agent List",
+            "href": "/agent/agent-list"
+          },
+          {
+            "text": "Member List",
+            "href": "/agent/user-list"
+          },
+          {
+            "text": "Agent Settings",
+            "href": "/agent/agent-setting"
+          },
+          {
+            "text": "Agent Domain",
+            "href": "/agent/domain"
+          }
+        ]
+      },
+      "initialization_events": [
+        {
+          "route": "/agent/agent-review",
+          "action": "page initialization",
+          "method": "GET",
+          "path": "/backend/agency/me/detail",
+          "query_fields": [],
+          "body_fields": [],
+          "http_status": 200,
+          "business_status": true,
+          "response_data_type": "object",
+          "response_data_keys": [
+            "avatar",
+            "bind_time",
+            "cmpl",
+            "create_name",
+            "created_at",
+            "email",
+            "google_secret",
+            "group_id",
+            "id",
+            "last_login_ip",
+            "last_login_time",
+            "login_password",
+            "nickname",
+            "operator_name",
+            "pwd_edit_time",
+            "roles",
+            "sid",
+            "status",
+            "stores",
+            "updated_at",
+            "username"
+          ]
+        },
+        {
+          "route": "/agent/agent-review",
+          "action": "page initialization",
+          "method": "GET",
+          "path": "/admin/agency/audit/list",
+          "query_fields": [
+            "end_time",
+            "page",
+            "page_size",
+            "start_time"
+          ],
+          "body_fields": [],
+          "http_status": 200,
+          "business_status": true,
+          "response_data_type": "object",
+          "response_data_keys": [
+            "d",
+            "s",
+            "t"
+          ]
+        }
+      ],
+      "error": ""
+    },
+    {
+      "order": 3,
+      "menu_path": [
+        "Agent Management"
+      ],
+      "page_name": "Agent List",
+      "route": "/agent/agent-list",
+      "final_origin": "https://admin-agency-fat.filbet2025.com",
+      "final_route": "/agent/agent-list",
+      "title": "Filbet Admin",
+      "rendered_menu_items": 6,
+      "scan_status": "SCANNED",
+      "controls": {
+        "inputs": [
+          {
+            "type": "text",
+            "placeholder": "Please enter",
+            "name": "",
+            "disabled": false
+          },
+          {
+            "type": "search",
+            "placeholder": "",
+            "name": "",
+            "disabled": false
+          },
+          {
+            "type": "search",
+            "placeholder": "",
+            "name": "",
+            "disabled": false
+          },
+          {
+            "type": "input",
+            "placeholder": "Start Date",
+            "name": "",
+            "disabled": false
+          },
+          {
+            "type": "input",
+            "placeholder": "End Date",
+            "name": "",
+            "disabled": false
+          },
+          {
+            "type": "search",
+            "placeholder": "",
+            "name": "",
+            "disabled": false
+          }
+        ],
+        "selects": [
+          {
+            "text": "Please select",
+            "aria_label": ""
+          },
+          {
+            "text": "",
+            "aria_label": ""
+          },
+          {
+            "text": "Please select",
+            "aria_label": ""
+          },
+          {
+            "text": "",
+            "aria_label": ""
+          },
+          {
+            "text": "20 / page",
+            "aria_label": "Page Size"
+          },
+          {
+            "text": "",
+            "aria_label": "Page Size"
+          }
+        ],
+        "buttons": [
+          {
+            "text": "",
+            "title": "",
+            "aria_label": "",
+            "disabled": false
+          },
+          {
+            "text": "Reset",
+            "title": "",
+            "aria_label": "",
+            "disabled": false
+          },
+          {
+            "text": "Query",
+            "title": "",
+            "aria_label": "",
+            "disabled": false
+          },
+          {
+            "text": "Balance Adjustment",
+            "title": "",
+            "aria_label": "",
+            "disabled": false
+          },
+          {
+            "text": "Ban/Unban",
+            "title": "",
+            "aria_label": "",
+            "disabled": false
+          },
+          {
+            "text": "Edit",
+            "title": "",
+            "aria_label": "",
+            "disabled": false
+          },
+          {
+            "text": "",
+            "title": "",
+            "aria_label": "",
+            "disabled": true
+          },
+          {
+            "text": "",
+            "title": "",
+            "aria_label": "",
+            "disabled": true
+          }
+        ],
+        "tabs": [
+          {
+            "text": "Agent List",
+            "selected": ""
+          },
+          {
+            "text": "Agent List",
+            "selected": "true"
+          }
+        ],
+        "pagination": [
+          {
+            "text": "",
+            "title": "",
+            "aria_label": ""
+          },
+          {
+            "text": "1",
+            "title": "",
+            "aria_label": ""
+          },
+          {
+            "text": "",
+            "title": "",
+            "aria_label": ""
+          }
+        ],
+        "links": [
+          {
+            "text": "Home",
+            "href": "/home"
+          },
+          {
+            "text": "Agent Review",
+            "href": "/agent/agent-review"
+          },
+          {
+            "text": "Agent List",
+            "href": "/agent/agent-list"
+          },
+          {
+            "text": "Member List",
+            "href": "/agent/user-list"
+          },
+          {
+            "text": "Agent Settings",
+            "href": "/agent/agent-setting"
+          },
+          {
+            "text": "Agent Domain",
+            "href": "/agent/domain"
+          }
+        ]
+      },
+      "initialization_events": [
+        {
+          "route": "/agent/agent-list",
+          "action": "page initialization",
+          "method": "GET",
+          "path": "/backend/agency/me/detail",
+          "query_fields": [],
+          "body_fields": [],
+          "http_status": 200,
+          "business_status": true,
+          "response_data_type": "object",
+          "response_data_keys": [
+            "avatar",
+            "bind_time",
+            "cmpl",
+            "create_name",
+            "created_at",
+            "email",
+            "google_secret",
+            "group_id",
+            "id",
+            "last_login_ip",
+            "last_login_time",
+            "login_password",
+            "nickname",
+            "operator_name",
+            "pwd_edit_time",
+            "roles",
+            "sid",
+            "status",
+            "stores",
+            "updated_at",
+            "username"
+          ]
+        },
+        {
+          "route": "/agent/agent-list",
+          "action": "page initialization",
+          "method": "GET",
+          "path": "/admin/agency/list",
+          "query_fields": [
+            "end_time",
+            "page",
+            "page_size",
+            "start_time"
+          ],
+          "body_fields": [],
+          "http_status": 200,
+          "business_status": true,
+          "response_data_type": "object",
+          "response_data_keys": [
+            "d",
+            "s",
+            "t"
+          ]
+        }
+      ],
+      "error": ""
+    },
+    {
+      "order": 4,
+      "menu_path": [
+        "Agent Management"
+      ],
+      "page_name": "Member List",
+      "route": "/agent/user-list",
+      "final_origin": "https://admin-agency-fat.filbet2025.com",
+      "final_route": "/agent/user-list",
+      "title": "Filbet Admin",
+      "rendered_menu_items": 6,
+      "scan_status": "SCANNED",
+      "controls": {
+        "inputs": [
+          {
+            "type": "text",
+            "placeholder": "Please enter",
+            "name": "",
+            "disabled": false
+          },
+          {
+            "type": "text",
+            "placeholder": "Please enter",
+            "name": "",
+            "disabled": false
+          },
+          {
+            "type": "input",
+            "placeholder": "Start Date",
+            "name": "",
+            "disabled": false
+          },
+          {
+            "type": "input",
+            "placeholder": "End Date",
+            "name": "",
+            "disabled": false
+          }
+        ],
+        "selects": [],
+        "buttons": [
+          {
+            "text": "",
+            "title": "",
+            "aria_label": "",
+            "disabled": false
+          },
+          {
+            "text": "Reset",
+            "title": "",
+            "aria_label": "",
+            "disabled": false
+          },
+          {
+            "text": "Query",
+            "title": "",
+            "aria_label": "",
+            "disabled": false
+          }
+        ],
+        "tabs": [
+          {
+            "text": "Member List",
+            "selected": ""
+          },
+          {
+            "text": "Member List",
+            "selected": "true"
+          }
+        ],
+        "pagination": [],
+        "links": [
+          {
+            "text": "Home",
+            "href": "/home"
+          },
+          {
+            "text": "Agent Review",
+            "href": "/agent/agent-review"
+          },
+          {
+            "text": "Agent List",
+            "href": "/agent/agent-list"
+          },
+          {
+            "text": "Member List",
+            "href": "/agent/user-list"
+          },
+          {
+            "text": "Agent Settings",
+            "href": "/agent/agent-setting"
+          },
+          {
+            "text": "Agent Domain",
+            "href": "/agent/domain"
+          }
+        ]
+      },
+      "initialization_events": [
+        {
+          "route": "/agent/user-list",
+          "action": "page initialization",
+          "method": "GET",
+          "path": "/backend/agency/me/detail",
+          "query_fields": [],
+          "body_fields": [],
+          "http_status": 200,
+          "business_status": true,
+          "response_data_type": "object",
+          "response_data_keys": [
+            "avatar",
+            "bind_time",
+            "cmpl",
+            "create_name",
+            "created_at",
+            "email",
+            "google_secret",
+            "group_id",
+            "id",
+            "last_login_ip",
+            "last_login_time",
+            "login_password",
+            "nickname",
+            "operator_name",
+            "pwd_edit_time",
+            "roles",
+            "sid",
+            "status",
+            "stores",
+            "updated_at",
+            "username"
+          ]
+        },
+        {
+          "route": "/agent/user-list",
+          "action": "page initialization",
+          "method": "GET",
+          "path": "/admin/agency/member/list",
+          "query_fields": [
+            "end_time",
+            "page",
+            "page_size",
+            "start_time"
+          ],
+          "body_fields": [],
+          "http_status": 200,
+          "business_status": true,
+          "response_data_type": "object",
+          "response_data_keys": [
+            "d",
+            "s",
+            "t"
+          ]
+        }
+      ],
+      "error": ""
+    },
+    {
+      "order": 5,
+      "menu_path": [
+        "Agent Management"
+      ],
+      "page_name": "Agent Settings",
+      "route": "/agent/agent-setting",
+      "final_origin": "https://admin-agency-fat.filbet2025.com",
+      "final_route": "/agent/agent-setting",
+      "title": "Filbet Admin",
+      "rendered_menu_items": 6,
+      "scan_status": "SCANNED",
+      "controls": {
+        "inputs": [
+          {
+            "type": "search",
+            "placeholder": "",
+            "name": "",
+            "disabled": false
+          }
+        ],
+        "selects": [
+          {
+            "text": "20 / page",
+            "aria_label": "Page Size"
+          },
+          {
+            "text": "",
+            "aria_label": "Page Size"
+          }
+        ],
+        "buttons": [
+          {
+            "text": "",
+            "title": "",
+            "aria_label": "",
+            "disabled": false
+          },
+          {
+            "text": "Add New",
+            "title": "",
+            "aria_label": "",
+            "disabled": false
+          },
+          {
+            "text": "Edit",
+            "title": "",
+            "aria_label": "",
+            "disabled": false
+          },
+          {
+            "text": "Delete",
+            "title": "",
+            "aria_label": "",
+            "disabled": false
+          },
+          {
+            "text": "Edit",
+            "title": "",
+            "aria_label": "",
+            "disabled": false
+          },
+          {
+            "text": "Delete",
+            "title": "",
+            "aria_label": "",
+            "disabled": false
+          },
+          {
+            "text": "Edit",
+            "title": "",
+            "aria_label": "",
+            "disabled": false
+          },
+          {
+            "text": "Delete",
+            "title": "",
+            "aria_label": "",
+            "disabled": false
+          },
+          {
+            "text": "",
+            "title": "",
+            "aria_label": "",
+            "disabled": true
+          },
+          {
+            "text": "",
+            "title": "",
+            "aria_label": "",
+            "disabled": true
+          }
+        ],
+        "tabs": [
+          {
+            "text": "Agent Settings",
+            "selected": ""
+          },
+          {
+            "text": "Agent Settings",
+            "selected": "true"
+          },
+          {
+            "text": "Commission Tier Table",
+            "selected": ""
+          },
+          {
+            "text": "Commission Tier Table",
+            "selected": "true"
+          },
+          {
+            "text": "Pagcor Tax Rate",
+            "selected": ""
+          },
+          {
+            "text": "Pagcor Tax Rate",
+            "selected": "false"
+          },
+          {
+            "text": "Provider Fee Rate",
+            "selected": ""
+          },
+          {
+            "text": "Provider Fee Rate",
+            "selected": "false"
+          },
+          {
+            "text": "Active User Definition",
+            "selected": ""
+          },
+          {
+            "text": "Active User Definition",
+            "selected": "false"
+          },
+          {
+            "text": "Promotion Material",
+            "selected": ""
+          },
+          {
+            "text": "Promotion Material",
+            "selected": "false"
+          },
+          {
+            "text": "代理开关",
+            "selected": ""
+          },
+          {
+            "text": "代理开关",
+            "selected": "false"
+          }
+        ],
+        "pagination": [
+          {
+            "text": "",
+            "title": "",
+            "aria_label": ""
+          },
+          {
+            "text": "1",
+            "title": "",
+            "aria_label": ""
+          },
+          {
+            "text": "",
+            "title": "",
+            "aria_label": ""
+          }
+        ],
+        "links": [
+          {
+            "text": "Home",
+            "href": "/home"
+          },
+          {
+            "text": "Agent Review",
+            "href": "/agent/agent-review"
+          },
+          {
+            "text": "Agent List",
+            "href": "/agent/agent-list"
+          },
+          {
+            "text": "Member List",
+            "href": "/agent/user-list"
+          },
+          {
+            "text": "Agent Settings",
+            "href": "/agent/agent-setting"
+          },
+          {
+            "text": "Agent Domain",
+            "href": "/agent/domain"
+          }
+        ]
+      },
+      "initialization_events": [
+        {
+          "route": "/agent/agent-setting",
+          "action": "page initialization",
+          "method": "GET",
+          "path": "/backend/agency/me/detail",
+          "query_fields": [],
+          "body_fields": [],
+          "http_status": 200,
+          "business_status": true,
+          "response_data_type": "object",
+          "response_data_keys": [
+            "avatar",
+            "bind_time",
+            "cmpl",
+            "create_name",
+            "created_at",
+            "email",
+            "google_secret",
+            "group_id",
+            "id",
+            "last_login_ip",
+            "last_login_time",
+            "login_password",
+            "nickname",
+            "operator_name",
+            "pwd_edit_time",
+            "roles",
+            "sid",
+            "status",
+            "stores",
+            "updated_at",
+            "username"
+          ]
+        },
+        {
+          "route": "/agent/agent-setting",
+          "action": "page initialization",
+          "method": "GET",
+          "path": "/admin/agency/ladder",
+          "query_fields": [
+            "page",
+            "page_size",
+            "settle_type"
+          ],
+          "body_fields": [],
+          "http_status": 200,
+          "business_status": true,
+          "response_data_type": "object",
+          "response_data_keys": [
+            "active_bet_amount",
+            "active_deposit_amount",
+            "setting"
+          ]
+        }
+      ],
+      "error": ""
+    },
+    {
+      "order": 6,
+      "menu_path": [
+        "Agent Management"
+      ],
+      "page_name": "Agent Domain",
+      "route": "/agent/domain",
+      "final_origin": "https://admin-agency-fat.filbet2025.com",
+      "final_route": "/agent/domain",
+      "title": "Filbet Admin",
+      "rendered_menu_items": 6,
+      "scan_status": "SCANNED",
+      "controls": {
+        "inputs": [
+          {
+            "type": "search",
+            "placeholder": "",
+            "name": "",
+            "disabled": false
+          },
+          {
+            "type": "text",
+            "placeholder": "Search domain...",
+            "name": "",
+            "disabled": false
+          },
+          {
+            "type": "text",
+            "placeholder": "Search agent...",
+            "name": "",
+            "disabled": false
+          },
+          {
+            "type": "search",
+            "placeholder": "",
+            "name": "",
+            "disabled": false
+          },
+          {
+            "type": "search",
+            "placeholder": "",
+            "name": "",
+            "disabled": false
+          }
+        ],
+        "selects": [
+          {
+            "text": "All",
+            "aria_label": ""
+          },
+          {
+            "text": "",
+            "aria_label": ""
+          },
+          {
+            "text": "All",
+            "aria_label": ""
+          },
+          {
+            "text": "",
+            "aria_label": ""
+          },
+          {
+            "text": "20 / page",
+            "aria_label": "Page Size"
+          },
+          {
+            "text": "",
+            "aria_label": "Page Size"
+          }
+        ],
+        "buttons": [
+          {
+            "text": "",
+            "title": "",
+            "aria_label": "",
+            "disabled": false
+          },
+          {
+            "text": "Reset",
+            "title": "",
+            "aria_label": "",
+            "disabled": false
+          },
+          {
+            "text": "Query",
+            "title": "",
+            "aria_label": "",
+            "disabled": false
+          },
+          {
+            "text": "Add",
+            "title": "",
+            "aria_label": "",
+            "disabled": false
+          },
+          {
+            "text": "",
+            "title": "",
+            "aria_label": "Copy",
+            "disabled": false
+          },
+          {
+            "text": "Enabled\nDisabled",
+            "title": "",
+            "aria_label": "",
+            "disabled": false
+          },
+          {
+            "text": "Edit",
+            "title": "",
+            "aria_label": "",
+            "disabled": false
+          },
+          {
+            "text": "Delete",
+            "title": "",
+            "aria_label": "",
+            "disabled": false
+          },
+          {
+            "text": "",
+            "title": "",
+            "aria_label": "Copy",
+            "disabled": false
+          },
+          {
+            "text": "Enabled\nDisabled",
+            "title": "",
+            "aria_label": "",
+            "disabled": false
+          },
+          {
+            "text": "Edit",
+            "title": "",
+            "aria_label": "",
+            "disabled": false
+          },
+          {
+            "text": "Delete",
+            "title": "",
+            "aria_label": "",
+            "disabled": false
+          },
+          {
+            "text": "",
+            "title": "",
+            "aria_label": "Copy",
+            "disabled": false
+          },
+          {
+            "text": "Enabled\nDisabled",
+            "title": "",
+            "aria_label": "",
+            "disabled": false
+          },
+          {
+            "text": "Edit",
+            "title": "",
+            "aria_label": "",
+            "disabled": false
+          },
+          {
+            "text": "Delete",
+            "title": "",
+            "aria_label": "",
+            "disabled": false
+          },
+          {
+            "text": "",
+            "title": "",
+            "aria_label": "",
+            "disabled": true
+          },
+          {
+            "text": "",
+            "title": "",
+            "aria_label": "",
+            "disabled": true
+          }
+        ],
+        "tabs": [
+          {
+            "text": "Agent Domain",
+            "selected": ""
+          },
+          {
+            "text": "Agent Domain",
+            "selected": "true"
+          }
+        ],
+        "pagination": [
+          {
+            "text": "",
+            "title": "",
+            "aria_label": ""
+          },
+          {
+            "text": "1",
+            "title": "",
+            "aria_label": ""
+          },
+          {
+            "text": "",
+            "title": "",
+            "aria_label": ""
+          }
+        ],
+        "links": [
+          {
+            "text": "Home",
+            "href": "/home"
+          },
+          {
+            "text": "Agent Review",
+            "href": "/agent/agent-review"
+          },
+          {
+            "text": "Agent List",
+            "href": "/agent/agent-list"
+          },
+          {
+            "text": "Member List",
+            "href": "/agent/user-list"
+          },
+          {
+            "text": "Agent Settings",
+            "href": "/agent/agent-setting"
+          },
+          {
+            "text": "Agent Domain",
+            "href": "/agent/domain"
+          }
+        ]
+      },
+      "initialization_events": [
+        {
+          "route": "/agent/domain",
+          "action": "page initialization",
+          "method": "GET",
+          "path": "/backend/agency/me/detail",
+          "query_fields": [],
+          "body_fields": [],
+          "http_status": 200,
+          "business_status": true,
+          "response_data_type": "object",
+          "response_data_keys": [
+            "avatar",
+            "bind_time",
+            "cmpl",
+            "create_name",
+            "created_at",
+            "email",
+            "google_secret",
+            "group_id",
+            "id",
+            "last_login_ip",
+            "last_login_time",
+            "login_password",
+            "nickname",
+            "operator_name",
+            "pwd_edit_time",
+            "roles",
+            "sid",
+            "status",
+            "stores",
+            "updated_at",
+            "username"
+          ]
+        },
+        {
+          "route": "/agent/domain",
+          "action": "page initialization",
+          "method": "GET",
+          "path": "/admin/agency/domain/list",
+          "query_fields": [
+            "state",
+            "ty"
+          ],
+          "body_fields": [],
+          "http_status": 200,
+          "business_status": true,
+          "response_data_type": "object",
+          "response_data_keys": [
+            "d",
+            "s",
+            "t"
+          ]
+        }
+      ],
+      "error": ""
+    },
+    {
+      "order": 7,
+      "menu_path": [
+        "Finance Management"
+      ],
+      "page_name": "Commission Review",
+      "route": "/financial/commission-review",
+      "final_origin": "https://admin-agency-fat.filbet2025.com",
+      "final_route": "/financial/commission-review",
+      "title": "Filbet Admin",
+      "rendered_menu_items": 4,
+      "scan_status": "SCANNED",
+      "controls": {
+        "inputs": [
+          {
+            "type": "search",
+            "placeholder": "",
+            "name": "",
+            "disabled": false
+          },
+          {
+            "type": "input",
+            "placeholder": "Start Date",
+            "name": "",
+            "disabled": false
+          },
+          {
+            "type": "input",
+            "placeholder": "End Date",
+            "name": "",
+            "disabled": false
+          },
+          {
+            "type": "search",
+            "placeholder": "",
+            "name": "",
+            "disabled": false
+          },
+          {
+            "type": "text",
+            "placeholder": "Please enter",
+            "name": "",
+            "disabled": false
+          },
+          {
+            "type": "checkbox",
+            "placeholder": "",
+            "name": "",
+            "disabled": true
+          }
+        ],
+        "selects": [
+          {
+            "text": "Please select",
+            "aria_label": ""
+          },
+          {
+            "text": "",
+            "aria_label": ""
+          },
+          {
+            "text": "Please select",
+            "aria_label": ""
+          },
+          {
+            "text": "",
+            "aria_label": ""
+          }
+        ],
+        "buttons": [
+          {
+            "text": "",
+            "title": "",
+            "aria_label": "",
+            "disabled": false
+          },
+          {
+            "text": "Reset",
+            "title": "",
+            "aria_label": "",
+            "disabled": false
+          },
+          {
+            "text": "Query",
+            "title": "",
+            "aria_label": "",
+            "disabled": false
+          },
+          {
+            "text": "Bulk Approve",
+            "title": "",
+            "aria_label": "",
+            "disabled": false
+          },
+          {
+            "text": "Bulk Reject",
+            "title": "",
+            "aria_label": "",
+            "disabled": false
+          }
+        ],
+        "tabs": [
+          {
+            "text": "Commission Review",
+            "selected": ""
+          },
+          {
+            "text": "Commission Review",
+            "selected": "true"
+          }
+        ],
+        "pagination": [],
+        "links": [
+          {
+            "text": "Home",
+            "href": "/home"
+          },
+          {
+            "text": "Commission Review",
+            "href": "/financial/commission-review"
+          },
+          {
+            "text": "Commission Report",
+            "href": "/financial/commission-list"
+          },
+          {
+            "text": "Financial Report",
+            "href": "/financial/financial-statements"
+          }
+        ]
+      },
+      "initialization_events": [
+        {
+          "route": "/financial/commission-review",
+          "action": "page initialization",
+          "method": "GET",
+          "path": "/backend/agency/me/detail",
+          "query_fields": [],
+          "body_fields": [],
+          "http_status": 200,
+          "business_status": true,
+          "response_data_type": "object",
+          "response_data_keys": [
+            "avatar",
+            "bind_time",
+            "cmpl",
+            "create_name",
+            "created_at",
+            "email",
+            "google_secret",
+            "group_id",
+            "id",
+            "last_login_ip",
+            "last_login_time",
+            "login_password",
+            "nickname",
+            "operator_name",
+            "pwd_edit_time",
+            "roles",
+            "sid",
+            "status",
+            "stores",
+            "updated_at",
+            "username"
+          ]
+        },
+        {
+          "route": "/financial/commission-review",
+          "action": "page initialization",
+          "method": "GET",
+          "path": "/admin/agency/commission/audit/list",
+          "query_fields": [
+            "end_time",
+            "page",
+            "page_size",
+            "start_time"
+          ],
+          "body_fields": [],
+          "http_status": 200,
+          "business_status": true,
+          "response_data_type": "object",
+          "response_data_keys": [
+            "d",
+            "s",
+            "t"
+          ]
+        }
+      ],
+      "error": ""
+    },
+    {
+      "order": 8,
+      "menu_path": [
+        "Finance Management"
+      ],
+      "page_name": "Commission Report",
+      "route": "/financial/commission-list",
+      "final_origin": "https://admin-agency-fat.filbet2025.com",
+      "final_route": "/financial/commission-list",
+      "title": "Filbet Admin",
+      "rendered_menu_items": 4,
+      "scan_status": "SCANNED",
+      "controls": {
+        "inputs": [
+          {
+            "type": "search",
+            "placeholder": "",
+            "name": "",
+            "disabled": false
+          },
+          {
+            "type": "input",
+            "placeholder": "Start Date",
+            "name": "",
+            "disabled": false
+          },
+          {
+            "type": "input",
+            "placeholder": "End Date",
+            "name": "",
+            "disabled": false
+          },
+          {
+            "type": "search",
+            "placeholder": "",
+            "name": "",
+            "disabled": false
+          },
+          {
+            "type": "text",
+            "placeholder": "Please enter",
+            "name": "",
+            "disabled": false
+          },
+          {
+            "type": "search",
+            "placeholder": "",
+            "name": "",
+            "disabled": false
+          },
+          {
+            "type": "search",
+            "placeholder": "",
+            "name": "",
+            "disabled": false
+          }
+        ],
+        "selects": [
+          {
+            "text": "Please select",
+            "aria_label": ""
+          },
+          {
+            "text": "",
+            "aria_label": ""
+          },
+          {
+            "text": "Please select",
+            "aria_label": ""
+          },
+          {
+            "text": "",
+            "aria_label": ""
+          },
+          {
+            "text": "Please select",
+            "aria_label": ""
+          },
+          {
+            "text": "",
+            "aria_label": ""
+          },
+          {
+            "text": "Please select",
+            "aria_label": ""
+          },
+          {
+            "text": "",
+            "aria_label": ""
+          }
+        ],
+        "buttons": [
+          {
+            "text": "",
+            "title": "",
+            "aria_label": "",
+            "disabled": false
+          },
+          {
+            "text": "Reset",
+            "title": "",
+            "aria_label": "",
+            "disabled": false
+          },
+          {
+            "text": "Query",
+            "title": "",
+            "aria_label": "",
+            "disabled": false
+          },
+          {
+            "text": "Export",
+            "title": "",
+            "aria_label": "",
+            "disabled": false
+          }
+        ],
+        "tabs": [
+          {
+            "text": "Commission Report",
+            "selected": ""
+          },
+          {
+            "text": "Commission Report",
+            "selected": "true"
+          }
+        ],
+        "pagination": [],
+        "links": [
+          {
+            "text": "Home",
+            "href": "/home"
+          },
+          {
+            "text": "Commission Review",
+            "href": "/financial/commission-review"
+          },
+          {
+            "text": "Commission Report",
+            "href": "/financial/commission-list"
+          },
+          {
+            "text": "Financial Report",
+            "href": "/financial/financial-statements"
+          }
+        ]
+      },
+      "initialization_events": [
+        {
+          "route": "/financial/commission-list",
+          "action": "page initialization",
+          "method": "GET",
+          "path": "/backend/agency/me/detail",
+          "query_fields": [],
+          "body_fields": [],
+          "http_status": 200,
+          "business_status": true,
+          "response_data_type": "object",
+          "response_data_keys": [
+            "avatar",
+            "bind_time",
+            "cmpl",
+            "create_name",
+            "created_at",
+            "email",
+            "google_secret",
+            "group_id",
+            "id",
+            "last_login_ip",
+            "last_login_time",
+            "login_password",
+            "nickname",
+            "operator_name",
+            "pwd_edit_time",
+            "roles",
+            "sid",
+            "status",
+            "stores",
+            "updated_at",
+            "username"
+          ]
+        },
+        {
+          "route": "/financial/commission-list",
+          "action": "page initialization",
+          "method": "GET",
+          "path": "/admin/agency/commission/report",
+          "query_fields": [
+            "end_time",
+            "page",
+            "page_size",
+            "start_time"
+          ],
+          "body_fields": [],
+          "http_status": 200,
+          "business_status": true,
+          "response_data_type": "object",
+          "response_data_keys": [
+            "d",
+            "s",
+            "t"
+          ]
+        }
+      ],
+      "error": ""
+    },
+    {
+      "order": 9,
+      "menu_path": [
+        "Finance Management"
+      ],
+      "page_name": "Financial Report",
+      "route": "/financial/financial-statements",
+      "final_origin": "https://admin-agency-fat.filbet2025.com",
+      "final_route": "/financial/financial-statements",
+      "title": "Filbet Admin",
+      "rendered_menu_items": 4,
+      "scan_status": "SCANNED",
+      "controls": {
+        "inputs": [
+          {
+            "type": "input",
+            "placeholder": "Start Date",
+            "name": "",
+            "disabled": false
+          },
+          {
+            "type": "input",
+            "placeholder": "End Date",
+            "name": "",
+            "disabled": false
+          }
+        ],
+        "selects": [],
+        "buttons": [
+          {
+            "text": "",
+            "title": "",
+            "aria_label": "",
+            "disabled": false
+          },
+          {
+            "text": "Reset",
+            "title": "",
+            "aria_label": "",
+            "disabled": false
+          },
+          {
+            "text": "Query",
+            "title": "",
+            "aria_label": "",
+            "disabled": false
+          }
+        ],
+        "tabs": [
+          {
+            "text": "Financial Report",
+            "selected": ""
+          },
+          {
+            "text": "Financial Report",
+            "selected": "true"
+          },
+          {
+            "text": "Commission Distribution",
+            "selected": ""
+          },
+          {
+            "text": "Commission Distribution",
+            "selected": "true"
+          }
+        ],
+        "pagination": [],
+        "links": [
+          {
+            "text": "Home",
+            "href": "/home"
+          },
+          {
+            "text": "Commission Review",
+            "href": "/financial/commission-review"
+          },
+          {
+            "text": "Commission Report",
+            "href": "/financial/commission-list"
+          },
+          {
+            "text": "Financial Report",
+            "href": "/financial/financial-statements"
+          }
+        ]
+      },
+      "initialization_events": [
+        {
+          "route": "/financial/financial-statements",
+          "action": "page initialization",
+          "method": "GET",
+          "path": "/backend/agency/me/detail",
+          "query_fields": [],
+          "body_fields": [],
+          "http_status": 200,
+          "business_status": true,
+          "response_data_type": "object",
+          "response_data_keys": [
+            "avatar",
+            "bind_time",
+            "cmpl",
+            "create_name",
+            "created_at",
+            "email",
+            "google_secret",
+            "group_id",
+            "id",
+            "last_login_ip",
+            "last_login_time",
+            "login_password",
+            "nickname",
+            "operator_name",
+            "pwd_edit_time",
+            "roles",
+            "sid",
+            "status",
+            "stores",
+            "updated_at",
+            "username"
+          ]
+        },
+        {
+          "route": "/financial/financial-statements",
+          "action": "page initialization",
+          "method": "POST",
+          "path": "/agency/finance/transaction/list",
+          "query_fields": [],
+          "body_fields": [
+            "cash_type",
+            "end_time",
+            "page",
+            "page_size",
+            "start_time"
+          ],
+          "http_status": 200,
+          "business_status": true,
+          "response_data_type": "object",
+          "response_data_keys": [
+            "d",
+            "s",
+            "t"
+          ]
+        }
+      ],
+      "error": ""
+    },
+    {
+      "order": 10,
+      "menu_path": [
+        "System"
+      ],
+      "page_name": "Role Configuration",
+      "route": "/system/role",
+      "final_origin": "https://admin-agency-fat.filbet2025.com",
+      "final_route": "/system/role",
+      "title": "Filbet Admin",
+      "rendered_menu_items": 3,
+      "scan_status": "SCANNED",
+      "controls": {
+        "inputs": [
+          {
+            "type": "search",
+            "placeholder": "",
+            "name": "",
+            "disabled": false
+          }
+        ],
+        "selects": [
+          {
+            "text": "20 / page",
+            "aria_label": "Page Size"
+          },
+          {
+            "text": "",
+            "aria_label": "Page Size"
+          }
+        ],
+        "buttons": [
+          {
+            "text": "",
+            "title": "",
+            "aria_label": "",
+            "disabled": false
+          },
+          {
+            "text": "Add New",
+            "title": "",
+            "aria_label": "",
+            "disabled": false
+          },
+          {
+            "text": "Edit",
+            "title": "",
+            "aria_label": "",
+            "disabled": false
+          },
+          {
+            "text": "Permissions",
+            "title": "",
+            "aria_label": "",
+            "disabled": false
+          },
+          {
+            "text": "Edit",
+            "title": "",
+            "aria_label": "",
+            "disabled": false
+          },
+          {
+            "text": "Permissions",
+            "title": "",
+            "aria_label": "",
+            "disabled": false
+          },
+          {
+            "text": "Edit",
+            "title": "",
+            "aria_label": "",
+            "disabled": false
+          },
+          {
+            "text": "Permissions",
+            "title": "",
+            "aria_label": "",
+            "disabled": false
+          },
+          {
+            "text": "Edit",
+            "title": "",
+            "aria_label": "",
+            "disabled": false
+          },
+          {
+            "text": "Permissions",
+            "title": "",
+            "aria_label": "",
+            "disabled": false
+          },
+          {
+            "text": "Edit",
+            "title": "",
+            "aria_label": "",
+            "disabled": false
+          },
+          {
+            "text": "Permissions",
+            "title": "",
+            "aria_label": "",
+            "disabled": false
+          },
+          {
+            "text": "Edit",
+            "title": "",
+            "aria_label": "",
+            "disabled": false
+          },
+          {
+            "text": "Permissions",
+            "title": "",
+            "aria_label": "",
+            "disabled": false
+          },
+          {
+            "text": "Edit",
+            "title": "",
+            "aria_label": "",
+            "disabled": false
+          },
+          {
+            "text": "Permissions",
+            "title": "",
+            "aria_label": "",
+            "disabled": false
+          },
+          {
+            "text": "Edit",
+            "title": "",
+            "aria_label": "",
+            "disabled": false
+          },
+          {
+            "text": "Permissions",
+            "title": "",
+            "aria_label": "",
+            "disabled": false
+          },
+          {
+            "text": "",
+            "title": "",
+            "aria_label": "",
+            "disabled": true
+          },
+          {
+            "text": "",
+            "title": "",
+            "aria_label": "",
+            "disabled": true
+          }
+        ],
+        "tabs": [
+          {
+            "text": "Role Configuration",
+            "selected": ""
+          },
+          {
+            "text": "Role Configuration",
+            "selected": "true"
+          }
+        ],
+        "pagination": [
+          {
+            "text": "",
+            "title": "",
+            "aria_label": ""
+          },
+          {
+            "text": "1",
+            "title": "",
+            "aria_label": ""
+          },
+          {
+            "text": "",
+            "title": "",
+            "aria_label": ""
+          }
+        ],
+        "links": [
+          {
+            "text": "Home",
+            "href": "/home"
+          },
+          {
+            "text": "Role Configuration",
+            "href": "/system/role"
+          },
+          {
+            "text": "Staff Configuration",
+            "href": "/system/staff"
+          }
+        ]
+      },
+      "initialization_events": [
+        {
+          "route": "/system/role",
+          "action": "page initialization",
+          "method": "GET",
+          "path": "/backend/agency/me/detail",
+          "query_fields": [],
+          "body_fields": [],
+          "http_status": 200,
+          "business_status": true,
+          "response_data_type": "object",
+          "response_data_keys": [
+            "avatar",
+            "bind_time",
+            "cmpl",
+            "create_name",
+            "created_at",
+            "email",
+            "google_secret",
+            "group_id",
+            "id",
+            "last_login_ip",
+            "last_login_time",
+            "login_password",
+            "nickname",
+            "operator_name",
+            "pwd_edit_time",
+            "roles",
+            "sid",
+            "status",
+            "stores",
+            "updated_at",
+            "username"
+          ]
+        },
+        {
+          "route": "/system/role",
+          "action": "page initialization",
+          "method": "GET",
+          "path": "/backend/agency/group/list",
+          "query_fields": [
+            "page",
+            "page_size"
+          ],
+          "body_fields": [],
+          "http_status": 200,
+          "business_status": true,
+          "response_data_type": "object",
+          "response_data_keys": [
+            "d",
+            "s",
+            "t"
+          ]
+        }
+      ],
+      "error": ""
+    },
+    {
+      "order": 11,
+      "menu_path": [
+        "System"
+      ],
+      "page_name": "Staff Configuration",
+      "route": "/system/staff",
+      "final_origin": "https://admin-agency-fat.filbet2025.com",
+      "final_route": "/system/staff",
+      "title": "Filbet Admin",
+      "rendered_menu_items": 3,
+      "scan_status": "SCANNED",
+      "controls": {
+        "inputs": [
+          {
+            "type": "text",
+            "placeholder": "Please Enter Username",
+            "name": "",
+            "disabled": false
+          },
+          {
+            "type": "search",
+            "placeholder": "",
+            "name": "",
+            "disabled": false
+          },
+          {
+            "type": "search",
+            "placeholder": "",
+            "name": "",
+            "disabled": false
+          },
+          {
+            "type": "search",
+            "placeholder": "",
+            "name": "",
+            "disabled": false
+          },
+          {
+            "type": "text",
+            "placeholder": "",
+            "name": "",
+            "disabled": false
+          }
+        ],
+        "selects": [
+          {
+            "text": "Please select",
+            "aria_label": ""
+          },
+          {
+            "text": "",
+            "aria_label": ""
+          },
+          {
+            "text": "Please select",
+            "aria_label": ""
+          },
+          {
+            "text": "",
+            "aria_label": ""
+          },
+          {
+            "text": "20 / page",
+            "aria_label": "Page Size"
+          },
+          {
+            "text": "",
+            "aria_label": "Page Size"
+          }
+        ],
+        "buttons": [
+          {
+            "text": "",
+            "title": "",
+            "aria_label": "",
+            "disabled": false
+          },
+          {
+            "text": "Reset",
+            "title": "",
+            "aria_label": "",
+            "disabled": false
+          },
+          {
+            "text": "Query",
+            "title": "",
+            "aria_label": "",
+            "disabled": false
+          },
+          {
+            "text": "Add Staff",
+            "title": "",
+            "aria_label": "",
+            "disabled": false
+          },
+          {
+            "text": "Edit",
+            "title": "",
+            "aria_label": "",
+            "disabled": false
+          },
+          {
+            "text": "Disable",
+            "title": "",
+            "aria_label": "",
+            "disabled": false
+          },
+          {
+            "text": "Reset Password",
+            "title": "",
+            "aria_label": "",
+            "disabled": false
+          },
+          {
+            "text": "Reset Google Verification Code",
+            "title": "",
+            "aria_label": "",
+            "disabled": false
+          },
+          {
+            "text": "Edit",
+            "title": "",
+            "aria_label": "",
+            "disabled": false
+          },
+          {
+            "text": "Disable",
+            "title": "",
+            "aria_label": "",
+            "disabled": false
+          },
+          {
+            "text": "Reset Password",
+            "title": "",
+            "aria_label": "",
+            "disabled": false
+          },
+          {
+            "text": "Reset Google Verification Code",
+            "title": "",
+            "aria_label": "",
+            "disabled": false
+          },
+          {
+            "text": "Edit",
+            "title": "",
+            "aria_label": "",
+            "disabled": false
+          },
+          {
+            "text": "Disable",
+            "title": "",
+            "aria_label": "",
+            "disabled": false
+          },
+          {
+            "text": "Reset Password",
+            "title": "",
+            "aria_label": "",
+            "disabled": false
+          },
+          {
+            "text": "Reset Google Verification Code",
+            "title": "",
+            "aria_label": "",
+            "disabled": false
+          },
+          {
+            "text": "Edit",
+            "title": "",
+            "aria_label": "",
+            "disabled": false
+          },
+          {
+            "text": "Disable",
+            "title": "",
+            "aria_label": "",
+            "disabled": false
+          },
+          {
+            "text": "Reset Password",
+            "title": "",
+            "aria_label": "",
+            "disabled": false
+          },
+          {
+            "text": "Reset Google Verification Code",
+            "title": "",
+            "aria_label": "",
+            "disabled": true
+          },
+          {
+            "text": "Edit",
+            "title": "",
+            "aria_label": "",
+            "disabled": false
+          },
+          {
+            "text": "Disable",
+            "title": "",
+            "aria_label": "",
+            "disabled": false
+          },
+          {
+            "text": "Reset Password",
+            "title": "",
+            "aria_label": "",
+            "disabled": false
+          },
+          {
+            "text": "Reset Google Verification Code",
+            "title": "",
+            "aria_label": "",
+            "disabled": true
+          },
+          {
+            "text": "Edit",
+            "title": "",
+            "aria_label": "",
+            "disabled": false
+          },
+          {
+            "text": "Disable",
+            "title": "",
+            "aria_label": "",
+            "disabled": false
+          },
+          {
+            "text": "Reset Password",
+            "title": "",
+            "aria_label": "",
+            "disabled": false
+          },
+          {
+            "text": "Reset Google Verification Code",
+            "title": "",
+            "aria_label": "",
+            "disabled": false
+          },
+          {
+            "text": "Edit",
+            "title": "",
+            "aria_label": "",
+            "disabled": false
+          },
+          {
+            "text": "Disable",
+            "title": "",
+            "aria_label": "",
+            "disabled": false
+          },
+          {
+            "text": "Reset Password",
+            "title": "",
+            "aria_label": "",
+            "disabled": false
+          },
+          {
+            "text": "Reset Google Verification Code",
+            "title": "",
+            "aria_label": "",
+            "disabled": false
+          },
+          {
+            "text": "Edit",
+            "title": "",
+            "aria_label": "",
+            "disabled": false
+          },
+          {
+            "text": "Disable",
+            "title": "",
+            "aria_label": "",
+            "disabled": false
+          },
+          {
+            "text": "Reset Password",
+            "title": "",
+            "aria_label": "",
+            "disabled": false
+          },
+          {
+            "text": "Reset Google Verification Code",
+            "title": "",
+            "aria_label": "",
+            "disabled": false
+          },
+          {
+            "text": "Edit",
+            "title": "",
+            "aria_label": "",
+            "disabled": false
+          },
+          {
+            "text": "Disable",
+            "title": "",
+            "aria_label": "",
+            "disabled": false
+          },
+          {
+            "text": "Reset Password",
+            "title": "",
+            "aria_label": "",
+            "disabled": false
+          },
+          {
+            "text": "Reset Google Verification Code",
+            "title": "",
+            "aria_label": "",
+            "disabled": false
+          },
+          {
+            "text": "Edit",
+            "title": "",
+            "aria_label": "",
+            "disabled": false
+          },
+          {
+            "text": "Disable",
+            "title": "",
+            "aria_label": "",
+            "disabled": false
+          },
+          {
+            "text": "Reset Password",
+            "title": "",
+            "aria_label": "",
+            "disabled": false
+          },
+          {
+            "text": "Reset Google Verification Code",
+            "title": "",
+            "aria_label": "",
+            "disabled": false
+          },
+          {
+            "text": "Edit",
+            "title": "",
+            "aria_label": "",
+            "disabled": false
+          },
+          {
+            "text": "Disable",
+            "title": "",
+            "aria_label": "",
+            "disabled": false
+          },
+          {
+            "text": "Reset Password",
+            "title": "",
+            "aria_label": "",
+            "disabled": false
+          },
+          {
+            "text": "Reset Google Verification Code",
+            "title": "",
+            "aria_label": "",
+            "disabled": false
+          },
+          {
+            "text": "Edit",
+            "title": "",
+            "aria_label": "",
+            "disabled": false
+          },
+          {
+            "text": "Disable",
+            "title": "",
+            "aria_label": "",
+            "disabled": false
+          },
+          {
+            "text": "Reset Password",
+            "title": "",
+            "aria_label": "",
+            "disabled": false
+          },
+          {
+            "text": "Reset Google Verification Code",
+            "title": "",
+            "aria_label": "",
+            "disabled": false
+          },
+          {
+            "text": "Edit",
+            "title": "",
+            "aria_label": "",
+            "disabled": false
+          },
+          {
+            "text": "Disable",
+            "title": "",
+            "aria_label": "",
+            "disabled": false
+          },
+          {
+            "text": "Reset Password",
+            "title": "",
+            "aria_label": "",
+            "disabled": false
+          },
+          {
+            "text": "Reset Google Verification Code",
+            "title": "",
+            "aria_label": "",
+            "disabled": false
+          },
+          {
+            "text": "Edit",
+            "title": "",
+            "aria_label": "",
+            "disabled": false
+          },
+          {
+            "text": "Disable",
+            "title": "",
+            "aria_label": "",
+            "disabled": false
+          },
+          {
+            "text": "Reset Password",
+            "title": "",
+            "aria_label": "",
+            "disabled": false
+          },
+          {
+            "text": "Reset Google Verification Code",
+            "title": "",
+            "aria_label": "",
+            "disabled": true
+          },
+          {
+            "text": "Edit",
+            "title": "",
+            "aria_label": "",
+            "disabled": false
+          },
+          {
+            "text": "Disable",
+            "title": "",
+            "aria_label": "",
+            "disabled": false
+          },
+          {
+            "text": "Reset Password",
+            "title": "",
+            "aria_label": "",
+            "disabled": false
+          },
+          {
+            "text": "Reset Google Verification Code",
+            "title": "",
+            "aria_label": "",
+            "disabled": false
+          },
+          {
+            "text": "Edit",
+            "title": "",
+            "aria_label": "",
+            "disabled": false
+          },
+          {
+            "text": "Disable",
+            "title": "",
+            "aria_label": "",
+            "disabled": false
+          },
+          {
+            "text": "Reset Password",
+            "title": "",
+            "aria_label": "",
+            "disabled": false
+          },
+          {
+            "text": "Reset Google Verification Code",
+            "title": "",
+            "aria_label": "",
+            "disabled": false
+          },
+          {
+            "text": "Edit",
+            "title": "",
+            "aria_label": "",
+            "disabled": false
+          },
+          {
+            "text": "Disable",
+            "title": "",
+            "aria_label": "",
+            "disabled": false
+          },
+          {
+            "text": "Reset Password",
+            "title": "",
+            "aria_label": "",
+            "disabled": false
+          },
+          {
+            "text": "Reset Google Verification Code",
+            "title": "",
+            "aria_label": "",
+            "disabled": false
+          },
+          {
+            "text": "Edit",
+            "title": "",
+            "aria_label": "",
+            "disabled": false
+          },
+          {
+            "text": "Disable",
+            "title": "",
+            "aria_label": "",
+            "disabled": false
+          },
+          {
+            "text": "Reset Password",
+            "title": "",
+            "aria_label": "",
+            "disabled": false
+          },
+          {
+            "text": "Reset Google Verification Code",
+            "title": "",
+            "aria_label": "",
+            "disabled": false
+          },
+          {
+            "text": "Edit",
+            "title": "",
+            "aria_label": "",
+            "disabled": false
+          },
+          {
+            "text": "Disable",
+            "title": "",
+            "aria_label": "",
+            "disabled": false
+          },
+          {
+            "text": "Reset Password",
+            "title": "",
+            "aria_label": "",
+            "disabled": false
+          },
+          {
+            "text": "Reset Google Verification Code",
+            "title": "",
+            "aria_label": "",
+            "disabled": false
+          },
+          {
+            "text": "Edit",
+            "title": "",
+            "aria_label": "",
+            "disabled": false
+          },
+          {
+            "text": "Disable",
+            "title": "",
+            "aria_label": "",
+            "disabled": false
+          },
+          {
+            "text": "Reset Password",
+            "title": "",
+            "aria_label": "",
+            "disabled": false
+          },
+          {
+            "text": "Reset Google Verification Code",
+            "title": "",
+            "aria_label": "",
+            "disabled": false
+          },
+          {
+            "text": "",
+            "title": "",
+            "aria_label": "",
+            "disabled": true
+          },
+          {
+            "text": "",
+            "title": "",
+            "aria_label": "",
+            "disabled": false
+          }
+        ],
+        "tabs": [
+          {
+            "text": "Staff Configuration",
+            "selected": ""
+          },
+          {
+            "text": "Staff Configuration",
+            "selected": "true"
+          }
+        ],
+        "pagination": [
+          {
+            "text": "",
+            "title": "",
+            "aria_label": ""
+          },
+          {
+            "text": "1",
+            "title": "",
+            "aria_label": ""
+          },
+          {
+            "text": "2",
+            "title": "",
+            "aria_label": ""
+          },
+          {
+            "text": "3",
+            "title": "",
+            "aria_label": ""
+          },
+          {
+            "text": "",
+            "title": "",
+            "aria_label": ""
+          }
+        ],
+        "links": [
+          {
+            "text": "Home",
+            "href": "/home"
+          },
+          {
+            "text": "Role Configuration",
+            "href": "/system/role"
+          },
+          {
+            "text": "Staff Configuration",
+            "href": "/system/staff"
+          }
+        ]
+      },
+      "initialization_events": [
+        {
+          "route": "/system/staff",
+          "action": "page initialization",
+          "method": "GET",
+          "path": "/backend/agency/me/detail",
+          "query_fields": [],
+          "body_fields": [],
+          "http_status": 200,
+          "business_status": true,
+          "response_data_type": "object",
+          "response_data_keys": [
+            "avatar",
+            "bind_time",
+            "cmpl",
+            "create_name",
+            "created_at",
+            "email",
+            "google_secret",
+            "group_id",
+            "id",
+            "last_login_ip",
+            "last_login_time",
+            "login_password",
+            "nickname",
+            "operator_name",
+            "pwd_edit_time",
+            "roles",
+            "sid",
+            "status",
+            "stores",
+            "updated_at",
+            "username"
+          ]
+        },
+        {
+          "route": "/system/staff",
+          "action": "page initialization",
+          "method": "GET",
+          "path": "/backend/agency/group/list",
+          "query_fields": [
+            "page",
+            "page_size"
+          ],
+          "body_fields": [],
+          "http_status": 200,
+          "business_status": true,
+          "response_data_type": "object",
+          "response_data_keys": [
+            "d",
+            "s",
+            "t"
+          ]
+        },
+        {
+          "route": "/system/staff",
+          "action": "page initialization",
+          "method": "POST",
+          "path": "/backend/agency/user/list",
+          "query_fields": [],
+          "body_fields": [
+            "page",
+            "page_size"
+          ],
+          "http_status": 200,
+          "business_status": true,
+          "response_data_type": "object",
+          "response_data_keys": [
+            "d",
+            "t"
+          ]
+        }
+      ],
+      "error": ""
+    }
+  ],
+  "actions": [
+    {
+      "route": "/home",
+      "kind": "query",
+      "status": "CLICKED",
+      "overlay_present": false,
+      "overlay_text": "",
+      "download_observed": false,
+      "network_events": [],
+      "error": ""
+    },
+    {
+      "route": "/home",
+      "kind": "reset",
+      "status": "CLICKED",
+      "overlay_present": false,
+      "overlay_text": "",
+      "download_observed": false,
+      "network_events": [
+        {
+          "route": "/home",
+          "action": "reset control",
+          "method": "GET",
+          "path": "/admin/agency/reports/bi/basic",
+          "query_fields": [
+            "report_type"
+          ],
+          "body_fields": [],
+          "http_status": 200,
+          "business_status": true,
+          "response_data_type": "object",
+          "response_data_keys": [
+            "bets",
+            "bets_people",
+            "bonus",
+            "deposit_amount",
+            "deposit_people",
+            "dw_diff",
+            "first_deposit",
+            "first_deposit_amount",
+            "ggr",
+            "members_total",
+            "rate",
+            "reg_count",
+            "settle_amount",
+            "valid_bet_amount",
+            "withdraw_amount",
+            "withdraw_people"
+          ]
+        }
+      ],
+      "error": ""
+    },
+    {
+      "route": "/home",
+      "kind": "tab",
+      "name": "Home",
+      "status": "CLICKED",
+      "network_events": [],
+      "error": ""
+    },
+    {
+      "route": "/home",
+      "kind": "chart_mode",
+      "name": "Line Chart Mode",
+      "status": "CLICKED",
+      "before_state": {
+        "line": {
+          "text": "Line Chart Mode",
+          "class_name": "ant-btn css-jcwvac ant-btn-default ant-btn-color-default ant-btn-variant-outlined",
+          "aria_pressed": "",
+          "aria_selected": "",
+          "disabled": false,
+          "parent_class": "ant-btn-group css-jcwvac",
+          "chart_nodes": 2
+        },
+        "bar": {
+          "text": "Bar Chart Mode",
+          "class_name": "ant-btn css-jcwvac ant-btn-primary ant-btn-color-primary ant-btn-variant-solid",
+          "aria_pressed": "",
+          "aria_selected": "",
+          "disabled": false,
+          "parent_class": "ant-btn-group css-jcwvac",
+          "chart_nodes": 2
+        }
+      },
+      "after_state": {
+        "line": {
+          "text": "Line Chart Mode",
+          "class_name": "ant-btn css-jcwvac ant-btn-primary ant-btn-color-primary ant-btn-variant-solid",
+          "aria_pressed": "",
+          "aria_selected": "",
+          "disabled": false,
+          "parent_class": "ant-btn-group css-jcwvac",
+          "chart_nodes": 2
+        },
+        "bar": {
+          "text": "Bar Chart Mode",
+          "class_name": "ant-btn css-jcwvac ant-btn-default ant-btn-color-default ant-btn-variant-outlined",
+          "aria_pressed": "",
+          "aria_selected": "",
+          "disabled": false,
+          "parent_class": "ant-btn-group css-jcwvac",
+          "chart_nodes": 2
+        }
+      },
+      "network_events": [],
+      "error": ""
+    },
+    {
+      "route": "/home",
+      "kind": "chart_mode",
+      "name": "Bar Chart Mode",
+      "status": "CLICKED",
+      "before_state": {
+        "line": {
+          "text": "Line Chart Mode",
+          "class_name": "ant-btn css-jcwvac ant-btn-primary ant-btn-color-primary ant-btn-variant-solid",
+          "aria_pressed": "",
+          "aria_selected": "",
+          "disabled": false,
+          "parent_class": "ant-btn-group css-jcwvac",
+          "chart_nodes": 2
+        },
+        "bar": {
+          "text": "Bar Chart Mode",
+          "class_name": "ant-btn css-jcwvac ant-btn-default ant-btn-color-default ant-btn-variant-outlined",
+          "aria_pressed": "",
+          "aria_selected": "",
+          "disabled": false,
+          "parent_class": "ant-btn-group css-jcwvac",
+          "chart_nodes": 2
+        }
+      },
+      "after_state": {
+        "line": {
+          "text": "Line Chart Mode",
+          "class_name": "ant-btn css-jcwvac ant-btn-default ant-btn-color-default ant-btn-variant-outlined",
+          "aria_pressed": "",
+          "aria_selected": "",
+          "disabled": false,
+          "parent_class": "ant-btn-group css-jcwvac",
+          "chart_nodes": 2
+        },
+        "bar": {
+          "text": "Bar Chart Mode",
+          "class_name": "ant-btn css-jcwvac ant-btn-primary ant-btn-color-primary ant-btn-variant-solid",
+          "aria_pressed": "",
+          "aria_selected": "",
+          "disabled": false,
+          "parent_class": "ant-btn-group css-jcwvac",
+          "chart_nodes": 2
+        }
+      },
+      "network_events": [],
+      "error": ""
+    },
+    {
+      "route": "/home",
+      "kind": "chart_mode_restore",
+      "name": "Bar Chart Mode",
+      "status": "RESTORED",
+      "before_state": {
+        "line": {
+          "text": "Line Chart Mode",
+          "class_name": "ant-btn css-jcwvac ant-btn-default ant-btn-color-default ant-btn-variant-outlined",
+          "aria_pressed": "",
+          "aria_selected": "",
+          "disabled": false,
+          "parent_class": "ant-btn-group css-jcwvac",
+          "chart_nodes": 2
+        },
+        "bar": {
+          "text": "Bar Chart Mode",
+          "class_name": "ant-btn css-jcwvac ant-btn-primary ant-btn-color-primary ant-btn-variant-solid",
+          "aria_pressed": "",
+          "aria_selected": "",
+          "disabled": false,
+          "parent_class": "ant-btn-group css-jcwvac",
+          "chart_nodes": 2
+        }
+      },
+      "after_state": {
+        "line": {
+          "text": "Line Chart Mode",
+          "class_name": "ant-btn css-jcwvac ant-btn-default ant-btn-color-default ant-btn-variant-outlined",
+          "aria_pressed": "",
+          "aria_selected": "",
+          "disabled": false,
+          "parent_class": "ant-btn-group css-jcwvac",
+          "chart_nodes": 2
+        },
+        "bar": {
+          "text": "Bar Chart Mode",
+          "class_name": "ant-btn css-jcwvac ant-btn-primary ant-btn-color-primary ant-btn-variant-solid",
+          "aria_pressed": "",
+          "aria_selected": "",
+          "disabled": false,
+          "parent_class": "ant-btn-group css-jcwvac",
+          "chart_nodes": 2
+        }
+      },
+      "initial_state": {
+        "line": {
+          "text": "Line Chart Mode",
+          "class_name": "ant-btn css-jcwvac ant-btn-default ant-btn-color-default ant-btn-variant-outlined",
+          "aria_pressed": "",
+          "aria_selected": "",
+          "disabled": false,
+          "parent_class": "ant-btn-group css-jcwvac",
+          "chart_nodes": 2
+        },
+        "bar": {
+          "text": "Bar Chart Mode",
+          "class_name": "ant-btn css-jcwvac ant-btn-primary ant-btn-color-primary ant-btn-variant-solid",
+          "aria_pressed": "",
+          "aria_selected": "",
+          "disabled": false,
+          "parent_class": "ant-btn-group css-jcwvac",
+          "chart_nodes": 2
+        }
+      },
+      "initial_active_hint": {
+        "line": false,
+        "bar": true
+      },
+      "network_events": [],
+      "error": ""
+    },
+    {
+      "route": "/home",
+      "kind": "chart_series_legend",
+      "name": "On / Closed",
+      "status": "BLOCKED_PREREQUISITE",
+      "before_state": {
+        "text": "On\nClosed",
+        "class_name": "ant-switch css-jcwvac",
+        "aria_pressed": "",
+        "aria_selected": "",
+        "disabled": false,
+        "parent_class": "ant-space-item",
+        "chart_nodes": 2
+      },
+      "after_state": {
+        "text": "On\nClosed",
+        "class_name": "ant-switch css-jcwvac",
+        "aria_pressed": "",
+        "aria_selected": "",
+        "disabled": false,
+        "parent_class": "ant-space-item",
+        "chart_nodes": 2
+      },
+      "network_events": [],
+      "error": "DOM did not prove this ambiguous combined-label control is a reversible chart series legend; not clicked",
+      "dom_structure": {
+        "tag": "button",
+        "role": "switch",
+        "class_name": "ant-switch css-jcwvac",
+        "has_input": false,
+        "nearest_chart": false,
+        "html_elements": [
+          "div",
+          "span",
+          "span",
+          "span"
+        ]
+      }
+    },
+    {
+      "route": "/agent/agent-review",
+      "kind": "query",
+      "status": "CLICKED",
+      "overlay_present": false,
+      "overlay_text": "",
+      "download_observed": false,
+      "network_events": [
+        {
+          "route": "/agent/agent-review",
+          "action": "query control",
+          "method": "GET",
+          "path": "/admin/agency/audit/list",
+          "query_fields": [
+            "end_time",
+            "page",
+            "page_size",
+            "start_time"
+          ],
+          "body_fields": [],
+          "http_status": 200,
+          "business_status": true,
+          "response_data_type": "object",
+          "response_data_keys": [
+            "d",
+            "s",
+            "t"
+          ]
+        }
+      ],
+      "error": ""
+    },
+    {
+      "route": "/agent/agent-review",
+      "kind": "reset",
+      "status": "CLICKED",
+      "overlay_present": false,
+      "overlay_text": "",
+      "download_observed": false,
+      "network_events": [
+        {
+          "route": "/agent/agent-review",
+          "action": "reset control",
+          "method": "GET",
+          "path": "/admin/agency/audit/list",
+          "query_fields": [
+            "end_time",
+            "page",
+            "page_size",
+            "start_time"
+          ],
+          "body_fields": [],
+          "http_status": 200,
+          "business_status": true,
+          "response_data_type": "object",
+          "response_data_keys": [
+            "d",
+            "s",
+            "t"
+          ]
+        }
+      ],
+      "error": ""
+    },
+    {
+      "route": "/agent/agent-review",
+      "kind": "details",
+      "status": "CLICKED",
+      "overlay_present": true,
+      "overlay_text": "提交信息\n邮箱\n-\n代理账号\n<redacted-account>\n视频地址\nOK",
+      "download_observed": false,
+      "network_events": [
+        {
+          "route": "/agent/agent-review",
+          "action": "details control",
+          "method": "GET",
+          "path": "/admin/agency/audit/detail",
+          "query_fields": [
+            "id",
+            "uid"
+          ],
+          "body_fields": [],
+          "http_status": 200,
+          "business_status": true,
+          "response_data_type": "object",
+          "response_data_keys": [
+            "Faq",
+            "email",
+            "fb_username",
+            "video_link"
+          ]
+        }
+      ],
+      "error": ""
+    },
+    {
+      "route": "/agent/agent-review",
+      "kind": "tab",
+      "name": "Agent Review",
+      "status": "CLICKED",
+      "network_events": [],
+      "error": ""
+    },
+    {
+      "route": "/agent/agent-review",
+      "kind": "filter_query",
+      "status": "CLICKED",
+      "before_state": {
+        "input_empty": true
+      },
+      "after_state": {
+        "input_restored": true
+      },
+      "network_events": [
+        {
+          "route": "/agent/agent-review",
+          "action": "reversible text filter query",
+          "method": "GET",
+          "path": "/admin/agency/audit/list",
+          "query_fields": [
+            "page",
+            "page_size",
+            "username"
+          ],
+          "body_fields": [],
+          "http_status": 200,
+          "business_status": true,
+          "response_data_type": "object",
+          "response_data_keys": [
+            "d",
+            "s",
+            "t"
+          ]
+        }
+      ],
+      "error": ""
+    },
+    {
+      "route": "/agent/agent-review",
+      "kind": "filter_reset",
+      "status": "RESTORED",
+      "network_events": [
+        {
+          "route": "/agent/agent-review",
+          "action": "filter reset",
+          "method": "GET",
+          "path": "/admin/agency/audit/list",
+          "query_fields": [
+            "end_time",
+            "page",
+            "page_size",
+            "start_time"
+          ],
+          "body_fields": [],
+          "http_status": 200,
+          "business_status": true,
+          "response_data_type": "object",
+          "response_data_keys": [
+            "d",
+            "s",
+            "t"
+          ]
+        }
+      ],
+      "error": ""
+    },
+    {
+      "route": "/agent/agent-review",
+      "kind": "filter_select_options",
+      "status": "OPENED_AND_CLOSED",
+      "overlay_present": true,
+      "overlay_text": "1\n2\nPending Review\nApproved\nRejected",
+      "network_events": [],
+      "error": ""
+    },
+    {
+      "route": "/agent/agent-list",
+      "kind": "query",
+      "status": "CLICKED",
+      "overlay_present": false,
+      "overlay_text": "",
+      "download_observed": false,
+      "network_events": [
+        {
+          "route": "/agent/agent-list",
+          "action": "query control",
+          "method": "GET",
+          "path": "/admin/agency/list",
+          "query_fields": [
+            "end_time",
+            "page",
+            "page_size",
+            "start_time"
+          ],
+          "body_fields": [],
+          "http_status": 200,
+          "business_status": true,
+          "response_data_type": "object",
+          "response_data_keys": [
+            "d",
+            "s",
+            "t"
+          ]
+        }
+      ],
+      "error": ""
+    },
+    {
+      "route": "/agent/agent-list",
+      "kind": "reset",
+      "status": "CLICKED",
+      "overlay_present": false,
+      "overlay_text": "",
+      "download_observed": false,
+      "network_events": [
+        {
+          "route": "/agent/agent-list",
+          "action": "reset control",
+          "method": "GET",
+          "path": "/admin/agency/list",
+          "query_fields": [
+            "end_time",
+            "page",
+            "page_size",
+            "start_time"
+          ],
+          "body_fields": [],
+          "http_status": 200,
+          "business_status": true,
+          "response_data_type": "object",
+          "response_data_keys": [
+            "d",
+            "s",
+            "t"
+          ]
+        }
+      ],
+      "error": ""
+    },
+    {
+      "route": "/agent/agent-list",
+      "kind": "tab",
+      "name": "Agent List",
+      "status": "CLICKED",
+      "network_events": [],
+      "error": ""
+    },
+    {
+      "route": "/agent/agent-list",
+      "kind": "filter_query",
+      "status": "CLICKED",
+      "before_state": {
+        "input_empty": true
+      },
+      "after_state": {
+        "input_restored": true
+      },
+      "network_events": [
+        {
+          "route": "/agent/agent-list",
+          "action": "reversible text filter query",
+          "method": "GET",
+          "path": "/admin/agency/list",
+          "query_fields": [
+            "page",
+            "page_size",
+            "username"
+          ],
+          "body_fields": [],
+          "http_status": 200,
+          "business_status": true,
+          "response_data_type": "object",
+          "response_data_keys": [
+            "d",
+            "s",
+            "t"
+          ]
+        }
+      ],
+      "error": ""
+    },
+    {
+      "route": "/agent/agent-list",
+      "kind": "filter_reset",
+      "status": "RESTORED",
+      "network_events": [
+        {
+          "route": "/agent/agent-list",
+          "action": "filter reset",
+          "method": "GET",
+          "path": "/admin/agency/list",
+          "query_fields": [
+            "end_time",
+            "page",
+            "page_size",
+            "start_time"
+          ],
+          "body_fields": [],
+          "http_status": 200,
+          "business_status": true,
+          "response_data_type": "object",
+          "response_data_keys": [
+            "d",
+            "s",
+            "t"
+          ]
+        }
+      ],
+      "error": ""
+    },
+    {
+      "route": "/agent/agent-list",
+      "kind": "filter_select_options",
+      "status": "OPENED_AND_CLOSED",
+      "overlay_present": true,
+      "overlay_text": "1\n2\nWeekly Settlement\nMonthly Settlement",
+      "network_events": [],
+      "error": ""
+    },
+    {
+      "route": "/agent/agent-list",
+      "kind": "filter_select_options",
+      "status": "OPENED_AND_CLOSED",
+      "overlay_present": true,
+      "overlay_text": "1\n2\nYes\nNo",
+      "network_events": [],
+      "error": ""
+    },
+    {
+      "route": "/agent/user-list",
+      "kind": "query",
+      "status": "CLICKED",
+      "overlay_present": false,
+      "overlay_text": "",
+      "download_observed": false,
+      "network_events": [
+        {
+          "route": "/agent/user-list",
+          "action": "query control",
+          "method": "GET",
+          "path": "/admin/agency/member/list",
+          "query_fields": [
+            "end_time",
+            "page",
+            "page_size",
+            "start_time"
+          ],
+          "body_fields": [],
+          "http_status": 200,
+          "business_status": true,
+          "response_data_type": "object",
+          "response_data_keys": [
+            "d",
+            "s",
+            "t"
+          ]
+        }
+      ],
+      "error": ""
+    },
+    {
+      "route": "/agent/user-list",
+      "kind": "reset",
+      "status": "CLICKED",
+      "overlay_present": false,
+      "overlay_text": "",
+      "download_observed": false,
+      "network_events": [
+        {
+          "route": "/agent/user-list",
+          "action": "reset control",
+          "method": "GET",
+          "path": "/admin/agency/member/list",
+          "query_fields": [
+            "end_time",
+            "page",
+            "page_size",
+            "start_time"
+          ],
+          "body_fields": [],
+          "http_status": 200,
+          "business_status": true,
+          "response_data_type": "object",
+          "response_data_keys": [
+            "d",
+            "s",
+            "t"
+          ]
+        }
+      ],
+      "error": ""
+    },
+    {
+      "route": "/agent/user-list",
+      "kind": "tab",
+      "name": "Member List",
+      "status": "CLICKED",
+      "network_events": [],
+      "error": ""
+    },
+    {
+      "route": "/agent/user-list",
+      "kind": "filter_query",
+      "status": "CLICKED",
+      "before_state": {
+        "input_empty": true
+      },
+      "after_state": {
+        "input_restored": true
+      },
+      "network_events": [
+        {
+          "route": "/agent/user-list",
+          "action": "reversible text filter query",
+          "method": "GET",
+          "path": "/admin/agency/member/list",
+          "query_fields": [
+            "page",
+            "page_size",
+            "username"
+          ],
+          "body_fields": [],
+          "http_status": 200,
+          "business_status": true,
+          "response_data_type": "object",
+          "response_data_keys": [
+            "d",
+            "s",
+            "t"
+          ]
+        }
+      ],
+      "error": ""
+    },
+    {
+      "route": "/agent/user-list",
+      "kind": "filter_reset",
+      "status": "RESTORED",
+      "network_events": [
+        {
+          "route": "/agent/user-list",
+          "action": "filter reset",
+          "method": "GET",
+          "path": "/admin/agency/member/list",
+          "query_fields": [
+            "end_time",
+            "page",
+            "page_size",
+            "start_time"
+          ],
+          "body_fields": [],
+          "http_status": 200,
+          "business_status": true,
+          "response_data_type": "object",
+          "response_data_keys": [
+            "d",
+            "s",
+            "t"
+          ]
+        }
+      ],
+      "error": ""
+    },
+    {
+      "route": "/agent/agent-setting",
+      "kind": "tab",
+      "name": "Agent Settings",
+      "status": "CLICKED",
+      "network_events": [],
+      "error": ""
+    },
+    {
+      "route": "/agent/agent-setting",
+      "kind": "tab",
+      "name": "Commission Tier Table",
+      "status": "CLICKED",
+      "network_events": [],
+      "error": ""
+    },
+    {
+      "route": "/agent/agent-setting",
+      "kind": "tab",
+      "name": "Pagcor Tax Rate",
+      "status": "CLICKED",
+      "network_events": [
+        {
+          "route": "/agent/agent-setting",
+          "action": "tab: Pagcor Tax Rate",
+          "method": "GET",
+          "path": "/admin/agency/taxrate/list",
+          "query_fields": [
+            "page",
+            "page_size"
+          ],
+          "body_fields": [],
+          "http_status": 200,
+          "business_status": true,
+          "response_data_type": "list",
+          "response_data_keys": []
+        }
+      ],
+      "error": ""
+    },
+    {
+      "route": "/agent/agent-setting",
+      "kind": "tab",
+      "name": "Provider Fee Rate",
+      "status": "CLICKED",
+      "network_events": [
+        {
+          "route": "/agent/agent-setting",
+          "action": "tab: Provider Fee Rate",
+          "method": "GET",
+          "path": "/admin/agency/vendorrate/list",
+          "query_fields": [
+            "page",
+            "page_size"
+          ],
+          "body_fields": [],
+          "http_status": 200,
+          "business_status": true,
+          "response_data_type": "list",
+          "response_data_keys": []
+        }
+      ],
+      "error": ""
+    },
+    {
+      "route": "/agent/agent-setting",
+      "kind": "pagination_next",
+      "status": "CLICKED",
+      "network_events": [],
+      "error": ""
+    },
+    {
+      "route": "/agent/agent-setting",
+      "kind": "pagination_restore",
+      "status": "RESTORED",
+      "network_events": [],
+      "error": ""
+    },
+    {
+      "route": "/agent/domain",
+      "kind": "query",
+      "status": "CLICKED",
+      "overlay_present": false,
+      "overlay_text": "",
+      "download_observed": false,
+      "network_events": [
+        {
+          "route": "/agent/domain",
+          "action": "query control",
+          "method": "GET",
+          "path": "/admin/agency/domain/list",
+          "query_fields": [
+            "state",
+            "ty"
+          ],
+          "body_fields": [],
+          "http_status": 200,
+          "business_status": true,
+          "response_data_type": "object",
+          "response_data_keys": [
+            "d",
+            "s",
+            "t"
+          ]
+        }
+      ],
+      "error": ""
+    },
+    {
+      "route": "/agent/domain",
+      "kind": "reset",
+      "status": "CLICKED",
+      "overlay_present": false,
+      "overlay_text": "",
+      "download_observed": false,
+      "network_events": [
+        {
+          "route": "/agent/domain",
+          "action": "reset control",
+          "method": "GET",
+          "path": "/admin/agency/domain/list",
+          "query_fields": [
+            "state",
+            "ty"
+          ],
+          "body_fields": [],
+          "http_status": 200,
+          "business_status": true,
+          "response_data_type": "object",
+          "response_data_keys": [
+            "d",
+            "s",
+            "t"
+          ]
+        }
+      ],
+      "error": ""
+    },
+    {
+      "route": "/agent/domain",
+      "kind": "tab",
+      "name": "Agent Domain",
+      "status": "CLICKED",
+      "network_events": [],
+      "error": ""
+    },
+    {
+      "route": "/agent/domain",
+      "kind": "filter_query",
+      "status": "INTERACTION_ERROR",
+      "before_state": {
+        "input_empty": true
+      },
+      "after_state": {
+        "input_restored": true
+      },
+      "network_events": [],
+      "error": "TimeoutError: locator.fill: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('form input:visible,.ant-form input:visible').filter({ hasNot: locat"
+    },
+    {
+      "route": "/agent/domain",
+      "kind": "filter_reset",
+      "status": "RESTORED",
+      "network_events": [],
+      "error": ""
+    },
+    {
+      "route": "/agent/domain",
+      "kind": "filter_select_options",
+      "status": "OPENED_AND_CLOSED",
+      "overlay_present": true,
+      "overlay_text": "0\n1\nAll\nSecond-level Domain\nSubdomain",
+      "network_events": [],
+      "error": ""
+    },
+    {
+      "route": "/agent/domain",
+      "kind": "filter_select_options",
+      "status": "OPENED_AND_CLOSED",
+      "overlay_present": true,
+      "overlay_text": "0\n1\nAll\nEnabled\nDisabled",
+      "network_events": [],
+      "error": ""
+    },
+    {
+      "route": "/financial/commission-review",
+      "kind": "query",
+      "status": "CLICKED",
+      "overlay_present": false,
+      "overlay_text": "",
+      "download_observed": false,
+      "network_events": [
+        {
+          "route": "/financial/commission-review",
+          "action": "query control",
+          "method": "GET",
+          "path": "/admin/agency/commission/audit/list",
+          "query_fields": [
+            "end_time",
+            "page",
+            "page_size",
+            "start_time"
+          ],
+          "body_fields": [],
+          "http_status": 200,
+          "business_status": true,
+          "response_data_type": "object",
+          "response_data_keys": [
+            "d",
+            "s",
+            "t"
+          ]
+        }
+      ],
+      "error": ""
+    },
+    {
+      "route": "/financial/commission-review",
+      "kind": "reset",
+      "status": "CLICKED",
+      "overlay_present": false,
+      "overlay_text": "",
+      "download_observed": false,
+      "network_events": [
+        {
+          "route": "/financial/commission-review",
+          "action": "reset control",
+          "method": "GET",
+          "path": "/admin/agency/commission/audit/list",
+          "query_fields": [
+            "end_time",
+            "page",
+            "page_size",
+            "start_time"
+          ],
+          "body_fields": [],
+          "http_status": 200,
+          "business_status": true,
+          "response_data_type": "object",
+          "response_data_keys": [
+            "d",
+            "s",
+            "t"
+          ]
+        }
+      ],
+      "error": ""
+    },
+    {
+      "route": "/financial/commission-review",
+      "kind": "tab",
+      "name": "Commission Review",
+      "status": "CLICKED",
+      "network_events": [],
+      "error": ""
+    },
+    {
+      "route": "/financial/commission-review",
+      "kind": "filter_query",
+      "status": "INTERACTION_ERROR",
+      "before_state": {
+        "input_empty": true
+      },
+      "after_state": {
+        "input_restored": true
+      },
+      "network_events": [],
+      "error": "TimeoutError: locator.fill: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('form input:visible,.ant-form input:visible').filter({ hasNot: locat"
+    },
+    {
+      "route": "/financial/commission-review",
+      "kind": "filter_reset",
+      "status": "RESTORED",
+      "network_events": [],
+      "error": ""
+    },
+    {
+      "route": "/financial/commission-review",
+      "kind": "filter_select_options",
+      "status": "OPENED_AND_CLOSED",
+      "overlay_present": true,
+      "overlay_text": "1\n2\nWeekly\nMonthly",
+      "network_events": [],
+      "error": ""
+    },
+    {
+      "route": "/financial/commission-review",
+      "kind": "filter_select_options",
+      "status": "OPENED_AND_CLOSED",
+      "overlay_present": true,
+      "overlay_text": "1\n2\n是\n否",
+      "network_events": [],
+      "error": ""
+    },
+    {
+      "route": "/financial/commission-list",
+      "kind": "query",
+      "status": "CLICKED",
+      "overlay_present": false,
+      "overlay_text": "",
+      "download_observed": false,
+      "network_events": [
+        {
+          "route": "/financial/commission-list",
+          "action": "query control",
+          "method": "GET",
+          "path": "/admin/agency/commission/report",
+          "query_fields": [
+            "end_time",
+            "page",
+            "page_size",
+            "start_time"
+          ],
+          "body_fields": [],
+          "http_status": 200,
+          "business_status": true,
+          "response_data_type": "object",
+          "response_data_keys": [
+            "d",
+            "s",
+            "t"
+          ]
+        }
+      ],
+      "error": ""
+    },
+    {
+      "route": "/financial/commission-list",
+      "kind": "reset",
+      "status": "CLICKED",
+      "overlay_present": false,
+      "overlay_text": "",
+      "download_observed": false,
+      "network_events": [
+        {
+          "route": "/financial/commission-list",
+          "action": "reset control",
+          "method": "GET",
+          "path": "/admin/agency/commission/report",
+          "query_fields": [
+            "end_time",
+            "page",
+            "page_size",
+            "start_time"
+          ],
+          "body_fields": [],
+          "http_status": 200,
+          "business_status": true,
+          "response_data_type": "object",
+          "response_data_keys": [
+            "d",
+            "s",
+            "t"
+          ]
+        }
+      ],
+      "error": ""
+    },
+    {
+      "route": "/financial/commission-list",
+      "kind": "tab",
+      "name": "Commission Report",
+      "status": "CLICKED",
+      "network_events": [],
+      "error": ""
+    },
+    {
+      "route": "/financial/commission-list",
+      "kind": "filter_query",
+      "status": "INTERACTION_ERROR",
+      "before_state": {
+        "input_empty": true
+      },
+      "after_state": {
+        "input_restored": true
+      },
+      "network_events": [],
+      "error": "TimeoutError: locator.fill: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('form input:visible,.ant-form input:visible').filter({ hasNot: locat"
+    },
+    {
+      "route": "/financial/commission-list",
+      "kind": "filter_reset",
+      "status": "RESTORED",
+      "network_events": [],
+      "error": ""
+    },
+    {
+      "route": "/financial/commission-list",
+      "kind": "filter_select_options",
+      "status": "OPENED_AND_CLOSED",
+      "overlay_present": true,
+      "overlay_text": "1\n2\nWeekly\nMonthly",
+      "network_events": [],
+      "error": ""
+    },
+    {
+      "route": "/financial/commission-list",
+      "kind": "filter_select_options",
+      "status": "OPENED_AND_CLOSED",
+      "overlay_present": true,
+      "overlay_text": "1\n2\n是\n否",
+      "network_events": [],
+      "error": ""
+    },
+    {
+      "route": "/financial/commission-list",
+      "kind": "filter_select_options",
+      "status": "OPENED_AND_CLOSED",
+      "overlay_present": true,
+      "overlay_text": "2\n1\n已达标\n未达标",
+      "network_events": [],
+      "error": ""
+    },
+    {
+      "route": "/financial/commission-list",
+      "kind": "filter_select_options",
+      "status": "OPENED_AND_CLOSED",
+      "overlay_present": true,
+      "overlay_text": "3\n4\n通过\n驳回",
+      "network_events": [],
+      "error": ""
+    },
+    {
+      "route": "/financial/financial-statements",
+      "kind": "query",
+      "status": "CLICKED",
+      "overlay_present": false,
+      "overlay_text": "",
+      "download_observed": false,
+      "network_events": [
+        {
+          "route": "/financial/financial-statements",
+          "action": "query control",
+          "method": "POST",
+          "path": "/agency/finance/transaction/list",
+          "query_fields": [],
+          "body_fields": [
+            "cash_type",
+            "end_time",
+            "page",
+            "page_size",
+            "start_time"
+          ],
+          "http_status": 200,
+          "business_status": true,
+          "response_data_type": "object",
+          "response_data_keys": [
+            "d",
+            "s",
+            "t"
+          ]
+        }
+      ],
+      "error": ""
+    },
+    {
+      "route": "/financial/financial-statements",
+      "kind": "reset",
+      "status": "CLICKED",
+      "overlay_present": false,
+      "overlay_text": "",
+      "download_observed": false,
+      "network_events": [
+        {
+          "route": "/financial/financial-statements",
+          "action": "reset control",
+          "method": "POST",
+          "path": "/agency/finance/transaction/list",
+          "query_fields": [],
+          "body_fields": [
+            "cash_type",
+            "end_time",
+            "page",
+            "page_size",
+            "start_time"
+          ],
+          "http_status": 200,
+          "business_status": true,
+          "response_data_type": "object",
+          "response_data_keys": [
+            "d",
+            "s",
+            "t"
+          ]
+        }
+      ],
+      "error": ""
+    },
+    {
+      "route": "/financial/financial-statements",
+      "kind": "tab",
+      "name": "Financial Report",
+      "status": "CLICKED",
+      "network_events": [],
+      "error": ""
+    },
+    {
+      "route": "/financial/financial-statements",
+      "kind": "tab",
+      "name": "Commission Distribution",
+      "status": "CLICKED",
+      "network_events": [],
+      "error": ""
+    },
+    {
+      "route": "/financial/financial-statements",
+      "kind": "filter_query",
+      "status": "CLICKED",
+      "before_state": {
+        "input_empty": false
+      },
+      "after_state": {
+        "input_restored": true
+      },
+      "network_events": [
+        {
+          "route": "/financial/financial-statements",
+          "action": "reversible text filter query",
+          "method": "POST",
+          "path": "/agency/finance/transaction/list",
+          "query_fields": [],
+          "body_fields": [
+            "cash_type",
+            "end_time",
+            "page",
+            "page_size",
+            "start_time"
+          ],
+          "http_status": 200,
+          "business_status": true,
+          "response_data_type": "object",
+          "response_data_keys": [
+            "d",
+            "s",
+            "t"
+          ]
+        }
+      ],
+      "error": ""
+    },
+    {
+      "route": "/financial/financial-statements",
+      "kind": "filter_reset",
+      "status": "RESTORED",
+      "network_events": [
+        {
+          "route": "/financial/financial-statements",
+          "action": "filter reset",
+          "method": "POST",
+          "path": "/agency/finance/transaction/list",
+          "query_fields": [],
+          "body_fields": [
+            "cash_type",
+            "end_time",
+            "page",
+            "page_size",
+            "start_time"
+          ],
+          "http_status": 200,
+          "business_status": true,
+          "response_data_type": "object",
+          "response_data_keys": [
+            "d",
+            "s",
+            "t"
+          ]
+        }
+      ],
+      "error": ""
+    },
+    {
+      "route": "/system/role",
+      "kind": "tab",
+      "name": "Role Configuration",
+      "status": "CLICKED",
+      "network_events": [],
+      "error": ""
+    },
+    {
+      "route": "/system/staff",
+      "kind": "query",
+      "status": "CLICKED",
+      "overlay_present": false,
+      "overlay_text": "",
+      "download_observed": false,
+      "network_events": [
+        {
+          "route": "/system/staff",
+          "action": "query control",
+          "method": "POST",
+          "path": "/backend/agency/user/list",
+          "query_fields": [],
+          "body_fields": [
+            "page",
+            "page_size"
+          ],
+          "http_status": 200,
+          "business_status": true,
+          "response_data_type": "object",
+          "response_data_keys": [
+            "d",
+            "t"
+          ]
+        }
+      ],
+      "error": ""
+    },
+    {
+      "route": "/system/staff",
+      "kind": "reset",
+      "status": "CLICKED",
+      "overlay_present": false,
+      "overlay_text": "",
+      "download_observed": false,
+      "network_events": [
+        {
+          "route": "/system/staff",
+          "action": "reset control",
+          "method": "POST",
+          "path": "/backend/agency/user/list",
+          "query_fields": [],
+          "body_fields": [
+            "page",
+            "page_size"
+          ],
+          "http_status": 200,
+          "business_status": true,
+          "response_data_type": "object",
+          "response_data_keys": [
+            "d",
+            "t"
+          ]
+        }
+      ],
+      "error": ""
+    },
+    {
+      "route": "/system/staff",
+      "kind": "tab",
+      "name": "Staff Configuration",
+      "status": "CLICKED",
+      "network_events": [],
+      "error": ""
+    },
+    {
+      "route": "/system/staff",
+      "kind": "pagination_next",
+      "status": "CLICKED",
+      "network_events": [
+        {
+          "route": "/system/staff",
+          "action": "pagination next",
+          "method": "POST",
+          "path": "/backend/agency/user/list",
+          "query_fields": [],
+          "body_fields": [
+            "page",
+            "page_size"
+          ],
+          "http_status": 200,
+          "business_status": true,
+          "response_data_type": "object",
+          "response_data_keys": [
+            "d",
+            "t"
+          ]
+        }
+      ],
+      "error": ""
+    },
+    {
+      "route": "/system/staff",
+      "kind": "pagination_restore",
+      "status": "RESTORED",
+      "network_events": [
+        {
+          "route": "/system/staff",
+          "action": "pagination restore previous",
+          "method": "POST",
+          "path": "/backend/agency/user/list",
+          "query_fields": [],
+          "body_fields": [
+            "page",
+            "page_size"
+          ],
+          "http_status": 200,
+          "business_status": true,
+          "response_data_type": "object",
+          "response_data_keys": [
+            "d",
+            "t"
+          ]
+        }
+      ],
+      "error": ""
+    },
+    {
+      "route": "/system/staff",
+      "kind": "filter_query",
+      "status": "CLICKED",
+      "before_state": {
+        "input_empty": true
+      },
+      "after_state": {
+        "input_restored": true
+      },
+      "network_events": [
+        {
+          "route": "/system/staff",
+          "action": "reversible text filter query",
+          "method": "POST",
+          "path": "/backend/agency/user/list",
+          "query_fields": [],
+          "body_fields": [
+            "page",
+            "page_size",
+            "username"
+          ],
+          "http_status": 200,
+          "business_status": true,
+          "response_data_type": "object",
+          "response_data_keys": [
+            "d",
+            "t"
+          ]
+        }
+      ],
+      "error": ""
+    },
+    {
+      "route": "/system/staff",
+      "kind": "filter_reset",
+      "status": "RESTORED",
+      "network_events": [
+        {
+          "route": "/system/staff",
+          "action": "filter reset",
+          "method": "POST",
+          "path": "/backend/agency/user/list",
+          "query_fields": [],
+          "body_fields": [
+            "page",
+            "page_size"
+          ],
+          "http_status": 200,
+          "business_status": true,
+          "response_data_type": "object",
+          "response_data_keys": [
+            "d",
+            "t"
+          ]
+        }
+      ],
+      "error": ""
+    },
+    {
+      "route": "/system/staff",
+      "kind": "filter_select_options",
+      "status": "OPENED_AND_CLOSED",
+      "overlay_present": true,
+      "overlay_text": "1\n2\nActive\nDisable",
+      "network_events": [],
+      "error": ""
+    },
+    {
+      "route": "/system/staff",
+      "kind": "filter_select_options",
+      "status": "OPENED_AND_CLOSED",
+      "overlay_present": true,
+      "overlay_text": "<redacted-numeric-id>\n<redacted-numeric-id>\n啊啊\n测试12\n123\n达文西\n测试1\n测试\n测试主管\n超级管理员",
+      "network_events": [],
+      "error": ""
+    }
+  ],
+  "network": [
+    {
+      "route": "login",
+      "action": "login flow",
+      "method": "GET",
+      "path": "/backend/agency/me/detail",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": false,
+      "response_data_type": "string",
+      "response_data_keys": []
+    },
+    {
+      "route": "login",
+      "action": "login flow",
+      "method": "POST",
+      "path": "/backend/agency/login/auth",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "number",
+      "response_data_keys": []
+    },
+    {
+      "route": "login",
+      "action": "login flow",
+      "method": "POST",
+      "path": "/backend/agency/login",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "string",
+      "response_data_keys": []
+    },
+    {
+      "route": "login",
+      "action": "login flow",
+      "method": "GET",
+      "path": "/backend/agency/me/detail",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "avatar",
+        "bind_time",
+        "cmpl",
+        "create_name",
+        "created_at",
+        "email",
+        "google_secret",
+        "group_id",
+        "id",
+        "last_login_ip",
+        "last_login_time",
+        "login_password",
+        "nickname",
+        "operator_name",
+        "pwd_edit_time",
+        "roles",
+        "sid",
+        "status",
+        "stores",
+        "updated_at",
+        "username"
+      ]
+    },
+    {
+      "route": "login",
+      "action": "login flow",
+      "method": "GET",
+      "path": "/admin/agency/reports/bi/chart",
+      "query_fields": [
+        "time_range"
+      ],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "d"
+      ]
+    },
+    {
+      "route": "login",
+      "action": "login flow",
+      "method": "GET",
+      "path": "/admin/agency/reports/bi/basic",
+      "query_fields": [
+        "report_type"
+      ],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "bets",
+        "bets_people",
+        "bonus",
+        "deposit_amount",
+        "deposit_people",
+        "dw_diff",
+        "first_deposit",
+        "first_deposit_amount",
+        "ggr",
+        "members_total",
+        "rate",
+        "reg_count",
+        "settle_amount",
+        "valid_bet_amount",
+        "withdraw_amount",
+        "withdraw_people"
+      ]
+    },
+    {
+      "route": "/home",
+      "action": "page initialization",
+      "method": "GET",
+      "path": "/backend/agency/me/detail",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "avatar",
+        "bind_time",
+        "cmpl",
+        "create_name",
+        "created_at",
+        "email",
+        "google_secret",
+        "group_id",
+        "id",
+        "last_login_ip",
+        "last_login_time",
+        "login_password",
+        "nickname",
+        "operator_name",
+        "pwd_edit_time",
+        "roles",
+        "sid",
+        "status",
+        "stores",
+        "updated_at",
+        "username"
+      ]
+    },
+    {
+      "route": "/home",
+      "action": "page initialization",
+      "method": "GET",
+      "path": "/admin/agency/reports/bi/chart",
+      "query_fields": [
+        "time_range"
+      ],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "d"
+      ]
+    },
+    {
+      "route": "/home",
+      "action": "page initialization",
+      "method": "GET",
+      "path": "/admin/agency/reports/bi/basic",
+      "query_fields": [
+        "report_type"
+      ],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "bets",
+        "bets_people",
+        "bonus",
+        "deposit_amount",
+        "deposit_people",
+        "dw_diff",
+        "first_deposit",
+        "first_deposit_amount",
+        "ggr",
+        "members_total",
+        "rate",
+        "reg_count",
+        "settle_amount",
+        "valid_bet_amount",
+        "withdraw_amount",
+        "withdraw_people"
+      ]
+    },
+    {
+      "route": "/home",
+      "action": "reset control",
+      "method": "GET",
+      "path": "/admin/agency/reports/bi/basic",
+      "query_fields": [
+        "report_type"
+      ],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "bets",
+        "bets_people",
+        "bonus",
+        "deposit_amount",
+        "deposit_people",
+        "dw_diff",
+        "first_deposit",
+        "first_deposit_amount",
+        "ggr",
+        "members_total",
+        "rate",
+        "reg_count",
+        "settle_amount",
+        "valid_bet_amount",
+        "withdraw_amount",
+        "withdraw_people"
+      ]
+    },
+    {
+      "route": "/agent/agent-review",
+      "action": "page initialization",
+      "method": "GET",
+      "path": "/backend/agency/me/detail",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "avatar",
+        "bind_time",
+        "cmpl",
+        "create_name",
+        "created_at",
+        "email",
+        "google_secret",
+        "group_id",
+        "id",
+        "last_login_ip",
+        "last_login_time",
+        "login_password",
+        "nickname",
+        "operator_name",
+        "pwd_edit_time",
+        "roles",
+        "sid",
+        "status",
+        "stores",
+        "updated_at",
+        "username"
+      ]
+    },
+    {
+      "route": "/agent/agent-review",
+      "action": "page initialization",
+      "method": "GET",
+      "path": "/admin/agency/audit/list",
+      "query_fields": [
+        "end_time",
+        "page",
+        "page_size",
+        "start_time"
+      ],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "d",
+        "s",
+        "t"
+      ]
+    },
+    {
+      "route": "/agent/agent-review",
+      "action": "query control",
+      "method": "GET",
+      "path": "/admin/agency/audit/list",
+      "query_fields": [
+        "end_time",
+        "page",
+        "page_size",
+        "start_time"
+      ],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "d",
+        "s",
+        "t"
+      ]
+    },
+    {
+      "route": "/agent/agent-review",
+      "action": "reset control",
+      "method": "GET",
+      "path": "/admin/agency/audit/list",
+      "query_fields": [
+        "end_time",
+        "page",
+        "page_size",
+        "start_time"
+      ],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "d",
+        "s",
+        "t"
+      ]
+    },
+    {
+      "route": "/agent/agent-review",
+      "action": "details control",
+      "method": "GET",
+      "path": "/admin/agency/audit/detail",
+      "query_fields": [
+        "id",
+        "uid"
+      ],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "Faq",
+        "email",
+        "fb_username",
+        "video_link"
+      ]
+    },
+    {
+      "route": "/agent/agent-review",
+      "action": "reversible text filter query",
+      "method": "GET",
+      "path": "/admin/agency/audit/list",
+      "query_fields": [
+        "page",
+        "page_size",
+        "username"
+      ],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "d",
+        "s",
+        "t"
+      ]
+    },
+    {
+      "route": "/agent/agent-review",
+      "action": "filter reset",
+      "method": "GET",
+      "path": "/admin/agency/audit/list",
+      "query_fields": [
+        "end_time",
+        "page",
+        "page_size",
+        "start_time"
+      ],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "d",
+        "s",
+        "t"
+      ]
+    },
+    {
+      "route": "/agent/agent-list",
+      "action": "page initialization",
+      "method": "GET",
+      "path": "/backend/agency/me/detail",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "avatar",
+        "bind_time",
+        "cmpl",
+        "create_name",
+        "created_at",
+        "email",
+        "google_secret",
+        "group_id",
+        "id",
+        "last_login_ip",
+        "last_login_time",
+        "login_password",
+        "nickname",
+        "operator_name",
+        "pwd_edit_time",
+        "roles",
+        "sid",
+        "status",
+        "stores",
+        "updated_at",
+        "username"
+      ]
+    },
+    {
+      "route": "/agent/agent-list",
+      "action": "page initialization",
+      "method": "GET",
+      "path": "/admin/agency/list",
+      "query_fields": [
+        "end_time",
+        "page",
+        "page_size",
+        "start_time"
+      ],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "d",
+        "s",
+        "t"
+      ]
+    },
+    {
+      "route": "/agent/agent-list",
+      "action": "query control",
+      "method": "GET",
+      "path": "/admin/agency/list",
+      "query_fields": [
+        "end_time",
+        "page",
+        "page_size",
+        "start_time"
+      ],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "d",
+        "s",
+        "t"
+      ]
+    },
+    {
+      "route": "/agent/agent-list",
+      "action": "reset control",
+      "method": "GET",
+      "path": "/admin/agency/list",
+      "query_fields": [
+        "end_time",
+        "page",
+        "page_size",
+        "start_time"
+      ],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "d",
+        "s",
+        "t"
+      ]
+    },
+    {
+      "route": "/agent/agent-list",
+      "action": "reversible text filter query",
+      "method": "GET",
+      "path": "/admin/agency/list",
+      "query_fields": [
+        "page",
+        "page_size",
+        "username"
+      ],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "d",
+        "s",
+        "t"
+      ]
+    },
+    {
+      "route": "/agent/agent-list",
+      "action": "filter reset",
+      "method": "GET",
+      "path": "/admin/agency/list",
+      "query_fields": [
+        "end_time",
+        "page",
+        "page_size",
+        "start_time"
+      ],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "d",
+        "s",
+        "t"
+      ]
+    },
+    {
+      "route": "/agent/user-list",
+      "action": "page initialization",
+      "method": "GET",
+      "path": "/backend/agency/me/detail",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "avatar",
+        "bind_time",
+        "cmpl",
+        "create_name",
+        "created_at",
+        "email",
+        "google_secret",
+        "group_id",
+        "id",
+        "last_login_ip",
+        "last_login_time",
+        "login_password",
+        "nickname",
+        "operator_name",
+        "pwd_edit_time",
+        "roles",
+        "sid",
+        "status",
+        "stores",
+        "updated_at",
+        "username"
+      ]
+    },
+    {
+      "route": "/agent/user-list",
+      "action": "page initialization",
+      "method": "GET",
+      "path": "/admin/agency/member/list",
+      "query_fields": [
+        "end_time",
+        "page",
+        "page_size",
+        "start_time"
+      ],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "d",
+        "s",
+        "t"
+      ]
+    },
+    {
+      "route": "/agent/user-list",
+      "action": "query control",
+      "method": "GET",
+      "path": "/admin/agency/member/list",
+      "query_fields": [
+        "end_time",
+        "page",
+        "page_size",
+        "start_time"
+      ],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "d",
+        "s",
+        "t"
+      ]
+    },
+    {
+      "route": "/agent/user-list",
+      "action": "reset control",
+      "method": "GET",
+      "path": "/admin/agency/member/list",
+      "query_fields": [
+        "end_time",
+        "page",
+        "page_size",
+        "start_time"
+      ],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "d",
+        "s",
+        "t"
+      ]
+    },
+    {
+      "route": "/agent/user-list",
+      "action": "reversible text filter query",
+      "method": "GET",
+      "path": "/admin/agency/member/list",
+      "query_fields": [
+        "page",
+        "page_size",
+        "username"
+      ],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "d",
+        "s",
+        "t"
+      ]
+    },
+    {
+      "route": "/agent/user-list",
+      "action": "filter reset",
+      "method": "GET",
+      "path": "/admin/agency/member/list",
+      "query_fields": [
+        "end_time",
+        "page",
+        "page_size",
+        "start_time"
+      ],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "d",
+        "s",
+        "t"
+      ]
+    },
+    {
+      "route": "/agent/agent-setting",
+      "action": "page initialization",
+      "method": "GET",
+      "path": "/backend/agency/me/detail",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "avatar",
+        "bind_time",
+        "cmpl",
+        "create_name",
+        "created_at",
+        "email",
+        "google_secret",
+        "group_id",
+        "id",
+        "last_login_ip",
+        "last_login_time",
+        "login_password",
+        "nickname",
+        "operator_name",
+        "pwd_edit_time",
+        "roles",
+        "sid",
+        "status",
+        "stores",
+        "updated_at",
+        "username"
+      ]
+    },
+    {
+      "route": "/agent/agent-setting",
+      "action": "page initialization",
+      "method": "GET",
+      "path": "/admin/agency/ladder",
+      "query_fields": [
+        "page",
+        "page_size",
+        "settle_type"
+      ],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "active_bet_amount",
+        "active_deposit_amount",
+        "setting"
+      ]
+    },
+    {
+      "route": "/agent/agent-setting",
+      "action": "tab: Pagcor Tax Rate",
+      "method": "GET",
+      "path": "/admin/agency/taxrate/list",
+      "query_fields": [
+        "page",
+        "page_size"
+      ],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "list",
+      "response_data_keys": []
+    },
+    {
+      "route": "/agent/agent-setting",
+      "action": "tab: Provider Fee Rate",
+      "method": "GET",
+      "path": "/admin/agency/vendorrate/list",
+      "query_fields": [
+        "page",
+        "page_size"
+      ],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "list",
+      "response_data_keys": []
+    },
+    {
+      "route": "/agent/domain",
+      "action": "page initialization",
+      "method": "GET",
+      "path": "/backend/agency/me/detail",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "avatar",
+        "bind_time",
+        "cmpl",
+        "create_name",
+        "created_at",
+        "email",
+        "google_secret",
+        "group_id",
+        "id",
+        "last_login_ip",
+        "last_login_time",
+        "login_password",
+        "nickname",
+        "operator_name",
+        "pwd_edit_time",
+        "roles",
+        "sid",
+        "status",
+        "stores",
+        "updated_at",
+        "username"
+      ]
+    },
+    {
+      "route": "/agent/domain",
+      "action": "page initialization",
+      "method": "GET",
+      "path": "/admin/agency/domain/list",
+      "query_fields": [
+        "state",
+        "ty"
+      ],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "d",
+        "s",
+        "t"
+      ]
+    },
+    {
+      "route": "/agent/domain",
+      "action": "query control",
+      "method": "GET",
+      "path": "/admin/agency/domain/list",
+      "query_fields": [
+        "state",
+        "ty"
+      ],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "d",
+        "s",
+        "t"
+      ]
+    },
+    {
+      "route": "/agent/domain",
+      "action": "reset control",
+      "method": "GET",
+      "path": "/admin/agency/domain/list",
+      "query_fields": [
+        "state",
+        "ty"
+      ],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "d",
+        "s",
+        "t"
+      ]
+    },
+    {
+      "route": "/financial/commission-review",
+      "action": "page initialization",
+      "method": "GET",
+      "path": "/backend/agency/me/detail",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "avatar",
+        "bind_time",
+        "cmpl",
+        "create_name",
+        "created_at",
+        "email",
+        "google_secret",
+        "group_id",
+        "id",
+        "last_login_ip",
+        "last_login_time",
+        "login_password",
+        "nickname",
+        "operator_name",
+        "pwd_edit_time",
+        "roles",
+        "sid",
+        "status",
+        "stores",
+        "updated_at",
+        "username"
+      ]
+    },
+    {
+      "route": "/financial/commission-review",
+      "action": "page initialization",
+      "method": "GET",
+      "path": "/admin/agency/commission/audit/list",
+      "query_fields": [
+        "end_time",
+        "page",
+        "page_size",
+        "start_time"
+      ],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "d",
+        "s",
+        "t"
+      ]
+    },
+    {
+      "route": "/financial/commission-review",
+      "action": "query control",
+      "method": "GET",
+      "path": "/admin/agency/commission/audit/list",
+      "query_fields": [
+        "end_time",
+        "page",
+        "page_size",
+        "start_time"
+      ],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "d",
+        "s",
+        "t"
+      ]
+    },
+    {
+      "route": "/financial/commission-review",
+      "action": "reset control",
+      "method": "GET",
+      "path": "/admin/agency/commission/audit/list",
+      "query_fields": [
+        "end_time",
+        "page",
+        "page_size",
+        "start_time"
+      ],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "d",
+        "s",
+        "t"
+      ]
+    },
+    {
+      "route": "/financial/commission-list",
+      "action": "page initialization",
+      "method": "GET",
+      "path": "/backend/agency/me/detail",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "avatar",
+        "bind_time",
+        "cmpl",
+        "create_name",
+        "created_at",
+        "email",
+        "google_secret",
+        "group_id",
+        "id",
+        "last_login_ip",
+        "last_login_time",
+        "login_password",
+        "nickname",
+        "operator_name",
+        "pwd_edit_time",
+        "roles",
+        "sid",
+        "status",
+        "stores",
+        "updated_at",
+        "username"
+      ]
+    },
+    {
+      "route": "/financial/commission-list",
+      "action": "page initialization",
+      "method": "GET",
+      "path": "/admin/agency/commission/report",
+      "query_fields": [
+        "end_time",
+        "page",
+        "page_size",
+        "start_time"
+      ],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "d",
+        "s",
+        "t"
+      ]
+    },
+    {
+      "route": "/financial/commission-list",
+      "action": "query control",
+      "method": "GET",
+      "path": "/admin/agency/commission/report",
+      "query_fields": [
+        "end_time",
+        "page",
+        "page_size",
+        "start_time"
+      ],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "d",
+        "s",
+        "t"
+      ]
+    },
+    {
+      "route": "/financial/commission-list",
+      "action": "reset control",
+      "method": "GET",
+      "path": "/admin/agency/commission/report",
+      "query_fields": [
+        "end_time",
+        "page",
+        "page_size",
+        "start_time"
+      ],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "d",
+        "s",
+        "t"
+      ]
+    },
+    {
+      "route": "/financial/financial-statements",
+      "action": "page initialization",
+      "method": "GET",
+      "path": "/backend/agency/me/detail",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "avatar",
+        "bind_time",
+        "cmpl",
+        "create_name",
+        "created_at",
+        "email",
+        "google_secret",
+        "group_id",
+        "id",
+        "last_login_ip",
+        "last_login_time",
+        "login_password",
+        "nickname",
+        "operator_name",
+        "pwd_edit_time",
+        "roles",
+        "sid",
+        "status",
+        "stores",
+        "updated_at",
+        "username"
+      ]
+    },
+    {
+      "route": "/financial/financial-statements",
+      "action": "page initialization",
+      "method": "POST",
+      "path": "/agency/finance/transaction/list",
+      "query_fields": [],
+      "body_fields": [
+        "cash_type",
+        "end_time",
+        "page",
+        "page_size",
+        "start_time"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "d",
+        "s",
+        "t"
+      ]
+    },
+    {
+      "route": "/financial/financial-statements",
+      "action": "query control",
+      "method": "POST",
+      "path": "/agency/finance/transaction/list",
+      "query_fields": [],
+      "body_fields": [
+        "cash_type",
+        "end_time",
+        "page",
+        "page_size",
+        "start_time"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "d",
+        "s",
+        "t"
+      ]
+    },
+    {
+      "route": "/financial/financial-statements",
+      "action": "reset control",
+      "method": "POST",
+      "path": "/agency/finance/transaction/list",
+      "query_fields": [],
+      "body_fields": [
+        "cash_type",
+        "end_time",
+        "page",
+        "page_size",
+        "start_time"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "d",
+        "s",
+        "t"
+      ]
+    },
+    {
+      "route": "/financial/financial-statements",
+      "action": "reversible text filter query",
+      "method": "POST",
+      "path": "/agency/finance/transaction/list",
+      "query_fields": [],
+      "body_fields": [
+        "cash_type",
+        "end_time",
+        "page",
+        "page_size",
+        "start_time"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "d",
+        "s",
+        "t"
+      ]
+    },
+    {
+      "route": "/financial/financial-statements",
+      "action": "filter reset",
+      "method": "POST",
+      "path": "/agency/finance/transaction/list",
+      "query_fields": [],
+      "body_fields": [
+        "cash_type",
+        "end_time",
+        "page",
+        "page_size",
+        "start_time"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "d",
+        "s",
+        "t"
+      ]
+    },
+    {
+      "route": "/system/role",
+      "action": "page initialization",
+      "method": "GET",
+      "path": "/backend/agency/me/detail",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "avatar",
+        "bind_time",
+        "cmpl",
+        "create_name",
+        "created_at",
+        "email",
+        "google_secret",
+        "group_id",
+        "id",
+        "last_login_ip",
+        "last_login_time",
+        "login_password",
+        "nickname",
+        "operator_name",
+        "pwd_edit_time",
+        "roles",
+        "sid",
+        "status",
+        "stores",
+        "updated_at",
+        "username"
+      ]
+    },
+    {
+      "route": "/system/role",
+      "action": "page initialization",
+      "method": "GET",
+      "path": "/backend/agency/group/list",
+      "query_fields": [
+        "page",
+        "page_size"
+      ],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "d",
+        "s",
+        "t"
+      ]
+    },
+    {
+      "route": "/system/staff",
+      "action": "page initialization",
+      "method": "GET",
+      "path": "/backend/agency/me/detail",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "avatar",
+        "bind_time",
+        "cmpl",
+        "create_name",
+        "created_at",
+        "email",
+        "google_secret",
+        "group_id",
+        "id",
+        "last_login_ip",
+        "last_login_time",
+        "login_password",
+        "nickname",
+        "operator_name",
+        "pwd_edit_time",
+        "roles",
+        "sid",
+        "status",
+        "stores",
+        "updated_at",
+        "username"
+      ]
+    },
+    {
+      "route": "/system/staff",
+      "action": "page initialization",
+      "method": "GET",
+      "path": "/backend/agency/group/list",
+      "query_fields": [
+        "page",
+        "page_size"
+      ],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "d",
+        "s",
+        "t"
+      ]
+    },
+    {
+      "route": "/system/staff",
+      "action": "page initialization",
+      "method": "POST",
+      "path": "/backend/agency/user/list",
+      "query_fields": [],
+      "body_fields": [
+        "page",
+        "page_size"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "d",
+        "t"
+      ]
+    },
+    {
+      "route": "/system/staff",
+      "action": "query control",
+      "method": "POST",
+      "path": "/backend/agency/user/list",
+      "query_fields": [],
+      "body_fields": [
+        "page",
+        "page_size"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "d",
+        "t"
+      ]
+    },
+    {
+      "route": "/system/staff",
+      "action": "reset control",
+      "method": "POST",
+      "path": "/backend/agency/user/list",
+      "query_fields": [],
+      "body_fields": [
+        "page",
+        "page_size"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "d",
+        "t"
+      ]
+    },
+    {
+      "route": "/system/staff",
+      "action": "pagination next",
+      "method": "POST",
+      "path": "/backend/agency/user/list",
+      "query_fields": [],
+      "body_fields": [
+        "page",
+        "page_size"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "d",
+        "t"
+      ]
+    },
+    {
+      "route": "/system/staff",
+      "action": "pagination restore previous",
+      "method": "POST",
+      "path": "/backend/agency/user/list",
+      "query_fields": [],
+      "body_fields": [
+        "page",
+        "page_size"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "d",
+        "t"
+      ]
+    },
+    {
+      "route": "/system/staff",
+      "action": "reversible text filter query",
+      "method": "POST",
+      "path": "/backend/agency/user/list",
+      "query_fields": [],
+      "body_fields": [
+        "page",
+        "page_size",
+        "username"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "d",
+        "t"
+      ]
+    },
+    {
+      "route": "/system/staff",
+      "action": "filter reset",
+      "method": "POST",
+      "path": "/backend/agency/user/list",
+      "query_fields": [],
+      "body_fields": [
+        "page",
+        "page_size"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "d",
+        "t"
+      ]
+    }
+  ],
+  "fatal_error": ""
+}

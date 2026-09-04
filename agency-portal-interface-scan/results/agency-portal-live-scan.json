@@ -1,0 +1,1483 @@
+{
+  "captured_at": "2026-09-03T11:24:31.926Z",
+  "environment": "FAT",
+  "surface": "agency_portal",
+  "base_origin": "https://agency-fat.filbet2025.com",
+  "context_policy": "fresh dedicated Playwright browser context; no storage state/token reuse or export",
+  "credential_retention": "runtime input only; phone and OTP omitted from artifacts",
+  "login_gate": {
+    "success": true,
+    "login_origin": "https://agency-fat.filbet2025.com",
+    "login_path": "/user/login",
+    "authenticated_origin": "https://agency-fat.filbet2025.com",
+    "authenticated_path": "/",
+    "title": "Filbet Affiliate",
+    "get_code_clicked": true,
+    "login_request_success": true,
+    "profile_request_success": true,
+    "profile_evidence": [
+      "GET /agency/profile:200:true",
+      "GET /agency/profile:200:true"
+    ],
+    "navigation_shell_visible": false,
+    "login_dom": {
+      "input_types": [
+        "text",
+        "text"
+      ],
+      "input_placeholders": [
+        "Please enter phone number",
+        "Please enter verification code"
+      ],
+      "button_labels": [
+        "Get Code",
+        "Login"
+      ]
+    }
+  },
+  "login_network": [
+    {
+      "route": "login",
+      "action": "request login code",
+      "api_origin": "https://agency-fat.filbet2025.com",
+      "method": "POST",
+      "path": "/member/sms",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "code_length",
+        "id",
+        "resend_at"
+      ],
+      "response_list_length": null
+    },
+    {
+      "route": "login",
+      "action": "submit code login",
+      "api_origin": "https://agency-fat.filbet2025.com",
+      "method": "POST",
+      "path": "/member/auth/sms",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "string",
+      "response_data_keys": [],
+      "response_list_length": null
+    },
+    {
+      "route": "login",
+      "action": "submit code login",
+      "api_origin": "https://agency-fat.filbet2025.com",
+      "method": "POST",
+      "path": "/agency/otp/login",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "string",
+      "response_data_keys": [],
+      "response_list_length": null
+    },
+    {
+      "route": "login",
+      "action": "submit code login",
+      "api_origin": "https://agency-fat.filbet2025.com",
+      "method": "GET",
+      "path": "/agency/profile",
+      "query_fields": [
+        "end_time",
+        "start_time"
+      ],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "invite_code",
+        "invite_img",
+        "invite_link",
+        "last_login_addr",
+        "last_login_at",
+        "last_login_device",
+        "last_login_ip",
+        "phone",
+        "real_username",
+        "settle_type",
+        "stat",
+        "uid",
+        "username"
+      ],
+      "response_list_length": null
+    },
+    {
+      "route": "login",
+      "action": "submit code login",
+      "api_origin": "https://agency-fat.filbet2025.com",
+      "method": "GET",
+      "path": "/agency/profile",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "invite_code",
+        "invite_img",
+        "invite_link",
+        "last_login_addr",
+        "last_login_at",
+        "last_login_device",
+        "last_login_ip",
+        "phone",
+        "real_username",
+        "settle_type",
+        "stat",
+        "uid",
+        "username"
+      ],
+      "response_list_length": null
+    }
+  ],
+  "menu": [
+    {
+      "order": 1,
+      "menu_path": [],
+      "page_name": "Data Overview",
+      "route": "/",
+      "route_source": "bundle_candidate_plus_authenticated_path_controls_and_network_verified"
+    },
+    {
+      "order": 2,
+      "menu_path": [],
+      "page_name": "Member List",
+      "route": "/a-member-list",
+      "route_source": "bundle_route_plus_rendered_exact_label"
+    },
+    {
+      "order": 3,
+      "menu_path": [],
+      "page_name": "Betting Record",
+      "route": "/betting-record",
+      "route_source": "bundle_candidate_plus_authenticated_path_controls_and_network_verified"
+    },
+    {
+      "order": 4,
+      "menu_path": [],
+      "page_name": "Commission Report",
+      "route": "/commission-report",
+      "route_source": "bundle_route_plus_rendered_exact_label"
+    },
+    {
+      "order": 5,
+      "menu_path": [],
+      "page_name": "Commission Rule",
+      "route": "/commission-rule",
+      "route_source": "bundle_candidate_plus_authenticated_path_controls_and_network_verified"
+    }
+  ],
+  "pages": [
+    {
+      "order": 1,
+      "menu_path": [],
+      "page_name": "Data Overview",
+      "route": "/",
+      "final_origin": "https://agency-fat.filbet2025.com",
+      "final_route": "/",
+      "title": "Filbet Affiliate",
+      "controls": {
+        "inputs": [
+          {
+            "type": "text",
+            "placeholder": "Start date",
+            "name": "",
+            "disabled": false
+          },
+          {
+            "type": "text",
+            "placeholder": "End date",
+            "name": "",
+            "disabled": false
+          }
+        ],
+        "selects": [],
+        "buttons": [
+          {
+            "label": "Today 09-03",
+            "disabled": false
+          },
+          {
+            "label": "Yesterday",
+            "disabled": false
+          },
+          {
+            "label": "This week",
+            "disabled": false
+          },
+          {
+            "label": "Last week",
+            "disabled": false
+          },
+          {
+            "label": "This month",
+            "disabled": false
+          },
+          {
+            "label": "Last month",
+            "disabled": false
+          },
+          {
+            "label": "Search",
+            "disabled": false
+          },
+          {
+            "label": "Reset",
+            "disabled": false
+          },
+          {
+            "label": "Copy",
+            "disabled": false
+          },
+          {
+            "label": "Copy Link",
+            "disabled": false
+          },
+          {
+            "label": "Promo Poster",
+            "disabled": false
+          }
+        ],
+        "tabs": [],
+        "pagination": [],
+        "overlays": []
+      },
+      "initialization_events": [
+        {
+          "route": "/",
+          "action": "page initialization",
+          "api_origin": "https://agency-fat.filbet2025.com",
+          "method": "GET",
+          "path": "/agency/profile",
+          "query_fields": [],
+          "body_fields": [],
+          "http_status": 200,
+          "business_status": true,
+          "response_data_type": "object",
+          "response_data_keys": [
+            "invite_code",
+            "invite_img",
+            "invite_link",
+            "last_login_addr",
+            "last_login_at",
+            "last_login_device",
+            "last_login_ip",
+            "phone",
+            "real_username",
+            "settle_type",
+            "stat",
+            "uid",
+            "username"
+          ],
+          "response_list_length": null
+        },
+        {
+          "route": "/",
+          "action": "page initialization",
+          "api_origin": "https://agency-fat.filbet2025.com",
+          "method": "GET",
+          "path": "/agency/profile",
+          "query_fields": [
+            "end_time",
+            "start_time"
+          ],
+          "body_fields": [],
+          "http_status": 200,
+          "business_status": true,
+          "response_data_type": "object",
+          "response_data_keys": [
+            "invite_code",
+            "invite_img",
+            "invite_link",
+            "last_login_addr",
+            "last_login_at",
+            "last_login_device",
+            "last_login_ip",
+            "phone",
+            "real_username",
+            "settle_type",
+            "stat",
+            "uid",
+            "username"
+          ],
+          "response_list_length": null
+        }
+      ],
+      "error": ""
+    },
+    {
+      "order": 2,
+      "menu_path": [],
+      "page_name": "Member List",
+      "route": "/a-member-list",
+      "final_origin": "https://agency-fat.filbet2025.com",
+      "final_route": "/a-member-list",
+      "title": "Filbet Affiliate",
+      "controls": {
+        "inputs": [
+          {
+            "type": "text",
+            "placeholder": "Please enter member account",
+            "name": "",
+            "disabled": false
+          },
+          {
+            "type": "text",
+            "placeholder": "Start Time",
+            "name": "",
+            "disabled": false
+          },
+          {
+            "type": "text",
+            "placeholder": "End Time",
+            "name": "",
+            "disabled": false
+          }
+        ],
+        "selects": [],
+        "buttons": [
+          {
+            "label": "",
+            "disabled": false
+          },
+          {
+            "label": "Reset",
+            "disabled": false
+          },
+          {
+            "label": "Search / Query",
+            "disabled": false
+          }
+        ],
+        "tabs": [],
+        "pagination": [],
+        "overlays": []
+      },
+      "initialization_events": [
+        {
+          "route": "/a-member-list",
+          "action": "page initialization",
+          "api_origin": "https://agency-fat.filbet2025.com",
+          "method": "GET",
+          "path": "/agency/member/list",
+          "query_fields": [
+            "end_time",
+            "page",
+            "page_size",
+            "start_time"
+          ],
+          "body_fields": [],
+          "http_status": 200,
+          "business_status": true,
+          "response_data_type": "object",
+          "response_data_keys": [
+            "d",
+            "s",
+            "t"
+          ],
+          "response_list_length": null
+        }
+      ],
+      "error": ""
+    },
+    {
+      "order": 3,
+      "menu_path": [],
+      "page_name": "Betting Record",
+      "route": "/betting-record",
+      "final_origin": "https://agency-fat.filbet2025.com",
+      "final_route": "/betting-record",
+      "title": "Filbet Affiliate",
+      "controls": {
+        "inputs": [
+          {
+            "type": "text",
+            "placeholder": "Please enter member account",
+            "name": "",
+            "disabled": false
+          },
+          {
+            "type": "text",
+            "placeholder": "Start Time",
+            "name": "",
+            "disabled": false
+          },
+          {
+            "type": "text",
+            "placeholder": "End Time",
+            "name": "",
+            "disabled": false
+          },
+          {
+            "type": "search",
+            "placeholder": "",
+            "name": "",
+            "disabled": false
+          },
+          {
+            "type": "search",
+            "placeholder": "",
+            "name": "",
+            "disabled": false
+          },
+          {
+            "type": "search",
+            "placeholder": "",
+            "name": "",
+            "disabled": false
+          }
+        ],
+        "selects": [
+          {
+            "label": "",
+            "disabled": false
+          },
+          {
+            "label": "",
+            "disabled": false
+          },
+          {
+            "label": "",
+            "disabled": false
+          },
+          {
+            "label": "",
+            "disabled": false
+          },
+          {
+            "label": "",
+            "disabled": false
+          },
+          {
+            "label": "",
+            "disabled": false
+          }
+        ],
+        "buttons": [
+          {
+            "label": "",
+            "disabled": false
+          },
+          {
+            "label": "Reset",
+            "disabled": false
+          },
+          {
+            "label": "Search / Query",
+            "disabled": false
+          }
+        ],
+        "tabs": [],
+        "pagination": [],
+        "overlays": []
+      },
+      "initialization_events": [
+        {
+          "route": "/betting-record",
+          "action": "page initialization",
+          "api_origin": "https://agency-fat.filbet2025.com",
+          "method": "GET",
+          "path": "/agency/platform/list",
+          "query_fields": [
+            "page",
+            "page_size"
+          ],
+          "body_fields": [],
+          "http_status": 200,
+          "business_status": true,
+          "response_data_type": "list",
+          "response_data_keys": [],
+          "response_list_length": 36
+        },
+        {
+          "route": "/betting-record",
+          "action": "page initialization",
+          "api_origin": "https://agency-fat.filbet2025.com",
+          "method": "POST",
+          "path": "/agency/record/bet",
+          "query_fields": [],
+          "body_fields": [],
+          "http_status": 200,
+          "business_status": true,
+          "response_data_type": "object",
+          "response_data_keys": [
+            "d",
+            "s",
+            "t",
+            "total_list"
+          ],
+          "response_list_length": null
+        },
+        {
+          "route": "/betting-record",
+          "action": "page initialization",
+          "api_origin": "https://agency-fat.filbet2025.com",
+          "method": "POST",
+          "path": "/agency/record/bet",
+          "query_fields": [],
+          "body_fields": [],
+          "http_status": 200,
+          "business_status": true,
+          "response_data_type": "object",
+          "response_data_keys": [
+            "d",
+            "s",
+            "t",
+            "total_list"
+          ],
+          "response_list_length": null
+        }
+      ],
+      "error": ""
+    },
+    {
+      "order": 4,
+      "menu_path": [],
+      "page_name": "Commission Report",
+      "route": "/commission-report",
+      "final_origin": "https://agency-fat.filbet2025.com",
+      "final_route": "/commission-report",
+      "title": "Filbet Affiliate",
+      "controls": {
+        "inputs": [
+          {
+            "type": "text",
+            "placeholder": "Start Date",
+            "name": "",
+            "disabled": false
+          },
+          {
+            "type": "text",
+            "placeholder": "End Date",
+            "name": "",
+            "disabled": false
+          },
+          {
+            "type": "search",
+            "placeholder": "",
+            "name": "",
+            "disabled": false
+          }
+        ],
+        "selects": [
+          {
+            "label": "",
+            "disabled": false
+          },
+          {
+            "label": "",
+            "disabled": false
+          }
+        ],
+        "buttons": [
+          {
+            "label": "Reset",
+            "disabled": false
+          },
+          {
+            "label": "Search / Query",
+            "disabled": false
+          }
+        ],
+        "tabs": [],
+        "pagination": [],
+        "overlays": []
+      },
+      "initialization_events": [
+        {
+          "route": "/commission-report",
+          "action": "page initialization",
+          "api_origin": "https://agency-fat.filbet2025.com",
+          "method": "GET",
+          "path": "/agency/commission/report",
+          "query_fields": [
+            "end_time",
+            "page",
+            "page_size",
+            "start_time"
+          ],
+          "body_fields": [],
+          "http_status": 200,
+          "business_status": true,
+          "response_data_type": "object",
+          "response_data_keys": [
+            "d",
+            "s",
+            "t"
+          ],
+          "response_list_length": null
+        }
+      ],
+      "error": ""
+    },
+    {
+      "order": 5,
+      "menu_path": [],
+      "page_name": "Commission Rule",
+      "route": "/commission-rule",
+      "final_origin": "https://agency-fat.filbet2025.com",
+      "final_route": "/commission-rule",
+      "title": "Filbet Affiliate",
+      "controls": {
+        "inputs": [],
+        "selects": [],
+        "buttons": [],
+        "tabs": [
+          {
+            "label": "Commission Rate Tier Table",
+            "selected": ""
+          },
+          {
+            "label": "Commission Rate Tier Table",
+            "selected": "true"
+          },
+          {
+            "label": "PAGCOR Tax Rate",
+            "selected": ""
+          },
+          {
+            "label": "PAGCOR Tax Rate",
+            "selected": "false"
+          },
+          {
+            "label": "Vendor Rate",
+            "selected": ""
+          },
+          {
+            "label": "Vendor Rate",
+            "selected": "false"
+          }
+        ],
+        "pagination": [],
+        "overlays": []
+      },
+      "initialization_events": [
+        {
+          "route": "/commission-rule",
+          "action": "page initialization",
+          "api_origin": "https://agency-fat.filbet2025.com",
+          "method": "GET",
+          "path": "/agency/ladder",
+          "query_fields": [],
+          "body_fields": [],
+          "http_status": 200,
+          "business_status": true,
+          "response_data_type": "object",
+          "response_data_keys": [
+            "active_bet_amount",
+            "active_deposit_amount",
+            "setting"
+          ],
+          "response_list_length": null
+        }
+      ],
+      "error": ""
+    }
+  ],
+  "actions": [
+    {
+      "route": "/",
+      "action_type": "query",
+      "action_name": "query",
+      "status": "CLICKED",
+      "before_route": "/",
+      "after_route": "/",
+      "before_overlay_count": 0,
+      "after_overlay_count": 0,
+      "download_observed": false,
+      "network_events": [
+        {
+          "route": "/",
+          "action": "query: query",
+          "api_origin": "https://agency-fat.filbet2025.com",
+          "method": "GET",
+          "path": "/agency/profile",
+          "query_fields": [
+            "end_time",
+            "start_time"
+          ],
+          "body_fields": [],
+          "http_status": 200,
+          "business_status": true,
+          "response_data_type": "object",
+          "response_data_keys": [
+            "invite_code",
+            "invite_img",
+            "invite_link",
+            "last_login_addr",
+            "last_login_at",
+            "last_login_device",
+            "last_login_ip",
+            "phone",
+            "real_username",
+            "settle_type",
+            "stat",
+            "uid",
+            "username"
+          ],
+          "response_list_length": null
+        }
+      ],
+      "side_effect": "none observed; read/navigation/local UI interaction",
+      "error": ""
+    },
+    {
+      "route": "/",
+      "action_type": "reset",
+      "action_name": "reset",
+      "status": "CLICKED",
+      "before_route": "/",
+      "after_route": "/",
+      "before_overlay_count": 0,
+      "after_overlay_count": 0,
+      "download_observed": false,
+      "network_events": [],
+      "side_effect": "none observed; read/navigation/local UI interaction",
+      "error": ""
+    },
+    {
+      "route": "/a-member-list",
+      "action_type": "reset",
+      "action_name": "reset",
+      "status": "CLICKED",
+      "before_route": "/a-member-list",
+      "after_route": "/a-member-list",
+      "before_overlay_count": 0,
+      "after_overlay_count": 0,
+      "download_observed": false,
+      "network_events": [
+        {
+          "route": "/a-member-list",
+          "action": "reset: reset",
+          "api_origin": "https://agency-fat.filbet2025.com",
+          "method": "GET",
+          "path": "/agency/member/list",
+          "query_fields": [
+            "end_time",
+            "page",
+            "page_size",
+            "start_time"
+          ],
+          "body_fields": [],
+          "http_status": 200,
+          "business_status": true,
+          "response_data_type": "object",
+          "response_data_keys": [
+            "d",
+            "s",
+            "t"
+          ],
+          "response_list_length": null
+        }
+      ],
+      "side_effect": "none observed; read/navigation/local UI interaction",
+      "error": ""
+    },
+    {
+      "route": "/a-member-list",
+      "action_type": "overflow_open",
+      "action_name": "overflow 1",
+      "status": "CLICKED",
+      "before_route": "/a-member-list",
+      "after_route": "/a-member-list",
+      "before_overlay_count": 0,
+      "after_overlay_count": 1,
+      "download_observed": false,
+      "network_events": [],
+      "side_effect": "none observed; read/navigation/local UI interaction",
+      "error": ""
+    },
+    {
+      "route": "/betting-record",
+      "action_type": "reset",
+      "action_name": "reset",
+      "status": "CLICKED",
+      "before_route": "/betting-record",
+      "after_route": "/betting-record",
+      "before_overlay_count": 0,
+      "after_overlay_count": 0,
+      "download_observed": false,
+      "network_events": [
+        {
+          "route": "/betting-record",
+          "action": "reset: reset",
+          "api_origin": "https://agency-fat.filbet2025.com",
+          "method": "POST",
+          "path": "/agency/record/bet",
+          "query_fields": [],
+          "body_fields": [],
+          "http_status": 200,
+          "business_status": true,
+          "response_data_type": "object",
+          "response_data_keys": [
+            "d",
+            "s",
+            "t",
+            "total_list"
+          ],
+          "response_list_length": null
+        }
+      ],
+      "side_effect": "none observed; read/navigation/local UI interaction",
+      "error": ""
+    },
+    {
+      "route": "/betting-record",
+      "action_type": "filter_open",
+      "action_name": "filter 1",
+      "status": "CLICKED",
+      "before_route": "/betting-record",
+      "after_route": "/betting-record",
+      "before_overlay_count": 0,
+      "after_overlay_count": 0,
+      "download_observed": false,
+      "network_events": [],
+      "side_effect": "none observed; read/navigation/local UI interaction",
+      "error": ""
+    },
+    {
+      "route": "/betting-record",
+      "action_type": "filter_open",
+      "action_name": "filter 2",
+      "status": "INTERACTION_ERROR",
+      "before_route": "/betting-record",
+      "after_route": "/betting-record",
+      "before_overlay_count": 0,
+      "after_overlay_count": 0,
+      "download_observed": false,
+      "network_events": [],
+      "side_effect": "none observed; read/navigation/local UI interaction",
+      "error": "locator.click: Timeout 2000ms exceeded. Call log: \u001b[2m - waiting for locator('select:visible,[role=combobox]:visible,.an"
+    },
+    {
+      "route": "/betting-record",
+      "action_type": "filter_open",
+      "action_name": "filter 3",
+      "status": "CLICKED",
+      "before_route": "/betting-record",
+      "after_route": "/betting-record",
+      "before_overlay_count": 0,
+      "after_overlay_count": 0,
+      "download_observed": false,
+      "network_events": [],
+      "side_effect": "none observed; read/navigation/local UI interaction",
+      "error": ""
+    },
+    {
+      "route": "/betting-record",
+      "action_type": "filter_open",
+      "action_name": "filter 4",
+      "status": "INTERACTION_ERROR",
+      "before_route": "/betting-record",
+      "after_route": "/betting-record",
+      "before_overlay_count": 0,
+      "after_overlay_count": 0,
+      "download_observed": false,
+      "network_events": [],
+      "side_effect": "none observed; read/navigation/local UI interaction",
+      "error": "locator.click: Timeout 2000ms exceeded. Call log: \u001b[2m - waiting for locator('select:visible,[role=combobox]:visible,.an"
+    },
+    {
+      "route": "/betting-record",
+      "action_type": "filter_open",
+      "action_name": "filter 5",
+      "status": "CLICKED",
+      "before_route": "/betting-record",
+      "after_route": "/betting-record",
+      "before_overlay_count": 0,
+      "after_overlay_count": 0,
+      "download_observed": false,
+      "network_events": [],
+      "side_effect": "none observed; read/navigation/local UI interaction",
+      "error": ""
+    },
+    {
+      "route": "/betting-record",
+      "action_type": "filter_open",
+      "action_name": "filter 6",
+      "status": "INTERACTION_ERROR",
+      "before_route": "/betting-record",
+      "after_route": "/betting-record",
+      "before_overlay_count": 0,
+      "after_overlay_count": 0,
+      "download_observed": false,
+      "network_events": [],
+      "side_effect": "none observed; read/navigation/local UI interaction",
+      "error": "locator.click: Timeout 2000ms exceeded. Call log: \u001b[2m - waiting for locator('select:visible,[role=combobox]:visible,.an"
+    },
+    {
+      "route": "/betting-record",
+      "action_type": "overflow_open",
+      "action_name": "overflow 1",
+      "status": "CLICKED",
+      "before_route": "/betting-record",
+      "after_route": "/betting-record",
+      "before_overlay_count": 0,
+      "after_overlay_count": 1,
+      "download_observed": false,
+      "network_events": [],
+      "side_effect": "none observed; read/navigation/local UI interaction",
+      "error": ""
+    },
+    {
+      "route": "/commission-report",
+      "action_type": "reset",
+      "action_name": "reset",
+      "status": "CLICKED",
+      "before_route": "/commission-report",
+      "after_route": "/commission-report",
+      "before_overlay_count": 0,
+      "after_overlay_count": 0,
+      "download_observed": false,
+      "network_events": [
+        {
+          "route": "/commission-report",
+          "action": "reset: reset",
+          "api_origin": "https://agency-fat.filbet2025.com",
+          "method": "GET",
+          "path": "/agency/commission/report",
+          "query_fields": [
+            "end_time",
+            "page",
+            "page_size",
+            "start_time"
+          ],
+          "body_fields": [],
+          "http_status": 200,
+          "business_status": true,
+          "response_data_type": "object",
+          "response_data_keys": [
+            "d",
+            "s",
+            "t"
+          ],
+          "response_list_length": null
+        }
+      ],
+      "side_effect": "none observed; read/navigation/local UI interaction",
+      "error": ""
+    },
+    {
+      "route": "/commission-report",
+      "action_type": "filter_open",
+      "action_name": "filter 1",
+      "status": "CLICKED",
+      "before_route": "/commission-report",
+      "after_route": "/commission-report",
+      "before_overlay_count": 0,
+      "after_overlay_count": 0,
+      "download_observed": false,
+      "network_events": [],
+      "side_effect": "none observed; read/navigation/local UI interaction",
+      "error": ""
+    },
+    {
+      "route": "/commission-report",
+      "action_type": "filter_open",
+      "action_name": "filter 2",
+      "status": "CLICKED",
+      "before_route": "/commission-report",
+      "after_route": "/commission-report",
+      "before_overlay_count": 0,
+      "after_overlay_count": 0,
+      "download_observed": false,
+      "network_events": [],
+      "side_effect": "none observed; read/navigation/local UI interaction",
+      "error": ""
+    },
+    {
+      "route": "/commission-rule",
+      "action_type": "tab",
+      "action_name": "Commission Rate Tier Table",
+      "status": "CLICKED",
+      "before_route": "/commission-rule",
+      "after_route": "/commission-rule",
+      "before_overlay_count": 0,
+      "after_overlay_count": 0,
+      "download_observed": false,
+      "network_events": [],
+      "side_effect": "none observed; read/navigation/local UI interaction",
+      "error": ""
+    },
+    {
+      "route": "/commission-rule",
+      "action_type": "tab",
+      "action_name": "PAGCOR Tax Rate",
+      "status": "CLICKED",
+      "before_route": "/commission-rule",
+      "after_route": "/commission-rule",
+      "before_overlay_count": 0,
+      "after_overlay_count": 0,
+      "download_observed": false,
+      "network_events": [
+        {
+          "route": "/commission-rule",
+          "action": "tab: PAGCOR Tax Rate",
+          "api_origin": "https://agency-fat.filbet2025.com",
+          "method": "GET",
+          "path": "/agency/taxrate/list",
+          "query_fields": [],
+          "body_fields": [],
+          "http_status": 200,
+          "business_status": true,
+          "response_data_type": "list",
+          "response_data_keys": [],
+          "response_list_length": 7
+        }
+      ],
+      "side_effect": "none observed; read/navigation/local UI interaction",
+      "error": ""
+    },
+    {
+      "route": "/commission-rule",
+      "action_type": "tab",
+      "action_name": "Vendor Rate",
+      "status": "CLICKED",
+      "before_route": "/commission-rule",
+      "after_route": "/commission-rule",
+      "before_overlay_count": 0,
+      "after_overlay_count": 0,
+      "download_observed": false,
+      "network_events": [
+        {
+          "route": "/commission-rule",
+          "action": "tab: Vendor Rate",
+          "api_origin": "https://agency-fat.filbet2025.com",
+          "method": "GET",
+          "path": "/agency/vendorrate/list",
+          "query_fields": [],
+          "body_fields": [],
+          "http_status": 200,
+          "business_status": true,
+          "response_data_type": "list",
+          "response_data_keys": [],
+          "response_list_length": 36
+        }
+      ],
+      "side_effect": "none observed; read/navigation/local UI interaction",
+      "error": ""
+    }
+  ],
+  "network": [
+    {
+      "route": "login",
+      "action": "request login code",
+      "api_origin": "https://agency-fat.filbet2025.com",
+      "method": "POST",
+      "path": "/member/sms",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "code_length",
+        "id",
+        "resend_at"
+      ],
+      "response_list_length": null
+    },
+    {
+      "route": "login",
+      "action": "submit code login",
+      "api_origin": "https://agency-fat.filbet2025.com",
+      "method": "POST",
+      "path": "/member/auth/sms",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "string",
+      "response_data_keys": [],
+      "response_list_length": null
+    },
+    {
+      "route": "login",
+      "action": "submit code login",
+      "api_origin": "https://agency-fat.filbet2025.com",
+      "method": "POST",
+      "path": "/agency/otp/login",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "string",
+      "response_data_keys": [],
+      "response_list_length": null
+    },
+    {
+      "route": "login",
+      "action": "submit code login",
+      "api_origin": "https://agency-fat.filbet2025.com",
+      "method": "GET",
+      "path": "/agency/profile",
+      "query_fields": [
+        "end_time",
+        "start_time"
+      ],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "invite_code",
+        "invite_img",
+        "invite_link",
+        "last_login_addr",
+        "last_login_at",
+        "last_login_device",
+        "last_login_ip",
+        "phone",
+        "real_username",
+        "settle_type",
+        "stat",
+        "uid",
+        "username"
+      ],
+      "response_list_length": null
+    },
+    {
+      "route": "login",
+      "action": "submit code login",
+      "api_origin": "https://agency-fat.filbet2025.com",
+      "method": "GET",
+      "path": "/agency/profile",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "invite_code",
+        "invite_img",
+        "invite_link",
+        "last_login_addr",
+        "last_login_at",
+        "last_login_device",
+        "last_login_ip",
+        "phone",
+        "real_username",
+        "settle_type",
+        "stat",
+        "uid",
+        "username"
+      ],
+      "response_list_length": null
+    },
+    {
+      "route": "/",
+      "action": "page initialization",
+      "api_origin": "https://agency-fat.filbet2025.com",
+      "method": "GET",
+      "path": "/agency/profile",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "invite_code",
+        "invite_img",
+        "invite_link",
+        "last_login_addr",
+        "last_login_at",
+        "last_login_device",
+        "last_login_ip",
+        "phone",
+        "real_username",
+        "settle_type",
+        "stat",
+        "uid",
+        "username"
+      ],
+      "response_list_length": null
+    },
+    {
+      "route": "/",
+      "action": "page initialization",
+      "api_origin": "https://agency-fat.filbet2025.com",
+      "method": "GET",
+      "path": "/agency/profile",
+      "query_fields": [
+        "end_time",
+        "start_time"
+      ],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "invite_code",
+        "invite_img",
+        "invite_link",
+        "last_login_addr",
+        "last_login_at",
+        "last_login_device",
+        "last_login_ip",
+        "phone",
+        "real_username",
+        "settle_type",
+        "stat",
+        "uid",
+        "username"
+      ],
+      "response_list_length": null
+    },
+    {
+      "route": "/",
+      "action": "query: query",
+      "api_origin": "https://agency-fat.filbet2025.com",
+      "method": "GET",
+      "path": "/agency/profile",
+      "query_fields": [
+        "end_time",
+        "start_time"
+      ],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "invite_code",
+        "invite_img",
+        "invite_link",
+        "last_login_addr",
+        "last_login_at",
+        "last_login_device",
+        "last_login_ip",
+        "phone",
+        "real_username",
+        "settle_type",
+        "stat",
+        "uid",
+        "username"
+      ],
+      "response_list_length": null
+    },
+    {
+      "route": "/a-member-list",
+      "action": "page initialization",
+      "api_origin": "https://agency-fat.filbet2025.com",
+      "method": "GET",
+      "path": "/agency/member/list",
+      "query_fields": [
+        "end_time",
+        "page",
+        "page_size",
+        "start_time"
+      ],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "d",
+        "s",
+        "t"
+      ],
+      "response_list_length": null
+    },
+    {
+      "route": "/a-member-list",
+      "action": "reset: reset",
+      "api_origin": "https://agency-fat.filbet2025.com",
+      "method": "GET",
+      "path": "/agency/member/list",
+      "query_fields": [
+        "end_time",
+        "page",
+        "page_size",
+        "start_time"
+      ],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "d",
+        "s",
+        "t"
+      ],
+      "response_list_length": null
+    },
+    {
+      "route": "/betting-record",
+      "action": "page initialization",
+      "api_origin": "https://agency-fat.filbet2025.com",
+      "method": "GET",
+      "path": "/agency/platform/list",
+      "query_fields": [
+        "page",
+        "page_size"
+      ],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "list",
+      "response_data_keys": [],
+      "response_list_length": 36
+    },
+    {
+      "route": "/betting-record",
+      "action": "page initialization",
+      "api_origin": "https://agency-fat.filbet2025.com",
+      "method": "POST",
+      "path": "/agency/record/bet",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "d",
+        "s",
+        "t",
+        "total_list"
+      ],
+      "response_list_length": null
+    },
+    {
+      "route": "/betting-record",
+      "action": "page initialization",
+      "api_origin": "https://agency-fat.filbet2025.com",
+      "method": "POST",
+      "path": "/agency/record/bet",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "d",
+        "s",
+        "t",
+        "total_list"
+      ],
+      "response_list_length": null
+    },
+    {
+      "route": "/betting-record",
+      "action": "reset: reset",
+      "api_origin": "https://agency-fat.filbet2025.com",
+      "method": "POST",
+      "path": "/agency/record/bet",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "d",
+        "s",
+        "t",
+        "total_list"
+      ],
+      "response_list_length": null
+    },
+    {
+      "route": "/commission-report",
+      "action": "page initialization",
+      "api_origin": "https://agency-fat.filbet2025.com",
+      "method": "GET",
+      "path": "/agency/commission/report",
+      "query_fields": [
+        "end_time",
+        "page",
+        "page_size",
+        "start_time"
+      ],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "d",
+        "s",
+        "t"
+      ],
+      "response_list_length": null
+    },
+    {
+      "route": "/commission-report",
+      "action": "reset: reset",
+      "api_origin": "https://agency-fat.filbet2025.com",
+      "method": "GET",
+      "path": "/agency/commission/report",
+      "query_fields": [
+        "end_time",
+        "page",
+        "page_size",
+        "start_time"
+      ],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "d",
+        "s",
+        "t"
+      ],
+      "response_list_length": null
+    },
+    {
+      "route": "/commission-rule",
+      "action": "page initialization",
+      "api_origin": "https://agency-fat.filbet2025.com",
+      "method": "GET",
+      "path": "/agency/ladder",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "active_bet_amount",
+        "active_deposit_amount",
+        "setting"
+      ],
+      "response_list_length": null
+    },
+    {
+      "route": "/commission-rule",
+      "action": "tab: PAGCOR Tax Rate",
+      "api_origin": "https://agency-fat.filbet2025.com",
+      "method": "GET",
+      "path": "/agency/taxrate/list",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "list",
+      "response_data_keys": [],
+      "response_list_length": 7
+    },
+    {
+      "route": "/commission-rule",
+      "action": "tab: Vendor Rate",
+      "api_origin": "https://agency-fat.filbet2025.com",
+      "method": "GET",
+      "path": "/agency/vendorrate/list",
+      "query_fields": [],
+      "body_fields": [],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "list",
+      "response_data_keys": [],
+      "response_list_length": 36
+    }
+  ],
+  "fatal_error": ""
+}

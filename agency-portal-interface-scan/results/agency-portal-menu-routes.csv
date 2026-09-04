@@ -1,0 +1,6 @@
+order,top_menu,menu_path,page_name,route,route_source,permission_observation
+1,Data Overview,,Data Overview,/,bundle_candidate_plus_authenticated_path_controls_and_network_verified,"bundle navigation candidate accepted by authenticated path, controls and page Network"
+2,Member List,,Member List,/a-member-list,bundle_route_plus_rendered_exact_label,rendered exact menu label and authenticated route
+3,Betting Record,,Betting Record,/betting-record,bundle_candidate_plus_authenticated_path_controls_and_network_verified,"bundle navigation candidate accepted by authenticated path, controls and page Network"
+4,Commission Report,,Commission Report,/commission-report,bundle_route_plus_rendered_exact_label,rendered exact menu label and authenticated route
+5,Commission Rule,,Commission Rule,/commission-rule,bundle_candidate_plus_authenticated_path_controls_and_network_verified,"bundle navigation candidate accepted by authenticated path, controls and page Network"

@@ -1,0 +1,360 @@
+page_name,route,control_type,control,evidence
+Home,/home,inputs,"{""type"": ""input"", ""placeholder"": ""Year/Month/Day"", ""name"": """", ""disabled"": false}",rendered visible DOM
+Home,/home,inputs,"{""type"": ""input"", ""placeholder"": ""Year/Month/Day"", ""name"": """", ""disabled"": false}",rendered visible DOM
+Home,/home,buttons,"{""text"": """", ""title"": """", ""aria_label"": """", ""disabled"": false}",rendered visible DOM
+Home,/home,buttons,"{""text"": ""Search"", ""title"": """", ""aria_label"": """", ""disabled"": false}",rendered visible DOM
+Home,/home,buttons,"{""text"": ""Reset"", ""title"": """", ""aria_label"": """", ""disabled"": false}",rendered visible DOM
+Home,/home,buttons,"{""text"": ""Line Chart Mode"", ""title"": """", ""aria_label"": """", ""disabled"": false}",rendered visible DOM
+Home,/home,buttons,"{""text"": ""Bar Chart Mode"", ""title"": """", ""aria_label"": """", ""disabled"": false}",rendered visible DOM
+Home,/home,buttons,"{""text"": ""On\nClosed"", ""title"": """", ""aria_label"": """", ""disabled"": false}",rendered visible DOM
+Home,/home,tabs,"{""text"": ""Home"", ""selected"": """"}",rendered visible DOM
+Home,/home,tabs,"{""text"": ""Home"", ""selected"": ""true""}",rendered visible DOM
+Home,/home,links,"{""text"": ""Home"", ""href"": ""/home""}",rendered visible DOM
+Agent Review,/agent/agent-review,inputs,"{""type"": ""text"", ""placeholder"": ""Please enter"", ""name"": """", ""disabled"": false}",rendered visible DOM
+Agent Review,/agent/agent-review,inputs,"{""type"": ""input"", ""placeholder"": ""Start Date"", ""name"": """", ""disabled"": false}",rendered visible DOM
+Agent Review,/agent/agent-review,inputs,"{""type"": ""input"", ""placeholder"": ""End Date"", ""name"": """", ""disabled"": false}",rendered visible DOM
+Agent Review,/agent/agent-review,inputs,"{""type"": ""search"", ""placeholder"": """", ""name"": """", ""disabled"": false}",rendered visible DOM
+Agent Review,/agent/agent-review,inputs,"{""type"": ""search"", ""placeholder"": """", ""name"": """", ""disabled"": false}",rendered visible DOM
+Agent Review,/agent/agent-review,selects,"{""text"": ""Please select"", ""aria_label"": """"}",rendered visible DOM
+Agent Review,/agent/agent-review,selects,"{""text"": """", ""aria_label"": """"}",rendered visible DOM
+Agent Review,/agent/agent-review,selects,"{""text"": ""20 / page"", ""aria_label"": ""Page Size""}",rendered visible DOM
+Agent Review,/agent/agent-review,selects,"{""text"": """", ""aria_label"": ""Page Size""}",rendered visible DOM
+Agent Review,/agent/agent-review,buttons,"{""text"": """", ""title"": """", ""aria_label"": """", ""disabled"": false}",rendered visible DOM
+Agent Review,/agent/agent-review,buttons,"{""text"": ""Reset"", ""title"": """", ""aria_label"": """", ""disabled"": false}",rendered visible DOM
+Agent Review,/agent/agent-review,buttons,"{""text"": ""Query"", ""title"": """", ""aria_label"": """", ""disabled"": false}",rendered visible DOM
+Agent Review,/agent/agent-review,buttons,"{""text"": """", ""title"": """", ""aria_label"": """", ""disabled"": false}",rendered visible DOM
+Agent Review,/agent/agent-review,buttons,"{""text"": ""查看"", ""title"": """", ""aria_label"": """", ""disabled"": false}",rendered visible DOM
+Agent Review,/agent/agent-review,buttons,"{""text"": ""Approve"", ""title"": """", ""aria_label"": """", ""disabled"": true}",rendered visible DOM
+Agent Review,/agent/agent-review,buttons,"{""text"": ""Rejected"", ""title"": """", ""aria_label"": """", ""disabled"": true}",rendered visible DOM
+Agent Review,/agent/agent-review,buttons,"{""text"": """", ""title"": """", ""aria_label"": """", ""disabled"": true}",rendered visible DOM
+Agent Review,/agent/agent-review,buttons,"{""text"": """", ""title"": """", ""aria_label"": """", ""disabled"": true}",rendered visible DOM
+Agent Review,/agent/agent-review,tabs,"{""text"": ""Agent Review"", ""selected"": """"}",rendered visible DOM
+Agent Review,/agent/agent-review,tabs,"{""text"": ""Agent Review"", ""selected"": ""true""}",rendered visible DOM
+Agent Review,/agent/agent-review,pagination,"{""text"": """", ""title"": """", ""aria_label"": """"}",rendered visible DOM
+Agent Review,/agent/agent-review,pagination,"{""text"": ""1"", ""title"": """", ""aria_label"": """"}",rendered visible DOM
+Agent Review,/agent/agent-review,pagination,"{""text"": """", ""title"": """", ""aria_label"": """"}",rendered visible DOM
+Agent Review,/agent/agent-review,links,"{""text"": ""Home"", ""href"": ""/home""}",rendered visible DOM
+Agent Review,/agent/agent-review,links,"{""text"": ""Agent Review"", ""href"": ""/agent/agent-review""}",rendered visible DOM
+Agent Review,/agent/agent-review,links,"{""text"": ""Agent List"", ""href"": ""/agent/agent-list""}",rendered visible DOM
+Agent Review,/agent/agent-review,links,"{""text"": ""Member List"", ""href"": ""/agent/user-list""}",rendered visible DOM
+Agent Review,/agent/agent-review,links,"{""text"": ""Agent Settings"", ""href"": ""/agent/agent-setting""}",rendered visible DOM
+Agent Review,/agent/agent-review,links,"{""text"": ""Agent Domain"", ""href"": ""/agent/domain""}",rendered visible DOM
+Agent List,/agent/agent-list,inputs,"{""type"": ""text"", ""placeholder"": ""Please enter"", ""name"": """", ""disabled"": false}",rendered visible DOM
+Agent List,/agent/agent-list,inputs,"{""type"": ""search"", ""placeholder"": """", ""name"": """", ""disabled"": false}",rendered visible DOM
+Agent List,/agent/agent-list,inputs,"{""type"": ""search"", ""placeholder"": """", ""name"": """", ""disabled"": false}",rendered visible DOM
+Agent List,/agent/agent-list,inputs,"{""type"": ""input"", ""placeholder"": ""Start Date"", ""name"": """", ""disabled"": false}",rendered visible DOM
+Agent List,/agent/agent-list,inputs,"{""type"": ""input"", ""placeholder"": ""End Date"", ""name"": """", ""disabled"": false}",rendered visible DOM
+Agent List,/agent/agent-list,inputs,"{""type"": ""search"", ""placeholder"": """", ""name"": """", ""disabled"": false}",rendered visible DOM
+Agent List,/agent/agent-list,selects,"{""text"": ""Please select"", ""aria_label"": """"}",rendered visible DOM
+Agent List,/agent/agent-list,selects,"{""text"": """", ""aria_label"": """"}",rendered visible DOM
+Agent List,/agent/agent-list,selects,"{""text"": ""Please select"", ""aria_label"": """"}",rendered visible DOM
+Agent List,/agent/agent-list,selects,"{""text"": """", ""aria_label"": """"}",rendered visible DOM
+Agent List,/agent/agent-list,selects,"{""text"": ""20 / page"", ""aria_label"": ""Page Size""}",rendered visible DOM
+Agent List,/agent/agent-list,selects,"{""text"": """", ""aria_label"": ""Page Size""}",rendered visible DOM
+Agent List,/agent/agent-list,buttons,"{""text"": """", ""title"": """", ""aria_label"": """", ""disabled"": false}",rendered visible DOM
+Agent List,/agent/agent-list,buttons,"{""text"": ""Reset"", ""title"": """", ""aria_label"": """", ""disabled"": false}",rendered visible DOM
+Agent List,/agent/agent-list,buttons,"{""text"": ""Query"", ""title"": """", ""aria_label"": """", ""disabled"": false}",rendered visible DOM
+Agent List,/agent/agent-list,buttons,"{""text"": ""Balance Adjustment"", ""title"": """", ""aria_label"": """", ""disabled"": false}",rendered visible DOM
+Agent List,/agent/agent-list,buttons,"{""text"": ""Ban/Unban"", ""title"": """", ""aria_label"": """", ""disabled"": false}",rendered visible DOM
+Agent List,/agent/agent-list,buttons,"{""text"": ""Edit"", ""title"": """", ""aria_label"": """", ""disabled"": false}",rendered visible DOM
+Agent List,/agent/agent-list,buttons,"{""text"": """", ""title"": """", ""aria_label"": """", ""disabled"": true}",rendered visible DOM
+Agent List,/agent/agent-list,buttons,"{""text"": """", ""title"": """", ""aria_label"": """", ""disabled"": true}",rendered visible DOM
+Agent List,/agent/agent-list,tabs,"{""text"": ""Agent List"", ""selected"": """"}",rendered visible DOM
+Agent List,/agent/agent-list,tabs,"{""text"": ""Agent List"", ""selected"": ""true""}",rendered visible DOM
+Agent List,/agent/agent-list,pagination,"{""text"": """", ""title"": """", ""aria_label"": """"}",rendered visible DOM
+Agent List,/agent/agent-list,pagination,"{""text"": ""1"", ""title"": """", ""aria_label"": """"}",rendered visible DOM
+Agent List,/agent/agent-list,pagination,"{""text"": """", ""title"": """", ""aria_label"": """"}",rendered visible DOM
+Agent List,/agent/agent-list,links,"{""text"": ""Home"", ""href"": ""/home""}",rendered visible DOM
+Agent List,/agent/agent-list,links,"{""text"": ""Agent Review"", ""href"": ""/agent/agent-review""}",rendered visible DOM
+Agent List,/agent/agent-list,links,"{""text"": ""Agent List"", ""href"": ""/agent/agent-list""}",rendered visible DOM
+Agent List,/agent/agent-list,links,"{""text"": ""Member List"", ""href"": ""/agent/user-list""}",rendered visible DOM
+Agent List,/agent/agent-list,links,"{""text"": ""Agent Settings"", ""href"": ""/agent/agent-setting""}",rendered visible DOM
+Agent List,/agent/agent-list,links,"{""text"": ""Agent Domain"", ""href"": ""/agent/domain""}",rendered visible DOM
+Member List,/agent/user-list,inputs,"{""type"": ""text"", ""placeholder"": ""Please enter"", ""name"": """", ""disabled"": false}",rendered visible DOM
+Member List,/agent/user-list,inputs,"{""type"": ""text"", ""placeholder"": ""Please enter"", ""name"": """", ""disabled"": false}",rendered visible DOM
+Member List,/agent/user-list,inputs,"{""type"": ""input"", ""placeholder"": ""Start Date"", ""name"": """", ""disabled"": false}",rendered visible DOM
+Member List,/agent/user-list,inputs,"{""type"": ""input"", ""placeholder"": ""End Date"", ""name"": """", ""disabled"": false}",rendered visible DOM
+Member List,/agent/user-list,buttons,"{""text"": """", ""title"": """", ""aria_label"": """", ""disabled"": false}",rendered visible DOM
+Member List,/agent/user-list,buttons,"{""text"": ""Reset"", ""title"": """", ""aria_label"": """", ""disabled"": false}",rendered visible DOM
+Member List,/agent/user-list,buttons,"{""text"": ""Query"", ""title"": """", ""aria_label"": """", ""disabled"": false}",rendered visible DOM
+Member List,/agent/user-list,tabs,"{""text"": ""Member List"", ""selected"": """"}",rendered visible DOM
+Member List,/agent/user-list,tabs,"{""text"": ""Member List"", ""selected"": ""true""}",rendered visible DOM
+Member List,/agent/user-list,links,"{""text"": ""Home"", ""href"": ""/home""}",rendered visible DOM
+Member List,/agent/user-list,links,"{""text"": ""Agent Review"", ""href"": ""/agent/agent-review""}",rendered visible DOM
+Member List,/agent/user-list,links,"{""text"": ""Agent List"", ""href"": ""/agent/agent-list""}",rendered visible DOM
+Member List,/agent/user-list,links,"{""text"": ""Member List"", ""href"": ""/agent/user-list""}",rendered visible DOM
+Member List,/agent/user-list,links,"{""text"": ""Agent Settings"", ""href"": ""/agent/agent-setting""}",rendered visible DOM
+Member List,/agent/user-list,links,"{""text"": ""Agent Domain"", ""href"": ""/agent/domain""}",rendered visible DOM
+Agent Settings,/agent/agent-setting,inputs,"{""type"": ""search"", ""placeholder"": """", ""name"": """", ""disabled"": false}",rendered visible DOM
+Agent Settings,/agent/agent-setting,selects,"{""text"": ""20 / page"", ""aria_label"": ""Page Size""}",rendered visible DOM
+Agent Settings,/agent/agent-setting,selects,"{""text"": """", ""aria_label"": ""Page Size""}",rendered visible DOM
+Agent Settings,/agent/agent-setting,buttons,"{""text"": """", ""title"": """", ""aria_label"": """", ""disabled"": false}",rendered visible DOM
+Agent Settings,/agent/agent-setting,buttons,"{""text"": ""Add New"", ""title"": """", ""aria_label"": """", ""disabled"": false}",rendered visible DOM
+Agent Settings,/agent/agent-setting,buttons,"{""text"": ""Edit"", ""title"": """", ""aria_label"": """", ""disabled"": false}",rendered visible DOM
+Agent Settings,/agent/agent-setting,buttons,"{""text"": ""Delete"", ""title"": """", ""aria_label"": """", ""disabled"": false}",rendered visible DOM
+Agent Settings,/agent/agent-setting,buttons,"{""text"": ""Edit"", ""title"": """", ""aria_label"": """", ""disabled"": false}",rendered visible DOM
+Agent Settings,/agent/agent-setting,buttons,"{""text"": ""Delete"", ""title"": """", ""aria_label"": """", ""disabled"": false}",rendered visible DOM
+Agent Settings,/agent/agent-setting,buttons,"{""text"": ""Edit"", ""title"": """", ""aria_label"": """", ""disabled"": false}",rendered visible DOM
+Agent Settings,/agent/agent-setting,buttons,"{""text"": ""Delete"", ""title"": """", ""aria_label"": """", ""disabled"": false}",rendered visible DOM
+Agent Settings,/agent/agent-setting,buttons,"{""text"": """", ""title"": """", ""aria_label"": """", ""disabled"": true}",rendered visible DOM
+Agent Settings,/agent/agent-setting,buttons,"{""text"": """", ""title"": """", ""aria_label"": """", ""disabled"": true}",rendered visible DOM
+Agent Settings,/agent/agent-setting,tabs,"{""text"": ""Agent Settings"", ""selected"": """"}",rendered visible DOM
+Agent Settings,/agent/agent-setting,tabs,"{""text"": ""Agent Settings"", ""selected"": ""true""}",rendered visible DOM
+Agent Settings,/agent/agent-setting,tabs,"{""text"": ""Commission Tier Table"", ""selected"": """"}",rendered visible DOM
+Agent Settings,/agent/agent-setting,tabs,"{""text"": ""Commission Tier Table"", ""selected"": ""true""}",rendered visible DOM
+Agent Settings,/agent/agent-setting,tabs,"{""text"": ""Pagcor Tax Rate"", ""selected"": """"}",rendered visible DOM
+Agent Settings,/agent/agent-setting,tabs,"{""text"": ""Pagcor Tax Rate"", ""selected"": ""false""}",rendered visible DOM
+Agent Settings,/agent/agent-setting,tabs,"{""text"": ""Provider Fee Rate"", ""selected"": """"}",rendered visible DOM
+Agent Settings,/agent/agent-setting,tabs,"{""text"": ""Provider Fee Rate"", ""selected"": ""false""}",rendered visible DOM
+Agent Settings,/agent/agent-setting,tabs,"{""text"": ""Active User Definition"", ""selected"": """"}",rendered visible DOM
+Agent Settings,/agent/agent-setting,tabs,"{""text"": ""Active User Definition"", ""selected"": ""false""}",rendered visible DOM
+Agent Settings,/agent/agent-setting,tabs,"{""text"": ""Promotion Material"", ""selected"": """"}",rendered visible DOM
+Agent Settings,/agent/agent-setting,tabs,"{""text"": ""Promotion Material"", ""selected"": ""false""}",rendered visible DOM
+Agent Settings,/agent/agent-setting,tabs,"{""text"": ""代理开关"", ""selected"": """"}",rendered visible DOM
+Agent Settings,/agent/agent-setting,tabs,"{""text"": ""代理开关"", ""selected"": ""false""}",rendered visible DOM
+Agent Settings,/agent/agent-setting,pagination,"{""text"": """", ""title"": """", ""aria_label"": """"}",rendered visible DOM
+Agent Settings,/agent/agent-setting,pagination,"{""text"": ""1"", ""title"": """", ""aria_label"": """"}",rendered visible DOM
+Agent Settings,/agent/agent-setting,pagination,"{""text"": """", ""title"": """", ""aria_label"": """"}",rendered visible DOM
+Agent Settings,/agent/agent-setting,links,"{""text"": ""Home"", ""href"": ""/home""}",rendered visible DOM
+Agent Settings,/agent/agent-setting,links,"{""text"": ""Agent Review"", ""href"": ""/agent/agent-review""}",rendered visible DOM
+Agent Settings,/agent/agent-setting,links,"{""text"": ""Agent List"", ""href"": ""/agent/agent-list""}",rendered visible DOM
+Agent Settings,/agent/agent-setting,links,"{""text"": ""Member List"", ""href"": ""/agent/user-list""}",rendered visible DOM
+Agent Settings,/agent/agent-setting,links,"{""text"": ""Agent Settings"", ""href"": ""/agent/agent-setting""}",rendered visible DOM
+Agent Settings,/agent/agent-setting,links,"{""text"": ""Agent Domain"", ""href"": ""/agent/domain""}",rendered visible DOM
+Agent Domain,/agent/domain,inputs,"{""type"": ""search"", ""placeholder"": """", ""name"": """", ""disabled"": false}",rendered visible DOM
+Agent Domain,/agent/domain,inputs,"{""type"": ""text"", ""placeholder"": ""Search domain..."", ""name"": """", ""disabled"": false}",rendered visible DOM
+Agent Domain,/agent/domain,inputs,"{""type"": ""text"", ""placeholder"": ""Search agent..."", ""name"": """", ""disabled"": false}",rendered visible DOM
+Agent Domain,/agent/domain,inputs,"{""type"": ""search"", ""placeholder"": """", ""name"": """", ""disabled"": false}",rendered visible DOM
+Agent Domain,/agent/domain,inputs,"{""type"": ""search"", ""placeholder"": """", ""name"": """", ""disabled"": false}",rendered visible DOM
+Agent Domain,/agent/domain,selects,"{""text"": ""All"", ""aria_label"": """"}",rendered visible DOM
+Agent Domain,/agent/domain,selects,"{""text"": """", ""aria_label"": """"}",rendered visible DOM
+Agent Domain,/agent/domain,selects,"{""text"": ""All"", ""aria_label"": """"}",rendered visible DOM
+Agent Domain,/agent/domain,selects,"{""text"": """", ""aria_label"": """"}",rendered visible DOM
+Agent Domain,/agent/domain,selects,"{""text"": ""20 / page"", ""aria_label"": ""Page Size""}",rendered visible DOM
+Agent Domain,/agent/domain,selects,"{""text"": """", ""aria_label"": ""Page Size""}",rendered visible DOM
+Agent Domain,/agent/domain,buttons,"{""text"": """", ""title"": """", ""aria_label"": """", ""disabled"": false}",rendered visible DOM
+Agent Domain,/agent/domain,buttons,"{""text"": ""Reset"", ""title"": """", ""aria_label"": """", ""disabled"": false}",rendered visible DOM
+Agent Domain,/agent/domain,buttons,"{""text"": ""Query"", ""title"": """", ""aria_label"": """", ""disabled"": false}",rendered visible DOM
+Agent Domain,/agent/domain,buttons,"{""text"": ""Add"", ""title"": """", ""aria_label"": """", ""disabled"": false}",rendered visible DOM
+Agent Domain,/agent/domain,buttons,"{""text"": """", ""title"": """", ""aria_label"": ""Copy"", ""disabled"": false}",rendered visible DOM
+Agent Domain,/agent/domain,buttons,"{""text"": ""Enabled\nDisabled"", ""title"": """", ""aria_label"": """", ""disabled"": false}",rendered visible DOM
+Agent Domain,/agent/domain,buttons,"{""text"": ""Edit"", ""title"": """", ""aria_label"": """", ""disabled"": false}",rendered visible DOM
+Agent Domain,/agent/domain,buttons,"{""text"": ""Delete"", ""title"": """", ""aria_label"": """", ""disabled"": false}",rendered visible DOM
+Agent Domain,/agent/domain,buttons,"{""text"": """", ""title"": """", ""aria_label"": ""Copy"", ""disabled"": false}",rendered visible DOM
+Agent Domain,/agent/domain,buttons,"{""text"": ""Enabled\nDisabled"", ""title"": """", ""aria_label"": """", ""disabled"": false}",rendered visible DOM
+Agent Domain,/agent/domain,buttons,"{""text"": ""Edit"", ""title"": """", ""aria_label"": """", ""disabled"": false}",rendered visible DOM
+Agent Domain,/agent/domain,buttons,"{""text"": ""Delete"", ""title"": """", ""aria_label"": """", ""disabled"": false}",rendered visible DOM
+Agent Domain,/agent/domain,buttons,"{""text"": """", ""title"": """", ""aria_label"": ""Copy"", ""disabled"": false}",rendered visible DOM
+Agent Domain,/agent/domain,buttons,"{""text"": ""Enabled\nDisabled"", ""title"": """", ""aria_label"": """", ""disabled"": false}",rendered visible DOM
+Agent Domain,/agent/domain,buttons,"{""text"": ""Edit"", ""title"": """", ""aria_label"": """", ""disabled"": false}",rendered visible DOM
+Agent Domain,/agent/domain,buttons,"{""text"": ""Delete"", ""title"": """", ""aria_label"": """", ""disabled"": false}",rendered visible DOM
+Agent Domain,/agent/domain,buttons,"{""text"": """", ""title"": """", ""aria_label"": """", ""disabled"": true}",rendered visible DOM
+Agent Domain,/agent/domain,buttons,"{""text"": """", ""title"": """", ""aria_label"": """", ""disabled"": true}",rendered visible DOM
+Agent Domain,/agent/domain,tabs,"{""text"": ""Agent Domain"", ""selected"": """"}",rendered visible DOM
+Agent Domain,/agent/domain,tabs,"{""text"": ""Agent Domain"", ""selected"": ""true""}",rendered visible DOM
+Agent Domain,/agent/domain,pagination,"{""text"": """", ""title"": """", ""aria_label"": """"}",rendered visible DOM
+Agent Domain,/agent/domain,pagination,"{""text"": ""1"", ""title"": """", ""aria_label"": """"}",rendered visible DOM
+Agent Domain,/agent/domain,pagination,"{""text"": """", ""title"": """", ""aria_label"": """"}",rendered visible DOM
+Agent Domain,/agent/domain,links,"{""text"": ""Home"", ""href"": ""/home""}",rendered visible DOM
+Agent Domain,/agent/domain,links,"{""text"": ""Agent Review"", ""href"": ""/agent/agent-review""}",rendered visible DOM
+Agent Domain,/agent/domain,links,"{""text"": ""Agent List"", ""href"": ""/agent/agent-list""}",rendered visible DOM
+Agent Domain,/agent/domain,links,"{""text"": ""Member List"", ""href"": ""/agent/user-list""}",rendered visible DOM
+Agent Domain,/agent/domain,links,"{""text"": ""Agent Settings"", ""href"": ""/agent/agent-setting""}",rendered visible DOM
+Agent Domain,/agent/domain,links,"{""text"": ""Agent Domain"", ""href"": ""/agent/domain""}",rendered visible DOM
+Commission Review,/financial/commission-review,inputs,"{""type"": ""search"", ""placeholder"": """", ""name"": """", ""disabled"": false}",rendered visible DOM
+Commission Review,/financial/commission-review,inputs,"{""type"": ""input"", ""placeholder"": ""Start Date"", ""name"": """", ""disabled"": false}",rendered visible DOM
+Commission Review,/financial/commission-review,inputs,"{""type"": ""input"", ""placeholder"": ""End Date"", ""name"": """", ""disabled"": false}",rendered visible DOM
+Commission Review,/financial/commission-review,inputs,"{""type"": ""search"", ""placeholder"": """", ""name"": """", ""disabled"": false}",rendered visible DOM
+Commission Review,/financial/commission-review,inputs,"{""type"": ""text"", ""placeholder"": ""Please enter"", ""name"": """", ""disabled"": false}",rendered visible DOM
+Commission Review,/financial/commission-review,inputs,"{""type"": ""checkbox"", ""placeholder"": """", ""name"": """", ""disabled"": true}",rendered visible DOM
+Commission Review,/financial/commission-review,selects,"{""text"": ""Please select"", ""aria_label"": """"}",rendered visible DOM
+Commission Review,/financial/commission-review,selects,"{""text"": """", ""aria_label"": """"}",rendered visible DOM
+Commission Review,/financial/commission-review,selects,"{""text"": ""Please select"", ""aria_label"": """"}",rendered visible DOM
+Commission Review,/financial/commission-review,selects,"{""text"": """", ""aria_label"": """"}",rendered visible DOM
+Commission Review,/financial/commission-review,buttons,"{""text"": """", ""title"": """", ""aria_label"": """", ""disabled"": false}",rendered visible DOM
+Commission Review,/financial/commission-review,buttons,"{""text"": ""Reset"", ""title"": """", ""aria_label"": """", ""disabled"": false}",rendered visible DOM
+Commission Review,/financial/commission-review,buttons,"{""text"": ""Query"", ""title"": """", ""aria_label"": """", ""disabled"": false}",rendered visible DOM
+Commission Review,/financial/commission-review,buttons,"{""text"": ""Bulk Approve"", ""title"": """", ""aria_label"": """", ""disabled"": false}",rendered visible DOM
+Commission Review,/financial/commission-review,buttons,"{""text"": ""Bulk Reject"", ""title"": """", ""aria_label"": """", ""disabled"": false}",rendered visible DOM
+Commission Review,/financial/commission-review,tabs,"{""text"": ""Commission Review"", ""selected"": """"}",rendered visible DOM
+Commission Review,/financial/commission-review,tabs,"{""text"": ""Commission Review"", ""selected"": ""true""}",rendered visible DOM
+Commission Review,/financial/commission-review,links,"{""text"": ""Home"", ""href"": ""/home""}",rendered visible DOM
+Commission Review,/financial/commission-review,links,"{""text"": ""Commission Review"", ""href"": ""/financial/commission-review""}",rendered visible DOM
+Commission Review,/financial/commission-review,links,"{""text"": ""Commission Report"", ""href"": ""/financial/commission-list""}",rendered visible DOM
+Commission Review,/financial/commission-review,links,"{""text"": ""Financial Report"", ""href"": ""/financial/financial-statements""}",rendered visible DOM
+Commission Report,/financial/commission-list,inputs,"{""type"": ""search"", ""placeholder"": """", ""name"": """", ""disabled"": false}",rendered visible DOM
+Commission Report,/financial/commission-list,inputs,"{""type"": ""input"", ""placeholder"": ""Start Date"", ""name"": """", ""disabled"": false}",rendered visible DOM
+Commission Report,/financial/commission-list,inputs,"{""type"": ""input"", ""placeholder"": ""End Date"", ""name"": """", ""disabled"": false}",rendered visible DOM
+Commission Report,/financial/commission-list,inputs,"{""type"": ""search"", ""placeholder"": """", ""name"": """", ""disabled"": false}",rendered visible DOM
+Commission Report,/financial/commission-list,inputs,"{""type"": ""text"", ""placeholder"": ""Please enter"", ""name"": """", ""disabled"": false}",rendered visible DOM
+Commission Report,/financial/commission-list,inputs,"{""type"": ""search"", ""placeholder"": """", ""name"": """", ""disabled"": false}",rendered visible DOM
+Commission Report,/financial/commission-list,inputs,"{""type"": ""search"", ""placeholder"": """", ""name"": """", ""disabled"": false}",rendered visible DOM
+Commission Report,/financial/commission-list,selects,"{""text"": ""Please select"", ""aria_label"": """"}",rendered visible DOM
+Commission Report,/financial/commission-list,selects,"{""text"": """", ""aria_label"": """"}",rendered visible DOM
+Commission Report,/financial/commission-list,selects,"{""text"": ""Please select"", ""aria_label"": """"}",rendered visible DOM
+Commission Report,/financial/commission-list,selects,"{""text"": """", ""aria_label"": """"}",rendered visible DOM
+Commission Report,/financial/commission-list,selects,"{""text"": ""Please select"", ""aria_label"": """"}",rendered visible DOM
+Commission Report,/financial/commission-list,selects,"{""text"": """", ""aria_label"": """"}",rendered visible DOM
+Commission Report,/financial/commission-list,selects,"{""text"": ""Please select"", ""aria_label"": """"}",rendered visible DOM
+Commission Report,/financial/commission-list,selects,"{""text"": """", ""aria_label"": """"}",rendered visible DOM
+Commission Report,/financial/commission-list,buttons,"{""text"": """", ""title"": """", ""aria_label"": """", ""disabled"": false}",rendered visible DOM
+Commission Report,/financial/commission-list,buttons,"{""text"": ""Reset"", ""title"": """", ""aria_label"": """", ""disabled"": false}",rendered visible DOM
+Commission Report,/financial/commission-list,buttons,"{""text"": ""Query"", ""title"": """", ""aria_label"": """", ""disabled"": false}",rendered visible DOM
+Commission Report,/financial/commission-list,buttons,"{""text"": ""Export"", ""title"": """", ""aria_label"": """", ""disabled"": false}",rendered visible DOM
+Commission Report,/financial/commission-list,tabs,"{""text"": ""Commission Report"", ""selected"": """"}",rendered visible DOM
+Commission Report,/financial/commission-list,tabs,"{""text"": ""Commission Report"", ""selected"": ""true""}",rendered visible DOM
+Commission Report,/financial/commission-list,links,"{""text"": ""Home"", ""href"": ""/home""}",rendered visible DOM
+Commission Report,/financial/commission-list,links,"{""text"": ""Commission Review"", ""href"": ""/financial/commission-review""}",rendered visible DOM
+Commission Report,/financial/commission-list,links,"{""text"": ""Commission Report"", ""href"": ""/financial/commission-list""}",rendered visible DOM
+Commission Report,/financial/commission-list,links,"{""text"": ""Financial Report"", ""href"": ""/financial/financial-statements""}",rendered visible DOM
+Financial Report,/financial/financial-statements,inputs,"{""type"": ""input"", ""placeholder"": ""Start Date"", ""name"": """", ""disabled"": false}",rendered visible DOM
+Financial Report,/financial/financial-statements,inputs,"{""type"": ""input"", ""placeholder"": ""End Date"", ""name"": """", ""disabled"": false}",rendered visible DOM
+Financial Report,/financial/financial-statements,buttons,"{""text"": """", ""title"": """", ""aria_label"": """", ""disabled"": false}",rendered visible DOM
+Financial Report,/financial/financial-statements,buttons,"{""text"": ""Reset"", ""title"": """", ""aria_label"": """", ""disabled"": false}",rendered visible DOM
+Financial Report,/financial/financial-statements,buttons,"{""text"": ""Query"", ""title"": """", ""aria_label"": """", ""disabled"": false}",rendered visible DOM
+Financial Report,/financial/financial-statements,tabs,"{""text"": ""Financial Report"", ""selected"": """"}",rendered visible DOM
+Financial Report,/financial/financial-statements,tabs,"{""text"": ""Financial Report"", ""selected"": ""true""}",rendered visible DOM
+Financial Report,/financial/financial-statements,tabs,"{""text"": ""Commission Distribution"", ""selected"": """"}",rendered visible DOM
+Financial Report,/financial/financial-statements,tabs,"{""text"": ""Commission Distribution"", ""selected"": ""true""}",rendered visible DOM
+Financial Report,/financial/financial-statements,links,"{""text"": ""Home"", ""href"": ""/home""}",rendered visible DOM
+Financial Report,/financial/financial-statements,links,"{""text"": ""Commission Review"", ""href"": ""/financial/commission-review""}",rendered visible DOM
+Financial Report,/financial/financial-statements,links,"{""text"": ""Commission Report"", ""href"": ""/financial/commission-list""}",rendered visible DOM
+Financial Report,/financial/financial-statements,links,"{""text"": ""Financial Report"", ""href"": ""/financial/financial-statements""}",rendered visible DOM
+Role Configuration,/system/role,inputs,"{""type"": ""search"", ""placeholder"": """", ""name"": """", ""disabled"": false}",rendered visible DOM
+Role Configuration,/system/role,selects,"{""text"": ""20 / page"", ""aria_label"": ""Page Size""}",rendered visible DOM
+Role Configuration,/system/role,selects,"{""text"": """", ""aria_label"": ""Page Size""}",rendered visible DOM
+Role Configuration,/system/role,buttons,"{""text"": """", ""title"": """", ""aria_label"": """", ""disabled"": false}",rendered visible DOM
+Role Configuration,/system/role,buttons,"{""text"": ""Add New"", ""title"": """", ""aria_label"": """", ""disabled"": false}",rendered visible DOM
+Role Configuration,/system/role,buttons,"{""text"": ""Edit"", ""title"": """", ""aria_label"": """", ""disabled"": false}",rendered visible DOM
+Role Configuration,/system/role,buttons,"{""text"": ""Permissions"", ""title"": """", ""aria_label"": """", ""disabled"": false}",rendered visible DOM
+Role Configuration,/system/role,buttons,"{""text"": ""Edit"", ""title"": """", ""aria_label"": """", ""disabled"": false}",rendered visible DOM
+Role Configuration,/system/role,buttons,"{""text"": ""Permissions"", ""title"": """", ""aria_label"": """", ""disabled"": false}",rendered visible DOM
+Role Configuration,/system/role,buttons,"{""text"": ""Edit"", ""title"": """", ""aria_label"": """", ""disabled"": false}",rendered visible DOM
+Role Configuration,/system/role,buttons,"{""text"": ""Permissions"", ""title"": """", ""aria_label"": """", ""disabled"": false}",rendered visible DOM
+Role Configuration,/system/role,buttons,"{""text"": ""Edit"", ""title"": """", ""aria_label"": """", ""disabled"": false}",rendered visible DOM
+Role Configuration,/system/role,buttons,"{""text"": ""Permissions"", ""title"": """", ""aria_label"": """", ""disabled"": false}",rendered visible DOM
+Role Configuration,/system/role,buttons,"{""text"": ""Edit"", ""title"": """", ""aria_label"": """", ""disabled"": false}",rendered visible DOM
+Role Configuration,/system/role,buttons,"{""text"": ""Permissions"", ""title"": """", ""aria_label"": """", ""disabled"": false}",rendered visible DOM
+Role Configuration,/system/role,buttons,"{""text"": ""Edit"", ""title"": """", ""aria_label"": """", ""disabled"": false}",rendered visible DOM
+Role Configuration,/system/role,buttons,"{""text"": ""Permissions"", ""title"": """", ""aria_label"": """", ""disabled"": false}",rendered visible DOM
+Role Configuration,/system/role,buttons,"{""text"": ""Edit"", ""title"": """", ""aria_label"": """", ""disabled"": false}",rendered visible DOM
+Role Configuration,/system/role,buttons,"{""text"": ""Permissions"", ""title"": """", ""aria_label"": """", ""disabled"": false}",rendered visible DOM
+Role Configuration,/system/role,buttons,"{""text"": ""Edit"", ""title"": """", ""aria_label"": """", ""disabled"": false}",rendered visible DOM
+Role Configuration,/system/role,buttons,"{""text"": ""Permissions"", ""title"": """", ""aria_label"": """", ""disabled"": false}",rendered visible DOM
+Role Configuration,/system/role,buttons,"{""text"": """", ""title"": """", ""aria_label"": """", ""disabled"": true}",rendered visible DOM
+Role Configuration,/system/role,buttons,"{""text"": """", ""title"": """", ""aria_label"": """", ""disabled"": true}",rendered visible DOM
+Role Configuration,/system/role,tabs,"{""text"": ""Role Configuration"", ""selected"": """"}",rendered visible DOM
+Role Configuration,/system/role,tabs,"{""text"": ""Role Configuration"", ""selected"": ""true""}",rendered visible DOM
+Role Configuration,/system/role,pagination,"{""text"": """", ""title"": """", ""aria_label"": """"}",rendered visible DOM
+Role Configuration,/system/role,pagination,"{""text"": ""1"", ""title"": """", ""aria_label"": """"}",rendered visible DOM
+Role Configuration,/system/role,pagination,"{""text"": """", ""title"": """", ""aria_label"": """"}",rendered visible DOM
+Role Configuration,/system/role,links,"{""text"": ""Home"", ""href"": ""/home""}",rendered visible DOM
+Role Configuration,/system/role,links,"{""text"": ""Role Configuration"", ""href"": ""/system/role""}",rendered visible DOM
+Role Configuration,/system/role,links,"{""text"": ""Staff Configuration"", ""href"": ""/system/staff""}",rendered visible DOM
+Staff Configuration,/system/staff,inputs,"{""type"": ""text"", ""placeholder"": ""Please Enter Username"", ""name"": """", ""disabled"": false}",rendered visible DOM
+Staff Configuration,/system/staff,inputs,"{""type"": ""search"", ""placeholder"": """", ""name"": """", ""disabled"": false}",rendered visible DOM
+Staff Configuration,/system/staff,inputs,"{""type"": ""search"", ""placeholder"": """", ""name"": """", ""disabled"": false}",rendered visible DOM
+Staff Configuration,/system/staff,inputs,"{""type"": ""search"", ""placeholder"": """", ""name"": """", ""disabled"": false}",rendered visible DOM
+Staff Configuration,/system/staff,inputs,"{""type"": ""text"", ""placeholder"": """", ""name"": """", ""disabled"": false}",rendered visible DOM
+Staff Configuration,/system/staff,selects,"{""text"": ""Please select"", ""aria_label"": """"}",rendered visible DOM
+Staff Configuration,/system/staff,selects,"{""text"": """", ""aria_label"": """"}",rendered visible DOM
+Staff Configuration,/system/staff,selects,"{""text"": ""Please select"", ""aria_label"": """"}",rendered visible DOM
+Staff Configuration,/system/staff,selects,"{""text"": """", ""aria_label"": """"}",rendered visible DOM
+Staff Configuration,/system/staff,selects,"{""text"": ""20 / page"", ""aria_label"": ""Page Size""}",rendered visible DOM
+Staff Configuration,/system/staff,selects,"{""text"": """", ""aria_label"": ""Page Size""}",rendered visible DOM
+Staff Configuration,/system/staff,buttons,"{""text"": """", ""title"": """", ""aria_label"": """", ""disabled"": false}",rendered visible DOM
+Staff Configuration,/system/staff,buttons,"{""text"": ""Reset"", ""title"": """", ""aria_label"": """", ""disabled"": false}",rendered visible DOM
+Staff Configuration,/system/staff,buttons,"{""text"": ""Query"", ""title"": """", ""aria_label"": """", ""disabled"": false}",rendered visible DOM
+Staff Configuration,/system/staff,buttons,"{""text"": ""Add Staff"", ""title"": """", ""aria_label"": """", ""disabled"": false}",rendered visible DOM
+Staff Configuration,/system/staff,buttons,"{""text"": ""Edit"", ""title"": """", ""aria_label"": """", ""disabled"": false}",rendered visible DOM
+Staff Configuration,/system/staff,buttons,"{""text"": ""Disable"", ""title"": """", ""aria_label"": """", ""disabled"": false}",rendered visible DOM
+Staff Configuration,/system/staff,buttons,"{""text"": ""Reset Password"", ""title"": """", ""aria_label"": """", ""disabled"": false}",rendered visible DOM
+Staff Configuration,/system/staff,buttons,"{""text"": ""Reset Google Verification Code"", ""title"": """", ""aria_label"": """", ""disabled"": false}",rendered visible DOM
+Staff Configuration,/system/staff,buttons,"{""text"": ""Edit"", ""title"": """", ""aria_label"": """", ""disabled"": false}",rendered visible DOM
+Staff Configuration,/system/staff,buttons,"{""text"": ""Disable"", ""title"": """", ""aria_label"": """", ""disabled"": false}",rendered visible DOM
+Staff Configuration,/system/staff,buttons,"{""text"": ""Reset Password"", ""title"": """", ""aria_label"": """", ""disabled"": false}",rendered visible DOM
+Staff Configuration,/system/staff,buttons,"{""text"": ""Reset Google Verification Code"", ""title"": """", ""aria_label"": """", ""disabled"": false}",rendered visible DOM
+Staff Configuration,/system/staff,buttons,"{""text"": ""Edit"", ""title"": """", ""aria_label"": """", ""disabled"": false}",rendered visible DOM
+Staff Configuration,/system/staff,buttons,"{""text"": ""Disable"", ""title"": """", ""aria_label"": """", ""disabled"": false}",rendered visible DOM
+Staff Configuration,/system/staff,buttons,"{""text"": ""Reset Password"", ""title"": """", ""aria_label"": """", ""disabled"": false}",rendered visible DOM
+Staff Configuration,/system/staff,buttons,"{""text"": ""Reset Google Verification Code"", ""title"": """", ""aria_label"": """", ""disabled"": false}",rendered visible DOM
+Staff Configuration,/system/staff,buttons,"{""text"": ""Edit"", ""title"": """", ""aria_label"": """", ""disabled"": false}",rendered visible DOM
+Staff Configuration,/system/staff,buttons,"{""text"": ""Disable"", ""title"": """", ""aria_label"": """", ""disabled"": false}",rendered visible DOM
+Staff Configuration,/system/staff,buttons,"{""text"": ""Reset Password"", ""title"": """", ""aria_label"": """", ""disabled"": false}",rendered visible DOM
+Staff Configuration,/system/staff,buttons,"{""text"": ""Reset Google Verification Code"", ""title"": """", ""aria_label"": """", ""disabled"": true}",rendered visible DOM
+Staff Configuration,/system/staff,buttons,"{""text"": ""Edit"", ""title"": """", ""aria_label"": """", ""disabled"": false}",rendered visible DOM
+Staff Configuration,/system/staff,buttons,"{""text"": ""Disable"", ""title"": """", ""aria_label"": """", ""disabled"": false}",rendered visible DOM
+Staff Configuration,/system/staff,buttons,"{""text"": ""Reset Password"", ""title"": """", ""aria_label"": """", ""disabled"": false}",rendered visible DOM
+Staff Configuration,/system/staff,buttons,"{""text"": ""Reset Google Verification Code"", ""title"": """", ""aria_label"": """", ""disabled"": true}",rendered visible DOM
+Staff Configuration,/system/staff,buttons,"{""text"": ""Edit"", ""title"": """", ""aria_label"": """", ""disabled"": false}",rendered visible DOM
+Staff Configuration,/system/staff,buttons,"{""text"": ""Disable"", ""title"": """", ""aria_label"": """", ""disabled"": false}",rendered visible DOM
+Staff Configuration,/system/staff,buttons,"{""text"": ""Reset Password"", ""title"": """", ""aria_label"": """", ""disabled"": false}",rendered visible DOM
+Staff Configuration,/system/staff,buttons,"{""text"": ""Reset Google Verification Code"", ""title"": """", ""aria_label"": """", ""disabled"": false}",rendered visible DOM
+Staff Configuration,/system/staff,buttons,"{""text"": ""Edit"", ""title"": """", ""aria_label"": """", ""disabled"": false}",rendered visible DOM
+Staff Configuration,/system/staff,buttons,"{""text"": ""Disable"", ""title"": """", ""aria_label"": """", ""disabled"": false}",rendered visible DOM
+Staff Configuration,/system/staff,buttons,"{""text"": ""Reset Password"", ""title"": """", ""aria_label"": """", ""disabled"": false}",rendered visible DOM
+Staff Configuration,/system/staff,buttons,"{""text"": ""Reset Google Verification Code"", ""title"": """", ""aria_label"": """", ""disabled"": false}",rendered visible DOM
+Staff Configuration,/system/staff,buttons,"{""text"": ""Edit"", ""title"": """", ""aria_label"": """", ""disabled"": false}",rendered visible DOM
+Staff Configuration,/system/staff,buttons,"{""text"": ""Disable"", ""title"": """", ""aria_label"": """", ""disabled"": false}",rendered visible DOM
+Staff Configuration,/system/staff,buttons,"{""text"": ""Reset Password"", ""title"": """", ""aria_label"": """", ""disabled"": false}",rendered visible DOM
+Staff Configuration,/system/staff,buttons,"{""text"": ""Reset Google Verification Code"", ""title"": """", ""aria_label"": """", ""disabled"": false}",rendered visible DOM
+Staff Configuration,/system/staff,buttons,"{""text"": ""Edit"", ""title"": """", ""aria_label"": """", ""disabled"": false}",rendered visible DOM
+Staff Configuration,/system/staff,buttons,"{""text"": ""Disable"", ""title"": """", ""aria_label"": """", ""disabled"": false}",rendered visible DOM
+Staff Configuration,/system/staff,buttons,"{""text"": ""Reset Password"", ""title"": """", ""aria_label"": """", ""disabled"": false}",rendered visible DOM
+Staff Configuration,/system/staff,buttons,"{""text"": ""Reset Google Verification Code"", ""title"": """", ""aria_label"": """", ""disabled"": false}",rendered visible DOM
+Staff Configuration,/system/staff,buttons,"{""text"": ""Edit"", ""title"": """", ""aria_label"": """", ""disabled"": false}",rendered visible DOM
+Staff Configuration,/system/staff,buttons,"{""text"": ""Disable"", ""title"": """", ""aria_label"": """", ""disabled"": false}",rendered visible DOM
+Staff Configuration,/system/staff,buttons,"{""text"": ""Reset Password"", ""title"": """", ""aria_label"": """", ""disabled"": false}",rendered visible DOM
+Staff Configuration,/system/staff,buttons,"{""text"": ""Reset Google Verification Code"", ""title"": """", ""aria_label"": """", ""disabled"": false}",rendered visible DOM
+Staff Configuration,/system/staff,buttons,"{""text"": ""Edit"", ""title"": """", ""aria_label"": """", ""disabled"": false}",rendered visible DOM
+Staff Configuration,/system/staff,buttons,"{""text"": ""Disable"", ""title"": """", ""aria_label"": """", ""disabled"": false}",rendered visible DOM
+Staff Configuration,/system/staff,buttons,"{""text"": ""Reset Password"", ""title"": """", ""aria_label"": """", ""disabled"": false}",rendered visible DOM
+Staff Configuration,/system/staff,buttons,"{""text"": ""Reset Google Verification Code"", ""title"": """", ""aria_label"": """", ""disabled"": false}",rendered visible DOM
+Staff Configuration,/system/staff,buttons,"{""text"": ""Edit"", ""title"": """", ""aria_label"": """", ""disabled"": false}",rendered visible DOM
+Staff Configuration,/system/staff,buttons,"{""text"": ""Disable"", ""title"": """", ""aria_label"": """", ""disabled"": false}",rendered visible DOM
+Staff Configuration,/system/staff,buttons,"{""text"": ""Reset Password"", ""title"": """", ""aria_label"": """", ""disabled"": false}",rendered visible DOM
+Staff Configuration,/system/staff,buttons,"{""text"": ""Reset Google Verification Code"", ""title"": """", ""aria_label"": """", ""disabled"": false}",rendered visible DOM
+Staff Configuration,/system/staff,buttons,"{""text"": ""Edit"", ""title"": """", ""aria_label"": """", ""disabled"": false}",rendered visible DOM
+Staff Configuration,/system/staff,buttons,"{""text"": ""Disable"", ""title"": """", ""aria_label"": """", ""disabled"": false}",rendered visible DOM
+Staff Configuration,/system/staff,buttons,"{""text"": ""Reset Password"", ""title"": """", ""aria_label"": """", ""disabled"": false}",rendered visible DOM
+Staff Configuration,/system/staff,buttons,"{""text"": ""Reset Google Verification Code"", ""title"": """", ""aria_label"": """", ""disabled"": false}",rendered visible DOM
+Staff Configuration,/system/staff,buttons,"{""text"": ""Edit"", ""title"": """", ""aria_label"": """", ""disabled"": false}",rendered visible DOM
+Staff Configuration,/system/staff,buttons,"{""text"": ""Disable"", ""title"": """", ""aria_label"": """", ""disabled"": false}",rendered visible DOM
+Staff Configuration,/system/staff,buttons,"{""text"": ""Reset Password"", ""title"": """", ""aria_label"": """", ""disabled"": false}",rendered visible DOM
+Staff Configuration,/system/staff,buttons,"{""text"": ""Reset Google Verification Code"", ""title"": """", ""aria_label"": """", ""disabled"": true}",rendered visible DOM
+Staff Configuration,/system/staff,buttons,"{""text"": ""Edit"", ""title"": """", ""aria_label"": """", ""disabled"": false}",rendered visible DOM
+Staff Configuration,/system/staff,buttons,"{""text"": ""Disable"", ""title"": """", ""aria_label"": """", ""disabled"": false}",rendered visible DOM
+Staff Configuration,/system/staff,buttons,"{""text"": ""Reset Password"", ""title"": """", ""aria_label"": """", ""disabled"": false}",rendered visible DOM
+Staff Configuration,/system/staff,buttons,"{""text"": ""Reset Google Verification Code"", ""title"": """", ""aria_label"": """", ""disabled"": false}",rendered visible DOM
+Staff Configuration,/system/staff,buttons,"{""text"": ""Edit"", ""title"": """", ""aria_label"": """", ""disabled"": false}",rendered visible DOM
+Staff Configuration,/system/staff,buttons,"{""text"": ""Disable"", ""title"": """", ""aria_label"": """", ""disabled"": false}",rendered visible DOM
+Staff Configuration,/system/staff,buttons,"{""text"": ""Reset Password"", ""title"": """", ""aria_label"": """", ""disabled"": false}",rendered visible DOM
+Staff Configuration,/system/staff,buttons,"{""text"": ""Reset Google Verification Code"", ""title"": """", ""aria_label"": """", ""disabled"": false}",rendered visible DOM
+Staff Configuration,/system/staff,buttons,"{""text"": ""Edit"", ""title"": """", ""aria_label"": """", ""disabled"": false}",rendered visible DOM
+Staff Configuration,/system/staff,buttons,"{""text"": ""Disable"", ""title"": """", ""aria_label"": """", ""disabled"": false}",rendered visible DOM
+Staff Configuration,/system/staff,buttons,"{""text"": ""Reset Password"", ""title"": """", ""aria_label"": """", ""disabled"": false}",rendered visible DOM
+Staff Configuration,/system/staff,buttons,"{""text"": ""Reset Google Verification Code"", ""title"": """", ""aria_label"": """", ""disabled"": false}",rendered visible DOM
+Staff Configuration,/system/staff,buttons,"{""text"": ""Edit"", ""title"": """", ""aria_label"": """", ""disabled"": false}",rendered visible DOM
+Staff Configuration,/system/staff,buttons,"{""text"": ""Disable"", ""title"": """", ""aria_label"": """", ""disabled"": false}",rendered visible DOM
+Staff Configuration,/system/staff,buttons,"{""text"": ""Reset Password"", ""title"": """", ""aria_label"": """", ""disabled"": false}",rendered visible DOM
+Staff Configuration,/system/staff,buttons,"{""text"": ""Reset Google Verification Code"", ""title"": """", ""aria_label"": """", ""disabled"": false}",rendered visible DOM
+Staff Configuration,/system/staff,buttons,"{""text"": ""Edit"", ""title"": """", ""aria_label"": """", ""disabled"": false}",rendered visible DOM
+Staff Configuration,/system/staff,buttons,"{""text"": ""Disable"", ""title"": """", ""aria_label"": """", ""disabled"": false}",rendered visible DOM
+Staff Configuration,/system/staff,buttons,"{""text"": ""Reset Password"", ""title"": """", ""aria_label"": """", ""disabled"": false}",rendered visible DOM
+Staff Configuration,/system/staff,buttons,"{""text"": ""Reset Google Verification Code"", ""title"": """", ""aria_label"": """", ""disabled"": false}",rendered visible DOM
+Staff Configuration,/system/staff,buttons,"{""text"": ""Edit"", ""title"": """", ""aria_label"": """", ""disabled"": false}",rendered visible DOM
+Staff Configuration,/system/staff,buttons,"{""text"": ""Disable"", ""title"": """", ""aria_label"": """", ""disabled"": false}",rendered visible DOM
+Staff Configuration,/system/staff,buttons,"{""text"": ""Reset Password"", ""title"": """", ""aria_label"": """", ""disabled"": false}",rendered visible DOM
+Staff Configuration,/system/staff,buttons,"{""text"": ""Reset Google Verification Code"", ""title"": """", ""aria_label"": """", ""disabled"": false}",rendered visible DOM
+Staff Configuration,/system/staff,buttons,"{""text"": """", ""title"": """", ""aria_label"": """", ""disabled"": true}",rendered visible DOM
+Staff Configuration,/system/staff,buttons,"{""text"": """", ""title"": """", ""aria_label"": """", ""disabled"": false}",rendered visible DOM
+Staff Configuration,/system/staff,tabs,"{""text"": ""Staff Configuration"", ""selected"": """"}",rendered visible DOM
+Staff Configuration,/system/staff,tabs,"{""text"": ""Staff Configuration"", ""selected"": ""true""}",rendered visible DOM
+Staff Configuration,/system/staff,pagination,"{""text"": """", ""title"": """", ""aria_label"": """"}",rendered visible DOM
+Staff Configuration,/system/staff,pagination,"{""text"": ""1"", ""title"": """", ""aria_label"": """"}",rendered visible DOM
+Staff Configuration,/system/staff,pagination,"{""text"": ""2"", ""title"": """", ""aria_label"": """"}",rendered visible DOM
+Staff Configuration,/system/staff,pagination,"{""text"": ""3"", ""title"": """", ""aria_label"": """"}",rendered visible DOM
+Staff Configuration,/system/staff,pagination,"{""text"": """", ""title"": """", ""aria_label"": """"}",rendered visible DOM
+Staff Configuration,/system/staff,links,"{""text"": ""Home"", ""href"": ""/home""}",rendered visible DOM
+Staff Configuration,/system/staff,links,"{""text"": ""Role Configuration"", ""href"": ""/system/role""}",rendered visible DOM
+Staff Configuration,/system/staff,links,"{""text"": ""Staff Configuration"", ""href"": ""/system/staff""}",rendered visible DOM

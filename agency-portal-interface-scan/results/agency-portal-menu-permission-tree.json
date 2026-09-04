@@ -1,0 +1,52 @@
+{
+  "source": "public bundle navigation definitions cross-checked by authenticated exact labels where available, actual pathname and page Network",
+  "account_data": "not retained",
+  "tree": [
+    {
+      "order": 1,
+      "top_menu": "Data Overview",
+      "menu_path": "",
+      "page_name": "Data Overview",
+      "route": "/",
+      "route_source": "bundle_candidate_plus_authenticated_path_controls_and_network_verified",
+      "permission_observation": "bundle navigation candidate accepted by authenticated path, controls and page Network"
+    },
+    {
+      "order": 2,
+      "top_menu": "Member List",
+      "menu_path": "",
+      "page_name": "Member List",
+      "route": "/a-member-list",
+      "route_source": "bundle_route_plus_rendered_exact_label",
+      "permission_observation": "rendered exact menu label and authenticated route"
+    },
+    {
+      "order": 3,
+      "top_menu": "Betting Record",
+      "menu_path": "",
+      "page_name": "Betting Record",
+      "route": "/betting-record",
+      "route_source": "bundle_candidate_plus_authenticated_path_controls_and_network_verified",
+      "permission_observation": "bundle navigation candidate accepted by authenticated path, controls and page Network"
+    },
+    {
+      "order": 4,
+      "top_menu": "Commission Report",
+      "menu_path": "",
+      "page_name": "Commission Report",
+      "route": "/commission-report",
+      "route_source": "bundle_route_plus_rendered_exact_label",
+      "permission_observation": "rendered exact menu label and authenticated route"
+    },
+    {
+      "order": 5,
+      "top_menu": "Commission Rule",
+      "menu_path": "",
+      "page_name": "Commission Rule",
+      "route": "/commission-rule",
+      "route_source": "bundle_candidate_plus_authenticated_path_controls_and_network_verified",
+      "permission_observation": "bundle navigation candidate accepted by authenticated path, controls and page Network"
+    }
+  ],
+  "limitation": "Only this account current authenticated route surface is asserted; routes not present are not classified STALE."
+}

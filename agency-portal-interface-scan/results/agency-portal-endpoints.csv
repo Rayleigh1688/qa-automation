@@ -1,0 +1,12 @@
+method,path,classification,success_events,failed_events,routes,actions,query_fields,body_fields,response_shapes,documented_source,note
+GET,/agency/commission/report,ACTIVE,2,0,/commission-report,page initialization | reset: reset,"end_time,page,page_size,start_time",,"object:d,s,t",代理后台/佣金管理/佣金列表.bru,
+GET,/agency/ladder,ACTIVE,1,0,/commission-rule,page initialization,,,"object:active_bet_amount,active_deposit_amount,setting",代理后台/规则设置/查询佣金阶梯.bru,
+GET,/agency/member/list,ACTIVE,2,0,/a-member-list,page initialization | reset: reset,"end_time,page,page_size,start_time",,"object:d,s,t",代理后台/会员列表/会员列表 copy.bru | 代理后台/会员列表/会员列表.bru,
+GET,/agency/platform/list,ACTIVE,1,0,/betting-record,page initialization,"page,page_size",,list:,代理后台/厂商列表.bru,
+GET,/agency/profile,ACTIVE,5,0,/ | login,page initialization | query: query | submit code login,"end_time,start_time",,"object:invite_code,invite_img,invite_link,last_login_addr,last_login_at,last_login_device,last_login_ip,phone,real_username,settle_type,stat,uid,username",代理后台/首页看板.bru,
+GET,/agency/taxrate/list,ACTIVE,1,0,/commission-rule,tab: PAGCOR Tax Rate,,,list:,代理后台/规则设置/Pagcor 税率列表.bru,
+GET,/agency/vendorrate/list,ACTIVE,1,0,/commission-rule,tab: Vendor Rate,,,list:,代理后台/规则设置/厂商费率列表.bru,
+POST,/agency/otp/login,ACTIVE,1,0,login,submit code login,,,string:,代理后台/登陆/otp登陆-wesley.bru,
+POST,/agency/record/bet,ACTIVE,3,0,/betting-record,page initialization | reset: reset,,,"object:d,s,t,total_list",代理后台/投注记录.bru,
+POST,/member/auth/sms,ACTIVE,1,0,login,submit code login,,,string:,代理后台/登陆/短信验证码前置检查-wesley.bru,
+POST,/member/sms,ACTIVE,1,0,login,request login code,,,"object:code_length,id,resend_at",代理后台/登陆/短信发送-wesley.bru,

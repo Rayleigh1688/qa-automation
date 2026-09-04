@@ -1,0 +1,12 @@
+order,top_menu,menu_path,page_name,route,route_source
+1,Home,,Home,/home,anchor_href
+2,Agent Management,Agent Management,Agent Review,/agent/agent-review,anchor_href
+3,Agent Management,Agent Management,Agent List,/agent/agent-list,anchor_href
+4,Agent Management,Agent Management,Member List,/agent/user-list,anchor_href
+5,Agent Management,Agent Management,Agent Settings,/agent/agent-setting,anchor_href
+6,Agent Management,Agent Management,Agent Domain,/agent/domain,anchor_href
+7,Finance Management,Finance Management,Commission Review,/financial/commission-review,anchor_href
+8,Finance Management,Finance Management,Commission Report,/financial/commission-list,anchor_href
+9,Finance Management,Finance Management,Financial Report,/financial/financial-statements,anchor_href
+10,System,System,Role Configuration,/system/role,anchor_href
+11,System,System,Staff Configuration,/system/staff,anchor_href

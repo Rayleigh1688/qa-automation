@@ -1,0 +1,19 @@
+method,path,classification,success_events,failed_events,routes,actions,documented_source,note
+GET,/admin/agency/audit/detail,ACTIVE,1,0,/agent/agent-review,details control,代理管理后台/代理管理/代理审核/代理资料.bru,
+GET,/admin/agency/audit/list,ACTIVE,5,0,/agent/agent-review,filter reset | page initialization | query control | reset control | reversible text filter query,代理管理后台/代理管理/代理审核/代理审核列表 - wesley.bru,
+GET,/admin/agency/commission/audit/list,ACTIVE,3,0,/financial/commission-review,page initialization | query control | reset control,代理管理后台/财务管理/佣金审核/佣金审核列表 - wesley.bru,
+GET,/admin/agency/commission/report,ACTIVE,3,0,/financial/commission-list,page initialization | query control | reset control,代理管理后台/财务管理/佣金报表/佣金报表.bru,
+GET,/admin/agency/domain/list,ACTIVE,3,0,/agent/domain,page initialization | query control | reset control,代理管理后台/代理域名/列表.bru,
+GET,/admin/agency/ladder,ACTIVE,1,0,/agent/agent-setting,page initialization,代理管理后台/代理管理/代理设置/佣金阶梯/查询佣金阶梯.bru,
+GET,/admin/agency/list,ACTIVE,5,0,/agent/agent-list,filter reset | page initialization | query control | reset control | reversible text filter query,代理管理后台/代理管理/代理列表/代理列表.bru,
+GET,/admin/agency/member/list,ACTIVE,5,0,/agent/user-list,filter reset | page initialization | query control | reset control | reversible text filter query,代理管理后台/代理管理/会员列表/会员列表-wesley.bru,
+GET,/admin/agency/reports/bi/basic,ACTIVE,3,0,/home | login,login flow | page initialization | reset control,代理管理后台/首页BI/数据总览.bru,
+GET,/admin/agency/reports/bi/chart,ACTIVE,2,0,/home | login,login flow | page initialization,代理管理后台/首页BI/报表图形化数据.bru,
+GET,/admin/agency/taxrate/list,ACTIVE,1,0,/agent/agent-setting,tab: Pagcor Tax Rate,代理管理后台/代理管理/代理设置/Pagcor税率/Pagcor税率列表.bru,
+GET,/admin/agency/vendorrate/list,ACTIVE,1,0,/agent/agent-setting,tab: Provider Fee Rate,代理管理后台/代理管理/代理设置/厂商费率/厂商费率列表.bru,
+GET,/backend/agency/group/list,UNDOCUMENTED_ACTIVE,2,0,/system/role | /system/staff,page initialization,,
+GET,/backend/agency/me/detail,ACTIVE,12,1,/agent/agent-list | /agent/agent-review | /agent/agent-setting | /agent/domain | /agent/user-list | /financial/commission-list | /financial/commission-review | /financial/financial-statements | /home | /system/role | /system/staff | login,login flow | page initialization,代理管理后台/后台账号管理/后台账户详情(当前登陆信息).bru,One expected unauthenticated bootstrap event occurred before successful login; authenticated calls succeeded
+POST,/agency/finance/transaction/list,ACTIVE,5,0,/financial/financial-statements,filter reset | page initialization | query control | reset control | reversible text filter query,代理管理后台/财务管理/财务报表/账变列表- wesley.bru,
+POST,/backend/agency/login,ACTIVE,1,0,login,login flow,代理管理后台/后台账号管理/后端账号登陆.bru,
+POST,/backend/agency/login/auth,ACTIVE,1,0,login,login flow,代理管理后台/后台账号管理/后端账号登陆（前置验证）-seven.bru,
+POST,/backend/agency/user/list,MISCLASSIFIED,7,0,/system/staff,filter reset | page initialization | pagination next | pagination restore previous | query control | reset control | reversible text filter query,代理管理后台/后台账号管理/后台账户列表.bru,method drift against agency-management documentation

@@ -1,0 +1,62 @@
+{
+  "captured_at": "2026-09-03T11:38:36.352Z",
+  "login_gate": {
+    "success": true,
+    "origin": "https://admin-agency-fat.filbet2025.com",
+    "pathname": "/home",
+    "title": "Filbet Admin",
+    "rendered_menu_items": 11,
+    "required_request_evidence": [
+      "POST /backend/agency/login:200:true",
+      "GET /backend/agency/me/detail:200:true"
+    ],
+    "identity_or_permission_evidence": [
+      "GET /backend/agency/me/detail:200:false",
+      "GET /backend/agency/me/detail:200:true"
+    ],
+    "body_shell_present": true
+  },
+  "menu_pages": 11,
+  "resolved_routes": 11,
+  "attempted_pages": 11,
+  "scanned_pages": 11,
+  "blocked_pages": 0,
+  "unattempted_pages": 0,
+  "page_errors": 0,
+  "dom_controls": 359,
+  "safe_actions": 71,
+  "action_types": {
+    "query": 9,
+    "reset": 9,
+    "tab": 15,
+    "chart_mode": 2,
+    "chart_mode_restore": 1,
+    "chart_series_legend": 1,
+    "details": 1,
+    "filter_query": 8,
+    "filter_reset": 8,
+    "filter_select_options": 13,
+    "pagination_next": 2,
+    "pagination_restore": 2
+  },
+  "action_statuses": {
+    "CLICKED": 43,
+    "RESTORED": 11,
+    "BLOCKED_PREREQUISITE": 1,
+    "OPENED_AND_CLOSED": 13,
+    "INTERACTION_ERROR": 3
+  },
+  "chart_local_actions": 4,
+  "blocked_prerequisite_actions": 1,
+  "chart_mode_restored": true,
+  "network_events": 62,
+  "unique_endpoints": 18,
+  "classifications": {
+    "ACTIVE": 16,
+    "UNDOCUMENTED_ACTIVE": 1,
+    "MISCLASSIFIED": 1
+  },
+  "write_operations_executed": 0,
+  "recovery": "Initial Bar Chart Mode and every exercised pagination/filter value were restored; no persistent write was executed.",
+  "fatal_error": ""
+}

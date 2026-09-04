@@ -1,0 +1,93 @@
+{
+  "source": "rendered menu for authenticated current role + successful /backend/agency/me/detail",
+  "account_data": "not retained",
+  "tree": [
+    {
+      "menu_path": [],
+      "page_name": "Home",
+      "route": "/home",
+      "permission_observation": "visible to current authenticated role"
+    },
+    {
+      "menu_path": [
+        "Agent Management"
+      ],
+      "page_name": "Agent Review",
+      "route": "/agent/agent-review",
+      "permission_observation": "visible to current authenticated role"
+    },
+    {
+      "menu_path": [
+        "Agent Management"
+      ],
+      "page_name": "Agent List",
+      "route": "/agent/agent-list",
+      "permission_observation": "visible to current authenticated role"
+    },
+    {
+      "menu_path": [
+        "Agent Management"
+      ],
+      "page_name": "Member List",
+      "route": "/agent/user-list",
+      "permission_observation": "visible to current authenticated role"
+    },
+    {
+      "menu_path": [
+        "Agent Management"
+      ],
+      "page_name": "Agent Settings",
+      "route": "/agent/agent-setting",
+      "permission_observation": "visible to current authenticated role"
+    },
+    {
+      "menu_path": [
+        "Agent Management"
+      ],
+      "page_name": "Agent Domain",
+      "route": "/agent/domain",
+      "permission_observation": "visible to current authenticated role"
+    },
+    {
+      "menu_path": [
+        "Finance Management"
+      ],
+      "page_name": "Commission Review",
+      "route": "/financial/commission-review",
+      "permission_observation": "visible to current authenticated role"
+    },
+    {
+      "menu_path": [
+        "Finance Management"
+      ],
+      "page_name": "Commission Report",
+      "route": "/financial/commission-list",
+      "permission_observation": "visible to current authenticated role"
+    },
+    {
+      "menu_path": [
+        "Finance Management"
+      ],
+      "page_name": "Financial Report",
+      "route": "/financial/financial-statements",
+      "permission_observation": "visible to current authenticated role"
+    },
+    {
+      "menu_path": [
+        "System"
+      ],
+      "page_name": "Role Configuration",
+      "route": "/system/role",
+      "permission_observation": "visible to current authenticated role"
+    },
+    {
+      "menu_path": [
+        "System"
+      ],
+      "page_name": "Staff Configuration",
+      "route": "/system/staff",
+      "permission_observation": "visible to current authenticated role"
+    }
+  ],
+  "limitation": "No separate permission-list request was emitted by this frontend session; only rendered permissions are asserted."
+}

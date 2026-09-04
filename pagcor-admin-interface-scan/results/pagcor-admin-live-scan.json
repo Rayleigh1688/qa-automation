@@ -1,0 +1,3480 @@
+{
+  "captured_at": "2026-09-03T11:07:01.401Z",
+  "environment": "FAT",
+  "target": "PAGCOR_ADMIN",
+  "gate": {
+    "status": "PASS",
+    "authenticated_at": "2026-09-03T11:07:01.400Z",
+    "expected_origin": "https://admin-pagcor-fat.filbet2025.com",
+    "actual_origin": "https://admin-pagcor-fat.filbet2025.com",
+    "initial_post_login_route": "/#/reportCenter/pagcor",
+    "token_captured_in_memory_only": true,
+    "me_detail_business_success": true,
+    "rendered_navigation_visible": true,
+    "rendered_menu_controls_at_gate": 0,
+    "navigation_structure": "single hash-route top navigation; no traditional sidebar menu items",
+    "traditional_sidebar_verified": false,
+    "business_page_initialization_success": true,
+    "context_isolation": "exclusive-context-b583346ff05a",
+    "storage_state_exported": false
+  },
+  "permission_tree": {
+    "queried_pid_count": 63,
+    "responses": [
+      {
+        "pid": "0",
+        "http_status": 200,
+        "business_status": true,
+        "item_count": 7,
+        "items": [
+          {
+            "id": "10000",
+            "pid": "0",
+            "name": "会员",
+            "route_name": "Member",
+            "module": "/member",
+            "is_button_permission": false
+          },
+          {
+            "id": "20000",
+            "pid": "0",
+            "name": "KYC",
+            "route_name": "KYC",
+            "module": "/kyc",
+            "is_button_permission": false
+          },
+          {
+            "id": "30000",
+            "pid": "0",
+            "name": "财务管理",
+            "route_name": "Finance",
+            "module": "/finance",
+            "is_button_permission": false
+          },
+          {
+            "id": "50000",
+            "pid": "0",
+            "name": "游戏",
+            "route_name": "Game",
+            "module": "/game",
+            "is_button_permission": false
+          },
+          {
+            "id": "60000",
+            "pid": "0",
+            "name": "系统",
+            "route_name": "System",
+            "module": "/system",
+            "is_button_permission": false
+          },
+          {
+            "id": "70000",
+            "pid": "0",
+            "name": "日志",
+            "route_name": "Log",
+            "module": "/log",
+            "is_button_permission": false
+          },
+          {
+            "id": "80000",
+            "pid": "0",
+            "name": "报表",
+            "route_name": "Report",
+            "module": "/report",
+            "is_button_permission": false
+          }
+        ]
+      },
+      {
+        "pid": "10000",
+        "http_status": 200,
+        "business_status": true,
+        "item_count": 4,
+        "items": [
+          {
+            "id": "10001",
+            "pid": "10000",
+            "name": "会员列表",
+            "route_name": "",
+            "module": "/cmpl/member/list",
+            "is_button_permission": false
+          },
+          {
+            "id": "10002",
+            "pid": "10000",
+            "name": "会员详情",
+            "route_name": "",
+            "module": "/cmpl/member/detail",
+            "is_button_permission": false
+          },
+          {
+            "id": "10003",
+            "pid": "10000",
+            "name": "会员导出",
+            "route_name": "",
+            "module": "/cmpl/member/export",
+            "is_button_permission": false
+          },
+          {
+            "id": "10004",
+            "pid": "10000",
+            "name": "会员更新",
+            "route_name": "",
+            "module": "/cmpl/member/update",
+            "is_button_permission": false
+          }
+        ]
+      },
+      {
+        "pid": "20000",
+        "http_status": 200,
+        "business_status": true,
+        "item_count": 4,
+        "items": [
+          {
+            "id": "20001",
+            "pid": "20000",
+            "name": "KYC列表",
+            "route_name": "",
+            "module": "/cmpl/kyc/list",
+            "is_button_permission": false
+          },
+          {
+            "id": "20002",
+            "pid": "20000",
+            "name": "KYC拒绝",
+            "route_name": "",
+            "module": "/cmpl/kyc/reject",
+            "is_button_permission": false
+          },
+          {
+            "id": "20003",
+            "pid": "20000",
+            "name": "KYC通过",
+            "route_name": "",
+            "module": "/cmpl/kyc/approve",
+            "is_button_permission": false
+          },
+          {
+            "id": "20004",
+            "pid": "20000",
+            "name": "KYC上传",
+            "route_name": "",
+            "module": "/cmpl/kyc/upload",
+            "is_button_permission": false
+          }
+        ]
+      },
+      {
+        "pid": "30000",
+        "http_status": 200,
+        "business_status": true,
+        "item_count": 4,
+        "items": [
+          {
+            "id": "30100",
+            "pid": "30000",
+            "name": "存款记录",
+            "route_name": "",
+            "module": "/finance/deposit",
+            "is_button_permission": false
+          },
+          {
+            "id": "30200",
+            "pid": "30000",
+            "name": "提现记录",
+            "route_name": "",
+            "module": "/finance/withdraw",
+            "is_button_permission": false
+          },
+          {
+            "id": "30300",
+            "pid": "30000",
+            "name": "注单管理",
+            "route_name": "",
+            "module": "/cmpl/record/bet",
+            "is_button_permission": false
+          },
+          {
+            "id": "30400",
+            "pid": "30000",
+            "name": "会员钱包帐变",
+            "route_name": "",
+            "module": "/finance/transaction",
+            "is_button_permission": false
+          }
+        ]
+      },
+      {
+        "pid": "50000",
+        "http_status": 200,
+        "business_status": true,
+        "item_count": 6,
+        "items": [
+          {
+            "id": "50100",
+            "pid": "50000",
+            "name": "游戏记录",
+            "route_name": "",
+            "module": "/cmpl/record/game",
+            "is_button_permission": false
+          },
+          {
+            "id": "50101",
+            "pid": "50000",
+            "name": "游戏记录-导出",
+            "route_name": "",
+            "module": "/cmpl/record/export",
+            "is_button_permission": false
+          },
+          {
+            "id": "50200",
+            "pid": "50000",
+            "name": "场馆管理",
+            "route_name": "",
+            "module": "/game/platform",
+            "is_button_permission": false
+          },
+          {
+            "id": "50300",
+            "pid": "50000",
+            "name": "游戏管理",
+            "route_name": "",
+            "module": "/game/game",
+            "is_button_permission": false
+          },
+          {
+            "id": "50102",
+            "pid": "50000",
+            "name": "jackpot列表",
+            "route_name": "",
+            "module": "/cmpl/jackpot/list",
+            "is_button_permission": false
+          },
+          {
+            "id": "50103",
+            "pid": "50000",
+            "name": "jackpot列表导出",
+            "route_name": "",
+            "module": "/cmpl/jackpot/export",
+            "is_button_permission": false
+          }
+        ]
+      },
+      {
+        "pid": "60000",
+        "http_status": 200,
+        "business_status": true,
+        "item_count": 3,
+        "items": [
+          {
+            "id": "60100",
+            "pid": "60000",
+            "name": "角色配置",
+            "route_name": "Group",
+            "module": "/group",
+            "is_button_permission": false
+          },
+          {
+            "id": "60200",
+            "pid": "60000",
+            "name": "员工配置",
+            "route_name": "User",
+            "module": "/user",
+            "is_button_permission": false
+          },
+          {
+            "id": "60300",
+            "pid": "60000",
+            "name": "门店配置",
+            "route_name": "",
+            "module": "/shop",
+            "is_button_permission": false
+          }
+        ]
+      },
+      {
+        "pid": "70000",
+        "http_status": 200,
+        "business_status": true,
+        "item_count": 2,
+        "items": [
+          {
+            "id": "70001",
+            "pid": "70000",
+            "name": "日志列表",
+            "route_name": "",
+            "module": "/cmpl/log/list",
+            "is_button_permission": false
+          },
+          {
+            "id": "70002",
+            "pid": "70000",
+            "name": "日志导出",
+            "route_name": "",
+            "module": "/cmpl/log/export",
+            "is_button_permission": false
+          }
+        ]
+      },
+      {
+        "pid": "80000",
+        "http_status": 200,
+        "business_status": true,
+        "item_count": 5,
+        "items": [
+          {
+            "id": "80003",
+            "pid": "80000",
+            "name": "门店报表",
+            "route_name": "",
+            "module": "/cmpl/report/shop/list",
+            "is_button_permission": false
+          },
+          {
+            "id": "80004",
+            "pid": "80000",
+            "name": "门店报表导出",
+            "route_name": "",
+            "module": "/cmpl/report/shop/export",
+            "is_button_permission": false
+          },
+          {
+            "id": "80005",
+            "pid": "80000",
+            "name": "报告摘要",
+            "route_name": "",
+            "module": "/cmpl/report/summary/list",
+            "is_button_permission": false
+          },
+          {
+            "id": "80001",
+            "pid": "80000",
+            "name": "Pagcor报表",
+            "route_name": "",
+            "module": "/cmpl/report/pagcor/list",
+            "is_button_permission": false
+          },
+          {
+            "id": "80002",
+            "pid": "80000",
+            "name": "Pagcor报表导出",
+            "route_name": "",
+            "module": "/cmpl/report/pagcor/export",
+            "is_button_permission": false
+          }
+        ]
+      },
+      {
+        "pid": "10001",
+        "http_status": 200,
+        "business_status": true,
+        "item_count": 0,
+        "items": []
+      },
+      {
+        "pid": "10002",
+        "http_status": 200,
+        "business_status": true,
+        "item_count": 4,
+        "items": [
+          {
+            "id": "10005",
+            "pid": "10002",
+            "name": "会员kyc详情",
+            "route_name": "",
+            "module": "/cmpl/kyc/detail",
+            "is_button_permission": false
+          },
+          {
+            "id": "10006",
+            "pid": "10002",
+            "name": "会员密码otp修改",
+            "route_name": "",
+            "module": "/cmpl/user/update/password",
+            "is_button_permission": false
+          },
+          {
+            "id": "10007",
+            "pid": "10002",
+            "name": "用户信息",
+            "route_name": "",
+            "module": "/cmpl/me/detail",
+            "is_button_permission": false
+          },
+          {
+            "id": "10008",
+            "pid": "10002",
+            "name": "会员在线人数",
+            "route_name": "",
+            "module": "/cmpl/online/count",
+            "is_button_permission": false
+          }
+        ]
+      },
+      {
+        "pid": "10003",
+        "http_status": 200,
+        "business_status": true,
+        "item_count": 0,
+        "items": []
+      },
+      {
+        "pid": "10004",
+        "http_status": 200,
+        "business_status": true,
+        "item_count": 0,
+        "items": []
+      },
+      {
+        "pid": "20001",
+        "http_status": 200,
+        "business_status": true,
+        "item_count": 0,
+        "items": []
+      },
+      {
+        "pid": "20002",
+        "http_status": 200,
+        "business_status": true,
+        "item_count": 0,
+        "items": []
+      },
+      {
+        "pid": "20003",
+        "http_status": 200,
+        "business_status": true,
+        "item_count": 0,
+        "items": []
+      },
+      {
+        "pid": "20004",
+        "http_status": 200,
+        "business_status": true,
+        "item_count": 0,
+        "items": []
+      },
+      {
+        "pid": "30100",
+        "http_status": 200,
+        "business_status": true,
+        "item_count": 2,
+        "items": [
+          {
+            "id": "30101",
+            "pid": "30100",
+            "name": "存款记录-列表",
+            "route_name": "",
+            "module": "/cmpl/finance/deposit/list",
+            "is_button_permission": false
+          },
+          {
+            "id": "30102",
+            "pid": "30100",
+            "name": "存款记录-导出",
+            "route_name": "",
+            "module": "/cmpl/finance/deposit/export",
+            "is_button_permission": false
+          }
+        ]
+      },
+      {
+        "pid": "30200",
+        "http_status": 200,
+        "business_status": true,
+        "item_count": 2,
+        "items": [
+          {
+            "id": "30201",
+            "pid": "30200",
+            "name": "提现记录-列表",
+            "route_name": "",
+            "module": "/cmpl/finance/withdraw/list",
+            "is_button_permission": false
+          },
+          {
+            "id": "30202",
+            "pid": "30200",
+            "name": "提现记录-导出",
+            "route_name": "",
+            "module": "/cmpl/finance/withdraw/export",
+            "is_button_permission": false
+          }
+        ]
+      },
+      {
+        "pid": "30300",
+        "http_status": 200,
+        "business_status": true,
+        "item_count": 0,
+        "items": []
+      },
+      {
+        "pid": "30400",
+        "http_status": 200,
+        "business_status": true,
+        "item_count": 3,
+        "items": [
+          {
+            "id": "30401",
+            "pid": "30400",
+            "name": "会员钱包帐变-类型",
+            "route_name": "",
+            "module": "/cmpl/finance/transaction/types",
+            "is_button_permission": false
+          },
+          {
+            "id": "30402",
+            "pid": "30400",
+            "name": "会员钱包帐变-列表",
+            "route_name": "",
+            "module": "/cmpl/finance/transaction/list",
+            "is_button_permission": false
+          },
+          {
+            "id": "30403",
+            "pid": "30400",
+            "name": "会员钱包帐变-导出",
+            "route_name": "",
+            "module": "/cmpl/finance/transaction/export",
+            "is_button_permission": false
+          }
+        ]
+      },
+      {
+        "pid": "50100",
+        "http_status": 200,
+        "business_status": true,
+        "item_count": 0,
+        "items": []
+      },
+      {
+        "pid": "50101",
+        "http_status": 200,
+        "business_status": true,
+        "item_count": 0,
+        "items": []
+      },
+      {
+        "pid": "50200",
+        "http_status": 200,
+        "business_status": true,
+        "item_count": 2,
+        "items": [
+          {
+            "id": "50201",
+            "pid": "50200",
+            "name": "场馆列表",
+            "route_name": "",
+            "module": "/cmpl/platform/list",
+            "is_button_permission": false
+          },
+          {
+            "id": "50202",
+            "pid": "50200",
+            "name": "场馆上线/下线",
+            "route_name": "",
+            "module": "/cmpl/platform/update/state",
+            "is_button_permission": false
+          }
+        ]
+      },
+      {
+        "pid": "50300",
+        "http_status": 200,
+        "business_status": true,
+        "item_count": 3,
+        "items": [
+          {
+            "id": "50301",
+            "pid": "50300",
+            "name": "游戏/推荐列表",
+            "route_name": "",
+            "module": "/cmpl/game/list",
+            "is_button_permission": false
+          },
+          {
+            "id": "50302",
+            "pid": "50300",
+            "name": "游戏上线/下线/推荐/设置热门/新游戏",
+            "route_name": "",
+            "module": "/cmpl/game/update/state",
+            "is_button_permission": false
+          },
+          {
+            "id": "50303",
+            "pid": "50300",
+            "name": "厂商列表",
+            "route_name": "",
+            "module": "/cmpl/venue/list",
+            "is_button_permission": false
+          }
+        ]
+      },
+      {
+        "pid": "50102",
+        "http_status": 200,
+        "business_status": true,
+        "item_count": 0,
+        "items": []
+      },
+      {
+        "pid": "50103",
+        "http_status": 200,
+        "business_status": true,
+        "item_count": 0,
+        "items": []
+      },
+      {
+        "pid": "60100",
+        "http_status": 200,
+        "business_status": true,
+        "item_count": 5,
+        "items": [
+          {
+            "id": "60101",
+            "pid": "60100",
+            "name": "角色列表",
+            "route_name": "",
+            "module": "/cmpl/group/list",
+            "is_button_permission": false
+          },
+          {
+            "id": "60102",
+            "pid": "60100",
+            "name": "角色列表新增",
+            "route_name": "",
+            "module": "/cmpl/group/insert",
+            "is_button_permission": false
+          },
+          {
+            "id": "60103",
+            "pid": "60100",
+            "name": "角色更新",
+            "route_name": "",
+            "module": "/cmpl/group/update",
+            "is_button_permission": false
+          },
+          {
+            "id": "60104",
+            "pid": "60100",
+            "name": "权限列表",
+            "route_name": "",
+            "module": "/cmpl/priv/list",
+            "is_button_permission": false
+          },
+          {
+            "id": "60105",
+            "pid": "60100",
+            "name": "角色权限列表",
+            "route_name": "",
+            "module": "/cmpl/priv/by/group",
+            "is_button_permission": false
+          }
+        ]
+      },
+      {
+        "pid": "60200",
+        "http_status": 200,
+        "business_status": true,
+        "item_count": 3,
+        "items": [
+          {
+            "id": "60201",
+            "pid": "60200",
+            "name": "员工列表",
+            "route_name": "",
+            "module": "/cmpl/user/list",
+            "is_button_permission": false
+          },
+          {
+            "id": "60202",
+            "pid": "60200",
+            "name": "员工新增",
+            "route_name": "",
+            "module": "/cmpl/user/insert",
+            "is_button_permission": false
+          },
+          {
+            "id": "60205",
+            "pid": "60200",
+            "name": "员工更新",
+            "route_name": "",
+            "module": "/cmpl/user/update",
+            "is_button_permission": false
+          }
+        ]
+      },
+      {
+        "pid": "60300",
+        "http_status": 200,
+        "business_status": true,
+        "item_count": 3,
+        "items": [
+          {
+            "id": "60301",
+            "pid": "60300",
+            "name": "门店列表",
+            "route_name": "",
+            "module": "/cmpl/shop/list",
+            "is_button_permission": false
+          },
+          {
+            "id": "60302",
+            "pid": "60300",
+            "name": "门店新增",
+            "route_name": "",
+            "module": "/cmpl/shop/insert",
+            "is_button_permission": false
+          },
+          {
+            "id": "60303",
+            "pid": "60300",
+            "name": "门店更新",
+            "route_name": "",
+            "module": "/cmpl/shop/update",
+            "is_button_permission": false
+          }
+        ]
+      },
+      {
+        "pid": "70001",
+        "http_status": 200,
+        "business_status": true,
+        "item_count": 0,
+        "items": []
+      },
+      {
+        "pid": "70002",
+        "http_status": 200,
+        "business_status": true,
+        "item_count": 0,
+        "items": []
+      },
+      {
+        "pid": "80003",
+        "http_status": 200,
+        "business_status": true,
+        "item_count": 0,
+        "items": []
+      },
+      {
+        "pid": "80004",
+        "http_status": 200,
+        "business_status": true,
+        "item_count": 0,
+        "items": []
+      },
+      {
+        "pid": "80005",
+        "http_status": 200,
+        "business_status": true,
+        "item_count": 0,
+        "items": []
+      },
+      {
+        "pid": "80001",
+        "http_status": 200,
+        "business_status": true,
+        "item_count": 0,
+        "items": []
+      },
+      {
+        "pid": "80002",
+        "http_status": 200,
+        "business_status": true,
+        "item_count": 0,
+        "items": []
+      },
+      {
+        "pid": "10005",
+        "http_status": 200,
+        "business_status": true,
+        "item_count": 0,
+        "items": []
+      },
+      {
+        "pid": "10006",
+        "http_status": 200,
+        "business_status": true,
+        "item_count": 0,
+        "items": []
+      },
+      {
+        "pid": "10007",
+        "http_status": 200,
+        "business_status": true,
+        "item_count": 0,
+        "items": []
+      },
+      {
+        "pid": "10008",
+        "http_status": 200,
+        "business_status": true,
+        "item_count": 0,
+        "items": []
+      },
+      {
+        "pid": "30101",
+        "http_status": 200,
+        "business_status": true,
+        "item_count": 0,
+        "items": []
+      },
+      {
+        "pid": "30102",
+        "http_status": 200,
+        "business_status": true,
+        "item_count": 0,
+        "items": []
+      },
+      {
+        "pid": "30201",
+        "http_status": 200,
+        "business_status": true,
+        "item_count": 0,
+        "items": []
+      },
+      {
+        "pid": "30202",
+        "http_status": 200,
+        "business_status": true,
+        "item_count": 0,
+        "items": []
+      },
+      {
+        "pid": "30401",
+        "http_status": 200,
+        "business_status": true,
+        "item_count": 0,
+        "items": []
+      },
+      {
+        "pid": "30402",
+        "http_status": 200,
+        "business_status": true,
+        "item_count": 0,
+        "items": []
+      },
+      {
+        "pid": "30403",
+        "http_status": 200,
+        "business_status": true,
+        "item_count": 0,
+        "items": []
+      },
+      {
+        "pid": "50201",
+        "http_status": 200,
+        "business_status": true,
+        "item_count": 0,
+        "items": []
+      },
+      {
+        "pid": "50202",
+        "http_status": 200,
+        "business_status": true,
+        "item_count": 0,
+        "items": []
+      },
+      {
+        "pid": "50301",
+        "http_status": 200,
+        "business_status": true,
+        "item_count": 0,
+        "items": []
+      },
+      {
+        "pid": "50302",
+        "http_status": 200,
+        "business_status": true,
+        "item_count": 0,
+        "items": []
+      },
+      {
+        "pid": "50303",
+        "http_status": 200,
+        "business_status": true,
+        "item_count": 0,
+        "items": []
+      },
+      {
+        "pid": "60101",
+        "http_status": 200,
+        "business_status": true,
+        "item_count": 0,
+        "items": []
+      },
+      {
+        "pid": "60102",
+        "http_status": 200,
+        "business_status": true,
+        "item_count": 0,
+        "items": []
+      },
+      {
+        "pid": "60103",
+        "http_status": 200,
+        "business_status": true,
+        "item_count": 0,
+        "items": []
+      },
+      {
+        "pid": "60104",
+        "http_status": 200,
+        "business_status": true,
+        "item_count": 0,
+        "items": []
+      },
+      {
+        "pid": "60105",
+        "http_status": 200,
+        "business_status": true,
+        "item_count": 0,
+        "items": []
+      },
+      {
+        "pid": "60201",
+        "http_status": 200,
+        "business_status": true,
+        "item_count": 0,
+        "items": []
+      },
+      {
+        "pid": "60202",
+        "http_status": 200,
+        "business_status": true,
+        "item_count": 0,
+        "items": []
+      },
+      {
+        "pid": "60205",
+        "http_status": 200,
+        "business_status": true,
+        "item_count": 0,
+        "items": []
+      },
+      {
+        "pid": "60301",
+        "http_status": 200,
+        "business_status": true,
+        "item_count": 0,
+        "items": []
+      },
+      {
+        "pid": "60302",
+        "http_status": 200,
+        "business_status": true,
+        "item_count": 0,
+        "items": []
+      },
+      {
+        "pid": "60303",
+        "http_status": 200,
+        "business_status": true,
+        "item_count": 0,
+        "items": []
+      }
+    ]
+  },
+  "menu": {
+    "rendered_items": 1,
+    "routed_pages": 1,
+    "pages": [
+      {
+        "menu_path": [],
+        "page_name": "报表中心",
+        "href": "#/reportCenter/pagcor",
+        "route": "/#/reportCenter/pagcor"
+      }
+    ]
+  },
+  "pages": [
+    {
+      "order": 1,
+      "menu_path": [],
+      "page_name": "报表中心",
+      "href": "#/reportCenter/pagcor",
+      "route": "/#/reportCenter/pagcor",
+      "actual_origin": "https://admin-pagcor-fat.filbet2025.com",
+      "actual_route": "/#/reportCenter/pagcor",
+      "title": "Pagcor税收报表 - Filbet Admin",
+      "controls": {
+        "inputs": [
+          {
+            "type": "search",
+            "name": "",
+            "placeholder": "",
+            "disabled": false
+          },
+          {
+            "type": "search",
+            "name": "",
+            "placeholder": "",
+            "disabled": false
+          },
+          {
+            "type": "search",
+            "name": "",
+            "placeholder": "",
+            "disabled": false
+          },
+          {
+            "type": "search",
+            "name": "",
+            "placeholder": "",
+            "disabled": false
+          },
+          {
+            "type": "text",
+            "name": "",
+            "placeholder": "开始日期",
+            "disabled": false
+          },
+          {
+            "type": "text",
+            "name": "",
+            "placeholder": "结束日期",
+            "disabled": false
+          },
+          {
+            "type": "search",
+            "name": "",
+            "placeholder": "",
+            "disabled": false
+          }
+        ],
+        "buttons": [
+          {
+            "text": "今 日",
+            "title": "",
+            "aria_label": "",
+            "disabled": false
+          },
+          {
+            "text": "昨 日",
+            "title": "",
+            "aria_label": "",
+            "disabled": false
+          },
+          {
+            "text": "本 周",
+            "title": "",
+            "aria_label": "",
+            "disabled": false
+          },
+          {
+            "text": "本 月",
+            "title": "",
+            "aria_label": "",
+            "disabled": false
+          },
+          {
+            "text": "上 月",
+            "title": "",
+            "aria_label": "",
+            "disabled": false
+          },
+          {
+            "text": "重 置",
+            "title": "",
+            "aria_label": "",
+            "disabled": false
+          },
+          {
+            "text": "搜 寻",
+            "title": "",
+            "aria_label": "",
+            "disabled": false
+          },
+          {
+            "text": "导 出",
+            "title": "",
+            "aria_label": "",
+            "disabled": false
+          }
+        ],
+        "selects": [
+          {
+            "text": "请选择",
+            "aria_label": ""
+          },
+          {
+            "text": "",
+            "aria_label": ""
+          },
+          {
+            "text": "请选择",
+            "aria_label": ""
+          },
+          {
+            "text": "",
+            "aria_label": ""
+          },
+          {
+            "text": "请选择",
+            "aria_label": ""
+          },
+          {
+            "text": "",
+            "aria_label": ""
+          },
+          {
+            "text": "请选择品牌归属",
+            "aria_label": ""
+          },
+          {
+            "text": "",
+            "aria_label": ""
+          },
+          {
+            "text": "20 条/页",
+            "aria_label": ""
+          },
+          {
+            "text": "",
+            "aria_label": ""
+          }
+        ],
+        "tabs": [
+          {
+            "text": "Pagcor税收报表",
+            "selected": ""
+          },
+          {
+            "text": "Pagcor税收报表",
+            "selected": "true"
+          }
+        ],
+        "pagination": [
+          {
+            "text": "1",
+            "title": ""
+          }
+        ],
+        "links": [
+          {
+            "text": "报表中心",
+            "href": "#/reportCenter/pagcor"
+          }
+        ],
+        "drawers": [],
+        "modals": [],
+        "tables": [
+          {
+            "headers": [
+              "序号",
+              "游戏厂商",
+              "厂商游戏分类",
+              "pagcor分类名称",
+              "Onsite 有效投注",
+              "Online 有效投注",
+              "Onsite FS 投注",
+              "Online FS 投注",
+              "Onsite JP 投注",
+              "Online JP 投注",
+              "Onsite 派彩",
+              "Online 派彩",
+              "Onsite FS 派彩",
+              "Online FS 派彩",
+              "Onsite JP 派彩",
+              "Online JP 派彩",
+              "Onsite 有效投注盈亏",
+              "Online 有效投注盈亏",
+              "Onsite FS 盈亏",
+              "Online FS 盈亏",
+              "Onsite JP 盈亏",
+              "Online JP 盈亏",
+              "税率",
+              "Onsite 有效税收",
+              "Online 有效税收",
+              "测试账号投注",
+              "测试账号派彩",
+              "测试账号GGR",
+              "最后操作人"
+            ],
+            "row_count": 8
+          },
+          {
+            "headers": [
+              "序号",
+              "游戏厂商",
+              "厂商游戏分类",
+              "pagcor分类名称",
+              "Onsite 有效投注",
+              "Online 有效投注",
+              "Onsite FS 投注",
+              "Online FS 投注",
+              "Onsite JP 投注",
+              "Online JP 投注",
+              "Onsite 派彩",
+              "Online 派彩",
+              "Onsite FS 派彩",
+              "Online FS 派彩",
+              "Onsite JP 派彩",
+              "Online JP 派彩",
+              "Onsite 有效投注盈亏",
+              "Online 有效投注盈亏",
+              "Onsite FS 盈亏",
+              "Online FS 盈亏",
+              "Onsite JP 盈亏",
+              "Online JP 盈亏",
+              "税率",
+              "Onsite 有效税收",
+              "Online 有效税收",
+              "测试账号投注",
+              "测试账号派彩",
+              "测试账号GGR",
+              "最后操作人"
+            ],
+            "row_count": 0
+          },
+          {
+            "headers": [],
+            "row_count": 8
+          }
+        ]
+      },
+      "request_count": 0,
+      "error": ""
+    }
+  ],
+  "actions": [
+    {
+      "page_route": "/#/reportCenter/pagcor",
+      "label": "Pagcor税收报表",
+      "control_type": "tab",
+      "result": "CLICKED",
+      "request_count": 0,
+      "overlay": {
+        "modals": 0,
+        "drawers": 0
+      }
+    },
+    {
+      "page_route": "/#/reportCenter/pagcor",
+      "label": "搜 寻",
+      "control_type": "button",
+      "result": "CLICKED",
+      "request_count": 3,
+      "overlay": {
+        "modals": 0,
+        "drawers": 0
+      }
+    },
+    {
+      "page_route": "/#/reportCenter/pagcor",
+      "label": "导 出",
+      "control_type": "button",
+      "result": "CLICKED_NO_INTERFACE_EVIDENCE",
+      "request_count": 0,
+      "overlay": {
+        "modals": 0,
+        "drawers": 0
+      }
+    },
+    {
+      "page_route": "/#/reportCenter/pagcor",
+      "label": "filter-1",
+      "control_type": "select",
+      "result": "FIRST_LEGAL_OPTION_SELECTED",
+      "option_count": 10,
+      "selected": true,
+      "request_count": 0,
+      "overlay": {
+        "modals": 0,
+        "drawers": 0
+      }
+    },
+    {
+      "page_route": "/#/reportCenter/pagcor",
+      "label": "filter-2",
+      "control_type": "select",
+      "result": "FIRST_LEGAL_OPTION_SELECTED",
+      "option_count": 10,
+      "selected": true,
+      "request_count": 0,
+      "overlay": {
+        "modals": 0,
+        "drawers": 0
+      }
+    },
+    {
+      "page_route": "/#/reportCenter/pagcor",
+      "label": "filter-3",
+      "control_type": "select",
+      "result": "FIRST_LEGAL_OPTION_SELECTED",
+      "option_count": 4,
+      "selected": true,
+      "request_count": 0,
+      "overlay": {
+        "modals": 0,
+        "drawers": 0
+      }
+    },
+    {
+      "page_route": "/#/reportCenter/pagcor",
+      "label": "filter-4",
+      "control_type": "select",
+      "result": "FIRST_LEGAL_OPTION_SELECTED",
+      "option_count": 2,
+      "selected": true,
+      "request_count": 0,
+      "overlay": {
+        "modals": 0,
+        "drawers": 0
+      }
+    },
+    {
+      "page_route": "/#/reportCenter/pagcor",
+      "label": "filter-5",
+      "control_type": "select",
+      "result": "FIRST_LEGAL_OPTION_SELECTED",
+      "option_count": 5,
+      "selected": true,
+      "request_count": 0,
+      "overlay": {
+        "modals": 0,
+        "drawers": 0
+      }
+    },
+    {
+      "page_route": "/#/reportCenter/pagcor",
+      "label": "今 日",
+      "control_type": "date_preset",
+      "result": "CLICKED",
+      "request_count": 3,
+      "before_values": [
+        "2026-09-01",
+        "2026-09-30"
+      ],
+      "after_values": [
+        "2026-09-03",
+        "2026-09-03"
+      ],
+      "overlay": {
+        "modals": 0,
+        "drawers": 0
+      }
+    },
+    {
+      "page_route": "/#/reportCenter/pagcor",
+      "label": "昨 日",
+      "control_type": "date_preset",
+      "result": "CLICKED",
+      "request_count": 3,
+      "before_values": [
+        "2026-09-03",
+        "2026-09-03"
+      ],
+      "after_values": [
+        "2026-09-02",
+        "2026-09-02"
+      ],
+      "overlay": {
+        "modals": 0,
+        "drawers": 0
+      }
+    },
+    {
+      "page_route": "/#/reportCenter/pagcor",
+      "label": "本 周",
+      "control_type": "date_preset",
+      "result": "CLICKED",
+      "request_count": 3,
+      "before_values": [
+        "2026-09-02",
+        "2026-09-02"
+      ],
+      "after_values": [
+        "2026-08-31",
+        "2026-09-06"
+      ],
+      "overlay": {
+        "modals": 0,
+        "drawers": 0
+      }
+    },
+    {
+      "page_route": "/#/reportCenter/pagcor",
+      "label": "本 月",
+      "control_type": "date_preset",
+      "result": "CLICKED",
+      "request_count": 3,
+      "before_values": [
+        "2026-08-31",
+        "2026-09-06"
+      ],
+      "after_values": [
+        "2026-09-01",
+        "2026-09-30"
+      ],
+      "overlay": {
+        "modals": 0,
+        "drawers": 0
+      }
+    },
+    {
+      "page_route": "/#/reportCenter/pagcor",
+      "label": "上 月",
+      "control_type": "date_preset",
+      "result": "CLICKED",
+      "request_count": 3,
+      "before_values": [
+        "2026-09-01",
+        "2026-09-30"
+      ],
+      "after_values": [
+        "2026-08-01",
+        "2026-08-31"
+      ],
+      "overlay": {
+        "modals": 0,
+        "drawers": 0
+      }
+    },
+    {
+      "page_route": "/#/reportCenter/pagcor",
+      "label": "重 置",
+      "control_type": "date_preset",
+      "result": "CLICKED",
+      "request_count": 3,
+      "before_values": [
+        "2026-08-01",
+        "2026-08-31"
+      ],
+      "after_values": [
+        "2026-09-01",
+        "2026-09-30"
+      ],
+      "overlay": {
+        "modals": 0,
+        "drawers": 0
+      }
+    },
+    {
+      "page_route": "/#/reportCenter/pagcor",
+      "label": "Search after filter/date coverage",
+      "control_type": "query",
+      "result": "CLICKED",
+      "request_count": 3,
+      "overlay": {
+        "modals": 0,
+        "drawers": 0
+      }
+    }
+  ],
+  "network": [
+    {
+      "phase": "LOGIN",
+      "page_route": "/",
+      "action": "LOGIN",
+      "method": "POST",
+      "path": "/cmpl/login",
+      "query_fields": [],
+      "body_fields": [
+        "<encoded-body-fields-unavailable>"
+      ],
+      "header_fields": [
+        "accept",
+        "accept-language",
+        "client-id",
+        "client-version",
+        "content-type",
+        "d",
+        "lang",
+        "referer",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform",
+        "user-agent"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "string",
+      "response_data_keys": []
+    },
+    {
+      "phase": "LOGIN",
+      "page_route": "/",
+      "action": "LOGIN",
+      "method": "GET",
+      "path": "/cmpl/me/detail",
+      "query_fields": [],
+      "body_fields": [],
+      "header_fields": [
+        "accept",
+        "accept-language",
+        "client-id",
+        "client-version",
+        "d",
+        "lang",
+        "referer",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform",
+        "user-agent"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "avatar",
+        "bind_time",
+        "cmpl",
+        "create_name",
+        "created_at",
+        "email",
+        "group_id",
+        "id",
+        "last_login_ip",
+        "last_login_time",
+        "nickname",
+        "operator_name",
+        "pwd_edit_time",
+        "roles",
+        "sid",
+        "status",
+        "stores",
+        "updated_at",
+        "username"
+      ]
+    },
+    {
+      "phase": "LOGIN",
+      "page_route": "/",
+      "action": "LOGIN",
+      "method": "GET",
+      "path": "/cmpl/online/count",
+      "query_fields": [],
+      "body_fields": [],
+      "header_fields": [
+        "accept",
+        "accept-language",
+        "client-id",
+        "client-version",
+        "d",
+        "lang",
+        "referer",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform",
+        "user-agent"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "number",
+      "response_data_keys": []
+    },
+    {
+      "phase": "LOGIN",
+      "page_route": "/",
+      "action": "LOGIN",
+      "method": "POST",
+      "path": "/cmpl/report/pagcor/dictionary",
+      "query_fields": [],
+      "body_fields": [],
+      "header_fields": [
+        "accept",
+        "accept-language",
+        "client-id",
+        "client-version",
+        "content-type",
+        "d",
+        "lang",
+        "referer",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform",
+        "user-agent"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "pagcor_categories",
+        "platforms",
+        "shops"
+      ]
+    },
+    {
+      "phase": "LOGIN",
+      "page_route": "/",
+      "action": "LOGIN",
+      "method": "POST",
+      "path": "/cmpl/report/pagcor/dictionary",
+      "query_fields": [],
+      "body_fields": [],
+      "header_fields": [
+        "accept",
+        "accept-language",
+        "client-id",
+        "client-version",
+        "content-type",
+        "d",
+        "lang",
+        "referer",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform",
+        "user-agent"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "pagcor_categories",
+        "platforms",
+        "shops"
+      ]
+    },
+    {
+      "phase": "LOGIN",
+      "page_route": "/",
+      "action": "LOGIN",
+      "method": "POST",
+      "path": "/cmpl/report/pagcor/dictionary",
+      "query_fields": [],
+      "body_fields": [],
+      "header_fields": [
+        "accept",
+        "accept-language",
+        "client-id",
+        "client-version",
+        "content-type",
+        "d",
+        "lang",
+        "referer",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform",
+        "user-agent"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "pagcor_categories",
+        "platforms",
+        "shops"
+      ]
+    },
+    {
+      "phase": "LOGIN",
+      "page_route": "/",
+      "action": "LOGIN",
+      "method": "POST",
+      "path": "/cmpl/report/pagcor/list",
+      "query_fields": [],
+      "body_fields": [
+        "current",
+        "end_time",
+        "size",
+        "start_time"
+      ],
+      "header_fields": [
+        "accept",
+        "accept-language",
+        "client-id",
+        "client-version",
+        "content-type",
+        "d",
+        "lang",
+        "referer",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform",
+        "user-agent"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "current",
+        "list",
+        "pages",
+        "size",
+        "total"
+      ]
+    },
+    {
+      "phase": "LOGIN",
+      "page_route": "/",
+      "action": "LOGIN",
+      "method": "POST",
+      "path": "/cmpl/report/pagcor/dictionary",
+      "query_fields": [],
+      "body_fields": [],
+      "header_fields": [
+        "accept",
+        "accept-language",
+        "client-id",
+        "client-version",
+        "content-type",
+        "d",
+        "lang",
+        "referer",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform",
+        "user-agent"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "pagcor_categories",
+        "platforms",
+        "shops"
+      ]
+    },
+    {
+      "phase": "MENU_DISCOVERY",
+      "page_route": "/",
+      "action": "MENU_DISCOVERY",
+      "method": "GET",
+      "path": "/cmpl/online/count",
+      "query_fields": [],
+      "body_fields": [],
+      "header_fields": [
+        "accept",
+        "accept-language",
+        "client-id",
+        "client-version",
+        "d",
+        "lang",
+        "referer",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform",
+        "user-agent"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "number",
+      "response_data_keys": []
+    },
+    {
+      "phase": "SAFE_ACTION",
+      "page_route": "/#/reportCenter/pagcor",
+      "action": "SAFE_ACTION",
+      "method": "POST",
+      "path": "/cmpl/report/pagcor/dictionary",
+      "query_fields": [],
+      "body_fields": [],
+      "header_fields": [
+        "accept",
+        "accept-language",
+        "client-id",
+        "client-version",
+        "content-type",
+        "d",
+        "lang",
+        "referer",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform",
+        "user-agent"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "pagcor_categories",
+        "platforms",
+        "shops"
+      ]
+    },
+    {
+      "phase": "SAFE_ACTION",
+      "page_route": "/#/reportCenter/pagcor",
+      "action": "SAFE_ACTION",
+      "method": "POST",
+      "path": "/cmpl/report/pagcor/list",
+      "query_fields": [],
+      "body_fields": [
+        "current",
+        "end_time",
+        "size",
+        "start_time"
+      ],
+      "header_fields": [
+        "accept",
+        "accept-language",
+        "client-id",
+        "client-version",
+        "content-type",
+        "d",
+        "lang",
+        "referer",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform",
+        "user-agent"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "current",
+        "list",
+        "pages",
+        "size",
+        "total"
+      ]
+    },
+    {
+      "phase": "SAFE_ACTION",
+      "page_route": "/#/reportCenter/pagcor",
+      "action": "SAFE_ACTION",
+      "method": "POST",
+      "path": "/cmpl/report/pagcor/dictionary",
+      "query_fields": [],
+      "body_fields": [],
+      "header_fields": [
+        "accept",
+        "accept-language",
+        "client-id",
+        "client-version",
+        "content-type",
+        "d",
+        "lang",
+        "referer",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform",
+        "user-agent"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "pagcor_categories",
+        "platforms",
+        "shops"
+      ]
+    },
+    {
+      "phase": "SAFE_ACTION",
+      "page_route": "/#/reportCenter/pagcor",
+      "action": "SAFE_ACTION",
+      "method": "POST",
+      "path": "/cmpl/report/pagcor/dictionary",
+      "query_fields": [],
+      "body_fields": [],
+      "header_fields": [
+        "accept",
+        "accept-language",
+        "client-id",
+        "client-version",
+        "content-type",
+        "d",
+        "lang",
+        "referer",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform",
+        "user-agent"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "pagcor_categories",
+        "platforms",
+        "shops"
+      ]
+    },
+    {
+      "phase": "SAFE_ACTION",
+      "page_route": "/#/reportCenter/pagcor",
+      "action": "SAFE_ACTION",
+      "method": "POST",
+      "path": "/cmpl/report/pagcor/list",
+      "query_fields": [],
+      "body_fields": [
+        "current",
+        "end_time",
+        "sid",
+        "site_id",
+        "size",
+        "start_time"
+      ],
+      "header_fields": [
+        "accept",
+        "accept-language",
+        "client-id",
+        "client-version",
+        "content-type",
+        "d",
+        "lang",
+        "referer",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform",
+        "user-agent"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "current",
+        "list",
+        "pages",
+        "size",
+        "total"
+      ]
+    },
+    {
+      "phase": "SAFE_ACTION",
+      "page_route": "/#/reportCenter/pagcor",
+      "action": "SAFE_ACTION",
+      "method": "POST",
+      "path": "/cmpl/report/pagcor/dictionary",
+      "query_fields": [],
+      "body_fields": [],
+      "header_fields": [
+        "accept",
+        "accept-language",
+        "client-id",
+        "client-version",
+        "content-type",
+        "d",
+        "lang",
+        "referer",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform",
+        "user-agent"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "pagcor_categories",
+        "platforms",
+        "shops"
+      ]
+    },
+    {
+      "phase": "SAFE_ACTION",
+      "page_route": "/#/reportCenter/pagcor",
+      "action": "SAFE_ACTION",
+      "method": "POST",
+      "path": "/cmpl/report/pagcor/dictionary",
+      "query_fields": [],
+      "body_fields": [],
+      "header_fields": [
+        "accept",
+        "accept-language",
+        "client-id",
+        "client-version",
+        "content-type",
+        "d",
+        "lang",
+        "referer",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform",
+        "user-agent"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "pagcor_categories",
+        "platforms",
+        "shops"
+      ]
+    },
+    {
+      "phase": "SAFE_ACTION",
+      "page_route": "/#/reportCenter/pagcor",
+      "action": "SAFE_ACTION",
+      "method": "POST",
+      "path": "/cmpl/report/pagcor/list",
+      "query_fields": [],
+      "body_fields": [
+        "current",
+        "end_time",
+        "sid",
+        "site_id",
+        "size",
+        "start_time"
+      ],
+      "header_fields": [
+        "accept",
+        "accept-language",
+        "client-id",
+        "client-version",
+        "content-type",
+        "d",
+        "lang",
+        "referer",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform",
+        "user-agent"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "current",
+        "list",
+        "pages",
+        "size",
+        "total"
+      ]
+    },
+    {
+      "phase": "SAFE_ACTION",
+      "page_route": "/#/reportCenter/pagcor",
+      "action": "SAFE_ACTION",
+      "method": "POST",
+      "path": "/cmpl/report/pagcor/dictionary",
+      "query_fields": [],
+      "body_fields": [],
+      "header_fields": [
+        "accept",
+        "accept-language",
+        "client-id",
+        "client-version",
+        "content-type",
+        "d",
+        "lang",
+        "referer",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform",
+        "user-agent"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "pagcor_categories",
+        "platforms",
+        "shops"
+      ]
+    },
+    {
+      "phase": "SAFE_ACTION",
+      "page_route": "/#/reportCenter/pagcor",
+      "action": "SAFE_ACTION",
+      "method": "POST",
+      "path": "/cmpl/report/pagcor/dictionary",
+      "query_fields": [],
+      "body_fields": [],
+      "header_fields": [
+        "accept",
+        "accept-language",
+        "client-id",
+        "client-version",
+        "content-type",
+        "d",
+        "lang",
+        "referer",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform",
+        "user-agent"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "pagcor_categories",
+        "platforms",
+        "shops"
+      ]
+    },
+    {
+      "phase": "SAFE_ACTION",
+      "page_route": "/#/reportCenter/pagcor",
+      "action": "SAFE_ACTION",
+      "method": "POST",
+      "path": "/cmpl/report/pagcor/list",
+      "query_fields": [],
+      "body_fields": [
+        "current",
+        "end_time",
+        "sid",
+        "site_id",
+        "size",
+        "start_time"
+      ],
+      "header_fields": [
+        "accept",
+        "accept-language",
+        "client-id",
+        "client-version",
+        "content-type",
+        "d",
+        "lang",
+        "referer",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform",
+        "user-agent"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "current",
+        "list",
+        "pages",
+        "size",
+        "total"
+      ]
+    },
+    {
+      "phase": "SAFE_ACTION",
+      "page_route": "/#/reportCenter/pagcor",
+      "action": "SAFE_ACTION",
+      "method": "POST",
+      "path": "/cmpl/report/pagcor/dictionary",
+      "query_fields": [],
+      "body_fields": [],
+      "header_fields": [
+        "accept",
+        "accept-language",
+        "client-id",
+        "client-version",
+        "content-type",
+        "d",
+        "lang",
+        "referer",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform",
+        "user-agent"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "pagcor_categories",
+        "platforms",
+        "shops"
+      ]
+    },
+    {
+      "phase": "SAFE_ACTION",
+      "page_route": "/#/reportCenter/pagcor",
+      "action": "SAFE_ACTION",
+      "method": "POST",
+      "path": "/cmpl/report/pagcor/dictionary",
+      "query_fields": [],
+      "body_fields": [],
+      "header_fields": [
+        "accept",
+        "accept-language",
+        "client-id",
+        "client-version",
+        "content-type",
+        "d",
+        "lang",
+        "referer",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform",
+        "user-agent"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "pagcor_categories",
+        "platforms",
+        "shops"
+      ]
+    },
+    {
+      "phase": "SAFE_ACTION",
+      "page_route": "/#/reportCenter/pagcor",
+      "action": "SAFE_ACTION",
+      "method": "POST",
+      "path": "/cmpl/report/pagcor/list",
+      "query_fields": [],
+      "body_fields": [
+        "current",
+        "end_time",
+        "sid",
+        "site_id",
+        "size",
+        "start_time"
+      ],
+      "header_fields": [
+        "accept",
+        "accept-language",
+        "client-id",
+        "client-version",
+        "content-type",
+        "d",
+        "lang",
+        "referer",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform",
+        "user-agent"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "current",
+        "list",
+        "pages",
+        "size",
+        "total"
+      ]
+    },
+    {
+      "phase": "SAFE_ACTION",
+      "page_route": "/#/reportCenter/pagcor",
+      "action": "SAFE_ACTION",
+      "method": "POST",
+      "path": "/cmpl/report/pagcor/dictionary",
+      "query_fields": [],
+      "body_fields": [],
+      "header_fields": [
+        "accept",
+        "accept-language",
+        "client-id",
+        "client-version",
+        "content-type",
+        "d",
+        "lang",
+        "referer",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform",
+        "user-agent"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "pagcor_categories",
+        "platforms",
+        "shops"
+      ]
+    },
+    {
+      "phase": "SAFE_ACTION",
+      "page_route": "/#/reportCenter/pagcor",
+      "action": "SAFE_ACTION",
+      "method": "POST",
+      "path": "/cmpl/report/pagcor/dictionary",
+      "query_fields": [],
+      "body_fields": [],
+      "header_fields": [
+        "accept",
+        "accept-language",
+        "client-id",
+        "client-version",
+        "content-type",
+        "d",
+        "lang",
+        "referer",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform",
+        "user-agent"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "pagcor_categories",
+        "platforms",
+        "shops"
+      ]
+    },
+    {
+      "phase": "SAFE_ACTION",
+      "page_route": "/#/reportCenter/pagcor",
+      "action": "SAFE_ACTION",
+      "method": "POST",
+      "path": "/cmpl/report/pagcor/list",
+      "query_fields": [],
+      "body_fields": [
+        "current",
+        "end_time",
+        "sid",
+        "site_id",
+        "size",
+        "start_time"
+      ],
+      "header_fields": [
+        "accept",
+        "accept-language",
+        "client-id",
+        "client-version",
+        "content-type",
+        "d",
+        "lang",
+        "referer",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform",
+        "user-agent"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "current",
+        "list",
+        "pages",
+        "size",
+        "total"
+      ]
+    },
+    {
+      "phase": "SAFE_ACTION",
+      "page_route": "/#/reportCenter/pagcor",
+      "action": "SAFE_ACTION",
+      "method": "POST",
+      "path": "/cmpl/report/pagcor/dictionary",
+      "query_fields": [],
+      "body_fields": [],
+      "header_fields": [
+        "accept",
+        "accept-language",
+        "client-id",
+        "client-version",
+        "content-type",
+        "d",
+        "lang",
+        "referer",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform",
+        "user-agent"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "pagcor_categories",
+        "platforms",
+        "shops"
+      ]
+    },
+    {
+      "phase": "SAFE_ACTION",
+      "page_route": "/#/reportCenter/pagcor",
+      "action": "SAFE_ACTION",
+      "method": "POST",
+      "path": "/cmpl/report/pagcor/dictionary",
+      "query_fields": [],
+      "body_fields": [],
+      "header_fields": [
+        "accept",
+        "accept-language",
+        "client-id",
+        "client-version",
+        "content-type",
+        "d",
+        "lang",
+        "referer",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform",
+        "user-agent"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "pagcor_categories",
+        "platforms",
+        "shops"
+      ]
+    },
+    {
+      "phase": "SAFE_ACTION",
+      "page_route": "/#/reportCenter/pagcor",
+      "action": "SAFE_ACTION",
+      "method": "POST",
+      "path": "/cmpl/report/pagcor/list",
+      "query_fields": [],
+      "body_fields": [
+        "current",
+        "end_time",
+        "size",
+        "start_time"
+      ],
+      "header_fields": [
+        "accept",
+        "accept-language",
+        "client-id",
+        "client-version",
+        "content-type",
+        "d",
+        "lang",
+        "referer",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform",
+        "user-agent"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "current",
+        "list",
+        "pages",
+        "size",
+        "total"
+      ]
+    },
+    {
+      "phase": "SAFE_ACTION",
+      "page_route": "/#/reportCenter/pagcor",
+      "action": "SAFE_ACTION",
+      "method": "POST",
+      "path": "/cmpl/report/pagcor/dictionary",
+      "query_fields": [],
+      "body_fields": [],
+      "header_fields": [
+        "accept",
+        "accept-language",
+        "client-id",
+        "client-version",
+        "content-type",
+        "d",
+        "lang",
+        "referer",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform",
+        "user-agent"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "pagcor_categories",
+        "platforms",
+        "shops"
+      ]
+    },
+    {
+      "phase": "SAFE_ACTION",
+      "page_route": "/#/reportCenter/pagcor",
+      "action": "SAFE_ACTION",
+      "method": "POST",
+      "path": "/cmpl/report/pagcor/dictionary",
+      "query_fields": [],
+      "body_fields": [],
+      "header_fields": [
+        "accept",
+        "accept-language",
+        "client-id",
+        "client-version",
+        "content-type",
+        "d",
+        "lang",
+        "referer",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform",
+        "user-agent"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "pagcor_categories",
+        "platforms",
+        "shops"
+      ]
+    },
+    {
+      "phase": "SAFE_ACTION",
+      "page_route": "/#/reportCenter/pagcor",
+      "action": "SAFE_ACTION",
+      "method": "POST",
+      "path": "/cmpl/report/pagcor/list",
+      "query_fields": [],
+      "body_fields": [
+        "current",
+        "end_time",
+        "size",
+        "start_time"
+      ],
+      "header_fields": [
+        "accept",
+        "accept-language",
+        "client-id",
+        "client-version",
+        "content-type",
+        "d",
+        "lang",
+        "referer",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform",
+        "user-agent"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "current",
+        "list",
+        "pages",
+        "size",
+        "total"
+      ]
+    },
+    {
+      "phase": "SAFE_ACTION",
+      "page_route": "/#/reportCenter/pagcor",
+      "action": "SAFE_ACTION",
+      "method": "POST",
+      "path": "/cmpl/report/pagcor/dictionary",
+      "query_fields": [],
+      "body_fields": [],
+      "header_fields": [
+        "accept",
+        "accept-language",
+        "client-id",
+        "client-version",
+        "content-type",
+        "d",
+        "lang",
+        "referer",
+        "sec-ch-ua",
+        "sec-ch-ua-mobile",
+        "sec-ch-ua-platform",
+        "user-agent"
+      ],
+      "http_status": 200,
+      "business_status": true,
+      "response_data_type": "object",
+      "response_data_keys": [
+        "pagcor_categories",
+        "platforms",
+        "shops"
+      ]
+    }
+  ],
+  "third_party": [
+    {
+      "phase": "LOGIN",
+      "page_route": "/",
+      "method": "GET",
+      "origin": "https://api.iconify.design",
+      "path": "/fluent-mdl2.json",
+      "http_status": 200,
+      "classification": "THIRD_PARTY"
+    },
+    {
+      "phase": "LOGIN",
+      "page_route": "/",
+      "method": "GET",
+      "origin": "https://api.iconify.design",
+      "path": "/material-symbols.json",
+      "http_status": 200,
+      "classification": "THIRD_PARTY"
+    },
+    {
+      "phase": "LOGIN",
+      "page_route": "/",
+      "method": "GET",
+      "origin": "https://api.iconify.design",
+      "path": "/solar.json",
+      "http_status": 200,
+      "classification": "THIRD_PARTY"
+    },
+    {
+      "phase": "LOGIN",
+      "page_route": "/",
+      "method": "GET",
+      "origin": "https://api.iconify.design",
+      "path": "/fluent-emoji-high-contrast.json",
+      "http_status": 200,
+      "classification": "THIRD_PARTY"
+    }
+  ],
+  "downloads": [],
+  "unavailable_current_dom": {
+    "second_page": "NOT_VISIBLE_SINGLE_PAGE",
+    "detail": "NOT_VISIBLE",
+    "modal": "NOT_VISIBLE",
+    "drawer": "NOT_VISIBLE",
+    "overflow": "NOT_VISIBLE"
+  },
+  "write_operations": {
+    "executed": 0,
+    "restored": 0,
+    "blocked_reason": "No current-run owned data and no real-time business TOTP seed; persistent writes were not attempted"
+  },
+  "endpoints": [
+    {
+      "method": "POST",
+      "path": "/cmpl/login",
+      "classification": "ACTIVE",
+      "documented_match": "EXACT",
+      "event_count": 1,
+      "success_count": 1,
+      "failed_count": 0,
+      "pages": [
+        "/"
+      ],
+      "evidence": "pagcor-admin-live-scan.json"
+    },
+    {
+      "method": "GET",
+      "path": "/cmpl/me/detail",
+      "classification": "ACTIVE",
+      "documented_match": "EXACT",
+      "event_count": 1,
+      "success_count": 1,
+      "failed_count": 0,
+      "pages": [
+        "/"
+      ],
+      "evidence": "pagcor-admin-live-scan.json"
+    },
+    {
+      "method": "GET",
+      "path": "/cmpl/online/count",
+      "classification": "ACTIVE",
+      "documented_match": "EXACT",
+      "event_count": 2,
+      "success_count": 2,
+      "failed_count": 0,
+      "pages": [
+        "/"
+      ],
+      "evidence": "pagcor-admin-live-scan.json"
+    },
+    {
+      "method": "POST",
+      "path": "/cmpl/report/pagcor/dictionary",
+      "classification": "ACTIVE",
+      "documented_match": "EXACT",
+      "event_count": 20,
+      "success_count": 20,
+      "failed_count": 0,
+      "pages": [
+        "/",
+        "/#/reportCenter/pagcor"
+      ],
+      "evidence": "pagcor-admin-live-scan.json"
+    },
+    {
+      "method": "POST",
+      "path": "/cmpl/report/pagcor/list",
+      "classification": "ACTIVE",
+      "documented_match": "EXACT",
+      "event_count": 9,
+      "success_count": 9,
+      "failed_count": 0,
+      "pages": [
+        "/",
+        "/#/reportCenter/pagcor"
+      ],
+      "evidence": "pagcor-admin-live-scan.json"
+    },
+    {
+      "method": "POST",
+      "path": "/cmpl/kyc/approve",
+      "classification": "DOCUMENTED_UNVERIFIED",
+      "documented_match": "EXACT_NOT_UI_OBSERVED",
+      "event_count": 0,
+      "success_count": 0,
+      "failed_count": 0,
+      "pages": [],
+      "evidence": "合规/kyc/kyc 审核通过 - owen.bru",
+      "note": "Not observed in current UI; not classified STALE"
+    },
+    {
+      "method": "POST",
+      "path": "/cmpl/kyc/reject",
+      "classification": "DOCUMENTED_UNVERIFIED",
+      "documented_match": "EXACT_NOT_UI_OBSERVED",
+      "event_count": 0,
+      "success_count": 0,
+      "failed_count": 0,
+      "pages": [],
+      "evidence": "合规/kyc/kyc 审核驳回 - owen.bru",
+      "note": "Not observed in current UI; not classified STALE"
+    },
+    {
+      "method": "POST",
+      "path": "/cmpl/kyc/update",
+      "classification": "DOCUMENTED_UNVERIFIED",
+      "documented_match": "EXACT_NOT_UI_OBSERVED",
+      "event_count": 0,
+      "success_count": 0,
+      "failed_count": 0,
+      "pages": [],
+      "evidence": "合规/kyc/更新 kyc - owen.bru",
+      "note": "Not observed in current UI; not classified STALE"
+    },
+    {
+      "method": "POST",
+      "path": "/cmpl/kyc/list",
+      "classification": "DOCUMENTED_UNVERIFIED",
+      "documented_match": "EXACT_NOT_UI_OBSERVED",
+      "event_count": 0,
+      "success_count": 0,
+      "failed_count": 0,
+      "pages": [],
+      "evidence": "合规/kyc/获取 kyc 列表 - owen.bru",
+      "note": "Not observed in current UI; not classified STALE"
+    },
+    {
+      "method": "GET",
+      "path": "/cmpl/kyc/pending/count",
+      "classification": "DOCUMENTED_UNVERIFIED",
+      "documented_match": "EXACT_NOT_UI_OBSERVED",
+      "event_count": 0,
+      "success_count": 0,
+      "failed_count": 0,
+      "pages": [],
+      "evidence": "合规/kyc/获取 kyc 待审批数量.bru",
+      "note": "Not observed in current UI; not classified STALE"
+    },
+    {
+      "method": "GET",
+      "path": "/cmpl/kyc/detail",
+      "classification": "DOCUMENTED_UNVERIFIED",
+      "documented_match": "EXACT_NOT_UI_OBSERVED",
+      "event_count": 0,
+      "success_count": 0,
+      "failed_count": 0,
+      "pages": [],
+      "evidence": "合规/kyc/获取 kyc 详情 - owen.bru",
+      "note": "Not observed in current UI; not classified STALE"
+    },
+    {
+      "method": "POST",
+      "path": "/cmpl/upload/private",
+      "classification": "DOCUMENTED_UNVERIFIED",
+      "documented_match": "EXACT_NOT_UI_OBSERVED",
+      "event_count": 0,
+      "success_count": 0,
+      "failed_count": 0,
+      "pages": [],
+      "evidence": "合规/上传/上传-临时访问 - double.bru",
+      "note": "Not observed in current UI; not classified STALE"
+    },
+    {
+      "method": "POST",
+      "path": "/cmpl/upload/public",
+      "classification": "DOCUMENTED_UNVERIFIED",
+      "documented_match": "EXACT_NOT_UI_OBSERVED",
+      "event_count": 0,
+      "success_count": 0,
+      "failed_count": 0,
+      "pages": [],
+      "evidence": "合规/上传/上传-公开访问 - double.bru",
+      "note": "Not observed in current UI; not classified STALE"
+    },
+    {
+      "method": "GET",
+      "path": "/cmpl/finance/transaction/list",
+      "classification": "DOCUMENTED_UNVERIFIED",
+      "documented_match": "EXACT_NOT_UI_OBSERVED",
+      "event_count": 0,
+      "success_count": 0,
+      "failed_count": 0,
+      "pages": [],
+      "evidence": "合规/交易管理/交易记录- wesley.bru",
+      "note": "Not observed in current UI; not classified STALE"
+    },
+    {
+      "method": "POST",
+      "path": "/cmpl/finance/transaction/export",
+      "classification": "DOCUMENTED_UNVERIFIED",
+      "documented_match": "EXACT_NOT_UI_OBSERVED",
+      "event_count": 0,
+      "success_count": 0,
+      "failed_count": 0,
+      "pages": [],
+      "evidence": "合规/交易管理/交易记录导出-wesley.bru",
+      "note": "Not observed in current UI; not classified STALE"
+    },
+    {
+      "method": "GET",
+      "path": "/cmpl/finance/transaction/types",
+      "classification": "DOCUMENTED_UNVERIFIED",
+      "documented_match": "EXACT_NOT_UI_OBSERVED",
+      "event_count": 0,
+      "success_count": 0,
+      "failed_count": 0,
+      "pages": [],
+      "evidence": "合规/交易管理/账变类型- wesley.bru",
+      "note": "Not observed in current UI; not classified STALE"
+    },
+    {
+      "method": "GET",
+      "path": "/cmpl/member/list",
+      "classification": "DOCUMENTED_UNVERIFIED",
+      "documented_match": "EXACT_NOT_UI_OBSERVED",
+      "event_count": 0,
+      "success_count": 0,
+      "failed_count": 0,
+      "pages": [],
+      "evidence": "合规/会员列表/会员列表 - seven-double.bru",
+      "note": "Not observed in current UI; not classified STALE"
+    },
+    {
+      "method": "GET",
+      "path": "/cmpl/member/withdrawal/limit",
+      "classification": "DOCUMENTED_UNVERIFIED",
+      "documented_match": "EXACT_NOT_UI_OBSERVED",
+      "event_count": 0,
+      "success_count": 0,
+      "failed_count": 0,
+      "pages": [],
+      "evidence": "合规/会员列表/提现限额.bru",
+      "note": "Not observed in current UI; not classified STALE"
+    },
+    {
+      "method": "GET",
+      "path": "/cmpl/member/export",
+      "classification": "DOCUMENTED_UNVERIFIED",
+      "documented_match": "EXACT_NOT_UI_OBSERVED",
+      "event_count": 0,
+      "success_count": 0,
+      "failed_count": 0,
+      "pages": [],
+      "evidence": "合规/会员列表/数据导出 - seven-double.bru",
+      "note": "Not observed in current UI; not classified STALE"
+    },
+    {
+      "method": "POST",
+      "path": "/cmpl/member/insert",
+      "classification": "DOCUMENTED_UNVERIFIED",
+      "documented_match": "EXACT_NOT_UI_OBSERVED",
+      "event_count": 0,
+      "success_count": 0,
+      "failed_count": 0,
+      "pages": [],
+      "evidence": "合规/会员列表/新增会员 - seven-double.bru",
+      "note": "Not observed in current UI; not classified STALE"
+    },
+    {
+      "method": "POST",
+      "path": "/cmpl/member/update",
+      "classification": "DOCUMENTED_UNVERIFIED",
+      "documented_match": "EXACT_NOT_UI_OBSERVED",
+      "event_count": 0,
+      "success_count": 0,
+      "failed_count": 0,
+      "pages": [],
+      "evidence": "合规/会员列表/更新会员 - seven-double.bru",
+      "note": "Not observed in current UI; not classified STALE"
+    },
+    {
+      "method": "POST",
+      "path": "/cmpl/member/update/password",
+      "classification": "DOCUMENTED_UNVERIFIED",
+      "documented_match": "EXACT_NOT_UI_OBSERVED",
+      "event_count": 0,
+      "success_count": 0,
+      "failed_count": 0,
+      "pages": [],
+      "evidence": "合规/会员列表/重置会员密码.bru",
+      "note": "Not observed in current UI; not classified STALE"
+    },
+    {
+      "method": "GET",
+      "path": "/cmpl/venue/list",
+      "classification": "DOCUMENTED_UNVERIFIED",
+      "documented_match": "EXACT_NOT_UI_OBSERVED",
+      "event_count": 0,
+      "success_count": 0,
+      "failed_count": 0,
+      "pages": [],
+      "evidence": "合规/厂商管理/厂商列表-light.bru",
+      "note": "Not observed in current UI; not classified STALE"
+    },
+    {
+      "method": "GET",
+      "path": "/cmpl/member/log/list",
+      "classification": "DOCUMENTED_UNVERIFIED",
+      "documented_match": "EXACT_NOT_UI_OBSERVED",
+      "event_count": 0,
+      "success_count": 0,
+      "failed_count": 0,
+      "pages": [],
+      "evidence": "合规/后台日志/会员登录日志-seven.bru",
+      "note": "Not observed in current UI; not classified STALE"
+    },
+    {
+      "method": "POST",
+      "path": "/cmpl/log/list",
+      "classification": "DOCUMENTED_UNVERIFIED",
+      "documented_match": "EXACT_NOT_UI_OBSERVED",
+      "event_count": 0,
+      "success_count": 0,
+      "failed_count": 0,
+      "pages": [],
+      "evidence": "合规/后台日志/日志-seven.bru",
+      "note": "Not observed in current UI; not classified STALE"
+    },
+    {
+      "method": "POST",
+      "path": "/cmpl/user/update",
+      "classification": "DOCUMENTED_UNVERIFIED",
+      "documented_match": "EXACT_NOT_UI_OBSERVED",
+      "event_count": 0,
+      "success_count": 0,
+      "failed_count": 0,
+      "pages": [],
+      "evidence": "合规/后台账号管理/修改账户信息-seven.bru",
+      "note": "Not observed in current UI; not classified STALE"
+    },
+    {
+      "method": "POST",
+      "path": "/cmpl/member/retrieve/password",
+      "classification": "DOCUMENTED_UNVERIFIED",
+      "documented_match": "EXACT_NOT_UI_OBSERVED",
+      "event_count": 0,
+      "success_count": 0,
+      "failed_count": 0,
+      "pages": [],
+      "evidence": "合规/后台账号管理/后台会员密码otp重置.bru",
+      "note": "Not observed in current UI; not classified STALE"
+    },
+    {
+      "method": "GET",
+      "path": "/cmpl/user/delete",
+      "classification": "DOCUMENTED_UNVERIFIED",
+      "documented_match": "EXACT_NOT_UI_OBSERVED",
+      "event_count": 0,
+      "success_count": 0,
+      "failed_count": 0,
+      "pages": [],
+      "evidence": "合规/后台账号管理/后台删除账户-seven.bru",
+      "note": "Not observed in current UI; not classified STALE"
+    },
+    {
+      "method": "POST",
+      "path": "/cmpl/user/update/password",
+      "classification": "DOCUMENTED_UNVERIFIED",
+      "documented_match": "EXACT_NOT_UI_OBSERVED",
+      "event_count": 0,
+      "success_count": 0,
+      "failed_count": 0,
+      "pages": [],
+      "evidence": "合规/后台账号管理/后台员工修改密码.bru",
+      "note": "Not observed in current UI; not classified STALE"
+    },
+    {
+      "method": "GET",
+      "path": "/cmpl/logout",
+      "classification": "DOCUMENTED_UNVERIFIED",
+      "documented_match": "EXACT_NOT_UI_OBSERVED",
+      "event_count": 0,
+      "success_count": 0,
+      "failed_count": 0,
+      "pages": [],
+      "evidence": "合规/后台账号管理/后台登出-seven.bru",
+      "note": "Not observed in current UI; not classified STALE"
+    },
+    {
+      "method": "GET",
+      "path": "/cmpl/user/list",
+      "classification": "DOCUMENTED_UNVERIFIED",
+      "documented_match": "EXACT_NOT_UI_OBSERVED",
+      "event_count": 0,
+      "success_count": 0,
+      "failed_count": 0,
+      "pages": [],
+      "evidence": "合规/后台账号管理/后台账户列表-seven.bru",
+      "note": "Not observed in current UI; not classified STALE"
+    },
+    {
+      "method": "GET",
+      "path": "/cmpl/user/detail",
+      "classification": "DOCUMENTED_UNVERIFIED",
+      "documented_match": "EXACT_NOT_UI_OBSERVED",
+      "event_count": 0,
+      "success_count": 0,
+      "failed_count": 0,
+      "pages": [],
+      "evidence": "合规/后台账号管理/后台账户详情-seven.bru",
+      "note": "Not observed in current UI; not classified STALE"
+    },
+    {
+      "method": "POST",
+      "path": "/cmpl/user/insert",
+      "classification": "DOCUMENTED_UNVERIFIED",
+      "documented_match": "EXACT_NOT_UI_OBSERVED",
+      "event_count": 0,
+      "success_count": 0,
+      "failed_count": 0,
+      "pages": [],
+      "evidence": "合规/后台账号管理/新增账户-seven.bru",
+      "note": "Not observed in current UI; not classified STALE"
+    },
+    {
+      "method": "GET",
+      "path": "/cmpl/online/list",
+      "classification": "DOCUMENTED_UNVERIFIED",
+      "documented_match": "EXACT_NOT_UI_OBSERVED",
+      "event_count": 0,
+      "success_count": 0,
+      "failed_count": 0,
+      "pages": [],
+      "evidence": "合规/在线用户/在线会员列表.bru",
+      "note": "Not observed in current UI; not classified STALE"
+    },
+    {
+      "method": "GET",
+      "path": "/cmpl/platform/list",
+      "classification": "DOCUMENTED_UNVERIFIED",
+      "documented_match": "EXACT_NOT_UI_OBSERVED",
+      "event_count": 0,
+      "success_count": 0,
+      "failed_count": 0,
+      "pages": [],
+      "evidence": "合规/场馆管理/场馆列表.bru",
+      "note": "Not observed in current UI; not classified STALE"
+    },
+    {
+      "method": "POST",
+      "path": "/cmpl/platform/update/state",
+      "classification": "DOCUMENTED_UNVERIFIED",
+      "documented_match": "EXACT_NOT_UI_OBSERVED",
+      "event_count": 0,
+      "success_count": 0,
+      "failed_count": 0,
+      "pages": [],
+      "evidence": "合规/场馆管理/场馆更新状态.bru",
+      "note": "Not observed in current UI; not classified STALE"
+    },
+    {
+      "method": "POST",
+      "path": "/cmpl/report/pagcor/export",
+      "classification": "DOCUMENTED_UNVERIFIED",
+      "documented_match": "EXACT_NOT_UI_OBSERVED",
+      "event_count": 0,
+      "success_count": 0,
+      "failed_count": 0,
+      "pages": [],
+      "evidence": "合规/报表/pagcor 导出 - owen.bru",
+      "note": "Not observed in current UI; not classified STALE"
+    },
+    {
+      "method": "POST",
+      "path": "/cmpl/report/summary/list",
+      "classification": "DOCUMENTED_UNVERIFIED",
+      "documented_match": "EXACT_NOT_UI_OBSERVED",
+      "event_count": 0,
+      "success_count": 0,
+      "failed_count": 0,
+      "pages": [],
+      "evidence": "合规/报表/报表-报告摘要.bru",
+      "note": "Not observed in current UI; not classified STALE"
+    },
+    {
+      "method": "POST",
+      "path": "/cmpl/record/api",
+      "classification": "DOCUMENTED_UNVERIFIED",
+      "documented_match": "EXACT_NOT_UI_OBSERVED",
+      "event_count": 0,
+      "success_count": 0,
+      "failed_count": 0,
+      "pages": [],
+      "evidence": "合规/报表/拉单API - light.bru",
+      "note": "Not observed in current UI; not classified STALE"
+    },
+    {
+      "method": "POST",
+      "path": "/cmpl/report/shop/list",
+      "classification": "DOCUMENTED_UNVERIFIED",
+      "documented_match": "EXACT_NOT_UI_OBSERVED",
+      "event_count": 0,
+      "success_count": 0,
+      "failed_count": 0,
+      "pages": [],
+      "evidence": "合规/报表/门店报表 - owen.bru",
+      "note": "Not observed in current UI; not classified STALE"
+    },
+    {
+      "method": "POST",
+      "path": "/cmpl/report/shop/export",
+      "classification": "DOCUMENTED_UNVERIFIED",
+      "documented_match": "EXACT_NOT_UI_OBSERVED",
+      "event_count": 0,
+      "success_count": 0,
+      "failed_count": 0,
+      "pages": [],
+      "evidence": "合规/报表/门店报表导出 - owen.bru",
+      "note": "Not observed in current UI; not classified STALE"
+    },
+    {
+      "method": "GET",
+      "path": "/cmpl/game/list",
+      "classification": "DOCUMENTED_UNVERIFIED",
+      "documented_match": "EXACT_NOT_UI_OBSERVED",
+      "event_count": 0,
+      "success_count": 0,
+      "failed_count": 0,
+      "pages": [],
+      "evidence": "合规/游戏管理/游戏列表.bru",
+      "note": "Not observed in current UI; not classified STALE"
+    },
+    {
+      "method": "POST",
+      "path": "/cmpl/game/update/state",
+      "classification": "DOCUMENTED_UNVERIFIED",
+      "documented_match": "EXACT_NOT_UI_OBSERVED",
+      "event_count": 0,
+      "success_count": 0,
+      "failed_count": 0,
+      "pages": [],
+      "evidence": "合规/游戏管理/游戏更新状态.bru",
+      "note": "Not observed in current UI; not classified STALE"
+    },
+    {
+      "method": "POST",
+      "path": "/cmpl/jackpot/list",
+      "classification": "DOCUMENTED_UNVERIFIED",
+      "documented_match": "EXACT_NOT_UI_OBSERVED",
+      "event_count": 0,
+      "success_count": 0,
+      "failed_count": 0,
+      "pages": [],
+      "evidence": "合规/游戏记录/jackpot记录-owen.bru",
+      "note": "Not observed in current UI; not classified STALE"
+    },
+    {
+      "method": "POST",
+      "path": "/cmpl/jackpot/export",
+      "classification": "DOCUMENTED_UNVERIFIED",
+      "documented_match": "EXACT_NOT_UI_OBSERVED",
+      "event_count": 0,
+      "success_count": 0,
+      "failed_count": 0,
+      "pages": [],
+      "evidence": "合规/游戏记录/jackpot记录导出-owen.bru",
+      "note": "Not observed in current UI; not classified STALE"
+    },
+    {
+      "method": "POST",
+      "path": "/cmpl/record/bet",
+      "classification": "DOCUMENTED_UNVERIFIED",
+      "documented_match": "EXACT_NOT_UI_OBSERVED",
+      "event_count": 0,
+      "success_count": 0,
+      "failed_count": 0,
+      "pages": [],
+      "evidence": "合规/游戏记录/全平台投注记录-wesley-owen.bru",
+      "note": "Not observed in current UI; not classified STALE"
+    },
+    {
+      "method": "POST",
+      "path": "/cmpl/record/export",
+      "classification": "DOCUMENTED_UNVERIFIED",
+      "documented_match": "EXACT_NOT_UI_OBSERVED",
+      "event_count": 0,
+      "success_count": 0,
+      "failed_count": 0,
+      "pages": [],
+      "evidence": "合规/游戏记录/游戏记录导出-wesley-owen.bru",
+      "note": "Not observed in current UI; not classified STALE"
+    },
+    {
+      "method": "GET",
+      "path": "/cmpl/priv/list",
+      "classification": "DOCUMENTED_REACHABLE",
+      "documented_match": "API_DIRECT_SUCCESS_NOT_UI_OBSERVED",
+      "event_count": 0,
+      "success_count": 63,
+      "failed_count": 0,
+      "pages": [],
+      "evidence": "permission_tree.responses",
+      "note": "Direct authenticated permission-tree evidence; not counted as UI ACTIVE"
+    },
+    {
+      "method": "GET",
+      "path": "/cmpl/priv/by/group",
+      "classification": "DOCUMENTED_UNVERIFIED",
+      "documented_match": "EXACT_NOT_UI_OBSERVED",
+      "event_count": 0,
+      "success_count": 0,
+      "failed_count": 0,
+      "pages": [],
+      "evidence": "合规/系统管理/权限管理/角色权限列表.bru",
+      "note": "Not observed in current UI; not classified STALE"
+    },
+    {
+      "method": "GET",
+      "path": "/cmpl/whiteList/delete",
+      "classification": "DOCUMENTED_UNVERIFIED",
+      "documented_match": "EXACT_NOT_UI_OBSERVED",
+      "event_count": 0,
+      "success_count": 0,
+      "failed_count": 0,
+      "pages": [],
+      "evidence": "合规/系统管理/白名单管理/删除白名单 --yasser.bru",
+      "note": "Not observed in current UI; not classified STALE"
+    },
+    {
+      "method": "POST",
+      "path": "/cmpl/whiteList/insert",
+      "classification": "DOCUMENTED_UNVERIFIED",
+      "documented_match": "EXACT_NOT_UI_OBSERVED",
+      "event_count": 0,
+      "success_count": 0,
+      "failed_count": 0,
+      "pages": [],
+      "evidence": "合规/系统管理/白名单管理/新增白名单 --yasser.bru",
+      "note": "Not observed in current UI; not classified STALE"
+    },
+    {
+      "method": "POST",
+      "path": "/cmpl/whiteList/update",
+      "classification": "DOCUMENTED_UNVERIFIED",
+      "documented_match": "EXACT_NOT_UI_OBSERVED",
+      "event_count": 0,
+      "success_count": 0,
+      "failed_count": 0,
+      "pages": [],
+      "evidence": "合规/系统管理/白名单管理/更新白名单 --yasser.bru",
+      "note": "Not observed in current UI; not classified STALE"
+    },
+    {
+      "method": "GET",
+      "path": "/cmpl/whiteList/list",
+      "classification": "DOCUMENTED_UNVERIFIED",
+      "documented_match": "EXACT_NOT_UI_OBSERVED",
+      "event_count": 0,
+      "success_count": 0,
+      "failed_count": 0,
+      "pages": [],
+      "evidence": "合规/系统管理/白名单管理/白名单列表 --yasser.bru",
+      "note": "Not observed in current UI; not classified STALE"
+    },
+    {
+      "method": "POST",
+      "path": "/cmpl/group/insert",
+      "classification": "DOCUMENTED_UNVERIFIED",
+      "documented_match": "EXACT_NOT_UI_OBSERVED",
+      "event_count": 0,
+      "success_count": 0,
+      "failed_count": 0,
+      "pages": [],
+      "evidence": "合规/系统管理/角色管理/新增角色 --yasser.bru",
+      "note": "Not observed in current UI; not classified STALE"
+    },
+    {
+      "method": "POST",
+      "path": "/cmpl/group/update",
+      "classification": "DOCUMENTED_UNVERIFIED",
+      "documented_match": "EXACT_NOT_UI_OBSERVED",
+      "event_count": 0,
+      "success_count": 0,
+      "failed_count": 0,
+      "pages": [],
+      "evidence": "合规/系统管理/角色管理/更新角色--yasser.bru",
+      "note": "Not observed in current UI; not classified STALE"
+    },
+    {
+      "method": "GET",
+      "path": "/cmpl/group/list",
+      "classification": "DOCUMENTED_UNVERIFIED",
+      "documented_match": "EXACT_NOT_UI_OBSERVED",
+      "event_count": 0,
+      "success_count": 0,
+      "failed_count": 0,
+      "pages": [],
+      "evidence": "合规/系统管理/角色管理/角色列表 --yasser.bru",
+      "note": "Not observed in current UI; not classified STALE"
+    },
+    {
+      "method": "GET",
+      "path": "/cmpl/notify/audit/alarm",
+      "classification": "DOCUMENTED_UNVERIFIED",
+      "documented_match": "EXACT_NOT_UI_OBSERVED",
+      "event_count": 0,
+      "success_count": 0,
+      "failed_count": 0,
+      "pages": [],
+      "evidence": "合规/系统管理/通知中心/获取系统通知数量-wesley.bru",
+      "note": "Not observed in current UI; not classified STALE"
+    },
+    {
+      "method": "GET",
+      "path": "/cmpl/finance/deposit/list",
+      "classification": "DOCUMENTED_UNVERIFIED",
+      "documented_match": "EXACT_NOT_UI_OBSERVED",
+      "event_count": 0,
+      "success_count": 0,
+      "failed_count": 0,
+      "pages": [],
+      "evidence": "合规/财务管理/财务记录/充值记录-wesley.bru",
+      "note": "Not observed in current UI; not classified STALE"
+    },
+    {
+      "method": "POST",
+      "path": "/cmpl/finance/deposit/export",
+      "classification": "DOCUMENTED_UNVERIFIED",
+      "documented_match": "EXACT_NOT_UI_OBSERVED",
+      "event_count": 0,
+      "success_count": 0,
+      "failed_count": 0,
+      "pages": [],
+      "evidence": "合规/财务管理/财务记录/充值记录导出-wesley.bru",
+      "note": "Not observed in current UI; not classified STALE"
+    },
+    {
+      "method": "GET",
+      "path": "/admin/finance/payment/withdraw/channels",
+      "classification": "DOCUMENTED_UNVERIFIED",
+      "documented_match": "EXACT_NOT_UI_OBSERVED",
+      "event_count": 0,
+      "success_count": 0,
+      "failed_count": 0,
+      "pages": [],
+      "evidence": "合规/财务管理/财务记录/提现渠道列表-cold.bru",
+      "note": "Not observed in current UI; not classified STALE"
+    },
+    {
+      "method": "GET",
+      "path": "/cmpl/finance/withdraw/list",
+      "classification": "DOCUMENTED_UNVERIFIED",
+      "documented_match": "EXACT_NOT_UI_OBSERVED",
+      "event_count": 0,
+      "success_count": 0,
+      "failed_count": 0,
+      "pages": [],
+      "evidence": "合规/财务管理/财务记录/提现记录-wesley.bru",
+      "note": "Not observed in current UI; not classified STALE"
+    },
+    {
+      "method": "POST",
+      "path": "/cmpl/finance/withdraw/export",
+      "classification": "DOCUMENTED_UNVERIFIED",
+      "documented_match": "EXACT_NOT_UI_OBSERVED",
+      "event_count": 0,
+      "success_count": 0,
+      "failed_count": 0,
+      "pages": [],
+      "evidence": "合规/财务管理/财务记录/提现记录导出-wesley.bru",
+      "note": "Not observed in current UI; not classified STALE"
+    },
+    {
+      "method": "GET",
+      "path": "/cmpl/finance/payment/deposit/channels",
+      "classification": "DOCUMENTED_UNVERIFIED",
+      "documented_match": "EXACT_NOT_UI_OBSERVED",
+      "event_count": 0,
+      "success_count": 0,
+      "failed_count": 0,
+      "pages": [],
+      "evidence": "合规/财务管理/财务记录/支付渠道列表-cold.bru",
+      "note": "Not observed in current UI; not classified STALE"
+    },
+    {
+      "method": "POST",
+      "path": "/cmpl/banner/insert",
+      "classification": "DOCUMENTED_UNVERIFIED",
+      "documented_match": "EXACT_NOT_UI_OBSERVED",
+      "event_count": 0,
+      "success_count": 0,
+      "failed_count": 0,
+      "pages": [],
+      "evidence": "合规/轮播图/新增轮播图.bru",
+      "note": "Not observed in current UI; not classified STALE"
+    },
+    {
+      "method": "POST",
+      "path": "/cmpl/banner/update",
+      "classification": "DOCUMENTED_UNVERIFIED",
+      "documented_match": "EXACT_NOT_UI_OBSERVED",
+      "event_count": 0,
+      "success_count": 0,
+      "failed_count": 0,
+      "pages": [],
+      "evidence": "合规/轮播图/轮播图修改.bru",
+      "note": "Not observed in current UI; not classified STALE"
+    },
+    {
+      "method": "POST",
+      "path": "/cmpl/banner/list",
+      "classification": "DOCUMENTED_UNVERIFIED",
+      "documented_match": "EXACT_NOT_UI_OBSERVED",
+      "event_count": 0,
+      "success_count": 0,
+      "failed_count": 0,
+      "pages": [],
+      "evidence": "合规/轮播图/轮播图列表.bru",
+      "note": "Not observed in current UI; not classified STALE"
+    },
+    {
+      "method": "GET",
+      "path": "/cmpl/banner/delete",
+      "classification": "DOCUMENTED_UNVERIFIED",
+      "documented_match": "EXACT_NOT_UI_OBSERVED",
+      "event_count": 0,
+      "success_count": 0,
+      "failed_count": 0,
+      "pages": [],
+      "evidence": "合规/轮播图/轮播图删除.bru",
+      "note": "Not observed in current UI; not classified STALE"
+    },
+    {
+      "method": "POST",
+      "path": "/cmpl/banner/update/state",
+      "classification": "DOCUMENTED_UNVERIFIED",
+      "documented_match": "EXACT_NOT_UI_OBSERVED",
+      "event_count": 0,
+      "success_count": 0,
+      "failed_count": 0,
+      "pages": [],
+      "evidence": "合规/轮播图/轮播图更新状态.bru",
+      "note": "Not observed in current UI; not classified STALE"
+    },
+    {
+      "method": "POST",
+      "path": "/cmpl/shop/update",
+      "classification": "DOCUMENTED_UNVERIFIED",
+      "documented_match": "EXACT_NOT_UI_OBSERVED",
+      "event_count": 0,
+      "success_count": 0,
+      "failed_count": 0,
+      "pages": [],
+      "evidence": "合规/门店/修改门店.bru",
+      "note": "Not observed in current UI; not classified STALE"
+    },
+    {
+      "method": "POST",
+      "path": "/cmpl/shop/insert",
+      "classification": "DOCUMENTED_UNVERIFIED",
+      "documented_match": "EXACT_NOT_UI_OBSERVED",
+      "event_count": 0,
+      "success_count": 0,
+      "failed_count": 0,
+      "pages": [],
+      "evidence": "合规/门店/新增门店.bru",
+      "note": "Not observed in current UI; not classified STALE"
+    },
+    {
+      "method": "GET",
+      "path": "/cmpl/shop/list",
+      "classification": "DOCUMENTED_UNVERIFIED",
+      "documented_match": "EXACT_NOT_UI_OBSERVED",
+      "event_count": 0,
+      "success_count": 0,
+      "failed_count": 0,
+      "pages": [],
+      "evidence": "合规/门店/门店列表.bru",
+      "note": "Not observed in current UI; not classified STALE"
+    }
+  ]
+}

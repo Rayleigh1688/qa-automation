@@ -1,0 +1,67 @@
+method,path,classification,ui_observed,documented_source,note
+,,DOCUMENTED_UNVERIFIED,NO,代理管理后台/folder.bru | 代理管理后台/代理域名/folder.bru | 代理管理后台/代理管理/folder.bru | 代理管理后台/代理管理/代理列表/folder.bru | 代理管理后台/代理管理/代理审核/folder.bru | 代理管理后台/代理管理/代理设置/Pagcor税率/folder.bru | 代理管理后台/代理管理/代理设置/folder.bru | 代理管理后台/代理管理/代理设置/代理开关/folder.bru | 代理管理后台/代理管理/代理设置/佣金阶梯/folder.bru | 代理管理后台/代理管理/代理设置/厂商费率/folder.bru | 代理管理后台/代理管理/代理设置/推广素材/folder.bru | 代理管理后台/代理管理/代理设置/活跃会员/folder.bru | 代理管理后台/代理管理/会员列表/folder.bru | 代理管理后台/后台账号管理/folder.bru | 代理管理后台/推广素材/folder.bru | 代理管理后台/系统/folder.bru | 代理管理后台/系统/角色配置/folder.bru | 代理管理后台/财务管理/folder.bru | 代理管理后台/财务管理/佣金审核/folder.bru | 代理管理后台/财务管理/佣金报表/folder.bru | 代理管理后台/财务管理/财务报表/folder.bru | 代理管理后台/首页BI/folder.bru,Not observed from the current role UI; absence is not STALE evidence
+GET,/admin/agency/audit/detail,ACTIVE,YES,代理管理后台/代理管理/代理审核/代理资料.bru,
+GET,/admin/agency/audit/list,ACTIVE,YES,代理管理后台/代理管理/代理审核/代理审核列表 - wesley.bru,
+GET,/admin/agency/child/active/list,DOCUMENTED_UNVERIFIED,NO,代理管理后台/活跃会员列表.bru,Not observed from the current role UI; absence is not STALE evidence
+GET,/admin/agency/child/bonus/list,DOCUMENTED_UNVERIFIED,NO,代理管理后台/活动礼金列表.bru,Not observed from the current role UI; absence is not STALE evidence
+GET,/admin/agency/child/ggr,DOCUMENTED_UNVERIFIED,NO,代理管理后台/ggr明细.bru,Not observed from the current role UI; absence is not STALE evidence
+GET,/admin/agency/child/pagcor/tax,DOCUMENTED_UNVERIFIED,NO,代理管理后台/pagcor税费明细.bru,Not observed from the current role UI; absence is not STALE evidence
+GET,/admin/agency/child/venue/fee,DOCUMENTED_UNVERIFIED,NO,代理管理后台/场馆费明细.bru,Not observed from the current role UI; absence is not STALE evidence
+GET,/admin/agency/commission/audit/list,ACTIVE,YES,代理管理后台/财务管理/佣金审核/佣金审核列表 - wesley.bru,
+GET,/admin/agency/commission/report,ACTIVE,YES,代理管理后台/财务管理/佣金报表/佣金报表.bru,
+GET,/admin/agency/commission/report/export,DOCUMENTED_UNVERIFIED,NO,代理管理后台/财务管理/佣金报表/佣金报表导出.bru,Not observed from the current role UI; absence is not STALE evidence
+GET,/admin/agency/domain/list,ACTIVE,YES,代理管理后台/代理域名/列表.bru,
+GET,/admin/agency/ladder,ACTIVE,YES,代理管理后台/代理管理/代理设置/佣金阶梯/查询佣金阶梯.bru,
+GET,/admin/agency/list,ACTIVE,YES,代理管理后台/代理管理/代理列表/代理列表.bru,
+GET,/admin/agency/member/list,ACTIVE,YES,代理管理后台/代理管理/会员列表/会员列表-wesley.bru,
+GET,/admin/agency/reports/bi/basic,ACTIVE,YES,代理管理后台/首页BI/数据总览.bru,
+GET,/admin/agency/reports/bi/chart,ACTIVE,YES,代理管理后台/首页BI/报表图形化数据.bru,
+GET,/admin/agency/taxrate/list,ACTIVE,YES,代理管理后台/代理管理/代理设置/Pagcor税率/Pagcor税率列表.bru,
+GET,/admin/agency/vendorrate/list,ACTIVE,YES,代理管理后台/代理管理/代理设置/厂商费率/厂商费率列表.bru,
+GET,/admin/log/list,DOCUMENTED_UNVERIFIED,NO,代理管理后台/系统/操作日志.bru,Not observed from the current role UI; absence is not STALE evidence
+GET,/agency/finance/transaction/types,DOCUMENTED_UNVERIFIED,NO,代理管理后台/财务管理/财务报表/账变类型- wesley.bru,Not observed from the current role UI; absence is not STALE evidence
+GET,/agency/priv/list,DOCUMENTED_UNVERIFIED,NO,代理管理后台/系统/角色配置/权限列表.bru,Not observed from the current role UI; absence is not STALE evidence
+GET,/backend/agency/detail,DOCUMENTED_UNVERIFIED,NO,代理管理后台/后台账号管理/后台账户详情-seven.bru,Not observed from the current role UI; absence is not STALE evidence
+GET,/backend/agency/google/qrcode/info,DOCUMENTED_UNVERIFIED,NO,代理管理后台/后台账号管理/获取谷歌令牌密钥-seven.bru,Not observed from the current role UI; absence is not STALE evidence
+GET,/backend/agency/google/unbind,DOCUMENTED_UNVERIFIED,NO,代理管理后台/后台账号管理/谷歌令牌解绑.bru,Not observed from the current role UI; absence is not STALE evidence
+GET,/backend/agency/google/verify,DOCUMENTED_UNVERIFIED,NO,代理管理后台/后台账号管理/谷歌令牌验证-seven.bru,Not observed from the current role UI; absence is not STALE evidence
+GET,/backend/agency/logout,DOCUMENTED_UNVERIFIED,NO,代理管理后台/后台账号管理/后台登出.bru,Not observed from the current role UI; absence is not STALE evidence
+GET,/backend/agency/me/detail,ACTIVE,YES,代理管理后台/后台账号管理/后台账户详情(当前登陆信息).bru,
+GET,/backend/agency/sys/config/list,DOCUMENTED_UNVERIFIED,NO,代理管理后台/代理管理/代理设置/代理开关/代理开关列表.bru | 代理管理后台/代理管理/代理设置/活跃会员/系统配置列表.bru,Not observed from the current role UI; absence is not STALE evidence
+GET,/backend/agency/user/list,DOCUMENTED_UNVERIFIED,NO,代理管理后台/后台账号管理/后台账户列表.bru,Not observed from the current role UI; absence is not STALE evidence
+POST,/admin/agency/audit/agree,DOCUMENTED_UNVERIFIED,NO,代理管理后台/代理管理/代理审核/代理审核同意-wesley.bru,Not observed from the current role UI; absence is not STALE evidence
+POST,/admin/agency/audit/reject,DOCUMENTED_UNVERIFIED,NO,代理管理后台/代理管理/代理审核/代理审核拒绝-wesley.bru,Not observed from the current role UI; absence is not STALE evidence
+POST,/admin/agency/commission/audit/adjust,DOCUMENTED_UNVERIFIED,NO,代理管理后台/财务管理/佣金审核/佣金校准 - wesley.bru,Not observed from the current role UI; absence is not STALE evidence
+POST,/admin/agency/commission/audit/agree,DOCUMENTED_UNVERIFIED,NO,代理管理后台/财务管理/佣金审核/佣金审核通过 - wesley.bru,Not observed from the current role UI; absence is not STALE evidence
+POST,/admin/agency/commission/audit/batch/agree,DOCUMENTED_UNVERIFIED,NO,代理管理后台/财务管理/佣金审核/批量通过.bru,Not observed from the current role UI; absence is not STALE evidence
+POST,/admin/agency/commission/audit/batch/reject,DOCUMENTED_UNVERIFIED,NO,代理管理后台/财务管理/佣金审核/批量拒绝.bru,Not observed from the current role UI; absence is not STALE evidence
+POST,/admin/agency/commission/audit/reject,DOCUMENTED_UNVERIFIED,NO,代理管理后台/财务管理/佣金审核/佣金审核拒绝 - wesley.bru,Not observed from the current role UI; absence is not STALE evidence
+POST,/admin/agency/domain/cutover,DOCUMENTED_UNVERIFIED,NO,代理管理后台/代理域名/开关切换.bru,Not observed from the current role UI; absence is not STALE evidence
+POST,/admin/agency/domain/delete,DOCUMENTED_UNVERIFIED,NO,代理管理后台/代理域名/删除.bru,Not observed from the current role UI; absence is not STALE evidence
+POST,/admin/agency/domain/insert,DOCUMENTED_UNVERIFIED,NO,代理管理后台/代理域名/添加.bru,Not observed from the current role UI; absence is not STALE evidence
+POST,/admin/agency/domain/update,DOCUMENTED_UNVERIFIED,NO,代理管理后台/代理域名/编辑.bru,Not observed from the current role UI; absence is not STALE evidence
+POST,/admin/agency/ladder/delete,DOCUMENTED_UNVERIFIED,NO,代理管理后台/代理管理/代理设置/佣金阶梯/删除佣金阶梯.bru,Not observed from the current role UI; absence is not STALE evidence
+POST,/admin/agency/ladder/insert,DOCUMENTED_UNVERIFIED,NO,代理管理后台/代理管理/代理设置/佣金阶梯/添加佣金阶梯.bru,Not observed from the current role UI; absence is not STALE evidence
+POST,/admin/agency/ladder/update,DOCUMENTED_UNVERIFIED,NO,代理管理后台/代理管理/代理设置/佣金阶梯/修改佣金阶梯.bru,Not observed from the current role UI; absence is not STALE evidence
+POST,/admin/agency/member/tags/update,DOCUMENTED_UNVERIFIED,NO,代理管理后台/代理管理/代理列表/会员备注.bru,Not observed from the current role UI; absence is not STALE evidence
+POST,/admin/agency/taxrate/update,DOCUMENTED_UNVERIFIED,NO,代理管理后台/代理管理/代理设置/Pagcor税率/Pagcor 税率修改.bru,Not observed from the current role UI; absence is not STALE evidence
+POST,/admin/agency/update,DOCUMENTED_UNVERIFIED,NO,代理管理后台/代理管理/代理列表/代理列表编辑.bru,Not observed from the current role UI; absence is not STALE evidence
+POST,/admin/agency/vendorrate/update,DOCUMENTED_UNVERIFIED,NO,代理管理后台/代理管理/代理设置/厂商费率/厂商费率修改.bru,Not observed from the current role UI; absence is not STALE evidence
+POST,/admin/finance/adjust/insert,DOCUMENTED_UNVERIFIED,NO,代理管理后台/代理管理/代理列表/余额调整.bru,Not observed from the current role UI; absence is not STALE evidence
+POST,/admin/finance/adjust/list,DOCUMENTED_UNVERIFIED,NO,代理管理后台/财务管理/财务报表/系统调整.bru,Not observed from the current role UI; absence is not STALE evidence
+POST,/agency/finance/transaction/list,ACTIVE,YES,代理管理后台/财务管理/财务报表/账变列表- wesley.bru,
+POST,/backend/agency/banner/insert,DOCUMENTED_UNVERIFIED,NO,代理管理后台/代理管理/代理设置/推广素材/添加.bru | 代理管理后台/推广素材/新增轮播图.bru,Not observed from the current role UI; absence is not STALE evidence
+POST,/backend/agency/banner/list,DOCUMENTED_UNVERIFIED,NO,代理管理后台/代理管理/代理设置/推广素材/列表.bru | 代理管理后台/推广素材/轮播图列表.bru,Not observed from the current role UI; absence is not STALE evidence
+POST,/backend/agency/banner/update,DOCUMENTED_UNVERIFIED,NO,代理管理后台/代理管理/代理设置/推广素材/编辑.bru,Not observed from the current role UI; absence is not STALE evidence
+POST,/backend/agency/banner/update/state,DOCUMENTED_UNVERIFIED,NO,代理管理后台/推广素材/轮播图更新状态.bru,Not observed from the current role UI; absence is not STALE evidence
+POST,/backend/agency/google/secret/update,DOCUMENTED_UNVERIFIED,NO,代理管理后台/后台账号管理/绑定谷歌令牌-seven.bru,Not observed from the current role UI; absence is not STALE evidence
+POST,/backend/agency/login,ACTIVE,YES,代理管理后台/后台账号管理/后端账号登陆.bru,
+POST,/backend/agency/login/auth,ACTIVE,YES,代理管理后台/后台账号管理/后端账号登陆（前置验证）-seven.bru,
+POST,/backend/agency/member/retrieve/password,DOCUMENTED_UNVERIFIED,NO,代理管理后台/后台账号管理/后台会员密码otp重置.bru,Not observed from the current role UI; absence is not STALE evidence
+POST,/backend/agency/sys/config/set,DOCUMENTED_UNVERIFIED,NO,代理管理后台/代理管理/代理设置/活跃会员/系统配置设置.bru,Not observed from the current role UI; absence is not STALE evidence
+POST,/backend/agency/sys/config/update,DOCUMENTED_UNVERIFIED,NO,代理管理后台/代理管理/代理设置/代理开关/代理开关修改.bru,Not observed from the current role UI; absence is not STALE evidence
+POST,/backend/agency/user/insert,DOCUMENTED_UNVERIFIED,NO,代理管理后台/后台账号管理/新增账户.bru,Not observed from the current role UI; absence is not STALE evidence
+POST,/backend/agency/user/update,DOCUMENTED_UNVERIFIED,NO,代理管理后台/后台账号管理/修改账户信息.bru,Not observed from the current role UI; absence is not STALE evidence
+POST,/backend/agency/user/update/password,DOCUMENTED_UNVERIFIED,NO,代理管理后台/后台账号管理/后台员工修改密码.bru,Not observed from the current role UI; absence is not STALE evidence
+GET,/backend/agency/group/list,UNDOCUMENTED_ACTIVE,YES,,
+POST,/backend/agency/user/list,MISCLASSIFIED,YES,代理管理后台/后台账号管理/后台账户列表.bru,method drift against agency-management documentation

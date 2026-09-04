@@ -40,16 +40,22 @@ ui/              UI 自动化测试
 performance/     性能测试
 interface-discovery/ FAT 客户端与管理后台当前接口发现、映射和分类计划
 client-button-map/  客户端页面与控件参考清单
+fat-client-interface-scan/ FAT 客户端接口发现独立资产
 fat-admin-interface-scan/ FAT 管理后台接口发现独立资产
+pagcor-admin-interface-scan/ FAT 合规管理后台接口发现独立资产
+agency-admin-interface-scan/ FAT 代理管理后台接口发现独立资产
+agency-portal-interface-scan/ FAT 代理前台接口发现独立资产
 tools/           脱离门禁主流程的测试数据准备工具；写操作必须显式执行
 scripts/         辅助脚本
 ```
 
 ## 当前状态
 
-当前阶段：P0 核心自动化已形成可执行基线，管理后台 P0 只读骨架已补齐
+当前阶段：P0 核心自动化已形成可执行基线；接口发现暂停，第一优先级转为让 FAT/UAT P0 完全由确定性代码单命令执行，不依赖 AI 临场操作或判断
 
-另有独立的 FAT 当前接口发现专项：先通过客户端和管理后台真实 UI 收集“页面 → 操作 → 接口”证据并与 inventory/catalog 分类映射，完成后再评审接口等级。该专项不改变现有 P0/P1 范围，执行计划见 [`interface-discovery/README.md`](interface-discovery/README.md)。
+阶段成果见 [`FILBET-QA阶段成果报告-2026-09-04.md`](FILBET-QA阶段成果报告-2026-09-04.md)。
+
+另有独立的 FAT 当前接口发现专项，通过真实 UI 收集“页面 → 操作 → 接口”证据并与 inventory/catalog 分类映射；该专项现已冻结为阶段快照，不改变现有 P0/P1 范围。执行状态见 [`interface-discovery/README.md`](interface-discovery/README.md)。
 
 - P0 资产已重排为 8 条端到端主流程和 57 条整体用例：31 条 safe smoke（客户端 18、后台 13）、15 条 API 登记反例（默认执行 13 条）、10 条受控写/UI 协作项和 1 条已实现状态 UI 反例。
 - `test-cases.csv` 已成为正反例统一索引，并按真实业务依赖排序；接口文档扫描清单只用于发现，不再决定 P0 范围或访问顺序。

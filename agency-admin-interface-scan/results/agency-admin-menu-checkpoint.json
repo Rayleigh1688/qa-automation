@@ -1,0 +1,117 @@
+{
+  "login_gate": {
+    "success": true,
+    "origin": "https://admin-agency-fat.filbet2025.com",
+    "pathname": "/home",
+    "title": "Filbet Admin",
+    "rendered_menu_items": 11,
+    "required_request_evidence": [
+      "POST /backend/agency/login:200:true",
+      "GET /backend/agency/me/detail:200:true"
+    ],
+    "identity_or_permission_evidence": [
+      "GET /backend/agency/me/detail:200:false",
+      "GET /backend/agency/me/detail:200:true"
+    ],
+    "body_shell_present": true
+  },
+  "menu": [
+    {
+      "order": 1,
+      "menu_path": [],
+      "page_name": "Home",
+      "route": "/home",
+      "route_source": "anchor_href"
+    },
+    {
+      "order": 2,
+      "menu_path": [
+        "Agent Management"
+      ],
+      "page_name": "Agent Review",
+      "route": "/agent/agent-review",
+      "route_source": "anchor_href"
+    },
+    {
+      "order": 3,
+      "menu_path": [
+        "Agent Management"
+      ],
+      "page_name": "Agent List",
+      "route": "/agent/agent-list",
+      "route_source": "anchor_href"
+    },
+    {
+      "order": 4,
+      "menu_path": [
+        "Agent Management"
+      ],
+      "page_name": "Member List",
+      "route": "/agent/user-list",
+      "route_source": "anchor_href"
+    },
+    {
+      "order": 5,
+      "menu_path": [
+        "Agent Management"
+      ],
+      "page_name": "Agent Settings",
+      "route": "/agent/agent-setting",
+      "route_source": "anchor_href"
+    },
+    {
+      "order": 6,
+      "menu_path": [
+        "Agent Management"
+      ],
+      "page_name": "Agent Domain",
+      "route": "/agent/domain",
+      "route_source": "anchor_href"
+    },
+    {
+      "order": 7,
+      "menu_path": [
+        "Finance Management"
+      ],
+      "page_name": "Commission Review",
+      "route": "/financial/commission-review",
+      "route_source": "anchor_href"
+    },
+    {
+      "order": 8,
+      "menu_path": [
+        "Finance Management"
+      ],
+      "page_name": "Commission Report",
+      "route": "/financial/commission-list",
+      "route_source": "anchor_href"
+    },
+    {
+      "order": 9,
+      "menu_path": [
+        "Finance Management"
+      ],
+      "page_name": "Financial Report",
+      "route": "/financial/financial-statements",
+      "route_source": "anchor_href"
+    },
+    {
+      "order": 10,
+      "menu_path": [
+        "System"
+      ],
+      "page_name": "Role Configuration",
+      "route": "/system/role",
+      "route_source": "anchor_href"
+    },
+    {
+      "order": 11,
+      "menu_path": [
+        "System"
+      ],
+      "page_name": "Staff Configuration",
+      "route": "/system/staff",
+      "route_source": "anchor_href"
+    }
+  ]
+}

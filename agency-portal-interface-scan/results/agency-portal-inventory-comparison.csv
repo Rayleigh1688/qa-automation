@@ -1,0 +1,21 @@
+method,path,classification,ui_observed,documented_source,note
+GET,/admin/agency/child/ggr,DOCUMENTED_UNVERIFIED,NO,代理后台/ggr明细.bru,Not observed from current-role UI; absence is not STALE evidence
+GET,/admin/agency/child/pagcor/tax,DOCUMENTED_UNVERIFIED,NO,代理后台/pagcor税费明细.bru,Not observed from current-role UI; absence is not STALE evidence
+GET,/admin/agency/child/venue/fee,DOCUMENTED_UNVERIFIED,NO,代理后台/场馆费明细.bru,Not observed from current-role UI; absence is not STALE evidence
+GET,/agency/bonus/list,DOCUMENTED_UNVERIFIED,NO,代理后台/佣金管理/活动礼金列表.bru,Not observed from current-role UI; absence is not STALE evidence
+GET,/agency/commission/report,ACTIVE,YES,代理后台/佣金管理/佣金列表.bru,
+GET,/agency/ladder,ACTIVE,YES,代理后台/规则设置/查询佣金阶梯.bru,
+GET,/agency/logout,DOCUMENTED_UNVERIFIED,NO,代理后台/登陆/退出登陆-wesley.bru,Not observed from current-role UI; absence is not STALE evidence
+GET,/agency/member/list,ACTIVE,YES,代理后台/会员列表/会员列表 copy.bru | 代理后台/会员列表/会员列表.bru,
+GET,/agency/message/list,DOCUMENTED_UNVERIFIED,NO,代理后台/消息管理/获取消息列表.bru,Not observed from current-role UI; absence is not STALE evidence
+GET,/agency/platform/list,ACTIVE,YES,代理后台/厂商列表.bru,
+GET,/agency/profile,ACTIVE,YES,代理后台/首页看板.bru,
+GET,/agency/taxrate/list,ACTIVE,YES,代理后台/规则设置/Pagcor 税率列表.bru,
+GET,/agency/vendorrate/list,ACTIVE,YES,代理后台/规则设置/厂商费率列表.bru,
+POST,/admin/message/send,DOCUMENTED_UNVERIFIED,NO,代理后台/消息管理/发送站内信消息.bru,Not observed from current-role UI; absence is not STALE evidence
+POST,/agency/member/update/password,DOCUMENTED_UNVERIFIED,NO,代理后台/会员列表/重置会员密码.bru,Not observed from current-role UI; absence is not STALE evidence
+POST,/agency/otp/login,ACTIVE,YES,代理后台/登陆/otp登陆-wesley.bru,
+POST,/agency/pwd/login,DOCUMENTED_UNVERIFIED,NO,代理后台/登陆/密码登陆-wesley.bru,Not observed from current-role UI; absence is not STALE evidence
+POST,/agency/record/bet,ACTIVE,YES,代理后台/投注记录.bru,
+POST,/member/auth/sms,ACTIVE,YES,代理后台/登陆/短信验证码前置检查-wesley.bru,
+POST,/member/sms,ACTIVE,YES,代理后台/登陆/短信发送-wesley.bru,
