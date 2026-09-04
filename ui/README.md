@@ -65,7 +65,7 @@ npm run test:p0
 npm run test:p0:full
 ```
 
-`npm run test:p0` 为 API safe/negative + 默认 UI 的可重复门禁；`npm run test:p0:full` 才会显式执行真实资金主流程。完整入口先用新号执行 KYC 前提现拦截，再提交 KYC；资金账号统一复用 API session 与 UI storage state，并在投注后轮询流水，归零后才提交提现。
+`npm run test:p0` 为 API safe/negative + 默认 UI 的可重复门禁；`npm run test:p0:full` 执行完整资金主流程。完整入口先用新号执行 KYC 前提现拦截，再提交 KYC；每次 UI 命令重新登录，storage state 只在本次 Playwright suite 内共享，并在投注后轮询流水，归零后才提交提现。
 
 完整资金链在 UI 投注和流水归零后恢复由 API 创建提现订单并完成后台关联。Maya UI 提现独立证明客户端可选择渠道、输入金额和生成订单，不作为 API CTC-009 的替代结果。
 
@@ -77,7 +77,7 @@ npm run test:p0:full
 
 所有 npm UI 命令执行前都会清空 UI 生成物目录，只保留最近一次结果。
 
-`npm run test:ui:p0` 固定 `--workers=1`。FAT 既有账号默认使用密码登录；UAT 使用真实动态短信 OTP：UI 点击 Get Code，按客户端返回的同一 ID 从后台读取本次验证码，再由 UI 提交登录。固定 `111111` 不用于 UAT。有效 storage state 仍优先复用，避免重复发短信。
+`npm run test:ui:p0` 固定 `--workers=1`。每次命令由 global setup fresh login，并仅为本次 suite 写入 storage state；下次命令不会复用。FAT 既有账号默认使用密码登录；UAT 使用真实动态短信 OTP：UI 点击 Get Code，按客户端返回的同一 ID 从后台读取本次验证码，再由 UI 提交登录。固定 `111111` 不用于 UAT。
 
 - `npm run test:ui:network-discovery`：窗口化 Playwright Network 发现入口，固定 Pixel 7 手机浏览器格式，登录后探索首页、Game、Rewards、Filcoin、My、充值、提现、Transaction、Bet History、KYC、账户入口；输出脱敏 JSON、HAR、trace 和 Markdown 报告，只用于接口发现，不纳入默认 CI 门禁。
 - `npm run test:ui:deposit-contract`：验证充值页、支付方式和金额控件；默认不创建订单，只有显式 `EXECUTE_DEPOSIT_CONTRACT=true` 时才提交并捕获非活动充值请求。
@@ -94,6 +94,7 @@ python3 scripts/clean-test-artifacts.py ui
 - UI 原始结果：`ui/results/*.json`。
 - UI 截图、trace、视频：`ui/results/` 或 Playwright 附件目录。
 - Playwright HTML 报告：`playwright-report/`。
+- P0 UI 汇总报告：`ui/reports/p0-ui-report.html`，与 API、主流程报告共用相同模板，按本次 Playwright 用例统计 PASS/FAIL/SKIPPED。
 - Playwright 测试附件：`test-results/`。
 
 这些目录不提交历史报告；需要历史追踪时使用 CI 归档。

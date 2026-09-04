@@ -40,7 +40,8 @@ def main() -> None:
 
     smoke = load_smoke_module()
     smoke.load_env_file(Path(args.env))
-    smoke.load_session("api/results/p0-api-session.json", os.environ.get("CLIENT_PHONE", ""))
+    os.environ.pop("API_TOKEN", None)
+    os.environ.pop("ADMIN_TOKEN", None)
     lookup_args = argparse.Namespace(
         timeout=args.timeout,
         insecure=args.insecure,

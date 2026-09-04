@@ -29,7 +29,7 @@ python3 tools/provisioning/member-bootstrap.py \
   --kyc-image 21000000008072.webp
 ```
 
-起始手机号优先读取 `--start-phone`，其次读取 `REGISTER_PHONE`，再读取 `PROVISION_PHONE_START`；均未配置时默认从 `9000000001` 开始。工具不依赖数据库：先用已知会员验证管理后台 `POST /admin/member/list` 的手机号精确筛选确实生效，再逐号递增查询，返回第一个不存在的会员。
+起始手机号优先读取 `--start-phone`，其次读取 `REGISTER_PHONE`、`PROVISION_PHONE_START`，然后读取环境专属本地游标；都没有时默认从 `9000000001` 开始。工具不依赖数据库：先用已知会员验证管理后台 `POST /admin/member/list` 的手机号精确筛选确实生效，再逐号递增查询，返回第一个不存在的会员。FAT/UAT 游标分别保存在 Git 忽略的 `api/local-state/register-phone-<environment>.json`，不会被 API 报告清理器删除；游标保存本次候选，下次先复查该号码，确认已注册才继续加一。
 
 接口发现需要为不同写操作准备独立会员时，可停在注册或 KYC 审核完成阶段，并为每个 lane 使用独立的 ignored 输出目录，避免不必要的充值及证据覆盖：
 

@@ -23,7 +23,7 @@ P0 只保留必要资产，避免 CSV 和 Markdown 重复维护。
 - `interface-shortlist.csv` 只负责接口发现。进入 P0 和执行顺序由真实客户端 Network、业务依赖和 `build-p0-test-cases.py` 的显式核心路径决定，不能按接口文档顺序直接生成。
 - 有状态动作必须严格按主流程执行，并沿用本次产生的 uid、订单号或投注标识；否则后续列表即使返回成功，也不能证明是本次动作的结果。纯只读 safe smoke 使用一个成熟账号验证接口契约，仍按主流程排序以方便定位，但不把这种结构检查冒充端到端闭环。
 - `account_lane` 是执行约束：safe smoke 客户端查询使用 `mature_read_account`；资金正向链路从充值到提现统一使用 `fund_flow_account`；未 KYC 反例固定使用永久 BASIC 账号，KYC 闭环使用另一账号，活动流水专项不进入 P0 lane。
-- 每个账号 lane 只成功登录一次。`api/results/p0-api-session.json` 在 safe、negative、controlled 阶段之间传递 client/admin token；runner 先以只读详情接口验证 token，失效时才允许重新登录。禁止负例 runner 为获取前置数据再次成功登录。
+- 每个 runner 启动时必须重新登录并取得新 token；token 只在该 runner 进程内作为运行上下文共享。safe、negative、KYC、充值和提现是独立场景，不从结果文件、环境中的旧 token 或上一条命令继承会话。
 - 同名 Markdown 说明不再保留；规则统一写在本文件、`README.md`、`api/runbooks/` 或 `harness/`。
 - API 执行报告不是固定资产，统一写入 `api/results/`。UI 结果不得写入 `api/results/`，必须放到 `ui/results/` 或 `ui/reports/`。
 - `api/results/` 只保留最近一次执行结果。所有 P0 runner 和报告脚本使用固定文件名覆盖输出，不按日期或次数增量生成报告。
@@ -33,7 +33,7 @@ P0 只保留必要资产，避免 CSV 和 Markdown 重复维护。
 正式业务顺序以 `main-flow-scenarios.csv` 的 8 条主流程为准。资金链在不同执行面之间切换时还必须满足以下规则：
 
 1. 充值、投注、流水核对和提现统一使用同一个 `fund_flow_account`，整条资金链串行执行。
-2. 账号在会话准备阶段只成功登录一次。API 复用忽略的 `api/results/p0-api-session.json`，UI 复用忽略的 `ui/results/client-p0-storage-state.json`；切换执行面时同步 token，不另起进程重复登录同一账号。
+2. 每个独立执行面/runner 在场景开始时重新登录一次，随后在本次进程或 Playwright suite 内共享 token。跨 API、UI 或下一条命令时不复用历史 token；业务关联依靠本轮 uid、订单号、时间窗口等业务标识，而不是共享登录态。
 3. API 完成充值、后台补单和钱包核对后必须停止。普通存款即使不参加活动也会产生基础流水，不能直接跳到提现。
 4. UI 三方游戏单注读取 `CLIENT_GAME_BET_AMOUNT`：FAT/UAT 当前统一为 100。`scripts/run-turnover-bet.py` 只读汇总全部未完成流水，按当前环境单注计算投注次数并设置安全上限；FAT 默认读取只读数据库，UAT 默认通过管理后台会员列表和流水列表读取，不要求数据库连接。
 5. 投注后轮询 Bet History、钱包、账变和基础流水；以本轮时间窗口和关联标识核对记录。只有总剩余流水为 0，才允许发起提现。
@@ -59,6 +59,26 @@ npm run test:p0:full
 ```bash
 python3 scripts/run-api-tests.py p0
 ```
+
+独立 API 操作（每条命令重新登录，不跨命令复用 token）：
+
+```bash
+npm run test:p0:api:register
+npm run test:p0:api:kyc-submit
+KYC_CLIENT_UID=<uid> npm run test:p0:api:kyc-approve
+npm run test:p0:api:deposit-create
+P0_DEPOSIT_ID=<deposit-id> npm run test:p0:api:deposit-check-client
+P0_DEPOSIT_ID=<deposit-id> npm run test:p0:api:deposit-check-admin
+P0_DEPOSIT_ID=<deposit-id> npm run test:p0:api:deposit-approve
+npm run test:p0:api:withdraw-create
+P0_WITHDRAW_ID=<withdraw-id> npm run test:p0:api:withdraw-check-client
+P0_WITHDRAW_ID=<withdraw-id> npm run test:p0:api:withdraw-check-admin
+P0_WITHDRAW_ID=<withdraw-id> npm run test:p0:api:withdraw-approve
+```
+
+环境由 `ENV_FILE=.env.fat` 或 `ENV_FILE=.env.uat` 选择。KYC、充值和提现按业务模块拆分；查询/审核类操作必须接收创建阶段输出的明确 UID/订单 ID，禁止用待审列表第一条记录代替关联。独立结果及同模板 HTML 报告写入 `api/results/operations/`。投注依赖客户端内的三方游戏请求，不属于这一组纯 API 操作。
+
+注册未显式传 `REGISTER_PHONE` 时，先通过后台会员列表精确筛选，从 `9000000001` 或环境专属游标开始逐号查找未注册号码。游标位于 Git 忽略的 `api/local-state/`，FAT/UAT 分开保存；dry-run 或注册中断后仍从同一候选复查，已注册才递增。
 
 执行 P0 和 P1：
 
@@ -88,15 +108,19 @@ python3 scripts/run-api-tests.py p0 \
 - `api/results/p0-smoke-report.md`
 - `api/results/p0-negative-result.json`
 - `api/results/p0-negative-report.md`
-- `api/results/p0-main-flow-report.md`
-- `api/results/p0-api-report.html`，静态可视化主流程报告
+- `api/results/p0-api-report.md` / `p0-api-report.html`，本次 API 登录前置、正例、反例和受控流程的逐项执行报告
+- `api/results/p0-main-flow-report.md` / `p0-main-flow-report.html`，完整 API+UI 验收的 8 条端到端主流程报告
+- `api/results/p0-run-status.json`，记录整次命令的状态、最后阶段、退出码和脱敏错误；失败时仍覆盖生成
 - `api/results/fund-flow-seed-result.json`，默认只生成充值与补单阶段证据；`--safe-only` 时不生成
 - `api/results/kyc-result.json`，KYC 提交/已存在状态、后台审批与前台刷新证据
 - `api/results/p0-reconciliation-result.json`，本轮充值、钱包、投注流水、提现及后台订单关联断言
+- `api/results/operations/<operation>.json` / `<operation>.html`，单个注册、KYC、充值或提现 API 操作的原始证据和独立报告
 
 这些文件都是可再生成产物，不属于 P0 固定资产；清理旧报告时可以直接删除。
 
-统一入口 `python3 scripts/run-api-tests.py ...` 会在执行前清空普通结果，再写入本次结果；被 Git 忽略的 `p0-api-session.json` 会保留，避免清理动作迫使账号重新登录。
+统一入口 `python3 scripts/run-api-tests.py ...` 会在执行前清空旧结果，再写入本次结果。认证 session/storage state 不跨运行保留；每个 runner fresh login 后只在本进程内使用 token。前置检查、子进程或未知异常都会转成非零退出码和 `FAILED/BLOCKED` 报告，不向终端抛出 traceback；报告渲染失败时自动生成最小兜底报告。
+
+API、UI 和主流程三个 HTML 报告共用 `scripts/p0_report_template.py` 的布局、汇总卡、状态颜色和可展开明细，但统计对象不同：API 统计请求/断言，UI 统计 Playwright 用例，主流程统计 8 条跨执行面场景。API 单独通过不会再因为缺少 UI 证据而显示 `PARTIAL`。
 
 ## 接口版本监控
 

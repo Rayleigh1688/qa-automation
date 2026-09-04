@@ -115,15 +115,13 @@ def import_smoke_runner():
 
 
 class AdminTurnoverReader:
-    def __init__(self, phone: str, session_in: str, timeout: float, insecure: bool):
+    def __init__(self, phone: str, timeout: float, insecure: bool):
         self.phone = phone
         self.timeout = timeout
         self.insecure = insecure
         self.smoke = import_smoke_runner()
-        from p0_session import load_session
-
-        load_session(session_in, phone)
-        self._ensure_admin_session()
+        os.environ.pop("ADMIN_TOKEN", None)
+        self._login_admin()
         self.uid = self._find_uid()
 
     @staticmethod
@@ -144,12 +142,7 @@ class AdminTurnoverReader:
             raise RuntimeError(f"admin read failed: method={method} status={result.get('status')}")
         return decoded
 
-    def _ensure_admin_session(self) -> None:
-        try:
-            self.request("{{admin_url}}/admin/me/detail")
-            return
-        except RuntimeError:
-            pass
+    def _login_admin(self) -> None:
         login_args = argparse.Namespace(timeout=self.timeout, insecure=self.insecure, body_format="cbor")
         _, token = self.smoke.admin_login(login_args)
         if not token:
@@ -211,7 +204,6 @@ def main() -> None:
     parser.add_argument("--game-id", default="")
     parser.add_argument("--game-page", default="")
     parser.add_argument("--turnover-source", choices=["auto", "database", "admin"], default="auto")
-    parser.add_argument("--session-in", default="api/results/p0-api-session.json")
     parser.add_argument("--timeout", type=float, default=15)
     parser.add_argument("--insecure", action=argparse.BooleanOptionalAction, default=True)
     parser.add_argument("--execute", action="store_true")
@@ -231,7 +223,7 @@ def main() -> None:
 
     source = choose_turnover_source(args.turnover_source, args.env)
     if source == "admin":
-        turnover_reader = AdminTurnoverReader(phone, args.session_in, args.timeout, args.insecure)
+        turnover_reader = AdminTurnoverReader(phone, args.timeout, args.insecure)
         unfinished_turnover = turnover_reader.unfinished
     else:
         unfinished_turnover = lambda: unfinished_turnover_database(phone)

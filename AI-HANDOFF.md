@@ -13,6 +13,8 @@
 - FAT/UAT 业务单注统一为 100。厂商请求里的缩放金额只作观察，真实金额由投注记录、钱包、账变和流水交叉证明。游戏厂商/身份检查必须在选择金额和 Spin 前完成，失败时不寻找替代游戏。
 - UAT 无数据库访问，流水通过后台会员与流水接口只读核对；数据库在其他环境也仅可只读诊断。
 - 永久 BASIC 账号与 KYC 闭环账号严格分离；BASIC 账号不得提交 KYC、设置钱包密码或充值。新号默认从 `9000000001` 起通过后台会员列表逐号查找。
+- 2026-09-04 API 执行模型已改为每个 runner 启动时强制 fresh login，token 只在本次进程内共享，不再跨命令保存或复用 session。FAT `npm run test:p0:api` 最新联网结果为 `PASS/complete`、90/90：safe 31/31、默认反例 13/13，以及新号注册、KYC 提交/后台审批、充值创建/同单补单/钱包到账、流水发现与清空、钱包密码、Maya 账户绑定、提现创建和前后台同订单精确核对均通过；纯 API 命令不执行三方真实投注。`amount_limit` 是快捷金额列表，硬校验使用 `min_amount/max_amount`；同额快捷档位仅作为自动选通道的优先项。API 入口将前置检查、子进程和未知异常统一转成非零退出与稳定 `FAILED/BLOCKED` 报告，报告渲染失败时写最小兜底报告。
+- 2026-09-04 报告拆为同模板、不同统计对象的三份 HTML：API 请求/断言报告 `api/results/p0-api-report.html`，Playwright 用例报告 `ui/reports/p0-ui-report.html`，完整组合验收的 8 条主流程报告 `api/results/p0-main-flow-report.html`。API 单命令不再因未执行 UI 证据显示 `PARTIAL`；报告时间固定显示 UTC+8，API 报告从 run status 展示整秒级总执行耗时。
 - 环境差异以 `api/runbooks/ENVIRONMENTS.md` 为准，执行方法看 API/UI runbook，已知故障看 Harness；结果目录只保存最近一次证据。
 
 ## 阅读链：由浅入深
@@ -54,7 +56,7 @@
 ### UI
 
 - `npm run test:ui:p0` 当前静态收集 11 条默认测试，覆盖登录、主流程页面扫描、充值页安全契约、游戏启动和页面状态正反例；默认不真实充值、投注或提现。
-- 默认套件固定 1 worker，并保留忽略的 storage state；API 固定保留忽略的 session 文件。同一账号的其他进程不得再次登录。
+- 每个 API runner 和每次 UI 命令都从 fresh login 开始；token/storage state 只允许在同一次进程或 Playwright suite 内共享，生成物清理时不再保留到下一次运行。默认 UI suite 仍固定 1 worker。
 - UI P0 测试点共有 19 条；提现包含 Maya 合法建单正例和永久未 KYC 账号安全前置反例。充值缺少金额/渠道的前端矩阵移出 P0，由 API 业务边界和充值页正向契约覆盖。
 - `client-deposit-contract.spec.mjs` 已纳入默认 P0 命令；默认只验证页面、支付方式和金额控件，只有显式 `EXECUTE_DEPOSIT_CONTRACT=true` 才创建充值请求。
 - 独立提现 UI 链路已验证：脚本明确选择 Maya，非法金额不会发出提现请求；合法金额 1000 完成钱包密码数字键盘提交，客户端显示成功详情，后台在同一提交时间定位到金额一致的新 `under_review` 订单。GCash 当前返回 `Payment channel unavailable`，不再用于 FAT 提现正例。
@@ -63,7 +65,7 @@
 
 ## 当前下一步（按价值排序）
 
-1. 2026-09-04 起暂停继续扫描接口，第一优先级转为让 P0 完全脱离 AI 临场操作和判断。目标是 FAT/UAT 均可由确定性代码单命令执行：启动前自动校验环境、账号 lane、动态 OTP/TOTP 来源和必要依赖；过程中不等待聊天或人工复制数据；失败时立即以非零退出并保留脱敏证据；结束时自动生成 API、UI、主流程和统一核对报告。现有 P0/P1 范围不变。
+1. 2026-09-04 起暂停继续扫描接口，第一优先级转为让 P0 完全脱离 AI 临场操作和判断。FAT API 单命令已经联网验收通过；下一检查点是单独执行 `ENV_FILE=.env.fat npm run test:ui:p0`，确认 Playwright 从 fresh login 开始、无需 AI 操作、成功或失败均稳定生成 UI HTML 报告。UI 独立通过后再执行 `ENV_FILE=.env.fat npm run test:p0:full` 验证 API + UI 总编排。现有 P0/P1 范围不变。
 2. FAT 接口发现的会员列表和详情内部操作补扫已完成：会员列表形成 30 个动作结论，Batch/全部筛选族/组合查询/分页/行内入口已有证据，`POST /admin/member/list` 对比文档 GET 定义归类 `MISCLASSIFIED`；17/17 详情页签完成 DOM 清单，14 个数据页签形成 72 个 UI 动作结论、76 条 action-endpoint 映射。Export 以触发接口为完成标准，不保存文件；Deposit Export 实际触发但空数据业务失败，其余未捕获 Network 的点击不虚报接口。KYC 保持 `0→2→3→2→5`；Bet/Login、Risk Control、Wallet `0→0.01→0`、VIP `V0→V1→V0`、充值倍率和 Turnover `0→1→0` 均完成可恢复闭环并恢复。流水 add/sub 均 HTTP 200、业务成功，数据库只读确认同一行 finished 且 locked=0；clear 和 Token 调整未请求。独立写操作资产为 32 行、18 个唯一已触发接口：`ACTIVE 21`、`ACTIVE_FAILED 1`、`DOCUMENTED_UNVERIFIED 6`、`UNDOCUMENTED_ACTIVE 1`、`MISCLASSIFIED 3`，无意外未恢复副作用。独立管理后台合并结果为 135 个唯一 method+path，连同客户端 59 个共 194 个首方接口；共享 inventory/catalog 尚未修改。184 个安全跳过、6 个交互错误和 60 个旧写阻塞项已生成逐行审计，未仅凭未扫描到判 `STALE`。合规管理后台、代理管理后台和代理前台已分别用互相隔离的 Playwright context 完成当前账号权限面扫描：合规仅渲染 `/#/reportCenter/pagcor`，动态 5 个接口均 `ACTIVE`，权限树 63/63 成功；代理管理使用新二维码实时 TOTP 登录后渲染 11 个菜单，11/11 页面通过鉴权/路由硬门禁，动态 18 个接口为 `ACTIVE 16`、`UNDOCUMENTED_ACTIVE 1`、`MISCLASSIFIED 1`；代理前台 Code Login 后动态验证 5/5 路由，11 个唯一接口均 `ACTIVE`。三个调用端均无合法本轮持久写目标，写请求为 0；未观察文档接口保持 `DOCUMENTED_UNVERIFIED`。当前冻结为阶段快照；只有用户明确恢复专项时才继续补扫、分类或等级评审。
 3. 不重放本轮 UAT 充值、投注或提现订单；下一次完整资金链必须创建并关联新的 flow。
 4. 未勾选登录条款缺陷修复后，只重跑默认 UI 11 项并取消临时接受例外。

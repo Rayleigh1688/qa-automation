@@ -13,10 +13,7 @@ TARGETS = {
     "ui": [Path("ui/results"), Path("ui/reports"), Path("playwright-report"), Path("test-results")],
 }
 
-PRESERVE = {
-    Path("api/results"): {"p0-api-session.json"},
-    Path("ui/results"): {"client-p0-storage-state.json"},
-}
+PRESERVE: dict[Path, set[str]] = {}
 
 PLACEHOLDER_DIRS = {Path("api/results"), Path("ui/results"), Path("ui/reports")}
 

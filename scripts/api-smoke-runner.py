@@ -10,12 +10,12 @@ import os
 import ssl
 import struct
 import time
+import uuid
 from pathlib import Path
 from urllib.error import HTTPError, URLError
 from urllib.parse import quote
 from urllib.request import Request, urlopen
 
-from p0_session import load_session, write_session
 from totp import current_totp
 
 
@@ -521,6 +521,8 @@ def run_client_login(args: argparse.Namespace) -> None:
 
 
 def admin_login(args: argparse.Namespace) -> tuple[list[dict[str, object]], str]:
+    if not os.environ.get("ADMIN_DEVICE_ID") and not os.environ.get("X_DEVICE_ID"):
+        os.environ["ADMIN_DEVICE_ID"] = str(uuid.uuid4())
     email = os.environ.get("ADMIN_EMAIL", "")
     password = os.environ.get("ADMIN_PASSWORD", "")
     google_code = os.environ.get("ADMIN_GOOGLE_CODE", "")
@@ -578,13 +580,11 @@ def main() -> None:
     parser.add_argument("--with-admin-login", action="store_true")
     parser.add_argument("--cases", default="", help="Run executable case CSV instead of shortlist CSV")
     parser.add_argument("--out", default="api/results/p0-smoke-result.json")
-    parser.add_argument("--session-out", default="", help="Write ignored reusable client/admin tokens for later P0 stages")
-    parser.add_argument("--session-in", default="", help="Reuse an ignored P0 client/admin token session")
     args = parser.parse_args()
 
     load_env_file(Path(args.env))
-    if args.session_in:
-        load_session(args.session_in, os.environ.get("CLIENT_PHONE", ""))
+    os.environ.pop("API_TOKEN", None)
+    os.environ.pop("ADMIN_TOKEN", None)
     if args.client_login:
         run_client_login(args)
         return
@@ -618,13 +618,6 @@ def main() -> None:
             auth_results.extend(admin_results)
             if admin_token:
                 os.environ["ADMIN_TOKEN"] = admin_token
-    if args.session_out:
-        write_session(
-            args.session_out,
-            client_token=os.environ.get("API_TOKEN", ""),
-            admin_token=os.environ.get("ADMIN_TOKEN", ""),
-            client_phone=os.environ.get("CLIENT_PHONE", ""),
-        )
     list_path = Path(args.cases or args.list)
     rows = read_rows(list_path, args.limit, args.base)
     if not args.execute:

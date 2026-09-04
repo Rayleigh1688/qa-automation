@@ -49,23 +49,8 @@ export default async function clientP0AuthSetup(config) {
   const authNetwork = [];
 
   try {
-    let reused = false;
-    if (fs.existsSync(p0StorageStatePath)) {
-      context = await browser.newContext({ ...contextOptions, storageState: p0StorageStatePath });
-      const existingPage = await context.newPage();
-      const existingApp = new ClientAppPage(existingPage, {
-        pageConfig: loadJson("ui/data/client-pages.json"),
-        modalConfig: loadJson("ui/data/client-modals.json"),
-      });
-      await existingApp.gotoHome();
-      reused = await existingApp.waitForLoggedIn(5000).then(() => true).catch(() => false);
-      if (!reused) {
-        await context.close();
-        context = undefined;
-      }
-    }
-
-    context ||= await browser.newContext(contextOptions);
+    const reused = false;
+    context = await browser.newContext(contextOptions);
     const page = context.pages()[0] || await context.newPage();
     const authMode = (process.env.CLIENT_AUTH_MODE || "password").toLowerCase();
     const otpSource = (process.env.CLIENT_OTP_SOURCE || "fixed").toLowerCase();
@@ -120,17 +105,15 @@ export default async function clientP0AuthSetup(config) {
       modalConfig: loadJson("ui/data/client-modals.json"),
     });
     try {
-      if (!reused) {
-        if (authMode === "password") {
-          await app.loginWithPassword(requiredEnv("CLIENT_PHONE"), requiredEnv("CLIENT_PASSWORD"));
-        } else {
-          const otp = otpSource === "admin_sms"
-            ? resolveAdminSmsOtp
-            : requiredEnv("CLIENT_OTP");
-          await app.loginWithOtp(requiredEnv("CLIENT_PHONE"), otp);
-        }
-        await context.storageState({ path: p0StorageStatePath });
+      if (authMode === "password") {
+        await app.loginWithPassword(requiredEnv("CLIENT_PHONE"), requiredEnv("CLIENT_PASSWORD"));
+      } else {
+        const otp = otpSource === "admin_sms"
+          ? resolveAdminSmsOtp
+          : requiredEnv("CLIENT_OTP");
+        await app.loginWithOtp(requiredEnv("CLIENT_PHONE"), otp);
       }
+      await context.storageState({ path: p0StorageStatePath });
     } catch (error) {
       const diagnosticPath = path.resolve("ui/results/client-p0-auth-failure.json");
       const screenshotPath = path.resolve("ui/results/client-p0-auth-failure.png");

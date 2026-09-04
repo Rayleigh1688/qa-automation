@@ -58,6 +58,49 @@ python3 scripts/run-api-tests.py p0 p1
 python3 scripts/run-api-tests.py p0 --safe-only
 ```
 
+npm 统一入口：`npm run test:p0:api` 执行 safe、negative，以及新账号注册 → KYC 提交/审核 → 充值/补单 → 流水清空 → Maya 绑定 → 提现创建/前后台核对/后台审核的 API 组合；不执行三方真实投注，也不人工标记出款成功。`npm run test:p0:api:read` 只执行查询与保护性反例。FAT/UAT 都允许执行受控写场景，命令名称必须明确表达是否创建业务记录。
+
+```bash
+npm run test:p0:api
+```
+
+统一受控流程在一个 Python 进程内复用注册和后台登录取得的 Token；safe、negative 和 controlled runner 是不同进程，因此各自重新登录。任一受控阶段业务失败会立即停止后续写操作，统一 JSON/HTML 报告仍会聚合已经完成、失败及未执行的测试点。
+
+每个底层 runner 启动时强制重新登录，登录得到的 client/admin token 只在本次 Python 进程中共享。不同 runner 和不同命令之间不使用结果文件传递 token；关联 KYC、充值或提现记录时使用本轮业务 ID。
+
+注册、KYC、充值和提现可以先按独立业务操作执行，不要求提前组合成一条场景：
+
+```bash
+npm run test:p0:api:register
+npm run test:p0:api:kyc-submit
+KYC_CLIENT_UID=<uid> npm run test:p0:api:kyc-approve
+npm run test:p0:api:deposit-create
+P0_DEPOSIT_ID=<deposit-id> npm run test:p0:api:deposit-check-client
+P0_DEPOSIT_ID=<deposit-id> npm run test:p0:api:deposit-check-admin
+P0_DEPOSIT_ID=<deposit-id> npm run test:p0:api:deposit-approve
+npm run test:p0:api:withdraw-create
+P0_WITHDRAW_ID=<withdraw-id> npm run test:p0:api:withdraw-check-client
+P0_WITHDRAW_ID=<withdraw-id> npm run test:p0:api:withdraw-check-admin
+P0_WITHDRAW_ID=<withdraw-id> npm run test:p0:api:withdraw-approve
+```
+
+客户端操作按 `KYC_CLIENT_*`、`WRITE_CLIENT_*` 或 `WITHDRAW_CLIENT_*` lane 自动选择账号并重新登录；后台审核/查询重新执行后台登录。创建操作的 JSON 结果提供后续所需业务 ID；后续操作必须显式传 ID，找不到精确订单时立即失败，不审批其他订单。每个独立操作在 `api/results/operations/` 同时输出 JSON 和 HTML，异常也生成失败报告。三方游戏内投注以及以该投注为前提的派彩、流水归零不在纯 API 独立操作范围内。
+
+`test:p0:api:register` 未传 `REGISTER_PHONE` 时自动分配号码：先用已知会员验证 `POST /admin/member/list` 的 phone 筛选，再从环境专属本地游标逐号精确查询。默认首号为 `9000000001`，游标位于被 Git 忽略且不会被 API 报告清理器删除的 `api/local-state/`。找到号码时保存当前号码而不是直接跳到下一号；下次会先复查它，确认已注册后才 `+1`。
+
+`npm run test:p0:api:deposit-clear-turnover` 使用注册游标账号，在单次进程内复用 client/admin token，执行充值、补单、钱包到账轮询、流水查询和条件清空。`POST /admin/finance/turnover/clear` 按前端契约发送 CBOR 请求体，但保持 `application/x-www-form-urlencoded` content-type；请求字段为 `uid`、`remark` 和实时审批 `google_code`。清空前剩余流水为 0 时跳过写请求，非零时调用清流并轮询复查为 0；随后必须确认 `balance` 和 `withdrawable` 都满足本次提现金额，才允许创建提现订单。新账号提现前另需钱包密码和明确绑定的提款账户，提现最低金额为 100。
+
+新注册账号的 Maya 提款前置和提现分别执行：
+
+```bash
+ENV_FILE=.env.fat npm run test:p0:api:withdraw-account-prepare -- --maya-pid <environment Maya payment_platform_id>
+ENV_FILE=.env.fat npm run test:p0:api:withdraw
+```
+
+提款账户准备命令每次启动重新登录注册游标账号，Maya `account` 默认使用该注册手机号；`pid` 是环境内 Maya 的 `payment_platform_id`。绑定后必须通过 `/finance/account/list` 取得新生成的绑定账户 `id`，提现时该值才是 `account_id`。普通业务步骤失败时立即停止；提现创建同步响应失败或缺少业务 ID 时不重试创建，而是进入异步订单核对。创建成功或异步定位成功后，客户端和后台列表都按本轮业务 ID 精确核对。
+
+FAT 的 Maya 提现可能先同步返回业务失败文案，随后异步生成 `paying` 订单。runner 在调用前保存客户端订单 ID 快照，创建接口只调用一次；响应没有可用 ID 时轮询客户端列表，只接受调用时间之后、ID 不在基线、金额及 `payment_platform_id` 都一致的新订单。匹配后再用该 ID 到前后台精确核对。订单已由系统推进到 `paying/paid/success` 时不调用人工 `agree`，避免重复处理。
+
 创建测试会员、代理或准备账号状态不属于 API 门禁。此类能力统一放在 [`tools/provisioning/`](../../tools/provisioning/README.md)。当前会员初始化工具默认只读查找未注册号码；显式 `--execute` 后才按注册 → KYC 提交/后台通过 → 充值/后台补单执行：
 
 ```bash
@@ -74,7 +117,9 @@ python3 scripts/clean-test-artifacts.py api
 python3 scripts/clean-test-artifacts.py all
 ```
 
-统一入口会额外生成 `api/results/p0-api-report.html`。这是不依赖服务端的单文件静态报告：首屏显示 `PASS`、`PARTIAL` 或 `BLOCKED`，并按主流程分组展开场景的接口、前置条件、断言和运行结论。
+统一入口始终尝试生成 `api/results/p0-run-status.json`、`api/results/p0-api-report.md` 和 `api/results/p0-api-report.html`。API 报告逐项展示本轮登录前置、safe 正例、negative 反例和受控流程的检查对象、预期、实际、耗时及结果，不再使用 8 条 API+UI 主流程判断 API 单命令。前置检查、任一子流程或未知异常失败时，后续阶段立即停止，入口以非零状态结束，但不会输出 Python traceback；报告会标记 `FAILED/BLOCKED` 并记录最后阶段和脱敏错误。正式报告渲染器本身异常时，会改写最小 Markdown/HTML 兜底报告。只有结果目录不可写等存储层故障，才可能无法落盘。
+
+命令结束时固定输出 `HTML report: file:///.../api/results/p0-api-report.html`，可从终端直接打开本轮静态报告；成功和失败均使用同一个固定地址。
 
 FAT 测试环境当前需要临时跳过本机 TLS 证书校验：
 
@@ -156,7 +201,7 @@ runner 会先通过 `/member/v2/login` 完成密码登录，再按当前客户�
 
 当前 FAT 正例经验：
 
-- 充值正例默认从当前环境的 `mode=1` 通道列表动态选择；只有已确认环境专属通道时才传 `--deposit-pid` 或 `P0_DEPOSIT_PID`，不能跨环境复用 PID。当前同账号资金主流程使用金额 1200。
+- 充值正例默认从当前环境的 `mode=1` 通道列表动态选择，并只选择本次金额符合 `min_amount/max_amount` 的通道；`amount_limit` 是页面快捷金额列表，同额快捷项只提高自动选择优先级，不是硬性白名单。只有已确认环境专属通道时才传 `--deposit-pid` 或 `P0_DEPOSIT_PID`，显式 PID 不匹配金额范围时在下单前失败，且不能跨环境复用 PID。当前同账号资金主流程使用金额 1200。
 - 注册不再临时生成手机号。执行完整写流程必须通过 `REGISTER_PHONE` 或 `--register-phone` 指定已分配的 `090XXXXXXXX` KYC 测试池账号，避免生成无法追踪、无法继续 KYC 的孤立账号。
 - 充值补单产生的流水/锁定金额属于主流程验证目标。同一个 `fund_flow_account` 必须先经过真实投注和流水轮询，再发起提现。
 - `scripts/run-api-tests.py p0` 默认执行到充值与补单检查点并停止。建议资金参数为充值 `1200`、首次 UI 投注 `1000`、提现探针 `1000`；跨 API、UI 和数据库的放行规则见 `api/p0/README.md`。

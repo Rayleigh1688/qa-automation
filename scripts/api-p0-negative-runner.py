@@ -19,7 +19,6 @@ from decimal import Decimal, InvalidOperation
 from datetime import datetime
 from pathlib import Path
 
-from p0_session import load_session
 from types import ModuleType
 
 
@@ -195,24 +194,6 @@ def otp_id_from(result: dict[str, object]) -> str:
     return ""
 
 
-def token_from_latest_positive_result(path: str = "api/results/p0-smoke-result.json") -> str:
-    result_path = Path(path)
-    if not result_path.exists():
-        return ""
-    try:
-        items = json.loads(result_path.read_text(encoding="utf-8"))
-    except Exception:
-        return ""
-    if not isinstance(items, list):
-        return ""
-    for item in items:
-        if isinstance(item, dict) and item.get("priority") == "LOGIN":
-            token = smoke.extract_token(item)
-            if token:
-                return token
-    return ""
-
-
 def login_with_code(args: argparse.Namespace, phone: str, otp_id: str, code: str) -> dict[str, object]:
     return smoke.request_once(
         row("POST", "{{api_url}}/member/otp/login/v2"),
@@ -280,31 +261,19 @@ def run_cases(args: argparse.Namespace) -> list[dict[str, object]]:
     sms_result = client_sms(args, phone)
     otp_id = otp_id_from(sms_result) or os.environ.get("P0_NEGATIVE_OTP_ID", "invalid-otp-id")
 
-    admin_token = os.environ.get("ADMIN_TOKEN", "")
+    admin_login_results, admin_token = smoke.admin_login(args)
     if admin_token:
-        probe = smoke.request_once(
-            row("GET", "{{admin_url}}/admin/me/detail", "{{admin_url}}"),
-            args.timeout,
-            args.insecure,
+        os.environ["ADMIN_TOKEN"] = admin_token
+    else:
+        records.append(
+            {
+                "case_id": "ADMIN-LOGIN",
+                "name": "后台登录前置失败",
+                "assertion_passed": False,
+                "assertion_failures": ["admin login failed"],
+                "body_sample": json.dumps([item.get("body_sample", "") for item in admin_login_results], ensure_ascii=False),
+            }
         )
-        body = probe.get("decoded_body")
-        if not (isinstance(body, dict) and body.get("status") is True):
-            admin_token = ""
-            os.environ.pop("ADMIN_TOKEN", None)
-    if not admin_token and os.environ.get("ADMIN_EMAIL") and os.environ.get("ADMIN_PASSWORD") and os.environ.get("ADMIN_GOOGLE_CODE"):
-        admin_login_results, admin_token = smoke.admin_login(args)
-        if admin_token:
-            os.environ["ADMIN_TOKEN"] = admin_token
-        else:
-            records.append(
-                {
-                    "case_id": "ADMIN-LOGIN",
-                    "name": "后台登录前置失败",
-                    "assertion_passed": False,
-                    "assertion_failures": ["admin login failed"],
-                    "body_sample": json.dumps([item.get("body_sample", "") for item in admin_login_results], ensure_ascii=False),
-                }
-            )
 
     case_by_id = {case.case_id: case for case in CASES}
     invalid_code = os.environ.get("P0_NEGATIVE_OTP", "000000")
@@ -318,11 +287,12 @@ def run_cases(args: argparse.Namespace) -> list[dict[str, object]]:
         )
     )
 
-    # Never perform a second successful login here: it would invalidate the
-    # shared P0 token. Reuse the session created by the single auth stage.
-    client_token = os.environ.get("API_TOKEN", "") or token_from_latest_positive_result()
+    # This script is an independent scenario and owns a fresh authenticated
+    # context. Invalid-login cases run first, then one successful login supplies
+    # the token shared by the remaining cases in this process.
+    _, client_token = smoke.client_login(args)
     if not client_token:
-        raise SystemExit("client token is required; run python3 scripts/run-api-tests.py p0 first or provide API_TOKEN")
+        raise SystemExit("fresh client login failed for P0 negative scenario")
     os.environ["API_TOKEN"] = client_token
 
     records.append(
@@ -541,12 +511,11 @@ def main() -> None:
     parser.add_argument("--report", default="api/results/p0-negative-report.md")
     parser.add_argument("--scope", default="FAT")
     parser.add_argument("--include-deposit-limit-contract", action="store_true")
-    parser.add_argument("--session-in", default="", help="Reuse ignored P0 client/admin tokens")
     args = parser.parse_args()
 
     smoke.load_env_file(Path(args.env))
-    if args.session_in:
-        load_session(args.session_in, os.environ.get("CLIENT_PHONE", ""))
+    os.environ.pop("API_TOKEN", None)
+    os.environ.pop("ADMIN_TOKEN", None)
     records = run_cases(args)
     output = Path(args.out)
     output.parent.mkdir(parents=True, exist_ok=True)

@@ -18,6 +18,7 @@ ROOT = Path(__file__).resolve().parents[2]
 SCRIPTS = ROOT / "scripts"
 DEFAULT_OUTPUT_DIR = ROOT / "api/results/provisioning"
 DEFAULT_PHONE_START = "9000000001"
+PHONE_CURSOR_DIR = ROOT / "api/local-state"
 
 
 class ProvisioningError(RuntimeError):
@@ -87,6 +88,36 @@ def validate_test_environment(env_path: Path) -> None:
             raise ProvisioningError(f"refusing provisioning against a production-like URL: {url}")
 
 
+def phone_cursor_path(env_path: Path) -> Path:
+    name = env_path.name.lower()
+    if name.startswith(".env."):
+        name = name[5:]
+    elif name.startswith("env."):
+        name = name[4:]
+    safe_name = "".join(character if character.isalnum() else "-" for character in name).strip("-")
+    return PHONE_CURSOR_DIR / f"register-phone-{safe_name or 'test'}.json"
+
+
+def load_phone_cursor(path: Path) -> str:
+    if not path.is_file():
+        return ""
+    try:
+        payload = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError) as error:
+        raise ProvisioningError(f"registration phone cursor is invalid: {path}") from error
+    value = payload.get("next_start") if isinstance(payload, dict) else ""
+    if not isinstance(value, str) or not value.isdigit():
+        raise ProvisioningError(f"registration phone cursor has no numeric next_start: {path}")
+    return value
+
+
+def save_phone_cursor(path: Path, phone: str, env_path: Path) -> None:
+    secure_write(
+        path,
+        {"environment_file": env_path.name, "next_start": phone},
+    )
+
+
 def find_unused_phone(args: argparse.Namespace) -> str:
     known_phone = os.environ.get("CLIENT_PHONE") or os.environ.get("WRITE_CLIENT_PHONE", "")
     if not known_phone:
@@ -94,10 +125,16 @@ def find_unused_phone(args: argparse.Namespace) -> str:
     if not exact_member_exists(args, known_phone):
         raise ProvisioningError("admin phone filter could not locate the configured known member")
 
+    cursor_value = (
+        load_phone_cursor(Path(args.phone_cursor_path))
+        if getattr(args, "phone_cursor_path", "")
+        else ""
+    )
     start = (
         args.start_phone
         or os.environ.get("REGISTER_PHONE")
         or os.environ.get("PROVISION_PHONE_START")
+        or cursor_value
         or DEFAULT_PHONE_START
     )
     if not start or not start.isdigit():
@@ -109,6 +146,8 @@ def find_unused_phone(args: argparse.Namespace) -> str:
     for offset in range(args.scan_limit):
         candidate = str(start_number + offset).zfill(width)
         if not exact_member_exists(args, candidate):
+            if getattr(args, "phone_cursor_path", ""):
+                save_phone_cursor(Path(args.phone_cursor_path), candidate, Path(args.env))
             return candidate
     raise ProvisioningError(f"no unused phone found within {args.scan_limit} candidates")
 
@@ -607,6 +646,7 @@ def main() -> None:
         parser.error("--prepare-withdrawal, --set-login-password, and --validate-existing are mutually exclusive")
 
     env_path = Path(args.env)
+    args.phone_cursor_path = str(phone_cursor_path(env_path))
     smoke.load_env_file(env_path)
     validate_test_environment(env_path)
     output_dir = ensure_ignored_output_dir(Path(args.out_dir))

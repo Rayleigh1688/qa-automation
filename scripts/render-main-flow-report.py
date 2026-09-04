@@ -12,6 +12,8 @@ from collections import Counter
 from datetime import datetime
 from pathlib import Path
 
+from p0_report_template import write_html_report
+
 
 def load_csv(path: Path) -> list[dict[str, str]]:
     with path.open(encoding="utf-8", newline="") as handle:
@@ -21,7 +23,10 @@ def load_csv(path: Path) -> list[dict[str, str]]:
 def load_json(path: Path) -> object:
     if not path.exists():
         return []
-    return json.loads(path.read_text(encoding="utf-8"))
+    try:
+        return json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        return []
 
 
 def table(rows: list[list[str]]) -> str:
@@ -274,7 +279,13 @@ def aggregate_flow_status(
     return "通过", "该主流程所有已登记用例均通过"
 
 
-def render_flow_html(scope: str, rows: list[dict[str, str]], verdict: str) -> str:
+def render_flow_html(
+    scope: str,
+    rows: list[dict[str, str]],
+    verdict: str,
+    run_stage: str = "",
+    run_error: str = "",
+) -> str:
     cards = "".join(
         f'<section><b>{html.escape(row["scenario_id"])} · {html.escape(row["flow_stage_label"])}</b>'
         f'<span class="{status_class(row["runtime_status"])}">{html.escape(row["runtime_status"])}</span>'
@@ -283,7 +294,7 @@ def render_flow_html(scope: str, rows: list[dict[str, str]], verdict: str) -> st
     )
     return f"""<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>P0 主流程报告</title><style>body{{max-width:980px;margin:auto;padding:28px;font:14px/1.6 sans-serif;background:#f4f6f5;color:#17232d}}header,section{{background:#fff;border:1px solid #d9e1e5;padding:16px;margin:10px 0}}b{{font-size:17px}}span{{float:right}}.pass{{color:#16754b}}.fail{{color:#bd3434}}.pending{{color:#a76508}}p{{margin:8px 0 0;color:#64727d}}</style></head>
-<body><header><h1>P0 主流程报告</h1><p>环境：{html.escape(scope)} · 结论：{html.escape(verdict)}</p></header>{cards}</body></html>"""
+<body><header><h1>P0 主流程报告</h1><p>环境：{html.escape(scope)} · 结论：{html.escape(verdict)}</p><p>最后阶段：{html.escape(run_stage or 'unknown')} · 错误：{html.escape(run_error or '无')}</p></header>{cards}</body></html>"""
 
 
 def main() -> None:
@@ -297,6 +308,7 @@ def main() -> None:
     parser.add_argument("--pre-kyc-withdraw-result", default="ui/results/client-unverified-withdraw.json")
     parser.add_argument("--kyc-result", default="api/results/kyc-result.json")
     parser.add_argument("--reconciliation-result", default="api/results/p0-reconciliation-result.json")
+    parser.add_argument("--run-status", default="api/results/p0-run-status.json")
     parser.add_argument("--out", default="api/results/p0-main-flow-report.md")
     parser.add_argument("--html-out", default="")
     parser.add_argument("--scope", default="FAT")
@@ -311,6 +323,8 @@ def main() -> None:
     pre_kyc_withdraw = load_json(Path(args.pre_kyc_withdraw_result))
     kyc_items = load_json(Path(args.kyc_result))
     reconciliation = load_json(Path(args.reconciliation_result))
+    run_status = load_json(Path(args.run_status))
+    run_status = run_status if isinstance(run_status, dict) else {}
     positive_by_case = {
         str(item.get("case_id")): item
         for item in positive_items
@@ -377,9 +391,18 @@ def main() -> None:
     summary_rows = [["指标", "数量"]] + [[key, str(value)] for key, value in runtime_counter.most_common()]
     stage_rows = [["流程", "主流程数"]] + [[key, str(value)] for key, value in stage_counter.items()]
 
+    run_state = str(run_status.get("status") or "UNKNOWN")
+    run_stage = str(run_status.get("stage") or "unknown")
+    run_error = str(run_status.get("error") or "")
     report = f"""# P0 Main Flow Report
 
 生成时间：`{datetime.now().astimezone().isoformat()}`
+
+## 运行结论
+
+- 状态：**{run_state}**
+- 最后阶段：`{run_stage}`
+- 错误：{run_error or "无"}
 
 ## 执行范围
 
@@ -410,10 +433,36 @@ def main() -> None:
     Path(args.out).write_text(report, encoding="utf-8")
     print(f"wrote {Path(args.out).resolve()}")
     if args.html_out:
-        verdict = "BLOCKED" if runtime_counter["失败"] else "PARTIAL" if runtime_counter["未执行"] or runtime_counter["部分通过"] else "PASS"
-        Path(args.html_out).write_text(
-            render_flow_html(args.scope, details, verdict),
-            encoding="utf-8",
+        verdict = "BLOCKED" if run_state in {"FAILED", "INTERRUPTED"} or runtime_counter["失败"] else "PARTIAL" if runtime_counter["未执行"] or runtime_counter["部分通过"] else "PASS"
+        verdict_detail = (
+            "存在失败或执行中断，请查看失败主流程。" if verdict == "BLOCKED"
+            else "已执行主流程通过，但仍缺少 API 或 UI 执行证据。" if verdict == "PARTIAL"
+            else "8 条 P0 主流程的 API 与 UI 证据均符合预期。"
+        )
+        report_items = [
+            {
+                "group": "P0 端到端主流程",
+                "id": item["scenario_id"],
+                "name": item["scenario_name"],
+                "kind": "API + UI",
+                "status": "PASS" if item["runtime_status"] == "通过" else "FAIL" if item["runtime_status"] in {"失败", "未通过"} else "PENDING",
+                "target": item["flow_stage_label"],
+                "expected": item["expected_assertions"],
+                "actual": item["runtime_detail"],
+                "duration": "",
+                "detail": f"前置条件：{item['precondition']}；自动化状态：{item['automation_status']}",
+            }
+            for item in details
+        ]
+        write_html_report(
+            title="P0 主流程报告",
+            scope=args.scope,
+            report_kind="API + UI 主流程",
+            verdict=verdict,
+            verdict_detail=verdict_detail,
+            items=report_items,
+            output=Path(args.html_out),
+            metadata=[("最后阶段", run_stage), ("错误", run_error or "无")],
         )
         print(f"wrote {Path(args.html_out).resolve()}")
 

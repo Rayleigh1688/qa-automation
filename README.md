@@ -132,6 +132,37 @@ python3 scripts/run-api-tests.py p0 --env .env.fat --scope FAT --safe-only
 python3 scripts/run-api-tests.py p0 --env .env.uat --scope UAT --safe-only
 ```
 
+P0 API 独立组合（包含 safe、negative，以及除三方真实投注外的新账号注册、KYC、充值、流水处理、Maya 绑定和提现 API 流程）：
+
+```bash
+npm run test:p0:api
+ENV_FILE=.env.uat npm run test:p0:api
+```
+
+只组合 API 查询和保护性反例时使用 `npm run test:p0:api:read`。写操作在 FAT/UAT 属于正常 P0 场景，不是全局禁止项；是否创建订单由所选命令/场景明确表达。
+
+需要逐个验证可由 API 完成的 P0 业务能力时，使用独立操作入口：
+
+```bash
+ENV_FILE=.env.fat npm run test:p0:api:register
+ENV_FILE=.env.fat npm run test:p0:api:kyc-submit
+KYC_CLIENT_UID=<uid> ENV_FILE=.env.fat npm run test:p0:api:kyc-approve
+ENV_FILE=.env.fat npm run test:p0:api:deposit-create
+P0_DEPOSIT_ID=<deposit-id> ENV_FILE=.env.fat npm run test:p0:api:deposit-check-client
+P0_DEPOSIT_ID=<deposit-id> ENV_FILE=.env.fat npm run test:p0:api:deposit-check-admin
+P0_DEPOSIT_ID=<deposit-id> ENV_FILE=.env.fat npm run test:p0:api:deposit-approve
+ENV_FILE=.env.fat npm run test:p0:api:withdraw-create
+P0_WITHDRAW_ID=<withdraw-id> ENV_FILE=.env.fat npm run test:p0:api:withdraw-check-client
+P0_WITHDRAW_ID=<withdraw-id> ENV_FILE=.env.fat npm run test:p0:api:withdraw-check-admin
+P0_WITHDRAW_ID=<withdraw-id> ENV_FILE=.env.fat npm run test:p0:api:withdraw-approve
+```
+
+每条命令是一次全新运行：客户端操作重新取得 client token，后台操作重新取得 admin token；token 不跨命令传递。创建操作把业务 ID 写入 `api/results/operations/<operation>.json`，后续查询或审核通过显式业务 ID 精确关联，不会回退处理列表第一条记录。每条命令无论通过或业务失败都会生成同路径的 HTML 报告。真实三方投注以及依赖本轮投注的派彩/流水归零仍由 UI/完整主流程负责，不伪装成纯 API 独立操作。
+
+注册命令未显式配置 `REGISTER_PHONE` 时，会先后台登录并验证会员手机号精确筛选，再从 `9000000001` 开始递增查找首个不存在的账号。FAT/UAT 游标分别保存在 Git 忽略的 `api/local-state/register-phone-<environment>.json`；游标保存本次找到的号码，下次从该号码复查，已注册才继续加一，因此中断不会无故跳号。
+
+API-only 资金调试可执行 `npm run test:p0:api:deposit-clear-turnover`：同一次 npm 运行只登录一次客户端和后台，完成充值、补单、查询剩余流水；剩余流水非零时调用后台清空并复查为 0，已经为 0 时不重复写入。该路径明确属于测试环境管理动作，不代表真实投注完成。新账号提现前还必须设置钱包密码并绑定提款账户；提现正例最低金额固定为 100。
+
 UI P0：
 
 ```bash
@@ -154,7 +185,9 @@ npm run test:p0:full
 说明：
 
 - `npm run test:p0` 是可重复快速门禁：API safe/negative + 默认 UI，不创建新的充值、投注或提现记录，并保留最近一次完整资金链证据。
+- 每次 API runner 或 UI 命令启动都重新登录并取得新 token；token 只在本次 runner/Playwright suite 内共享，KYC、充值、投注、提现由独立操作组合成场景，不跨命令复用历史 session/storage state。
 - `npm run test:p0:full` 是显式受控写入口，严格按永久未 KYC 账号提现拦截 → 独立 KYC 账号闭环 → 充值 → UI 投注 → 流水核对 → API 提现建单 → 后台按订单 ID 关联执行；任一阶段业务失败立即停止。
+- `test:p0:full` 在任何业务动作前统一执行 preflight，校验环境 URL/scope、账号 lane 隔离、动态 OTP/TOTP 来源、金额、KYC 图片、Python/npm/Playwright 依赖；未显式传 `--scope` 时按 `.env.fat` / `.env.uat` 文件名推断 FAT/UAT。
 - `python3 scripts/run-api-tests.py p0` 是 API 子流程入口，执行 safe/negative 并将资金链推进到充值与补单检查点；不会跳过真实投注直接提现。
 - 只复验后台 safe smoke 时，可执行：`python3 scripts/api-smoke-runner.py --cases api/p0/test-cases.csv --with-admin-login --base admin --execute --insecure --body-format cbor --out /tmp/admin-p0-smoke.json`。
 - `python3 scripts/run-api-tests.py p0 p1` 按等级依次执行；当前 P1 资产不存在时会跳过并提示。
@@ -164,9 +197,9 @@ npm run test:p0:full
 - 正向资金链单注由 `CLIENT_GAME_BET_AMOUNT` 控制：FAT/UAT 当前统一为 100，UAT 上限仍为 100；`scripts/run-turnover-bet.py` 按所选环境的剩余流水动态计算次数。投注后再次核对流水，归零才进入提现。完整差异见 [`ENVIRONMENTS.md`](api/runbooks/ENVIRONMENTS.md)。
 - 后台登录固定码和审核动态码是两套东西：`ADMIN_GOOGLE_CODE=111111` 只用于 FAT 后台登录，审核/补单/KYC 审批使用 `ADMIN_APPROVAL_TOTP_SECRET` 生成真实动态码。
 - API 执行会覆盖 `api/results/` 下同名结果和报告；UI 执行会覆盖 `ui/results/` 和 `ui/reports/` 下同名产物。需要历史记录时，以 CI 归档为准，不在仓库工作区内累积。
-- 每次 P0 API 执行还会生成 `api/results/p0-api-report.html`：可离线打开的静态主流程报告，包含放行结论、流程状态卡和可展开场景细则。
+- 三类 P0 HTML 报告使用同一模板但保持独立判定口径：`api/results/p0-api-report.html` 展示本次 API 请求/断言，`ui/reports/p0-ui-report.html` 展示本次 Playwright 用例，`api/results/p0-main-flow-report.html` 只在 API+UI 组合验收中按 8 条端到端主流程汇总。三个入口结束时分别打印对应的 `file://` 绝对地址。
 - 需要单独清空生成物时，执行 `python3 scripts/clean-test-artifacts.py all`；只清 API 或 UI 时分别用 `api`、`ui` 参数。
-- FAT 主流程使用同一普通会员完成不参加活动的充值、投注和提现；充值参数固定 `cashback_flag=0&rotation_flag=0` 且不传活动 `product_id`。普通存款基础流水在提现前正常完成，但不在主链路中测试流水限制拒绝。
+- FAT 主流程使用同一普通会员完成不参加活动的充值、投注和提现；充值参数固定 `cashback_flag=0&rotation_flag=0` 且不传活动 `product_id`。自动选择充值通道时，本次金额必须符合通道 `min_amount/max_amount`；`amount_limit` 只作为快捷金额优先项。普通存款基础流水在提现前正常完成，但不在主链路中测试流水限制拒绝。
 - 充值页 `Multiple Deposit Bonus` 活动开关默认不参加；参加活动会产生提现流水限制。`9888888050` 已知存在提现流水限制，提现正例需换无流水限制账号或先后台解除限制。
 - KYC 新账号池使用 `090XXXXXXXX`，首个账号从 `09000000001` 开始；测试环境 OTP 固定为 `111111`，已驳回/未通过 KYC 的账号可再次提交。
 - 本地或 CI 通过 `WRITE_CLIENT_PHONE`、`WRITE_CLIENT_PASSWORD` 注入 `fund_flow_account`；兼容变量 `BET_CLIENT_PHONE` 和 `WITHDRAW_CLIENT_PHONE` 可指向同一账号。OTP 变量只保留给注册、首次设密和显式 OTP 专项。未 KYC 提现反例固定使用永久不提交 KYC 的 `PRE_KYC_CLIENT_PHONE`；最低提现金额走成熟账号 API 反例，不准备低余额账号。`RESTRICTED_CLIENT_PHONE` 仅预留给 P1 活动流水专项。

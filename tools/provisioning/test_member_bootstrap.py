@@ -3,6 +3,7 @@ from __future__ import annotations
 import argparse
 import importlib.util
 import os
+import tempfile
 import unittest
 from pathlib import Path
 from unittest.mock import patch
@@ -50,6 +51,39 @@ class MemberBootstrapTest(unittest.TestCase):
         ):
             with patch.object(bootstrap, "exact_member_exists", side_effect=exists):
                 self.assertEqual(bootstrap.find_unused_phone(args), "9000000003")
+
+    def test_find_unused_phone_persists_and_resumes_environment_cursor(self) -> None:
+        known = "9888888000"
+        existing = {known}
+        with tempfile.TemporaryDirectory() as directory:
+            cursor = Path(directory) / "register-phone-fat.json"
+            args = argparse.Namespace(
+                start_phone="",
+                scan_limit=10,
+                phone_cursor_path=str(cursor),
+                env=".env.fat",
+            )
+            with patch.dict(
+                os.environ,
+                {
+                    "CLIENT_PHONE": known,
+                    "REGISTER_PHONE": "",
+                    "PROVISION_PHONE_START": "",
+                },
+                clear=False,
+            ):
+                with patch.object(
+                    bootstrap,
+                    "exact_member_exists",
+                    side_effect=lambda _args, phone: phone in existing,
+                ):
+                    first = bootstrap.find_unused_phone(args)
+                    self.assertEqual(first, "9000000001")
+                    self.assertEqual(bootstrap.load_phone_cursor(cursor), first)
+                    existing.add(first)
+                    second = bootstrap.find_unused_phone(args)
+                    self.assertEqual(second, "9000000002")
+                    self.assertEqual(bootstrap.load_phone_cursor(cursor), second)
 
     def test_required_business_record_blocks_false_status(self) -> None:
         records = [{"name": "register", "business_status": False}]

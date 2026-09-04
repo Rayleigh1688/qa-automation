@@ -19,6 +19,7 @@ test-results/*
 coverage/
 api/results/*
 !api/results/.gitkeep
+api/local-state/
 ui/results/*
 !ui/results/.gitkeep
 ui/reports/*

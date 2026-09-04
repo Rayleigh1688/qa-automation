@@ -45,6 +45,8 @@ ADMIN_TOKEN_PREFIX=
 
 注意：FAT 的 `ADMIN_GOOGLE_CODE=111111` 只用于后台登录。若目标环境后台登录也要求动态码，可将 `ADMIN_GOOGLE_CODE` 留空；runner 会优先使用 `ADMIN_LOGIN_TOTP_SECRET`，未配置时回退到 `ADMIN_APPROVAL_TOTP_SECRET`，算法同样优先使用 login 专用变量再回退到 approval 算法。充值补单、提现审核、KYC 审核等动作始终需要真实动态验证码，不能用 FAT 固定登录码代替。当前 FAT 与已验证 UAT 管理账号均使用 SHA256。
 
+同一受控流程包含多个审核动作时，每个动作必须使用新的动态验证码。controlled runner 优先使用 `ADMIN_APPROVAL_TOTP_SECRET` 现场生成，并在检测到与上一个审核动作处于同一 TOTP 窗口时等待下一窗口；`.env` 中的 `ADMIN_APPROVAL_CODE` 只在没有 secret 时作为单次兜底，不能在 KYC、补单、清流和提现审核之间复用。
+
 `ADMIN_TOKEN_PREFIX` 默认留空。前端真实请求里的后台业务接口使用裸 token：
 
 ```text
