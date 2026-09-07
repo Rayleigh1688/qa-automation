@@ -43,7 +43,13 @@
     "test:ui:game-bet": "npm run clean:ui-results && playwright test ui/cases/client-game-bet-smoke.spec.mjs",
     "test:ui:modal-debug": "npm run clean:ui-results && playwright test ui/cases/client-modal-debug.spec.mjs",
     "ui:p0-points": "npm run clean:ui-results && node scripts/render-ui-p0-test-points.mjs",
-    "test:ui:headed": "npm run clean:ui-results && playwright test --headed"
+    "test:ui:headed": "npm run clean:ui-results && playwright test --headed",
+    "check:docs": "python3 scripts/check-project.py docs",
+    "check:assets": "python3 scripts/check-api-assets.py",
+    "check:syntax": "python3 scripts/check-project.py syntax",
+    "test:unit": "python3 -m unittest discover -s scripts -p \"test_*.py\" && python3 -m unittest discover -s tools/provisioning -p \"test_*.py\"",
+    "check": "npm run check:docs && npm run check:archive && npm run check:assets && npm run check:syntax && npm run test:unit",
+    "check:archive": "python3 scripts/check-scan-archive.py"
   },
   "devDependencies": {
     "@playwright/test": "^1.57.0",

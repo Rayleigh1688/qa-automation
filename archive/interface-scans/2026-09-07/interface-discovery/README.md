@@ -1,5 +1,18 @@
 # FAT 当前接口发现与映射计划
 
+## 冻结资产导航
+
+| 调用端 | 原路径入口 |
+| --- | --- |
+| FAT 客户端 | [扫描说明](../fat-client-interface-scan/README.md) |
+| FAT 管理后台 | [扫描说明](../fat-admin-interface-scan/README.md) |
+| 合规管理后台 | [扫描说明](../pagcor-admin-interface-scan/README.md) |
+| 代理管理后台 | [扫描说明](../agency-admin-interface-scan/README.md) |
+| 代理前台 | [扫描说明](../agency-portal-interface-scan/README.md) |
+| 客户端控件参考 | [控件清单](../client-button-map/README.md) |
+
+这些目录保留冻结证据和原脚本路径。下文为专项范围及历史执行方案，不代表当前默认回归入口；保留策略见 [架构说明](../../../../docs/architecture.md)。
+
 ## 背景与目标
 
 现有接口文档主要说明“曾经定义过哪些接口”，但不能证明接口当前是否仍由客户端或管理后台使用。当前专项先以 FAT 真实 UI 为调用端事实来源，完整收集页面初始化和用户交互产生的请求，建立可追溯的接口资产；接口等级在发现、去重、映射和分类完成后再确认。
@@ -43,7 +56,7 @@
 
 ### 线程 B：管理后台
 
-- 页面/权限基线和结果目录：[`../fat-admin-interface-scan/`](../fat-admin-interface-scan/)。
+- 页面/权限基线和结果目录：[`../fat-admin-interface-scan/`](../fat-admin-interface-scan)。
 - 使用独立 Playwright 浏览器，一次登录后持续复用会话；优先英文 UI，同时保留中文权限树和接口文档名称。
 - 第一阶段只建立菜单清单：先使用菜单/权限接口获取结构，再与渲染后的左侧菜单 DOM、链接 href 和实际 pathname 核对。权限接口返回的 API `module` 不能直接当作 UI 路由。
 - 完整菜单路由清单确认后，第二阶段才按菜单和页面顺序逐页访问，不随机跨页点击。
@@ -141,7 +154,7 @@
 ## 当前状态
 
 - 客户端页面与控件清单已建立，包含 13 张脱敏参考截图。
-- 客户端首轮有效扫描已完成：19 个页面/逻辑页面、84 个明确动作，68 个完成；动态发现 53 个首方业务接口和 7 个第三方接口。首方接口分类为 `ACTIVE 42`、`ACTIVE_FAILED 1`、`MISCLASSIFIED 10`。结果见 [`../fat-client-interface-scan/results/`](../fat-client-interface-scan/results/)。
+- 客户端首轮有效扫描已完成：19 个页面/逻辑页面、84 个明确动作，68 个完成；动态发现 53 个首方业务接口和 7 个第三方接口。首方接口分类为 `ACTIVE 42`、`ACTIVE_FAILED 1`、`MISCLASSIFIED 10`。结果见 [`../fat-client-interface-scan/results/`](../fat-client-interface-scan/results)。
 - 管理后台已按“菜单发现 → 页面初始化 → 显式操作”完成首轮扫描：12 个一级权限、57 个真实侧栏页面、679 个清洗后动作；615 个非写动作逐项尝试，425 个实际交互。动态发现 109 个唯一接口，分类为 `ACTIVE 89`、`UNDOCUMENTED_ACTIVE 18`、`MISCLASSIFIED 2`。结果见 [`../fat-admin-interface-scan/results/fat-admin-final-report.md`](../fat-admin-interface-scan/results/fat-admin-final-report.md)。
 - 合规管理后台已使用独立 Playwright context 完成当前账号真实权限面的扫描：登录门禁通过，实际 hash 路由为 `/#/reportCenter/pagcor`；权限树 63/63 个 PID 查询成功并返回 62 个节点，当前 UI 仅渲染 1 个报表路由。该页形成 32 个 DOM 控件/表格快照、15 个安全动作和 33 条首方 Network 事件，动态 5 个唯一接口均为 `ACTIVE`；权限接口为 `DOCUMENTED_REACHABLE`，另有 65 个合规文档接口因当前角色/UI 未观察保持 `DOCUMENTED_UNVERIFIED`。五个筛选、日期快捷范围、查询和重置已覆盖；导出点击无 Network/download，记录为 `CLICKED_NO_INTERFACE_EVIDENCE`，未保存文件。结果见 [`../pagcor-admin-interface-scan/results/pagcor-admin-report.md`](../pagcor-admin-interface-scan/results/pagcor-admin-report.md)。
 - 代理管理后台使用新二维码的实时 SHA256 TOTP 和单一独立 Playwright context 从零重扫：登录后实际路由 `/home`，最终登录与当前用户接口均业务成功，渲染 11 个菜单且 11/11 页面通过 origin、pathname 和已认证侧栏硬门禁。形成 359 个 DOM 控件、71 个动作结论和 62 条首方 Network 事件，动态 18 个唯一接口分类为 `ACTIVE 16`、`UNDOCUMENTED_ACTIVE 1`、`MISCLASSIFIED 1`。查询、重置、页签、筛选、分页前进/恢复和详情弹层已有证据；3 个表单重绘后的额外筛选 locator 失效保留为交互错误。持久写为 0。结果见 [`../agency-admin-interface-scan/results/agency-admin-report.md`](../agency-admin-interface-scan/results/agency-admin-report.md)。

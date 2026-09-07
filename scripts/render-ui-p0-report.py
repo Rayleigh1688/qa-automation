@@ -9,6 +9,8 @@ import os
 import re
 from pathlib import Path
 
+from ui_report_evidence import build_evidence, append_markdown
+
 from p0_report_template import (
     format_execution_duration,
     report_verdict,
@@ -138,7 +140,9 @@ def main() -> None:
     ) or (str(source.get("status") or "") if isinstance(source, dict) else "")
     verdict, detail = report_verdict(items, run_status)
     kwargs = dict(title="P0 UI 执行报告", scope=args.scope, verdict=verdict, verdict_detail=detail, items=items)
+    evidence = build_evidence(source, status_source, items, Path(args.input), Path(args.html_out))
     write_markdown_report(**kwargs, output=Path(args.out))
+    append_markdown(Path(args.out), evidence)
     metadata = []
     if isinstance(status_source, dict):
         metadata = [
@@ -148,7 +152,7 @@ def main() -> None:
                 status_source.get("started_at"), status_source.get("finished_at"),
             )),
         ]
-    write_html_report(**kwargs, report_kind="UI", metadata=metadata, output=Path(args.html_out))
+    write_html_report(**kwargs, report_kind="UI", metadata=metadata, evidence=evidence, output=Path(args.html_out))
     print(f"wrote {Path(args.out).resolve()}")
     print(f"wrote {Path(args.html_out).resolve()}")
 

@@ -30,7 +30,7 @@ P0 只保留必要资产，避免 CSV 和 Markdown 重复维护。
 
 ## 跨 API、UI 与数据库的资金链放行规则
 
-正式业务顺序以 `main-flow-scenarios.csv` 的 8 条主流程为准。资金链在不同执行面之间切换时还必须满足以下规则：
+以下规则适用于 `test:p0:full` 的跨 API/UI 完整验收；纯 API 独立组合包含后台清流，不提供投注证据，见 [命令说明](../../docs/commands.md)。正式业务顺序以 `main-flow-scenarios.csv` 为准：
 
 1. 充值、投注、流水核对和提现统一使用同一个 `fund_flow_account`，整条资金链串行执行。
 2. 每个独立执行面/runner 在场景开始时重新登录一次，随后在本次进程或 Playwright suite 内共享 token。跨 API、UI 或下一条命令时不复用历史 token；业务关联依靠本轮 uid、订单号、时间窗口等业务标识，而不是共享登录态。
@@ -56,7 +56,7 @@ ENV_FILE=.env.fat npm run test:p0:full -- --bet-spins 10 --clear-remaining-turno
 python3 scripts/run-p0-tests.py --mode full --env .env.fat --scope FAT --deposit-amount 1200 --bet-spins 10 --clear-remaining-turnover --withdraw-amount 1000 --headed
 ```
 
-只执行 API 到充值与补单检查点：
+执行 API 独立受控组合（包含注册、KYC、充值、后台清流、提款账户准备、提现和审核阶段）：
 
 ```bash
 python3 scripts/run-api-tests.py p0
@@ -82,7 +82,7 @@ P0_WITHDRAW_ID=<withdraw-id> npm run test:p0:api:withdraw-approve
 
 注册未显式传 `REGISTER_PHONE` 时，先通过后台会员列表精确筛选，从 `9000000001` 或环境专属游标开始逐号查找未注册号码。游标位于 Git 忽略的 `api/local-state/`，FAT/UAT 分开保存；dry-run 或注册中断后仍从同一候选复查，已注册才递增。
 
-执行 P0 和 P1：
+未来新增 P1 资产后的多等级调用示例（当前仅实现 P0）：
 
 ```bash
 python3 scripts/run-api-tests.py p0 p1
@@ -139,9 +139,9 @@ API、UI 和主流程三个 HTML 报告共用 `scripts/p0_report_template.py` �
 | 充值记录旧 `status=PENDING` 筛选 | `/finance/deposit/list?page=1&page_size=10&time_flag=0` | 按 Transaction/Deposit 记录页真实请求做正例门禁 |
 | 投注记录旧 `time_flag=30&status=1` 筛选 | `/member/game/bet/list?page_size=10&time_flag=0&page=1` | 按 Bet History 真实请求做正例门禁 |
 
-## 主流程下一步计划
+## 主流程执行约束
 
-当前资产为 8 条主流程、57 条整体 P0 用例：31 条 safe smoke（客户端 18、后台 13）、15 条 API 登记反例（默认执行 13 条，充值上下限 2 条为显式缺陷探针）、10 条受控写/UI 协作项，以及 1 条已实现的状态 UI 反例。更换成熟账号后 FAT safe smoke 已通过 31/31，默认安全反例通过 13/13。
+当前资产为 8 条主流程、57 条整体 P0 用例：31 条 safe smoke（客户端 18、后台 13）、15 条 API 登记反例（默认执行 13 条，充值上下限 2 条为显式缺陷探针）、10 条受控写/UI 协作项，以及 1 条已实现的状态 UI 反例。最新执行证据见 [交接](../../AI-HANDOFF.md)。
 
 1. 永久 BASIC 账号只验证 KYC/钱包密码双前置，不提交 KYC；KYC 最小闭环使用独立的新号或可重提账号。
 2. 已通过 KYC 的账号只复核状态，不执行重复提交；注册、KYC、资金链账号必须遵循 `test-account-pool.csv` 的 lane 边界。
@@ -150,11 +150,11 @@ API、UI 和主流程三个 HTML 报告共用 `scripts/p0_report_template.py` �
 5. 活动配置、活动流水限制、盲盒、Filcoin、VIP、代理、收藏等均移出 P0 门禁；活动流水限制作为 P1 独立专项，不参与 P0 放行。
 6. 后台查询穿插在对应业务阶段：KYC 后查待审，充值后查待审/补单，提现后查审核；当前用户权限与汇总报表放在最后总核对。
 
-后台列表类 POST 接口必须以 CBOR 发送请求体；充值/提现待审与财务报表使用最近两天的秒级动态时间窗口。`test-cases.csv` 的 `request_body` 支持 `{{now_minus_2d}}`、`{{now_plus_5m}}`，runner 会在执行时替换为整数时间戳。接口文档中把部分待审列表标为 GET 的记录已经实测纠正为 POST。
+后台列表类 POST 接口必须以 CBOR 发送请求体；时间单位按接口维护：提现待审 `/admin/finance/withdraw/risk/audit/list` 使用毫秒，其他已配置列表保留秒级窗口。`test-cases.csv` 的 `request_body` 支持 秒级 `{{now_minus_2d}}`、`{{now_plus_5m}}` 与毫秒级 `{{now_minus_2d_ms}}`、`{{now_plus_5m_ms}}`，runner 会在执行时替换为整数时间戳。接口文档中把部分待审列表标为 GET 的记录已经实测纠正为 POST。
 
 当前核对深度：客户端账变与后台账变的结构查询已分别进入 safe smoke；本轮充值和提现已完成订单号、uid、金额与待审状态的一对一关联。真实出款成功/取消后的最终状态和账变方向复验属于 FAT 转账接口恢复后的增强项，不阻塞当前 P0。
 
-当前 FAT 阶段接受标准：Maya 提现单成功创建、进入后台待审列表、取消/退款后前后台金额和最终状态一致，即可视为提现提交链路通过。`No available transfer interface` 之后的真实出款成功属于环境恢复后的增强复验；目标场景仍保留后台成功闭环，不因环境例外删除。
+当前环境接受标准统一见 [环境手册](../runbooks/ENVIRONMENTS.md#提现阶段接受标准)。历史取消/退款证据不作为每轮必选步骤，待审关联不能表述为最终出款成功。
 
 KYC 保留最小 P0 闭环：真实提交、后台审核以及审核后前台状态刷新。页面 `KYC successful` 只代表资料已提交等待处理，不等于审核通过。驳回重提、OCR/eKYC、证件类型和字段组合等扩展矩阵归 P1。
 
@@ -167,6 +167,6 @@ KYC 保留最小 P0 闭环：真实提交、后台审核以及审核后前台状
 - `BET_CLIENT_PHONE`、`WITHDRAW_CLIENT_PHONE`：兼容别名，可以指向同一个 `fund_flow_account`。
 - `RESTRICTED_CLIENT_PHONE`：P1 活动流水专项预留变量，不参与 P0 主流程放行判断。
 - 维护一个永久 BASIC/未 KYC 账号专用于 DTC-002，绝不提交 KYC；KYC 闭环使用独立账号。最低提现金额使用已绑定提款账户的成熟账号直接走 API 小金额反例，不维护低余额账号。
-- KYC 探索使用 `090XXXXXXXX` 新账号池，首个账号从 `09000000001` 开始；测试环境 OTP 固定为 `111111`。已驳回或未通过 KYC 的账号可以重复提交 KYC，避免账号池被快速用尽。
-- `9888888050` 已知存在提现流水限制，不作为默认提现正例账号；除非先在后台解除流水限制，否则提现失败属于测试数据前置问题。
+- KYC 号段、分配方式与验证码按 [环境手册](../runbooks/ENVIRONMENTS.md) 执行，不将 FAT 固定码泛化到 UAT。
+- 提现前实时复核目标账号状态；历史账号观察不作为当前数据前置。
 - 充值页面的 `Multiple Deposit Bonus` 活动开关默认不参加；参加充值活动会产生提现流水限制。需要做无流水限制提现链路时，应保持该开关关闭/置灰。

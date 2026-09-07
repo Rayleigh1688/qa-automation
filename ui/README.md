@@ -67,7 +67,7 @@ ENV_FILE=.env.fat npm run test:p0:full -- --bet-spins 10 --clear-remaining-turno
 python3 scripts/run-p0-tests.py --mode full --env .env.fat --scope FAT --deposit-amount 1200 --bet-spins 10 --clear-remaining-turnover --withdraw-amount 1000 --headed
 ```
 
-`npm run test:p0` 为 API safe/negative + 默认 UI 的可重复门禁；`npm run test:p0:full` 执行完整资金主流程。完整入口先用新号执行 KYC 前提现拦截，再提交 KYC；每次 UI 命令重新登录，storage state 只在本次 Playwright suite 内共享。默认会按剩余流水投注到 0；显式使用 `--bet-spins N --clear-remaining-turnover` 时，Playwright 固定投注 N 次并确认流水下降，随后管理后台清空剩余流水，复查为 0 后才提交提现。
+`npm run test:p0` 为 API safe/negative + 默认 UI 的可重复门禁；`npm run test:p0:full` 执行完整资金主流程。完整入口先用永久 BASIC 账号验证提现拦截，再对独立 KYC 账号提交或复核 KYC；每次 UI 命令重新登录，storage state 只在本次 Playwright suite 内共享。默认会按剩余流水投注到 0；显式使用 `--bet-spins N --clear-remaining-turnover` 时，Playwright 固定投注 N 次并确认流水下降，随后管理后台清空剩余流水，复查为 0 后才提交提现。
 
 Python UI/完整入口默认以 headless Chromium 运行；传 `--headed` 后，global setup、未 KYC 提现、默认 UI 和真实投注使用的 Playwright 浏览器都会在桌面显示，不需要设置 `PWDEBUG=1`，也不会额外打开 Inspector。
 
@@ -119,4 +119,10 @@ python3 scripts/clean-test-artifacts.py ui
 - My 页 `Withdraw` 为提现入口，`Deposit` 为充值入口，`Transaction` 可查看充值、提现和账变记录，`Bet History` 为投注记录入口。
 - 充值页 `Multiple Deposit Bonus` 活动开关默认不参加；参加活动会产生提现流水限制。
 - KYC 最小 UI 提交保留在 P0：新账号首页默认弹出 KYC 引导，二次确认后进入 `/s-kyc-v2`，依次完成证件/图片、地址、个人信息、核对提交并看到 `KYC successful`。扩展证件、OCR/eKYC 和驳回重提矩阵归 P1。
-- KYC 新账号池使用 `090XXXXXXXX`，首个账号从 `09000000001` 开始，测试环境 OTP 固定 `111111`；已驳回/未通过 KYC 的账号可再次提交。
+- KYC 账号分配与验证码规则统一见 [环境手册](../api/runbooks/ENVIRONMENTS.md)。
+
+## UI 报告的证据层
+
+默认 `p0-ui-report.html` / `.md` 在固定用例结果之外展示执行摘要、中文用例轨迹、主导航页面观察、Network 响应计数、充值请求与真实 Spin 状态，以及本轮页面截图。证据不增加通过用例数；结构观察不能替代业务断言。
+
+辅助结果只在本次 Playwright 时间窗口内关联；缺失或过期结果明确显示未采集，不用历史图片补齐。`p0-ui-evidence.json` 仅输出白名单摘要，不链接认证/storage state 或原始响应正文。截图可以点击原图；默认游戏启动截图不会被标为投注成功。报告可用 `python3 scripts/render-ui-p0-report.py` 从已有结果重新生成，不触发业务执行。

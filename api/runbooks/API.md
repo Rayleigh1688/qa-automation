@@ -6,11 +6,7 @@
 
 这套资产用于让任意 AI 代理或自动化执行器在不依赖对话上下文的情况下，完成 P0 API 冒烟验证。
 
-当前 P0 覆盖范围：
-
-- 客户端只读 P0：登录前置、KYC、充值/提现资料、投注、钱包、账变、会员、VIP、代理资料。
-- 后台只读 P0：后台登录前置、当前用户、银行卡、账变类型、KYC 待审数量、eKYC 配置。
-- 主流程受控写 P0：新增测试用户、充值下单和后台补单、提现申请及后台审核同意/成功标记。
+可执行范围由 [P0 用例索引](../p0/test-cases.csv) 定义；命令写入范围统一见 [命令说明](../../docs/commands.md)。候选池中的 VIP、代理与 eKYC 等条目不等于默认门禁覆盖。
 
 ## 资产入口
 
@@ -54,7 +50,6 @@ LANG_HEADER=en_US
 
 ```bash
 python3 scripts/run-api-tests.py p0
-python3 scripts/run-api-tests.py p0 p1
 python3 scripts/run-api-tests.py p0 --safe-only
 ```
 

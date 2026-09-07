@@ -27,8 +27,8 @@
    - 业务结果符合预期：正例为 `status=true`；反例为明确拒绝或受控降级，且不产生不应有的副作用。
    - `data` 类型符合预期。
    - 关键字段存在。
-5. FAT 当前使用 CBOR 请求/响应，runner 执行时使用 `--body-format cbor`。
-6. FAT 当前本机证书链需要临时 `--insecure`，只允许用于测试环境。
+5. 请求编码、时间单位与认证按接口契约执行，不能从同类接口推断。
+6. 环境编码及 TLS 差异见 `api/runbooks/ENVIRONMENTS.md`。
 7. 真实账号、OTP、Google code、token、cookie、设备 id 只能通过环境变量或 CI secret 注入，不写入仓库。
 8. `api/results/*.json` 是最近一次 API 原始执行结果，每次覆盖刷新，不做历史累计，且不提交。
 9. `api/results/*.md`、`api/results/*.html` 是 API 可读结论，每次覆盖刷新，不提交；同名 CSV 说明 Markdown 不再保留。

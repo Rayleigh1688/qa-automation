@@ -90,6 +90,6 @@ npm run test:ui:p0:pn
 npm run test:ui:game-bet
 ```
 
-## 当前方向
+## 范围与状态来源
 
-当前接口发现已冻结为阶段快照。UI 工作优先保证默认 P0 可通过单命令 fresh login、确定性执行、非零失败退出并稳定生成脱敏报告；不继续扫描或向 API 回填接口，除非用户明确恢复接口发现专项。实时完成度和下一步只维护在 `AI-HANDOFF.md` 与 `ui/README.md`，避免本 Skill 与项目说明重复。
+当前任务与冻结专项见 [交接](../AI-HANDOFF.md)，执行命令见 [UI 手册](../ui/README.md)。本文件仅维护长期方法。

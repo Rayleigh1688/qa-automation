@@ -10,7 +10,7 @@ Start with the repository's current truth, then load only the branch needed for 
 ## Always establish context
 
 1. Read `../../../AI-HANDOFF.md` for current evidence, accepted environment exceptions, blockers, and the next checkpoint.
-2. Read `../../../README.md` only as far as needed for global commands, safety boundaries, and artifact locations.
+2. Read `../../../AGENTS.md` for repository maintenance and local checks; use `../../../docs/commands.md` for command scope and `../../../README.md` for navigation.
 3. Run `git status --short`; preserve unrelated or user-owned changes.
 
 Do not treat generated files under `api/results/`, `ui/results/`, or `ui/reports/` as long-term rules. They are only the latest execution evidence.
@@ -26,7 +26,7 @@ Do not treat generated files under `api/results/`, `ui/results/`, or `ui/reports
 ## P0 invariants
 
 - `api/p0/test-cases.csv` is the complete case index; `main-flow-scenarios.csv` is the eight-stage business map; `interface-shortlist.csv` is discovery input only.
-- Stateful steps follow register/login → minimal KYC → deposit → UI bet → bet/payout evidence → wallet/transaction reconciliation → withdrawal → admin/report reconciliation.
+- For the full API+UI flow, stateful steps follow register/login → minimal KYC → deposit → UI bet → bet/payout evidence → wallet/transaction reconciliation → withdrawal → admin/report reconciliation.
 - API and UI provide different evidence. Do not duplicate stable API checks in UI or claim an API-only run proves the third-party game interaction.
 - Database access is read-only and diagnostic. Never change business state directly in MySQL.
 - Controlled writes must use the designated lane and only act on records created by the current flow. Stop when a stage's business result is false; never call a later success endpoint to manufacture a pass.

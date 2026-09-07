@@ -10,6 +10,7 @@ from __future__ import annotations
 
 import csv
 from pathlib import Path
+from qa_core.contracts import normalize_request_template
 
 
 FIELDNAMES = [
@@ -137,6 +138,7 @@ def normalized_safe_cases(rows: list[dict[str, str]]) -> list[dict[str, str]]:
         if module == "admin":
             module = "permission"
         item = {field: row.get(field, "") for field in FIELDNAMES}
+        item["request_body"] = normalize_request_template(row["path"], item["request_body"])
         item.update({
             "scenario_id": FLOW_SCENARIOS[stage], "polarity": "positive",
             "surface": row.get("surface") or ("admin" if row.get("suggested_base_var") == "{{admin_url}}" else "client"),

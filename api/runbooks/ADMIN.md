@@ -109,7 +109,7 @@ python3 scripts/api-smoke-runner.py \
   --out /tmp/admin-p0-smoke.json
 ```
 
-后台列表 POST 请求不能发送空 body。充值/提现待审列表和财务记录使用 `start_time`、`end_time`、`page`、`page_size`；当前实测为秒级时间戳。`test-cases.csv` 使用动态时间标记，由 smoke runner 在发送前替换。
+后台列表 POST 请求不能发送空 body。充值/提现待审列表和财务记录使用 `start_time`、`end_time`、`page`、`page_size`；提现待审 `/admin/finance/withdraw/risk/audit/list` 使用毫秒，不能把其他列表的秒级参数直接复用。`test-cases.csv` 使用动态时间标记，由 smoke runner 在发送前替换。
 
 UAT 会员账号筛选的实测契约：
 
@@ -129,11 +129,9 @@ UAT 会员账号筛选的实测契约：
 - 曾误以为后台接口需要 `t:` 前缀，实际前端业务请求使用裸 token。
 - runner 曾把业务失败响应里的字符串误判成 token，现在只在 `status=true` 时提取 token。
 
-## 下一步
+## 维护与复核顺序
 
-后台 P0 接口进入正式用例前，先按以下顺序推进：
-
-1. KYC UI/API 提交后，用 uid/phone 在 `/admin/kyc/list` 定位本次记录，再补详情和通过/驳回的受控 runner。
-2. 审批通过、审批拒绝、配置修改、补单、同步状态等接口需要真实审核令牌；只允许操作本次自动化创建的记录，不混入默认只读 smoke。
-3. 在 controlled flow 中补齐订单级核对：前后台 uid、订单号、金额、状态、账变方向一致，并检查无重复账变。
-4. 后台 safe smoke 可用 `--base admin` 单独执行，便于把后台失败与客户端登录/SMS 环境问题隔离。
+1. KYC 按本次 uid 精确定位记录，复核后台审核与客户端状态；驳回重提矩阵属于扩展专项。
+2. 业务审批使用真实动态令牌，只处理当前 flow 创建的记录。
+3. 订单关联核对 uid、订单号、金额和状态；账变及最终出款的验收层次按环境手册区分。
+4. 用 `--base admin` 独立定位后台 safe smoke 失败；当前工程下一步只维护在交接中。

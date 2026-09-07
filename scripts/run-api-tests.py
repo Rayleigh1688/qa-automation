@@ -433,7 +433,7 @@ def main() -> int:
     parser.add_argument("--scope", default="")
     parser.add_argument("--body-format", choices=["json", "cbor"], default="cbor")
     parser.add_argument("--insecure", action=argparse.BooleanOptionalAction, default=True)
-    parser.add_argument("--include-write", action="store_true", help="compatibility flag; P0 already includes controlled deposit seeding by default")
+    parser.add_argument("--include-write", action="store_true", help="compatibility flag; P0 already includes the controlled API flow with turnover clearing and withdrawal by default")
     parser.add_argument("--safe-only", action="store_true", help="skip controlled P0 writes and run only read/negative checks")
     parser.add_argument("--no-clean", action="store_true", help="preserve existing controlled-flow evidence while refreshing repeatable gates")
     parser.add_argument(

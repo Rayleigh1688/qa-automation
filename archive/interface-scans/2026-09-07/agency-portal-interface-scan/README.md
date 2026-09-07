@@ -17,4 +17,4 @@ node agency-portal-interface-scan/agency-portal-scan.mjs
 python3 agency-portal-interface-scan/build-results.py
 ```
 
-主要产物位于 [`results/`](results/)：登录门禁、菜单/路由、权限观察、DOM 控件、操作证据、动态 endpoint、静态对照、汇总和报告。
+主要产物位于 [`results/`](results)：登录门禁、菜单/路由、权限观察、DOM 控件、操作证据、动态 endpoint、静态对照、汇总和报告。
