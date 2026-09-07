@@ -20,7 +20,7 @@ npm run check
 # API P0：正例、默认反例及受控写入组合
 npm run test:p0:api
 
-# UI P0：默认客户端完整套件
+# UI P0：默认页面与交互回归（不含完整KYC/充值/提现流程）
 npm run test:ui:p0
 ```
 
@@ -29,7 +29,7 @@ npm run test:ui:p0
 | API P0 | 包含注册、KYC、充值补单、后台清流、提款账户准备、提现及审核阶段；会创建业务数据，不包含真实 UI 投注。已知充值限额缺陷探针不默认执行。 |
 | UI P0 | 执行固定 10 条页面与交互用例；专项写入开关关闭时不真实充值、投注或提现。独立 UI 资金专项不包含在这 10 条中。 |
 
-这里的“完整套件”指当前默认可执行范围，不表示所有专项都执行。日常 UI 配置保持 `EXECUTE_BET`、`EXECUTE_DEPOSIT_CONTRACT`、`EXECUTE_WITHDRAW_UI` 为 `false`。
+默认 UI 不是全程业务端到端测试：未实现独立的KYC资料上传至提交成功UI用例；充值下单和合法提现UI属于独立专项。`npm run test:p0:full` 是API+UI混合资金链，KYC、充值及提现主要由API执行，真实投注由UI执行，不能替代这三段完整UI验证。专项入口见 [UI手册](ui/README.md)。日常 UI 配置保持 `EXECUTE_BET`、`EXECUTE_DEPOSIT_CONTRACT`、`EXECUTE_WITHDRAW_UI` 为 `false`。
 
 两条命令默认使用 `.env.fat`。切换 UAT 时在对应命令前加 `ENV_FILE=.env.uat`。
 
