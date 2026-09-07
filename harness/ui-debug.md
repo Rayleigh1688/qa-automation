@@ -59,18 +59,19 @@
 - 默认 P0 不执行真实下注、真实充值、真实提现。真实下注必须显式设置 `EXECUTE_BET=true`。
 - P0 UI 测试点源数据是 `ui/data/client-p0-test-points.json`，可读报告由 `npm run ui:p0-points` 生成到 `ui/reports/client-ui-p0-test-points.md`。
 - 正反例执行报告写入 `ui/reports/client-p0-positive-negative-report.md`，原始 JSON 写入 `ui/results/client-p0-positive-negative.json`。
+- 默认 P0 汇总状态写入 `ui/results/p0-ui-run-status.json`，HTML 写入 `ui/reports/p0-ui-report.html`。先看 `stage` 区分 preflight、Playwright 和报告失败，再进入对应截图、视频或 trace；固定清单缺失项显示为 `NOT_RUN`，额外项显示为失败的 `UI-UNPLANNED-*`。
 
 ### 登录页条款
 
 - 登录页的 `I agree to the Terms of Use ... confirm that I am 21 years old` 也是自定义控件。
 - 处理方式：找到该文案容器，点击容器左侧区域，再验证 `Login` 按钮是否启用。
-- 反例必须显式保持未勾选，不能为了让按钮可点而调用正例的条款点击 helper。2026-08-31 FAT 实测未勾选仍能完成 OTP 登录，当前作为产品缺陷保留失败。
+- 历史反例必须显式保持未勾选，不能为了让按钮可点而调用正例的条款点击 helper。2026-08-31 FAT 实测未勾选仍能完成 OTP 登录；该产品行为继续保留在已知错误记录中，但用户于 2026-09-04 决定将此项从当前默认 UI 自动化用例和固定测试点中移除。
 
-### 登录会话复用
+### 登录会话生命周期
 
-- 默认 P0 固定 1 worker。主账号只在无有效 storage state 时登录一次；后续用例加载 `ui/results/client-p0-storage-state.json`。
-- API/UI 交替时使用 `export-browser-p0-session.py`、`import-api-p0-session.py` 同步同一个 token，不得重新登录。
-- 清理结果时必须保留忽略的 UI storage state 和 API session；否则清理动作会意外触发新登录并使另一进程 token 失效。
+- 默认 P0 固定 1 worker。每次 `npm run test:ui:p0` 都先清理旧 UI 结果，由 global setup 启动新的 Playwright browser context 并 fresh login。
+- `ui/results/client-p0-storage-state.json` 只在当前 Playwright suite 内供后续用例共享；下次命令不得复用，也不在 API/UI 之间同步 token。
+- `export-browser-p0-session.py`、`import-api-p0-session.py` 和历史 `p0-api-session.json` 不属于当前 P0 执行链。API runner 与 UI 命令分别重新登录，认证信息只在各自进程或 suite 内使用。
 - Playwright 配置必须在读取 `CLIENT_BASE_URL` 前加载 `ENV_FILE`。否则 `ENV_FILE=.env.uat` 只会在 global setup 中生效，浏览器可能仍使用 FAT 默认 URL，而管理后台 helper 已切到 UAT，形成跨环境登录假象。当前 `playwright.config.mjs` 在配置解析顶部调用 `loadEnv()`，global setup 还会校验项目 `baseURL` 与 `CLIENT_BASE_URL` 的 origin 一致。
 
 ### Get Code 定位

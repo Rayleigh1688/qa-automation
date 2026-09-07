@@ -19,7 +19,7 @@
 - FAT 测试环境后台登录的 `google_code` 当前固定使用 `111111`。
 - `google_code` 必须按数字发送，不要按字符串发送。
 - `google_secret` 字段需要保留，当前可为空字符串。
-- `x-device-id` 需要从浏览器真实请求或环境变量注入。
+- `x-device-id` 可从浏览器真实请求或环境变量注入；无人值守 runner 未收到 `ADMIN_DEVICE_ID`/`X_DEVICE_ID` 时，为本次进程生成新的 UUID，且不跨命令持久化。
 - `client-id` 当前使用 `123`。
 - `client-version` 当前跟随浏览器版本，例如 `Chrome/151.0.0.0`。
 - `lang` 当前后台使用 `en`。

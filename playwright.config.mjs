@@ -3,6 +3,7 @@ import { loadEnv } from "./ui/framework/env.mjs";
 
 loadEnv();
 
+const headless = process.env.PLAYWRIGHT_HEADLESS !== "false";
 const clientDevice = process.env.CLIENT_BROWSER_PROFILE === "desktop"
   ? devices["Desktop Chrome"]
   : devices["Pixel 7"];
@@ -25,6 +26,7 @@ export default defineConfig({
     ["json", { outputFile: "ui/results/ui-playwright-result.json" }],
   ],
   use: {
+    headless,
     baseURL: process.env.CLIENT_BASE_URL || process.env.API_URL || "https://client-fat.filbet2025.com",
     ignoreHTTPSErrors: true,
     trace: "retain-on-failure",

@@ -198,6 +198,7 @@ def main() -> None:
     parser.add_argument("--phone", default="")
     parser.add_argument("--password", default="")
     parser.add_argument("--bet-unit", type=int)
+    parser.add_argument("--spin-count", type=int, default=0)
     parser.add_argument("--max-spins", type=int, default=20)
     parser.add_argument("--poll-interval", type=float, default=5)
     parser.add_argument("--poll-timeout", type=float, default=60)
@@ -207,6 +208,7 @@ def main() -> None:
     parser.add_argument("--timeout", type=float, default=15)
     parser.add_argument("--insecure", action=argparse.BooleanOptionalAction, default=True)
     parser.add_argument("--execute", action="store_true")
+    parser.add_argument("--allow-remaining-turnover", action="store_true")
     parser.add_argument("--out", default="ui/results/turnover-bet-plan.json")
     args = parser.parse_args()
 
@@ -218,8 +220,10 @@ def main() -> None:
     password = args.password or os.environ.get("BET_CLIENT_PASSWORD") or os.environ.get("WRITE_CLIENT_PASSWORD") or os.environ.get("CLIENT_PASSWORD", "")
     if not phone or not password:
         raise SystemExit("phone and password are required")
-    if args.bet_unit <= 0 or args.max_spins <= 0:
-        raise SystemExit("bet unit and max spins must be positive")
+    if args.bet_unit <= 0 or args.max_spins <= 0 or args.spin_count < 0:
+        raise SystemExit("bet unit and max spins must be positive; spin count cannot be negative")
+    if args.spin_count > args.max_spins:
+        raise SystemExit(f"requested spin count {args.spin_count} exceeds safety cap {args.max_spins}")
 
     source = choose_turnover_source(args.turnover_source, args.env)
     if source == "admin":
@@ -229,7 +233,12 @@ def main() -> None:
         unfinished_turnover = lambda: unfinished_turnover_database(phone)
 
     before = unfinished_turnover()
-    initial_planned_spins = math.ceil(before / Decimal(args.bet_unit)) if before > 0 else 0
+    fixed_spin_count = args.spin_count > 0
+    initial_planned_spins = (
+        args.spin_count if fixed_spin_count and before > 0
+        else math.ceil(before / Decimal(args.bet_unit)) if before > 0
+        else 0
+    )
     if initial_planned_spins > args.max_spins:
         raise SystemExit(
             f"planned spins {initial_planned_spins} exceed safety cap {args.max_spins}; "
@@ -242,7 +251,7 @@ def main() -> None:
     batches: list[dict[str, object]] = []
     current = before
     while args.execute and current > 0:
-        batch_spins = math.ceil(current / Decimal(args.bet_unit))
+        batch_spins = args.spin_count if fixed_spin_count else math.ceil(current / Decimal(args.bet_unit))
         if total_planned + batch_spins > args.max_spins:
             raise SystemExit(
                 f"total planned spins {total_planned + batch_spins} exceed safety cap {args.max_spins}"
@@ -277,7 +286,10 @@ def main() -> None:
 
         deadline = time.monotonic() + args.poll_timeout
         observed = unfinished_turnover()
-        while observed > 0 and time.monotonic() < deadline:
+        while (
+            (observed >= batch_before if fixed_spin_count else observed > 0)
+            and time.monotonic() < deadline
+        ):
             time.sleep(max(0.5, args.poll_interval))
             observed = unfinished_turnover()
         batches.append({
@@ -290,6 +302,8 @@ def main() -> None:
             current = observed
             break
         current = observed
+        if fixed_spin_count:
+            break
 
     after = current if executed else before
     result = {
@@ -302,13 +316,16 @@ def main() -> None:
         "executed": executed,
         "turnover_after": str(after),
         "turnover_cleared": after == 0,
+        "remaining_turnover_allowed": args.allow_remaining_turnover,
         "batches": batches,
     }
     output = Path(args.out)
     output.parent.mkdir(parents=True, exist_ok=True)
     output.write_text(json.dumps(result, ensure_ascii=False, indent=2), encoding="utf-8")
     print(json.dumps(result, ensure_ascii=False))
-    if executed and after > 0:
+    if executed and after >= before:
+        raise SystemExit(f"turnover did not decrease after UI bets: before={before}, after={after}")
+    if executed and after > 0 and not args.allow_remaining_turnover:
         raise SystemExit(f"turnover remains after UI bets: {after}")
 
 

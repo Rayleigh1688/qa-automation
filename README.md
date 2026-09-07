@@ -66,6 +66,8 @@ scripts/         辅助脚本
 - 当前主要风险：客户端自动化账号可能因频繁请求短信被 FAT 限制；CI 需要使用稳定的专用客户端账号或预置 token 策略。充值通道限额后端校验在 FAT 存在已知缺陷，越界契约探针不默认进入 CI。管理后台审核类动作使用已配置的真实 Google Authenticator 动态令牌；后台登录在 FAT 使用固定 `ADMIN_GOOGLE_CODE=111111`。
 - 2026-08-31 P0 快速门禁连续 3 轮稳定：每轮 FAT safe smoke 31/31、默认反例 13/13；UI 前两轮仅保留已确认条款缺陷，第三轮 11/11。完整受控链路已完成 KYC 审批与前台刷新、充值 1200、固定单注 1000 的流水驱动投注、提现 1000 和前后台订单关联核对；统一核对结果 PASS。
 - 2026-09-02 UAT 的 8 条 P0 主流程和统一资金链核对已 PASS：Maya 充值 1200、BNG `Coins` 单注 100 完成 6 次投注、流水归零、Maya 提现 500 进入后台 `under_review`。默认 UI 为 10/11，唯一失败是已明确接受本轮例外但尚未修复的“未勾选登录条款仍可登录”；实时证据以 [`AI-HANDOFF.md`](AI-HANDOFF.md) 为准。
+- 2026-09-04 FAT UI 脱离 AI 入口先以 Playwright Chromium 连续三轮 fresh-login 稳定复现旧默认套件 10/11；随后按用户决定移除“未勾选登录条款不能登录”，当前固定 10 条默认 Case 已重新执行并 10/10 PASS。主 UI HTML 报告使用中文分组和中文 Case 名称；最新状态仍以 [`AI-HANDOFF.md`](AI-HANDOFF.md) 为准。
+- 2026-09-04 19:07 FAT 最新完整组合已 PASS：充值 1200，Playwright Chromium 以单注 100 完成 10/10 次真实投注，流水 1800→900 后由管理后台显式清为 0，再提交提现 1000 并与后台同一 `under_review` 订单精确匹配；统一核对 10/10、主流程 8/8 PASS。
 
 ## 执行规则
 
@@ -180,21 +182,24 @@ npm run test:p0
 
 ```bash
 npm run test:p0:full
+ENV_FILE=.env.fat npm run test:p0:full -- --bet-spins 10 --clear-remaining-turnover --deposit-amount 1200 --withdraw-amount 1000
+python3 scripts/run-p0-tests.py --mode full --env .env.fat --scope FAT --deposit-amount 1200 --bet-spins 10 --clear-remaining-turnover --withdraw-amount 1000 --headed
 ```
 
 说明：
 
 - `npm run test:p0` 是可重复快速门禁：API safe/negative + 默认 UI，不创建新的充值、投注或提现记录，并保留最近一次完整资金链证据。
 - 每次 API runner 或 UI 命令启动都重新登录并取得新 token；token 只在本次 runner/Playwright suite 内共享，KYC、充值、投注、提现由独立操作组合成场景，不跨命令复用历史 session/storage state。
-- `npm run test:p0:full` 是显式受控写入口，严格按永久未 KYC 账号提现拦截 → 独立 KYC 账号闭环 → 充值 → UI 投注 → 流水核对 → API 提现建单 → 后台按订单 ID 关联执行；任一阶段业务失败立即停止。
+- `npm run test:p0:full` 是显式受控写入口，严格按永久未 KYC 账号提现拦截 → 独立 KYC 账号闭环 → 充值 → UI 投注 → 流水核对 → API 提现建单 → 后台按订单 ID 关联执行；任一阶段业务失败立即停止。显式传入 `--bet-spins N --clear-remaining-turnover` 时，Playwright 固定投注 N 次，先证明流水真实下降，再由管理后台清空剩余流水并复查为 0；报告必须分别展示投注后的剩余值和清流后的最终值。
 - `test:p0:full` 在任何业务动作前统一执行 preflight，校验环境 URL/scope、账号 lane 隔离、动态 OTP/TOTP 来源、金额、KYC 图片、Python/npm/Playwright 依赖；未显式传 `--scope` 时按 `.env.fat` / `.env.uat` 文件名推断 FAT/UAT。
+- Python 总入口默认使用 Playwright headless Chromium；本地需要在桌面观察时传 `--headed`，浏览器会正常显示但不打开 Playwright Inspector。完整流程无论成功、preflight 失败、中断或任一子阶段失败，都会写入 `api/results/p0-full-run-status.json`，并覆盖生成当次 `p0-main-flow-report.html` / `.md`；失败报告显示 `BLOCKED`、失败阶段、退出码和已完成阶段，避免残留旧成功结论。
 - `python3 scripts/run-api-tests.py p0` 是 API 子流程入口，执行 safe/negative 并将资金链推进到充值与补单检查点；不会跳过真实投注直接提现。
 - 只复验后台 safe smoke 时，可执行：`python3 scripts/api-smoke-runner.py --cases api/p0/test-cases.csv --with-admin-login --base admin --execute --insecure --body-format cbor --out /tmp/admin-p0-smoke.json`。
 - `python3 scripts/run-api-tests.py p0 p1` 按等级依次执行；当前 P1 资产不存在时会跳过并提示。
 - `--safe-only` 跳过注册、充值、提现和审核等受控写操作，只执行只读/反例检查。`--include-write` 保留为旧命令兼容参数；P0 默认包含受控写的充值检查点。提现以后台成功记录为验收，不校验项目外收款账户或真实到账，只应在测试环境或专用 UAT 测试数据下执行。
 - `test:ui:p0` 默认不执行真实投注。需要点击三方游戏内投注区域时，必须显式设置 `EXECUTE_BET=true`。
 - API 和 UI P0 分别执行、分别判定。Maya UI 提现使用 `npm run test:ui:withdraw-contract` 独立验证客户端建单；未 KYC 提现前置使用 `npm run test:ui:unverified-withdraw`。两者不会替代 API 提现契约。
-- 正向资金链单注由 `CLIENT_GAME_BET_AMOUNT` 控制：FAT/UAT 当前统一为 100，UAT 上限仍为 100；`scripts/run-turnover-bet.py` 按所选环境的剩余流水动态计算次数。投注后再次核对流水，归零才进入提现。完整差异见 [`ENVIRONMENTS.md`](api/runbooks/ENVIRONMENTS.md)。
+- 正向资金链单注由 `CLIENT_GAME_BET_AMOUNT` 控制：FAT/UAT 当前统一为 100，UAT 上限仍为 100；默认按剩余流水动态计算次数。用户明确指定固定次数时使用 `--bet-spins`，若投注后仍有流水，只有同时显式启用 `--clear-remaining-turnover` 才调用管理后台清流；最终复查为 0 后才能进入提现。完整差异见 [`ENVIRONMENTS.md`](api/runbooks/ENVIRONMENTS.md)。
 - 后台登录固定码和审核动态码是两套东西：`ADMIN_GOOGLE_CODE=111111` 只用于 FAT 后台登录，审核/补单/KYC 审批使用 `ADMIN_APPROVAL_TOTP_SECRET` 生成真实动态码。
 - API 执行会覆盖 `api/results/` 下同名结果和报告；UI 执行会覆盖 `ui/results/` 和 `ui/reports/` 下同名产物。需要历史记录时，以 CI 归档为准，不在仓库工作区内累积。
 - 三类 P0 HTML 报告使用同一模板但保持独立判定口径：`api/results/p0-api-report.html` 展示本次 API 请求/断言，`ui/reports/p0-ui-report.html` 展示本次 Playwright 用例，`api/results/p0-main-flow-report.html` 只在 API+UI 组合验收中按 8 条端到端主流程汇总。三个入口结束时分别打印对应的 `file://` 绝对地址。
@@ -265,6 +270,7 @@ CI 归档产物：
 - `api/results/*.json`
 - `api/results/*.html`
 - `ui/reports/*.md`
+- `ui/reports/*.html`
 - `ui/results/**/*.json`
 - `ui/results/screenshots/**/*`
 - `playwright-report/**/*`
@@ -304,7 +310,7 @@ npm run test:ui:game-bet
 npm run ui:p0-points
 ```
 
-- `npm run test:ui:p0`：执行客户端 P0 UI 默认套件，包含登录正反例、主流程扫描、游戏启动冒烟、页面状态正反例；默认不做真实资金动作。
+- `npm run test:ui:p0`：执行客户端 P0 UI 默认套件，包含登录正反例、主流程扫描、游戏启动冒烟、页面状态正反例；默认不做真实资金动作。入口执行环境/scope/依赖预检，核对固定 10 条测试，记录 `ui/results/p0-ui-run-status.json`，成功、失败或中断均尝试生成同路径 HTML 报告；主 HTML 报告用中文展示分组和 Case 名称。
 - `npm run test:ui:p0:scan`：只执行 Playwright P0 客户端主流程扫描用例。
 - `npm run test:ui:network-discovery`：窗口化 Playwright Network 发现入口，固定 Pixel 7 手机浏览器格式，登录后探索 P0 页面、充值、提现、Transaction、Bet History 等入口，生成脱敏 JSON、HAR、trace 与 Markdown 报告；只用于接口发现和人工确认，不纳入默认 CI 门禁。
 - `npm run test:ui:p0:pn`：只执行客户端 P0 UI 正反例补充用例。

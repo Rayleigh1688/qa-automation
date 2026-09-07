@@ -165,6 +165,16 @@ test.describe("Client game bet smoke", () => {
     const modalConfig = loadJson("ui/data/client-modals.json");
     const gameConfig = loadJson("ui/data/client-game-actions.json");
     const game = selectGame(gameConfig);
+    const executeBet = process.env.EXECUTE_BET === "true";
+    const spinCount = Math.max(1, Number(process.env.CLIENT_GAME_SPIN_COUNT || 1));
+    const postClickWaitMs = Number(
+      process.env.CLIENT_GAME_POST_CLICK_WAIT_MS || game.postClickWaitMs || 8000,
+    );
+    // Login, third-party launch, canvas diagnostics and attachments consume a
+    // fixed baseline. Real betting adds one settlement wait per configured
+    // Spin, so a fixed 120s timeout can fail after every click has succeeded.
+    const requiredTimeoutMs = 120_000 + (executeBet ? spinCount * postClickWaitMs : 0);
+    testInfo.setTimeout(Math.max(testInfo.timeout, requiredTimeoutMs));
     const viewport = game.viewport || gameConfig.viewport || page.viewportSize() || { width: 412, height: 915 };
     if (JSON.stringify(page.viewportSize()) !== JSON.stringify(viewport)) {
       await page.setViewportSize(viewport);
@@ -279,15 +289,13 @@ test.describe("Client game bet smoke", () => {
       x: Math.round(viewport.width * game.spinButton.xRatio),
       y: Math.round(viewport.height * game.spinButton.yRatio),
     };
-    const executeBet = process.env.EXECUTE_BET === "true";
-    const spinCount = Math.max(1, Number(process.env.CLIENT_GAME_SPIN_COUNT || 1));
     let completedSpinCount = 0;
     const clickStartedAt = Date.now();
     if (executeBet) {
       for (let index = 0; index < spinCount; index += 1) {
         await activatePoint(page, clickPoint.x, clickPoint.y);
         completedSpinCount += 1;
-        await page.waitForTimeout(Number(process.env.CLIENT_GAME_POST_CLICK_WAIT_MS || game.postClickWaitMs || 8000));
+        await page.waitForTimeout(postClickWaitMs);
       }
     }
     await page.screenshot({ path: afterScreenshot, fullPage: false });

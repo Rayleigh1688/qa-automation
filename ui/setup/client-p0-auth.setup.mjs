@@ -38,6 +38,7 @@ export default async function clientP0AuthSetup(config) {
   }
   const browser = await chromium.launch({
     channel: process.env.PLAYWRIGHT_CHANNEL || undefined,
+    headless: process.env.PLAYWRIGHT_HEADLESS !== "false",
   });
   const contextOptions = {
     ...devices["Pixel 7"],

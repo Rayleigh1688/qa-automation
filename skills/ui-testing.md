@@ -30,6 +30,7 @@
    - 页面和路由配置放 `ui/data/client-pages.json`。
    - 弹窗规则放 `ui/data/client-modals.json`。
    - P0 UI 测试点放 `ui/data/client-p0-test-points.json`。
+   - 默认 P0 固定执行清单放 `ui/data/client-p0-default-suite.json`。
    - 游戏固定视口和相对点击点放 `ui/data/client-game-actions.json`。
    - 用例只编排流程，不把页面文案、路由候选、弹窗规则散落到测试逻辑里。
 6. Playwright 定位优先级：
@@ -39,7 +40,7 @@
    - 对自定义 SVG/div 控件，可使用 DOM 派生定位：先从语义文本找到容器，再计算目标元素位置点击。
    - 三方游戏 iframe/canvas 无稳定 DOM 时，允许 Pixel 7 `412x915` 固定视口下的相对坐标；坐标必须配置在 `ui/data/client-game-actions.json`，不得散落在用例代码。
 7. 登录态、storage state、截图、视频、trace、token、cookie、账号和 OTP 不提交仓库。UI 原始结果写入 `ui/results/`，默认忽略。
-8. UI 可读报告写入 `ui/reports/`，原始 JSON、截图、trace、视频写入 `ui/results/`；Playwright HTML 和测试附件分别写入 `playwright-report/`、`test-results/`。
+8. UI HTML/Markdown 可读报告写入 `ui/reports/`，原始 JSON、截图、trace、视频写入 `ui/results/`；Playwright HTML 和测试附件分别写入 `playwright-report/`、`test-results/`。
 9. UI 结果目录只保留最近一次执行产物。npm UI 命令会先执行 `python3 scripts/clean-test-artifacts.py ui`，不要在工作区按时间戳或次数累积报告。
 10. UI 失败时先判断是：
    - 页面选择器变化。
@@ -71,7 +72,7 @@
 
 最近一次生成物：
 
-- `ui/reports/*.md`
+- `ui/reports/*.md`、`ui/reports/*.html`
 - `ui/results/*.json`
 - `ui/results/screenshots/`
 - `playwright-report/`
@@ -91,4 +92,4 @@ npm run test:ui:game-bet
 
 ## 当前方向
 
-当前 UI 工作先通过窗口化 Playwright 捕获客户端主流程的真实 Network，再将已确认的接口契约补入 API P0。实时完成度和下一步只维护在 `AI-HANDOFF.md` 与 `ui/README.md`，避免本 Skill 与项目说明重复。
+当前接口发现已冻结为阶段快照。UI 工作优先保证默认 P0 可通过单命令 fresh login、确定性执行、非零失败退出并稳定生成脱敏报告；不继续扫描或向 API 回填接口，除非用户明确恢复接口发现专项。实时完成度和下一步只维护在 `AI-HANDOFF.md` 与 `ui/README.md`，避免本 Skill 与项目说明重复。

@@ -35,8 +35,8 @@ P0 只保留必要资产，避免 CSV 和 Markdown 重复维护。
 1. 充值、投注、流水核对和提现统一使用同一个 `fund_flow_account`，整条资金链串行执行。
 2. 每个独立执行面/runner 在场景开始时重新登录一次，随后在本次进程或 Playwright suite 内共享 token。跨 API、UI 或下一条命令时不复用历史 token；业务关联依靠本轮 uid、订单号、时间窗口等业务标识，而不是共享登录态。
 3. API 完成充值、后台补单和钱包核对后必须停止。普通存款即使不参加活动也会产生基础流水，不能直接跳到提现。
-4. UI 三方游戏单注读取 `CLIENT_GAME_BET_AMOUNT`：FAT/UAT 当前统一为 100。`scripts/run-turnover-bet.py` 只读汇总全部未完成流水，按当前环境单注计算投注次数并设置安全上限；FAT 默认读取只读数据库，UAT 默认通过管理后台会员列表和流水列表读取，不要求数据库连接。
-5. 投注后轮询 Bet History、钱包、账变和基础流水；以本轮时间窗口和关联标识核对记录。只有总剩余流水为 0，才允许发起提现。
+4. UI 三方游戏单注读取 `CLIENT_GAME_BET_AMOUNT`：FAT/UAT 当前统一为 100。`scripts/run-turnover-bet.py` 只读汇总全部未完成流水，默认按当前环境单注计算投注次数并设置安全上限；完整入口可由 `--bet-spins` 显式固定次数。FAT 默认读取只读数据库，UAT 默认通过管理后台会员列表和流水列表读取，不要求数据库连接。
+5. 投注后轮询 Bet History、钱包、账变和基础流水；以本轮时间窗口和关联标识核对记录。固定次数后仍有流水时，只有用户同时显式启用 `--clear-remaining-turnover`，才允许调用后台清流；报告必须分别保留投注前、投注后和后台清流后的流水值。最终总剩余流水为 0 后才允许发起提现。
 6. 提现金额必须同时满足余额和通道限制。完整 API 资金链通过 `/finance/payment/withdraw` 创建订单，再由后台 API 按订单 ID 精确定位并核对；Maya UI 建单另作独立 UI P0，不替代 API CTC-009。
 7. 数据库只用于只读诊断和交叉核对，不直接修改 KYC、余额、流水、充值或提现状态。
 
@@ -52,6 +52,8 @@ npm run test:p0
 
 ```bash
 npm run test:p0:full
+ENV_FILE=.env.fat npm run test:p0:full -- --bet-spins 10 --clear-remaining-turnover --deposit-amount 1200 --withdraw-amount 1000
+python3 scripts/run-p0-tests.py --mode full --env .env.fat --scope FAT --deposit-amount 1200 --bet-spins 10 --clear-remaining-turnover --withdraw-amount 1000 --headed
 ```
 
 只执行 API 到充值与补单检查点：
@@ -111,6 +113,7 @@ python3 scripts/run-api-tests.py p0 \
 - `api/results/p0-api-report.md` / `p0-api-report.html`，本次 API 登录前置、正例、反例和受控流程的逐项执行报告
 - `api/results/p0-main-flow-report.md` / `p0-main-flow-report.html`，完整 API+UI 验收的 8 条端到端主流程报告
 - `api/results/p0-run-status.json`，记录整次命令的状态、最后阶段、退出码和脱敏错误；失败时仍覆盖生成
+- `api/results/p0-full-run-status.json`，记录 API + Playwright 完整总编排的模式、参数、headed 状态、已完成阶段、失败阶段和退出码；成功或失败均覆盖生成
 - `api/results/fund-flow-seed-result.json`，默认只生成充值与补单阶段证据；`--safe-only` 时不生成
 - `api/results/kyc-result.json`，KYC 提交/已存在状态、后台审批与前台刷新证据
 - `api/results/p0-reconciliation-result.json`，本轮充值、钱包、投注流水、提现及后台订单关联断言

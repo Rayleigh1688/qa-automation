@@ -44,6 +44,7 @@ def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--deposit", default="api/results/fund-flow-seed-result.json")
     parser.add_argument("--turnover", default="ui/results/turnover-bet-plan.json")
+    parser.add_argument("--turnover-clear", default="api/results/turnover-clear-result.json")
     parser.add_argument("--game", default="ui/results/client-game-bet-smoke.json")
     parser.add_argument("--withdraw", default="api/results/withdraw-result.json")
     parser.add_argument("--out", default="api/results/p0-reconciliation-result.json")
@@ -52,6 +53,7 @@ def main() -> None:
     deposit = records(load(args.deposit))
     withdraw = records(load(args.withdraw))
     turnover = load(args.turnover)
+    turnover_clear = records(load(args.turnover_clear))
     game = load(args.game)
     checks: list[dict[str, object]] = []
     context: dict[str, object] = {}
@@ -78,9 +80,33 @@ def main() -> None:
     planned = int(turnover_data.get("planned_spins") or 0)
     completed = int(turnover_data.get("completed_spins") or game_data.get("completedSpinCount") or 0)
     add(checks, "bet_executed", bool(turnover_data.get("executed") is True and planned > 0 and completed == planned), f"planned={planned}, completed={completed}")
-    turnover_after = decimal(turnover_data.get("turnover_after"))
-    add(checks, "turnover_cleared", turnover_data.get("turnover_cleared") is True and turnover_after == 0, f"before={turnover_data.get('turnover_before')}, after={turnover_data.get('turnover_after')}")
-    context.update({"bet_unit": turnover_data.get("bet_unit"), "planned_spins": planned, "completed_spins": completed})
+    turnover_after_bet = decimal(turnover_data.get("turnover_after"))
+    clear_action = turnover_clear.get("turnover_clear", {})
+    clear_before_record = turnover_clear.get("turnover_before_clear", {})
+    clear_after_record = turnover_clear.get("turnover_after_clear", {})
+    clear_before = decimal(clear_before_record.get("remaining_turnover"))
+    clear_after = decimal(clear_after_record.get("remaining_turnover"))
+    cleared_by_bet = turnover_data.get("turnover_cleared") is True and turnover_after_bet == 0
+    cleared_by_admin = bool(clear_action.get("business_status") is True and (
+        (clear_after_record.get("business_status") is True and clear_after == 0)
+        or (clear_action.get("skipped") is True and clear_before_record.get("business_status") is True and clear_before == 0)
+    ))
+    clear_source = "ui_bet" if cleared_by_bet else "admin" if cleared_by_admin else "none"
+    add(
+        checks,
+        "turnover_cleared",
+        cleared_by_bet or cleared_by_admin,
+        f"after_bet={turnover_data.get('turnover_after')}, final={clear_after if clear_after is not None else clear_before if cleared_by_admin else turnover_after_bet}, source={clear_source}",
+    )
+    context.update({
+        "bet_unit": turnover_data.get("bet_unit"),
+        "planned_spins": planned,
+        "completed_spins": completed,
+        "turnover_before_bet": turnover_data.get("turnover_before"),
+        "turnover_after_bet": turnover_data.get("turnover_after"),
+        "turnover_final": str(clear_after if clear_after is not None else clear_before) if cleared_by_admin else str(turnover_after_bet),
+        "turnover_clear_source": clear_source,
+    })
 
     withdraw_create = withdraw.get("withdraw_create", {})
     withdraw_data = withdraw_create.get("data", {})

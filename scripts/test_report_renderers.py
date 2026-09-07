@@ -3,6 +3,7 @@ import json
 import tempfile
 import unittest
 from pathlib import Path
+from unittest.mock import patch
 
 from p0_report_template import format_east8_time, format_execution_duration, write_html_report
 
@@ -18,6 +19,7 @@ def load_script(name: str):
 
 API_REPORT = load_script("render-api-p0-report.py")
 UI_REPORT = load_script("render-ui-p0-report.py")
+MAIN_REPORT = load_script("render-main-flow-report.py")
 
 
 class ApiReportTests(unittest.TestCase):
@@ -123,6 +125,120 @@ class UiReportTests(unittest.TestCase):
         self.assertEqual([item["status"] for item in items], ["PASS", "FAIL"])
         self.assertEqual([item["id"] for item in items], ["UI-001", "UI-002"])
 
+    def test_forced_failed_run_is_blocked_without_collected_tests(self):
+        with tempfile.TemporaryDirectory() as directory:
+            html_output = Path(directory) / "report.html"
+            markdown_output = Path(directory) / "report.md"
+            with patch("sys.argv", [
+                "render-ui-p0-report.py",
+                "--input", str(Path(directory) / "missing.json"),
+                "--run-status", "FAILED",
+                "--out", str(markdown_output),
+                "--html-out", str(html_output),
+            ]):
+                UI_REPORT.main()
+            document = html_output.read_text(encoding="utf-8")
+
+        self.assertIn("BLOCKED", document)
+
+    def test_forced_successful_run_with_passed_test_is_pass(self):
+        with tempfile.TemporaryDirectory() as directory:
+            source = Path(directory) / "result.json"
+            source.write_text(json.dumps({"suites": [{"specs": [{
+                "title": "login", "file": "ui/cases/client-login.spec.mjs",
+                "tests": [{"title": "login succeeds", "ok": True, "results": [{"status": "passed"}]}],
+            }]}]}), encoding="utf-8")
+            expected = Path(directory) / "expected.json"
+            expected.write_text(json.dumps([{
+                "id": "UI-001", "file": "client-login.spec.mjs", "title": "login succeeds",
+            }]), encoding="utf-8")
+            html_output = Path(directory) / "report.html"
+            with patch("sys.argv", [
+                "render-ui-p0-report.py", "--input", str(source), "--run-status", "PASS",
+                "--expected", str(expected),
+                "--out", str(Path(directory) / "report.md"), "--html-out", str(html_output),
+            ]):
+                UI_REPORT.main()
+            document = html_output.read_text(encoding="utf-8")
+
+        self.assertIn("<strong>PASS</strong>", document)
+
+    def test_missing_expected_test_is_not_run(self):
+        items = UI_REPORT.apply_expected_tests([], [{
+            "id": "UI-001", "file": "client-login.spec.mjs", "title": "login",
+            "displayName": "登录成功", "group": "登录",
+        }])
+        self.assertEqual(items[0]["status"], "NOT_RUN")
+        self.assertEqual(items[0]["id"], "UI-001")
+        self.assertEqual(items[0]["name"], "登录成功")
+        self.assertEqual(items[0]["group"], "登录")
+
+    def test_expected_test_uses_chinese_report_labels_after_matching(self):
+        items = UI_REPORT.apply_expected_tests([{
+            "group": "client-login", "id": "UI-001", "name": "login succeeds", "kind": "UI",
+            "status": "PASS", "target": "ui/cases/client-login.spec.mjs", "expected": "passed",
+            "actual": "passed", "duration": "1ms", "detail": "",
+        }], [{
+            "id": "UI-001", "file": "client-login.spec.mjs", "title": "login succeeds",
+            "displayName": "登录成功", "group": "登录",
+        }])
+        self.assertEqual(items[0]["name"], "登录成功")
+        self.assertEqual(items[0]["group"], "登录")
+
+    def test_unplanned_test_fails_fixed_suite_gate(self):
+        items = UI_REPORT.apply_expected_tests([{
+            "group": "extra", "id": "UI-001", "name": "unexpected", "kind": "UI",
+            "status": "PASS", "target": "extra.spec.mjs", "expected": "", "actual": "passed",
+            "duration": "1ms", "detail": "",
+        }], [])
+        self.assertEqual(items[0]["status"], "FAIL")
+        self.assertEqual(items[0]["id"], "UI-UNPLANNED-001")
+
+
+class MainFlowReportTests(unittest.TestCase):
+    def setUp(self):
+        self.controlled = [{
+            "name": "p0_reconciliation",
+            "business_status": True,
+            "data": {
+                "context": {
+                    "deposit_amount": "1200",
+                    "deposit_id": "deposit-1",
+                    "bet_unit": 100,
+                    "planned_spins": 10,
+                    "completed_spins": 10,
+                    "turnover_before_bet": "1800.00",
+                    "turnover_after_bet": "800.00",
+                    "turnover_final": "0",
+                    "withdraw_amount": "1000",
+                    "withdraw_id": "withdraw-1",
+                    "withdraw_status": "under_review",
+                },
+                "checks": [{"passed": True} for _ in range(10)],
+            },
+        }]
+
+    def test_real_bet_flow_displays_playwright_spin_evidence(self):
+        status, detail = MAIN_REPORT.aggregate_flow_status(
+            "MF-004", [], {}, {}, self.controlled
+        )
+        self.assertEqual(status, "通过")
+        self.assertEqual(detail, "Playwright 真实投注 10/10 次；单注 100")
+
+    def test_turnover_flow_displays_bet_progress_and_admin_clear(self):
+        status, detail = MAIN_REPORT.aggregate_flow_status(
+            "MF-005", [], {}, {}, self.controlled
+        )
+        self.assertEqual(status, "通过")
+        self.assertEqual(detail, "投注流水 1800.00 → 800.00；管理后台清流后 0")
+
+    def test_withdraw_flow_displays_same_order_evidence(self):
+        status, detail = MAIN_REPORT.aggregate_flow_status(
+            "MF-007", [], {}, {}, self.controlled
+        )
+        self.assertEqual(status, "通过")
+        self.assertEqual(detail, "提现 1000；订单 withdraw-1；后台同单状态 under_review")
+
 
 class SharedTemplateTests(unittest.TestCase):
     def test_formats_report_time_in_explicit_east_8_timezone(self):
@@ -152,6 +268,27 @@ class SharedTemplateTests(unittest.TestCase):
         self.assertIn("Example report", document)
         self.assertIn("执行总数", document)
         self.assertIn("POST /login", document)
+
+    def test_shared_template_renders_structured_business_evidence(self):
+        with tempfile.TemporaryDirectory() as directory:
+            output = Path(directory) / "report.html"
+            write_html_report(
+                title="Flow report", scope="FAT", report_kind="API + UI", verdict="PASS",
+                verdict_detail="all good", output=output, items=[],
+                evidence={
+                    "highlights": [{"label": "真实投注", "value": "10/10 次", "detail": "单注 100"}],
+                    "timeline": [{"step": "1", "title": "投注", "status": "PASS", "detail": "流水下降", "source": "Playwright"}],
+                    "checks": [{"status": "PASS", "name": "投注完成", "detail": "planned=10, completed=10"}],
+                    "images": [{"title": "投注后", "src": "after.png", "caption": "Spin 后状态"}],
+                    "artifacts": [{"label": "核对 JSON", "href": "reconcile.json", "detail": "原始证据"}],
+                },
+            )
+            document = output.read_text(encoding="utf-8")
+        self.assertIn("本次执行摘要", document)
+        self.assertIn("关键执行轨迹", document)
+        self.assertIn("统一资金链核对", document)
+        self.assertIn("Playwright 页面证据", document)
+        self.assertIn('href="reconcile.json"', document)
 
 
 if __name__ == "__main__":

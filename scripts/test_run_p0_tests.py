@@ -1,8 +1,11 @@
 import argparse
 import importlib.util
+import json
 import subprocess
 import sys
+import tempfile
 import unittest
+from contextlib import chdir
 from pathlib import Path
 from unittest.mock import patch
 
@@ -47,6 +50,32 @@ class CommandRedactionTests(unittest.TestCase):
 
 
 class FullOrchestrationTests(unittest.TestCase):
+    def test_full_preflight_allows_fresh_generated_admin_device_id(self):
+        args = argparse.Namespace(scope="FAT", deposit_amount="1200", withdraw_amount="100")
+        env = {
+            "API_URL": "https://client-fat.example.test",
+            "ADMIN_URL": "https://admin-fat.example.test",
+            "CLIENT_BASE_URL": "https://client-fat.example.test",
+            "CLIENT_PHONE": "9000000000",
+            "CLIENT_PASSWORD": "client-password",
+            "WRITE_CLIENT_PHONE": "9000000001",
+            "WRITE_CLIENT_PASSWORD": "write-password",
+            "KYC_CLIENT_PHONE": "9000000002",
+            "KYC_CLIENT_PASSWORD": "kyc-password",
+            "PRE_KYC_CLIENT_PHONE": "9000000003",
+            "PRE_KYC_CLIENT_PASSWORD": "basic-password",
+            "ADMIN_EMAIL": "admin@example.test",
+            "ADMIN_PASSWORD": "admin-password",
+            "ADMIN_GOOGLE_CODE": "111111",
+            "ADMIN_APPROVAL_TOTP_SECRET": "totp-secret",
+        }
+        with (
+            patch.object(MODULE.Path, "is_file", return_value=True),
+            patch.object(MODULE.Path, "exists", return_value=True),
+            patch.object(MODULE.shutil, "which", return_value="/usr/bin/tool"),
+        ):
+            MODULE.preflight_full(args, env)
+
     def test_preflight_runs_first_and_kyc_precedes_deposit_suite(self):
         env = {
             "WRITE_CLIENT_PHONE": "9000000001",
@@ -64,11 +93,14 @@ class FullOrchestrationTests(unittest.TestCase):
             events.append(command)
 
         with (
-            patch.object(sys, "argv", ["run-p0-tests.py", "--mode", "full"]),
+            patch.object(sys, "argv", [
+                "run-p0-tests.py", "--mode", "full", "--bet-spins", "10", "--clear-remaining-turnover",
+            ]),
             patch.object(MODULE, "load_env", return_value=env),
             patch.object(MODULE, "preflight_full", side_effect=lambda *_: events.append("preflight")),
             patch.object(MODULE, "run", side_effect=record_run),
             patch.object(MODULE, "run_default_ui", side_effect=lambda *_args, **_kwargs: events.append("default-ui")),
+            patch.object(MODULE, "write_full_run_status", return_value={}),
         ):
             MODULE.main()
 
@@ -76,6 +108,66 @@ class FullOrchestrationTests(unittest.TestCase):
         kyc_index = next(index for index, item in enumerate(events) if isinstance(item, list) and "--complete-kyc" in item)
         deposit_suite_index = next(index for index, item in enumerate(events) if isinstance(item, list) and "scripts/run-api-tests.py" in item)
         self.assertLess(kyc_index, deposit_suite_index)
+        self.assertIn("--safe-only", events[deposit_suite_index])
+        fund_seed_index = next(
+            index for index, item in enumerate(events)
+            if isinstance(item, list) and "api/results/fund-flow-seed-result.json" in item
+        )
+        default_ui_index = events.index("default-ui")
+        turnover_index = next(
+            index for index, item in enumerate(events)
+            if isinstance(item, list) and "scripts/run-turnover-bet.py" in item
+        )
+        withdraw_index = next(
+            index for index, item in enumerate(events)
+            if isinstance(item, list) and "api/results/withdraw-result.json" in item
+        )
+        reconcile_index = next(
+            index for index, item in enumerate(events)
+            if isinstance(item, list) and "scripts/reconcile-p0-flow.py" in item
+        )
+        self.assertLess(deposit_suite_index, fund_seed_index)
+        self.assertLess(fund_seed_index, default_ui_index)
+        self.assertLess(default_ui_index, turnover_index)
+        self.assertIn("--spin-count", events[turnover_index])
+        self.assertIn("10", events[turnover_index])
+        self.assertIn("--allow-remaining-turnover", events[turnover_index])
+        turnover_clear_index = next(
+            index for index, item in enumerate(events)
+            if isinstance(item, list) and "api/results/turnover-clear-result.json" in item
+        )
+        self.assertLess(turnover_index, turnover_clear_index)
+        self.assertLess(turnover_clear_index, withdraw_index)
+        self.assertLess(withdraw_index, reconcile_index)
+
+    def test_full_preflight_failure_writes_current_blocked_status_and_reports(self):
+        with tempfile.TemporaryDirectory() as directory, chdir(directory), \
+                patch.object(sys, "argv", ["run-p0-tests.py", "--mode", "full", "--env", ".env.fat"]), \
+                patch.object(MODULE, "load_env", return_value={}), \
+                patch.object(MODULE, "preflight_full", side_effect=SystemExit("missing full configuration")):
+            exit_code = MODULE.main()
+            status = json.loads(Path("api/results/p0-full-run-status.json").read_text(encoding="utf-8"))
+            html_report = Path("api/results/p0-main-flow-report.html").read_text(encoding="utf-8")
+            markdown_report = Path("api/results/p0-main-flow-report.md").read_text(encoding="utf-8")
+
+        self.assertEqual(exit_code, 1)
+        self.assertEqual(status["status"], "FAILED")
+        self.assertEqual(status["stage"], "preflight")
+        self.assertIn("BLOCKED", html_report)
+        self.assertIn("旧的成功报告已被覆盖", markdown_report)
+
+    def test_headed_flag_is_forwarded_to_quick_ui_and_playwright_environment(self):
+        with (
+            patch.object(sys, "argv", ["run-p0-tests.py", "--mode", "quick", "--headed"]),
+            patch.object(MODULE, "load_env", return_value={}),
+            patch.object(MODULE, "run") as command_run,
+            patch.object(MODULE, "run_default_ui") as default_ui,
+        ):
+            self.assertEqual(MODULE.main(), 0)
+
+        self.assertEqual(command_run.call_args.args[1]["PLAYWRIGHT_HEADLESS"], "false")
+        self.assertEqual(default_ui.call_args.args[0]["PLAYWRIGHT_HEADLESS"], "false")
+        self.assertTrue(default_ui.call_args.kwargs["headed"])
 
 
 class ApiReportTests(unittest.TestCase):

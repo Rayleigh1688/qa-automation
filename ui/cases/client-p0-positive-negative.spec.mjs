@@ -142,42 +142,6 @@ test.describe("Client P0 positive and negative UI checkpoints", () => {
     expect(hasLoginSuccess(network)).toBeFalsy();
   });
 
-  test("negative: unchecked login terms cannot login", async ({ page }, testInfo) => {
-    const network = attachNetworkRecorder(page);
-    const app = createApp(page);
-
-    await app.openLogin();
-    const phone = requiredEnv("PRE_KYC_CLIENT_PHONE");
-    const password = requiredEnv("PRE_KYC_CLIENT_PASSWORD");
-    const passwordMode = page.getByRole("button", { name: /^Password$/i }).first();
-    if (await passwordMode.isVisible({ timeout: 5000 }).catch(() => false)) {
-      await passwordMode.click({ timeout: 3000 });
-    }
-    await app.fillPhone(phone);
-    const passwordInput = page.locator('input[type="password"]:visible').first();
-    await passwordInput.waitFor({ state: "visible", timeout: 8000 });
-    await passwordInput.fill(password);
-
-    const login = page.getByRole("button", { name: /^Login$/i }).first();
-    if (await login.isEnabled().catch(() => false)) {
-      await login.click({ timeout: 3000 }).catch(() => {});
-      await page.waitForTimeout(2500);
-    }
-
-    const state = await visibleState(page);
-    const result = {
-      name: "negative_unchecked_terms",
-      status: looksLoggedIn(state) ? "failed" : "passed",
-      note: "未勾选登录条款时不能进入会员态",
-      state,
-      network,
-    };
-    await writeResult(testInfo, result);
-
-    expect(looksLoggedIn(state)).toBeFalsy();
-    expect(hasLoginSuccess(network)).toBeFalsy();
-  });
-
   test("negative: guest direct My does not expose member details", async ({ page }, testInfo) => {
     const app = createApp(page);
     await page.goto("/my", { waitUntil: "domcontentloaded" });

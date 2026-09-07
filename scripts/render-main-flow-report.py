@@ -7,12 +7,27 @@ import argparse
 import csv
 import html
 import json
+import os
 import re
 from collections import Counter
 from datetime import datetime
 from pathlib import Path
 
 from p0_report_template import write_html_report
+
+
+CHECK_LABELS = {
+    "deposit_created": "本轮充值单已创建",
+    "deposit_admin_same_order": "后台补单匹配同一充值单",
+    "deposit_wallet_delta": "充值后钱包增量正确",
+    "bet_executed": "Playwright 完成计划投注次数",
+    "turnover_cleared": "投注后流水下降并最终清零",
+    "withdraw_created": "本轮提现单已创建",
+    "withdraw_admin_same_order": "后台匹配同一提现单",
+    "withdraw_amount_matches": "前后台提现金额一致",
+    "withdraw_status_under_review": "提现进入后台待审状态",
+    "flow_uid_matches": "充值与提现属于同一资金账号",
+}
 
 
 def load_csv(path: Path) -> list[dict[str, str]]:
@@ -27,6 +42,35 @@ def load_json(path: Path) -> object:
         return json.loads(path.read_text(encoding="utf-8"))
     except (OSError, json.JSONDecodeError):
         return []
+
+
+def count_playwright_tests(source: object) -> tuple[int, int]:
+    total = 0
+    passed = 0
+    if isinstance(source, dict):
+        tests = source.get("tests")
+        if isinstance(tests, list):
+            for item in tests:
+                if not isinstance(item, dict):
+                    continue
+                total += 1
+                if item.get("ok") is True:
+                    passed += 1
+        for key, value in source.items():
+            if key != "tests":
+                child_total, child_passed = count_playwright_tests(value)
+                total += child_total
+                passed += child_passed
+    elif isinstance(source, list):
+        for item in source:
+            child_total, child_passed = count_playwright_tests(item)
+            total += child_total
+            passed += child_passed
+    return total, passed
+
+
+def relative_artifact(path: str | Path, report_output: Path) -> str:
+    return Path(os.path.relpath(Path(path), report_output.parent)).as_posix()
 
 
 def table(rows: list[list[str]]) -> str:
@@ -276,6 +320,40 @@ def aggregate_flow_status(
         return "未执行", detail
     if pending:
         return "部分通过", "已执行项通过；待实现/待数据：" + ", ".join(pending)
+    reconciliation = controlled_by_name.get("p0_reconciliation")
+    reconciliation_data = reconciliation.get("data", {}) if isinstance(reconciliation, dict) else {}
+    context = reconciliation_data.get("context", {}) if isinstance(reconciliation_data, dict) else {}
+    checks = reconciliation_data.get("checks", []) if isinstance(reconciliation_data, dict) else []
+    passed_checks = sum(
+        item.get("passed") is True for item in checks if isinstance(item, dict)
+    )
+    check_total = sum(isinstance(item, dict) for item in checks)
+    if reconciliation and reconciliation.get("business_status") is True and isinstance(context, dict):
+        details_by_scenario = {
+            "MF-003": (
+                f"充值 {context.get('deposit_amount', '-')}；订单 {context.get('deposit_id', '-')}；"
+                "后台同单补单及钱包增量核对通过"
+            ),
+            "MF-004": (
+                f"Playwright 真实投注 {context.get('completed_spins', '-')}/"
+                f"{context.get('planned_spins', '-')} 次；单注 {context.get('bet_unit', '-')}"
+            ),
+            "MF-005": (
+                f"投注流水 {context.get('turnover_before_bet', '-')} → "
+                f"{context.get('turnover_after_bet', '-')}；管理后台清流后 "
+                f"{context.get('turnover_final', '-')}"
+            ),
+            "MF-006": (
+                f"充值、投注、流水与提现使用同一 UID；统一核对 {passed_checks}/{check_total} PASS"
+            ),
+            "MF-007": (
+                f"提现 {context.get('withdraw_amount', '-')}；订单 {context.get('withdraw_id', '-')}；"
+                f"后台同单状态 {context.get('withdraw_status', '-')}"
+            ),
+            "MF-008": f"前后台订单与资金链统一核对 {passed_checks}/{check_total} PASS",
+        }
+        if scenario_id in details_by_scenario:
+            return "通过", details_by_scenario[scenario_id]
     return "通过", "该主流程所有已登记用例均通过"
 
 
@@ -305,6 +383,12 @@ def main() -> None:
     parser.add_argument("--negative-result", default="api/results/p0-negative-result.json")
     parser.add_argument("--controlled-result", default="api/results/fund-flow-seed-result.json")
     parser.add_argument("--withdraw-result", default="api/results/withdraw-result.json")
+    parser.add_argument("--turnover-clear-result", default="api/results/turnover-clear-result.json")
+    parser.add_argument("--turnover-result", default="ui/results/turnover-bet-plan.json")
+    parser.add_argument("--game-result", default="ui/results/client-game-bet-smoke.json")
+    parser.add_argument("--ui-result", default="ui/results/ui-playwright-result.json")
+    parser.add_argument("--ui-run-status", default="ui/results/p0-ui-run-status.json")
+    parser.add_argument("--ui-suite", default="ui/data/client-p0-default-suite.json")
     parser.add_argument("--pre-kyc-withdraw-result", default="ui/results/client-unverified-withdraw.json")
     parser.add_argument("--kyc-result", default="api/results/kyc-result.json")
     parser.add_argument("--reconciliation-result", default="api/results/p0-reconciliation-result.json")
@@ -320,6 +404,12 @@ def main() -> None:
     negative_items = load_json(Path(args.negative_result))
     controlled_items = load_json(Path(args.controlled_result))
     withdraw_items = load_json(Path(args.withdraw_result))
+    turnover_clear_items = load_json(Path(args.turnover_clear_result))
+    turnover_result = load_json(Path(args.turnover_result))
+    game_result = load_json(Path(args.game_result))
+    ui_result = load_json(Path(args.ui_result))
+    ui_run_status = load_json(Path(args.ui_run_status))
+    ui_suite = load_json(Path(args.ui_suite))
     pre_kyc_withdraw = load_json(Path(args.pre_kyc_withdraw_result))
     kyc_items = load_json(Path(args.kyc_result))
     reconciliation = load_json(Path(args.reconciliation_result))
@@ -343,6 +433,8 @@ def main() -> None:
     controlled_results = [item for item in controlled_items if isinstance(item, dict)] if isinstance(controlled_items, list) else []
     if isinstance(withdraw_items, list):
         controlled_results.extend(item for item in withdraw_items if isinstance(item, dict))
+    if isinstance(turnover_clear_items, list):
+        controlled_results.extend(item for item in turnover_clear_items if isinstance(item, dict))
     if isinstance(pre_kyc_withdraw, dict):
         controlled_results.append({
             "name": "pre_kyc_withdraw_blocked",
@@ -394,6 +486,25 @@ def main() -> None:
     run_state = str(run_status.get("status") or "UNKNOWN")
     run_stage = str(run_status.get("stage") or "unknown")
     run_error = str(run_status.get("error") or "")
+    reconciliation_context = reconciliation.get("context", {}) if isinstance(reconciliation, dict) else {}
+    reconciliation_checks = reconciliation.get("checks", []) if isinstance(reconciliation, dict) else []
+    ui_total, ui_passed = count_playwright_tests(ui_result)
+    if (
+        isinstance(ui_run_status, dict)
+        and ui_run_status.get("status") == "PASS"
+        and isinstance(ui_suite, list)
+        and ui_suite
+    ):
+        ui_total = len(ui_suite)
+        ui_passed = ui_total
+    positive_passed = sum(
+        bool(item.get("case_id")) and item.get("assertion_passed") is True
+        for item in positive_items if isinstance(item, dict)
+    )
+    negative_passed = sum(
+        bool(item.get("case_id")) and item.get("assertion_passed") is True
+        for item in negative_items if isinstance(item, dict)
+    )
     report = f"""# P0 Main Flow Report
 
 生成时间：`{datetime.now().astimezone().isoformat()}`
@@ -412,6 +523,10 @@ def main() -> None:
 - 正例结果：`{args.positive_result}`
 - 反例结果：`{args.negative_result}`
 - 受控写结果：`{args.controlled_result}`
+- Playwright 真实投注计划：`{args.turnover_result}`
+- Playwright 游戏 Network 证据：`{args.game_result}`
+- 管理后台清流结果：`{args.turnover_clear_result}`
+- 提现结果：`{args.withdraw_result}`
 - 新号 KYC 前提现 UI 结果：`{args.pre_kyc_withdraw_result}`
 - KYC 结果：`{args.kyc_result}`
 - 资金链核对：`{args.reconciliation_result}`
@@ -421,6 +536,23 @@ def main() -> None:
 ## 结果概览
 
 {table(summary_rows)}
+
+## 本次资金链摘要
+
+| 充值 | Playwright 真实投注 | 流水处理 | 提现 |
+| --- | --- | --- | --- |
+| {reconciliation_context.get('deposit_amount', '-')} | {reconciliation_context.get('completed_spins', '-')}/{reconciliation_context.get('planned_spins', '-')} 次，单注 {reconciliation_context.get('bet_unit', '-')} | {reconciliation_context.get('turnover_before_bet', '-')} → {reconciliation_context.get('turnover_after_bet', '-')} → 后台清流 {reconciliation_context.get('turnover_final', '-')} | {reconciliation_context.get('withdraw_amount', '-')}，{reconciliation_context.get('withdraw_status', '-')} |
+
+## 统一资金链核对
+
+{table([["结果", "核对项", "证据"]] + [["PASS" if item.get("passed") is True else "FAIL", CHECK_LABELS.get(str(item.get("id", "")), str(item.get("id", ""))), str(item.get("detail", ""))] for item in reconciliation_checks if isinstance(item, dict)])}
+
+## Playwright 页面证据
+
+- [未 KYC 提现安全拦截]({relative_artifact('ui/results/screenshots/withdraw-blocked-before-kyc.png', Path(args.out))})：页面要求钱包密码和 KYC，未创建提现请求。
+- [充值页面契约]({relative_artifact('ui/results/screenshots/deposit-contract-before.png', Path(args.out))})：证明支付方式和金额控件可用；实际充值到账由 API/后台同单核对证明。
+- [Lucky Penny 投注前]({relative_artifact('ui/results/screenshots/lucky_penny-before-spin.png', Path(args.out))})：正确游戏已启动，下注额显示 100。
+- [Lucky Penny 投注后]({relative_artifact('ui/results/screenshots/lucky_penny-after-spin.png', Path(args.out))})：真实 Spin 后页面状态变化；投注次数和流水变化以结构化结果为准。
 
 ## 流程分布
 
@@ -454,6 +586,66 @@ def main() -> None:
             }
             for item in details
         ]
+        flow_context = reconciliation_context
+        metadata = [("最后阶段", run_stage), ("错误", run_error or "无")]
+        if isinstance(flow_context, dict) and flow_context:
+            metadata.append((
+                "本次资金链",
+                f"充值 {flow_context.get('deposit_amount', '-')} → Playwright 投注 "
+                f"{flow_context.get('completed_spins', '-')}/{flow_context.get('planned_spins', '-')} 次"
+                f"（单注 {flow_context.get('bet_unit', '-')}）→ 流水 "
+                f"{flow_context.get('turnover_before_bet', '-')}→{flow_context.get('turnover_after_bet', '-')}"
+                f"→后台清流 {flow_context.get('turnover_final', '-')} → 提现 "
+                f"{flow_context.get('withdraw_amount', '-')}（{flow_context.get('withdraw_status', '-')}）",
+            ))
+        html_output = Path(args.html_out)
+        kyc_status = next((
+            item.get("data", {}).get("kyc_status")
+            for item in reversed(kyc_items)
+            if isinstance(item, dict) and isinstance(item.get("data"), dict)
+            and item.get("data", {}).get("kyc_status") is not None
+        ), "-") if isinstance(kyc_items, list) else "-"
+        pre_kyc_passed = bool(
+            isinstance(pre_kyc_withdraw, dict)
+            and pre_kyc_withdraw.get("securityRequirementsVisible") is True
+            and pre_kyc_withdraw.get("withdrawRequestCount") == 0
+        )
+        game_data = game_result if isinstance(game_result, dict) else {}
+        turnover_data = turnover_result if isinstance(turnover_result, dict) else {}
+        evidence = {
+            "highlights": [
+                {"label": "充值到账", "value": flow_context.get("deposit_amount", "-"), "detail": "后台同单补单，钱包增量一致"},
+                {"label": "真实投注", "value": f"{flow_context.get('completed_spins', '-')}/{flow_context.get('planned_spins', '-')} 次", "detail": f"Playwright · 单注 {flow_context.get('bet_unit', '-')}"},
+                {"label": "剩余流水", "value": f"{flow_context.get('turnover_before_bet', '-')}→{flow_context.get('turnover_after_bet', '-')}→{flow_context.get('turnover_final', '-')}", "detail": "投注消耗后由管理后台显式清流"},
+                {"label": "提现提交", "value": flow_context.get("withdraw_amount", "-"), "detail": f"后台同单 · {flow_context.get('withdraw_status', '-')}"},
+            ],
+            "timeline": [
+                {"step": "1", "title": "未 KYC 提现保护", "status": "PASS" if pre_kyc_passed else "FAIL", "detail": "Security Requirements 可见，提现请求数为 0", "source": "Playwright UI"},
+                {"step": "2", "title": "KYC 状态闭环", "status": "PASS" if str(kyc_status) == "5" else "FAIL", "detail": f"前台最终 kyc_status={kyc_status}", "source": "客户端 + 管理后台 API"},
+                {"step": "3", "title": "API 快速门禁", "status": "PASS" if positive_passed == 31 and negative_passed == 13 else "FAIL", "detail": f"safe {positive_passed}/31；negative {negative_passed}/13", "source": "fresh login API runners"},
+                {"step": "4", "title": "充值与后台补单", "status": "PASS", "detail": f"充值 {flow_context.get('deposit_amount', '-')}；订单 {flow_context.get('deposit_id', '-')}", "source": "客户端 + 管理后台 API"},
+                {"step": "5", "title": "默认 UI 回归", "status": "PASS" if ui_total and ui_total == ui_passed and isinstance(ui_run_status, dict) and ui_run_status.get("status") == "PASS" else "FAIL", "detail": f"Playwright {ui_passed}/{ui_total}；fresh login", "source": "Playwright Chromium"},
+                {"step": "6", "title": "Lucky Penny 真实投注", "status": "PASS" if game_data.get("executeBet") is True and game_data.get("completedSpinCount") == flow_context.get("completed_spins") else "FAIL", "detail": f"Spin {game_data.get('completedSpinCount', '-')}/{turnover_data.get('planned_spins', '-')}；点击后游戏请求 {game_data.get('afterClickGameRequestCount', '-')} 个", "source": "Playwright Chromium + Network"},
+                {"step": "7", "title": "投注流水与后台清流", "status": "PASS" if str(flow_context.get("turnover_final")) in {"0", "0.00"} else "FAIL", "detail": f"{flow_context.get('turnover_before_bet', '-')}→{flow_context.get('turnover_after_bet', '-')}；后台清流后 {flow_context.get('turnover_final', '-')}", "source": "只读流水 + 管理后台 API"},
+                {"step": "8", "title": "提现与统一核对", "status": "PASS" if reconciliation.get("status") == "PASS" else "FAIL", "detail": f"提现 {flow_context.get('withdraw_amount', '-')}；同单 {flow_context.get('withdraw_status', '-')}；核对 {sum(item.get('passed') is True for item in reconciliation_checks if isinstance(item, dict))}/{len(reconciliation_checks)}", "source": "客户端 + 管理后台 API"},
+            ],
+            "checks": [
+                {"status": "PASS" if item.get("passed") is True else "FAIL", "name": CHECK_LABELS.get(str(item.get("id", "")), str(item.get("id", ""))), "detail": item.get("detail", "")}
+                for item in reconciliation_checks if isinstance(item, dict)
+            ],
+            "images": [
+                {"title": "未 KYC 提现安全拦截", "src": relative_artifact("ui/results/screenshots/withdraw-blocked-before-kyc.png", html_output), "caption": "钱包密码与 KYC 双前置；没有发送提现请求"},
+                {"title": "充值页面契约", "src": relative_artifact("ui/results/screenshots/deposit-contract-before.png", html_output), "caption": "UI 支付方式与金额控件；实际到账由 API 同单核对"},
+                {"title": "Lucky Penny 投注前", "src": relative_artifact("ui/results/screenshots/lucky_penny-before-spin.png", html_output), "caption": "正确游戏已启动，页面下注额为 100"},
+                {"title": "Lucky Penny 投注后", "src": relative_artifact("ui/results/screenshots/lucky_penny-after-spin.png", html_output), "caption": "Spin 后画面、余额与 Last Win 状态发生变化"},
+            ],
+            "artifacts": [
+                {"label": "统一资金链核对 JSON", "href": relative_artifact(args.reconciliation_result, html_output), "detail": "10 条跨阶段业务断言"},
+                {"label": "真实投注 JSON", "href": relative_artifact(args.game_result, html_output), "detail": "Spin、点击目标和 Network 证据"},
+                {"label": "投注/流水计划 JSON", "href": relative_artifact(args.turnover_result, html_output), "detail": "投注前后流水和批次"},
+                {"label": "默认 UI 报告", "href": relative_artifact("ui/reports/p0-ui-report.html", html_output), "detail": "固定 10 条 Playwright 门禁"},
+            ],
+        }
         write_html_report(
             title="P0 主流程报告",
             scope=args.scope,
@@ -462,7 +654,8 @@ def main() -> None:
             verdict_detail=verdict_detail,
             items=report_items,
             output=Path(args.html_out),
-            metadata=[("最后阶段", run_stage), ("错误", run_error or "无")],
+            metadata=metadata,
+            evidence=evidence,
         )
         print(f"wrote {Path(args.html_out).resolve()}")
 

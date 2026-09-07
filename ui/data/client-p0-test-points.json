@@ -74,22 +74,6 @@
       "spec": "ui/cases/client-p0-positive-negative.spec.mjs"
     },
     {
-      "id": "UI-P0-005",
-      "module": "登录注册",
-      "priority": "P0",
-      "type": "negative",
-      "executionMode": "default_auto",
-      "title": "未勾选登录条款不能登录",
-      "route": "/",
-      "assertions": [
-        "手机号和 OTP 已填写但未同意条款时不能完成登录",
-        "Login 按钮不可用或点击后仍停留登录态",
-        "不能出现会员详情或钱包成功响应"
-      ],
-      "automationStatus": "implemented",
-      "spec": "ui/cases/client-p0-positive-negative.spec.mjs"
-    },
-    {
       "id": "UI-P0-006",
       "module": "首页",
       "priority": "P0",

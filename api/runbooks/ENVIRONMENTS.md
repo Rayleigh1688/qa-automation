@@ -20,7 +20,7 @@
 | 游戏 | `Lucky Penny`（`CLIENT_GAME_ID=lucky_penny`） | 固定 `coins_uat`，同一 ID 已恢复并验证进入 BNG `Coins` |
 | 业务单注 | `CLIENT_GAME_BET_AMOUNT=100` | 上限 100；BNG `Coins` 已按 100 完成真实投注 |
 | 提现通道 | Maya 为稳定建单通道；真实出款受 FAT 转账接口配置限制 | Maya 已绑定；使用同一资金账号继续提现链路 |
-| 已确认异常 | 充值限额未校验、偶发 502、短信限制、无可用转账接口 | GCash、QRPH/PESONET 充值不可用但 Maya 已成功；未勾选登录条款仍可登录 |
+| 已确认异常 | 充值限额未校验、偶发 502、短信限制、无可用转账接口；未勾选登录条款仍可登录 | GCash、QRPH/PESONET 充值不可用但 Maya 已成功；未勾选登录条款仍可登录 |
 
 ## 账号与凭据变量
 

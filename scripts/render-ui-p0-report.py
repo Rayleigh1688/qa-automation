@@ -5,9 +5,38 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
+import re
 from pathlib import Path
 
-from p0_report_template import report_verdict, write_html_report, write_markdown_report
+from p0_report_template import (
+    format_execution_duration,
+    report_verdict,
+    write_html_report,
+    write_markdown_report,
+)
+
+
+def load_json(path: Path, default: object) -> object:
+    try:
+        return json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        return default
+
+
+def sanitize_detail(value: object) -> str:
+    message = re.sub(r"\x1b\[[0-9;]*m", "", str(value or ""))
+    for name, secret in os.environ.items():
+        if len(secret) >= 4 and any(marker in name.upper() for marker in (
+            "PASSWORD", "SECRET", "TOKEN", "OTP", "CODE", "PHONE", "EMAIL", "DEVICE",
+        )):
+            message = message.replace(secret, "<redacted>")
+    return re.sub(
+        r"([?&](?:token|code|otp|phone|email|uid|device_id|x-device-id)=)[^&\s]+",
+        r"\1<redacted>",
+        message,
+        flags=re.IGNORECASE,
+    )[:2000]
 
 
 def collect_tests(value: object, inherited_file: str = "") -> list[dict[str, str]]:
@@ -29,7 +58,7 @@ def collect_tests(value: object, inherited_file: str = "") -> list[dict[str, str
                     "name": str(test.get("title") or value.get("title") or "UI test"), "kind": "UI",
                     "status": status, "target": current_file, "expected": "Playwright 用例断言全部满足",
                     "actual": raw_status, "duration": f"{last.get('duration', '')}ms" if last else "",
-                    "detail": str(error.get("message") or last.get("error") or ""),
+                    "detail": sanitize_detail(error.get("message") or last.get("error") or ""),
                 })
         for key, child in value.items():
             if key not in {"tests", "results"}:
@@ -46,23 +75,80 @@ def collect_tests(value: object, inherited_file: str = "") -> list[dict[str, str
     return collected
 
 
+def apply_expected_tests(items: list[dict[str, str]], expected: object) -> list[dict[str, str]]:
+    if not isinstance(expected, list):
+        return items
+    remaining = list(items)
+    ordered: list[dict[str, str]] = []
+    for entry in expected:
+        if not isinstance(entry, dict):
+            continue
+        file_name = Path(str(entry.get("file") or "")).name
+        title = str(entry.get("title") or "")
+        display_name = str(entry.get("displayName") or title)
+        group_name = str(entry.get("group") or Path(file_name).stem or "UI 用例")
+        matched_index = next((
+            index for index, item in enumerate(remaining)
+            if (Path(item["target"]).name, item["name"]) == (file_name, title)
+        ), None)
+        if matched_index is not None:
+            item = remaining.pop(matched_index)
+            item["id"] = str(entry.get("id") or item["id"])
+            item["group"] = group_name
+            item["name"] = display_name
+            ordered.append(item)
+            continue
+        ordered.append({
+            "group": group_name,
+            "id": str(entry.get("id") or f"UI-{len(ordered) + 1:03d}"),
+            "name": display_name or "未收集的 UI 用例",
+            "kind": "UI",
+            "status": "NOT_RUN",
+            "target": file_name,
+            "expected": "Playwright 默认套件必须收集并执行该用例",
+            "actual": "not collected",
+            "duration": "",
+            "detail": "默认 UI P0 固定清单中的用例未被 Playwright 收集。",
+        })
+    for index, item in enumerate(remaining, 1):
+        item["id"] = f"UI-UNPLANNED-{index:03d}"
+        item["status"] = "FAIL"
+        item["detail"] = (
+            "该用例不在 ui/data/client-p0-default-suite.json 固定清单中；"
+            "请先完成 P0 范围评审并同步清单。"
+        )
+    return [*ordered, *remaining]
+
+
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--input", default="ui/results/ui-playwright-result.json")
     parser.add_argument("--scope", default="FAT")
+    parser.add_argument("--run-status", choices=["PASS", "FAILED", "INTERRUPTED", "BLOCKED"], default="")
+    parser.add_argument("--run-status-file", default="ui/results/p0-ui-run-status.json")
+    parser.add_argument("--expected", default="ui/data/client-p0-default-suite.json")
     parser.add_argument("--out", default="ui/reports/p0-ui-report.md")
     parser.add_argument("--html-out", default="ui/reports/p0-ui-report.html")
     args = parser.parse_args()
-    try:
-        source = json.loads(Path(args.input).read_text(encoding="utf-8"))
-    except (OSError, json.JSONDecodeError):
-        source = {}
-    items = collect_tests(source)
-    run_status = str(source.get("status") or "") if isinstance(source, dict) else ""
-    verdict, detail = report_verdict(items, "FAILED" if run_status == "failed" else "")
+    source = load_json(Path(args.input), {})
+    status_source = load_json(Path(args.run_status_file), {})
+    items = apply_expected_tests(collect_tests(source), load_json(Path(args.expected), []))
+    run_status = args.run_status or (
+        str(status_source.get("status") or "") if isinstance(status_source, dict) else ""
+    ) or (str(source.get("status") or "") if isinstance(source, dict) else "")
+    verdict, detail = report_verdict(items, run_status)
     kwargs = dict(title="P0 UI 执行报告", scope=args.scope, verdict=verdict, verdict_detail=detail, items=items)
     write_markdown_report(**kwargs, output=Path(args.out))
-    write_html_report(**kwargs, report_kind="UI", output=Path(args.html_out))
+    metadata = []
+    if isinstance(status_source, dict):
+        metadata = [
+            ("执行状态", str(status_source.get("status") or "")),
+            ("最后阶段", str(status_source.get("stage") or "")),
+            ("执行总耗时", format_execution_duration(
+                status_source.get("started_at"), status_source.get("finished_at"),
+            )),
+        ]
+    write_html_report(**kwargs, report_kind="UI", metadata=metadata, output=Path(args.html_out))
     print(f"wrote {Path(args.out).resolve()}")
     print(f"wrote {Path(args.html_out).resolve()}")
 

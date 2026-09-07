@@ -1,0 +1,72 @@
+[
+  {
+    "id": "UI-001",
+    "file": "client-deposit-contract.spec.mjs",
+    "title": "capture skip-bonus deposit request contract",
+    "displayName": "充值页跳过活动并验证支付方式与金额控件",
+    "group": "充值页面契约"
+  },
+  {
+    "id": "UI-002",
+    "file": "client-game-bet-smoke.spec.mjs",
+    "title": "launch configured game and click spin area when enabled",
+    "displayName": "启动指定游戏并按开关决定是否点击投注区域",
+    "group": "游戏启动"
+  },
+  {
+    "id": "UI-003",
+    "file": "client-login.spec.mjs",
+    "title": "positive: reusable authenticated session succeeds",
+    "displayName": "复用本次套件认证状态并验证登录成功",
+    "group": "登录"
+  },
+  {
+    "id": "UI-004",
+    "file": "client-login.spec.mjs",
+    "title": "negative: empty phone does not login",
+    "displayName": "空手机号不能提交登录",
+    "group": "登录"
+  },
+  {
+    "id": "UI-005",
+    "file": "client-login.spec.mjs",
+    "title": "negative: invalid phone keeps user in guest state",
+    "displayName": "无效手机号应保持游客状态",
+    "group": "登录"
+  },
+  {
+    "id": "UI-006",
+    "file": "client-main-flow.spec.mjs",
+    "title": "login and scan wallet/deposit/withdraw/betting surfaces",
+    "displayName": "登录并检查钱包、充值、提现和游戏入口",
+    "group": "主流程页面"
+  },
+  {
+    "id": "UI-007",
+    "file": "client-p0-positive-negative.spec.mjs",
+    "title": "negative: valid phone without OTP cannot login",
+    "displayName": "有效手机号未填写验证码不能登录",
+    "group": "登录"
+  },
+  {
+    "id": "UI-008",
+    "file": "client-p0-positive-negative.spec.mjs",
+    "title": "negative: guest direct My does not expose member details",
+    "displayName": "游客直接访问个人中心不应暴露会员信息",
+    "group": "个人中心"
+  },
+  {
+    "id": "UI-009",
+    "file": "client-p0-positive-negative.spec.mjs",
+    "title": "positive: logged-in My exposes wallet and member checkpoints",
+    "displayName": "登录后个人中心展示钱包和会员入口",
+    "group": "个人中心"
+  },
+  {
+    "id": "UI-010",
+    "file": "client-p0-positive-negative.spec.mjs",
+    "title": "negative: invalid game page does not launch third-party game",
+    "displayName": "无效游戏页不能启动第三方游戏",
+    "group": "游戏启动"
+  }
+]
