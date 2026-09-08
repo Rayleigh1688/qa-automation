@@ -8,7 +8,7 @@ import json
 import re
 from pathlib import Path
 from urllib.parse import parse_qsl, urlsplit
-from qa_core.contracts import WITHDRAW_AUDIT_PATH
+from qa_core.contracts import MILLISECOND_WINDOW_PATHS
 
 
 def read_csv(path: Path) -> list[dict[str, str]]:
@@ -43,7 +43,7 @@ def main() -> None:
     errors: list[str] = []
 
     for row in cases:
-        if row.get("path") == WITHDRAW_AUDIT_PATH and row.get("execution_policy") == "safe_smoke":
+        if row.get("path") in MILLISECOND_WINDOW_PATHS and row.get("execution_policy") == "safe_smoke":
             body = json.loads(row.get("request_body") or "{}")
             expected = {"start_time": "{{now_minus_2d_ms}}", "end_time": "{{now_plus_5m_ms}}"}
             if any(body.get(key) != value for key, value in expected.items()):

@@ -6,6 +6,7 @@ import json
 
 
 WITHDRAW_AUDIT_PATH = "/admin/finance/withdraw/risk/audit/list"
+MILLISECOND_WINDOW_PATHS = {WITHDRAW_AUDIT_PATH, "/admin/finance/deposit/risk/list", "/admin/finance/deposit/list", "/admin/finance/transaction/list"}
 TIME_TOKENS = {
     "{{now_minus_2d}}": (-2 * 86400, 1),
     "{{now_plus_5m}}": (300, 1),
@@ -15,8 +16,8 @@ TIME_TOKENS = {
 
 
 def normalize_request_template(path: str, raw: str) -> str:
-    """Normalize only the confirmed withdrawal audit contract, idempotently."""
-    if path != WITHDRAW_AUDIT_PATH or not raw:
+    """Normalize confirmed millisecond list windows, idempotently."""
+    if path not in MILLISECOND_WINDOW_PATHS or not raw:
         return raw
     body = json.loads(raw)
     for key in ("start_time", "end_time"):

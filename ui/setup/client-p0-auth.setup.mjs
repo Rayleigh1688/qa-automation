@@ -48,6 +48,7 @@ export default async function clientP0AuthSetup(config) {
   };
   let context;
   const authNetwork = [];
+  const authArtifactPrefix = process.env.CLIENT_AUTH_ARTIFACT_PREFIX || "client-p0-auth";
 
   try {
     const reused = false;
@@ -116,8 +117,8 @@ export default async function clientP0AuthSetup(config) {
       }
       await context.storageState({ path: p0StorageStatePath });
     } catch (error) {
-      const diagnosticPath = path.resolve("ui/results/client-p0-auth-failure.json");
-      const screenshotPath = path.resolve("ui/results/client-p0-auth-failure.png");
+      const diagnosticPath = path.resolve(`ui/results/${authArtifactPrefix}-failure.json`);
+      const screenshotPath = path.resolve(`ui/results/${authArtifactPrefix}-failure.png`);
       await page.screenshot({ path: screenshotPath, fullPage: false }).catch(() => {});
       const diagnostic = {
         createdAt: new Date().toISOString(),
@@ -136,16 +137,19 @@ export default async function clientP0AuthSetup(config) {
       createdAt: new Date().toISOString(),
       pageUrl: page.url().replace(/^https?:\/\/[^/]+/i, ""),
       storageStatePath: path.relative(process.cwd(), p0StorageStatePath),
-      accountLane: "readonly_mature_account",
+      accountLane: process.env.CLIENT_AUTH_LANE || "readonly_mature_account",
       authMode,
       reused,
     };
     fs.writeFileSync(
-      path.resolve("ui/results/client-p0-auth-session.json"),
+      path.resolve(`ui/results/${authArtifactPrefix}-session.json`),
       JSON.stringify(state, null, 2),
     );
   } finally {
-    await context?.close();
-    await browser.close();
+    try {
+      await context?.close();
+    } finally {
+      await browser.close();
+    }
   }
 }

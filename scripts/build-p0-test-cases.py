@@ -89,7 +89,7 @@ NEGATIVE_CASES = [
 CONTROLLED_CASES = [
     ("CTC-001", "01_register_login", 10, "positive", "auth", "new_kyc_account", "新号注册成功", "controlled", "POST", "/member/register", "注册账号必须显式来自 090XXXXXXXX 测试池"),
     ("CTC-002", "01_register_login", 20, "positive", "auth", "mature_read_account", "现有成熟账号密码登录成功", "setup", "SETUP", "client-login", "UI/API 默认密码登录；OTP 仅用于注册、首次设密和显式 OTP 专项"),
-    ("CTC-003", "02_kyc", 30, "positive", "kyc", "new_kyc_account", "新号或未通过/驳回账号提交 KYC", "controlled", "POST", "/member/kyc/insert", "仅当当前非通过状态且接口允许再次提交时复用；待审状态单独验证"),
+    ("CTC-003", "02_kyc", 30, "positive", "kyc", "new_kyc_account", "新号或未通过/驳回账号提交 KYC", "controlled", "POST", "/member/kyc/insert", "API 原入口保留；UI 协作 ui/cases/client-kyc-submit.spec.mjs 仅接受状态0并断言提交后状态2；待审/已通过不算本轮提交；审核后fresh UI登录刷新为5"),
     ("CTC-004", "02_kyc", 70, "positive", "kyc", "admin_account", "后台定位并审核本次 KYC", "controlled", "POST", "/admin/kyc/approve|/admin/kyc/reject", "只审核本次提交记录"),
     ("CTC-005", "03_deposit", 20, "positive", "finance", "fund_flow_account", "创建充值订单", "controlled", "GET", "/finance/payment/deposit", "与后续投注、流水核对和提现复用同一主流程账号"),
     ("CTC-006", "03_deposit", 60, "positive", "finance", "admin_account", "后台对本次充值单补单", "controlled", "POST", "/admin/finance/deposit/manual/success", "只操作本次自动化创建订单"),

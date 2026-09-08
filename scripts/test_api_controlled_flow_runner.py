@@ -528,13 +528,13 @@ class IndependentOperationTests(unittest.TestCase):
             "status": 200,
             "decoded_body": {
                 "status": True,
-                "data": {"d": [{"state": 1, "turnover": "1200", "finished": "0"}]},
+                "data": {"d": [{"id": "row-1", "uid": "uid-1", "state": 1, "turnover": "1200", "finished": "0"}], "t": 1},
             },
         }
         cleared = {"status": 200, "decoded_body": {"status": True, "data": "ok"}}
         after = {
             "status": 200,
-            "decoded_body": {"status": True, "data": {"d": []}},
+            "decoded_body": {"status": True, "data": {"d": [], "t": 0}},
         }
         with patch.object(MODULE.smoke, "request_once", side_effect=[before, cleared, after]) as request:
             records = MODULE.run_turnover_clear(args, "uid-1")
@@ -637,7 +637,7 @@ class IndependentOperationTests(unittest.TestCase):
         empty = {
             "url": "https://admin.example/admin/finance/deposit/risk/list",
             "status": 200,
-            "decoded_body": {"status": True, "data": {"d": []}},
+            "decoded_body": {"status": True, "data": {"d": [], "t": 0}},
         }
         matched = {
             "url": "https://admin.example/admin/finance/deposit/risk/list",
@@ -650,6 +650,8 @@ class IndependentOperationTests(unittest.TestCase):
         with patch.object(MODULE.smoke, "request_once", side_effect=[empty, matched]) as request:
             record, target = MODULE.find_deposit_order(args, "client-order")
         self.assertEqual(request.call_count, 2)
+        for call in request.call_args_list:
+            self.assertGreater(call.args[3]["start_time"], 10**12)
         self.assertEqual(target["id"], "internal")
         self.assertTrue(record["business_status"])
 
@@ -676,3 +678,37 @@ class IndependentOperationTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+class TurnoverPagination(unittest.TestCase):
+    def page(self, ids, total, **overrides):
+        rows = [{'id': str(i), 'uid': 'fund', 'state': 1, 'turnover': '10', 'finished': '1'} for i in ids]
+        return dict({'status': 200, 'decoded_body': {'status': True, 'data': {'d': rows, 't': total}}}, **overrides)
+
+    def test_complete_two_pages(self):
+        with patch.object(MODULE.smoke, 'request_once', side_effect=[self.page(range(100), 101), self.page([100], 101)]) as request:
+            record, remaining = MODULE.query_admin_turnover(deposit_args(), 'fund', 'test')
+        self.assertTrue(record['pagination_complete'])
+        self.assertEqual(record['row_count'], 101)
+        self.assertEqual(remaining, 909)
+        self.assertIn('page=2', str(request.call_args))
+
+    def test_partial_duplicate_changed_total_and_http_failure_block(self):
+        for second in [self.page([99], 101), self.page([], 101), self.page([100], 102), self.page([100], 101, status=500)]:
+            with self.subTest(second=second), patch.object(MODULE.smoke, 'request_once', side_effect=[self.page(range(100), 101), second]):
+                record, _ = MODULE.query_admin_turnover(deposit_args(), 'fund', 'test')
+                self.assertFalse(record['business_status'])
+                self.assertFalse(record['pagination_complete'])
+
+    def test_empty_is_complete(self):
+        with patch.object(MODULE.smoke, 'request_once', return_value=self.page([], 0)):
+            record, remaining = MODULE.query_admin_turnover(deposit_args(), 'fund', 'test')
+        self.assertTrue(record['pagination_complete'])
+        self.assertEqual(remaining, 0)
+
+class TurnoverMalformedPage(unittest.TestCase):
+    def test_non_object_rows_cannot_be_silently_filtered_into_empty_success(self):
+        response = {'status': 200, 'decoded_body': {'status': True, 'data': {'d': [None], 't': 0}}}
+        with patch.object(MODULE.smoke, 'request_once', return_value=response):
+            record, _ = MODULE.query_admin_turnover(deposit_args(), 'fund', 'test')
+        self.assertFalse(record['business_status'])
+        self.assertIn('non-object', record['reason'])

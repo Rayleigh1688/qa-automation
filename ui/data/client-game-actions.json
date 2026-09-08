@@ -37,7 +37,40 @@
       "expectedFrameText": [
         "bng.games",
         "lucky_penny"
-      ]
+      ],
+      "roundState": {
+        "buttonRegion": [
+          0.39,
+          0.75,
+          0.22,
+          0.105
+        ],
+        "reelsRegion": [
+          0.04,
+          0.4,
+          0.9,
+          0.25
+        ],
+        "backgroundRegion": [
+          0.1,
+          0.1,
+          0.3,
+          0.15
+        ],
+        "freePattern": "FREE\\s*SPINS",
+        "startPattern": "MULTIPLIERS|Increase\\s+wins|WIN\\s+UP\\s+TO",
+        "maxMaskDifference": 0.035,
+        "maxReelsDifference": 0.008,
+        "freeBlueMargin": 35,
+        "stabilityMs": 500,
+        "pollIntervalMs": 5000,
+        "waitTimeoutMs": 60000,
+        "minClickIntervalMs": 2000,
+        "readyMasks": [
+          "...........................................GGGGGGGGGGG...................GGGGGGGGGGGGGGG...............GGGGGGGGGGGGGGGGGG.............GGGGGGGGWWWW.GGWWGGGG..........GGGGGGWWWWWWWWWWWWWGGGG........GGGGGWWWWWWWWWWWWWWWGGGGG......GGGGGWWWWWWWWWWWWWWWWWGGGGG.....GGGGWWWWWWGGGGGGWWWWWWWGGGG....GGGGWWWWWGGGGGGGGWWWWWWWGGGG....GGGGWWWWGGGGGGGGGGGGGGGGGGGGG..GGGGGGGGGGGGGGGGGGGGGGGGGGGGGG..GGGGGGGGGG.GGG.GG.GG.G.GGGGGGG..GGGGGGG...G.GG..G.G.G..GGGGGGGG.GGGGGGGGGG.G.G.GGGGGGGGGGGGGGGG.GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG.GGGGGGGGGG.GGGGGG.GGGGGGGGGGGGG.GGGGGGGGGG.GG......G.GGGGGGGGGG.GGGGGGGGGGGG.GGGG.GGGGGGGGGGGG..GGGGGGGGGGGGGGGGGGGGGGGGGGGGGG...GGGGGGGGGGGGGGGGGGGGWWWWWGGGG...GGGG.WWWWWWWGGGGGGGWWWWWGGGG.....GGG.WWWWWWWGGGGG.WWWWW.GGGG.....GGGG.WWWWWWWWWWWWWWWW.GGGG.......GGGGWWWWWWWWWWWWWWW.GGGG.........GGGGWWWWWWWWWWWW.GGGGGG..........GGG.WWG...W...GGGGGG.............GGG.GGGGGGGGGGGGGG................GGGGGGGGGGGGGG.....................GGGGGGGGG...........................................................................",
+          "..............GGGG........................GGGGGGGGGGGG..................GGGGGGGGGGGGGGGG...............GGGGGGGGGGGGGGGGGGG............GGGGGGG.WWWWWGGWWGGGG..........GGGGGGWWWWWWWWWWWWWGGGG........GGGGGWWWWWWWWWWWWWWW.GGGG......GGGGGWWWWWWWWWWWWWWWWWGGGGG....GGGGGWWWWW.GGGGGGWWWWWWWGGGG....GGGGWWWWWGGGGGGGGWWWWWWWGGGGG...GGG.WWWWGGGGGGGGGGGGGGGGGGGGG..GGGGGGGGGGGGGGGGGGGGGGGGGGGGGG..GGGGGGGGGG.GGG.GG.GG.G.GGGGGGGG.GGGGGGG...G.GG..G.G.G..GGGGGGGG.GGGGGGGGGG.G.G.GGGGGGGGGGGGGGGG.GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG.GGGGGGGGGG.GGGGGG.GGGGGGGGGGGGG.GGGGGGGGGG.GG......G.GGGGGGGGGG.GGGGGGGGGGGG.GGGG.GGGGGGGGGGGGG.GGGGGGGGGGGGGGGGGGGGGGGGGGGGGG...GGGGGGGGGGGGGGGGGGGG.WWWWGGGG...GGGG.WWWWWWWGGGGGGGWWWWW.GGGG....GGG.WWWWWWWGGGGG.WWWWWWGGGG.....GGGGWWWWWWWWWWWWWWWWWWGGGG.......GGGGWWWWWWWWWWWWWWW.GGGGG........GGG.WWWWWWWWWWWWWGGGGGG..........GGG.WW..WWWW..GGGGGGG............GGG..GGGGGGGGGGGGG................GGGGGGGGGGGGGGG...................GGGGGGGGGG..........................................................................."
+        ]
+      }
     },
     {
       "id": "beanstalk_243",

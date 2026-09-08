@@ -1,3 +1,5 @@
+import { GameRoundState, visualDependencies } from '../framework/game-round-state.mjs';
+import { liveBetReader, verifyPaidDelta } from '../framework/game-paid-bets.mjs';
 import fs from "node:fs";
 import path from "node:path";
 import { expect, test } from "@playwright/test";
@@ -8,6 +10,7 @@ import { attachNetworkRecorder } from "../framework/network-recorder.mjs";
 import { p0StorageStatePath, reuseP0Auth } from "../framework/auth-state.mjs";
 
 loadEnv();
+if (process.env.EXECUTE_BET === "true") test.describe.configure({ retries: 0 });
 
 const storageStatePath = reuseP0Auth
   ? p0StorageStatePath
@@ -173,7 +176,8 @@ test.describe("Client game bet smoke", () => {
     // Login, third-party launch, canvas diagnostics and attachments consume a
     // fixed baseline. Real betting adds one settlement wait per configured
     // Spin, so a fixed 120s timeout can fail after every click has succeeded.
-    const requiredTimeoutMs = 120_000 + (executeBet ? spinCount * postClickWaitMs : 0);
+    const controlled = process.env.CLIENT_GAME_REQUIRE_PAID_BETS === "true";
+    const requiredTimeoutMs = 180_000 + (executeBet ? spinCount * (controlled ? 125_000 : postClickWaitMs) : 0);
     testInfo.setTimeout(Math.max(testInfo.timeout, requiredTimeoutMs));
     const viewport = game.viewport || gameConfig.viewport || page.viewportSize() || { width: 412, height: 915 };
     if (JSON.stringify(page.viewportSize()) !== JSON.stringify(viewport)) {
@@ -181,6 +185,14 @@ test.describe("Client game bet smoke", () => {
     }
     const network = attachNetworkRecorder(page, { hostPattern: /filbet|pwa|game|luck|jili|spribe|pg|cq9|bng|neurorestorativeals|playpoint|cloudfront/i });
     const runtimeDiagnostics = attachRuntimeDiagnostics(page);
+    const readBets = controlled ? liveBetReader(page, requiredEnv("CLIENT_BASE_URL")) : null;
+    const rounds = controlled ? new GameRoundState(page, game.roundState) : null;
+    if (controlled) {
+      if (!game.roundState || !executeBet) throw new Error("Controlled paid bets require configured visual state and EXECUTE_BET");
+      if (!Number.isInteger(spinCount) || spinCount < 1 || spinCount > 5) throw new Error("Controlled paid bet target must be 1–5");
+      await visualDependencies();
+      fs.mkdirSync("ui/results/screenshots", {recursive:true});
+    }
     const app = new ClientAppPage(page, { pageConfig, modalConfig });
 
     await app.gotoHome();
@@ -209,7 +221,16 @@ test.describe("Client game bet smoke", () => {
     await page.waitForLoadState("networkidle", { timeout: 5000 }).catch(() => {});
     await page.waitForTimeout(Number(process.env.CLIENT_GAME_READY_WAIT_MS || game.readyWaitMs || 25_000));
 
-    if (game.startTap) {
+    const launchFrames = page.frames().map((frame) => frame.url()).filter(Boolean);
+    assertConfiguredGameLaunch(game, launchFrames);
+    if (rounds) {
+      try {
+        await rounds.enter(() => activatePoint(page, Math.round(viewport.width * game.startTap.xRatio), Math.round(viewport.height * game.startTap.yRatio)));
+        await rounds.waitReady();
+      } finally { rounds.save(); }
+    }
+
+    if (!rounds && game.startTap) {
       await activatePoint(page,
         Math.round(viewport.width * game.startTap.xRatio),
         Math.round(viewport.height * game.startTap.yRatio),
@@ -227,9 +248,6 @@ test.describe("Client game bet smoke", () => {
 
     // This is a hard write gate. A configured game ID that launches a different
     // provider/game is a product or environment defect; never calibrate or bet.
-    const launchFrames = page.frames().map((frame) => frame.url()).filter(Boolean);
-    assertConfiguredGameLaunch(game, launchFrames);
-
     const requestedBetAmount = String(process.env.CLIENT_GAME_BET_AMOUNT || "");
     const betOption = requestedBetAmount ? game.betOptions?.[requestedBetAmount] : null;
     const configuredBetButtonClicks = requestedBetAmount
@@ -291,11 +309,29 @@ test.describe("Client game bet smoke", () => {
     };
     let completedSpinCount = 0;
     const clickStartedAt = Date.now();
+    let paidEvidence = null;
     if (executeBet) {
-      for (let index = 0; index < spinCount; index += 1) {
-        await activatePoint(page, clickPoint.x, clickPoint.y);
-        completedSpinCount += 1;
-        await page.waitForTimeout(postClickWaitMs);
+      const baseline = controlled ? await readBets() : [];
+      try {
+        for (let index = 0; index < spinCount; index += 1) {
+          if (rounds) await rounds.waitReady();
+          await activatePoint(page, clickPoint.x, clickPoint.y);
+          completedSpinCount += 1;
+          await page.waitForTimeout(controlled ? game.roundState.minClickIntervalMs : postClickWaitMs);
+          if (rounds) {
+            await rounds.waitReady();
+            const deadline = Date.now() + game.roundState.waitTimeoutMs;
+            do {
+              paidEvidence = verifyPaidDelta(await readBets(), baseline, completedSpinCount, Number(requestedBetAmount));
+              if (paidEvidence.accepted) break;
+              await page.waitForTimeout(game.roundState.pollIntervalMs);
+            } while (Date.now() < deadline);
+            if (!paidEvidence.accepted) throw new Error('Clicked Spin but no exact settled paid bet appeared; no automatic repeat');
+          }
+        }
+      } finally {
+        rounds?.save();
+        if (controlled) fs.writeFileSync('ui/results/game-paid-bets.json', JSON.stringify({runId:process.env.UI_BUSINESS_RUN_ID, completedSpinCount, requestedBetAmount, requestedPaidBets:spinCount, paidEvidence},null,2));
       }
     }
     await page.screenshot({ path: afterScreenshot, fullPage: false });
@@ -336,6 +372,7 @@ test.describe("Client game bet smoke", () => {
       .filter(Number.isFinite);
 
     const result = {
+      runId: process.env.UI_BUSINESS_RUN_ID,
       scannedAt: new Date().toISOString(),
       game,
       pageUrl: page.url(),
@@ -346,6 +383,8 @@ test.describe("Client game bet smoke", () => {
       betButtonHitTargets,
       spinCount,
       completedSpinCount,
+      paidEvidence,
+      controlledPaidBets: controlled,
       clickPoint,
       frames,
       frameDiagnostics,
@@ -375,10 +414,14 @@ test.describe("Client game bet smoke", () => {
 
     expect(page.url()).toContain("/s-game-page/");
     if (executeBet) {
-      if (game.networkEvidenceRequired !== false) {
+      if (controlled) {
+        expect(paidEvidence?.accepted).toBe(true);
+        expect(paidEvidence?.paidBetRecords).toBe(spinCount);
+      }
+      if (!controlled && game.networkEvidenceRequired !== false) {
         expect(afterClickGameRequestCount).toBeGreaterThan(0);
       }
-      if (requestedBetAmount && game.assertRequestedBetAmount !== false) {
+      if (!controlled && requestedBetAmount && game.assertRequestedBetAmount !== false) {
         expect(afterClickBetTotals).toContain(Number(requestedBetAmount));
       }
     }

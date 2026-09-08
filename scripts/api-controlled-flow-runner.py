@@ -1037,21 +1037,53 @@ def query_admin_turnover(
     uid: str,
     name: str,
 ) -> tuple[dict[str, object], Decimal]:
-    result = smoke.request_once(
-        row(
-            "GET",
-            f"{{{{admin_url}}}}/admin/finance/turnover/list?uid={uid}&page=1&page_size=100",
-            "{{admin_url}}",
-        ),
-        args.timeout,
-        args.insecure,
-    )
-    record = result_record(name, result)
-    rows = list_rows(data_of(result))
-    remaining = remaining_turnover(rows)
-    record["row_count"] = len(rows)
-    record["remaining_turnover"] = str(remaining)
-    return record, remaining
+    rows = []
+    seen = set()
+    total = None
+    record = None
+    pages = []
+    for page in range(1, 101):
+        result = smoke.request_once(
+            row("GET", f"{{{{admin_url}}}}/admin/finance/turnover/list?uid={uid}&page={page}&page_size=100", "{{admin_url}}"),
+            args.timeout, args.insecure,
+        )
+        current = result_record(name, result)
+        if record is None:
+            record = current
+        data = data_of(result)
+        batch = list_rows(data)
+        pages.append({'page': page, 'row_count': len(batch), 'http_status': current.get('http_status'), 'business_status': current.get('business_status')})
+        reason = None
+        count = data.get('t') if isinstance(data, dict) else None
+        if current.get('business_status') is not True or not 200 <= int(current.get('http_status') or 0) < 300:
+            reason = 'Turnover page request failed'
+        elif not isinstance(data, dict) or not isinstance(data.get('d'), list) or not isinstance(count, int) or isinstance(count, bool) or count < 0:
+            reason = 'Invalid turnover pagination shape'
+        elif len(batch) != len(data['d']):
+            reason = 'Invalid non-object row in turnover page'
+        elif total is not None and total != count:
+            reason = 'Turnover total changed during pagination'
+        else:
+            total = count
+            for item in batch:
+                ident = str(item.get('id') or '')
+                if not ident or ident in seen or str(item.get('uid') or '') != str(uid):
+                    reason = 'Duplicate, missing ID or wrong UID in turnover pages'
+                    break
+                seen.add(ident)
+            if reason is None:
+                rows.extend(batch)
+                if len(rows) > total or (len(rows) < total and len(batch) != 100):
+                    reason = 'Incomplete turnover page or inconsistent total'
+        if reason:
+            record.update(business_status=False, reason=reason, pagination_complete=False, pages=pages)
+            return record, Decimal('0')
+        if len(rows) == total:
+            remaining = remaining_turnover(rows)
+            record.update(data={'d': rows, 't': total, 's': len(rows)}, row_count=len(rows), remaining_turnover=str(remaining), pagination_complete=True, pages=pages)
+            return record, remaining
+    record.update(business_status=False, reason='Turnover pagination exceeded 100 pages', pagination_complete=False, pages=pages)
+    return record, Decimal('0')
 
 
 def run_turnover_clear(
@@ -1321,8 +1353,8 @@ def find_deposit_order(args: argparse.Namespace, deposit_id: str = "") -> tuple[
     start_time, end_time = now_window()
     base_params: dict[str, object] = {
         "status": args.deposit_status or "PENDING",
-        "start_time": start_time,
-        "end_time": end_time,
+        "start_time": start_time * 1000,
+        "end_time": end_time * 1000,
         "page": 1,
         "page_size": 50,
     }
@@ -1373,8 +1405,8 @@ def find_deposit_order(args: argparse.Namespace, deposit_id: str = "") -> tuple[
         # Online-channel orders may be visible in the general deposit ledger
         # before (or without) entering the risk-review queue.
         params = {
-            "start_time": start_time,
-            "end_time": end_time,
+            "start_time": start_time * 1000,
+            "end_time": end_time * 1000,
             "page": 1,
             "page_size": 100,
         }
@@ -1779,8 +1811,7 @@ def finish(args: argparse.Namespace, records: list[dict[str, object]]) -> None:
         raise SystemExit("controlled flow business failure: " + ", ".join(failed_names))
 
 
-def main() -> None:
-    global ACTIVE_ARGS, ACTIVE_RECORDS
+def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser()
     parser.add_argument("--env", default=os.environ.get("ENV_FILE", ".env.fat"))
     parser.add_argument("--timeout", type=float, default=10)
@@ -1868,7 +1899,12 @@ def main() -> None:
     parser.add_argument("--turnover-clear-interval", type=float, default=1)
     parser.add_argument("--turnover-discovery-attempts", type=int, default=30)
     parser.add_argument("--turnover-discovery-interval", type=float, default=1)
-    args = parser.parse_args()
+    return parser
+
+
+def main() -> None:
+    global ACTIVE_ARGS, ACTIVE_RECORDS
+    args = build_parser().parse_args()
     if not args.out:
         args.out = (
             f"api/results/operations/{args.operation}.json"

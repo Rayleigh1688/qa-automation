@@ -139,11 +139,14 @@ def write_html_report(
         for item in timeline_items if isinstance(item, dict)
     )
     check_items = evidence.get("checks", [])
+    expanded_checks = any(isinstance(item, dict) and "expected" in item for item in check_items)
+    check_headers = "<th>结果</th><th>核对项</th>" + ("<th>期望值</th><th>实际值</th>" if expanded_checks else "") + "<th>证据</th>"
     checks = "".join(
         '<tr>'
         f'<td><span class="badge {status_class(str(item.get("status", "PASS")))}">{html.escape(str(item.get("status", "PASS")))}</span></td>'
         f'<td>{html.escape(str(item.get("name", "")))}</td>'
-        f'<td>{html.escape(str(item.get("detail", "")))}</td>'
+        + (f'<td>{html.escape(str(item.get("expected", "")))}</td><td>{html.escape(str(item.get("actual", "")))}</td>' if expanded_checks else "")
+        + f'<td>{html.escape(str(item.get("detail", "")))}</td>'
         '</tr>'
         for item in check_items if isinstance(item, dict)
     )
@@ -168,13 +171,18 @@ def write_html_report(
         evidence_html += f'<section class="evidence-block"><h2>本次执行摘要</h2><div class="highlights">{highlights}</div></section>'
     if timeline:
         evidence_html += f'<section class="evidence-block"><h2>{html.escape(str(evidence.get("timeline_title", "关键执行轨迹")))} <small>{html.escape(str(evidence.get("timeline_note", "按真实业务顺序")))}</small></h2><ol class="timeline">{timeline}</ol></section>'
+    gallery_html = f'<section class="evidence-block"><h2>Playwright 页面证据 <small>点击图片查看原图</small></h2><p class="section-note">{html.escape(str(evidence.get("image_note", "截图证明页面状态与浏览器交互；充值到账、流水变化和提现同单仍以结构化核对结果为准。")))}</p><div class="gallery">{images}</div></section>' if images else ""
+    if images and evidence.get("images_first"):
+        evidence_html += gallery_html
     if checks:
-        evidence_html += f'<section class="evidence-block"><h2>{html.escape(str(evidence.get("checks_title", "统一资金链核对")))} <small>{html.escape(str(evidence.get("checks_note", str(len([item for item in check_items if isinstance(item, dict)])) + " 条断言")))}</small></h2><div class="table-wrap"><table><thead><tr><th>结果</th><th>核对项</th><th>证据</th></tr></thead><tbody>{checks}</tbody></table></div></section>'
-    if images:
-        evidence_html += f'<section class="evidence-block"><h2>Playwright 页面证据 <small>点击图片查看原图</small></h2><p class="section-note">{html.escape(str(evidence.get("image_note", "截图证明页面状态与浏览器交互；充值到账、流水变化和提现同单仍以结构化核对结果为准。")))}</p><div class="gallery">{images}</div></section>'
+        evidence_html += f'<section class="evidence-block"><h2>{html.escape(str(evidence.get("checks_title", "统一资金链核对")))} <small>{html.escape(str(evidence.get("checks_note", str(len([item for item in check_items if isinstance(item, dict)])) + " 条断言")))}</small></h2><div class="table-wrap"><table><thead><tr>{check_headers}</tr></thead><tbody>{checks}</tbody></table></div></section>'
+    if images and not evidence.get("images_first"):
+        evidence_html += gallery_html
     if artifacts:
         evidence_html += f'<section class="evidence-block"><h2>原始证据文件</h2><div class="artifacts">{artifacts}</div></section>'
     ui_style = ".table-wrap td:first-child{white-space:nowrap}.gallery{grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}" if report_kind == "UI" else ""
+    if report_kind == "受控 UI 全流程":
+        ui_style += ".gallery{grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}.gallery figure img{height:420px;object-fit:contain}.gallery figcaption{min-height:90px}"
     generated_at = format_east8_time()
     document = f"""<!doctype html>
 <html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">

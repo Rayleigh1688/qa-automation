@@ -49,7 +49,10 @@
     "check:syntax": "python3 scripts/check-project.py syntax",
     "test:unit": "python3 -m unittest discover -s scripts -p \"test_*.py\" && python3 -m unittest discover -s tools/provisioning -p \"test_*.py\"",
     "check": "npm run check:docs && npm run check:archive && npm run check:assets && npm run check:syntax && npm run test:unit",
-    "check:archive": "python3 scripts/check-scan-archive.py"
+    "check:archive": "python3 scripts/check-scan-archive.py",
+    "test:ui:kyc": "node scripts/run-ui-kyc.mjs",
+    "test:ui:business": "python3 scripts/run-ui-business.py",
+    "test:ui:business:fat": "npm run test:ui:business -- --env .env.ui-p0.fat --execute --new-kyc-account --bet-spins 3 --clear-remaining-turnover --allow-existing-turnover --headed"
   },
   "devDependencies": {
     "@playwright/test": "^1.57.0",

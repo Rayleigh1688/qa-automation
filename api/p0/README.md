@@ -37,7 +37,7 @@ P0 只保留必要资产，避免 CSV 和 Markdown 重复维护。
 3. API 完成充值、后台补单和钱包核对后必须停止。普通存款即使不参加活动也会产生基础流水，不能直接跳到提现。
 4. UI 三方游戏单注读取 `CLIENT_GAME_BET_AMOUNT`：FAT/UAT 当前统一为 100。`scripts/run-turnover-bet.py` 只读汇总全部未完成流水，默认按当前环境单注计算投注次数并设置安全上限；完整入口可由 `--bet-spins` 显式固定次数。FAT 默认读取只读数据库，UAT 默认通过管理后台会员列表和流水列表读取，不要求数据库连接。
 5. 投注后轮询 Bet History、钱包、账变和基础流水；以本轮时间窗口和关联标识核对记录。固定次数后仍有流水时，只有用户同时显式启用 `--clear-remaining-turnover`，才允许调用后台清流；报告必须分别保留投注前、投注后和后台清流后的流水值。最终总剩余流水为 0 后才允许发起提现。
-6. 提现金额必须同时满足余额和通道限制。完整 API 资金链通过 `/finance/payment/withdraw` 创建订单，再由后台 API 按订单 ID 精确定位并核对；Maya UI 建单另作独立 UI P0，不替代 API CTC-009。
+6. 提现金额必须同时满足余额和通道限制。完整 API 资金链通过 `/finance/payment/withdraw` 创建订单，再由后台 API 按订单 ID 精确定位并核对；Maya UI 建单另作独立 UI P0，不替代 API CTC-009；新增 `test:ui:business` 由 UI 创建充值/提现订单，复用后台查询/补单与真实投注能力，执行边界见 [UI 手册](../../ui/README.md#受控-ui-业务总入口)。
 7. 数据库只用于只读诊断和交叉核对，不直接修改 KYC、余额、流水、充值或提现状态。
 
 ## 推荐命令
@@ -150,7 +150,7 @@ API、UI 和主流程三个 HTML 报告共用 `scripts/p0_report_template.py` �
 5. 活动配置、活动流水限制、盲盒、Filcoin、VIP、代理、收藏等均移出 P0 门禁；活动流水限制作为 P1 独立专项，不参与 P0 放行。
 6. 后台查询穿插在对应业务阶段：KYC 后查待审，充值后查待审/补单，提现后查审核；当前用户权限与汇总报表放在最后总核对。
 
-后台列表类 POST 接口必须以 CBOR 发送请求体；时间单位按接口维护：提现待审 `/admin/finance/withdraw/risk/audit/list` 使用毫秒，其他已配置列表保留秒级窗口。`test-cases.csv` 的 `request_body` 支持 秒级 `{{now_minus_2d}}`、`{{now_plus_5m}}` 与毫秒级 `{{now_minus_2d_ms}}`、`{{now_plus_5m_ms}}`，runner 会在执行时替换为整数时间戳。接口文档中把部分待审列表标为 GET 的记录已经实测纠正为 POST。
+后台列表类 POST 接口必须以 CBOR 发送请求体；时间单位按接口维护：提现待审 `/admin/finance/withdraw/risk/audit/list`、充值风险 `/admin/finance/deposit/risk/list` 及充值总列表 `/admin/finance/deposit/list` 和账变 `/admin/finance/transaction/list` 使用毫秒，其他已配置列表保留各自契约（不能据此类推）。充值毫秒窗口于 2026-09-08 在 FAT 通过同订单秒/毫秒只读对照确认；UAT 尚未随此修正重验。`test-cases.csv` 的 `request_body` 支持 秒级 `{{now_minus_2d}}`、`{{now_plus_5m}}` 与毫秒级 `{{now_minus_2d_ms}}`、`{{now_plus_5m_ms}}`，runner 会在执行时替换为整数时间戳。接口文档中把部分待审列表标为 GET 的记录已经实测纠正为 POST。
 
 当前核对深度：客户端账变与后台账变的结构查询已分别进入 safe smoke；本轮充值和提现已完成订单号、uid、金额与待审状态的一对一关联。真实出款成功/取消后的最终状态和账变方向复验属于 FAT 转账接口恢复后的增强项，不阻塞当前 P0。
 

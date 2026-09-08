@@ -1,0 +1,70 @@
+{
+  "route": "/s-kyc-v2",
+  "uploadPath": "/member/oss/upload",
+  "detailPath": "/member/kyc/detail",
+  "submitPaths": [
+    "/member/kyc/insert",
+    "/member/kyc/v2/insert"
+  ],
+  "buttons": {
+    "verify": "Verify Now",
+    "reverify": "Re-KYC verification",
+    "confirm": "Confirm",
+    "next": "Next",
+    "submit": "Submit",
+    "gender": "Male",
+    "nationality": "Philippines",
+    "idType": "National ID"
+  },
+  "placeholders": {
+    "idType": "Select your ID type",
+    "address": "Enter your permanent address",
+    "branch": "Select your nearest branch",
+    "work": "Select your nature of work",
+    "income": "Select your source of income",
+    "firstName": "Enter your first name",
+    "middleName": "Enter your middle name",
+    "lastName": "Enter your last name",
+    "province": "Enter province",
+    "birthday": "Select Date",
+    "nationality": "Select your nationality"
+  },
+  "selectors": {
+    "file": "input[type=\"file\"]",
+    "pickerContainer": "[role=button],.van-field,.nut-cell,.adm-list-item",
+    "preview": "img[alt=\"preview\"]"
+  },
+  "options": {
+    "branch": "2040 Taft Ave|Pasay",
+    "work": "Employed.*Permanent|Contractual",
+    "income": "Employment Income"
+  },
+  "fixture": {
+    "address": "FAT Test Address, Manila",
+    "firstName": "FatKyc",
+    "middleName": "Record",
+    "lastName": "Flow",
+    "province": "Manila"
+  },
+  "successText": "KYC successful",
+  "reviewText": "Check your Information",
+  "submitReadyStatuses": [
+    0
+  ],
+  "pendingStatus": 2,
+  "approvedStatus": 5,
+  "buttonPatterns": {
+    "verify": "^Verify Now(?: pointer)?$"
+  },
+  "visualStatusPatterns": {
+    "submitted": [
+      "^KYC successful$"
+    ],
+    "approved": [
+      "^Verified$",
+      "^KYC Verified$",
+      "^Verification Successful$",
+      "^KYC successful$"
+    ]
+  }
+}

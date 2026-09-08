@@ -250,12 +250,12 @@ def main() -> None:
     total_completed = 0
     batches: list[dict[str, object]] = []
     current = before
+    stop_reason = ""
     while args.execute and current > 0:
         batch_spins = args.spin_count if fixed_spin_count else math.ceil(current / Decimal(args.bet_unit))
         if total_planned + batch_spins > args.max_spins:
-            raise SystemExit(
-                f"total planned spins {total_planned + batch_spins} exceed safety cap {args.max_spins}"
-            )
+            stop_reason = f"total planned spins {total_planned + batch_spins} exceed safety cap {args.max_spins}"
+            break
         ui_env = os.environ.copy()
         ui_env.update({
             "ENV_FILE": args.env,
@@ -318,11 +318,14 @@ def main() -> None:
         "turnover_cleared": after == 0,
         "remaining_turnover_allowed": args.allow_remaining_turnover,
         "batches": batches,
+        "stop_reason": stop_reason,
     }
     output = Path(args.out)
     output.parent.mkdir(parents=True, exist_ok=True)
     output.write_text(json.dumps(result, ensure_ascii=False, indent=2), encoding="utf-8")
     print(json.dumps(result, ensure_ascii=False))
+    if stop_reason:
+        raise SystemExit(stop_reason)
     if executed and after >= before:
         raise SystemExit(f"turnover did not decrease after UI bets: before={before}, after={after}")
     if executed and after > 0 and not args.allow_remaining_turnover:

@@ -1,4 +1,6 @@
+import {captureVisual} from '../framework/visual-evidence.mjs';
 import fs from "node:fs";
+import { readBusinessRequest, requireBusinessResponse } from "../framework/business-response.mjs";
 import path from "node:path";
 import { expect, test } from "@playwright/test";
 import { ClientAppPage } from "../elements/client-app.page.mjs";
@@ -123,6 +125,8 @@ async function openWithdrawPanel(page, app) {
   return "not_found";
 }
 
+test.describe.configure({ retries: 0 });
+
 test("withdraw UI rejects an invalid amount and can create a legal order", async ({ page }) => {
   const app = new ClientAppPage(page, {
     pageConfig: loadJson("ui/data/client-pages.json"),
@@ -169,6 +173,7 @@ test("withdraw UI rejects an invalid amount and can create a legal order", async
   }
   const invalidGeneratedRequest = withdrawEvents.length > invalidEventCount;
 
+  const visualEvidence = {};
   const screenshotDir = path.resolve("ui/results/screenshots");
   fs.mkdirSync(screenshotDir, { recursive: true });
   await page.screenshot({ path: path.join(screenshotDir, "withdraw-invalid-amount.png"), fullPage: false });
@@ -179,15 +184,26 @@ test("withdraw UI rejects an invalid amount and can create a legal order", async
 
   let confirmationClicked = false;
   let walletPasswordEntered = false;
+  let legalResponse = null;
   if (process.env.EXECUTE_WITHDRAW_UI === "true") {
     await amountInput.fill(legalAmount);
     await page.waitForTimeout(500);
     await expect(submit).toBeEnabled();
+    const responsePromise = page.waitForResponse(response => new URL(response.url()).pathname === "/finance/payment/withdraw" && response.request().method() === "GET");
+    // Attach a rejection handler immediately while wallet/confirmation controls are used.
+    responsePromise.catch(() => {});
     await submit.click();
     walletPasswordEntered = await enterWalletPasswordIfShown(page);
     confirmationClicked = await clickConfirmationIfShown(page);
+    const response = await responsePromise;
+    const body = await requireBusinessResponse(response);
+    const submitted = readBusinessRequest(response.request());
+    expect(Number(submitted.amount)).toBe(Number(legalAmount));
+    const orderId = String(body.data?.order_no || body.data?.id || "");
+    expect(orderId, "withdraw response must identify this UI order").not.toBe("");
+    legalResponse = { httpStatus: response.status(), businessStatus: true, orderId, amount: submitted.amount };
     await page.waitForTimeout(3000);
-    await page.screenshot({ path: path.join(screenshotDir, "withdraw-legal-amount.png"), fullPage: false });
+    visualEvidence.after = await captureVisual(page, 'withdraw-legal-amount', {title:'UI 提现提交后页面', kind:'DOM assertion screenshot', status:'CAPTURED', assertion:'页面成功提示、金额、订单号与响应一致（结果见对应断言）'}, {fullPage:false});
   }
 
   const legalResponses = withdrawEvents.filter((item) => item.kind === "response" && item.status >= 200 && item.status < 300);
@@ -201,6 +217,8 @@ test("withdraw UI rejects an invalid amount and can create a legal order", async
   const transactionId = bodyAfter.match(/Transaction ID\s*([0-9]+)/i)?.[1] || "";
   const withdrawalMethod = bodyAfter.match(/Withdrawal Method\s*([A-Za-z]+)/i)?.[1] || "";
   const result = {
+    runId: process.env.UI_BUSINESS_RUN_ID,
+    visualEvidence,
     executedAt: new Date().toISOString(),
     pageUrl: page.url().replace(/^https?:\/\/[^/]+/i, ""),
     openMode,
@@ -212,6 +230,7 @@ test("withdraw UI rejects an invalid amount and can create a legal order", async
     invalidGeneratedRequest,
     legalAmount: process.env.EXECUTE_WITHDRAW_UI === "true" ? legalAmount : null,
     walletPasswordEntered,
+    legalResponse,
     confirmationClicked,
     balanceBefore,
     balanceAfter,
@@ -233,6 +252,7 @@ test("withdraw UI rejects an invalid amount and can create a legal order", async
     expect(channelUnavailable).toBeFalsy();
     expect(legalOrderCreated).toBeTruthy();
     expect(transactionId).toMatch(/^\d+$/);
+    expect(transactionId).toBe(legalResponse.orderId);
     expect(withdrawalMethod.toLowerCase()).toBe(withdrawChannel.toLowerCase());
   }
 });
