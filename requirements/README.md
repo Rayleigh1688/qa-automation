@@ -16,7 +16,7 @@
 | ISOP-2038 | 合規後台 - 移除 Jackpot 記錄選單 | [设计](ISOP-2038/design.md) · [问题](ISOP-2038/questions.md) · [用例](ISOP-2038/test-cases.md) |
 | ISOP-2037 | 合規後台 - 全平台投注紀錄增加欄位 | [设计](ISOP-2037/design.md) · [问题](ISOP-2037/questions.md) · [用例](ISOP-2037/test-cases.md) |
 | ISOP-2032 | 用戶端 - 投注返利活動 | [设计](ISOP-2032/design.md) · [问题](ISOP-2032/questions.md) · [用例](ISOP-2032/test-cases.md) |
-| ISOP-2031 | 用戶端 - 新增金額動畫效果 | [设计](ISOP-2031/design.md) · [问题](ISOP-2031/questions.md) · [用例](ISOP-2031/test-cases.md) |
+| ISOP-2031 | 新增金額動畫效果 | [设计](ISOP-2031/design.md) · [问题](ISOP-2031/questions.md) · [用例](ISOP-2031/test-cases.md) |
 | ISOP-2030 | 用戶端 - 遊戲頁面改版 | [设计](ISOP-2030/design.md) · [问题](ISOP-2030/questions.md) · [用例](ISOP-2030/test-cases.md) |
 | ISOP-2029 | 用戶端 - 免費旋轉領取文案調整 | [设计](ISOP-2029/design.md) · [问题](ISOP-2029/questions.md) · [用例](ISOP-2029/test-cases.md) |
 | ISOP-2028 | 合規後台 - 統計數據時間調整 | [设计](ISOP-2028/design.md) · [问题](ISOP-2028/questions.md) · [用例](ISOP-2028/test-cases.md) |
