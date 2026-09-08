@@ -3,6 +3,8 @@
 
 from __future__ import annotations
 
+from qa_core.terminal import print_result, print_path
+
 import argparse
 import html
 import json
@@ -114,7 +116,7 @@ def preflight(args: argparse.Namespace, env: dict[str, str]) -> None:
             errors.append(f"missing dependency: {path}")
     if errors:
         raise SystemExit("P0 UI preflight failed:\n- " + "\n- ".join(errors))
-    print(f"P0 UI preflight PASS scope={args.scope} auth={auth_mode}", flush=True)
+    print_result(f"P0 UI preflight PASS scope={args.scope} auth={auth_mode}", "PASS")
 
 
 def write_run_status(
@@ -290,11 +292,11 @@ def main() -> int:
             print(f"wrote fallback {html_report.resolve()}", flush=True)
         except BaseException as error:
             print(f"P0 UI fallback report unavailable: {sanitize_error(error, env)}", file=sys.stderr, flush=True)
-    print(
+    print_result(
         f"P0 UI run status={status.get('status')} stage={status.get('stage')}",
-        flush=True,
+        status.get('status'),
     )
-    print(f"HTML report: {html_report.resolve().as_uri()}", flush=True)
+    print_path(f"HTML report: {html_report.resolve().as_uri()}", flush=True)
     return int(status.get("exit_code") or report_code or 0)
 
 

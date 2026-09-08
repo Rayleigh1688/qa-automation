@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 """Local readiness checks. --network explicitly opts into unauthenticated HTTPS HEAD probes."""
+from qa_core.terminal import print_result, print_path
+
 import argparse
 import contextlib
 import importlib.util
@@ -145,9 +147,9 @@ def main():
     except (OSError, ValueError, LocalRunBusy):
         failures = ['本地配置或锁检查失败：检查文件权限、URL 格式和运行中任务；未输出原始异常。']
     for message in failures:
-        print('FAIL: ' + message)
-    print('doctor ' + ('FAIL' if failures else 'PASS') + (' · 显式 HTTPS 探测' if args.network and not failures else ' · 本地检查'))
-    print('本地检查不证明账号状态、分配唯一性或业务通过；KYC 每轮新号，BASIC 永久未认证，资金号按执行者分配。')
+        print_result('FAIL: ' + message, 'FAIL')
+    print_result('doctor ' + ('FAIL' if failures else 'PASS') + (' · 显式 HTTPS 探测' if args.network and not failures else ' · 本地检查'), 'FAIL' if failures else 'PASS')
+    print('说明：本地检查不证明账号状态、分配唯一性或业务通过；KYC 每轮新号，BASIC 永久未认证，资金号按执行者分配。')
     return 1 if failures else 0
 
 

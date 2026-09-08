@@ -9,6 +9,8 @@ Examples:
 
 from __future__ import annotations
 
+from qa_core.terminal import print_result, print_path
+
 import argparse
 import html
 import json
@@ -121,7 +123,7 @@ def preflight(args: argparse.Namespace, env: dict[str, str]) -> None:
             errors.append(f"missing dependency: {path}")
     if errors:
         raise SystemExit("P0 API preflight failed:\n- " + "\n- ".join(errors))
-    print(f"P0 API preflight PASS scope={args.scope} mode={'safe' if args.safe_only else 'controlled-write'}", flush=True)
+    print_result(f"P0 API preflight PASS scope={args.scope} mode={'safe' if args.safe_only else 'controlled-write'}", "PASS")
 
 
 def run(command: list[str], env: dict[str, str]) -> None:
@@ -373,7 +375,7 @@ def run_p0(args: argparse.Namespace, env: dict[str, str]) -> None:
 def run_generic_level(level: str, args: argparse.Namespace, env: dict[str, str]) -> None:
     cases = Path(f"api/{level}/test-cases.csv")
     if not cases.exists():
-        print(f"skip {level}: missing {cases}")
+        print_result(f"skip {level}: missing {cases}", "SKIPPED")
         return
     output = f"api/results/{level}-smoke-result.json"
     report = f"api/results/{level}-smoke-report.md"
@@ -521,11 +523,11 @@ def main() -> int:
     if "p0" in [item.lower() for item in args.levels]:
         status = render_report_resilient(args, env, status, started_at)
         exit_code = int(status.get("exit_code") or 0)
-    print(
+    print_result(
         f"P0 API run status={status.get('status')} stage={status.get('stage')}",
-        flush=True,
+        status.get('status'),
     )
-    print(
+    print_path(
         f"HTML report: {Path('api/results/p0-api-report.html').resolve().as_uri()}",
         flush=True,
     )

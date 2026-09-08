@@ -1,3 +1,4 @@
+import { styled } from '../ui/framework/terminal.mjs';
 import fs from 'node:fs';
 import crypto from 'node:crypto';
 import { spawnSync } from 'node:child_process';
@@ -50,7 +51,7 @@ try {
   exitCode = 0;
 } catch (error) {
   result.error = error.message;
-  console.error(result.error);
+  console.error(styled(result.error, 'FAIL', process.stderr));
 } finally {
   result.finishedAt = new Date().toISOString();
   result.exitCode = exitCode;
@@ -60,4 +61,6 @@ try {
   fs.writeFileSync('ui/reports/kyc-ui-report.html', `<!doctype html><html lang="zh"><meta charset="utf-8"><title>KYC UI</title><style>body{font:16px system-ui;max-width:900px;margin:40px auto;padding:20px}pre{white-space:pre-wrap;background:#f3f5f7;padding:20px}</style><h1>KYC UI：${escape(result.status)}</h1><p>SUBMITTED_PENDING 表示本轮页面提交后待审；APPROVED 还要求本轮后台审核与浏览器刷新为 5。该报告不代表默认页面回归或资金全流程通过。</p><pre>${escape(JSON.stringify(result, null, 2))}</pre><a href="../results/kyc-ui-run-status.json">运行状态</a></html>`);
   fs.rmSync('ui/results/kyc-ui-storage-state.json', { force: true });
 }
+console.log(styled(`KYC UI ${result.status}`, exitCode === 0 ? 'PASS' : 'BLOCKED'));
+console.log(styled('HTML report: ui/reports/kyc-ui-report.html', 'PATH'));
 process.exitCode = exitCode;

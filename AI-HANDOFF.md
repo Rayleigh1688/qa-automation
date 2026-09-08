@@ -262,3 +262,13 @@ README 补充 `test:ui:business` 单命令、FAT 配置与视觉依赖、独立 
 验证：`test:ui:business -- --help` 经新 npm 包装器正常透传且未进入业务；新增本地测试覆盖 Python/JS 配置一致性、缺失个人文件、旧默认兼容、锁竞争/嵌套/异常及进程崩溃释放、参数字面值与退出码、doctor 默认离线/显式联网（mock）/失败阻断和不泄露值、模板 schema 与默认写开关。未实际使用 `--network`，未登录、注册、KYC、充值、投注、清流或提现；真实联网与浏览器业务兼容待下一轮单独验收，历史业务结果不变。
 
 最终本地验证：`npm run check` 全部通过（81 份当前文档、235 份归档校验、146 份源码语法、142+16 条单元测试），`git diff --check` 通过。新增 10 条标准化回归均为本地/模拟检查；现有真实配置的两项 doctor 待修复如上，未将其误记为通过。全部改动保留在工作区，未 add/commit。
+
+### 2026-09-08 默认 doctor 权限修复
+
+用户反馈 doctor 无法通过，实际复现 `npm run doctor` 仅因 `.env.fat` 权限过宽失败。已将该忽略文件权限收紧为 0600，内容不变；重跑默认 doctor 已 PASS（本地检查、退出码 0）。未开启 `--network`、未登录或执行业务。此前 business target 缺少 `QA_OPERATOR` 的记录不由此次默认检查收口；未修改执行器或提交代码。
+
+### 2026-09-08 终端结果与路径颜色
+
+保留此前交接修改。新增公共 Python/JS 终端样式模块，doctor、API/default UI/full/UI business 及独立 KYC 结果按状态着色；本地锁阻断为红色，报告/日志路径为青色下划线。UI business 最终输出分别列出结果、HTML 和运行日志，doctor 固定说明添加“说明”前缀。TTY 自动启用，NO_COLOR、TERM=dumb、文件/管道关闭，不改变业务状态或产物内容。
+
+本地 `npm run check` 全部通过（148 份源码、142+16 条测试）；另以内存终端核对 Python/JS ANSI 样式和关闭条件，实际离线 doctor PASS。未运行联网业务、未重建现有业务报告或提交代码。

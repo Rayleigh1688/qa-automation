@@ -2,6 +2,7 @@
 """Hold the local run lock across a complete command, including nested npm scripts."""
 import argparse
 import sys
+from qa_core.terminal import print_result
 from qa_core.local_lock import local_run_lock, LocalRunBusy
 from ui_process import run_ui_process
 
@@ -22,12 +23,12 @@ def main():
         with local_run_lock() as fd:
             return run_ui_process(command, pass_fds=(() if fd is None else (fd,))).returncode
     except LocalRunBusy as error:
-        print(f'BLOCKED: {error}', file=sys.stderr)
+        print_result(f'BLOCKED: {error}', 'BLOCKED', file=sys.stderr)
         return 2
     except KeyboardInterrupt:
         return 130
     except OSError:
-        print('BLOCKED: command or local lock unavailable; check installation and local permissions.', file=sys.stderr)
+        print_result('BLOCKED: command or local lock unavailable; check installation and local permissions.', 'BLOCKED', file=sys.stderr)
         return 2
 
 

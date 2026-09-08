@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 """Controlled FAT UI business chain, separate from the default page suite."""
+from qa_core.terminal import print_result, print_path
+
 import argparse
 import contextlib
 import hashlib
@@ -52,7 +54,7 @@ def main():
     try:
         prepare_business_artifacts(resume=bool(args.resume_run or args.resume_reconcile), kyc_run_id=args.kyc_run_id)
     except (OSError, ValueError, KeyError, RuntimeError) as error:
-        print(f'UI artifact preparation blocked: {error}')
+        print_result(f'UI artifact preparation blocked: {error}', 'BLOCKED')
         return 1
     Path('ui/results').mkdir(parents=True, exist_ok=True)
     with open('ui/results/ui-business-run.log', 'w') as log, contextlib.redirect_stdout(log), contextlib.redirect_stderr(log):
@@ -234,7 +236,9 @@ def main():
             write('ui/results/ui-business-run-status.json', state)
             render_report(state)
             Path('ui/results/ui-fund-storage-state.json').unlink(missing_ok=True)
-            print(f"UI business {state['status']} at {state['stage']}; see ui/reports/ui-business-report.html", file=sys.__stdout__)
+            print_result(f"UI business {state['status']} at {state['stage']}", state['status'], file=sys.__stdout__)
+            print_path(f"HTML report: {Path('ui/reports/ui-business-report.html').resolve().as_uri()}", file=sys.__stdout__)
+            print_path(f"Run log: {Path('ui/results/ui-business-run.log').resolve()}", file=sys.__stdout__)
     return code
 
 

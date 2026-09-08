@@ -7,6 +7,8 @@ controlled deposit -> real UI bet -> turnover check -> withdrawal chain.
 
 from __future__ import annotations
 
+from qa_core.terminal import print_result, print_path
+
 import argparse
 import html
 import json
@@ -259,7 +261,7 @@ def preflight_full(args: argparse.Namespace, env: dict[str, str]) -> None:
 
     if errors:
         raise SystemExit("full P0 preflight failed:\n- " + "\n- ".join(errors))
-    print("full P0 preflight PASS", flush=True)
+    print_result("full P0 preflight PASS", "PASS")
 
 
 def run_default_ui(env: dict[str, str], *, clean: bool = True, headed: bool = False) -> None:
@@ -458,8 +460,8 @@ def main() -> int:
             args, status="PASS", stage="complete", started_at=started_at,
             exit_code=0, completed_stages=completed_stages,
         )
-        print(f"P0 full run status=PASS stage=complete headed={args.headed}", flush=True)
-        print(f"HTML report: {FULL_HTML_REPORT.resolve().as_uri()}", flush=True)
+        print_result(f"P0 full run status=PASS stage=complete headed={args.headed}", "PASS")
+        print_path(f"HTML report: {FULL_HTML_REPORT.resolve().as_uri()}", flush=True)
         return 0
     except KeyboardInterrupt as error:
         exit_code = 130
@@ -500,8 +502,8 @@ def main() -> int:
             write_full_failure_report(status)
         except BaseException as report_error:
             print(f"P0 full failure report unavailable: {sanitize_error(report_error, env)}", file=sys.stderr, flush=True)
-        print(f"P0 full run status={status_name} stage={stage}", flush=True)
-        print(f"HTML report: {FULL_HTML_REPORT.resolve().as_uri()}", flush=True)
+        print_result(f"P0 full run status={status_name} stage={stage}", status_name)
+        print_path(f"HTML report: {FULL_HTML_REPORT.resolve().as_uri()}", flush=True)
     return int(exit_code)
 
 
