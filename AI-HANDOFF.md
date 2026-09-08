@@ -246,3 +246,19 @@ README 补充 `test:ui:business` 单命令、FAT 配置与视觉依赖、独立 
 ### 2026-09-08 纳入日常测试入口
 
 按用户决定，将 `npm run test:ui:business:fat` 与 API P0、默认 UI P0 并列放入 README 日常三个入口，明确 FAT 配置、实际写入和遗留流水清零范围，并提醒共用账号/产物目录时串行执行。删除重复的别名展示，修正高级命令页导航锚点。保持已有 npm 映射、默认套件和报告路径不变；本轮仅整理入口文档，不提交代码、不重复执行业务。
+
+### 2026-09-08 团队本地运行标准化
+
+开始时 `git status --short` 干净；已阅读 AGENTS、当前交接、业务技能、环境/API/UI 手册及架构/命令说明。本轮不提交、不部署 CI、不建设平台、不执行真实资金业务。
+
+- 新增 `config/environments/fat.env.example`、`uat.env.example` 及个人覆盖模板，与 `.env.example` 共用变量 schema。所有凭据为空，环境地址为待替换示例；默认资金专项开关关闭。账号规则统一为 KYC 每轮独立新号、BASIC 永久未认证、资金号按执行者/环境分配。旧 full/独立 KYC 入口仍由执行者先准备本轮新号，不宣称已自动改造这些入口的新号分配。
+- `qa_core/environment.py` 统一 Python 环境加载，JS 公共 loader 同步个人覆盖；`QA_ENV_LOCAL` 显式指定个人文件，缺失则停止。默认文件优先，`ENV_FILE_PRECEDENCE=shell` 保留父流程覆盖；空值也是覆盖，不展开 shell。原 `.env.fat`、`.env.ui-p0.fat` 等真实配置未修改。
+- `npm run doctor` 默认只做本地检查，复用 API safe/UI preflight；business 增加个人资金、新号密码、素材及视觉依赖检查。`--network` 只有显式开启且本地通过后才做无认证 HTTPS HEAD，不登录、不发短信、不读响应正文、不创建订单。输出变量名/修复提示，不输出凭据。离线检查不能证明账号状态或分配唯一性。
+- 所有既有业务 npm/清理入口通过 `run-local.py` 获取 POSIX 本机协作锁，覆盖清理和整个父子运行；命令名称、业务参数、退出码及默认报告路径保留。`run:local` 可包装直接 CLI/报告重建。同系统用户及临时目录下的多个 checkout 共用锁，内部随机 token 允许嵌套；不提供跨机器锁。未包装直接 CLI、不同系统用户/临时目录不受同一锁保护，SIGKILL 后仍需人工核对残留子进程。
+- 操作权威文档为 [团队本地运行](docs/local-running.md)，README、API/UI/环境手册、命令说明及架构同步；修正 UI 手册残留“尚未实现 KYC UI”的旧描述。
+
+实际本地 doctor：`.env.fat --target api` 因现有配置权限过宽退出 1，提示执行者 `chmod 600`；`.env.ui-p0.fat --target business` 因未配置 `QA_OPERATOR` 退出 1。保留现有文件及权限，没有替用户选定执行者或账号。补齐后按本地手册重跑；失败不代表业务失败，也不能记为 doctor PASS。
+
+验证：`test:ui:business -- --help` 经新 npm 包装器正常透传且未进入业务；新增本地测试覆盖 Python/JS 配置一致性、缺失个人文件、旧默认兼容、锁竞争/嵌套/异常及进程崩溃释放、参数字面值与退出码、doctor 默认离线/显式联网（mock）/失败阻断和不泄露值、模板 schema 与默认写开关。未实际使用 `--network`，未登录、注册、KYC、充值、投注、清流或提现；真实联网与浏览器业务兼容待下一轮单独验收，历史业务结果不变。
+
+最终本地验证：`npm run check` 全部通过（81 份当前文档、235 份归档校验、146 份源码语法、142+16 条单元测试），`git diff --check` 通过。新增 10 条标准化回归均为本地/模拟检查；现有真实配置的两项 doctor 待修复如上，未将其误记为通过。全部改动保留在工作区，未 add/commit。

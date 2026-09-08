@@ -12,7 +12,7 @@ npx playwright install chromium
 npm run check
 ```
 
-`check` 仅执行本地资产、文档、语法和单元测试，不登录业务系统。联网执行前根据 [.env.example](.env.example) 准备被 Git 忽略的 `.env.fat` / `.env.uat`，变量及环境差异见 [环境手册](api/runbooks/ENVIRONMENTS.md)。KYC 图片由本地 `KYC_IMAGE` 指定，不提交证件或二维码。
+`check` 仅执行本地资产、文档、语法和单元测试，不登录业务系统。联网执行前按 [团队本地运行手册](docs/local-running.md) 从统一的 FAT/UAT 模板准备被 Git 忽略的配置；用 `QA_ENV_LOCAL` 叠加个人账号，先运行 `npm run doctor -- --env .env.fat`（默认离线）。变量及环境差异见 [环境手册](api/runbooks/ENVIRONMENTS.md)。KYC 图片由本地 `KYC_IMAGE` 指定，不提交证件或二维码。
 
 ## 日常 P0 测试：三个入口
 
@@ -35,7 +35,7 @@ npm run test:ui:business:fat
 
 默认 UI 是页面回归；KYC 上传与提交、充值下单、真实投注和提现提交由下面的独立 UI 业务入口执行。`npm run test:p0:full` 仍是 API+UI 混合资金链，KYC、充值及提现主要由 API 执行，不能替代 UI 业务验证。默认页面回归配置保持 `EXECUTE_BET`、`EXECUTE_DEPOSIT_CONTRACT`、`EXECUTE_WITHDRAW_UI` 为 `false`。
 
-API P0 与默认 UI P0 使用 `.env.fat`，切换 UAT 时在对应命令前加 `ENV_FILE=.env.uat`。UI 业务全流程固定使用 `.env.ui-p0.fat`，仅支持 FAT。三个入口按测试目的独立选择；共用账号或结果目录时串行执行，后一次 UI 测试会覆盖前一次 UI 产物。
+API P0 与默认 UI P0 使用 `.env.fat`，切换 UAT 时在对应命令前加 `ENV_FILE=.env.uat`。UI 业务全流程固定使用 `.env.ui-p0.fat`，仅支持 FAT。三个入口按测试目的独立选择；npm 入口以本机锁串行保护运行与清理，后一次 UI 测试会覆盖前一次 UI 产物。KYC 每轮新号、BASIC 永久未认证、资金号按执行者分配；本地锁不提供跨机器账号保护，详见 [本地手册](docs/local-running.md)。
 
 ## UI 业务全流程：一条命令
 

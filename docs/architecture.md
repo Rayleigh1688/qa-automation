@@ -8,6 +8,7 @@ CLI 文件保留原路径和命令；共享 Python 能力集中到可直接导�
 
 | 模块 | 职责 | 兼容方式 |
 | --- | --- | --- |
+| `qa_core/environment.py` / `qa_core/local_lock.py` | 个人配置分层及同机协作锁；无业务请求 | npm 由 `run-local.py` 包装，原 CLI 保留；直接 CLI 可显式包装 |
 | `qa_core/codec.py` | 既有 CBOR 编解码与响应 JSON 回退 | smoke runner 继续导出原函数名，受控资金链与 session 工具调用不变 |
 | `qa_core/contracts.py` | 请求时间单位与动态参数解析 | `scripts/api_contracts.py` 保留兼容导出，生成器和 runner 使用新包 |
 

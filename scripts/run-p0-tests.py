@@ -55,15 +55,8 @@ def display_command(command: list[str]) -> str:
 
 
 def load_env(path: Path) -> dict[str, str]:
-    env = os.environ.copy()
-    if not path.is_file():
-        raise SystemExit(f"environment file does not exist: {path}")
-    for raw in path.read_text(encoding="utf-8").splitlines():
-        line = raw.strip()
-        if not line or line.startswith("#") or "=" not in line:
-            continue
-        key, value = line.split("=", 1)
-        env[key.strip()] = value.strip().strip('"').strip("'")
+    from qa_core.environment import load_environment
+    env = load_environment(path)
     env["ENV_FILE_PRECEDENCE"] = "shell"
     return env
 

@@ -290,3 +290,7 @@ python3 scripts/render-p0-smoke-report.py \
 5. 渲染报告。
 6. 如果失败，优先看 `assertion_failures`，再看 `decoded_body`。
 7. 不要自动执行 `manual_review` 或 `review_only` 接口。
+
+## 团队本地运行
+
+FAT/UAT 模板、个人凭据与账号用途、doctor 和本机互斥统一见 [本地手册](../../docs/local-running.md)。KYC 每轮准备独立新号，BASIC 永久未认证，资金号按执行者分配。npm 入口自动持锁；直接调用本手册中的 Python 命令时可在前面加 `npm run run:local --`，保持原参数。

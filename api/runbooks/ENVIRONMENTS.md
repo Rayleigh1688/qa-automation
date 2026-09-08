@@ -1,6 +1,8 @@
 # FAT / UAT 环境差异
 
-本文件是 FAT 与 UAT 执行差异的唯一规则来源。这里只记录非敏感规则和环境变量名；账号、密码、OTP、TOTP seed、token、设备号等真实值只允许存在于忽略的 `.env.fat`、`.env.uat` 或 CI 凭据中。
+本文件是 FAT 与 UAT 执行差异的唯一规则来源。这里只记录非敏感规则和环境变量名；账号、密码、OTP、TOTP seed、token、设备号等真实值只允许存在于忽略的 `.env.fat`、`.env.uat` 、显式个人 `.env.*.local` 或 CI 凭据中。
+
+配置初始化、凭据交付、个人覆盖优先级与 doctor 见 [团队本地运行](../../docs/local-running.md)。[FAT 模板](../../config/environments/fat.env.example) 与 [UAT 模板](../../config/environments/uat.env.example) 共用 schema；示例地址必须本地替换。
 
 ## 环境矩阵
 
@@ -15,7 +17,7 @@
 | TOTP 算法 | 当前配置为 SHA256 | 当前已验证管理账号为 SHA256 |
 | CBOR | 客户端和后台业务接口均按 CBOR 契约执行 | 同样使用 CBOR；部分前端请求虽然 body 为 CBOR，`Content-Type` 实际仍为 `application/json`，runner 按接口契约覆盖 |
 | TLS | 当前本地 runner 默认允许 `--insecure` | 只在确有证书链需要时使用，不能把跳过校验当成业务规则 |
-| 资金账号 | 使用 FAT 专用 `fund_flow_account` | 使用本次自动创建、已 KYC、已充值、已设置钱包密码并绑定 Maya 的账号 |
+| 资金账号 | 按执行者分配专用 `fund_flow_account` | 按执行者分配已 KYC、已设置钱包密码并绑定 Maya 的专用账号 |
 | 永久未 KYC 账号 | `PRE_KYC_CLIENT_PHONE` 永久保持 BASIC | 同样使用独立永久 BASIC 账号，不得提交 KYC 或设置钱包密码 |
 | 游戏 | `Lucky Penny`（`CLIENT_GAME_ID=lucky_penny`） | 固定 `coins_uat`，同一 ID 已恢复并验证进入 BNG `Coins` |
 | 业务单注 | `CLIENT_GAME_BET_AMOUNT=100` | 上限 100；BNG `Coins` 已按 100 完成真实投注 |
@@ -33,9 +35,11 @@
 - 钱包密码：`CLIENT_WALLET_PASSWORD`。
 - 后台登录与审批：`ADMIN_EMAIL`、`ADMIN_PASSWORD`、`ADMIN_LOGIN_TOTP_SECRET`、`ADMIN_APPROVAL_TOTP_SECRET`。
 
-同一环境内登录密码和钱包密码采用统一测试约定，但真实值不得写入本文档或其他受版本控制文件。
+登录密码和钱包密码由团队凭据渠道交付，在执行者本地配置；不要求团队共用密码，真实值不得写入受版本控制文件。
 
 ### 账号 lane 差异
+
+KYC 每轮独立新号，永久 BASIC 保持未认证，资金号按执行者及环境分配。UI 业务使用 `--new-kyc-account`；独立 KYC/旧 full 入口需先准备本轮新号。同轮受限续跑不属于新一轮。本机锁仅协调同机协作命令，跨机器分配由团队管理。
 
 - FAT/UAT 新账号默认从 `9000000001` 开始递增，先通过 `POST /admin/member/list` 精确确认不存在，再由 controlled flow 注册；无需数据库访问。需要切换号码池时再显式设置 `--start-phone`、`REGISTER_PHONE` 或 `PROVISION_PHONE_START`。
 - UAT 资金账号应注册满 7 天、KYC 已通过、无遗留流水；余额可以由主链充值，但必须配置钱包密码和提款账户。

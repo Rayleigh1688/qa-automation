@@ -18,6 +18,8 @@
 
 `test:api`、`test:api:write` 与 `test:p0:api` 调用同一个 API 入口；`test:p0:ui` 是默认 UI 别名。不要把 `test:api` 当成只读命令。
 
+所有业务 npm 与清理入口现由本机锁包装；原业务命令与参数不变，直接 CLI 的保护方式见 [团队本地运行](local-running.md)。`npm run doctor` 默认只做本地准备检查，`--network` 显式开启无认证 HTTPS 探测；`--target business` 增加受控 UI 依赖检查。`QA_ENV_LOCAL` 显式选择个人覆盖文件。
+
 ## 环境和参数
 
 ```bash

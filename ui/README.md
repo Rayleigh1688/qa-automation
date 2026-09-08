@@ -76,7 +76,7 @@ npm run test:ui:business -- --env .env.ui-p0.fat --clear-remaining-turnover --al
 npm run test:ui:business -- --env .env.ui-p0.fat --execute --new-kyc-account --bet-spins 3 --clear-remaining-turnover --allow-existing-turnover --headed
 ```
 
-`--bet-spins` 允许 3–5，默认 3；单注固定 100。`--clear-remaining-turnover` 是必要的独立写开关；`--allow-existing-turnover` 明确把指定资金账号旧流水纳入本次清流，默认不允许。`--new-kyc-account` 复用现有号码分配/注册能力，只准备新号，实际 KYC 仍经 UI 提交；不设置该参数时须提供可提交的独立 KYC 账号。注册属于 API 数据准备，不算 UI 注册通过。`--headed` 仅影响显示方式，CI 可不传。不得对失败运行直接重放充值或审批。
+`--bet-spins` 允许 3–5，默认 3；单注固定 100。`--clear-remaining-turnover` 是必要的独立写开关；`--allow-existing-turnover` 明确把指定资金账号旧流水纳入本次清流，默认不允许。`--new-kyc-account` 复用现有号码分配/注册能力，只准备新号，实际 KYC 仍经 UI 提交；不设置该参数时须提供本轮刚准备的独立 KYC 新号，不复用上一轮账号。注册属于 API 数据准备，不算 UI 注册通过。`--headed` 仅影响显示方式，CI 可不传。不得对失败运行直接重放充值或审批。
 
 Lucky Penny 的启动文字、按钮颜色特征、截图区域及等待参数统一在 `ui/data/client-game-actions.json` 的 `roundState`。普通投注最小点击间隔 2000ms；免费局/忙碌状态每 5000ms 复查、最长 60000ms，超时截图并非零退出。识别包含免费文字、背景、普通按钮特征和转轴稳定性；未知画面一律等待而不盲点。免费局结算后的未知继续弹窗目前也会超时停止，不猜坐标。
 
@@ -177,7 +177,7 @@ python3 scripts/clean-test-artifacts.py ui
 - 测试环境页面加载最多等待 5 秒；超过 5 秒记录为加载过慢 warning，除非登录成功或关键入口存在等硬前置不满足。
 - My 页 `Withdraw` 为提现入口，`Deposit` 为充值入口，`Transaction` 可查看充值、提现和账变记录，`Bet History` 为投注记录入口。
 - 充值页 `Multiple Deposit Bonus` 活动开关默认不参加；参加活动会产生提现流水限制。
-- KYC 最小 UI 提交是待补齐的主流程覆盖：新账号首页KYC引导→二次确认→`/s-kyc-v2`→证件/图片→地址→个人信息→核对提交→`KYC successful`。现有页面/定位资料不等于已实现可执行用例；默认UI和完整组合均不能证明该UI链路通过。扩展证件、OCR/eKYC和驳回重提矩阵归P1。
+- KYC 最小 UI 提交由独立 KYC/业务入口覆盖：新账号首页KYC引导→二次确认→`/s-kyc-v2`→证件/图片→地址→个人信息→核对提交→`KYC successful`。默认页面回归及旧 API/full 组合不能代替独立 KYC UI 执行证据。扩展证件、OCR/eKYC和驳回重提矩阵归P1。
 - KYC 账号分配与验证码规则统一见 [环境手册](../api/runbooks/ENVIRONMENTS.md)。
 
 ## UI 报告的证据层
@@ -209,3 +209,7 @@ python3 scripts/render-ui-business-report.py
 截图元数据位于对应 UI JSON 的 `visualEvidence`：包含 runId、采集时间及 SHA256。报告拒绝跨轮、越界路径、过期和哈希不符的图片。旧版同订单截图仅在时间窗口内作为已有 UI 留证展示，不能升级成新的图片断言。缺失的图片明确注明未采集，不为补图重放业务。
 
 KYC 仅截取配置白名单中的状态文字边界，证件表单、图片和个人资料不截图；找不到安全文字则记录 `NOT_CAPTURED`，不能拿接口状态生成伪造图片。审核页状态文字候选仍需后续真实运行验证。显式 `--kyc-run-id` 除两份 JSON 外，最多保留两张经过 runId/哈希及隐私类型校验的关联状态截图。新一轮清理规则保持不变。
+
+## 团队本地配置与互斥
+
+统一模板、个人凭据覆盖、账号分配和离线 doctor 见 [团队本地运行](../docs/local-running.md)。现有 npm UI 命令在清理前获取本机锁，直接 CLI 需使用 `npm run run:local -- <command>`。KYC 每轮用独立新号，BASIC 永久未认证，资金号按执行者分配；锁不提供跨机器保护。旧默认环境与结果路径保持兼容。
