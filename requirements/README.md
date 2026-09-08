@@ -10,6 +10,7 @@
 
 | Jira 编号 | 需求名称 | 分离文档 |
 | --- | --- | --- |
+| ISOP-2072 | 報表數據更改爲排程計算 | [设计](ISOP-2072/design.md) · [问题](ISOP-2072/questions.md) · [用例](ISOP-2072/test-cases.md) |
 | ISOP-2070 | Funky 時間回傳問題 | [设计](ISOP-2070/design.md) · [问题](ISOP-2070/questions.md) · [用例](ISOP-2070/test-cases.md) |
 | ISOP-2043 | 管理後台 - 新增 JP 資訊 | [设计](ISOP-2043/design.md) · [问题](ISOP-2043/questions.md) · [用例](ISOP-2043/test-cases.md) |
 | ISOP-2041 | JP 注單寫入方式調整 | [设计](ISOP-2041/design.md) · [问题](ISOP-2041/questions.md) · [用例](ISOP-2041/test-cases.md) |
