@@ -1,3 +1,4 @@
+import os
 import signal
 import subprocess
 import sys
@@ -13,6 +14,7 @@ class UiProcessCleanup(unittest.TestCase):
             run_ui_process([sys.executable, '-c', 'raise SystemExit(7)'], check=True)
         self.assertEqual(error.exception.returncode, 7)
 
+    @unittest.skipIf(os.name == 'nt', 'POSIX process group branch')
     def test_interrupt_cleans_only_owned_group_and_restores_handler(self):
         child = Mock(pid=12345)
         child.wait.side_effect = KeyboardInterrupt

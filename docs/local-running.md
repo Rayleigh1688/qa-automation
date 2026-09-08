@@ -2,6 +2,51 @@
 
 本手册负责个人配置、凭据交付、doctor 和本机互斥；业务环境差异见 [环境手册](../api/runbooks/ENVIRONMENTS.md)，执行范围见 [命令说明](commands.md)。本轮不接入 CI 或测试平台。
 
+## Python 虚拟环境与 Windows
+
+每台电脑自行创建 `.venv`（已被 Git 忽略），不要复制其他电脑的环境目录。团队建议统一 Python 3.12；代码要求 Python 3.10+。当前核心 runner 仅使用标准库，没有额外 pip 依赖；Node/Playwright 仍由 `npm ci` 根据 `package-lock.json` 安装，MySQL、ImageMagick、Tesseract 是独立系统工具。
+
+Mac/Linux：
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+npm run check
+```
+
+Windows PowerShell：
+
+```powershell
+py -3.12 -m venv .venv
+.\.venv\Scripts\Activate.ps1
+npm run check
+```
+
+若 PowerShell 策略禁止激活脚本，不必修改系统策略；在当前终端显式选择解释器即可：
+
+```powershell
+$env:QA_PYTHON_EXECUTABLE = (Resolve-Path .\.venv\Scripts\python.exe).Path
+npm run check
+```
+
+Windows cmd 可用 `.venv\Scripts\activate.bat` 激活。npm 启动器依次使用显式 `QA_PYTHON_EXECUTABLE`、已激活的 `VIRTUAL_ENV`，否则探测系统 Python（Windows 为 `py -3` / `python` / `python3`，Mac/Linux 为 `python3` / `python`）。虚拟环境选择失败时停止，不静默切换到系统解释器。Python 子脚本使用 `sys.executable`；Python → Node → Python 通过内部解释器路径沿用同一环境。直接 CLI 应使用虚拟环境中的 `python`。
+
+Windows 配置示例（模板只在文件尚不存在时复制，勿覆盖已有凭据）：
+
+```powershell
+Copy-Item config/environments/fat.env.example .env.fat
+Copy-Item config/environments/personal.env.example .env.alice.fat.local
+$env:QA_ENV_LOCAL = '.env.alice.fat.local'
+$env:ENV_FILE = '.env.fat'
+npm run doctor
+```
+
+其他手册的 `ENV_FILE=... npm run ...` 为 POSIX shell 写法；PowerShell 用 `$env:ENV_FILE = '...'`，cmd 用 `set "ENV_FILE=..."` 后再执行 npm。Windows 不执行 `chmod 600`，请在文件属性 → 安全中核对 ACL；doctor 检查可读性和 Git 跟踪状态，但不自动验证 Windows ACL，也不将 Unix 权限位当作 Windows 权限错误。
+
+npm 的业务命令映射集中在 `config/local-commands.json`，使用参数数组串行执行，保留原命令、开关和报告路径；不依赖 `/bin/sh`、单引号 shell 包装或 cmd 的参数插值。Windows 嵌套 npm 通过 Node 执行 npm CLI，Playwright 通过 Node 执行已安装的本地 CLI，不调用 `.cmd` 或触发 npx 自动下载。旧 `run-local.py --shell` 仅兼容仓库原有的命令及 ` && ` 串联语法，不是通用 shell；带空格路径及任意参数优先使用 `run:local --`。
+
+虚拟环境不替代平台适配：Windows 没有 `fcntl`、`/bin/sh` 或 POSIX 进程组。本次用户 Traceback 确认 `fcntl` 导入阻断入口；原 `stage=clean` 是否另有解释器故障尚未复现。
+
 ## 初始化与个人配置
 
 ```bash
@@ -59,15 +104,15 @@ npm run doctor -- --env .env.fat --network
 
 所有现有业务 `test:*` npm 命令（不含 `test:unit`）、结果清理命令和 `ui:p0-points` 在启动及清理前获取公共锁，整个父子流程结束才释放；原命令名、参数、退出码和结果路径保留。不同终端/checkout/环境也串行，以避免共用账号及结果清理冲突。锁冲突退出码 2，不排队、不清理结果、不进入业务。
 
-实现使用 POSIX `flock`，锁文件位于当前系统用户临时目录的 `qa-automation-<uid>.lock`，0600。嵌套 npm 子流程通过本轮随机内部 token 复用锁；不要复制或手工配置 `QA_LOCAL_LOCK_TOKEN`。锁文件存在不等于占用，内核锁才是依据；不要通过删除文件解锁。Ctrl+C/SIGTERM 会清理包装器创建的子进程组，正常退出或失败释放锁。SIGKILL/系统崩溃无法保证后代清理，须先检查残留测试进程，不能仅凭 doctor 锁可用判断没有浏览器。
+Mac/Linux 使用 POSIX `flock`，锁文件位于当前系统用户临时目录的 `qa-automation-<uid>.lock`，0600。Windows 使用 `msvcrt.locking` 非阻塞字节锁，文件名使用系统登录用户名摘要，元数据与锁字节分开，以允许嵌套流程读取 token；文件权限依赖用户临时目录 ACL。嵌套 npm 子流程通过本轮随机内部 token 复用锁；不要复制或手工配置 `QA_LOCAL_LOCK_TOKEN`。锁文件存在不等于占用，内核锁才是依据；不要通过删除文件解锁。Mac/Linux 在 Ctrl+C/SIGTERM 时清理包装器创建的子进程组，最多等待 3 秒后 SIGKILL。Windows 在命令放行前先把等待进程加入独立的 kill-on-close Job Object，再启动命令及浏览器后代；加入失败则停止，正常结束、失败及可捕获的 Ctrl+C/Ctrl+Break 都终止该 Job 并等待其后代退出后释放锁，不按浏览器名称批量关闭。Windows 清理为强制终止，不能保证中断时业务报告完整写入；系统直接终止进程不等同于可捕获的 POSIX SIGTERM。SIGKILL/系统崩溃无法保证后代清理，须先检查残留测试进程，不能仅凭 doctor 锁可用判断没有浏览器。
 
 这是同机、同系统用户、相同临时目录的协作锁；不同系统用户/自定义临时目录/未包装命令不共享该保护，也不提供跨机器或服务端账号锁。不同机器仍需按执行者分配资金号。
 
 直接调用 Python/Node/Playwright 或重建报告时，用通用包装器主动纳入保护：
 
 ```bash
-npm run run:local -- python3 scripts/run-api-tests.py p0 --env .env.fat --safe-only
-npm run run:local -- python3 scripts/render-ui-business-report.py
+npm run run:local -- python scripts/run-api-tests.py p0 --env .env.fat --safe-only
+npm run run:local -- python scripts/render-ui-business-report.py
 ```
 
 直接运行未包装的底层命令不会自动获取锁；不要与团队 npm 入口并行。`npm run check` / 单元测试保持离线，不占业务长锁；其中锁回归测试会短暂探测本机锁，应在无业务运行时执行。
@@ -77,3 +122,9 @@ npm run run:local -- python3 scripts/render-ui-business-report.py
 doctor、API/UI 主运行入口及独立 KYC 的最终结果保留状态文字，并在支持颜色的交互终端显示：PASS 绿色，失败/阻断红色，跳过黄色，报告/日志路径青色下划线。doctor 的固定边界文字以“说明”开头，不代表失败。UI 业务入口结束时分别显示 HTML 报告和运行日志位置。
 
 重定向到文件、管道、`TERM=dumb` 或设置 `NO_COLOR` 时自动使用纯文本；即使 `NO_COLOR` 为空也关闭颜色。颜色不写入 JSON/HTML 结果，不改变退出码或业务判定。路径是否可点击由终端支持决定。
+
+## Windows 验收边界
+
+当前改造仅在 macOS 做离线检查；Windows 字节锁、Job Object、PowerShell/cmd、Ctrl+C/Ctrl+Break、真实 Playwright 浏览器退出及 Linux 行为未在本轮实机验证。模拟测试不等于 Windows 已通过。Windows 组员应先在本地 `.venv` 运行 `npm run check`（包含隔离临时锁、嵌套、崩溃释放、参数及子进程退出测试），再运行默认离线 doctor；先处理依赖/权限问题，另行授权后才运行联网业务门禁。
+
+可用 `npm run run:local -- python -c "import time; time.sleep(30)"` 做无业务中断实验：另一终端运行同命令应立即 BLOCKED；原终端 Ctrl+C 后应允许再次运行。浏览器清理的 Windows 实机验收需用本地空白页验证正常/失败/中断及后代退出，不需要登录或资金操作。不能以 doctor PASS 声称真实业务或跨平台验收完成。

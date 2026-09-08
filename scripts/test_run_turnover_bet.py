@@ -57,7 +57,7 @@ class TurnoverStopEvidenceTests(unittest.TestCase):
             try:
                 Path('ui/results').mkdir(parents=True)
                 Path('ui/results/client-game-bet-smoke.json').write_text(json.dumps({'completedSpinCount': 18}))
-                with patch.object(MODULE, 'load_env_file'), patch.object(MODULE, 'AdminTurnoverReader') as reader, patch.object(MODULE.subprocess, 'run') as ui, patch.dict(os.environ, {'BET_CLIENT_PHONE': '9000000001', 'BET_CLIENT_PASSWORD': 'test-only'}, clear=True), patch.object(sys, 'argv', ['runner', '--env', 'unused', '--execute', '--turnover-source', 'admin', '--bet-unit', '100', '--max-spins', '20', '--poll-timeout', '0']):
+                with patch.object(MODULE, 'load_env_file'), patch.object(MODULE, 'AdminTurnoverReader') as reader, patch.object(MODULE, 'run_ui_process') as ui, patch.dict(os.environ, {'BET_CLIENT_PHONE': '9000000001', 'BET_CLIENT_PASSWORD': 'test-only'}, clear=True), patch.object(sys, 'argv', ['runner', '--env', 'unused', '--execute', '--turnover-source', 'admin', '--bet-unit', '100', '--max-spins', '20', '--poll-timeout', '0']):
                     reader.return_value.unfinished.side_effect = [Decimal('1800'), Decimal('1300')]
                     with self.assertRaisesRegex(SystemExit, '31 exceed safety cap 20'):
                         MODULE.main()

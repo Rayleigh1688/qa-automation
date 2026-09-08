@@ -14,6 +14,7 @@ import json
 import math
 import os
 import subprocess
+from ui_process import run_ui_process
 import sys
 import time
 from decimal import Decimal
@@ -266,7 +267,7 @@ def main() -> None:
                 "npx", "playwright", "test",
                 "ui/cases/client-game-bet-smoke.spec.mjs", "--workers=1",
             ]
-        subprocess.run(command, env=ui_env, check=True)
+        run_ui_process(command, env=ui_env, check=True)
         game_result = json.loads(Path("ui/results/client-game-bet-smoke.json").read_text(encoding="utf-8"))
         completed_spins = int(game_result.get("completedSpinCount") or 0)
         total_planned += batch_spins

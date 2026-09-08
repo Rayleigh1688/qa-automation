@@ -6,6 +6,8 @@ FILBET 的 Python API 与 Playwright UI 自动化项目。API 验证接口契约
 
 需要 Python 3.10+、Node.js/npm；Node 版本应满足锁定的 Playwright 依赖。Python 核心 runner 使用标准库；FAT 数据库诊断另需本地 MySQL 客户端。
 
+先按 [本地手册的虚拟环境与 Windows 步骤](docs/local-running.md#python-虚拟环境与-windows) 创建并选择本机 `.venv`；不要跨电脑复制虚拟环境。Windows 兼容改造尚待实机验收。
+
 ```bash
 npm ci
 npx playwright install chromium

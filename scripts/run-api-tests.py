@@ -18,6 +18,7 @@ import os
 import re
 import shutil
 import subprocess
+from ui_process import run_ui_process
 import sys
 import uuid
 from datetime import datetime
@@ -110,8 +111,8 @@ def preflight(args: argparse.Namespace, env: dict[str, str]) -> None:
     if args.scope not in {"FAT", "UAT"}:
         errors.append("--scope must be FAT or UAT")
 
-    if not shutil.which("python3"):
-        errors.append("missing executable: python3")
+    if not shutil.which(sys.executable):
+        errors.append("missing current Python executable")
     for path in (
         Path("api/p0/test-cases.csv"),
         Path("scripts/api-smoke-runner.py"),
@@ -129,19 +130,19 @@ def preflight(args: argparse.Namespace, env: dict[str, str]) -> None:
 def run(command: list[str], env: dict[str, str]) -> None:
     print("+ " + display_command(command), flush=True)
     try:
-        subprocess.run(command, env=env, check=True)
+        run_ui_process(command, env=env, check=True)
     except subprocess.CalledProcessError as error:
         raise subprocess.CalledProcessError(error.returncode, display_command(command)) from None
 
 
 def clean_api_results(env: dict[str, str]) -> None:
-    run(["python3", "scripts/clean-test-artifacts.py", "api"], env)
+    run([sys.executable, "scripts/clean-test-artifacts.py", "api"], env)
 
 
 def render_p0_api_report(args: argparse.Namespace, env: dict[str, str]) -> None:
     run(
         [
-            "python3",
+            sys.executable,
             "scripts/render-api-p0-report.py",
             "--scope",
             args.scope,
@@ -277,7 +278,7 @@ def run_p0(args: argparse.Namespace, env: dict[str, str]) -> None:
     args.current_stage = "safe_smoke"
     run(
         [
-            "python3",
+            sys.executable,
             "scripts/api-smoke-runner.py",
             "--cases",
             str(cases),
@@ -299,7 +300,7 @@ def run_p0(args: argparse.Namespace, env: dict[str, str]) -> None:
     args.current_stage = "safe_smoke_report"
     run(
         [
-            "python3",
+            sys.executable,
             "scripts/render-p0-smoke-report.py",
             "--result",
             "api/results/p0-smoke-result.json",
@@ -315,7 +316,7 @@ def run_p0(args: argparse.Namespace, env: dict[str, str]) -> None:
     args.current_stage = "negative"
     run(
         [
-            "python3",
+            sys.executable,
             "scripts/api-p0-negative-runner.py",
             "--env",
             args.env,
@@ -335,7 +336,7 @@ def run_p0(args: argparse.Namespace, env: dict[str, str]) -> None:
         args.current_stage = "controlled_full_flow"
         run(
             [
-                "python3",
+                sys.executable,
                 "scripts/api-controlled-flow-runner.py",
                 "--env",
                 args.env,
@@ -381,7 +382,7 @@ def run_generic_level(level: str, args: argparse.Namespace, env: dict[str, str])
     report = f"api/results/{level}-smoke-report.md"
     run(
         [
-            "python3",
+            sys.executable,
             "scripts/api-smoke-runner.py",
             "--cases",
             str(cases),
@@ -400,7 +401,7 @@ def run_generic_level(level: str, args: argparse.Namespace, env: dict[str, str])
     )
     run(
         [
-            "python3",
+            sys.executable,
             "scripts/render-p0-smoke-report.py",
             "--result",
             output,

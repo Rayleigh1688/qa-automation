@@ -27,7 +27,7 @@ class CommandRedactionTests(unittest.TestCase):
     def test_called_process_error_contains_only_redacted_command(self):
         command = ["tool", "--client-phone", "sensitive-phone", "--approval-code", "sensitive-code"]
         original = subprocess.CalledProcessError(7, command)
-        with patch.object(MODULE.subprocess, "run", side_effect=original):
+        with patch.object(MODULE, "run_ui_process", side_effect=original):
             with self.assertRaises(subprocess.CalledProcessError) as caught:
                 MODULE.run(command, {})
         rendered = str(caught.exception)

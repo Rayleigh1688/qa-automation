@@ -42,7 +42,7 @@ try {
     EXECUTE_BET: 'false', EXECUTE_DEPOSIT_CONTRACT: 'false', EXECUTE_WITHDRAW_UI: 'false',
   };
   result.stage = 'kyc_ui';
-  const child = spawnSync('npx', ['playwright', 'test', 'ui/cases/client-kyc-submit.spec.mjs', '--workers=1', '--retries=0'], { env, stdio: 'inherit' });
+  const child = spawnSync(process.execPath, ['node_modules/playwright/cli.js', 'test', 'ui/cases/client-kyc-submit.spec.mjs', '--workers=1', '--retries=0'], { env, stdio: 'inherit' });
   if (child.error || child.status !== 0) throw new Error('KYC UI failed; inspect current Playwright and KYC evidence');
   const submission = JSON.parse(fs.readFileSync('ui/results/client-kyc-submit.json', 'utf8'));
   if (submission.runId !== result.runId || submission.status !== (approve || resume ? 'APPROVED' : 'SUBMITTED_PENDING') || !submission.uiSubmitted) throw new Error('Missing this-run KYC UI submission evidence');

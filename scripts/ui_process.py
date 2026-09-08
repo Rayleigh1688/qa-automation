@@ -3,12 +3,22 @@ import os
 import signal
 import subprocess
 import time
+from qa_core.process_command import process_command, process_environment
 
 
 def run_ui_process(command, **kwargs):
     check = kwargs.pop('check', False)
+    command = process_command(command)
+    kwargs['env'] = process_environment(kwargs.get('env'))
+    if os.name == 'nt':
+        from qa_core.windows_job import run_windows_process
+        result = run_windows_process(command, **kwargs)
+        if check and result.returncode:
+            raise subprocess.CalledProcessError(result.returncode, command)
+        return result
     # A fresh session keeps cleanup away from the terminal and other test runs.
     with subprocess.Popen(command, start_new_session=True, **kwargs) as child:
+        previous_int = signal.getsignal(signal.SIGINT)
         previous = signal.getsignal(signal.SIGTERM)
         def interrupted(signum, frame):
             raise KeyboardInterrupt('UI stage terminated')
@@ -16,6 +26,9 @@ def run_ui_process(command, **kwargs):
         try:
             code = child.wait()
         finally:
+            # A second console interrupt must not abandon descendant cleanup.
+            signal.signal(signal.SIGINT, signal.SIG_IGN)
+            signal.signal(signal.SIGTERM, signal.SIG_IGN)
             try:
                 os.killpg(child.pid, signal.SIGTERM)
                 deadline = time.monotonic() + 3
@@ -31,6 +44,7 @@ def run_ui_process(command, **kwargs):
             except ProcessLookupError:
                 pass
             finally:
+                signal.signal(signal.SIGINT, previous_int)
                 signal.signal(signal.SIGTERM, previous)
         if check and code:
             raise subprocess.CalledProcessError(code, command)

@@ -2,13 +2,14 @@
 
 ## 执行依赖
 
-`package.json` → `scripts/run-*.py` → API runner / Playwright → 原始结果 → 报告渲染器。
+`package.json` → `python-launcher.mjs` → `run-local.py` / `config/local-commands.json` → `scripts/run-*.py` → API runner / Playwright → 原始结果 → 报告渲染器。
 
 CLI 文件保留原路径和命令；共享 Python 能力集中到可直接导入的 `scripts/qa_core/` 包：
 
 | 模块 | 职责 | 兼容方式 |
 | --- | --- | --- |
 | `qa_core/environment.py` / `qa_core/local_lock.py` | 个人配置分层及同机协作锁；无业务请求 | npm 由 `run-local.py` 包装，原 CLI 保留；直接 CLI 可显式包装 |
+| `qa_core/process_command.py` / `qa_core/windows_job.py` / `ui_process.py` | 解释器传递、无 shell 的 npm/Playwright 启动、平台进程清理 | POSIX 进程组与 Windows Job 分支；操作及未验证边界见本地手册 |
 | `qa_core/codec.py` | 既有 CBOR 编解码与响应 JSON 回退 | smoke runner 继续导出原函数名，受控资金链与 session 工具调用不变 |
 | `qa_core/contracts.py` | 请求时间单位与动态参数解析 | `scripts/api_contracts.py` 保留兼容导出，生成器和 runner 使用新包 |
 

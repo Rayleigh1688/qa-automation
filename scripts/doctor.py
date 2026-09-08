@@ -70,7 +70,7 @@ def check(args):
         if not file:
             continue
         path = Path(file)
-        require(not path.stat().st_mode & 0o077, '配置权限过宽：对环境文件及个人文件执行 chmod 600。')
+        require(os.name == 'nt' or not path.stat().st_mode & 0o077, '配置权限过宽：对环境文件及个人文件执行 chmod 600。')
         tracked = subprocess.run(['git', 'ls-files', '--error-unmatch', '--', str(path.resolve())], capture_output=True).returncode == 0
         require(not tracked, '凭据配置已受版本控制：改用被 Git 忽略的 .env 文件，勿将真实凭据填入模板。')
     env = {key: '' if placeholder(value) else value for key, value in env.items()}
@@ -146,6 +146,8 @@ def main():
         failures = check(args)
     except (OSError, ValueError, LocalRunBusy):
         failures = ['本地配置或锁检查失败：检查文件权限、URL 格式和运行中任务；未输出原始异常。']
+    if os.name == 'nt':
+        print('说明：Windows 文件 ACL 未自动验证，请在文件属性的安全页核对环境文件访问权限。')
     for message in failures:
         print_result('FAIL: ' + message, 'FAIL')
     print_result('doctor ' + ('FAIL' if failures else 'PASS') + (' · 显式 HTTPS 探测' if args.network and not failures else ' · 本地检查'), 'FAIL' if failures else 'PASS')

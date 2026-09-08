@@ -1,3 +1,4 @@
+import { pythonExecutable } from '../../scripts/python-runtime.mjs';
 import fs from "node:fs";
 import path from "node:path";
 import { execFileSync } from "node:child_process";
@@ -13,7 +14,7 @@ const resolvedOtpCodes = new Map();
 function resolveAdminSmsOtp(otpId) {
   if (resolvedOtpCodes.has(otpId)) return resolvedOtpCodes.get(otpId);
   const code = execFileSync(
-    "python3",
+    pythonExecutable(),
     ["scripts/admin-sms-otp.py", "--env", process.env.ENV_FILE || ".env.fat", "--otp-id", otpId],
     {
       cwd: process.cwd(),

@@ -16,6 +16,7 @@ import os
 import re
 import shutil
 import subprocess
+from ui_process import run_ui_process
 import sys
 from datetime import datetime
 from decimal import Decimal, InvalidOperation
@@ -66,7 +67,7 @@ def load_env(path: Path) -> dict[str, str]:
 def run(command: list[str], env: dict[str, str]) -> None:
     print("+ " + display_command(command), flush=True)
     try:
-        subprocess.run(command, env=env, check=True)
+        run_ui_process(command, env=env, check=True)
     except subprocess.CalledProcessError as error:
         raise subprocess.CalledProcessError(error.returncode, display_command(command)) from None
 
@@ -242,7 +243,7 @@ def preflight_full(args: argparse.Namespace, env: dict[str, str]) -> None:
     kyc_image = Path(env.get("KYC_IMAGE", "21000000008072.webp"))
     if not kyc_image.is_file():
         errors.append(f"KYC_IMAGE does not exist: {kyc_image}")
-    for executable in ("python3", "npm", "npx"):
+    for executable in (sys.executable, "node", "npm"):
         if not shutil.which(executable):
             errors.append(f"missing executable: {executable}")
     for path in (
@@ -266,7 +267,7 @@ def preflight_full(args: argparse.Namespace, env: dict[str, str]) -> None:
 
 def run_default_ui(env: dict[str, str], *, clean: bool = True, headed: bool = False) -> None:
     command = [
-        "python3", "scripts/run-ui-p0-tests.py",
+        sys.executable, "scripts/run-ui-p0-tests.py",
         "--env", env.get("ENV_FILE", ".env.fat"),
         *([] if clean else ["--no-clean"]),
         *(["--headed"] if headed else []),
@@ -305,7 +306,7 @@ def main() -> int:
 
         if args.mode == "quick":
             stage = "api_gate"
-            run(["python3", "scripts/run-api-tests.py", "p0", "--env", args.env, "--scope", args.scope, "--safe-only", "--no-clean"], env)
+            run([sys.executable, "scripts/run-api-tests.py", "p0", "--env", args.env, "--scope", args.scope, "--safe-only", "--no-clean"], env)
             stage = "default_ui"
             run_default_ui(env, headed=args.headed)
             return 0
@@ -331,7 +332,7 @@ def main() -> int:
         if normalize_phone(pre_kyc_phone) == normalize_phone(kyc_phone):
             raise SystemExit("PRE_KYC_CLIENT_PHONE must be permanently separate from KYC_CLIENT_PHONE")
         stage = "clean"
-        run(["python3", "scripts/clean-test-artifacts.py", "all"], env)
+        run([sys.executable, "scripts/clean-test-artifacts.py", "all"], env)
         completed_stages.append(stage)
         stage = "pre_kyc_withdraw_ui"
         pre_kyc_env = {
@@ -356,7 +357,7 @@ def main() -> int:
         }
         stage = "kyc"
         run([
-            "python3", "scripts/api-controlled-flow-runner.py",
+            sys.executable, "scripts/api-controlled-flow-runner.py",
             "--env", args.env,
             "--complete-kyc",
             "--client-phone", kyc_phone,
@@ -369,7 +370,7 @@ def main() -> int:
         completed_stages.append(stage)
         stage = "api_gate"
         run([
-            "python3", "scripts/run-api-tests.py", "p0",
+            sys.executable, "scripts/run-api-tests.py", "p0",
             "--env", args.env,
             "--scope", args.scope,
             "--write-client-phone", write_phone,
@@ -387,7 +388,7 @@ def main() -> int:
             "CLIENT_AUTH_MODE": env.get("CLIENT_AUTH_MODE", "password"),
         }
         deposit_command = [
-            "python3", "scripts/api-controlled-flow-runner.py",
+            sys.executable, "scripts/api-controlled-flow-runner.py",
             "--env", args.env,
             "--deposit",
             "--approve-deposit",
@@ -407,7 +408,7 @@ def main() -> int:
         run_default_ui(fund_env, clean=False, headed=args.headed)
         completed_stages.append(stage)
         turnover_env = {**fund_env, "PRESERVE_UI_RESULTS": "true"}
-        turnover_command = ["python3", "scripts/run-turnover-bet.py", "--env", args.env, "--execute"]
+        turnover_command = [sys.executable, "scripts/run-turnover-bet.py", "--env", args.env, "--execute"]
         if args.bet_spins:
             turnover_command.extend(["--spin-count", str(args.bet_spins)])
         if args.clear_remaining_turnover:
@@ -418,7 +419,7 @@ def main() -> int:
         if args.clear_remaining_turnover:
             stage = "turnover_clear"
             run([
-                "python3", "scripts/api-controlled-flow-runner.py",
+                sys.executable, "scripts/api-controlled-flow-runner.py",
                 "--env", args.env,
                 "--clear-turnover",
                 "--client-phone", write_phone,
@@ -429,7 +430,7 @@ def main() -> int:
             completed_stages.append(stage)
         stage = "withdraw"
         run([
-            "python3", "scripts/api-controlled-flow-runner.py",
+            sys.executable, "scripts/api-controlled-flow-runner.py",
             "--env", args.env,
             "--withdraw",
             "--check-admin-withdraw-list",
@@ -441,7 +442,7 @@ def main() -> int:
         ], fund_env)
         completed_stages.append(stage)
         stage = "reconcile"
-        run(["python3", "scripts/reconcile-p0-flow.py"], fund_env)
+        run([sys.executable, "scripts/reconcile-p0-flow.py"], fund_env)
         completed_stages.append(stage)
         write_full_run_status(
             args, status="PASS", stage="complete", started_at=started_at,
@@ -449,7 +450,7 @@ def main() -> int:
         )
         stage = "report"
         run([
-            "python3", "scripts/render-main-flow-report.py",
+            sys.executable, "scripts/render-main-flow-report.py",
             "--scope", args.scope,
             "--run-status", str(FULL_STATUS_PATH),
             "--out", "api/results/p0-main-flow-report.md",

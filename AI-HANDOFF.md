@@ -272,3 +272,17 @@ README 补充 `test:ui:business` 单命令、FAT 配置与视觉依赖、独立 
 保留此前交接修改。新增公共 Python/JS 终端样式模块，doctor、API/default UI/full/UI business 及独立 KYC 结果按状态着色；本地锁阻断为红色，报告/日志路径为青色下划线。UI business 最终输出分别列出结果、HTML 和运行日志，doctor 固定说明添加“说明”前缀。TTY 自动启用，NO_COLOR、TERM=dumb、文件/管道关闭，不改变业务状态或产物内容。
 
 本地 `npm run check` 全部通过（148 份源码、142+16 条测试）；另以内存终端核对 Python/JS ANSI 样式和关闭条件，实际离线 doctor PASS。未运行联网业务、未重建现有业务报告或提交代码。
+
+### 2026-09-08 Windows 兼容与本机虚拟环境
+
+本轮开始 `git status --short` 干净；中途用户暂停讨论 `.venv` 后明确继续，保留本轮已写入修改。用户原反馈 `test:p0:api` 停在 `stage=clean`，随后提供的 Traceback 明确为 `run-local.py` 导入 `local_lock.py` 时 `ModuleNotFoundError: No module named 'fcntl'`。已确认的是入口平台导入阻断；不能据此把原 clean 阶段的 `python3` 启动失败认定为已复现根因。
+
+- Python 编排子脚本统一 `sys.executable`；Node 公共解释器选择支持显式路径、已激活 `.venv` 和系统 Python，Python → Node → Python 沿用当前解释器。创建了本机被忽略的 `.venv`，核心 runner 仅依赖标准库，未安装或下载额外包。
+- npm 命令改由 Node 启动 Python，业务参数数组集中到 `config/local-commands.json`，移除 `/bin/sh` 及单引号 shell 依赖。逐项对照 HEAD，原 npm 命令名和全部业务参数映射一致；默认配置及报告路径未改。Windows 嵌套 npm 走 Node/npm CLI，Playwright 走本地 Node CLI，不依赖 `.cmd` 启动或 npx 下载。旧 `--shell` 仅保留仓库 recipe 语法兼容。
+- 本地锁分平台加载：POSIX 保留 flock/0600，Windows 使用 msvcrt 非阻塞单字节锁；token 元数据避开锁定字节，支持同机同系统用户同临时目录多 checkout 互斥和父子复用。Windows 不使用 pass_fds，父包装器持锁到 Job 清理结束；不承诺跨机器保护。
+- `ui_process.py` 保留 POSIX 独立进程组与 3 秒终止策略，清理期间忽略重复中断；Windows 以等待门确保命令运行前加入 kill-on-close Job，结束/失败/可捕获中断均终止并等待该 Job 后代退出。分配失败不放行业务命令。Windows 为强制清理，不保证中断时报告完整落盘；Job 清理异常、系统崩溃或外部强杀仍须核查残留，不能以锁可用代替进程检查。
+- README、UI 手册、架构及 [团队本地运行](docs/local-running.md) 同步虚拟环境、PowerShell/cmd 配置、ACL 和平台验收边界。Windows doctor 不再误用 Unix 权限位，但明确提示 ACL 未自动验证。
+
+实际本地验证（macOS、Python 3.12 `.venv`）：`npm run check` 全部通过，81 份文档、235 份归档校验、153 份源码语法、150+16 条单元测试；新增 8 条离线兼容测试覆盖参数字面值/空格路径、venv 选择、Windows npm 映射、字节锁元数据模拟、Job 分配失败/中断/退出模拟、实际后代停止和串行失败短路。原本地锁竞争/嵌套/进程崩溃释放回归继续通过。默认离线 doctor PASS，`test:ui:business -- --help` 透传通过，`git diff --check` 通过。
+
+Windows 内核锁、真实 Job Object、PowerShell/cmd、Ctrl+C/Ctrl+Break 和真实 Playwright 浏览器清理均尚未实机验证；本轮没有 Linux 实机或真实业务回归。下一步由 Windows 组员先运行离线 check/doctor 和本地中断实验，记录原始失败信息；联网/资金验收须另行授权。本轮未联网、未登录、未执行 KYC/充值/投注/清流/提现、未重建业务报告、未修改真实环境文件、未 add/commit。历史联网 PASS 不能替代本次平台验收。

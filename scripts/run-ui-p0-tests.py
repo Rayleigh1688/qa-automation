@@ -12,6 +12,7 @@ import os
 import re
 import shutil
 import subprocess
+from ui_process import run_ui_process
 import sys
 from datetime import datetime
 from pathlib import Path
@@ -32,7 +33,7 @@ SENSITIVE_MARKERS = ("PASSWORD", "SECRET", "TOKEN", "OTP", "CODE", "PHONE", "EMA
 def run(command: list[str], env: dict[str, str]) -> int:
     print("+ " + " ".join(command), flush=True)
     try:
-        return subprocess.run(command, env=env, check=False).returncode
+        return run_ui_process(command, env=env, check=False).returncode
     except OSError as error:
         print(f"command unavailable: {error}", flush=True)
         return 127
@@ -100,12 +101,12 @@ def preflight(args: argparse.Namespace, env: dict[str, str]) -> None:
         errors.append("UAT scope cannot use a FAT CLIENT_BASE_URL")
     if args.scope not in {"FAT", "UAT"}:
         errors.append("--scope must be FAT or UAT")
-    if not shutil.which("npx"):
-        errors.append("missing executable: npx")
+    if not shutil.which("node"):
+        errors.append("missing executable: node")
     for path in (
         *(Path(spec) for spec in DEFAULT_SPECS),
         Path("playwright.config.mjs"),
-        Path("node_modules/.bin/playwright"),
+        Path("node_modules/playwright/cli.js"),
         Path("ui/setup/client-p0-auth.setup.mjs"),
         Path("ui/data/client-p0-default-suite.json"),
         Path("scripts/clean-test-artifacts.py"),
@@ -204,7 +205,7 @@ def main() -> int:
     try:
         if not args.no_clean:
             stage = "clean"
-            clean_code = run(["python3", "scripts/clean-test-artifacts.py", "ui"], env)
+            clean_code = run([sys.executable, "scripts/clean-test-artifacts.py", "ui"], env)
             if clean_code:
                 raise RuntimeError(f"artifact cleanup failed with exit code {clean_code}")
         stage = "environment"
@@ -251,7 +252,7 @@ def main() -> int:
     html_report = Path("ui/reports/p0-ui-report.html")
     try:
         report_code = run([
-            "python3", "scripts/render-ui-p0-report.py", "--scope", args.scope,
+            sys.executable, "scripts/render-ui-p0-report.py", "--scope", args.scope,
             "--run-status", str(status.get("status") or "FAILED"),
             "--run-status-file", "ui/results/p0-ui-run-status.json",
             "--html-out", str(html_report),
