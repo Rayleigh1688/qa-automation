@@ -20,13 +20,13 @@ from ui_process import run_ui_process
 
 
 def read(path):
-    return json.loads(Path(path).read_text())
+    return json.loads(Path(path).read_text(encoding="utf-8"))
 
 
 def write(path, value):
     target = Path(path)
     target.parent.mkdir(parents=True, exist_ok=True)
-    target.write_text(json.dumps(value, ensure_ascii=False, indent=2))
+    target.write_text(json.dumps(value, ensure_ascii=False, indent=2), encoding="utf-8")
     target.chmod(0o600)
 
 

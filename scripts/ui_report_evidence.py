@@ -132,7 +132,7 @@ def build_evidence(source, status, items, input_path, output):
     # Export only the exact allowlisted model; never include auth/session, raw bodies, query strings or DOM text.
     artifact = output.with_name('p0-ui-evidence.json')
     artifact.parent.mkdir(parents=True, exist_ok=True)
-    artifact.write_text(json.dumps(evidence, ensure_ascii=False, indent=2) + '\n')
+    artifact.write_text(json.dumps(evidence, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
     evidence['artifacts'].append({'label': 'UI 证据摘要 JSON', 'href': relative_link(artifact, output),
                                   'detail': '本轮白名单字段摘要，不含 token、响应正文或页面原文'})
     return evidence
@@ -155,5 +155,5 @@ def append_markdown(output, evidence):
         lines.append(f"\n![{item['title']}]({item['src']})\n\n{item['caption']}")
     for item in evidence['artifacts']:
         lines.append(f"\n[{item['label']}]({item['href']})")
-    with output.open('a') as handle:
+    with output.open('a', encoding='utf-8') as handle:
         handle.write('\n'.join(lines) + '\n')
