@@ -299,7 +299,7 @@ def restore_client(
 
 def apply_primary_client_override(args: argparse.Namespace) -> None:
     if args.use_register_phone:
-        phone = load_phone_cursor(phone_cursor_path(args.env))
+        phone = os.environ.get("REGISTER_PHONE", "") or load_phone_cursor(phone_cursor_path(args.env))
         password = os.environ.get("REGISTER_PASSWORD", "")
         if not phone or not password:
             raise SystemExit("register phone cursor and REGISTER_PASSWORD are required")
