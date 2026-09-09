@@ -1,3 +1,4 @@
+from support import ROOT, SCRIPTS
 import importlib.util
 import json
 import tempfile
@@ -5,11 +6,11 @@ import unittest
 from pathlib import Path
 from unittest.mock import patch
 
-from p0_report_template import format_east8_time, format_execution_duration, write_html_report
+from filbet.reporting import format_east8_time, format_execution_duration, write_html_report
 
 
 def load_script(name: str):
-    path = Path(__file__).with_name(name)
+    path = (SCRIPTS / name)
     spec = importlib.util.spec_from_file_location(name.replace("-", "_"), path)
     module = importlib.util.module_from_spec(spec)
     assert spec.loader

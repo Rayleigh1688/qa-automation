@@ -1,3 +1,4 @@
+from support import ROOT, SCRIPTS
 import importlib.util
 import os
 import json
@@ -9,7 +10,7 @@ from pathlib import Path
 from unittest.mock import patch
 
 
-MODULE_PATH = Path(__file__).with_name("run-turnover-bet.py")
+MODULE_PATH = (SCRIPTS / "run-turnover-bet.py")
 SPEC = importlib.util.spec_from_file_location("run_turnover_bet", MODULE_PATH)
 MODULE = importlib.util.module_from_spec(SPEC)
 assert SPEC.loader

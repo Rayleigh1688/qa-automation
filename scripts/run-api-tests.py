@@ -18,7 +18,7 @@ import os
 import re
 import shutil
 import subprocess
-from ui_process import run_ui_process
+from qa_core.process import run_ui_process
 import sys
 import uuid
 from datetime import datetime

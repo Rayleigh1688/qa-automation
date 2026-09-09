@@ -1,3 +1,4 @@
+from support import ROOT, SCRIPTS
 """Wire fixtures and legacy entry compatibility for the infrastructure migration."""
 import importlib.util
 import unittest
@@ -45,7 +46,7 @@ class CodecWireTests(unittest.TestCase):
 
 class LegacyImportsTests(unittest.TestCase):
     def test_smoke_runner_reexports_codec_for_existing_consumers(self):
-        path = Path(__file__).with_name('api-smoke-runner.py')
+        path = (SCRIPTS / 'api-smoke-runner.py')
         spec = importlib.util.spec_from_file_location('legacy_smoke_codec_test', path)
         smoke = importlib.util.module_from_spec(spec)
         spec.loader.exec_module(smoke)

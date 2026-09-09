@@ -100,5 +100,5 @@ python3 tools/provisioning/member-bootstrap.py \
 纯工具逻辑测试不访问环境：
 
 ```bash
-python3 -m unittest tools/provisioning/test_member_bootstrap.py
+npm run test:unit
 ```

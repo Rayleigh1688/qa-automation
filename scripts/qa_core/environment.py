@@ -20,7 +20,7 @@ def load_environment(path, *, environ=None, required=True):
     if Path(path).is_file():
         values.update(read_values(path))
     elif required:
-        raise SystemExit('Environment file missing; copy config/environments/fat.env.example or uat.env.example to an ignored .env file.')
+        raise SystemExit('Environment file missing; create the selected local file from your project environment template.')
     personal = shell.get('QA_ENV_LOCAL')
     if personal:
         if not Path(personal).is_file():

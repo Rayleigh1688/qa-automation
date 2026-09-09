@@ -9,12 +9,11 @@ updates wallet, turnover, or member state directly.
 from __future__ import annotations
 
 import argparse
-import importlib.util
 import json
 import math
 import os
 import subprocess
-from ui_process import run_ui_process
+from qa_core.process import run_ui_process
 import sys
 import time
 from decimal import Decimal
@@ -93,15 +92,8 @@ def remaining_turnover(rows: object) -> Decimal:
 
 
 def import_smoke_runner():
-    scripts_dir = Path(__file__).resolve().parent
-    sys.path.insert(0, str(scripts_dir))
-    module_path = scripts_dir / "api-smoke-runner.py"
-    spec = importlib.util.spec_from_file_location("p0_api_smoke_runner", module_path)
-    if not spec or not spec.loader:
-        raise RuntimeError(f"cannot import {module_path}")
-    module = importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(module)
-    return module
+    from filbet import smoke
+    return smoke
 
 
 class AdminTurnoverReader:

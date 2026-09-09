@@ -9,7 +9,7 @@ import json
 from pathlib import Path
 from urllib.parse import urlsplit
 
-from p0_report_template import (
+from filbet.reporting import (
     format_execution_duration,
     report_verdict,
     write_html_report,

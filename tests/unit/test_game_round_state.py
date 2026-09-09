@@ -1,3 +1,4 @@
+from support import ROOT, SCRIPTS
 import subprocess
 import unittest
 

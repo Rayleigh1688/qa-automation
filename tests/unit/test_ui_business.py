@@ -1,3 +1,4 @@
+from support import ROOT, SCRIPTS
 """Offline business response and lane guards; no browser or environment secrets."""
 import subprocess
 import unittest
@@ -34,5 +35,5 @@ for (const key of ['PRE_KYC_CLIENT_PHONE','WRITE_CLIENT_PHONE']) {
 assert.throws(() => validateKycEnvironment({...env, API_URL:'https://client-uat.filbet2025.com'}), /FAT/);
 assert.throws(() => validateKycEnvironment({...env, ADMIN_URL:'https://admin-fat.filbet2025.com.evil.test'}), /FAT/);
 assert.throws(() => validateKycEnvironment(env,{approve:true}), /TOTP/);
-'''], cwd=Path(__file__).resolve().parents[1], capture_output=True, text=True)
+'''], cwd=ROOT, capture_output=True, text=True)
         self.assertEqual(result.returncode, 0, result.stderr)

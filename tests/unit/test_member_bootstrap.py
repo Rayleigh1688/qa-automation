@@ -1,4 +1,6 @@
 from __future__ import annotations
+from support import ROOT, SCRIPTS
+
 
 import argparse
 import importlib.util
@@ -9,7 +11,7 @@ from pathlib import Path
 from unittest.mock import patch
 
 
-MODULE_PATH = Path(__file__).with_name("member-bootstrap.py")
+MODULE_PATH = (ROOT / "tools/provisioning/member-bootstrap.py")
 SPEC = importlib.util.spec_from_file_location("member_bootstrap", MODULE_PATH)
 assert SPEC and SPEC.loader
 bootstrap = importlib.util.module_from_spec(SPEC)

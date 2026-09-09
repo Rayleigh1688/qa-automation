@@ -4,7 +4,6 @@
 from __future__ import annotations
 
 import argparse
-import importlib.util
 import json
 import os
 import sys
@@ -17,13 +16,8 @@ sys.path.insert(0, str(ROOT / "scripts"))
 
 
 def load_smoke_module():
-    path = ROOT / "scripts/api-smoke-runner.py"
-    spec = importlib.util.spec_from_file_location("api_smoke_runner_for_sms_otp", path)
-    if spec is None or spec.loader is None:
-        raise SystemExit("cannot load API smoke runner")
-    module = importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(module)
-    return module
+    from filbet import smoke
+    return smoke
 
 
 def main() -> None:

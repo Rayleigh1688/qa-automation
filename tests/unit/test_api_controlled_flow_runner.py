@@ -1,3 +1,6 @@
+from support import ROOT, SCRIPTS
+from decimal import Decimal
+import time
 import argparse
 import importlib.util
 import os
@@ -7,12 +10,8 @@ from pathlib import Path
 from unittest.mock import patch
 
 
-MODULE_PATH = Path(__file__).with_name("api-controlled-flow-runner.py")
-SPEC = importlib.util.spec_from_file_location("api_controlled_flow_runner", MODULE_PATH)
-MODULE = importlib.util.module_from_spec(SPEC)
-assert SPEC.loader
-SPEC.loader.exec_module(MODULE)
-
+from filbet.controlled import ControlledFlow
+MODULE = ControlledFlow()
 
 def deposit_args(amount: str = "1200", pid: str = "") -> argparse.Namespace:
     return argparse.Namespace(
@@ -176,7 +175,7 @@ class IndependentOperationTests(unittest.TestCase):
                 clear=True,
             ),
             patch.object(MODULE, "current_totp", return_value="123456") as totp,
-            patch.object(MODULE.time, "time", return_value=10),
+            patch.object(time, "time", return_value=10),
         ):
             self.assertEqual(MODULE.approval_code(args), "123456")
         totp.assert_called_once_with("secret", algorithm="SHA256")
@@ -191,8 +190,8 @@ class IndependentOperationTests(unittest.TestCase):
                 clear=True,
             ),
             patch.object(MODULE, "current_totp", side_effect=["123456", "654321"]),
-            patch.object(MODULE.time, "time", side_effect=[10, 10]),
-            patch.object(MODULE.time, "sleep") as sleep,
+            patch.object(time, "time", side_effect=[10, 10]),
+            patch.object(time, "sleep") as sleep,
         ):
             self.assertEqual(MODULE.approval_code(args), "654321")
         sleep.assert_called_once_with(21)
@@ -254,7 +253,7 @@ class IndependentOperationTests(unittest.TestCase):
             "id": "withdraw-1",
             "amount": "100.00000000",
             "payment_platform_id": "maya-pid",
-            "created_at": int(MODULE.time.time() * 1000),
+            "created_at": int(time.time() * 1000),
             "status": "paying",
         }
         records = []
@@ -556,9 +555,9 @@ class IndependentOperationTests(unittest.TestCase):
             turnover_clear_interval=0,
         )
         responses = [
-            ({"name": "turnover_before_clear", "business_status": True}, MODULE.Decimal("1800")),
-            ({"name": "turnover_after_clear", "business_status": True}, MODULE.Decimal("1800")),
-            ({"name": "turnover_after_clear", "business_status": True}, MODULE.Decimal("0")),
+            ({"name": "turnover_before_clear", "business_status": True}, Decimal("1800")),
+            ({"name": "turnover_after_clear", "business_status": True}, Decimal("1800")),
+            ({"name": "turnover_after_clear", "business_status": True}, Decimal("0")),
         ]
         clear_result = {"status": 200, "decoded_body": {"status": True, "data": {"affected": 1}}}
         with (
@@ -583,16 +582,16 @@ class IndependentOperationTests(unittest.TestCase):
             turnover_clear_interval=0,
         )
         responses = [
-            ({"name": "turnover_before_clear", "business_status": True, "row_count": 0}, MODULE.Decimal("0")),
-            ({"name": "turnover_before_clear", "business_status": True, "row_count": 1}, MODULE.Decimal("1800")),
-            ({"name": "turnover_after_clear", "business_status": True, "row_count": 1}, MODULE.Decimal("0")),
+            ({"name": "turnover_before_clear", "business_status": True, "row_count": 0}, Decimal("0")),
+            ({"name": "turnover_before_clear", "business_status": True, "row_count": 1}, Decimal("1800")),
+            ({"name": "turnover_after_clear", "business_status": True, "row_count": 1}, Decimal("0")),
         ]
         clear_result = {"status": 200, "decoded_body": {"status": True, "data": {"affected": 1}}}
         with (
             patch.object(MODULE, "query_admin_turnover", side_effect=responses) as query,
             patch.object(MODULE.smoke, "request_once", return_value=clear_result),
         ):
-            records = MODULE.run_turnover_clear(args, "uid-1", MODULE.Decimal("1800"))
+            records = MODULE.run_turnover_clear(args, "uid-1", Decimal("1800"))
         self.assertEqual(query.call_count, 3)
         self.assertEqual(records[0]["row_count"], 1)
         self.assertTrue(records[-1]["business_status"])
@@ -712,3 +711,35 @@ class TurnoverMalformedPage(unittest.TestCase):
             record, _ = MODULE.query_admin_turnover(deposit_args(), 'fund', 'test')
         self.assertFalse(record['business_status'])
         self.assertIn('non-object', record['reason'])
+
+
+class TurnoverNullEmpty(unittest.TestCase):
+    def test_confirmed_null_empty_is_complete_but_inconsistent_null_is_rejected(self):
+        for data, accepted in [({'d': None, 't': 0, 's': 0}, True),
+                               ({'d': None, 't': 1, 's': 0}, False),
+                               ({'d': None, 't': 0, 's': 1}, False),
+                               ({'d': None, 't': False, 's': 0}, False),
+                               ({'t': 0, 's': 0}, False)]:
+            with self.subTest(data=data), patch.object(MODULE.smoke, 'request_once', return_value={'status': 200, 'decoded_body': {'status': True, 'data': data}}):
+                record, _ = MODULE.query_admin_turnover(deposit_args(), 'fund', 'test')
+                self.assertEqual(record['pagination_complete'], accepted)
+
+    def test_locked_wallet_null_empty_waits_and_never_clears_on_timeout(self):
+        args = argparse.Namespace(timeout=1, insecure=True, turnover_discovery_attempts=2, turnover_discovery_interval=0)
+        response = {'status': 200, 'decoded_body': {'status': True, 'data': {'d': None, 't': 0, 's': 0}}}
+        with patch.object(MODULE.smoke, 'request_once', return_value=response) as request:
+            records = MODULE.run_turnover_clear(args, 'fund', Decimal('1800'))
+        self.assertEqual(request.call_count, 2)
+        self.assertTrue(all(call.args[0]['method'] == 'GET' for call in request.call_args_list))
+        self.assertFalse(records[0]['business_status'])
+        self.assertIn('no turnover record appeared', records[0]['reason'])
+
+    def test_discovery_request_failure_stops_immediately(self):
+        args = argparse.Namespace(turnover_discovery_attempts=3, turnover_discovery_interval=0)
+        replies = [({'business_status': True, 'row_count': 0}, Decimal(0)),
+                   ({'business_status': False, 'reason': 'query failed'}, Decimal(0))]
+        with patch.object(MODULE, 'query_admin_turnover', side_effect=replies) as query, patch.object(MODULE.smoke, 'request_once') as request:
+            records = MODULE.run_turnover_clear(args, 'fund', Decimal('1800'))
+        self.assertEqual(query.call_count, 2)
+        self.assertEqual(records[0]['reason'], 'query failed')
+        request.assert_not_called()

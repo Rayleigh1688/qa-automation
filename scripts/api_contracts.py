@@ -1,6 +1,6 @@
-"""Compatibility imports; new code should use qa_core.contracts."""
+"""Compatibility imports; new code should use filbet.contracts."""
 
-from qa_core.contracts import (
+from filbet.contracts import (
     TIME_TOKENS,
     WITHDRAW_AUDIT_PATH,
     normalize_request_template,

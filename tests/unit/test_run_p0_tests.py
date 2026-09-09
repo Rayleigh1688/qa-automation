@@ -1,3 +1,4 @@
+from support import ROOT, SCRIPTS
 import argparse
 import importlib.util
 import json
@@ -10,13 +11,13 @@ from pathlib import Path
 from unittest.mock import patch
 
 
-MODULE_PATH = Path(__file__).with_name("run-p0-tests.py")
+MODULE_PATH = (SCRIPTS / "run-p0-tests.py")
 SPEC = importlib.util.spec_from_file_location("run_p0_tests", MODULE_PATH)
 MODULE = importlib.util.module_from_spec(SPEC)
 assert SPEC.loader
 SPEC.loader.exec_module(MODULE)
 
-API_MODULE_PATH = Path(__file__).with_name("run-api-tests.py")
+API_MODULE_PATH = (SCRIPTS / "run-api-tests.py")
 API_SPEC = importlib.util.spec_from_file_location("run_api_tests", API_MODULE_PATH)
 API_MODULE = importlib.util.module_from_spec(API_SPEC)
 assert API_SPEC.loader

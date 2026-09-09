@@ -8,7 +8,7 @@ import json
 import re
 from pathlib import Path
 from urllib.parse import parse_qsl, urlsplit
-from qa_core.contracts import MILLISECOND_WINDOW_PATHS
+from filbet.contracts import MILLISECOND_WINDOW_PATHS
 
 
 def read_csv(path: Path) -> list[dict[str, str]]:

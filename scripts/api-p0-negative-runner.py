@@ -10,7 +10,6 @@ from __future__ import annotations
 
 import argparse
 import csv
-import importlib.util
 import json
 import os
 import time
@@ -22,14 +21,9 @@ from pathlib import Path
 from types import ModuleType
 
 
-def load_smoke_runner() -> ModuleType:
-    path = Path(__file__).with_name("api-smoke-runner.py")
-    spec = importlib.util.spec_from_file_location("api_smoke_runner", path)
-    if spec is None or spec.loader is None:
-        raise RuntimeError(f"cannot load {path}")
-    module = importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(module)
-    return module
+def load_smoke_runner():
+    from filbet import smoke
+    return smoke
 
 
 smoke = load_smoke_runner()

@@ -125,6 +125,8 @@ doctor、API/UI 主运行入口及独立 KYC 的最终结果保留状态文字�
 
 ## Windows 验收边界
 
-当前改造仅在 macOS 做离线检查；Windows 字节锁、Job Object、PowerShell/cmd、Ctrl+C/Ctrl+Break、真实 Playwright 浏览器退出及 Linux 行为未在本轮实机验证。模拟测试不等于 Windows 已通过。Windows 组员应先在本地 `.venv` 运行 `npm run check`（包含隔离临时锁、嵌套、崩溃释放、参数及子进程退出测试），再运行默认离线 doctor；先处理依赖/权限问题，另行授权后才运行联网业务门禁。
+2026-09-09 用户反馈拉取最新代码后 Windows 已正常跑通；该反馈未附具体命令、版本或中断清理的专项证据。本次目录重构在 macOS 做离线检查，重构后的 Windows/Linux，以及 Ctrl+C/Ctrl+Break 和浏览器后代清理仍需分别回归，不能把重构前的成功反馈扩展为全平台矩阵验收。Windows 组员应先在本地 `.venv` 运行 `npm run check`（包含隔离临时锁、嵌套、崩溃释放、参数及子进程退出测试），再运行默认离线 doctor；先处理依赖/权限问题，另行授权后才运行联网业务门禁。
 
 可用 `npm run run:local -- python -c "import time; time.sleep(30)"` 做无业务中断实验：另一终端运行同命令应立即 BLOCKED；原终端 Ctrl+C 后应允许再次运行。浏览器清理的 Windows 实机验收需用本地空白页验证正常/失败/中断及后代退出，不需要登录或资金操作。不能以 doctor PASS 声称真实业务或跨平台验收完成。
+
+跨项目使用时按 [运行核心复用说明](runtime-reuse.md) 设置项目根目录和独立锁 namespace；本项目仍使用原 qa-automation 锁，不因导出新项目修改已有配置。

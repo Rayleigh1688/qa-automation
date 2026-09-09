@@ -4,7 +4,7 @@ import json
 from datetime import datetime
 from decimal import Decimal, InvalidOperation
 from pathlib import Path
-from p0_report_template import write_html_report
+from filbet.reporting import write_html_report
 from ui_business_visuals import visual_gallery
 
 PHASES = {

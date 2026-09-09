@@ -47,7 +47,7 @@
     "check:docs": "node scripts/python-launcher.mjs scripts/check-project.py docs",
     "check:assets": "node scripts/python-launcher.mjs scripts/check-api-assets.py",
     "check:syntax": "node scripts/python-launcher.mjs scripts/check-project.py syntax",
-    "test:unit": "node scripts/python-launcher.mjs -m unittest discover -s scripts -p \"test_*.py\" && node scripts/python-launcher.mjs -m unittest discover -s tools/provisioning -p \"test_*.py\"",
+    "test:unit": "node scripts/python-launcher.mjs scripts/run-unit-tests.py",
     "check": "npm run check:docs && npm run check:archive && npm run check:assets && npm run check:syntax && npm run test:unit",
     "check:archive": "node scripts/python-launcher.mjs scripts/check-scan-archive.py",
     "test:ui:kyc": "node scripts/python-launcher.mjs scripts/run-local.py --task test:ui:kyc --",

@@ -1,3 +1,4 @@
+from support import ROOT, SCRIPTS
 import csv
 import importlib.util
 import json
@@ -9,7 +10,7 @@ from api_contracts import WITHDRAW_AUDIT_PATH, normalize_request_template, resol
 
 
 def load_script(name):
-    spec = importlib.util.spec_from_file_location(name.replace("-", "_"), Path(__file__).with_name(name + ".py"))
+    spec = importlib.util.spec_from_file_location(name.replace("-", "_"), (SCRIPTS / (name + ".py")))
     module = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(module)
     return module
@@ -18,7 +19,7 @@ def load_script(name):
 class RequestContractTests(unittest.TestCase):
     def test_curated_audit_request_uses_milliseconds_in_runner(self):
         smoke = load_script("api-smoke-runner")
-        path = Path(__file__).resolve().parents[1] / "api/p0/test-cases.csv"
+        path = ROOT / "api/p0/test-cases.csv"
         with path.open(newline="") as handle:
             case = next(row for row in csv.DictReader(handle) if row["case_id"] == "TC-026")
         with patch.object(smoke.time, "time", return_value=1_800_000_000):

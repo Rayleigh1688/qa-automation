@@ -1,0 +1,522 @@
+#!/usr/bin/env python3
+"""Run a P0 API smoke set from api/p0/test-cases.csv."""
+
+from __future__ import annotations
+
+import argparse
+import csv
+import json
+import os
+import ssl
+import time
+import uuid
+from pathlib import Path
+from urllib.error import HTTPError, URLError
+from urllib.parse import quote
+from urllib.request import Request, urlopen
+
+from totp import current_totp
+from filbet.contracts import resolve_dynamic_values
+# Keep legacy runner attributes available to controlled flow and session tools.
+from qa_core.codec import (
+    CborDecodeError, cbor_encode, cbor_decode, decode_body_sample,
+    _cbor_encode_type_value, _cbor_decode_one, _cbor_read_value,
+)
+
+
+VAR_DEFAULTS = {
+    "{{api_url}}": "https://client-fat.filbet2025.com",
+    "{{admin_url}}": "https://admin-fat.filbet2025.com",
+    "{{agency_url}}": "",
+}
+
+
+ENV_NAMES = {
+    "{{api_url}}": "API_URL",
+    "{{admin_url}}": "ADMIN_URL",
+    "{{agency_url}}": "AGENCY_URL",
+}
+
+
+def load_env_file(path: Path) -> None:
+    from qa_core.environment import load_environment
+    os.environ.update(load_environment(path, required=False))
+
+
+def resolve_url(clean_url: str) -> str:
+    resolved = clean_url
+    for marker, env_name in ENV_NAMES.items():
+        value = os.environ.get(env_name) or VAR_DEFAULTS.get(marker, "")
+        if marker in resolved and not value:
+            raise ValueError(f"missing {env_name} for {marker}")
+        resolved = resolved.replace(marker, value.rstrip("/"))
+    return quote(resolved, safe=":/?&=%._-+,")
+
+
+def headers_for(row: dict[str, str]) -> dict[str, str]:
+    base_var = row["suggested_base_var"]
+    is_admin = base_var == "{{admin_url}}"
+    headers = {
+        "accept": "application/json, text/plain, */*" if is_admin else "application/json",
+        "d": os.environ.get("DEVICE", "25"),
+        "lang": os.environ.get("ADMIN_LANG_HEADER" if is_admin else "LANG_HEADER", "en" if is_admin else "en_US"),
+    }
+    if is_admin:
+        headers["client-id"] = os.environ.get("ADMIN_CLIENT_ID", "123")
+        headers["client-version"] = os.environ.get("ADMIN_CLIENT_VERSION", "Chrome/151.0.0.0")
+        device_id = os.environ.get("ADMIN_DEVICE_ID") or os.environ.get("X_DEVICE_ID")
+        if device_id:
+            headers["x-device-id"] = device_id
+    token = ""
+    if base_var == "{{admin_url}}":
+        token = os.environ.get("ADMIN_TOKEN", "")
+        prefix = os.environ.get("ADMIN_TOKEN_PREFIX", "")
+        if token and prefix and not token.startswith(prefix):
+            token = prefix + token
+    elif base_var == "{{agency_url}}":
+        token = os.environ.get("AGENCY_TOKEN", "")
+    else:
+        token = os.environ.get("API_TOKEN", "")
+    if token:
+        headers["t"] = token
+    return headers
+
+
+def read_rows(path: Path, limit: int, base: str = "all") -> list[dict[str, str]]:
+    base_markers = {
+        "client": "{{api_url}}",
+        "admin": "{{admin_url}}",
+        "agency": "{{agency_url}}",
+    }
+    with path.open(encoding="utf-8", newline="") as handle:
+        reader = csv.DictReader(handle)
+        rows = []
+        for row in reader:
+            if "case_id" in row:
+                include = row.get("execution_policy") == "safe_smoke"
+            elif row["execution_policy"] == "safe_smoke":
+                include = True
+            else:
+                include = False
+            if include and (base == "all" or row.get("suggested_base_var") == base_markers[base]):
+                rows.append(row)
+    return rows[:limit] if limit > 0 else rows
+
+
+def request_body_for(row: dict[str, str]) -> dict[str, object] | None:
+    raw = row.get("request_body") or ""
+    if not raw:
+        return None
+    parsed = json.loads(raw)
+    if not isinstance(parsed, dict):
+        raise ValueError(f"request_body must be a JSON object for {row.get('case_id') or row.get('priority')}")
+    now = int(time.time())
+    return resolve_dynamic_values(parsed, now)
+
+
+def get_nested(value: object, path: str) -> object:
+    current = value
+    for part in path.split("."):
+        if isinstance(current, dict) and part in current:
+            current = current[part]
+        else:
+            return None
+    return current
+
+
+def has_nested(value: object, path: str) -> bool:
+    current = value
+    for part in path.split("."):
+        if isinstance(current, dict) and part in current:
+            current = current[part]
+        else:
+            return False
+    return True
+
+
+def assertion_result(result: dict[str, object], assertions: str) -> tuple[bool, list[str]]:
+    failures = []
+    body = result.get("decoded_body")
+    rules = [item for item in assertions.split(",") if item]
+
+    for rule in rules:
+        if rule == "http_200":
+            if result.get("status") != 200:
+                failures.append("http status is not 200")
+        elif rule == "decoded":
+            if body is None:
+                failures.append("body is not decoded")
+        elif rule == "status_true":
+            if not isinstance(body, dict) or body.get("status") is not True:
+                failures.append("business status is not true")
+        elif rule == "data_object":
+            data = body.get("data") if isinstance(body, dict) else None
+            if not isinstance(data, dict):
+                failures.append("data is not object")
+        elif rule == "data_list":
+            data = body.get("data") if isinstance(body, dict) else None
+            if not isinstance(data, list):
+                failures.append("data is not list")
+        elif rule.startswith("keys:"):
+            keys = [item for item in rule.removeprefix("keys:").split("|") if item]
+            for key in keys:
+                if not has_nested(body, key):
+                    failures.append(f"missing key {key}")
+        elif rule.startswith("non_empty:"):
+            key = rule.removeprefix("non_empty:")
+            value = get_nested(body, key)
+            if value is None or value == "" or value == [] or value == {}:
+                failures.append(f"empty value {key}")
+
+    return not failures, failures
+
+
+def request_once(
+    row: dict[str, str],
+    timeout: float,
+    insecure: bool,
+    body: dict[str, object] | None = None,
+    body_format: str = "json",
+    content_type: str = "",
+) -> dict[str, object]:
+    url = resolve_url(row["clean_url"])
+    headers = headers_for(row)
+    payload = None
+    if body is not None:
+        if body_format == "cbor":
+            payload = cbor_encode(body)
+            headers["content-type"] = content_type or "application/cbor"
+        else:
+            payload = json.dumps(body).encode("utf-8")
+            headers["content-type"] = content_type or "application/json"
+    request = Request(url, data=payload, method=row["method"], headers=headers)
+    context = ssl._create_unverified_context() if insecure else None
+    started = time.monotonic()
+    try:
+        with urlopen(request, timeout=timeout, context=context) as response:
+            body_bytes = response.read()
+            elapsed_ms = int((time.monotonic() - started) * 1000)
+            decoded, sample = decode_body_sample(body_bytes)
+            return {
+                "priority": row["priority"],
+                "case_id": row.get("case_id", ""),
+                "method": row["method"],
+                "url": url,
+                "status": response.status,
+                "elapsed_ms": elapsed_ms,
+                "ok": 200 <= response.status < 500,
+                "decoded_body": decoded,
+                "body_sample": sample,
+            }
+    except HTTPError as error:
+        body_bytes = error.read()
+        elapsed_ms = int((time.monotonic() - started) * 1000)
+        decoded, sample = decode_body_sample(body_bytes)
+        return {
+            "priority": row["priority"],
+            "case_id": row.get("case_id", ""),
+            "method": row["method"],
+            "url": url,
+            "status": error.code,
+            "elapsed_ms": elapsed_ms,
+            "ok": error.code in {401, 403} or 200 <= error.code < 500,
+            "decoded_body": decoded,
+            "body_sample": sample,
+        }
+    except (URLError, TimeoutError, ValueError) as error:
+        elapsed_ms = int((time.monotonic() - started) * 1000)
+        return {
+            "priority": row["priority"],
+            "case_id": row.get("case_id", ""),
+            "method": row["method"],
+            "url": url if "url" in locals() else row["clean_url"],
+            "status": "ERROR",
+            "elapsed_ms": elapsed_ms,
+            "ok": False,
+            "decoded_body": None,
+            "body_sample": str(error),
+        }
+
+
+def login_row(clean_url: str, base_var: str, method: str = "POST") -> dict[str, str]:
+    return {
+        "priority": "LOGIN",
+        "method": method,
+        "clean_url": clean_url,
+        "suggested_base_var": base_var,
+    }
+
+
+def extract_token(result: dict[str, object]) -> str:
+    decoded = result.get("decoded_body")
+    if not isinstance(decoded, dict):
+        return ""
+    if decoded.get("status") is not True:
+        return ""
+    data = decoded.get("data")
+    if isinstance(data, str):
+        return data
+    if isinstance(data, dict):
+        token = data.get("token") or data.get("t")
+        return token if isinstance(token, str) else ""
+    return ""
+
+
+def admin_sms_otp(args: argparse.Namespace, otp_id: str) -> str:
+    if not otp_id.isdigit():
+        return ""
+    admin_token = os.environ.get("ADMIN_TOKEN", "")
+    if admin_token:
+        validation = request_once(
+            login_row("{{admin_url}}/admin/me/detail", "{{admin_url}}", method="GET"),
+            args.timeout,
+            args.insecure,
+            body_format=args.body_format,
+        )
+        body = validation.get("decoded_body")
+        if not (isinstance(body, dict) and body.get("status") is True):
+            admin_token = ""
+            os.environ.pop("ADMIN_TOKEN", None)
+    if not admin_token:
+        _, admin_token = admin_login(args)
+    if not admin_token:
+        return ""
+    os.environ["ADMIN_TOKEN"] = admin_token
+
+    secret = os.environ.get("ADMIN_APPROVAL_TOTP_SECRET", "")
+    algorithm = os.environ.get("ADMIN_APPROVAL_TOTP_ALGORITHM", "SHA1")
+    if not secret:
+        return ""
+    seconds_remaining = 30 - (int(time.time()) % 30)
+    if seconds_remaining <= 2:
+        time.sleep(seconds_remaining + 1)
+    google_code = current_totp(secret, algorithm=algorithm)
+    lookup_row = login_row(
+        f"{{{{admin_url}}}}/admin/sms/auth?code={google_code}&id={otp_id}",
+        "{{admin_url}}",
+        method="GET",
+    )
+    result = request_once(lookup_row, args.timeout, args.insecure, body_format=args.body_format)
+    body = result.get("decoded_body")
+    data = body.get("data") if isinstance(body, dict) and body.get("status") is True else None
+    return data if isinstance(data, str) and data.isdigit() else ""
+
+
+def client_login(args: argparse.Namespace) -> tuple[list[dict[str, object]], str]:
+    phone = os.environ.get("CLIENT_PHONE", "")
+    password = os.environ.get("CLIENT_PASSWORD", "")
+    otp = os.environ.get("CLIENT_OTP", "")
+    otp_source = os.environ.get("CLIENT_OTP_SOURCE", "fixed").strip().lower()
+    auth_mode = os.environ.get("CLIENT_AUTH_MODE", "password").strip().lower()
+    if auth_mode not in {"password", "otp"}:
+        raise SystemExit("CLIENT_AUTH_MODE must be password or otp")
+    if not phone:
+        raise SystemExit("CLIENT_PHONE is required")
+
+    if auth_mode == "password":
+        if not password:
+            raise SystemExit("CLIENT_PASSWORD is required when CLIENT_AUTH_MODE=password")
+        password_row = login_row("{{api_url}}/member/v2/login", "{{api_url}}")
+        password_body = {"login_text": phone, "password": password}
+        password_result = request_once(
+            password_row,
+            args.timeout,
+            args.insecure,
+            password_body,
+            args.body_format,
+        )
+        token = extract_token(password_result)
+        if token:
+            os.environ["API_TOKEN"] = token
+        return [password_result], token
+
+    if not otp and otp_source != "admin_sms":
+        raise SystemExit("CLIENT_OTP or CLIENT_OTP_SOURCE=admin_sms is required when CLIENT_AUTH_MODE=otp")
+
+    sms_row = login_row("{{api_url}}/member/sms", "{{api_url}}")
+    sms_body = {
+        "country_code": os.environ.get("CLIENT_COUNTRY_CODE", "63"),
+        "phone": phone,
+        "reason": "login",
+    }
+    sms_result = request_once(sms_row, args.timeout, args.insecure, sms_body, args.body_format)
+    decoded = sms_result.get("decoded_body")
+    otp_id = ""
+    if isinstance(decoded, dict) and isinstance(decoded.get("data"), dict):
+        otp_id = str(decoded["data"].get("id") or decoded["data"].get("otp_id") or "")
+
+    login_result: dict[str, object] | None = None
+    if otp_id:
+        if otp_source == "admin_sms":
+            otp = admin_sms_otp(args, otp_id)
+        otp_row = login_row("{{api_url}}/member/otp/login/v2", "{{api_url}}")
+        if otp:
+            login_body = {
+                "code": otp,
+                "otp_id": otp_id,
+            }
+            login_result = request_once(otp_row, args.timeout, args.insecure, login_body, args.body_format)
+            token = extract_token(login_result)
+            if token:
+                os.environ["API_TOKEN"] = token
+
+    token = ""
+    results = [sms_result]
+    if login_result:
+        token = extract_token(login_result)
+        results.append(login_result)
+    return results, token
+
+
+def run_client_login(args: argparse.Namespace) -> None:
+    results, token = client_login(args)
+    Path(args.out).write_text(json.dumps(results, ensure_ascii=False, indent=2), encoding="utf-8")
+    print(f"wrote {Path(args.out).resolve()}")
+    auth_mode = os.environ.get("CLIENT_AUTH_MODE", "password").strip().lower()
+    if auth_mode == "password":
+        print(f"client password login status={results[0]['status']} token={'yes' if token else 'no'}")
+    else:
+        print(f"client sms status={results[0]['status']} otp_id={'yes' if len(results) > 1 else 'no'}")
+        if len(results) > 1:
+            print(f"client otp login status={results[1]['status']} token={'yes' if token else 'no'}")
+
+
+def admin_login(args: argparse.Namespace) -> tuple[list[dict[str, object]], str]:
+    if not os.environ.get("ADMIN_DEVICE_ID") and not os.environ.get("X_DEVICE_ID"):
+        os.environ["ADMIN_DEVICE_ID"] = str(uuid.uuid4())
+    email = os.environ.get("ADMIN_EMAIL", "")
+    password = os.environ.get("ADMIN_PASSWORD", "")
+    google_code = os.environ.get("ADMIN_GOOGLE_CODE", "")
+    if not google_code:
+        login_secret = os.environ.get("ADMIN_LOGIN_TOTP_SECRET") or os.environ.get("ADMIN_APPROVAL_TOTP_SECRET", "")
+        login_algorithm = os.environ.get("ADMIN_LOGIN_TOTP_ALGORITHM") or os.environ.get("ADMIN_APPROVAL_TOTP_ALGORITHM", "SHA1")
+        if login_secret:
+            google_code = current_totp(login_secret, algorithm=login_algorithm)
+    if not email or not password or not google_code:
+        raise SystemExit("ADMIN_EMAIL, ADMIN_PASSWORD, and an admin login code or TOTP secret are required")
+
+    auth_row = login_row("{{admin_url}}/admin/login/auth", "{{admin_url}}")
+    auth_body = {"email": email, "password": password}
+    auth_result = request_once(auth_row, args.timeout, args.insecure, auth_body, args.body_format)
+
+    login_row_data = login_row("{{admin_url}}/admin/login", "{{admin_url}}")
+    login_body = {
+        "email": email,
+        "password": password,
+        "google_code": int(google_code) if google_code.isdigit() else google_code,
+        "google_secret": os.environ.get("ADMIN_GOOGLE_SECRET", ""),
+    }
+    if os.environ.get("ADMIN_CMPL"):
+        login_body["cmpl"] = int(os.environ["ADMIN_CMPL"])
+    login_result = request_once(login_row_data, args.timeout, args.insecure, login_body, args.body_format)
+    token = extract_token(login_result)
+    if token:
+        os.environ["ADMIN_TOKEN"] = token
+
+    results = [auth_result, login_result]
+    return results, token
+
+
+def run_admin_login(args: argparse.Namespace) -> None:
+    results, token = admin_login(args)
+    Path(args.out).write_text(json.dumps(results, ensure_ascii=False, indent=2), encoding="utf-8")
+    print(f"wrote {Path(args.out).resolve()}")
+    print(f"admin auth status={results[0]['status']}")
+    print(f"admin login status={results[1]['status']} token={'yes' if token else 'no'}")
+
+
+def main() -> None:
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--list", default="api/p0/interface-shortlist.csv")
+    parser.add_argument("--env", default=os.environ.get("ENV_FILE", ".env.fat"))
+    parser.add_argument("--limit", type=int, default=0, help="Maximum cases to run; 0 runs all selected cases")
+    parser.add_argument("--base", choices=["all", "client", "admin", "agency"], default="all")
+    parser.add_argument("--timeout", type=float, default=10)
+    parser.add_argument("--execute", action="store_true")
+    parser.add_argument("--insecure", action="store_true", help="Disable TLS verification for test environments only")
+    parser.add_argument("--body-format", choices=["json", "cbor"], default="json")
+    parser.add_argument("--client-login", action="store_true")
+    parser.add_argument("--admin-login", action="store_true")
+    parser.add_argument("--with-client-login", action="store_true")
+    parser.add_argument("--with-admin-login", action="store_true")
+    parser.add_argument("--cases", default="", help="Run executable case CSV instead of shortlist CSV")
+    parser.add_argument("--out", default="api/results/p0-smoke-result.json")
+    args = parser.parse_args()
+
+    load_env_file(Path(args.env))
+    os.environ.pop("API_TOKEN", None)
+    os.environ.pop("ADMIN_TOKEN", None)
+    if args.client_login:
+        run_client_login(args)
+        return
+    if args.admin_login:
+        run_admin_login(args)
+        return
+    auth_results: list[dict[str, object]] = []
+    if args.with_client_login:
+        client_token = os.environ.get("API_TOKEN", "")
+        if client_token:
+            validation = request_once(login_row("{{api_url}}/member/detail", "{{api_url}}", method="GET"), args.timeout, args.insecure)
+            body = validation.get("decoded_body")
+            if not (isinstance(body, dict) and body.get("status") is True):
+                client_token = ""
+                os.environ.pop("API_TOKEN", None)
+        if not client_token:
+            client_results, client_token = client_login(args)
+            auth_results.extend(client_results)
+            if client_token:
+                os.environ["API_TOKEN"] = client_token
+    if args.with_admin_login:
+        admin_token = os.environ.get("ADMIN_TOKEN", "")
+        if admin_token:
+            validation = request_once(login_row("{{admin_url}}/admin/me/detail", "{{admin_url}}", method="GET"), args.timeout, args.insecure)
+            body = validation.get("decoded_body")
+            if not (isinstance(body, dict) and body.get("status") is True):
+                admin_token = ""
+                os.environ.pop("ADMIN_TOKEN", None)
+        if not admin_token:
+            admin_results, admin_token = admin_login(args)
+            auth_results.extend(admin_results)
+            if admin_token:
+                os.environ["ADMIN_TOKEN"] = admin_token
+    list_path = Path(args.cases or args.list)
+    rows = read_rows(list_path, args.limit, args.base)
+    if not args.execute:
+        print("dry-run; add --execute to send requests")
+        for row in rows:
+            print(f"{row['priority']} {row['method']} {row['clean_url']} :: {row['source_file']}")
+        return
+
+    results = auth_results + [
+        request_once(
+            row,
+            args.timeout,
+            args.insecure,
+            request_body_for(row),
+            args.body_format,
+        )
+        for row in rows
+    ]
+    for row, result in zip(rows, results[len(auth_results) :]):
+        assertions = row.get("assertions", "")
+        if assertions:
+            passed, failures = assertion_result(result, "http_200,decoded," + assertions)
+            result["assertion_passed"] = passed
+            result["assertion_failures"] = failures
+    output = Path(args.out)
+    output.write_text(json.dumps(results, ensure_ascii=False, indent=2), encoding="utf-8")
+    executable = [item for item in results if "assertion_passed" in item]
+    passed = sum(1 for item in executable if item["assertion_passed"]) if executable else sum(1 for item in results if item["ok"])
+    total = len(executable) if executable else len(results)
+    print(f"wrote {output.resolve()}")
+    print(f"ok {passed}/{total}")
+    for item in results:
+        label = item.get("case_id") or item["priority"]
+        verdict = item.get("assertion_passed", item["ok"])
+        print(f"{label} {item['status']} {item['elapsed_ms']}ms pass={verdict} {item['url']}")
+    if passed != total:
+        raise SystemExit(1)
+
+
+if __name__ == "__main__":
+    main()

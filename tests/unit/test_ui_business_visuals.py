@@ -1,3 +1,4 @@
+from support import ROOT, SCRIPTS
 import hashlib
 import json
 import tempfile

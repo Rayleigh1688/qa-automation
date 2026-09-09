@@ -3,6 +3,7 @@ import contextlib
 import os
 import errno
 import hashlib
+import re
 
 WINDOWS = os.name == "nt"
 
@@ -20,15 +21,17 @@ class LocalRunBusy(RuntimeError):
     pass
 
 
-def lock_path():
+def lock_path(namespace="qa-automation"):
+    if not re.fullmatch(r"[A-Za-z0-9][A-Za-z0-9_-]{0,63}", namespace):
+        raise ValueError("lock namespace must be 1-64 letters, digits, underscores or hyphens")
     # Shared by checkouts for this OS user, independent of environment/account.
     identity = os.getuid() if not WINDOWS else hashlib.sha256(os.getlogin().encode()).hexdigest()[:16]
-    return Path(tempfile.gettempdir()) / f'qa-automation-{identity}.lock'
+    return Path(tempfile.gettempdir()) / f'{namespace}-{identity}.lock'
 
 
 @contextlib.contextmanager
-def local_run_lock(path=None, *, inherit=True):
-    target = Path(path) if path else lock_path()
+def local_run_lock(path=None, *, inherit=True, namespace="qa-automation"):
+    target = Path(path) if path else lock_path(namespace)
     fd = os.open(target, os.O_RDWR | os.O_CREAT | getattr(os, 'O_NOFOLLOW', 0) | getattr(os, 'O_BINARY', 0), 0o600)
     try:
         stat = os.fstat(fd)

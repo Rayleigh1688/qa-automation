@@ -3,12 +3,11 @@
 import argparse
 import sys
 import json
-import os
 import shlex
 from pathlib import Path
 from qa_core.terminal import print_result
-from qa_core.local_lock import local_run_lock, LocalRunBusy
-from ui_process import run_ui_process
+from qa_core.local_lock import LocalRunBusy
+from qa_core.workflow import run_stages
 
 
 def main():
@@ -35,23 +34,14 @@ def main():
     if not command:
         parser.error('supply a command after --')
     try:
-        with local_run_lock() as fd:
-            for stage in stages:
-                env = dict(os.environ)
-                while stage and '=' in stage[0] and stage[0].split('=', 1)[0].isidentifier():
-                    key, value = stage.pop(0).split('=', 1)
-                    env[key] = value
-                if not stage:
-                    parser.error('empty command stage')
-                code = run_ui_process(stage, env=env, pass_fds=(() if fd is None else (fd,))).returncode
-                if code:
-                    return code
-            return 0
+        return run_stages(stages, project_root=Path(__file__).resolve().parents[1])
     except LocalRunBusy as error:
         print_result(f'BLOCKED: {error}', 'BLOCKED', file=sys.stderr)
         return 2
     except KeyboardInterrupt:
         return 130
+    except ValueError as error:
+        parser.error(str(error))
     except OSError:
         print_result('BLOCKED: command or local lock unavailable; check installation and local permissions.', 'BLOCKED', file=sys.stderr)
         return 2

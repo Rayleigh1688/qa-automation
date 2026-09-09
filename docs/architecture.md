@@ -4,18 +4,31 @@
 
 `package.json` → `python-launcher.mjs` → `run-local.py` / `config/local-commands.json` → `scripts/run-*.py` → API runner / Playwright → 原始结果 → 报告渲染器。
 
-CLI 文件保留原路径和命令；共享 Python 能力集中到可直接导入的 `scripts/qa_core/` 包：
+CLI 文件保留原路径和命令；实现按公共能力与项目业务分层：
 
-| 模块 | 职责 | 兼容方式 |
+| 位置 | 职责 | 依赖方向 |
 | --- | --- | --- |
-| `qa_core/environment.py` / `qa_core/local_lock.py` | 个人配置分层及同机协作锁；无业务请求 | npm 由 `run-local.py` 包装，原 CLI 保留；直接 CLI 可显式包装 |
-| `qa_core/process_command.py` / `qa_core/windows_job.py` / `ui_process.py` | 解释器传递、无 shell 的 npm/Playwright 启动、平台进程清理 | POSIX 进程组与 Windows Job 分支；操作及未验证边界见本地手册 |
-| `qa_core/codec.py` | 既有 CBOR 编解码与响应 JSON 回退 | smoke runner 继续导出原函数名，受控资金链与 session 工具调用不变 |
-| `qa_core/contracts.py` | 请求时间单位与动态参数解析 | `scripts/api_contracts.py` 保留兼容导出，生成器和 runner 使用新包 |
+| `scripts/run-*.py`、原 API CLI | 参数和执行编排、兼容命令入口 | 调用公共能力与 FILBET 实现 |
+| `scripts/qa_core/` | 环境、锁、跨平台进程、编解码、终端样式、通用报告 | 新公共模块不依赖 FILBET；旧 `contracts.py` 仅作兼容转发 |
+| `scripts/filbet/` | API 请求实现、业务契约、认证/KYC/充值/流水/提现及 UI 资金支持 | 可依赖 qa_core，不动态加载业务 CLI |
+| `tests/unit/` | 框架与业务实现的离线单元测试，包括开户工具回归 | `npm run test:unit` 统一发现；路径由 `support.py` 计算 |
+| `ui/elements/`、`ui/framework/` | 页面操作及浏览器侧支持 | 维持当前 Playwright 组织方式 |
 
-公共包导入时不加载环境凭据、不发起业务请求。CBOR 保留原有协议子集；响应解码优先识别合法 JSON 对象/数组，修复 JSON 被宽松 CBOR 解码误读并丢失业务字段的问题。
+`filbet.controlled.ControlledFlow` 是受控业务的导入入口，每个实例持有独立的审批码、运行记录和报告状态。内部 operation 类按业务职责拆分，通过该对象协作，不单独作为 CLI。创建对象不加载凭据、不登录、不写业务数据；执行操作仍使用原环境变量和认证规则，因此不支持同一 Python 进程内并发运行多个资金流程。UI 资金支持直接创建该对象，不再动态加载受控 CLI。
+
+`filbet/smoke.py` 保存原 API smoke 实现，`filbet/contracts.py` 保存 FILBET 路由/时间契约。`qa_core/process.py` 与 `qa_core/reporting.py` 收拢进程管理和通用报告组件；`filbet/reporting.py` 负责原资金文案和布局默认值。原 `ui_process.py`、`p0_report_template.py`、`ui_fund_flow.py`、`api_contracts.py` 及 `qa_core/contracts.py` 保留兼容导出；新代码使用规范模块路径。API 命令文件仍可按原路径执行。
+
+跨平台要求适用于整个目录：仓库路径由 `Path(__file__)` 推导，子 Python 使用 `sys.executable`，npm/Playwright 使用公共启动能力；不在业务模块新增 shell、POSIX 锁或平台信号操作。Windows Job Object 与 POSIX 进程组仍由同一个公共模块按平台选择。本机锁和报告输出路径保持原约定。
+
+公共包导入时不加载环境凭据、不发起业务请求。CBOR 保留原有协议子集；响应解码优先识别合法 JSON 对象/数组。
 
 UI 用例依赖 `ui/elements/` 和 `ui/framework/`，页面、弹窗、游戏点击点与固定套件由 `ui/data/` 提供。资金链使用 uid/订单 ID/时间窗口关联执行面，认证状态不跨运行复用。
+
+## 跨项目封装边界
+
+`qa_core/workflow.py` 提供项目根目录、锁 namespace 和阶段参数数组；`run-local.py` 只保留 FILBET 命令清单与 CLI 解析。默认 namespace 和锁文件路径不变。独立项目选择自己的 namespace，避免无关项目互相阻塞；同项目所有 checkout 必须保持一致。
+
+`qa_core/export.py` 的白名单是导出边界，明确排除兼容转发到业务包的 `contracts.py`、FILBET 配置与数据。新增公共模块时须同时核对依赖及独立导出测试，不通过复制整个 scripts 目录交付新项目。
 
 ## 文档归属
 
@@ -42,7 +55,7 @@ UI 用例依赖 `ui/elements/` 和 `ui/framework/`，页面、弹窗、游戏点
 
 后续工作以 [新需求设计](../requirements/README.md) 为入口，按变更影响补用例并评估是否纳入 P0，不要求全接口自动化后再做需求测试。
 
-`api-controlled-flow-runner.py` 仍是较大的业务编排模块。后续按认证、KYC、充值、提现逐步拆分；公共基础能力已先迁入 `qa_core/`，业务步骤仍由原 runner 编排；后续拆分以现有契约测试为保护。
+受控 runner 已拆分至 `filbet/`；后续按实际需求扩展相应模块。公共核心仍在本仓库内维护，尚未发布为独立安装包；可通过白名单工具导出源码快照，能力清单、接入示例及验证边界见 [跨项目运行核心](runtime-reuse.md)。不直接复制业务目录。
 
 ## 本地校验
 

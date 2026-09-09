@@ -1,3 +1,4 @@
+from support import ROOT, SCRIPTS
 import argparse
 import importlib.util
 import tempfile
@@ -8,7 +9,7 @@ from unittest.mock import patch
 
 
 def load_script(name: str):
-    path = Path(__file__).with_name(name)
+    path = (SCRIPTS / name)
     spec = importlib.util.spec_from_file_location(name.replace("-", "_"), path)
     module = importlib.util.module_from_spec(spec)
     assert spec.loader

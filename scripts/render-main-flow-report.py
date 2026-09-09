@@ -13,7 +13,7 @@ from collections import Counter
 from datetime import datetime
 from pathlib import Path
 
-from p0_report_template import write_html_report
+from filbet.reporting import write_html_report
 
 
 CHECK_LABELS = {

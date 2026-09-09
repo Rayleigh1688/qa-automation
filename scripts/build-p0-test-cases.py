@@ -10,7 +10,7 @@ from __future__ import annotations
 
 import csv
 from pathlib import Path
-from qa_core.contracts import normalize_request_template
+from filbet.contracts import normalize_request_template
 
 
 FIELDNAMES = [

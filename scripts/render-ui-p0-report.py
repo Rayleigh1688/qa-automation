@@ -11,7 +11,7 @@ from pathlib import Path
 
 from ui_report_evidence import build_evidence, append_markdown
 
-from p0_report_template import (
+from filbet.reporting import (
     format_execution_duration,
     report_verdict,
     write_html_report,

@@ -286,3 +286,42 @@ README 补充 `test:ui:business` 单命令、FAT 配置与视觉依赖、独立 
 实际本地验证（macOS、Python 3.12 `.venv`）：`npm run check` 全部通过，81 份文档、235 份归档校验、153 份源码语法、150+16 条单元测试；新增 8 条离线兼容测试覆盖参数字面值/空格路径、venv 选择、Windows npm 映射、字节锁元数据模拟、Job 分配失败/中断/退出模拟、实际后代停止和串行失败短路。原本地锁竞争/嵌套/进程崩溃释放回归继续通过。默认离线 doctor PASS，`test:ui:business -- --help` 透传通过，`git diff --check` 通过。
 
 Windows 内核锁、真实 Job Object、PowerShell/cmd、Ctrl+C/Ctrl+Break 和真实 Playwright 浏览器清理均尚未实机验证；本轮没有 Linux 实机或真实业务回归。下一步由 Windows 组员先运行离线 check/doctor 和本地中断实验，记录原始失败信息；联网/资金验收须另行授权。本轮未联网、未登录、未执行 KYC/充值/投注/清流/提现、未重建业务报告、未修改真实环境文件、未 add/commit。历史联网 PASS 不能替代本次平台验收。
+
+### 2026-09-09 架构分层与单元测试目录整理
+
+用户反馈拉取最新代码后 Windows 已正常跑通，要求整理时继续兼顾 Windows/Mac/Linux。此为用户实机反馈，未提供具体命令、提交号及中断清理矩阵，不自行补充业务通过率。开始时工作区已有 python-launcher.mjs、python-runtime.mjs、test_platform_process.py 的诊断修改；前两份原样保留，第三份保留新增断言并随单元测试迁移。本轮不重新排查同事机器，不联网、不执行资金链、不提交代码。
+
+实现：
+
+- 原 2202 行受控 API runner 改为兼容 CLI，60 个业务函数按 common/auth/wallet/registration/kyc/turnover/deposit/withdrawal/flow 拆到 `scripts/filbet/`。`ControlledFlow` 持有单流程审批码、运行记录及报告标志；UI 资金支持直接创建实例，不再动态导入受控 CLI。业务请求仍沿用环境变量及原认证规则，不声称同进程并发资金流程已隔离。
+- smoke 与 FILBET 路由/时间契约进入 `filbet/smoke.py`、`filbet/contracts.py`，旧 CLI/导入路径保留；SMS、负例、会话转换和流水查询的 smoke 复用改为普通导入。共享进程和报告进入 `qa_core/process.py`、`qa_core/reporting.py`，旧路径保留转发。平台进程及通用报告实现与本轮前 HEAD 逐字一致；业务模块不新增平台判断或 shell。
+- 原 scripts 下单元测试及开户工具测试统一迁入 `tests/unit/`，新 `scripts/run-unit-tests.py` 负责跨平台发现及仓库 cwd，`npm run test:unit` 命令名不变。已有平台测试保留 Windows/模拟分支和临时目录隔离。业务 npm 映射、默认配置、报告与账号游标路径不变。
+- 架构、本地运行、UI、开户手册同步；需求用例模板新增 Case ID→实现/测试名称→执行入口→回归归属映射，历史需求用例没有被改判已实现或已执行。公共核心仍在本仓库内，未提前发布跨项目包。
+
+验证：最终 `npm run check` 全部通过（82 份当前文档、235 份归档、173 份源码语法、173 条单元测试），默认离线 doctor PASS，业务 `--help` 与原 API CLI help 通过；`git diff --check` 通过。新增 5 条回归覆盖实例状态隔离、失败保留部分记录/脱敏/报告、KYC 嵌套查询回退精确 UID、旧 CLI 与公共导出。另对照原 60 个函数 AST，扣除 self/实例状态变化后业务逻辑一致，并核查嵌套作用域没有遗留未定义全局引用。
+
+检查过程中曾出现一次后代清理测试 killpg 探测 PermissionError（macOS 沙箱），同一进程实现未改动，后续单元与全量检查通过；不据此宣称该环境现象已修复。此前启动器诊断修改已随当前本地检查通过，但不归因为 Windows 跑通原因。
+
+本轮未登录、注册、KYC、充值、投注、清流、提现、重建现有业务报告或修改真实环境配置。用户 Windows 跑通反馈属于重构前版本；本次目录重构后的 Windows/Linux 和真实业务执行尚未验证，后续按本地手册先做离线 check/doctor，再按明确授权做业务验收。未 add/commit。
+
+### 2026-09-09 公共运行核心封装与跨项目导出
+
+继续保留上一轮全部未提交修改，不改业务断言/数据或默认命令。针对后续新项目，新增 `qa_core.workflow.run_stages`：显式项目根目录、独立锁 namespace、阶段 argv 数组和末阶段参数；启动前验证全部阶段，阶段环境独立，输入不被修改，失败停止。`run-local.py` 复用公共工作流，仍使用原 qa-automation 锁和业务命令映射。`process_command` 支持目标项目根目录及目标环境 PATH/npm_execpath，`run_process` 为原 run_ui_process 的通用名称；Windows Job/POSIX 清理机制保持。
+
+通用配置错误提示移除 FAT/UAT 模板绑定；报告核心移除资金链默认文案与按业务类型选择布局，新增展示参数，原文案和布局通过 `filbet/reporting.py` 适配保留。编解码、终端、虚拟环境选择继续复用，不将 FILBET 路由契约、账户/资金规则或页面定位器当作公共能力。
+
+新增白名单导出工具 `scripts/export-runtime.py --out <不存在的新目录>`：只导出 10 个公共 Python 文件、2 个 Node 启动文件和独立说明，附逐文件 SHA256 manifest；不复制兼容依赖业务包的 contracts.py、环境/账号、测试数据、报告、归档或 node_modules。拒绝覆盖已有目录，不安装依赖或自动执行业务。这是可独立使用的源码快照，尚未发布 pip/npm 包，也不自动同步源仓库更新。
+
+权威说明见 [跨项目运行核心](docs/runtime-reuse.md)，包含能力矩阵、排除范围、导出/接入步骤、锁与配置约定、Windows/Posix 限制；README、架构、本地手册新增导航，避免在多个入口复制整套操作步骤。
+
+本地验证：`npm run check` 通过（83 份文档、235 份归档、178 份源码语法、178 条单元测试），默认离线 doctor 和业务 help 通过，`git diff --check` 通过。新增 5 条跨项目回归，在不含 filbet 包的中文/空格临时项目中验证配置、报告、子进程退出码，核对导出白名单/哈希/拒绝覆盖、锁隔离、阶段失败短路与参数不变、目标 Playwright 路径、通用/原业务报告默认值。额外实际调用导出 CLI 和导出后的 Node 启动器，仅打印本地文本，均通过。
+
+本轮不联网、不执行业务或资金操作、不重建当前业务报告、不修改真实配置、不 add/commit。原项目 Windows 跑通为用户已有反馈，本次封装/独立导出目前只有 macOS 实测；目标新项目的 Windows/Linux、浏览器清理及业务验收仍需各自回归，不能由模拟分支或历史反馈代替。
+
+### 2026-09-09 API P0 清流前空流水响应误判
+
+用户反馈 `npm run test:p0:api` 失败。只读本机 `api/results/p0-run-status.json` 与 `p0-controlled-flow-result.json`，定位 14:16:55—14:17:32（UTC+8）运行：注册、KYC 提交/审核、充值建单/补单及钱包到账成功，停在 controlled_full_flow 的 turnover_before_clear。该查询 HTTP 200、接口业务成功，原始 data 为 `d=null,t=0,s=0`；执行器要求 d 为数组，改判 `Invalid turnover pagination shape`。未调用清流或进入提现；不是 Python/Windows 启动失败，也不能仅凭空响应断定充值流水已就绪或最终为零。
+
+修复 `filbet/turnover.py`：只接受明确的 `d=null,t=0,s=0` 为空页；其他缺字段、计数不一致、非对象行、分页变化仍阻断。钱包有锁定金额时继续走原流水出现等待，超时失败，不用空页跳过清流前置。同时发现等待中的后续查询失败可能被继续轮询覆盖，现改为立即停止并保留失败原因。
+
+新增 3 条本地回归覆盖已确认空响应/异常变体、锁定钱包等待超时且不写入、等待中查询失败立即停止。`npm run check` 通过（181 条单元测试），`git diff --check` 通过。本次未重跑 API/UI、未登录或执行注册/充值/清流/提现，也未重写当前失败报告；保留已有工作区修改，未提交。下一轮真实执行的等待及流水响应仍需验证，不能将本地检查当作本轮业务 PASS。

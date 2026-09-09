@@ -1,3 +1,4 @@
+from support import ROOT, SCRIPTS
 """Offline process regressions; real Windows kernel branches run only on Windows."""
 import errno
 import json
@@ -12,9 +13,8 @@ import unittest
 from unittest.mock import Mock, patch
 from qa_core import process_command as commands
 from qa_core import windows_job, local_lock
-from ui_process import run_ui_process
+from qa_core.process import run_ui_process
 
-ROOT = Path(__file__).resolve().parents[1]
 
 
 class PlatformProcessTests(unittest.TestCase):
@@ -53,7 +53,7 @@ class PlatformProcessTests(unittest.TestCase):
 
     def test_active_venv_and_python_child_selection(self):
         # Fake venv path exercises runtime selection, using the current Python executable.
-        with tempfile.TemporaryDirectory(prefix='qa venv ') as directory:
+        with tempfile.TemporaryDirectory(prefix='qa 中文 venv ') as directory:
             subprocess.run([sys.executable, '-m', 'venv', '--without-pip', directory], check=True)
             expected = Path(directory)/('Scripts/python.exe' if os.name == 'nt' else 'bin/python')
             env = {**os.environ, 'VIRTUAL_ENV': directory}
@@ -64,6 +64,23 @@ class PlatformProcessTests(unittest.TestCase):
             self.assertEqual(Path(executable).parent.resolve(), expected.parent.resolve())
             self.assertEqual(Path(prefix).resolve(), Path(directory).resolve())
             self.assertEqual(commands.process_environment({'QA_PYTHON_EXECUTABLE': 'stale'})['QA_PYTHON_EXECUTABLE'], sys.executable)
+
+    def test_explicit_python_is_validated_without_leaking_its_value(self):
+        env = {**os.environ, 'QA_PYTHON_EXECUTABLE': '/missing-private-sentinel/python'}
+        result = subprocess.run(['node', 'scripts/python-launcher.mjs', '-c', 'print("MUST_NOT_RUN")'],
+                                env=env, capture_output=True, text=True)
+        self.assertEqual(result.returncode, 2)
+        self.assertIn('source=QA_PYTHON_EXECUTABLE', result.stderr)
+        self.assertIn('ENOENT', result.stderr)
+        self.assertNotIn('private-sentinel', result.stderr)
+        self.assertNotIn('MUST_NOT_RUN', result.stdout)
+
+    def test_explicit_python_with_spaces_uses_current_interpreter(self):
+        env = {**os.environ, 'QA_PYTHON_EXECUTABLE': sys.executable, 'VIRTUAL_ENV': '/missing-venv'}
+        result = subprocess.run(['node', 'scripts/python-launcher.mjs', '-c',
+                                 'import json,sys; print(json.dumps(sys.executable))'],
+                                env=env, capture_output=True, text=True, check=True)
+        self.assertEqual(Path(json.loads(result.stdout)).resolve(), Path(sys.executable).resolve())
 
     def test_owned_descendant_stops_after_leader_exit(self):
         with tempfile.TemporaryDirectory() as directory:

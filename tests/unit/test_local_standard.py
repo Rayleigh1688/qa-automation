@@ -1,3 +1,4 @@
+from support import ROOT, SCRIPTS
 """Offline regressions for configuration, lock ownership and doctor boundaries."""
 import contextlib
 import importlib.util
@@ -14,7 +15,6 @@ from unittest.mock import patch
 from qa_core.environment import load_environment
 from qa_core.local_lock import local_run_lock, LocalRunBusy
 
-ROOT = Path(__file__).resolve().parents[1]
 spec = importlib.util.spec_from_file_location('doctor', ROOT / 'scripts/doctor.py')
 doctor = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(doctor)

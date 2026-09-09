@@ -6,7 +6,7 @@ FILBET 的 Python API 与 Playwright UI 自动化项目。API 验证接口契约
 
 需要 Python 3.10+、Node.js/npm；Node 版本应满足锁定的 Playwright 依赖。Python 核心 runner 使用标准库；FAT 数据库诊断另需本地 MySQL 客户端。
 
-先按 [本地手册的虚拟环境与 Windows 步骤](docs/local-running.md#python-虚拟环境与-windows) 创建并选择本机 `.venv`；不要跨电脑复制虚拟环境。Windows 兼容改造尚待实机验收。
+先按 [本地手册的虚拟环境与 Windows 步骤](docs/local-running.md#python-虚拟环境与-windows) 创建并选择本机 `.venv`；不要跨电脑复制虚拟环境。Windows 已有组员跑通反馈；本次重构后的平台验证边界见同一手册。
 
 ```bash
 npm ci
@@ -105,3 +105,5 @@ npm run test:ui:business -- --env .env.ui-p0.fat --execute --new-kyc-account --b
 API 结果及跨 API/UI 主流程报告写入 `api/results/`；UI 原始结果写 `ui/results/`，可读报告写 `ui/reports/`，Playwright 附件写 `test-results/` 和 `playwright-report/`。这些运行目录只保留最近一次结果，历史归档按 CI 状态说明处理；已跟踪的专项扫描快照采用独立保留策略。
 
 每个 runner fresh login，跨进程通过本轮 uid、订单号与时间窗口关联证据。数据库仅只读诊断；业务步骤失败时停止后续成功动作。真实凭据与未脱敏个人资料只留本地忽略配置或 CI 凭据。环境接受标准见 [环境手册](api/runbooks/ENVIRONMENTS.md)，不能把待审建单表述为最终出款成功。
+
+新项目复用公共运行能力，见 [跨项目运行核心](docs/runtime-reuse.md)：包含白名单导出、独立接入示例与 Windows/Mac/Linux 验证边界。

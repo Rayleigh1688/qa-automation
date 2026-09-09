@@ -1,9 +1,10 @@
+from support import ROOT, SCRIPTS
 import importlib.util
 import tempfile
 import unittest
 from pathlib import Path
 
-SPEC = importlib.util.spec_from_file_location("check_project", Path(__file__).with_name("check-project.py"))
+SPEC = importlib.util.spec_from_file_location("check_project", (SCRIPTS / "check-project.py"))
 MODULE = importlib.util.module_from_spec(SPEC)
 SPEC.loader.exec_module(MODULE)
 

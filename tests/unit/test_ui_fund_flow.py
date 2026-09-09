@@ -1,5 +1,6 @@
+from support import ROOT, SCRIPTS
 import unittest
-from ui_fund_flow import require_order, require_success, load_controlled, validate_deposit_resume
+from filbet.ui_fund_flow import require_order, require_success, load_controlled, validate_deposit_resume
 
 
 class UiFundFlowGuards(unittest.TestCase):
@@ -40,7 +41,7 @@ class UiFundFlowGuards(unittest.TestCase):
 
 class FixedPaidBetGuards(unittest.TestCase):
     def test_clear_requires_exact_settled_paid_evidence(self):
-        from ui_fund_flow import require_paid_bets, FundApi
+        from filbet.ui_fund_flow import require_paid_bets, FundApi
         from unittest.mock import Mock
         evidence = {'paidBetRecords': 3, 'betAmount': '300', 'settled': True}
         require_paid_bets(evidence, 3, 100)
@@ -55,7 +56,7 @@ class FixedPaidBetGuards(unittest.TestCase):
         api.c.run_turnover_clear.assert_not_called()
 
     def test_client_empty_uid_requires_wallet_lane_and_exact_arithmetic(self):
-        from ui_fund_flow import require_client_ledger_row
+        from filbet.ui_fund_flow import require_client_ledger_row
         row = {'uid': '', 'before_amount': '100.00', 'amount': '-10', 'after_amount': '90'}
         require_client_ledger_row(row, 'fund')
         require_client_ledger_row({**row, 'uid': 'fund'}, 'fund')
@@ -65,7 +66,7 @@ class FixedPaidBetGuards(unittest.TestCase):
 
 class DepositTurnoverBaseline(unittest.TestCase):
     def make_api(self, snapshots):
-        from ui_fund_flow import FundApi
+        from filbet.ui_fund_flow import FundApi
         from unittest.mock import Mock
         from decimal import Decimal
         api = FundApi.__new__(FundApi)
@@ -85,7 +86,7 @@ class DepositTurnoverBaseline(unittest.TestCase):
         from unittest.mock import patch, Mock
         api = self.make_api(iter([('1500', [self.row(bill_no='old')]), ('3300', [self.row()])]))
         evidence, persist = {}, Mock()
-        with patch('ui_fund_flow.time.sleep') as sleep:
+        with patch('filbet.ui_fund_flow.time.sleep') as sleep:
             self.assertEqual(api.wait_deposit_turnover('current', 1200, evidence, persist), 3300)
         sleep.assert_called_once()
         self.assertEqual(evidence['beforeBets'], '3300')
@@ -129,7 +130,7 @@ class DepositTurnoverBaseline(unittest.TestCase):
 
 class AdminLedgerArrival(unittest.TestCase):
     def test_only_missing_records_may_wait_and_differences_fail(self):
-        from ui_fund_flow import require_admin_ledger_matches
+        from filbet.ui_fund_flow import require_admin_ledger_matches
         row = {'id': 'a', 'amount': '-1000', 'before_amount': '2000', 'after_amount': '1000'}
         self.assertFalse(require_admin_ledger_matches([row], {}))
         self.assertTrue(require_admin_ledger_matches([row], {'a': dict(row)}))

@@ -13,10 +13,10 @@ import time
 import uuid
 from pathlib import Path
 from urllib.parse import urlparse
-from ui_fund_flow import FundApi, validate_deposit_resume, require_paid_bets
+from filbet.ui_fund_flow import FundApi, validate_deposit_resume, require_paid_bets
 from ui_business_report import render_report, collect_assertions
 from ui_business_artifacts import prepare_business_artifacts
-from ui_process import run_ui_process
+from qa_core.process import run_ui_process
 
 
 def read(path):
@@ -142,7 +142,7 @@ def main():
                     raise RuntimeError('Fund transactions changed since failed lookup')
                 if prior.get('stage') == 'bet_ui':
                     baseline_record = next(r for r in reversed(prior_records) if r.get('name') == 'ui_fund_bets')
-                    from ui_fund_flow import bet_rows
+                    from filbet.ui_fund_flow import bet_rows
                     if api.bets() != bet_rows(baseline_record['data']):
                         raise RuntimeError('Bet records changed after checkpoint; do not replay UI bets')
                     if prior.get('paidBetTarget') != args.bet_spins or prior.get('adminClearRequested') is not True:

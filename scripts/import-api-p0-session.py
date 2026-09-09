@@ -5,7 +5,6 @@ from __future__ import annotations
 
 import argparse
 import base64
-import importlib.util
 import json
 import os
 from pathlib import Path
@@ -15,14 +14,9 @@ from urllib.parse import urlparse
 from p0_session import phone_hash
 
 
-def load_smoke_module() -> ModuleType:
-    path = Path(__file__).with_name("api-smoke-runner.py")
-    spec = importlib.util.spec_from_file_location("api_smoke_runner_for_storage", path)
-    if spec is None or spec.loader is None:
-        raise SystemExit("cannot load CBOR codec")
-    module = importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(module)
-    return module
+def load_smoke_module():
+    from filbet import smoke
+    return smoke
 
 
 smoke = load_smoke_module()

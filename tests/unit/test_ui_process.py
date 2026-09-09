@@ -1,10 +1,11 @@
+from support import ROOT, SCRIPTS
 import os
 import signal
 import subprocess
 import sys
 import unittest
 from unittest.mock import Mock, patch
-from ui_process import run_ui_process
+from qa_core.process import run_ui_process
 
 
 class UiProcessCleanup(unittest.TestCase):
@@ -18,7 +19,7 @@ class UiProcessCleanup(unittest.TestCase):
     def test_interrupt_cleans_only_owned_group_and_restores_handler(self):
         child = Mock(pid=12345)
         child.wait.side_effect = KeyboardInterrupt
-        with patch('ui_process.subprocess.Popen') as launch, patch('ui_process.os.killpg', side_effect=[None, ProcessLookupError]) as kill, patch('ui_process.signal.signal') as handler, patch('ui_process.signal.getsignal', return_value=signal.SIG_DFL):
+        with patch('qa_core.process.subprocess.Popen') as launch, patch('qa_core.process.os.killpg', side_effect=[None, ProcessLookupError]) as kill, patch('qa_core.process.signal.signal') as handler, patch('qa_core.process.signal.getsignal', return_value=signal.SIG_DFL):
             launch.return_value.__enter__.return_value = child
             with self.assertRaises(KeyboardInterrupt):
                 run_ui_process(['test-stage'])
