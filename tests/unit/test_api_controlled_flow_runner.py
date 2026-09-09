@@ -743,3 +743,20 @@ class TurnoverNullEmpty(unittest.TestCase):
         self.assertEqual(query.call_count, 2)
         self.assertEqual(records[0]['reason'], 'query failed')
         request.assert_not_called()
+
+
+class RegistrationPhoneMerge(unittest.TestCase):
+    def test_explicit_registration_phone_precedes_cursor(self):
+        args = argparse.Namespace(use_register_phone=True, env='unused')
+        with patch.dict(os.environ, {'REGISTER_PHONE': 'explicit-test-phone', 'REGISTER_PASSWORD': 'test-only'}, clear=True), patch.object(MODULE, 'load_phone_cursor') as cursor:
+            MODULE.apply_primary_client_override(args)
+            self.assertEqual(args.client_phone, 'explicit-test-phone')
+            self.assertEqual(os.environ['CLIENT_PHONE'], 'explicit-test-phone')
+            cursor.assert_not_called()
+
+    def test_empty_registration_phone_falls_back_to_cursor(self):
+        args = argparse.Namespace(use_register_phone=True, env='unused')
+        with patch.dict(os.environ, {'REGISTER_PHONE': '', 'REGISTER_PASSWORD': 'test-only'}, clear=True), patch.object(MODULE, 'load_phone_cursor', return_value='cursor-test-phone') as cursor:
+            MODULE.apply_primary_client_override(args)
+            self.assertEqual(args.client_phone, 'cursor-test-phone')
+            cursor.assert_called_once()
