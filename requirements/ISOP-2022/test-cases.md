@@ -62,6 +62,7 @@
 | 2026-09-07 / 本地 / cdb94a1+文档 | `npm run check:docs` | PASS，39份文档检查 | 本轮命令输出 | 仅导航与文档检查，不代表业务通过 |
 | 2026-09-07 / FAT MySQL / cdb94a1+文档 | `SHOW FULL COLUMNS FROM orders.tbl_game_record`；限定prefix=fat读取8条金额样本 | 字段映射与样本读取完成 | [数据库核对记录](design.md#数据库只读核对记录2026-09-07) | 未独立验证派彩/GGR；未执行业务用例 |
 | FAT / 版本待记录 | 需求业务专项尚未实现/执行 | 29条在范围内场景NOT_RUN；R22为OUT_OF_SCOPE | 无业务执行证据 | 预期、样本、部署与接口映射待补 |
+| 2026-09-11 / 本地 Windows / 版本待记录 | 按本文件执行前置核对；`npm.cmd run doctor -- --env .env.fat --target api --network` | `doctor PASS`，仅证明 FAT HTTPS 可达；未执行 ISOP-2022 业务请求 | 本次终端命令输出 | 专项 runner、统计接口契约、体育独立数据源、稳定跨日/重结算样本、部署版本和受限角色均未具备；R01-R21、R23-R30 为 BLOCKED_DATA/BLOCKED_EXPECTATION，R22 保持 OUT_OF_SCOPE |
 
 当前结论（首轮评审后已吸收用户澄清）：D-01、Q-01已解决，线路映射明确，Q-02按非体育1个自然日扩窗的本阶段已知限制处理；Q-03毫秒精度及含端点日期边界已确认，Q-08整数时区/手动时间、Q-09分页汇总、Q-06 RisingWave整体重跑已明确，Q-04部分/重结算与Q-05主要指标已补充；实际原表映射已定位；其余状态处理实现、报表映射及提测执行信息待核对。可以按已确认范围推进自动化准备；未报告任何已复现的产品缺陷，未修改Jira或发布评论。
 
@@ -70,3 +71,4 @@
 | 日期/环境/版本 | Case ID/数据组合 | 负责人 | 实际结果/状态 | 脱敏证据 | 缺陷/复测关联 |
 | --- | --- | --- | --- | --- | --- |
 | 待执行 | — | 待分派 | NOT_RUN | 无 | — |
+| 2026-09-11 / FAT 可达但未进入业务执行 / 版本待记录 | R01-R21、R23-R30 | 待分派 | BLOCKED_DATA/BLOCKED_EXPECTATION；未发送业务请求 | `npm.cmd run doctor -- --env .env.fat --target api --network` 仅为无认证连通性证据 | 待提供专项执行器、提测契约、部署版本、样本集和受限角色后执行；R22 为 OUT_OF_SCOPE |

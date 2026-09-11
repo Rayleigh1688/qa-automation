@@ -203,6 +203,10 @@ README 补充 `test:ui:business` 单命令、FAT 配置与视觉依赖、独立 
 
 最终 `npm run check` 全部通过（139 份源码语法、125+16 条本地单元测试），`git diff --check` 通过；新增逻辑尚待下一轮真实 UI 验收。
 
+### 2026-09-11 ISOP-2022 执行尝试
+
+按 `requirements/ISOP-2022/test-cases.md` 执行前置核对。Windows FAT 无认证连通性探针 `npm.cmd run doctor -- --env .env.fat --target api --network` 通过，但没有登录或发送业务请求。ISOP-2022 专项 runner、统计接口提测契约、部署版本、体育独立数据源、稳定跨日/重结算样本和受限角色仍缺失；R01-R21、R23-R30 保持 BLOCKED_DATA/BLOCKED_EXPECTATION，R22 为 OUT_OF_SCOPE。不能将现有 P0 或本次 doctor 结果作为需求通过证据。
+
 ### 2026-09-08 KYC 审核后首页导航超时
 
 最新运行 `af84fad7-378e-4cfd-8e01-8f686f92da48` 停在 KYC UI：本轮已 UI 提交、状态 0→2、后台审核成功，随后 `client-kyc-submit.spec.mjs` 返回首页默认等待 load 45 秒超时；失败页面快照已有首页和登录入口。本轮尚未充值、投注或清流，不能据此判断流水基线修复效果。
