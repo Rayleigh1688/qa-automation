@@ -33,9 +33,11 @@ class CaseCatalogueTests(unittest.TestCase):
             reader = csv.DictReader(stream)
             self.assertEqual(reader.fieldnames, API_FIELDS)
             data = list(reader)
-        self.assertEqual(overview_count, len(self.plan['acceptance_ids']))
+        # Remote manual C18 expands business acceptance without inventing executable API coverage.
+        self.assertEqual(overview_count, len(self.plan['acceptance_ids']) + 1)
         known = {r['用例编号'] for r in overview}
-        self.assertEqual(known, {'ISOP-2027-' + ref for ref in self.plan['acceptance_ids']})
+        self.assertEqual(known, {'ISOP-2027-' + ref for ref in self.plan['acceptance_ids']} | {'ISOP-2027-C18'})
+        self.assertTrue(all('ISOP-2027-C18' not in r['总用例编号'].split(',') for r in data))
         self.assertNotIn('${', json.dumps(overview, ensure_ascii=False))
         self.assertNotIn('body.status', json.dumps(overview, ensure_ascii=False))
         expected = {c['id'] for c in self.cases if c['delivery']['mode'] == 'automatic'}
@@ -60,8 +62,8 @@ class CaseCatalogueTests(unittest.TestCase):
     def test_design_parser_stops_before_execution_history_and_rejects_duplicate_ids(self):
         path = self.out / 'test-cases.md'
         rows = design_rows(path, self.out.name)
-        self.assertEqual(len(rows), 17)
-        self.assertEqual(len(overview_rows(rows, self.out.name)), 17)
+        self.assertEqual(len(rows), 18)
+        self.assertEqual(len(overview_rows(rows, self.out.name)), 18)
         text = path.read_text()
         row = next(line for line in text.splitlines() if line.startswith('| ISOP-2027-C01 |'))
         path.write_text(text.replace(row, row + '\n' + row))

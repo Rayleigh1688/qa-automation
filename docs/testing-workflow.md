@@ -72,7 +72,7 @@ npm run qa:cases -- --all
 npm run qa:requirement -- ISOP-2027 --export-cases
 ```
 
-`preparation.csv`继续记录前置。执行报告仍逐条记录本批展开后的组合与失败点，使用本批cases.snapshot.json；不能直接把89条执行结果拼到17条业务总表中。已有团队包的manual.csv/packet.json及最近实测不因用例视图调整被覆盖。
+`preparation.csv`继续记录前置。执行报告仍逐条记录本批展开后的组合与失败点，使用本批cases.snapshot.json；不能按行号把展开后的执行结果拼到业务总表中。新增业务用例也不自动成为旧冻结计划的已覆盖项。已有团队包的manual.csv/packet.json及最近实测不因用例视图调整被覆盖。
 
 ```bash
 # 只检查用例结构；不登录、不运行测试
