@@ -29,6 +29,21 @@ class NavigationCheckTests(unittest.TestCase):
             self.assertEqual(len(errors), 1)
             self.assertIn("scripts/missing.py", errors[0])
 
+    def test_requirement_and_telegram_evidence_are_optional_but_sources_are_not(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            doc = root / 'README.md'
+            doc.write_text('[run](reports/telegram/runs/example/report.md)\n'
+                           '[team](reports/qa/ISOP-2027/team/manual.csv)\n'
+                           '[current](reports/qa/ISOP-2027/latest.html)\n'
+                           '[api](requirements/ISOP-2027/api/results/example/report.md)\n'
+                           '[cases](requirements/ISOP-2027/api/cases.json)\n'
+                           '[other](requirements/ISOP-2027/results/missing.md)\n')
+            errors = MODULE.document_errors(doc, root, set())
+            self.assertEqual(len(errors), 2)
+            self.assertTrue(any('cases.json' in error for error in errors))
+            self.assertTrue(any('ISOP-2027/results/missing.md' in error for error in errors))
+
     def test_accepts_relative_unicode_links_and_external_urls(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)

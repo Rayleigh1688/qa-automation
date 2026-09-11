@@ -7,13 +7,15 @@ controlled deposit -> real UI bet -> turnover check -> withdrawal chain.
 
 from __future__ import annotations
 
+from qa_core.redaction import sanitize_error, SENSITIVE_MARKERS
+from qa_core.redaction import display_command as redact_command
+
 from qa_core.terminal import print_result, print_path
 
 import argparse
 import html
 import json
 import os
-import re
 import shutil
 import subprocess
 from qa_core.process import run_ui_process
@@ -38,23 +40,13 @@ SENSITIVE_COMMAND_FLAGS = {
     "--write-client-otp",
     "--write-client-phone",
 }
-SENSITIVE_MARKERS = ("PASSWORD", "SECRET", "TOKEN", "OTP", "CODE", "PHONE", "EMAIL", "DEVICE")
 FULL_STATUS_PATH = Path("api/results/p0-full-run-status.json")
 FULL_MARKDOWN_REPORT = Path("api/results/p0-main-flow-report.md")
 FULL_HTML_REPORT = Path("api/results/p0-main-flow-report.html")
 
 
 def display_command(command: list[str]) -> str:
-    visible: list[str] = []
-    redact_next = False
-    for value in command:
-        if redact_next:
-            visible.append("<redacted>")
-            redact_next = False
-            continue
-        visible.append(value)
-        redact_next = value in SENSITIVE_COMMAND_FLAGS
-    return " ".join(visible)
+    return redact_command(command, SENSITIVE_COMMAND_FLAGS)
 
 
 def load_env(path: Path) -> dict[str, str]:
@@ -74,20 +66,6 @@ def run(command: list[str], env: dict[str, str]) -> None:
 
 def normalize_phone(value: str) -> str:
     return "".join(character for character in value if character.isdigit())
-
-
-def sanitize_error(error: BaseException | str, env: dict[str, str]) -> str:
-    message = str(error) or (type(error).__name__ if isinstance(error, BaseException) else "unknown error")
-    for name, value in env.items():
-        if len(value) >= 4 and any(marker in name.upper() for marker in SENSITIVE_MARKERS):
-            message = message.replace(value, "<redacted>")
-    message = re.sub(
-        r"([?&](?:token|code|otp|phone|email|uid|device_id|x-device-id)=)[^&\s]+",
-        r"\1<redacted>",
-        message,
-        flags=re.IGNORECASE,
-    )
-    return message[:2000]
 
 
 def write_full_run_status(

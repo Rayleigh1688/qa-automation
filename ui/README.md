@@ -4,7 +4,7 @@
 
 UI 自动化用于补足 API 无法证明的真实用户路径、页面集成状态和第三方游戏/canvas 场景。
 
-当前只聚焦客户端 P0 主流程；后台管理端优先通过 API 验证，暂不建设后台 UI 回归。
+默认套件聚焦客户端P0主流程，P0的API与核心UI自动化继续维护。新需求API自动执行、UI人工验收，暂不新增UI脚本；早期[Telegram需求专项UI](../docs/telegram-qa.md)仅保留兼容，不扩展默认P0套件。
 
 ## 目录分工
 
@@ -213,3 +213,13 @@ KYC 仅截取配置白名单中的状态文字边界，证件表单、图片和�
 ## 团队本地配置与互斥
 
 统一模板、个人凭据覆盖、账号分配和离线 doctor 见 [团队本地运行](../docs/local-running.md)。现有 npm UI 命令在清理前获取本机锁，直接 CLI 需使用 `npm run run:local -- <command>`。KYC 每轮用独立新号，BASIC 永久未认证，资金号按执行者分配；锁不提供跨机器保护。旧默认环境与结果路径保持兼容。
+
+## 简洁用例与结果
+
+新需求专项采用CSV用例、前置清单和四状态结果树，详见[用例与结果流程](../docs/testing-workflow.md)。旧历史结果已按用户授权清理，保留范围见当前交接；登录和数据准备不计业务PASS，脚本错误不直接计产品FAIL。
+
+## 新需求固定UI执行
+
+ISOP-2027使用`npm run qa:requirement -- ISOP-2027 --layer UI`离线校验；追加`--execute --insecure --allow-write kyc-review`执行已授权FAT专项。页面/元素固定于`ui/data/isop2027.json`，步骤与结果使用统一plan协议，产物隔离于`reports/qa/`且不由P0清理器处理。三图双账号流程与取证、会话说明见[阶段3记录](../docs/new-requirement-stage3.md)。
+
+新需求的默认团队分工已调整为[API自动执行与UI人工验收](../docs/team-testing.md)。上述固定UI脚本仅保留兼容；当前不安排新需求UI自动化建设，P0的API与核心UI自动化继续维护。

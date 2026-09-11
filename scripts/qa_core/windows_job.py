@@ -65,6 +65,7 @@ class Job:
 
 
 def run_windows_process(command, **kwargs):
+    timeout = kwargs.pop('timeout', None)
     # No pass_fds on Windows: the owning wrapper holds the kernel lock until its Job is closed.
     kwargs.pop('pass_fds', None)
     job = Job()
@@ -82,7 +83,7 @@ def run_windows_process(command, **kwargs):
             try:
                 job.assign(child)
                 gate.touch()
-                return subprocess.CompletedProcess(command, child.wait())
+                return subprocess.CompletedProcess(command, child.wait(timeout=timeout))
             finally:
                 # Includes descendants even when the stage leader has already exited.
                 for sig in previous:

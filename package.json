@@ -54,7 +54,12 @@
     "test:ui:business": "node scripts/python-launcher.mjs scripts/run-local.py --task test:ui:business --",
     "test:ui:business:fat": "node scripts/python-launcher.mjs scripts/run-local.py --task test:ui:business:fat --",
     "doctor": "node scripts/python-launcher.mjs scripts/doctor.py",
-    "run:local": "node scripts/python-launcher.mjs scripts/run-local.py --"
+    "run:local": "node scripts/python-launcher.mjs scripts/run-local.py --",
+    "qa:telegram": "node scripts/python-launcher.mjs scripts/run-telegram-qa.py",
+    "qa:report": "node scripts/python-launcher.mjs scripts/build-case-report.py",
+    "qa:requirement": "node scripts/python-launcher.mjs scripts/run-requirement.py",
+    "qa:delivery": "node scripts/python-launcher.mjs scripts/prepare-test-delivery.py",
+    "qa:cases": "node scripts/python-launcher.mjs scripts/export-requirement-cases.py"
   },
   "devDependencies": {
     "@playwright/test": "^1.57.0",

@@ -1,0 +1,566 @@
+{
+  "schema_version": 1,
+  "requirement": "ISOP-2032",
+  "source_commit": "69c9be0631a11b2f9ae08624dc5d9380c6069362",
+  "window_note": "2026-09-09 00:00:00 至 09-10 23:59:59.999 UTC+8；毫秒",
+  "cases": [
+    {
+      "id": "rebate-report-state-0",
+      "case_ids": [
+        "ISOP-2032-C13"
+      ],
+      "title": "文档枚举查询结构（不判定领取语义）",
+      "kind": "positive",
+      "request": {
+        "path": "/admin/promo/betting/rebate/report",
+        "method": "GET",
+        "query": {
+          "state": 0,
+          "page": 1,
+          "page_size": 20
+        }
+      },
+      "auth": "valid",
+      "expect": "success",
+      "requires_rows": false,
+      "checks": [
+        {
+          "op": "type",
+          "path": "data",
+          "value": "object"
+        },
+        {
+          "op": "type",
+          "path": "data.d",
+          "value": "array"
+        },
+        {
+          "op": "type",
+          "path": "data.total",
+          "value": "object"
+        },
+        {
+          "op": "type",
+          "path": "data.total.people_num",
+          "value": "integer"
+        },
+        {
+          "op": "type",
+          "path": "data.total.bonus",
+          "value": "string"
+        },
+        {
+          "op": "type",
+          "path": "data.total.bet_amount",
+          "value": "string"
+        },
+        {
+          "op": "page_limit",
+          "path": "data.d",
+          "value": 20
+        }
+      ]
+    },
+    {
+      "id": "rebate-report-state-1",
+      "case_ids": [
+        "ISOP-2032-C13"
+      ],
+      "title": "文档枚举查询结构（不判定领取语义）",
+      "kind": "positive",
+      "request": {
+        "path": "/admin/promo/betting/rebate/report",
+        "method": "GET",
+        "query": {
+          "state": 1,
+          "page": 1,
+          "page_size": 20
+        }
+      },
+      "auth": "valid",
+      "expect": "success",
+      "requires_rows": false,
+      "checks": [
+        {
+          "op": "type",
+          "path": "data",
+          "value": "object"
+        },
+        {
+          "op": "type",
+          "path": "data.d",
+          "value": "array"
+        },
+        {
+          "op": "type",
+          "path": "data.total",
+          "value": "object"
+        },
+        {
+          "op": "type",
+          "path": "data.total.people_num",
+          "value": "integer"
+        },
+        {
+          "op": "type",
+          "path": "data.total.bonus",
+          "value": "string"
+        },
+        {
+          "op": "type",
+          "path": "data.total.bet_amount",
+          "value": "string"
+        },
+        {
+          "op": "page_limit",
+          "path": "data.d",
+          "value": 20
+        }
+      ]
+    },
+    {
+      "id": "rebate-report-state-3",
+      "case_ids": [
+        "ISOP-2032-C13"
+      ],
+      "title": "文档枚举查询结构（不判定领取语义）",
+      "kind": "positive",
+      "request": {
+        "path": "/admin/promo/betting/rebate/report",
+        "method": "GET",
+        "query": {
+          "state": 3,
+          "page": 1,
+          "page_size": 20
+        }
+      },
+      "auth": "valid",
+      "expect": "success",
+      "requires_rows": false,
+      "checks": [
+        {
+          "op": "type",
+          "path": "data",
+          "value": "object"
+        },
+        {
+          "op": "type",
+          "path": "data.d",
+          "value": "array"
+        },
+        {
+          "op": "type",
+          "path": "data.total",
+          "value": "object"
+        },
+        {
+          "op": "type",
+          "path": "data.total.people_num",
+          "value": "integer"
+        },
+        {
+          "op": "type",
+          "path": "data.total.bonus",
+          "value": "string"
+        },
+        {
+          "op": "type",
+          "path": "data.total.bet_amount",
+          "value": "string"
+        },
+        {
+          "op": "page_limit",
+          "path": "data.d",
+          "value": 20
+        }
+      ]
+    },
+    {
+      "id": "rebate-report-state-4",
+      "case_ids": [
+        "ISOP-2032-C13"
+      ],
+      "title": "文档枚举查询结构（不判定领取语义）",
+      "kind": "positive",
+      "request": {
+        "path": "/admin/promo/betting/rebate/report",
+        "method": "GET",
+        "query": {
+          "state": 4,
+          "page": 1,
+          "page_size": 20
+        }
+      },
+      "auth": "valid",
+      "expect": "success",
+      "requires_rows": false,
+      "checks": [
+        {
+          "op": "type",
+          "path": "data",
+          "value": "object"
+        },
+        {
+          "op": "type",
+          "path": "data.d",
+          "value": "array"
+        },
+        {
+          "op": "type",
+          "path": "data.total",
+          "value": "object"
+        },
+        {
+          "op": "type",
+          "path": "data.total.people_num",
+          "value": "integer"
+        },
+        {
+          "op": "type",
+          "path": "data.total.bonus",
+          "value": "string"
+        },
+        {
+          "op": "type",
+          "path": "data.total.bet_amount",
+          "value": "string"
+        },
+        {
+          "op": "page_limit",
+          "path": "data.d",
+          "value": 20
+        }
+      ]
+    },
+    {
+      "id": "rebate-detail-fields",
+      "case_ids": [
+        "ISOP-2032-C12"
+      ],
+      "title": "每日返利明细契约",
+      "kind": "positive",
+      "request": {
+        "path": "/admin/promo/betting/rebate/report",
+        "method": "GET",
+        "query": {
+          "state": 1,
+          "page": 1,
+          "page_size": 20
+        }
+      },
+      "auth": "valid",
+      "expect": "success",
+      "requires_rows": true,
+      "checks": [
+        {
+          "op": "type",
+          "path": "data",
+          "value": "object"
+        },
+        {
+          "op": "type",
+          "path": "data.d",
+          "value": "array"
+        },
+        {
+          "op": "type",
+          "path": "data.total",
+          "value": "object"
+        },
+        {
+          "op": "type",
+          "path": "data.total.people_num",
+          "value": "integer"
+        },
+        {
+          "op": "type",
+          "path": "data.total.bonus",
+          "value": "string"
+        },
+        {
+          "op": "type",
+          "path": "data.total.bet_amount",
+          "value": "string"
+        },
+        {
+          "op": "row_keys",
+          "path": "data.d",
+          "value": [
+            "uid",
+            "stats_day",
+            "bonus",
+            "bet_amount",
+            "multiple_amount",
+            "conf"
+          ]
+        },
+        {
+          "op": "row_decimal",
+          "path": "data.d",
+          "value": [
+            "bonus",
+            "bet_amount",
+            "multiple_amount"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "rebate-detail-sums",
+      "case_ids": [
+        "ISOP-2032-C12"
+      ],
+      "title": "conf明细实派与打码金额加总等于会员日行（仅内部一致性）",
+      "kind": "positive",
+      "request": {
+        "method": "GET",
+        "path": "/admin/promo/betting/rebate/report",
+        "query": {
+          "state": 1,
+          "page": 1,
+          "page_size": 20
+        }
+      },
+      "auth": "valid",
+      "expect": "success",
+      "requires_rows": true,
+      "checks": [
+        {
+          "op": "rebate_details",
+          "path": "data.d"
+        }
+      ]
+    },
+    {
+      "id": "auth-missing",
+      "case_ids": [
+        "ISOP-2032-C13"
+      ],
+      "title": "未登录/无效token不得泄露查询结果",
+      "kind": "negative",
+      "request": {
+        "path": "/admin/promo/betting/rebate/report",
+        "method": "GET",
+        "query": {
+          "state": 0,
+          "page": 1,
+          "page_size": 20
+        }
+      },
+      "auth": "missing",
+      "expect": "auth_rejected",
+      "requires_rows": false,
+      "checks": []
+    },
+    {
+      "id": "auth-invalid",
+      "case_ids": [
+        "ISOP-2032-C13"
+      ],
+      "title": "未登录/无效token不得泄露查询结果",
+      "kind": "negative",
+      "request": {
+        "path": "/admin/promo/betting/rebate/report",
+        "method": "GET",
+        "query": {
+          "state": 0,
+          "page": 1,
+          "page_size": 20
+        }
+      },
+      "auth": "invalid",
+      "expect": "auth_rejected",
+      "requires_rows": false,
+      "checks": []
+    },
+    {
+      "id": "ISOP-2032-C01-closure",
+      "case_ids": [
+        "ISOP-2032-C01"
+      ],
+      "title": "基础返利与VIP无关",
+      "kind": "acceptance",
+      "blocked": "需ID32/40映射、配置方法/读回、规则精度、结算测试入口、专用投注与派发账变样本；报表查询不证明计算/发奖。"
+    },
+    {
+      "id": "ISOP-2032-C02-closure",
+      "case_ids": [
+        "ISOP-2032-C02"
+      ],
+      "title": "各类型独立门槛",
+      "kind": "acceptance",
+      "blocked": "需ID32/40映射、配置方法/读回、规则精度、结算测试入口、专用投注与派发账变样本；报表查询不证明计算/发奖。"
+    },
+    {
+      "id": "ISOP-2032-C03-closure",
+      "case_ids": [
+        "ISOP-2032-C03"
+      ],
+      "title": "规则封顶与0不限",
+      "kind": "acceptance",
+      "blocked": "需ID32/40映射、配置方法/读回、规则精度、结算测试入口、专用投注与派发账变样本；报表查询不证明计算/发奖。"
+    },
+    {
+      "id": "ISOP-2032-C04-closure",
+      "case_ids": [
+        "ISOP-2032-C04"
+      ],
+      "title": "命中优先级与停用",
+      "kind": "acceptance",
+      "blocked": "需ID32/40映射、配置方法/读回、规则精度、结算测试入口、专用投注与派发账变样本；报表查询不证明计算/发奖。"
+    },
+    {
+      "id": "ISOP-2032-C05-closure",
+      "case_ids": [
+        "ISOP-2032-C05"
+      ],
+      "title": "七类与多选规则配置",
+      "kind": "acceptance",
+      "blocked": "需ID32/40映射、配置方法/读回、规则精度、结算测试入口、专用投注与派发账变样本；报表查询不证明计算/发奖。"
+    },
+    {
+      "id": "ISOP-2032-C06-closure",
+      "case_ids": [
+        "ISOP-2032-C06"
+      ],
+      "title": "配置权限隔离",
+      "kind": "acceptance",
+      "blocked": "需ID32/40映射、配置方法/读回、规则精度、结算测试入口、专用投注与派发账变样本；报表查询不证明计算/发奖。"
+    },
+    {
+      "id": "ISOP-2032-C07-closure",
+      "case_ids": [
+        "ISOP-2032-C07"
+      ],
+      "title": "三类型分账和打码",
+      "kind": "acceptance",
+      "blocked": "需ID32/40映射、配置方法/读回、规则精度、结算测试入口、专用投注与派发账变样本；报表查询不证明计算/发奖。"
+    },
+    {
+      "id": "ISOP-2032-C08-closure",
+      "case_ids": [
+        "ISOP-2032-C08"
+      ],
+      "title": "日界与04点批次",
+      "kind": "acceptance",
+      "blocked": "需ID32/40映射、配置方法/读回、规则精度、结算测试入口、专用投注与派发账变样本；报表查询不证明计算/发奖。"
+    },
+    {
+      "id": "ISOP-2032-C09-closure",
+      "case_ids": [
+        "ISOP-2032-C09"
+      ],
+      "title": "批次幂等与恢复",
+      "kind": "acceptance",
+      "blocked": "需ID32/40映射、配置方法/读回、规则精度、结算测试入口、专用投注与派发账变样本；报表查询不证明计算/发奖。"
+    },
+    {
+      "id": "ISOP-2032-C10-closure",
+      "case_ids": [
+        "ISOP-2032-C10"
+      ],
+      "title": "自动入奖与永久存在",
+      "kind": "acceptance",
+      "blocked": "需ID32/40映射、配置方法/读回、规则精度、结算测试入口、专用投注与派发账变样本；报表查询不证明计算/发奖。"
+    },
+    {
+      "id": "ISOP-2032-C11-closure",
+      "case_ids": [
+        "ISOP-2032-C11"
+      ],
+      "title": "后台文案与通知",
+      "kind": "acceptance",
+      "blocked": "Q-04/Q-07/Q-09：正式MQTT/pending未冻结，title/copy仅前端适配；禁止把localhost Mock、去重当后端业务聚合。"
+    },
+    {
+      "id": "ISOP-2032-C12-closure",
+      "case_ids": [
+        "ISOP-2032-C12"
+      ],
+      "title": "会员日行与Drawer",
+      "kind": "acceptance",
+      "blocked": "需ID32/40映射、配置方法/读回、规则精度、结算测试入口、专用投注与派发账变样本；报表查询不证明计算/发奖。"
+    },
+    {
+      "id": "ISOP-2032-C13-closure",
+      "case_ids": [
+        "ISOP-2032-C13"
+      ],
+      "title": "筛选统计与Xlsx导出",
+      "kind": "acceptance",
+      "blocked": "需ID32/40映射、配置方法/读回、规则精度、结算测试入口、专用投注与派发账变样本；报表查询不证明计算/发奖。"
+    },
+    {
+      "id": "ISOP-2032-C14-closure",
+      "case_ids": [
+        "ISOP-2032-C14"
+      ],
+      "title": "防返利循环",
+      "kind": "acceptance",
+      "blocked": "需ID32/40映射、配置方法/读回、规则精度、结算测试入口、专用投注与派发账变样本；报表查询不证明计算/发奖。"
+    },
+    {
+      "id": "ISOP-2032-C15-closure",
+      "case_ids": [
+        "ISOP-2032-C15"
+      ],
+      "title": "打码解锁与范围",
+      "kind": "acceptance",
+      "blocked": "需ID32/40映射、配置方法/读回、规则精度、结算测试入口、专用投注与派发账变样本；报表查询不证明计算/发奖。"
+    },
+    {
+      "id": "ISOP-2032-C16-closure",
+      "case_ids": [
+        "ISOP-2032-C16"
+      ],
+      "title": "活动入口与基础配置",
+      "kind": "acceptance",
+      "blocked": "需ID32/40映射、配置方法/读回、规则精度、结算测试入口、专用投注与派发账变样本；报表查询不证明计算/发奖。"
+    },
+    {
+      "id": "ISOP-2032-C17-closure",
+      "case_ids": [
+        "ISOP-2032-C17"
+      ],
+      "title": "三步精灵状态与持久化",
+      "kind": "acceptance",
+      "blocked": "需ID32/40映射、配置方法/读回、规则精度、结算测试入口、专用投注与派发账变样本；报表查询不证明计算/发奖。"
+    },
+    {
+      "id": "ISOP-2032-C18-closure",
+      "case_ids": [
+        "ISOP-2032-C18"
+      ],
+      "title": "指定规则多游戏累计门槛",
+      "kind": "acceptance",
+      "blocked": "需ID32/40映射、配置方法/读回、规则精度、结算测试入口、专用投注与派发账变样本；报表查询不证明计算/发奖。"
+    },
+    {
+      "id": "ISOP-2032-C19-closure",
+      "case_ids": [
+        "ISOP-2032-C19"
+      ],
+      "title": "聚合通知不合并账变",
+      "kind": "acceptance",
+      "blocked": "Q-04/Q-07/Q-09：正式MQTT/pending未冻结，title/copy仅前端适配；禁止把localhost Mock、去重当后端业务聚合。"
+    },
+    {
+      "id": "ISOP-2032-C20-closure",
+      "case_ids": [
+        "ISOP-2032-C20"
+      ],
+      "title": "活动状态名单和有效期",
+      "kind": "acceptance",
+      "blocked": "需ID32/40映射、配置方法/读回、规则精度、结算测试入口、专用投注与派发账变样本；报表查询不证明计算/发奖。"
+    },
+    {
+      "id": "ISOP-2032-C21-closure",
+      "case_ids": [
+        "ISOP-2032-C21"
+      ],
+      "title": "派发说明与配置文案",
+      "kind": "acceptance",
+      "blocked": "Q-04/Q-07/Q-09：正式MQTT/pending未冻结，title/copy仅前端适配；禁止把localhost Mock、去重当后端业务聚合。"
+    }
+  ]
+}

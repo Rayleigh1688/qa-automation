@@ -488,7 +488,7 @@ class IndependentOperationTests(unittest.TestCase):
     def test_withdraw_create_uses_configured_p0_amount(self):
         args = operation_args("withdraw-create")
         env = {
-            "WITHDRAW_CLIENT_PHONE": "09000000002",
+            "WITHDRAW_CLIENT_PHONE": "09900000001",
             "WITHDRAW_CLIENT_PASSWORD": "password",
             "P0_WITHDRAW_AMOUNT": "1000",
         }
@@ -600,7 +600,7 @@ class IndependentOperationTests(unittest.TestCase):
         args = operation_args("withdraw-check-client")
         with patch.dict(
             os.environ,
-            {"WITHDRAW_CLIENT_PHONE": "09000000002", "WITHDRAW_CLIENT_PASSWORD": "password"},
+            {"WITHDRAW_CLIENT_PHONE": "09900000001", "WITHDRAW_CLIENT_PASSWORD": "password"},
             clear=True,
         ):
             with self.assertRaisesRegex(SystemExit, "withdraw-id"):

@@ -3,6 +3,8 @@
 
 from __future__ import annotations
 
+from qa_core.reporting import markdown_table as table
+
 import csv
 from collections import Counter
 from pathlib import Path
@@ -142,16 +144,6 @@ def write_csv(rows: list[dict[str, str]], output: Path) -> None:
         writer = csv.DictWriter(handle, fieldnames=fieldnames, lineterminator="\n")
         writer.writeheader()
         writer.writerows(rows)
-
-
-def table(rows: list[list[str]]) -> str:
-    lines = [
-        "| " + " | ".join(rows[0]) + " |",
-        "| " + " | ".join("---" for _ in rows[0]) + " |",
-    ]
-    for row in rows[1:]:
-        lines.append("| " + " | ".join(item.replace("|", "\\|") for item in row) + " |")
-    return "\n".join(lines)
 
 
 def write_markdown(rows: list[dict[str, str]], output: Path, csv_output: Path) -> None:

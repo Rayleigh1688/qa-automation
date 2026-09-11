@@ -1,0 +1,25 @@
+{
+  "depends_on_api": false,
+  "viewport": {"width": 1365, "height": 900},
+  "auth": {
+    "url": "https://admin.example.com/login",
+    "steps": [
+      {"op": "fill", "target": {"label": "Username"}, "value_env": "QA_UI_USERNAME"},
+      {"op": "fill", "target": {"label": "Password"}, "value_env": "QA_UI_PASSWORD"},
+      {"op": "click", "target": {"role": "button", "name": "Login"}}
+    ],
+    "ready": {"testId": "authenticated-navigation"}
+  },
+  "pages": {
+    "records": {
+      "url": "https://admin.example.com/records",
+      "ready": {"role": "button", "name": "Search"}
+    }
+  },
+  "requests": [
+    {"id": "page", "origin": "https://admin.example.com", "method": "GET", "path_pattern": "^/(login|records)$"},
+    {"id": "assets", "origin": "https://admin.example.com", "method": "GET", "path_pattern": "^/assets/.*$"},
+    {"id": "login", "origin": "https://admin.example.com", "method": "POST", "path_pattern": "^/api/login$"},
+    {"id": "query", "origin": "https://admin.example.com", "method": "POST", "path_pattern": "^/api/records/query$"}
+  ]
+}

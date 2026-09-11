@@ -8,6 +8,10 @@ They should not create valid payments, approvals, KYC records, or config changes
 
 from __future__ import annotations
 
+from qa_core.reporting import markdown_table as table
+
+from qa_core.values import has_nested
+
 import argparse
 import csv
 import json
@@ -75,16 +79,6 @@ def data_of(result: dict[str, object]) -> object:
     if isinstance(body, dict):
         return body.get("data")
     return None
-
-
-def has_nested(value: object, path: str) -> bool:
-    current = value
-    for part in path.split("."):
-        if isinstance(current, dict) and part in current:
-            current = current[part]
-        else:
-            return False
-    return True
 
 
 def assertion_result(result: dict[str, object], assertion: str) -> tuple[bool, list[str]]:
@@ -427,16 +421,6 @@ def run_cases(args: argparse.Namespace) -> list[dict[str, object]]:
             )
 
     return records
-
-
-def table(rows: list[list[str]]) -> str:
-    lines = [
-        "| " + " | ".join(rows[0]) + " |",
-        "| " + " | ".join("---" for _ in rows[0]) + " |",
-    ]
-    for row in rows[1:]:
-        lines.append("| " + " | ".join(item.replace("|", "\\|") for item in row) + " |")
-    return "\n".join(lines)
 
 
 def body_hint(item: dict[str, object]) -> str:

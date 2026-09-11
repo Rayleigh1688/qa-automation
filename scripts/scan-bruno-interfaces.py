@@ -3,6 +3,8 @@
 
 from __future__ import annotations
 
+from qa_core.reporting import markdown_table as table
+
 import argparse
 import csv
 import re
@@ -324,19 +326,6 @@ def write_csv(rows: list[dict[str, str]], output: Path) -> None:
         writer = csv.DictWriter(handle, fieldnames=fieldnames, lineterminator="\n")
         writer.writeheader()
         writer.writerows(rows)
-
-
-def table(rows: list[list[str]]) -> str:
-    if not rows:
-        return ""
-    header = rows[0]
-    body = rows[1:]
-    lines = [
-        "| " + " | ".join(header) + " |",
-        "| " + " | ".join("---" for _ in header) + " |",
-    ]
-    lines.extend("| " + " | ".join(item.replace("|", "\\|") for item in row) + " |" for row in body)
-    return "\n".join(lines)
 
 
 def write_markdown(rows: list[dict[str, str]], source: Path, csv_output: Path, output: Path) -> None:

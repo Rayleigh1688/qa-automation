@@ -1,0 +1,397 @@
+{
+  "schema_version": 1,
+  "requirement": "ISOP-2027",
+  "source_commit": "69c9be0631a11b2f9ae08624dc5d9380c6069362",
+  "window_note": "2026-09-09 00:00:00 至 09-10 23:59:59.999 UTC+8；毫秒",
+  "cases": [
+    {
+      "id": "review-list-state-1",
+      "case_ids": [
+        "ISOP-2027-C12"
+      ],
+      "title": "复核页签列表结构",
+      "kind": "positive",
+      "request": {
+        "method": "GET",
+        "path": "/admin/kyc/review/list",
+        "query": {
+          "state": 1,
+          "page": 1,
+          "page_size": 20
+        }
+      },
+      "auth": "valid",
+      "expect": "success",
+      "requires_rows": false,
+      "checks": [
+        {
+          "path": "data",
+          "op": "type",
+          "value": "object"
+        },
+        {
+          "path": "data.d",
+          "op": "type",
+          "value": "array"
+        },
+        {
+          "path": "data.t",
+          "op": "type",
+          "value": "integer"
+        },
+        {
+          "path": "data.d",
+          "op": "page_limit",
+          "value": 20
+        }
+      ]
+    },
+    {
+      "id": "review-list-state-2",
+      "case_ids": [
+        "ISOP-2027-C12"
+      ],
+      "title": "复核页签列表结构",
+      "kind": "positive",
+      "request": {
+        "method": "GET",
+        "path": "/admin/kyc/review/list",
+        "query": {
+          "state": 2,
+          "page": 1,
+          "page_size": 20
+        }
+      },
+      "auth": "valid",
+      "expect": "success",
+      "requires_rows": false,
+      "checks": [
+        {
+          "path": "data",
+          "op": "type",
+          "value": "object"
+        },
+        {
+          "path": "data.d",
+          "op": "type",
+          "value": "array"
+        },
+        {
+          "path": "data.t",
+          "op": "type",
+          "value": "integer"
+        },
+        {
+          "path": "data.d",
+          "op": "page_limit",
+          "value": 20
+        }
+      ]
+    },
+    {
+      "id": "review-result-2",
+      "case_ids": [
+        "ISOP-2027-C12"
+      ],
+      "title": "核准/驳回筛选命中数据",
+      "kind": "positive",
+      "request": {
+        "method": "GET",
+        "path": "/admin/kyc/review/list",
+        "query": {
+          "state": 2,
+          "review_status": 2,
+          "page": 1,
+          "page_size": 20
+        }
+      },
+      "auth": "valid",
+      "expect": "success",
+      "requires_rows": true,
+      "checks": [
+        {
+          "path": "data",
+          "op": "type",
+          "value": "object"
+        },
+        {
+          "path": "data.d",
+          "op": "type",
+          "value": "array"
+        },
+        {
+          "path": "data.t",
+          "op": "type",
+          "value": "integer"
+        },
+        {
+          "path": "data.d",
+          "op": "rows_eq",
+          "value": 2,
+          "field": "state"
+        },
+        {
+          "path": "data.d",
+          "op": "row_keys",
+          "value": [
+            "id",
+            "uid",
+            "created_at",
+            "before_info",
+            "after_info"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "review-result-3",
+      "case_ids": [
+        "ISOP-2027-C12"
+      ],
+      "title": "核准/驳回筛选命中数据",
+      "kind": "positive",
+      "request": {
+        "method": "GET",
+        "path": "/admin/kyc/review/list",
+        "query": {
+          "state": 2,
+          "review_status": 3,
+          "page": 1,
+          "page_size": 20
+        }
+      },
+      "auth": "valid",
+      "expect": "success",
+      "requires_rows": true,
+      "checks": [
+        {
+          "path": "data",
+          "op": "type",
+          "value": "object"
+        },
+        {
+          "path": "data.d",
+          "op": "type",
+          "value": "array"
+        },
+        {
+          "path": "data.t",
+          "op": "type",
+          "value": "integer"
+        },
+        {
+          "path": "data.d",
+          "op": "rows_eq",
+          "value": 3,
+          "field": "state"
+        },
+        {
+          "path": "data.d",
+          "op": "row_keys",
+          "value": [
+            "id",
+            "uid",
+            "created_at",
+            "before_info",
+            "after_info"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "auth-missing",
+      "case_ids": [
+        "ISOP-2027-C12"
+      ],
+      "title": "未登录/无效token不得泄露查询结果",
+      "kind": "negative",
+      "request": {
+        "method": "GET",
+        "path": "/admin/kyc/review/list",
+        "query": {
+          "state": 1,
+          "page": 1,
+          "page_size": 20
+        }
+      },
+      "auth": "missing",
+      "expect": "auth_rejected",
+      "requires_rows": false,
+      "checks": []
+    },
+    {
+      "id": "auth-invalid",
+      "case_ids": [
+        "ISOP-2027-C12"
+      ],
+      "title": "未登录/无效token不得泄露查询结果",
+      "kind": "negative",
+      "request": {
+        "method": "GET",
+        "path": "/admin/kyc/review/list",
+        "query": {
+          "state": 1,
+          "page": 1,
+          "page_size": 20
+        }
+      },
+      "auth": "invalid",
+      "expect": "auth_rejected",
+      "requires_rows": false,
+      "checks": []
+    },
+    {
+      "id": "ISOP-2027-C01-closure",
+      "case_ids": [
+        "ISOP-2027-C01"
+      ],
+      "title": "五种KYC状态编辑",
+      "kind": "acceptance",
+      "blocked": "旧只读CLI不执行验收闭环；请使用run-requirement.py中的固定用例。"
+    },
+    {
+      "id": "ISOP-2027-C02-closure",
+      "case_ids": [
+        "ISOP-2027-C02"
+      ],
+      "title": "同笔并发编辑",
+      "kind": "acceptance",
+      "blocked": "旧只读CLI不执行验收闭环；请使用run-requirement.py中的固定用例。"
+    },
+    {
+      "id": "ISOP-2027-C03-closure",
+      "case_ids": [
+        "ISOP-2027-C03"
+      ],
+      "title": "三图预览替换还原",
+      "kind": "acceptance",
+      "blocked": "旧只读CLI不执行验收闭环；请使用run-requirement.py中的固定用例。"
+    },
+    {
+      "id": "ISOP-2027-C04-closure",
+      "case_ids": [
+        "ISOP-2027-C04"
+      ],
+      "title": "上传边界及伪装",
+      "kind": "acceptance",
+      "blocked": "旧只读CLI不执行验收闭环；请使用run-requirement.py中的固定用例。"
+    },
+    {
+      "id": "ISOP-2027-C05-closure",
+      "case_ids": [
+        "ISOP-2027-C05"
+      ],
+      "title": "无变更与只读字段",
+      "kind": "acceptance",
+      "blocked": "旧只读CLI不执行验收闭环；请使用run-requirement.py中的固定用例。"
+    },
+    {
+      "id": "ISOP-2027-C06-closure",
+      "case_ids": [
+        "ISOP-2027-C06"
+      ],
+      "title": "核准整体生效",
+      "kind": "acceptance",
+      "blocked": "旧只读CLI不执行验收闭环；请使用run-requirement.py中的固定用例。"
+    },
+    {
+      "id": "ISOP-2027-C07-closure",
+      "case_ids": [
+        "ISOP-2027-C07"
+      ],
+      "title": "驳回整笔舍弃",
+      "kind": "acceptance",
+      "blocked": "旧只读CLI不执行验收闭环；请使用run-requirement.py中的固定用例。"
+    },
+    {
+      "id": "ISOP-2027-C08-closure",
+      "case_ids": [
+        "ISOP-2027-C08"
+      ],
+      "title": "驳回原因校验",
+      "kind": "acceptance",
+      "blocked": "旧只读CLI不执行验收闭环；请使用run-requirement.py中的固定用例。"
+    },
+    {
+      "id": "ISOP-2027-C09-closure",
+      "case_ids": [
+        "ISOP-2027-C09"
+      ],
+      "title": "不可自审及身份伪造",
+      "kind": "acceptance",
+      "blocked": "旧只读CLI不执行验收闭环；请使用run-requirement.py中的固定用例。"
+    },
+    {
+      "id": "ISOP-2027-C10-closure",
+      "case_ids": [
+        "ISOP-2027-C10"
+      ],
+      "title": "角色权限",
+      "kind": "acceptance",
+      "blocked": "旧只读CLI不执行验收闭环；请使用run-requirement.py中的固定用例。"
+    },
+    {
+      "id": "ISOP-2027-C11-closure",
+      "case_ids": [
+        "ISOP-2027-C11"
+      ],
+      "title": "已处理只读与重复操作",
+      "kind": "acceptance",
+      "blocked": "旧只读CLI不执行验收闭环；请使用run-requirement.py中的固定用例。"
+    },
+    {
+      "id": "ISOP-2027-C12-closure",
+      "case_ids": [
+        "ISOP-2027-C12"
+      ],
+      "title": "双页签筛选字段",
+      "kind": "acceptance",
+      "blocked": "旧只读CLI不执行验收闭环；请使用run-requirement.py中的固定用例。"
+    },
+    {
+      "id": "ISOP-2027-C13-closure",
+      "case_ids": [
+        "ISOP-2027-C13"
+      ],
+      "title": "diff与抽屉信息",
+      "kind": "acceptance",
+      "blocked": "旧只读CLI不执行验收闭环；请使用run-requirement.py中的固定用例。"
+    },
+    {
+      "id": "ISOP-2027-C14-closure",
+      "case_ids": [
+        "ISOP-2027-C14"
+      ],
+      "title": "审计不可变",
+      "kind": "acceptance",
+      "blocked": "旧只读CLI不执行验收闭环；请使用run-requirement.py中的固定用例。"
+    },
+    {
+      "id": "ISOP-2027-C15-closure",
+      "case_ids": [
+        "ISOP-2027-C15"
+      ],
+      "title": "待审核期间禁止提交新KYC",
+      "kind": "acceptance",
+      "blocked": "旧只读CLI不执行验收闭环；请使用run-requirement.py中的固定用例。"
+    },
+    {
+      "id": "ISOP-2027-C16-closure",
+      "case_ids": [
+        "ISOP-2027-C16"
+      ],
+      "title": "同时复核与原子失败",
+      "kind": "acceptance",
+      "blocked": "旧只读CLI不执行验收闭环；请使用run-requirement.py中的固定用例。"
+    },
+    {
+      "id": "ISOP-2027-C17-closure",
+      "case_ids": [
+        "ISOP-2027-C17"
+      ],
+      "title": "敏感图访问隔离",
+      "kind": "acceptance",
+      "blocked": "旧只读CLI不执行验收闭环；请使用run-requirement.py中的固定用例。"
+    }
+  ]
+}

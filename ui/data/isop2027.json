@@ -1,0 +1,397 @@
+{
+  "schema_version": 1,
+  "source": "ISOP-2027 reviewed FAT UI evidence 2026-09-10; fixed document order guarded by exact collection size",
+  "auth": {
+    "path": "/user/login?redirect=/kyc",
+    "steps": [
+      {
+        "op": "fill",
+        "target": {
+          "css": "#email"
+        },
+        "key": "email"
+      },
+      {
+        "op": "fill",
+        "target": {
+          "css": "#password"
+        },
+        "key": "password"
+      },
+      {
+        "op": "click",
+        "target": {
+          "role": "button",
+          "name": "Login"
+        }
+      },
+      {
+        "op": "fill",
+        "target": {
+          "css": "#google_code"
+        },
+        "key": "code"
+      },
+      {
+        "op": "click",
+        "target": {
+          "role": "button",
+          "name": "OK"
+        }
+      }
+    ],
+    "ready": {
+      "css": "a[href=\"/kyc\"]"
+    }
+  },
+  "requests": [
+    {
+      "id": "pages",
+      "method": "GET",
+      "path_pattern": "^/(user/login|kyc-review)$",
+      "service": "admin"
+    },
+    {
+      "id": "assets",
+      "method": "GET",
+      "path_pattern": "^/(assets/[A-Za-z0-9_.-]+\\.(js|css|woff2?)|scripts/loading\\.js|js/(qrcord|base32)\\.js|logo\\.png|favicon\\.ico)$",
+      "service": "admin"
+    },
+    {
+      "id": "login-auth",
+      "method": "POST",
+      "path_pattern": "^/admin/login/auth$",
+      "business_success": true,
+      "service": "admin"
+    },
+    {
+      "id": "login",
+      "method": "POST",
+      "path_pattern": "^/admin/login$",
+      "business_success": true,
+      "service": "admin"
+    },
+    {
+      "id": "identity",
+      "method": "GET",
+      "path_pattern": "^/admin/me/detail$",
+      "service": "admin"
+    },
+    {
+      "id": "review-list",
+      "method": "GET",
+      "path_pattern": "^/admin/kyc/review/list$",
+      "business_success": true,
+      "service": "admin"
+    },
+    {
+      "id": "compliance-status",
+      "method": "GET",
+      "path_pattern": "^/admin/sys/config/compliance/status$",
+      "service": "admin"
+    },
+    {
+      "id": "audit-count",
+      "method": "GET",
+      "path_pattern": "^/admin/notify/audit/alarm$",
+      "service": "admin"
+    },
+    {
+      "id": "gameclass-list",
+      "method": "POST",
+      "path_pattern": "^/admin/gameclass/list$",
+      "service": "admin"
+    },
+    {
+      "id": "security-script",
+      "method": "GET",
+      "path_pattern": "^/gh/gongben2024/network-security@main/src/filbet\\.js$",
+      "origin": "https://cdn.jsdelivr.net"
+    },
+    {
+      "id": "theme-images",
+      "method": "GET",
+      "path_pattern": "^/yuyan_qk0oxh/afts/img/(V-_oS6r-i7wAAAAAAAAAAAAAFl94AQBr|D2LWSqNny4sAAAAAAAAAAAAAFl94AQBr|C2TWRpJpiC0AAAAAAAAAAAAAFl94AQBr|F6vSTbj8KpYAAAAAAAAAAAAAFl94AQBr)$",
+      "origin": "https://mdn.alipayobjects.com"
+    },
+    {
+      "id": "game-search",
+      "method": "POST",
+      "path_pattern": "^/admin/game/search$",
+      "service": "admin"
+    },
+    {
+      "id": "kyc-details",
+      "method": "POST",
+      "path_pattern": "^/admin/kyc/details$",
+      "service": "admin"
+    },
+    {
+      "id": "kyc-images",
+      "origin": "https://images-ph-kyc.oss-ap-southeast-6.aliyuncs.com",
+      "method": "GET",
+      "path_pattern": "^/kyc(%2[Ff]|/)[0-9%Ff/]+\\.(webp|png|jpg|jpeg)$"
+    },
+    {
+      "service": "admin",
+      "method": "GET",
+      "path_pattern": "^/kyc$"
+    },
+    {
+      "service": "admin",
+      "method": "POST",
+      "path_pattern": "^/admin/(kyc/list|member/list)$"
+    },
+    {
+      "service": "admin",
+      "method": "GET",
+      "path_pattern": "^/admin/shop/gs/list$"
+    },
+    {
+      "service": "admin",
+      "method": "GET",
+      "path_pattern": "^/admin/kyc/approved/count$"
+    }
+  ],
+  "pages": {
+    "list": {
+      "service": "admin",
+      "path": "/kyc",
+      "ready": {
+        "css": "#phone"
+      }
+    },
+    "review": {
+      "service": "admin",
+      "path": "/kyc-review",
+      "ready": {
+        "css": "#uid"
+      }
+    }
+  },
+  "elements": {
+    "phone": {
+      "css": "#phone"
+    },
+    "uid": {
+      "css": "#uid"
+    },
+    "query": {
+      "css": "button",
+      "exactText": "Query"
+    },
+    "search": {
+      "css": "button",
+      "exactText": "Search"
+    },
+    "own_row": {
+      "css": "tbody tr",
+      "hasText": "${record}"
+    },
+    "edit": {
+      "scope": {
+        "css": "tbody tr",
+        "hasText": "${record}"
+      },
+      "text": "Edit"
+    },
+    "yes": {
+      "scope": {
+        "css": ".ant-modal-confirm:visible"
+      },
+      "role": "button",
+      "name": "Yes"
+    },
+    "confirm_ok": {
+      "scope": {
+        "css": ".ant-modal-confirm:visible"
+      },
+      "role": "button",
+      "name": "OK"
+    },
+    "first_name": {
+      "scope": {
+        "css": ".ant-modal:visible:not(.ant-modal-confirm),.ant-drawer-content:visible"
+      },
+      "css": "#first_name"
+    },
+    "submit": {
+      "scope": {
+        "css": ".ant-modal:visible:not(.ant-modal-confirm),.ant-drawer-content:visible"
+      },
+      "role": "button",
+      "name": "Submit for review"
+    },
+    "no_change": {
+      "scope": {
+        "css": ".ant-modal-confirm:visible"
+      },
+      "text": "No field or document changes"
+    },
+    "size_error": {
+      "text": "Image must be smaller than 500KB"
+    },
+    "review": {
+      "scope": {
+        "css": "tbody tr",
+        "hasText": "${record}"
+      },
+      "role": "button",
+      "name": "Review"
+    },
+    "details": {
+      "scope": {
+        "css": "tbody tr",
+        "hasText": "${record}"
+      },
+      "css": "button",
+      "exactText": "Details"
+    },
+    "approve": {
+      "scope": {
+        "css": ".ant-modal:visible:not(.ant-modal-confirm),.ant-drawer-content:visible"
+      },
+      "role": "button",
+      "name": "Approve"
+    },
+    "reject": {
+      "scope": {
+        "css": ".ant-modal:visible:not(.ant-modal-confirm),.ant-drawer-content:visible"
+      },
+      "role": "button",
+      "name": "Reject"
+    },
+    "reason": {
+      "scope": {
+        "css": ".ant-modal:visible:not(.ant-modal-confirm),.ant-drawer-content:visible"
+      },
+      "css": "#reason"
+    },
+    "reason_error": {
+      "scope": {
+        "css": ".ant-modal:visible:not(.ant-modal-confirm),.ant-drawer-content:visible"
+      },
+      "css": "#reason_help .ant-form-item-explain-error"
+    },
+    "processed": {
+      "css": "[role=\"tab\"][id$=\"-tab-reviewed\"]"
+    },
+    "review_controls": {
+      "scope": {
+        "css": ".ant-modal:visible:not(.ant-modal-confirm),.ant-drawer-content:visible"
+      },
+      "css": "button",
+      "hasText": "Approve"
+    },
+    "reject_controls": {
+      "scope": {
+        "css": ".ant-modal:visible:not(.ant-modal-confirm),.ant-drawer-content:visible"
+      },
+      "css": "button",
+      "hasText": "Reject"
+    },
+    "restore": {
+      "scope": {
+        "css": ".ant-modal:visible:not(.ant-modal-confirm),.ant-drawer-content:visible"
+      },
+      "css": "button",
+      "exactText": "Restore"
+    },
+    "preview": {
+      "css": ".ant-image-preview-wrap:visible"
+    },
+    "preview_image": {
+      "css": ".ant-image-preview-wrap:visible img.ant-image-preview-img"
+    },
+    "readonly_phone": {
+      "scope": {
+        "css": ".ant-modal:visible:not(.ant-modal-confirm),.ant-drawer-content:visible"
+      },
+      "css": "#phone"
+    },
+    "readonly_user_message": {
+      "scope": {
+        "css": ".ant-modal:visible:not(.ant-modal-confirm),.ant-drawer-content:visible"
+      },
+      "css": "#user_message"
+    },
+    "readonly_kyc_status": {
+      "scope": {
+        "css": ".ant-modal:visible:not(.ant-modal-confirm),.ant-drawer-content:visible"
+      },
+      "css": "#kyc_status"
+    },
+    "file_0": {
+      "scope": {
+        "css": ".ant-modal:visible:not(.ant-modal-confirm),.ant-drawer-content:visible"
+      },
+      "css": "input[type=file]",
+      "index": 0,
+      "expectedCount": 3
+    },
+    "file_1": {
+      "scope": {
+        "css": ".ant-modal:visible:not(.ant-modal-confirm),.ant-drawer-content:visible"
+      },
+      "css": "input[type=file]",
+      "index": 1,
+      "expectedCount": 3
+    },
+    "file_2": {
+      "scope": {
+        "css": ".ant-modal:visible:not(.ant-modal-confirm),.ant-drawer-content:visible"
+      },
+      "css": "input[type=file]",
+      "index": 2,
+      "expectedCount": 3
+    },
+    "preview_0": {
+      "scope": {
+        "css": ".ant-modal:visible:not(.ant-modal-confirm),.ant-drawer-content:visible"
+      },
+      "css": ".ant-image",
+      "index": 0,
+      "expectedCount": 6
+    },
+    "preview_1": {
+      "scope": {
+        "css": ".ant-modal:visible:not(.ant-modal-confirm),.ant-drawer-content:visible"
+      },
+      "css": ".ant-image",
+      "index": 1,
+      "expectedCount": 6
+    },
+    "preview_2": {
+      "scope": {
+        "css": ".ant-modal:visible:not(.ant-modal-confirm),.ant-drawer-content:visible"
+      },
+      "css": ".ant-image",
+      "index": 2,
+      "expectedCount": 6
+    },
+    "preview_3": {
+      "scope": {
+        "css": ".ant-modal:visible:not(.ant-modal-confirm),.ant-drawer-content:visible"
+      },
+      "css": ".ant-image",
+      "index": 3,
+      "expectedCount": 6
+    },
+    "preview_4": {
+      "scope": {
+        "css": ".ant-modal:visible:not(.ant-modal-confirm),.ant-drawer-content:visible"
+      },
+      "css": ".ant-image",
+      "index": 4,
+      "expectedCount": 6
+    },
+    "preview_5": {
+      "scope": {
+        "css": ".ant-modal:visible:not(.ant-modal-confirm),.ant-drawer-content:visible"
+      },
+      "css": ".ant-image",
+      "index": 5,
+      "expectedCount": 6
+    }
+  }
+}

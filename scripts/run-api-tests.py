@@ -9,13 +9,15 @@ Examples:
 
 from __future__ import annotations
 
+from qa_core.redaction import sanitize_error, SENSITIVE_MARKERS
+from qa_core.redaction import display_command as redact_command
+
 from qa_core.terminal import print_result, print_path
 
 import argparse
 import html
 import json
 import os
-import re
 import shutil
 import subprocess
 from qa_core.process import run_ui_process
@@ -42,16 +44,7 @@ SENSITIVE_COMMAND_FLAGS = {
 
 
 def display_command(command: list[str]) -> str:
-    visible: list[str] = []
-    redact_next = False
-    for value in command:
-        if redact_next:
-            visible.append("<redacted>")
-            redact_next = False
-            continue
-        visible.append(value)
-        redact_next = value in SENSITIVE_COMMAND_FLAGS
-    return " ".join(visible)
+    return redact_command(command, SENSITIVE_COMMAND_FLAGS)
 
 
 def load_env(path: Path) -> dict[str, str]:
@@ -153,21 +146,6 @@ def render_p0_api_report(args: argparse.Namespace, env: dict[str, str]) -> None:
         ],
         env,
     )
-
-
-def sanitize_error(error: BaseException, env: dict[str, str]) -> str:
-    message = str(error) or type(error).__name__
-    sensitive_markers = ("PASSWORD", "SECRET", "TOKEN", "OTP", "CODE", "PHONE", "EMAIL", "DEVICE")
-    for name, value in env.items():
-        if len(value) >= 4 and any(marker in name.upper() for marker in sensitive_markers):
-            message = message.replace(value, "<redacted>")
-    message = re.sub(
-        r"([?&](?:token|code|otp|phone|email|uid|device_id|x-device-id)=)[^&\s]+",
-        r"\1<redacted>",
-        message,
-        flags=re.IGNORECASE,
-    )
-    return message[:2000]
 
 
 def write_run_status(

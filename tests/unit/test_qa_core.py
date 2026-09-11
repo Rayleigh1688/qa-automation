@@ -59,5 +59,37 @@ class LegacyImportsTests(unittest.TestCase):
         self.assertIs(api_contracts.TIME_TOKENS, contracts.TIME_TOKENS)
 
 
+class SharedHelpersTests(unittest.TestCase):
+    def test_blocked_checks_never_produce_a_pass_verdict(self):
+        from qa_core.reporting import report_verdict
+        for rows in ([{'status': 'BLOCKED'}], [{'status': 'PASS'}, {'status': 'blocked'}]):
+            self.assertEqual(report_verdict(rows)[0], 'BLOCKED')
+        self.assertEqual(report_verdict([{'status': 'NOT_RUN'}])[0], 'PARTIAL')
+        self.assertEqual(report_verdict([{'status': 'PASS'}])[0], 'PASS')
+
+    def test_null_is_present_and_nonmapping_paths_are_missing(self):
+        from qa_core.values import get_nested, has_nested
+        self.assertTrue(has_nested({'data': {'value': None}}, 'data.value'))
+        self.assertIsNone(get_nested({'data': {'value': None}}, 'data.value'))
+        for data in ({'data': None}, {'data': []}, {}):
+            self.assertFalse(has_nested(data, 'data.value'))
+
+    def test_markdown_table_preserves_escaping_and_empty_input(self):
+        from qa_core.reporting import markdown_table
+        self.assertEqual(markdown_table([]), '')
+        self.assertEqual(markdown_table([['Field', 'Value'], ['state', 'a|b']]),
+                         '| Field | Value |\n| --- | --- |\n| state | a\\|b |')
+
+    def test_shared_redaction_hides_credentials_without_mutating_arguments(self):
+        from qa_core.redaction import display_command, sanitize_error
+        argv = ['runner', '--password', 'example-secret', '--scope', 'FAT']
+        self.assertEqual(display_command(argv, {'--password'}), 'runner --password <redacted> --scope FAT')
+        self.assertEqual(argv[2], 'example-secret')
+        text = sanitize_error('example-secret https://example.test/?token=opaque&state=2', {'ADMIN_PASSWORD': 'example-secret'})
+        self.assertNotIn('example-secret', text)
+        self.assertNotIn('opaque', text)
+        self.assertIn('state=2', text)
+
+
 if __name__ == '__main__':
     unittest.main()

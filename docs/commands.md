@@ -6,6 +6,7 @@
 
 | 命令 | 执行范围 | 业务写入与证据边界 |
 | --- | --- | --- |
+| `python3 scripts/run-requirement-api.py ISOP-2032` | 需求API数据与Case引用离线校验 | 不联网；多个需求用空格分隔。增加`--env .env.fat --execute --insecure`执行白名单查询及鉴权/参数反例，按需求留存独立结果；无配置/审批/发奖/导出任务写入 |
 | `npm run check` | 资产、文档、源码语法和本地单元测试 | 无业务请求 |
 | `npm run test:p0:api:read` | safe API + 默认保护性反例 | 有认证请求，不创建资金订单；不包含已知会建单的充值限额探针 |
 | `npm run test:ui:p0` | 固定默认 UI 清单 | 默认只验证页面/游戏启动；专项写入开关应保持关闭 |
@@ -81,3 +82,42 @@ ENV_FILE=.env.fat ENV_FILE_PRECEDENCE=shell EXECUTE_WITHDRAW_UI=true CLIENT_WITH
 默认 10 条 UI 不提交提现；提现专项明确开启写开关才提交合法订单。以上专项各自清理 UI 最近结果，且不自动调用默认 UI 汇总渲染器；不能把专项结果当成默认 10 条套件已重跑。完整跨 API/UI 资金链使用本文件的 `test:p0:full`，其中提现由 API 创建。
 
 `python3 scripts/render-ui-business-report.py` 仅用当前证据重建 UI 业务报告及断言明细，不执行测试或业务请求。受控 UI 新运行会清理上一轮 UI 报告/图片，续跑保留本轮检查点，详见 [UI 报告与覆盖规则](../ui/README.md#业务报告断言与产物覆盖)。
+
+## Telegram 提测
+
+`npm run qa:telegram` 只扫描并输出requirements目录内的需求级待确认列表，不执行测试。`npm run qa:telegram -- preview`只读本地队列刷新清单，不扫描或调用AI。确认后用 `run --requirements ISOP-2022,ISOP-2032 --revision ...` 按需求选择；同需求多个批次须用兼容的`--candidates`明确选择。每个Story固定一名负责人；报告和候选留本机，用 `approve --job ... --revision ... --bugs B1,B2` 确认具体产品BUG，再用 `submit` 创建并关联，整批成功后才一次性发群清单。`check` 离线检查；`verify` 只读核对Telegram和Jira连接。无常驻监听，详见 [Telegram接入手册](telegram-qa.md)。
+
+## CSV用例与结果树
+
+`npm run qa:report -- --cases <cases.csv>`仅离线校验用例；同时提供`--results <recorded-results.json> --out <新目录>`生成结果树和CSV，不登录、不执行业务。报告生成成功不代表测试通过。格式与迁移范围见[统一流程](testing-workflow.md)。
+
+## 新需求统一执行入口（ISOP-2027试点）
+
+`python3 scripts/run-requirement.py ISOP-2027`默认离线校验；`--export-cases`从plan.json生成CSV；`--only <id...>`、`--layer API`选择范围；`--rebuild <run目录>`离线重建到新视图目录。实施与验证见[阶段记录](new-requirement-stage1-2.md)。旧run-requirement-api.py与P0入口保持兼容。
+
+`npm run qa:requirement -- ISOP-2027 --env .env.fat --execute --insecure --allow-write kyc-review --allow-write kyc-permissions`按当前策略执行FAT自动分配计划（默认排除人工分配的UI/FLOW；显式选择可运行旧UI脚本），注册/KYC/编辑/复核仅作用于本轮独立会员；权限步骤仅对B独占的当前Codex角色撤权并finally恢复。省略`--execute`不登录；省略所需写范围在前置校验阶段拒绝。BUG和群投递不在此命令中。可加`--version <发布标识>`写入声明版本，默认未提供；`--expected-plan-sha256 <hash>`拒绝计划变化，`--result-index <新文件>`供编排方获取本次完成结果，不读latest挑选证据。
+
+新入口执行退出码：0为所选用例全部PASS，1为存在FAIL/ERROR，2为没有FAIL/ERROR但仍有NOT_RUN（包括无最大长度契约的观察）。离线校验/重建退出0仅代表该离线操作成功。
+
+固定UI使用`--layer UI`；双账号三图UI核准/驳回使用`--only 2027-FLOW-003 2027-FLOW-004`，均需`--execute --insecure --allow-write kyc-review`。页面资产、会话与实测边界见[阶段3记录](new-requirement-stage3.md)。
+
+## 团队执行包与回填
+
+`npm run qa:delivery -- prepare <Story> --environment FAT --out <新目录>`离线生成API自动表与人工清单；`import --packet <执行包> --manual <回填CSV> --out <新报告目录>`导入人工结果，可重复提供`--auto-results <原始结果JSON>`。细节见[团队流程](team-testing.md)。ISOP-2027默认qa:requirement执行自动分配项；`--include-ui-automation`恢复包含既有UI脚本的范围，`--only/--layer UI`仍可显式选择。
+
+## 报告精简与清理
+
+`qa:requirement`（执行和`--rebuild`）、`qa:delivery prepare/import`默认只导出results.csv/results.html；加`--extra-views`才额外导出cases/failures/pending CSV和summary.json。原始结果、快照、必要证据及团队API/人工表继续保留；旧qa:report、查询CLI、P0的路径和产物契约不变。
+
+`check:archive`名称保留，现检查旧扫描目录只留退出索引，不再读取已删除的manifest。2026-09-11一次性全项目清理见[整理记录](project-cleanup-2026-09-11.md)；未增加自动删除运行历史的任务。现有P0清理命令仍只处理原API/UI生成目录，不清理Telegram状态或新需求包。
+
+## 分离总用例与API数据
+
+`npm run qa:cases -- <Story...>`离线导出指定需求的cases.csv总表，以及已有执行资产的api/data-cases.csv；`--all`导出全部需求。总表来自test-cases.md，API表来自plan.json或旧api/cases.json，不登录、不生成运行结果。没有API执行源的需求只导出总表，命令明确显示API未实现。
+
+原`qa:requirement -- <Story> --export-cases`同步生成这两类表并继续更新旧查询兼容JSON。总表使用业务Case ID，数据表和`--only`使用执行Case ID；总表ID不直接传给`--only`。详细执行结果用本批冻结快照重建，不能与业务总表按执行编号直接合并。已有团队执行包不自动重写。
+
+当前执行策略（2026-09-11）：P0继续运行并维护API与核心UI自动化；新需求使用API自动执行与UI人工回填，暂不建设新需求UI自动化。本文保留的专项UI参数只说明兼容能力，不表示应自动续跑新需求UI或停止P0 UI。
+
+
+`qa:telegram run`对有plan.json的需求使用统一API执行器，按已确认计划hash/用例选择执行；UI生成team-packet/manual.csv供人工执行，不启动新需求浏览器。`npm run qa:telegram -- import-manual --job <job> --revision <当前报告版本> --manual <本批回填CSV>`合并明确API来源和人工结果、重新评审BUG，不重跑业务、不建单或发群；导入后使用新revision确认BUG。写范围和未迁移需求兼容规则见[Telegram流程](telegram-qa.md#测试与证据边界)。

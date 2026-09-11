@@ -4,7 +4,7 @@
 
 指导 AI 或测试执行者维护、扩展和执行本项目的 UI 自动化资产。
 
-当前 UI 自动化只聚焦客户端主流程，不追活动细节；后台管理端优先用 API 覆盖，暂不建设后台 UI 回归。
+当前P0继续维护API与核心UI自动化，UI聚焦客户端主流程。2026-09-11用户澄清：新需求UI暂由人工执行，不新增专项UI脚本或扩建UI框架；AI负责用例、准备和结果分析。早期Telegram专项UI实现只保留兼容，当前分工见[团队流程](../docs/team-testing.md#自动化范围)，不因此停用P0 UI。
 
 适用范围：
 
@@ -25,7 +25,7 @@
    - 提现。
    - My/个人中心。
 3. 活动、运营位、临时弹窗、Rewards 细节、Filcoin 活动玩法默认不做稳定 UI 回归，只记录可见性和 Network。
-4. 后台管理端暂不做 UI 自动化。后台登录、报表、列表、详情、审批查询优先走 API。
+4. P0不默认建设后台UI回归。新需求专项可按已确认原型、规则与页面配置执行UI；后台业务数据核对仍优先API。
 5. UI 脚本必须数据驱动：
    - 页面和路由配置放 `ui/data/client-pages.json`。
    - 弹窗规则放 `ui/data/client-modals.json`。
@@ -41,7 +41,7 @@
    - 三方游戏 iframe/canvas 无稳定 DOM 时，允许 Pixel 7 `412x915` 固定视口下的相对坐标；坐标必须配置在 `ui/data/client-game-actions.json`，不得散落在用例代码。
 7. 登录态、storage state、截图、视频、trace、token、cookie、账号和 OTP 不提交仓库。UI 原始结果写入 `ui/results/`，默认忽略。
 8. UI HTML/Markdown 可读报告写入 `ui/reports/`，原始 JSON、截图、trace、视频写入 `ui/results/`；Playwright HTML 和测试附件分别写入 `playwright-report/`、`test-results/`。
-9. UI 结果目录只保留最近一次执行产物。npm UI 命令会先执行 `python3 scripts/clean-test-artifacts.py ui`，不要在工作区按时间戳或次数累积报告。
+9. P0 UI 结果目录只保留最近一次执行产物。Telegram专项证据按run-id隔离于忽略的`reports/telegram/runs/`，不被P0清理。npm UI 命令会先执行 `python3 scripts/clean-test-artifacts.py ui`，不要在工作区按时间戳或次数累积报告。
 10. UI 失败时先判断是：
    - 页面选择器变化。
    - 接口返回异常。
@@ -93,3 +93,7 @@ npm run test:ui:game-bet
 ## 范围与状态来源
 
 当前任务与冻结专项见 [交接](../AI-HANDOFF.md)，执行命令见 [UI 手册](../ui/README.md)。本文件仅维护长期方法。
+
+## 简洁用例与结果
+
+新需求专项采用CSV用例、前置清单和四状态结果树，详见[用例与结果流程](../docs/testing-workflow.md)。旧历史结果已按用户授权清理，保留范围见当前交接；登录和数据准备不计业务PASS，脚本错误不直接计产品FAIL。

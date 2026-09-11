@@ -3,6 +3,8 @@
 
 from __future__ import annotations
 
+from qa_core.values import get_nested, has_nested
+
 import argparse
 import csv
 import json
@@ -112,26 +114,6 @@ def request_body_for(row: dict[str, str]) -> dict[str, object] | None:
         raise ValueError(f"request_body must be a JSON object for {row.get('case_id') or row.get('priority')}")
     now = int(time.time())
     return resolve_dynamic_values(parsed, now)
-
-
-def get_nested(value: object, path: str) -> object:
-    current = value
-    for part in path.split("."):
-        if isinstance(current, dict) and part in current:
-            current = current[part]
-        else:
-            return None
-    return current
-
-
-def has_nested(value: object, path: str) -> bool:
-    current = value
-    for part in path.split("."):
-        if isinstance(current, dict) and part in current:
-            current = current[part]
-        else:
-            return False
-    return True
 
 
 def assertion_result(result: dict[str, object], assertions: str) -> tuple[bool, list[str]]:

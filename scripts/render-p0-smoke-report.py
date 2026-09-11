@@ -3,6 +3,8 @@
 
 from __future__ import annotations
 
+from qa_core.reporting import markdown_table as table
+
 import argparse
 import csv
 import json
@@ -14,16 +16,6 @@ from pathlib import Path
 def load_cases(path: Path) -> dict[str, dict[str, str]]:
     with path.open(encoding="utf-8", newline="") as handle:
         return {row["case_id"]: row for row in csv.DictReader(handle)}
-
-
-def table(rows: list[list[str]]) -> str:
-    lines = [
-        "| " + " | ".join(rows[0]) + " |",
-        "| " + " | ".join("---" for _ in rows[0]) + " |",
-    ]
-    for row in rows[1:]:
-        lines.append("| " + " | ".join(item.replace("|", "\\|") for item in row) + " |")
-    return "\n".join(lines)
 
 
 def body_status(item: dict[str, object]) -> str:

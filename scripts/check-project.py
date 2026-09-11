@@ -31,9 +31,13 @@ def document_errors(path: Path, root: Path, commands: set[str]) -> list[str]:
             if not target or re.match(r"[a-zA-Z][a-zA-Z0-9+.-]*:", target):
                 continue
             resolved = (path.parent / unquote(target)).resolve()
-            generated_roots = ("api/results", "ui/results", "ui/reports", "playwright-report", "test-results")
+            generated_roots = ("api/results", "ui/results", "ui/reports", "reports/qa", "reports/telegram", "playwright-report", "test-results")
             if any(resolved.is_relative_to(root.resolve() / entry) for entry in generated_roots):
                 continue  # Latest-run artifacts are optional and routinely cleaned.
+            if resolved.is_relative_to(root.resolve() / 'requirements'):
+                relative = resolved.relative_to(root.resolve()).parts
+                if len(relative) >= 4 and relative[2:4] == ('api', 'results'):
+                    continue  # Requirement evidence is local, not a checkout prerequisite.
             if not resolved.exists():
                 errors.append(f"{label}: missing link target {target}")
         for command in re.findall(r"npm run ([\w:-]+)", line):

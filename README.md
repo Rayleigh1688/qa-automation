@@ -39,6 +39,16 @@ npm run test:ui:business:fat
 
 API P0 与默认 UI P0 使用 `.env.fat`，切换 UAT 时在对应命令前加 `ENV_FILE=.env.uat`。UI 业务全流程固定使用 `.env.ui-p0.fat`，仅支持 FAT。三个入口按测试目的独立选择；npm 入口以本机锁串行保护运行与清理，后一次 UI 测试会覆盖前一次 UI 产物。KYC 每轮新号、BASIC 永久未认证、资金号按执行者分配；本地锁不提供跨机器账号保护，详见 [本地手册](docs/local-running.md)。
 
+## Telegram 提测：手动扫描一次
+
+```bash
+npm run qa:telegram
+```
+
+读取提测群消息，只将带ISOP工单的消息交AI整理，优先用design里的子任务记录找到父Story，并按需求合并候选，输出带判断依据的本地候选清单后退出。任何成员都可提测；你确认清单后，按终端给出的 `run` 命令执行测试。每个 Story 固定一名测试负责人，所有子任务和测试批次沿用。测试过程、报告及候选 BUG 留本机；核对具体 BUG 后用 `approve` 确认，再运行 `npm run qa:telegram -- submit` 创建并关联 Story。整批成功后才一次性向测试群发送 BUG 链接清单。默认从上次处理位置继续扫描，记录扫描时间；可用 `npm run qa:telegram -- --since 2026-09-10T15:00:00+08:00` 选择起始时间。没有长期监听。
+
+首次使用先补齐人员、Jira 和首个需求的环境/页面配置，见 [接入清单](docs/telegram-qa.md#首次接入需要补充的信息)。`npm run qa:telegram -- check` 只检查本地配置，不读取群消息或执行测试。机器人待处理更新最多保留24小时，不提供任意群历史扫描；提测格式、身份查询和恢复命令见 [Telegram 手册](docs/telegram-qa.md)。
+
 ## UI 业务全流程：一条命令
 
 完成环境配置后，可独立运行，无需 AI 或人工看图。当前该入口仅支持 FAT；除上述依赖外，还需 ImageMagick 7（`magick`）和 Tesseract 英文识别。将 FAT 服务、分离的 KYC/BASIC/资金账号、本地 KYC 素材及真实审批 TOTP 配置在 Git 忽略的 `.env.ui-p0.fat` 中；资金账号须已通过 KYC、绑定有效提款账户并配置钱包密码。配置及账号要求见 [环境手册](api/runbooks/ENVIRONMENTS.md) 和 [UI 执行手册](ui/README.md#固定付费投注与显式清流独立执行)。
@@ -70,7 +80,7 @@ npm run test:ui:business -- --env .env.ui-p0.fat --execute --new-kyc-account --b
 
 ## 接下来：新需求测试
 
-新需求从 [测试设计入口](requirements/README.md) 开始，使用需求模板关联验收标准、API/UI 用例和现有 P0。低频低风险接口随需求迭代补充；已有扫描只作 [历史参考](archive/interface-scans/README.md)。
+新需求从 [测试设计入口](requirements/README.md) 开始，使用需求模板关联验收标准、API/UI 用例和现有 P0。低频低风险接口随需求迭代补充；旧扫描已[清理退出](archive/interface-scans/README.md)，当前接口资产继续维护。
 
 ## 项目结构
 
@@ -86,7 +96,7 @@ npm run test:ui:business -- --env .env.ui-p0.fat --execute --new-kyc-account --b
 | `.agents/skills/`、`skills/` | AI 任务路由及长期测试方法 |
 | `harness/` | 故障定位与有状态的已知问题记录 |
 | `testing-plan/` | 阶段目标与验收规划 |
-| `archive/interface-scans/` | 各端扫描历史资产，统一索引与校验清单 |
+| `archive/interface-scans/` | 旧扫描退出说明；原脚本和快照已删除 |
 | `requirements/` | 按新需求组织测试设计、验收映射和结论 |
 | `docs/` | 命令、架构、CI 状态和历史交接 |
 
@@ -97,13 +107,19 @@ npm run test:ui:business -- --env .env.ui-p0.fat --execute --new-kyc-account --b
 - 接手当前工作：[AI-HANDOFF.md](AI-HANDOFF.md)。
 - 修改仓库：[AGENTS.md](AGENTS.md)；业务任务由 [FILBET Skill](.agents/skills/filbet-p0-automation/SKILL.md) 按需路由。
 - API 资产：[P0 说明](api/p0/README.md)；UI 执行：[UI 说明](ui/README.md)。
-- 排障：[Harness](harness/README.md)；专项快照：[接口发现](archive/interface-scans/README.md)。
+- 排障：[Harness](harness/README.md)；扫描退出说明：[接口发现](archive/interface-scans/README.md)。
 - 历史成果：[冻结交接](docs/history/handoff-2026-09-04.md)；CI 验证边界：[CI 状态](docs/ci.md)。
 
 ## 结果与业务边界
 
-API 结果及跨 API/UI 主流程报告写入 `api/results/`；UI 原始结果写 `ui/results/`，可读报告写 `ui/reports/`，Playwright 附件写 `test-results/` 和 `playwright-report/`。这些运行目录只保留最近一次结果，历史归档按 CI 状态说明处理；已跟踪的专项扫描快照采用独立保留策略。
+API 结果及跨 API/UI 主流程报告写入 `api/results/`；UI 原始结果写 `ui/results/`，可读报告写 `ui/reports/`，Playwright 附件写 `test-results/` 和 `playwright-report/`。这些运行目录只保留最近一次结果，历史归档按 CI 状态说明处理；旧专项扫描快照已清理，当前执行包/活动状态保留，见[整理记录](docs/project-cleanup-2026-09-11.md)。
 
 每个 runner fresh login，跨进程通过本轮 uid、订单号与时间窗口关联证据。数据库仅只读诊断；业务步骤失败时停止后续成功动作。真实凭据与未脱敏个人资料只留本地忽略配置或 CI 凭据。环境接受标准见 [环境手册](api/runbooks/ENVIRONMENTS.md)，不能把待审建单表述为最终出款成功。
 
 新项目复用公共运行能力，见 [跨项目运行核心](docs/runtime-reuse.md)：包含白名单导出、独立接入示例与 Windows/Mac/Linux 验证边界。
+
+## 简洁用例与结果
+
+新需求按Story分开保存cases.csv业务总表和api/data-cases.csv数据驱动表，通过总用例编号关联；`npm run qa:cases -- --all`离线更新。前置清单和四状态结果树见[用例与结果流程](docs/testing-workflow.md)。历史结果已按用户授权清理；登录和数据准备不计业务PASS，脚本错误不直接计产品FAIL。
+
+新需求当前采用[API自动优先、UI人工清单与回填](docs/team-testing.md)，使用`npm run qa:delivery`离线准备与汇总；新需求暂不建设UI自动化，旧专项脚本保留兼容。P0继续维护API与核心UI自动化。

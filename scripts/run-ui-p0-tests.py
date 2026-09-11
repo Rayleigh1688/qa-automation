@@ -3,13 +3,14 @@
 
 from __future__ import annotations
 
+from qa_core.redaction import sanitize_error, SENSITIVE_MARKERS
+
 from qa_core.terminal import print_result, print_path
 
 import argparse
 import html
 import json
 import os
-import re
 import shutil
 import subprocess
 from qa_core.process import run_ui_process
@@ -26,8 +27,6 @@ DEFAULT_SPECS = [
     "ui/cases/client-game-bet-smoke.spec.mjs",
     "ui/cases/client-p0-positive-negative.spec.mjs",
 ]
-
-SENSITIVE_MARKERS = ("PASSWORD", "SECRET", "TOKEN", "OTP", "CODE", "PHONE", "EMAIL", "DEVICE")
 
 
 def run(command: list[str], env: dict[str, str]) -> int:
@@ -50,20 +49,6 @@ def load_env(path: Path) -> dict[str, str]:
     env.pop("API_TOKEN", None)
     env.pop("ADMIN_TOKEN", None)
     return env
-
-
-def sanitize_error(error: BaseException | str, env: dict[str, str]) -> str:
-    message = str(error) or (type(error).__name__ if isinstance(error, BaseException) else "unknown error")
-    for name, value in env.items():
-        if len(value) >= 4 and any(marker in name.upper() for marker in SENSITIVE_MARKERS):
-            message = message.replace(value, "<redacted>")
-    message = re.sub(
-        r"([?&](?:token|code|otp|phone|email|uid|device_id|x-device-id)=)[^&\s]+",
-        r"\1<redacted>",
-        message,
-        flags=re.IGNORECASE,
-    )
-    return message[:2000]
 
 
 def preflight(args: argparse.Namespace, env: dict[str, str]) -> None:

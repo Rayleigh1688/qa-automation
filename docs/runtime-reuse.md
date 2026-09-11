@@ -14,6 +14,8 @@
 | CBOR/JSON | `qa_core.codec` | 请求/响应字节；只支持现有协议子集，需核对新服务契约 |
 | 终端样式 | `qa_core.terminal` | 状态和文字；TTY/NO_COLOR 行为保留 |
 | HTML/Markdown 展示 | `qa_core.reporting` | 标题、状态、条目、输出文件及证据；默认中文/UTC+8 展示约定需核对 |
+| 日志脱敏 | `qa_core.redaction` | 调用者提供环境值或敏感参数集合，不自动加载凭据 |
+| 嵌套字段 | `qa_core.values` | 字典路径读取与存在性判断，区分缺失字段和显式null |
 
 导出不包含 FILBET 业务包、接口路由/时间契约、账号、环境文件、Jira 需求、页面定位器、图像识别阈值、资金恢复逻辑、业务清理器或当前报告。doctor 的账号与环境检查、CI 凭据、用例标签和报告判定必须由新项目实现；不能把现有业务 PASS 规则当作新项目验收规则。报告函数负责展示，调用者负责状态可信、脱敏及证据关联。资金链默认文案留在源仓库的 filbet/reporting.py，不进入导出核心；新项目可传 evidence 的 images_title/image_note/checks_title，layout（default/ui/gallery）和 generated_at 字符串选择展示。
 
@@ -85,3 +87,7 @@ node scripts/python-launcher.mjs scripts/run-checks.py
 先做离线验证：本机虚拟环境选择、中文/空格路径、参数字面值、第二阶段失败停止、同项目锁竞争和嵌套、不同项目锁隔离、退出/中断后的后代清理。再按新项目的明确环境和授权验证 API/UI，不通过导出脚本自动执行。
 
 当前导出核心在 macOS 以独立临时项目测试。原项目已有用户反馈 Windows 正常跑通；新封装及新项目 Windows/Linux 仍需各自回归，不能由旧反馈或模拟测试代替实机验收。
+
+新需求通用导出另包含`case_report.py`、`execution_plan.py`和`plan_runner.py`：调用者提供服务/账号元数据和固定方法注册表，公共层不登录、不导入FILBET。实际业务adapter自行提供，导出不包含ISOP用例或本机证据。
+
+`qa_core/case_catalogue.py`提供离线业务总表/API数据视图，包含在公共导出中；调用者传入设计文件、Story和执行资产。它只生成审阅CSV并验证Case引用，不执行业务、不修改源JSON或人工执行结果。项目CLI不随公共核心导出。

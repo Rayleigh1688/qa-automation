@@ -12,6 +12,18 @@ from pathlib import Path
 EAST_8 = timezone(timedelta(hours=8))
 
 
+def markdown_table(rows: list[list[str]]) -> str:
+    if not rows:
+        return ""
+    lines = [
+        "| " + " | ".join(rows[0]) + " |",
+        "| " + " | ".join("---" for _ in rows[0]) + " |",
+    ]
+    for row in rows[1:]:
+        lines.append("| " + " | ".join(item.replace("|", "\\|") for item in row) + " |")
+    return "\n".join(lines)
+
+
 def format_east8_time(value: datetime | str | None = None) -> str:
     """Return a stable human-readable timestamp in UTC+8."""
     if isinstance(value, str):
@@ -52,7 +64,7 @@ def status_class(status: str) -> str:
 
 def report_verdict(items: list[dict[str, str]], run_status: str = "") -> tuple[str, str]:
     counts = Counter(item.get("status", "UNKNOWN").upper() for item in items)
-    if run_status.upper() in {"FAILED", "INTERRUPTED", "BLOCKED"} or counts["FAIL"] or counts["FAILED"]:
+    if run_status.upper() in {"FAILED", "INTERRUPTED", "BLOCKED"} or counts["FAIL"] or counts["FAILED"] or counts["BLOCKED"]:
         return "BLOCKED", "存在失败或执行中断，请查看失败明细和最后执行阶段。"
     if not items or counts["PENDING"] or counts["SKIPPED"] or counts["NOT_RUN"]:
         return "PARTIAL", "已执行项通过，但仍有未执行或跳过项。"

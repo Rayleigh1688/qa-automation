@@ -1,30 +1,18 @@
 #!/usr/bin/env python3
-"""Verify the frozen scan relocation without executing archived scripts."""
-import hashlib
-import json
+"""Keep check:archive compatible and prevent retired scan payloads returning."""
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-ARCHIVE = ROOT / 'archive/interface-scans/2026-09-07'
+ARCHIVE = ROOT / 'archive/interface-scans'
 
 
 def main():
-    records = json.loads((ARCHIVE / 'manifest.json').read_text())['files']
-    errors = []
-    seen = set()
-    for record in records:
-        path = (ROOT / record['archived']).resolve()
-        if not path.is_relative_to(ARCHIVE) or path in seen:
-            errors.append('Invalid or duplicate archive path')
-            continue
-        seen.add(path)
-        if not path.is_file() or hashlib.sha256(path.read_bytes()).hexdigest() != record['sha256_archived']:
-            errors.append(f"Missing or changed: {record['archived']}")
-        if (ROOT / record['original']).exists():
-            errors.append(f"Old location still exists: {record['original']}")
-    if errors:
-        raise SystemExit('\n'.join(errors))
-    print(f'archive checks PASS: {len(records)} manifest files')
+    if not (ARCHIVE / 'README.md').is_file():
+        raise SystemExit('Missing scan retirement index')
+    unexpected = [p.relative_to(ROOT) for p in ARCHIVE.iterdir() if p.name != 'README.md']
+    if unexpected:
+        raise SystemExit('Retired scan payloads must not return: ' + ', '.join(map(str, unexpected)))
+    print('archive checks PASS: retirement index only; current assets in api/inventory and api/catalog')
 
 
 if __name__ == '__main__':

@@ -1,0 +1,696 @@
+{
+  "schema_version": 1,
+  "requirement": "ISOP-2037",
+  "source_commit": "69c9be0631a11b2f9ae08624dc5d9380c6069362",
+  "window_note": "2026-09-09 00:00:00 至 09-10 23:59:59.999 UTC+8；毫秒",
+  "cases": [
+    {
+      "id": "game-list",
+      "case_ids": [
+        "ISOP-2037-C09"
+      ],
+      "title": "查询结构与分页",
+      "kind": "positive",
+      "request": {
+        "path": "/cmpl/record/game",
+        "method": "POST",
+        "body": {
+          "start_time": 1788883200000,
+          "end_time": 1789055999999,
+          "page": 1,
+          "page_size": 20
+        }
+      },
+      "auth": "valid",
+      "expect": "success",
+      "requires_rows": false,
+      "checks": [
+        {
+          "op": "type",
+          "path": "data",
+          "value": "object"
+        },
+        {
+          "op": "type",
+          "path": "data.d",
+          "value": "array"
+        },
+        {
+          "op": "type",
+          "path": "data.t",
+          "value": "integer"
+        },
+        {
+          "op": "type",
+          "path": "data.s",
+          "value": "integer"
+        },
+        {
+          "op": "count_rows",
+          "path": "data.s"
+        },
+        {
+          "op": "page_limit",
+          "path": "data.d",
+          "value": 20
+        }
+      ]
+    },
+    {
+      "id": "game-jp-0",
+      "case_ids": [
+        "ISOP-2037-C09"
+      ],
+      "title": "JP类型与金额字段/多池加总",
+      "kind": "positive",
+      "request": {
+        "path": "/cmpl/record/game",
+        "method": "POST",
+        "body": {
+          "start_time": 1788883200000,
+          "end_time": 1789055999999,
+          "page": 1,
+          "page_size": 20,
+          "jp_type": 0
+        }
+      },
+      "auth": "valid",
+      "expect": "success",
+      "requires_rows": true,
+      "checks": [
+        {
+          "op": "type",
+          "path": "data",
+          "value": "object"
+        },
+        {
+          "op": "type",
+          "path": "data.d",
+          "value": "array"
+        },
+        {
+          "op": "type",
+          "path": "data.t",
+          "value": "integer"
+        },
+        {
+          "op": "type",
+          "path": "data.s",
+          "value": "integer"
+        },
+        {
+          "op": "count_rows",
+          "path": "data.s"
+        },
+        {
+          "op": "rows_eq",
+          "path": "data.d",
+          "field": "jp_type",
+          "value": 0
+        },
+        {
+          "op": "row_keys",
+          "path": "data.d",
+          "value": [
+            "jp_type",
+            "jp_contribution",
+            "jp_winning",
+            "seed_money",
+            "jackpot_details"
+          ]
+        },
+        {
+          "op": "row_decimal",
+          "path": "data.d",
+          "value": [
+            "jp_contribution",
+            "jp_winning",
+            "seed_money"
+          ]
+        },
+        {
+          "op": "jp_visibility",
+          "path": "data.d"
+        }
+      ]
+    },
+    {
+      "id": "game-jp-1",
+      "case_ids": [
+        "ISOP-2037-C09"
+      ],
+      "title": "JP类型与金额字段/多池加总",
+      "kind": "positive",
+      "request": {
+        "path": "/cmpl/record/game",
+        "method": "POST",
+        "body": {
+          "start_time": 1788883200000,
+          "end_time": 1789055999999,
+          "page": 1,
+          "page_size": 20,
+          "jp_type": 1
+        }
+      },
+      "auth": "valid",
+      "expect": "success",
+      "requires_rows": true,
+      "checks": [
+        {
+          "op": "type",
+          "path": "data",
+          "value": "object"
+        },
+        {
+          "op": "type",
+          "path": "data.d",
+          "value": "array"
+        },
+        {
+          "op": "type",
+          "path": "data.t",
+          "value": "integer"
+        },
+        {
+          "op": "type",
+          "path": "data.s",
+          "value": "integer"
+        },
+        {
+          "op": "count_rows",
+          "path": "data.s"
+        },
+        {
+          "op": "rows_eq",
+          "path": "data.d",
+          "field": "jp_type",
+          "value": 1
+        },
+        {
+          "op": "row_keys",
+          "path": "data.d",
+          "value": [
+            "jp_type",
+            "jp_contribution",
+            "jp_winning",
+            "seed_money",
+            "jackpot_details"
+          ]
+        },
+        {
+          "op": "row_decimal",
+          "path": "data.d",
+          "value": [
+            "jp_contribution",
+            "jp_winning",
+            "seed_money"
+          ]
+        },
+        {
+          "op": "jp_visibility",
+          "path": "data.d"
+        }
+      ]
+    },
+    {
+      "id": "game-jp-2",
+      "case_ids": [
+        "ISOP-2037-C09"
+      ],
+      "title": "JP类型与金额字段/多池加总",
+      "kind": "positive",
+      "request": {
+        "path": "/cmpl/record/game",
+        "method": "POST",
+        "body": {
+          "start_time": 1788883200000,
+          "end_time": 1789055999999,
+          "page": 1,
+          "page_size": 20,
+          "jp_type": 2
+        }
+      },
+      "auth": "valid",
+      "expect": "success",
+      "requires_rows": true,
+      "checks": [
+        {
+          "op": "type",
+          "path": "data",
+          "value": "object"
+        },
+        {
+          "op": "type",
+          "path": "data.d",
+          "value": "array"
+        },
+        {
+          "op": "type",
+          "path": "data.t",
+          "value": "integer"
+        },
+        {
+          "op": "type",
+          "path": "data.s",
+          "value": "integer"
+        },
+        {
+          "op": "count_rows",
+          "path": "data.s"
+        },
+        {
+          "op": "rows_eq",
+          "path": "data.d",
+          "field": "jp_type",
+          "value": 2
+        },
+        {
+          "op": "row_keys",
+          "path": "data.d",
+          "value": [
+            "jp_type",
+            "jp_contribution",
+            "jp_winning",
+            "seed_money",
+            "jackpot_details"
+          ]
+        },
+        {
+          "op": "row_decimal",
+          "path": "data.d",
+          "value": [
+            "jp_contribution",
+            "jp_winning",
+            "seed_money"
+          ]
+        },
+        {
+          "op": "jp_visibility",
+          "path": "data.d"
+        }
+      ]
+    },
+    {
+      "id": "game-jp-3",
+      "case_ids": [
+        "ISOP-2037-C09"
+      ],
+      "title": "JP类型与金额字段/多池加总",
+      "kind": "positive",
+      "request": {
+        "path": "/cmpl/record/game",
+        "method": "POST",
+        "body": {
+          "start_time": 1788883200000,
+          "end_time": 1789055999999,
+          "page": 1,
+          "page_size": 20,
+          "jp_type": 3
+        }
+      },
+      "auth": "valid",
+      "expect": "success",
+      "requires_rows": true,
+      "checks": [
+        {
+          "op": "type",
+          "path": "data",
+          "value": "object"
+        },
+        {
+          "op": "type",
+          "path": "data.d",
+          "value": "array"
+        },
+        {
+          "op": "type",
+          "path": "data.t",
+          "value": "integer"
+        },
+        {
+          "op": "type",
+          "path": "data.s",
+          "value": "integer"
+        },
+        {
+          "op": "count_rows",
+          "path": "data.s"
+        },
+        {
+          "op": "rows_eq",
+          "path": "data.d",
+          "field": "jp_type",
+          "value": 3
+        },
+        {
+          "op": "row_keys",
+          "path": "data.d",
+          "value": [
+            "jp_type",
+            "jp_contribution",
+            "jp_winning",
+            "seed_money",
+            "jackpot_details"
+          ]
+        },
+        {
+          "op": "row_decimal",
+          "path": "data.d",
+          "value": [
+            "jp_contribution",
+            "jp_winning",
+            "seed_money"
+          ]
+        },
+        {
+          "op": "jp_visibility",
+          "path": "data.d"
+        }
+      ]
+    },
+    {
+      "id": "game-jp-4",
+      "case_ids": [
+        "ISOP-2037-C09"
+      ],
+      "title": "JP类型与金额字段/多池加总",
+      "kind": "positive",
+      "request": {
+        "path": "/cmpl/record/game",
+        "method": "POST",
+        "body": {
+          "start_time": 1788883200000,
+          "end_time": 1789055999999,
+          "page": 1,
+          "page_size": 20,
+          "jp_type": 4
+        }
+      },
+      "auth": "valid",
+      "expect": "success",
+      "requires_rows": true,
+      "checks": [
+        {
+          "op": "type",
+          "path": "data",
+          "value": "object"
+        },
+        {
+          "op": "type",
+          "path": "data.d",
+          "value": "array"
+        },
+        {
+          "op": "type",
+          "path": "data.t",
+          "value": "integer"
+        },
+        {
+          "op": "type",
+          "path": "data.s",
+          "value": "integer"
+        },
+        {
+          "op": "count_rows",
+          "path": "data.s"
+        },
+        {
+          "op": "rows_eq",
+          "path": "data.d",
+          "field": "jp_type",
+          "value": 4
+        },
+        {
+          "op": "row_keys",
+          "path": "data.d",
+          "value": [
+            "jp_type",
+            "jp_contribution",
+            "jp_winning",
+            "seed_money",
+            "jackpot_details"
+          ]
+        },
+        {
+          "op": "row_decimal",
+          "path": "data.d",
+          "value": [
+            "jp_contribution",
+            "jp_winning",
+            "seed_money"
+          ]
+        },
+        {
+          "op": "jp_visibility",
+          "path": "data.d"
+        }
+      ]
+    },
+    {
+      "id": "game-jp-99",
+      "case_ids": [
+        "ISOP-2037-C09"
+      ],
+      "title": "JP类型与金额字段/多池加总",
+      "kind": "positive",
+      "request": {
+        "path": "/cmpl/record/game",
+        "method": "POST",
+        "body": {
+          "start_time": 1788883200000,
+          "end_time": 1789055999999,
+          "page": 1,
+          "page_size": 20,
+          "jp_type": 99
+        }
+      },
+      "auth": "valid",
+      "expect": "success",
+      "requires_rows": true,
+      "checks": [
+        {
+          "op": "type",
+          "path": "data",
+          "value": "object"
+        },
+        {
+          "op": "type",
+          "path": "data.d",
+          "value": "array"
+        },
+        {
+          "op": "type",
+          "path": "data.t",
+          "value": "integer"
+        },
+        {
+          "op": "type",
+          "path": "data.s",
+          "value": "integer"
+        },
+        {
+          "op": "count_rows",
+          "path": "data.s"
+        },
+        {
+          "op": "rows_eq",
+          "path": "data.d",
+          "field": "jp_type",
+          "value": 99
+        },
+        {
+          "op": "row_keys",
+          "path": "data.d",
+          "value": [
+            "jp_type",
+            "jp_contribution",
+            "jp_winning",
+            "seed_money",
+            "jackpot_details"
+          ]
+        },
+        {
+          "op": "row_decimal",
+          "path": "data.d",
+          "value": [
+            "jp_contribution",
+            "jp_winning",
+            "seed_money"
+          ]
+        },
+        {
+          "op": "jp_multi",
+          "path": "data.d"
+        },
+        {
+          "op": "jp_visibility",
+          "path": "data.d"
+        }
+      ]
+    },
+    {
+      "id": "game-missing-time",
+      "case_ids": [
+        "ISOP-2037-C09"
+      ],
+      "title": "缺失必填时间范围",
+      "kind": "negative",
+      "request": {
+        "path": "/cmpl/record/game",
+        "method": "POST",
+        "body": {
+          "page": 1,
+          "page_size": 20
+        }
+      },
+      "auth": "valid",
+      "expect": "validation_rejected",
+      "requires_rows": false,
+      "checks": [],
+      "error_pattern": "time|parameter|params|日期|时间|参数"
+    },
+    {
+      "id": "auth-missing",
+      "case_ids": [
+        "ISOP-2037-C09"
+      ],
+      "title": "未登录/无效token不得泄露查询结果",
+      "kind": "negative",
+      "request": {
+        "path": "/cmpl/record/game",
+        "method": "POST",
+        "body": {
+          "start_time": 1788883200000,
+          "end_time": 1789055999999,
+          "page": 1,
+          "page_size": 20
+        }
+      },
+      "auth": "missing",
+      "expect": "auth_rejected",
+      "requires_rows": false,
+      "checks": []
+    },
+    {
+      "id": "auth-invalid",
+      "case_ids": [
+        "ISOP-2037-C09"
+      ],
+      "title": "未登录/无效token不得泄露查询结果",
+      "kind": "negative",
+      "request": {
+        "path": "/cmpl/record/game",
+        "method": "POST",
+        "body": {
+          "start_time": 1788883200000,
+          "end_time": 1789055999999,
+          "page": 1,
+          "page_size": 20
+        }
+      },
+      "auth": "invalid",
+      "expect": "auth_rejected",
+      "requires_rows": false,
+      "checks": []
+    },
+    {
+      "id": "ISOP-2037-C01-closure",
+      "case_ids": [
+        "ISOP-2037-C01"
+      ],
+      "title": "四列顺序",
+      "kind": "acceptance",
+      "blocked": "需独立JP源数据与授权范围样本；CSV需实际导出文件及获取契约；UI由人工验证。"
+    },
+    {
+      "id": "ISOP-2037-C02-closure",
+      "case_ids": [
+        "ISOP-2037-C02"
+      ],
+      "title": "直接贡献金额及精度",
+      "kind": "acceptance",
+      "blocked": "需独立JP源数据与授权范围样本；CSV需实际导出文件及获取契约；UI由人工验证。"
+    },
+    {
+      "id": "ISOP-2037-C03-closure",
+      "case_ids": [
+        "ISOP-2037-C03"
+      ],
+      "title": "厂商和未中奖空值",
+      "kind": "acceptance",
+      "blocked": "需独立JP源数据与授权范围样本；CSV需实际导出文件及获取契约；UI由人工验证。"
+    },
+    {
+      "id": "ISOP-2037-C04-closure",
+      "case_ids": [
+        "ISOP-2037-C04"
+      ],
+      "title": "普通 GGR 不含 JP",
+      "kind": "acceptance",
+      "blocked": "需独立JP源数据与授权范围样本；CSV需实际导出文件及获取契约；UI由人工验证。"
+    },
+    {
+      "id": "ISOP-2037-C05-closure",
+      "case_ids": [
+        "ISOP-2037-C05"
+      ],
+      "title": "四种单奖池",
+      "kind": "acceptance",
+      "blocked": "需独立JP源数据与授权范围样本；CSV需实际导出文件及获取契约；UI由人工验证。"
+    },
+    {
+      "id": "ISOP-2037-C06-closure",
+      "case_ids": [
+        "ISOP-2037-C06"
+      ],
+      "title": "Multi 总额和弹窗",
+      "kind": "acceptance",
+      "blocked": "需独立JP源数据与授权范围样本；CSV需实际导出文件及获取契约；UI由人工验证。"
+    },
+    {
+      "id": "ISOP-2037-C07-closure",
+      "case_ids": [
+        "ISOP-2037-C07"
+      ],
+      "title": "关闭及切换记录",
+      "kind": "acceptance",
+      "blocked": "需独立JP源数据与授权范围样本；CSV需实际导出文件及获取契约；UI由人工验证。"
+    },
+    {
+      "id": "ISOP-2037-C08-closure",
+      "case_ids": [
+        "ISOP-2037-C08"
+      ],
+      "title": "明细访问隔离",
+      "kind": "acceptance",
+      "blocked": "需独立JP源数据与授权范围样本；CSV需实际导出文件及获取契约；UI由人工验证。"
+    },
+    {
+      "id": "ISOP-2037-C09-closure",
+      "case_ids": [
+        "ISOP-2037-C09"
+      ],
+      "title": "类型与其他筛选组合",
+      "kind": "acceptance",
+      "blocked": "需独立JP源数据与授权范围样本；CSV需实际导出文件及获取契约；UI由人工验证。"
+    },
+    {
+      "id": "ISOP-2037-C10-closure",
+      "case_ids": [
+        "ISOP-2037-C10"
+      ],
+      "title": "24栏 CSV",
+      "kind": "acceptance",
+      "blocked": "需独立JP源数据与授权范围样本；CSV需实际导出文件及获取契约；UI由人工验证。"
+    },
+    {
+      "id": "ISOP-2037-C11-closure",
+      "case_ids": [
+        "ISOP-2037-C11"
+      ],
+      "title": "拆分后历史与实时",
+      "kind": "acceptance",
+      "blocked": "需独立JP源数据与授权范围样本；CSV需实际导出文件及获取契约；UI由人工验证。"
+    }
+  ]
+}

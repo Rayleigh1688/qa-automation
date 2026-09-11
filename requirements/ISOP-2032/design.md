@@ -1,16 +1,16 @@
-# ISOP-2032：用戶端 - 投注返利活動 — 测试设计
+# ISOP-2032：投注返利活動 — 测试设计
 
-当前阶段：需求评审/测试准备；不代表业务测试通过。复审日期：2026-09-08（UTC+8）。
+当前阶段：需求评审/测试准备；不代表业务测试通过。复审日期：2026-09-10（UTC+8）。
 
 [可分派测试用例](test-cases.md) · [问题与决定](questions.md) · [批次评审](../review-summary.md) · [需求索引](../README.md)
 
 ## 来源与范围
 
-- [Jira正文](https://alibaba-international.atlassian.net/browse/ISOP-2032)；创建：2026-09-03T18:39:25.501+0800；读取时最后更新：2026-09-07T22:43:18.070+0800；Story状态：待办（仅来源快照）。
-- 子任务：[ISOP-2075](https://alibaba-international.atlassian.net/browse/ISOP-2075)、[ISOP-2076](https://alibaba-international.atlassian.net/browse/ISOP-2076)、[ISOP-2077](https://alibaba-international.atlassian.net/browse/ISOP-2077)、[ISOP-2078](https://alibaba-international.atlassian.net/browse/ISOP-2078)、[ISOP-2079](https://alibaba-international.atlassian.net/browse/ISOP-2079)、[ISOP-2084](https://alibaba-international.atlassian.net/browse/ISOP-2084)；本轮已读取，正文/评论无补充。状态不代表部署或验收。
+- [Jira正文](https://alibaba-international.atlassian.net/browse/ISOP-2032)；创建：2026-09-03T18:39:25.501+0800；读取时最后更新：2026-09-09T16:33:32.660+0800。
+- 子任务：[ISOP-2075](https://alibaba-international.atlassian.net/browse/ISOP-2075)、[ISOP-2076](https://alibaba-international.atlassian.net/browse/ISOP-2076)、[ISOP-2077](https://alibaba-international.atlassian.net/browse/ISOP-2077)、[ISOP-2078](https://alibaba-international.atlassian.net/browse/ISOP-2078)、[ISOP-2079](https://alibaba-international.atlassian.net/browse/ISOP-2079)、[ISOP-2084](https://alibaba-international.atlassian.net/browse/ISOP-2084)；本轮已读取；2078有新增联调评论，其余子任务正文/评论未补充业务契约。状态不代表部署或验收。
 - 范围：投注返利全链路：活动配置、按有效投注计算、次日自动派发、奖金打码、后台报表、客户端通知。原型是 mock，不能证明后台已实现。
 - 补充来源与关联：[Lark来源](https://qsgpn7a1512s.sg.larksuite.com/wiki/Jg61wE3DRijwnqkQXjPl3OUFg4e)、[到账动画](../ISOP-2031/design.md)
-- 读取边界：本轮已重读Jira、全部关联子任务及Lark。已人工核对Step 2规则配置截图，确认独立门槛及同规则多选游戏；其余截图未逐张视觉复核。原型仍为mock。
+- 读取边界：本轮重读Jira正文、评论、全部六个子任务及关联2081评论。Lark本轮已按首屏及结算段落锚点重读正文至最后的数据报表字段；仍显示9月7日更新，保留“明天回来领取”、通知无过期和旧Loss Rebate/Cash Back文字，与新版Jira不一致。五张Jira附件仍为9月7日，本轮未逐张视觉复核；9月8日已核对Step2的独立门槛及多选游戏。原型不作部署证据。
 
 ## 验收依据
 
@@ -48,4 +48,16 @@
 
 目标环境先以 FAT 准备；各端实际部署版本、接口路径/参数、账号角色与受控执行范围需在提测单核实。需求或原型可访问不代表功能已经部署。方法标为API/只读对账的用例需要实际接口返回和独立数据期望；不凭UI展示一致推定后端计算正确。
 
-只有需求阶段先确认规则、盘点样本、冻结契约并分派用例；后端提测后先验证契约/业务状态/金额和异常副作用；前端提测后执行交互与跨端联调；最后对受影响模块回归。本需求暂不自动加入P0，不新增或复制runner。执行步骤及证据统一进入 [用例文件](test-cases.md)，讨论只更新 [问题文件](questions.md)。
+只有需求阶段先确认规则、盘点样本、冻结契约并分派用例；后端提测后先验证契约/业务状态/金额和异常副作用；前端提测后执行交互与跨端联调；最后对受影响模块回归。本需求不自动加入P0，需求内维护API组合，复用共享认证/请求执行能力。执行步骤及证据统一进入 [用例文件](test-cases.md)，讨论只更新 [问题文件](questions.md)。
+
+## 2026-09-10 增量复审
+
+| 来源 | 最新信息 | 测试处理 |
+| --- | --- | --- |
+| [2032 评论17330](https://alibaba-international.atlassian.net/browse/ISOP-2032?focusedCommentId=17330) | cash_rebate弹窗复用2081；默认文案与本单不一致，自定义标题优先 | C11/C21区分默认文案与自定义透传；Q-04保留 |
+| [2078 评论17329](https://alibaba-international.atlassian.net/browse/ISOP-2078?focusedCommentId=17329) | 旧5% CashbackPage不是ID32活动页；正式API/MQTT等待2076；前端支持title/copy适配 | 活动页和正式通知不能根据Mock通过；Q-09保留 |
+| [2081 评论17327](https://alibaba-international.atlassian.net/browse/ISOP-2081?focusedCommentId=17327) | 五Nav动画、非主页面结束帧、串行队列、不可点击/ESC关闭已做前端Mock；分支未合并或发布UAT/PROD | UI人工验收；仅视为实现说明，不是提测证据 |
+| 2078/2081评论 | 事件ID去重和排队不是T+1同会员返利业务聚合 | C19仍需后端事件粒度与多类型账变，Q-07不关闭 |
+| 接口文档69c9be0 | 活动编辑示例id/ty=40，而需求ID32；GET/POST和state枚举冲突仍存在 | Q-11/Q-12/Q-13；仅明确查询契约先生成可执行组合 |
+
+此次正文核心计算规则与9月8日设计保持一致；新发现集中在子任务实现边界和接口契约差异，未将更新时间变化理解为所有规则重写。

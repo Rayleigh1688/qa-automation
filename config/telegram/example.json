@@ -1,0 +1,31 @@
+{
+  "bot_username": "YourQABot",
+  "submission_chat_id": -1000000000001,
+  "testing_chat_id": -1000000000002,
+  "testers": {},
+  "codex_executable": "codex",
+  "ai_timeout_seconds": 600,
+  "test_timeout_seconds": 900,
+  "environments": {
+    "FAT": {
+      "env_file": ".env.fat",
+      "version_probes": []
+    },
+    "UAT": {
+      "env_file": ".env.uat",
+      "version_probes": []
+    }
+  },
+  "stories": {},
+  "jira": {
+    "base_url": "https://your-site.atlassian.net",
+    "email_env": "JIRA_EMAIL",
+    "token_env": "JIRA_API_TOKEN",
+    "issue_type_id": "",
+    "relation": "link",
+    "link_type": "Relates",
+    "story_type_id": "10677"
+  },
+  "default_environment": "FAT",
+  "pilot_story": null
+}

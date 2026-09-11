@@ -145,6 +145,9 @@ class RegistrationOperations:
             raise SystemExit("admin member lookup returned a business failure")
         data = self.data_of(result)
         rows = data.get("d") if isinstance(data, dict) else None
+        # An explicit zero total distinguishes an empty FAT page from a broken shape.
+        if rows is None and isinstance(data, dict) and type(data.get("t")) is int and data["t"] == 0:
+            rows = []
         if not isinstance(rows, list):
             raise SystemExit("admin member lookup data.d is not a list")
         return any(

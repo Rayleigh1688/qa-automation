@@ -17,6 +17,7 @@ def run_ui_process(command, **kwargs):
         if check and result.returncode:
             raise subprocess.CalledProcessError(result.returncode, command)
         return result
+    timeout = kwargs.pop('timeout', None)
     # A fresh session keeps cleanup away from the terminal and other test runs.
     with subprocess.Popen(command, start_new_session=True, **kwargs) as child:
         previous_int = signal.getsignal(signal.SIGINT)
@@ -25,7 +26,7 @@ def run_ui_process(command, **kwargs):
             raise KeyboardInterrupt('UI stage terminated')
         signal.signal(signal.SIGTERM, interrupted)
         try:
-            code = child.wait()
+            code = child.wait(timeout=timeout)
         finally:
             # A second console interrupt must not abandon descendant cleanup.
             signal.signal(signal.SIGINT, signal.SIG_IGN)
@@ -39,6 +40,11 @@ def run_ui_process(command, **kwargs):
                         os.killpg(child.pid, 0)
                     except ProcessLookupError:
                         break
+                    except PermissionError:
+                        # macOS can transiently deny signals while the terminated
+                        # group is being reaped. Retry within the same deadline;
+                        # persistent denial still fails the final SIGKILL below.
+                        pass
                     time.sleep(0.1)
                 else:
                     os.killpg(child.pid, signal.SIGKILL)
