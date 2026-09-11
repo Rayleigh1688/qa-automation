@@ -36,7 +36,9 @@ client,finance,POST,/finance/lazada/exchange,{{api_url}}/finance/lazada/exchange
 client,finance,POST,/finance/lazada/product/list,{{api_url}}/finance/lazada/product/list,,yes,前台/财务/lazada商品列表-owen.bru,lazada商品列表-owen
 client,finance,GET,/finance/member/buyfeatures,{{api_url}}/finance/member/buyfeatures,hardcoded_env,yes,前台/财务/购买免费旋转游戏列表.bru,购买免费旋转游戏列表
 client,finance,GET,/finance/payment/bank/list,{{api_url}}/finance/payment/bank/list?page=2&page_size=10,hardcoded_env,yes,前台/财务/银行列表.bru,银行列表
+client,finance,POST,/finance/payment/callback/deposit/coinph,{{api_url}}/finance/payment/callback/deposit/coinph,hardcoded_env,,Untitled 1.bru,Untitled 1
 client,finance,POST,/finance/payment/callback/deposit/pisopay,{{api_url}}/finance/payment/callback/deposit/pisopay,hardcoded_env,yes,前台/支付/pisopay回调.bru,pisopay回调
+client,finance,POST,/finance/payment/callback/withdraw/coinph,{{api_url}}/finance/payment/callback/withdraw/coinph,hardcoded_env,yes,前台/coinph 测试.bru,coinph 测试
 client,finance,GET,/finance/payment/deposit,{{api_url}}/finance/payment/deposit?pid=10&amount=998&device=web&source=huawei&product_id=123,,yes,前台/财务/充值-wesley-cold.bru,充值-wesley/cold
 client,finance,GET,/finance/payment/tab/list,{{api_url}}/finance/payment/tab/list,hardcoded_env,yes,前台/财务/提现tab.bru,提现tab
 client,finance,GET,/finance/payment/withdraw,{{api_url}}/finance/payment/withdraw?amount=100&account_id=<id>,hardcoded_env,yes,前台/财务/提现-wesley-cold.bru,提现-wesley/cold

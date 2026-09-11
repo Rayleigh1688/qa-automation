@@ -99,3 +99,6 @@ METHODS['kyc_permission'] = {'call':permission_case,'scope':'kyc-permissions','b
 
 from filbet.requirement_race import race, validate_race
 METHODS['kyc_race'] = {'call':race,'scope':'kyc-review','business':True,'validate':validate_race}
+
+from filbet.requirement_records import record_check
+METHODS['bet_record_check'] = {'call':record_check,'scope':None,'business':False,'read_only':True}

@@ -105,7 +105,7 @@ admin,finance,GET,/admin/ops-tools/first-deposit-no-second/export,{{admin_url}}/
 admin,finance,GET,/admin/promo/task/transaction,{{admin_url}}/admin/promo/task/transaction,,,后台/vip任务中心/任务奖金列表-seven.bru,任务奖金列表-seven
 admin,finance,GET,/admin/promo/task/transaction/export,{{admin_url}}/admin/promo/task/transaction/export,,,后台/vip任务中心/任务奖励列表导出-seven.bru,任务奖励列表导出-seven
 admin,finance,GET,/admin/promotion_first_deposit,{{admin_url}}/admin/promotion_first_deposit?page=1&page_size=15,hardcoded_env,,后台/推广管理/首充日活分析.bru,首充日活分析
-admin,finance,POST,/admin/record/bet,{{admin_url}}/admin/record/bet,,,后台/财务管理/注单管理/游戏记录-wesley.bru,游戏记录-wesley
+admin,finance,POST,/admin/record/bet,{{admin_url}}/admin/record/bet,,,后台/财务管理/注单管理/游戏记录-wesley.bru,注单管理
 admin,finance,GET,/admin/sys/config/deposit/multiple/list,{{admin_url}}/admin/sys/config/deposit/multiple/list,hardcoded_env,,后台/运营管理/客户端管理/平台倍率/平台充值倍率列表-aliang.bru,平台充值倍率列表-aliang
 admin,finance,GET,/admin/sys/config/deposit/multiple/log,{{admin_url}}/admin/sys/config/deposit/multiple/log?page=1&page_size=20,hardcoded_env,,后台/运营管理/客户端管理/平台倍率/平台充值倍率异动记录-aliang.bru,平台充值倍率异动记录-aliang
 admin,finance,POST,/admin/sys/config/deposit/multiple/update,{{admin_url}}/admin/sys/config/deposit/multiple/update,hardcoded_env,,后台/运营管理/客户端管理/平台倍率/平台充值倍率更新-aliang.bru,平台充值倍率更新-aliang
@@ -158,6 +158,7 @@ admin,game,POST,/admin/promo/bti/world/cup/cancel,{{admin_url}}/admin/promo/bti/
 admin,game,GET,/admin/promo/bti/world/cup/list,{{admin_url}}/admin/promo/bti/world/cup/list,,,后台/game管理/freebet活动管理/freebet活动管理-重新发放.bru,freebet活动管理-重新发放
 admin,game,GET,/admin/promo/bti/world/cup/list,{{admin_url}}/admin/promo/bti/world/cup/list,,,后台/game管理/freebet活动管理/freebet活动管理列表.bru,freebet活动管理列表
 admin,game,GET,/admin/promo/bti/world/cup/list,{{admin_url}}/admin/promo/bti/world/cup/list,,,后台/game管理/freebet活动管理/freebet活动管理列表导出.bru,freebet活动管理列表导出
+admin,game,POST,/admin/record/game,{{admin_url}}/admin/record/game,,,后台/game管理/投注紀錄/投注紀錄.bru,投注紀錄
 admin,game,GET,/admin/reports/game,{{admin_url}}/admin/reports/game?page=1&page_size=10,,,后台/报表/游戏报表/游戏报表.bru,游戏报表
 admin,game,POST,/admin/reports/game/adjust,{{admin_url}}/admin/reports/game/adjust,,,后台/报表/游戏报表校准.bru,游戏报表校准
 admin,game,GET,/admin/reports/game/export,{{admin_url}}/admin/reports/game/export?topic_id=1234,,,后台/报表/游戏报表/游戏报表导出.bru,游戏报表导出
@@ -179,8 +180,8 @@ admin,game,GET,/cmpl/game/list,{{admin_url}}/cmpl/game/list?page=1&page_size=10&
 admin,game,POST,/cmpl/game/update/state,{{admin_url}}/cmpl/game/update/state,,,合规/游戏管理/游戏更新状态.bru,游戏更新状态
 admin,game,POST,/cmpl/jackpot/export,{{admin_url}}/cmpl/jackpot/export,,,合规/游戏记录/jackpot记录导出-owen.bru,jackpot记录导出-owen
 admin,game,POST,/cmpl/jackpot/list,{{admin_url}}/cmpl/jackpot/list,,,合规/游戏记录/jackpot记录-owen.bru,jackpot记录-owen
-admin,game,POST,/cmpl/record/bet,{{admin_url}}/cmpl/record/bet,,,合规/游戏记录/全平台投注记录-wesley-owen.bru,全平台投注记录-wesley/owen
 admin,game,POST,/cmpl/record/export,{{admin_url}}/cmpl/record/export,,,合规/游戏记录/游戏记录导出-wesley-owen.bru,游戏记录导出-wesley/owen
+admin,game,POST,/cmpl/record/game,{{admin_url}}/cmpl/record/game,,,合规/游戏记录/全平台投注记录-wesley-owen.bru,全平台投注记录-wesley/owen
 admin,game,POST,/platform/game/dicttypetag/list,{{admin_url}}/platform/game/dicttypetag/list,,,游戏集成平台/游戏管理/+获取 -类型标签- 列表-owen.bru,+获取 <类型标签> 列表-owen
 admin,game,POST,/platform/game/dictweighttag/list,{{admin_url}}/platform/game/dictweighttag/list,,,游戏集成平台/游戏管理/+获取 -权重标签- 列表-owen.bru,+获取 <权重标签> 列表-owen
 admin,game,POST,/platform/game/export,{{admin_url}}/platform/game/export?topic_id=%E9%98%B2%E5%86%B2%E7%AA%81id,,,游戏集成平台/游戏管理/游戏导出.bru,游戏导出
@@ -225,6 +226,8 @@ admin,kyc,GET,/admin/kyc/ekyc/log,{{admin_url}}/admin/kyc/ekyc/log?uid=<redacted
 admin,kyc,POST,/admin/kyc/list,{{admin_url}}/admin/kyc/list?phone=<redacted>&created_end_time=1774972799999&created_start_time=1772294400000&source=default,hardcoded_env,yes,后台/kyc/获取 kyc 列表 - double-owen.bru,获取 kyc 列表 - double/owen
 admin,kyc,GET,/admin/kyc/pending/count,{{admin_url}}/admin/kyc/pending/count,,yes,后台/kyc/获取 kyc 待审批数量.bru,获取 kyc 待审批数量
 admin,kyc,POST,/admin/kyc/reject,{{admin_url}}/admin/kyc/reject,,yes,后台/kyc/kyc 审核驳回 - double.bru,kyc 审核驳回 - double
+admin,kyc,POST,/admin/kyc/review,{{admin_url}}/admin/kyc/review,hardcoded_env,yes,后台/kyc/复核.bru,复核
+admin,kyc,GET,/admin/kyc/review/list,{{admin_url}}/admin/kyc/review/list?state=1,hardcoded_env,yes,后台/kyc/复核列表.bru,复核列表
 admin,kyc,POST,/admin/kyc/update,{{admin_url}}/admin/kyc/update,,yes,后台/kyc/更新 kyc - double.bru,更新 kyc - double
 admin,kyc,GET,/admin/promo/rotate/kyc/export,{{admin_url}}/admin/promo/rotate/kyc/export?topic_id=1234567,hardcoded_env,yes,活动/后台-活动管理/KYC通过送免费旋转/导出.bru,导出
 admin,kyc,GET,/admin/promo/rotate/kyc/list,{{admin_url}}/admin/promo/rotate/kyc/list,hardcoded_env,yes,活动/后台-活动管理/KYC通过送免费旋转/列表.bru,列表

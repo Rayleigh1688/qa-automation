@@ -12,6 +12,7 @@
 
 - 来源：[ISOP-2022](https://alibaba-international.atlassian.net/browse/ISOP-2022)，读取时更新时间 `2026-09-07 10:45:20 +08:00`，状态待办。
 - 子任务：[后端 ISOP-2044](https://alibaba-international.atlassian.net/browse/ISOP-2044)、[前端 ISOP-2045](https://alibaba-international.atlassian.net/browse/ISOP-2045)、[QA ISOP-2046](https://alibaba-international.atlassian.net/browse/ISOP-2046) 读取时均待办、描述为空且无评论；未获得补充接口契约、部署版本或验收答案。状态不能证明测试环境尚未部署。
+- 2026-09-11续核：父任务新增[后端2085](https://alibaba-international.atlassian.net/browse/ISOP-2085)（FAT测试）和[前端2101](https://alibaba-international.atlassian.net/browse/ISOP-2101)（已完成）。2085仅明确本需求§7/8两处API参数调整；完整范围与准备缺口见[最新契约评审](api/contract-review.md#2026-09-11-isop-2085续核)，不由子任务状态推定全量报表部署。
 - 拟先用 FAT（用户所称测试环境，依据[环境手册](../../api/runbooks/ENVIRONMENTS.md)），正式执行需记录实际部署版本；UAT 作后续环境回归。
 - 核心目标：统计归属由结算时间决定。非体育的投注时间扩窗是检索约束，结算筛选本身不能跟着扩窗；体育按结算数据查询，防止跨日长周期注单遗漏。
 - 8 个章节对应 11 个页面/报表入口；第 3 节另有个人/邀请子页签。不同页面对体育的包含范围不同，不能直接要求所有页面总额无条件相等。
@@ -179,3 +180,7 @@ D-01已解决，偏移单位和两层时间筛选已确认；Q-01查询分支已
 ## 2026-09-10 月度合规对账补充
 
 来源：本会话用户确认。体育早球注单的创建与结算可跨较长周期，只有按结算时间查询且选择体育游戏类型时，明细查询才切换独立体育结算表。投注时间查询即使选择体育也不因类型而切换该表。非体育前后各1天候选扩窗与体育独立表均服务于每月合规核对；不改变结算原区间及已确认窗口外偏差边界，也不改变统计页明确要求的体育合并口径。接口文档切表条件差异见问题文件及 [接口评审](api/contract-review.md)。
+
+## 首轮执行（2026-09-11）
+
+用户最新指令要求先开测、逐轮输出，已对2085两处API执行首轮及限定复核；结果见[问题评审](bug-review.md)。首轮评审中的未执行结论仅描述当时阶段。执行配置使用`plan.json`，缺口与人工UI独立保留；API组合通过不等于11页全量验收通过。

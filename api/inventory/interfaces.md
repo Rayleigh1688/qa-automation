@@ -8,54 +8,54 @@
 
 | 指标 | 数量 |
 | --- | --- |
-| Bruno 文件 | 1136 |
-| HTTP 请求 | 911 |
-| 可用 URL 请求 | 904 |
-| 非请求或未解析请求 | 225 |
+| Bruno 文件 | 1149 |
+| HTTP 请求 | 922 |
+| 可用 URL 请求 | 915 |
+| 非请求或未解析请求 | 227 |
 | URL 含 /v2 | 4 |
 | 文件名/目录含 v2 但 URL 非 /v2 | 15 |
 | todo 标记 | 83 |
 | 弃用标记 | 2 |
 | 老接口或 copy 标记 | 10 |
-| 硬编码环境 URL | 264 |
-| 可归一到 {{api_url}} | 176 |
-| 可归一到 {{admin_url}} | 587 |
+| 硬编码环境 URL | 269 |
+| 可归一到 {{api_url}} | 178 |
+| 可归一到 {{admin_url}} | 590 |
 | 可归一到 {{agency_url}} | 55 |
-| P0 候选请求 | 164 |
+| P0 候选请求 | 167 |
 
 ## 业务域分布
 
 | 业务域 | 文件数 |
 | --- | --- |
-| 后台 | 525 |
-| 前台 | 186 |
-| 活动 | 156 |
+| 后台 | 529 |
+| 前台 | 187 |
+| 活动 | 162 |
 | 合规 | 95 |
 | 代理管理后台 | 88 |
 | 游戏集成平台 | 43 |
 | 代理后台 | 27 |
 | environments | 7 |
+| (root) | 4 |
 | mx | 4 |
 | 免费旋转 | 3 |
-| (root) | 2 |
 
 ## 方法分布
 
 | 方法 | 数量 |
 | --- | --- |
-| GET | 525 |
-| POST | 384 |
-| NO_METHOD | 225 |
+| GET | 531 |
+| POST | 389 |
+| NO_METHOD | 227 |
 | PUT | 2 |
 
 ## Host 与环境变量分布
 
 | Host/变量 | 请求数 |
 | --- | --- |
-| {{admin_url}} | 289 |
-| (relative_abs) | 128 |
-| admin-fat.filbet2025.com | 96 |
-| client-fat.filbet2025.com | 70 |
+| {{admin_url}} | 290 |
+| (relative_abs) | 133 |
+| admin-fat.filbet2025.com | 98 |
+| client-fat.filbet2025.com | 72 |
 | {{api_url}} | 56 |
 | {{test_url}} | 47 |
 | admin-antd.filbet2025.com | 31 |
@@ -69,30 +69,30 @@
 
 | 建议变量 | 请求数 |
 | --- | --- |
-| {{admin_url}} | 587 |
-| {{api_url}} | 176 |
-| (empty) | 93 |
+| {{admin_url}} | 590 |
+| {{api_url}} | 178 |
+| (empty) | 99 |
 | {{agency_url}} | 55 |
 
 ## 调用端与业务模块
 
 | 调用端 | 请求数 |
 | --- | --- |
-| admin | 587 |
-| client | 176 |
-| unknown | 93 |
+| admin | 590 |
+| client | 178 |
+| unknown | 99 |
 | agency | 55 |
 
 | 业务模块 | 请求数 |
 | --- | --- |
-| other | 246 |
-| promo | 144 |
-| finance | 141 |
-| game | 113 |
+| other | 247 |
+| promo | 148 |
+| finance | 143 |
+| game | 114 |
 | member | 86 |
-| report | 60 |
+| report | 61 |
 | auth | 57 |
-| kyc | 43 |
+| kyc | 45 |
 | permission | 21 |
 
 ## 初步判断
@@ -115,6 +115,7 @@
 | finance | GET | /agency/finance/transaction/types | {{admin_url}} |  | 代理管理后台/财务管理/财务报表/账变类型- wesley.bru |
 | member | GET | /member/vip/rule | {{api_url}} | todo | 前台/VIP/VIP配置规则-todo.bru |
 | member | GET | /member/vip/level/detail | {{api_url}} | hardcoded_env | 前台/VIP/会员vip等级详情.bru |
+| finance | POST | /finance/payment/callback/withdraw/coinph | {{api_url}} | hardcoded_env | 前台/coinph 测试.bru |
 | kyc | GET | /member/kyc/ekyc/info | {{api_url}} | hardcoded_env | 前台/kyc/ekyc 配置.bru |
 | kyc | POST | /member/kyc/ekyc/callback | {{api_url}} | hardcoded_env | 前台/kyc/ekyc回调.bru |
 | kyc | POST | /member/kyc/v2/insert | {{api_url}} | url_v2,hardcoded_env | 前台/kyc/v2/insert.bru |
@@ -189,7 +190,6 @@
 | finance | GET | /finance/account/list | {{api_url}} | hardcoded_env | 前台/财务/提款账户列表-wesley.bru |
 | finance | GET | /finance/payment/withdraw | {{api_url}} | hardcoded_env | 前台/财务/提现-wesley-cold.bru |
 | finance | GET | /finance/payment/tab/list | {{api_url}} | hardcoded_env | 前台/财务/提现tab.bru |
-| finance | GET | /finance/withdraw/list | {{api_url}} |  | 前台/财务/提现记录-wesley.bru |
 
 ## 需复核接口样本
 

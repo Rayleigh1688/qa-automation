@@ -6,9 +6,9 @@
 
 | 调用端 | 接口数 | 文件 |
 |---|---:|---|
-| admin | 587 | [`admin.csv`](admin.csv) |
-| client | 176 | [`client.csv`](client.csv) |
-| unknown | 93 | [`unknown.csv`](unknown.csv) |
+| admin | 590 | [`admin.csv`](admin.csv) |
+| client | 178 | [`client.csv`](client.csv) |
+| unknown | 99 | [`unknown.csv`](unknown.csv) |
 | agency | 55 | [`agency.csv`](agency.csv) |
 
 ## 管理后台模块
@@ -16,13 +16,13 @@
 | 模块 | 接口数 | 文件 |
 |---|---:|---|
 | other | 205 | [`admin/other.csv`](admin/other.csv) |
-| game | 91 | [`admin/game.csv`](admin/game.csv) |
+| game | 92 | [`admin/game.csv`](admin/game.csv) |
 | finance | 89 | [`admin/finance.csv`](admin/finance.csv) |
 | promo | 56 | [`admin/promo.csv`](admin/promo.csv) |
 | report | 43 | [`admin/report.csv`](admin/report.csv) |
 | auth | 34 | [`admin/auth.csv`](admin/auth.csv) |
 | member | 26 | [`admin/member.csv`](admin/member.csv) |
-| kyc | 23 | [`admin/kyc.csv`](admin/kyc.csv) |
+| kyc | 25 | [`admin/kyc.csv`](admin/kyc.csv) |
 | permission | 20 | [`admin/permission.csv`](admin/permission.csv) |
 
 ## 维护规则

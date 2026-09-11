@@ -35,6 +35,7 @@ admin,game,POST,/admin/promo/bti/world/cup/cancel,{{admin_url}}/admin/promo/bti/
 admin,game,GET,/admin/promo/bti/world/cup/list,{{admin_url}}/admin/promo/bti/world/cup/list,,,后台/game管理/freebet活动管理/freebet活动管理-重新发放.bru,freebet活动管理-重新发放
 admin,game,GET,/admin/promo/bti/world/cup/list,{{admin_url}}/admin/promo/bti/world/cup/list,,,后台/game管理/freebet活动管理/freebet活动管理列表.bru,freebet活动管理列表
 admin,game,GET,/admin/promo/bti/world/cup/list,{{admin_url}}/admin/promo/bti/world/cup/list,,,后台/game管理/freebet活动管理/freebet活动管理列表导出.bru,freebet活动管理列表导出
+admin,game,POST,/admin/record/game,{{admin_url}}/admin/record/game,,,后台/game管理/投注紀錄/投注紀錄.bru,投注紀錄
 admin,game,GET,/admin/reports/game,{{admin_url}}/admin/reports/game?page=1&page_size=10,,,后台/报表/游戏报表/游戏报表.bru,游戏报表
 admin,game,POST,/admin/reports/game/adjust,{{admin_url}}/admin/reports/game/adjust,,,后台/报表/游戏报表校准.bru,游戏报表校准
 admin,game,GET,/admin/reports/game/export,{{admin_url}}/admin/reports/game/export?topic_id=1234,,,后台/报表/游戏报表/游戏报表导出.bru,游戏报表导出
@@ -56,8 +57,8 @@ admin,game,GET,/cmpl/game/list,{{admin_url}}/cmpl/game/list?page=1&page_size=10&
 admin,game,POST,/cmpl/game/update/state,{{admin_url}}/cmpl/game/update/state,,,合规/游戏管理/游戏更新状态.bru,游戏更新状态
 admin,game,POST,/cmpl/jackpot/export,{{admin_url}}/cmpl/jackpot/export,,,合规/游戏记录/jackpot记录导出-owen.bru,jackpot记录导出-owen
 admin,game,POST,/cmpl/jackpot/list,{{admin_url}}/cmpl/jackpot/list,,,合规/游戏记录/jackpot记录-owen.bru,jackpot记录-owen
-admin,game,POST,/cmpl/record/bet,{{admin_url}}/cmpl/record/bet,,,合规/游戏记录/全平台投注记录-wesley-owen.bru,全平台投注记录-wesley/owen
 admin,game,POST,/cmpl/record/export,{{admin_url}}/cmpl/record/export,,,合规/游戏记录/游戏记录导出-wesley-owen.bru,游戏记录导出-wesley/owen
+admin,game,POST,/cmpl/record/game,{{admin_url}}/cmpl/record/game,,,合规/游戏记录/全平台投注记录-wesley-owen.bru,全平台投注记录-wesley/owen
 admin,game,POST,/platform/game/dicttypetag/list,{{admin_url}}/platform/game/dicttypetag/list,,,游戏集成平台/游戏管理/+获取 -类型标签- 列表-owen.bru,+获取 <类型标签> 列表-owen
 admin,game,POST,/platform/game/dictweighttag/list,{{admin_url}}/platform/game/dictweighttag/list,,,游戏集成平台/游戏管理/+获取 -权重标签- 列表-owen.bru,+获取 <权重标签> 列表-owen
 admin,game,POST,/platform/game/export,{{admin_url}}/platform/game/export?topic_id=%E9%98%B2%E5%86%B2%E7%AA%81id,,,游戏集成平台/游戏管理/游戏导出.bru,游戏导出

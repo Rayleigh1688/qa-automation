@@ -28,7 +28,7 @@
 | ISOP-2029 | 用戶端 - 免費旋轉領取文案調整 | [设计](ISOP-2029/design.md) · [问题](ISOP-2029/questions.md) · [总用例](ISOP-2029/cases.csv) · [用例设计](ISOP-2029/test-cases.md) |
 | ISOP-2028 | 合規後台 - 統計數據時間調整 | [设计](ISOP-2028/design.md) · [问题](ISOP-2028/questions.md) · [总用例](ISOP-2028/cases.csv) · [用例设计](ISOP-2028/test-cases.md) |
 | ISOP-2027 | 管理後台 - KYC 複核功能 | [设计](ISOP-2027/design.md) · [问题](ISOP-2027/questions.md) · [总用例](ISOP-2027/cases.csv) · [用例设计](ISOP-2027/test-cases.md) · [API数据](ISOP-2027/api/data-cases.csv) |
-| ISOP-2022 | 管理后台统计数据时间调整 | [设计](ISOP-2022/design.md) · [问题](ISOP-2022/questions.md) · [总用例](ISOP-2022/cases.csv) · [用例设计](ISOP-2022/test-cases.md) |
+| ISOP-2022 | 管理后台统计数据时间调整 | [设计](ISOP-2022/design.md) · [问题](ISOP-2022/questions.md) · [总用例](ISOP-2022/cases.csv) · [用例设计](ISOP-2022/test-cases.md) · [API数据](ISOP-2022/api/data-cases.csv) · [问题评审](ISOP-2022/bug-review.md) |
 
 每个需求保留三份文档入口：`design.md`写验收规则/影响/测试策略，`questions.md`写问题及答复决定，`test-cases.md`保留验收用例、实现映射与历史证据链接。新执行结果统一生成到结果表，不在Markdown再手工抄写实时通过率。问题解决后同步规则和期望，不将讨论过程塞进用例步骤；索引不复制实时通过率。
 
@@ -38,7 +38,7 @@
 
 ## 总用例与API数据分开
 
-每个需求自己的`cases.csv`是业务总表，来自`test-cases.md`；有自动执行资产时，`api/data-cases.csv`独立保存具体数据组合、请求和断言。两表通过总用例编号关联，详细数据不再展开到总表。JSON仍是自动执行输入，生成CSV不手工双向维护。当前13个需求均有总表；2027、2032、2037、2043已有API数据表，其余不伪造未实现资产。
+每个需求自己的`cases.csv`是业务总表，来自`test-cases.md`；有自动执行资产时，`api/data-cases.csv`独立保存具体数据组合、请求和断言。两表通过总用例编号关联，详细数据不再展开到总表。JSON仍是自动执行输入，生成CSV不手工双向维护。当前13个需求均有总表；2022、2027、2032、2037、2043已有API数据表，其余不伪造未实现资产。
 
 `npm run qa:cases -- ISOP-2027`更新单需求，`npm run qa:cases -- --all`更新全部，均不登录。API表包含未具备前提的执行项，不把“有数据表”当作可全量运行；来源和编号规则见[测试流程](../docs/testing-workflow.md#文件与执行入口)。
 
@@ -63,7 +63,7 @@ requirements/<需求编号>/
 
 独立执行的新结果和人工回填放在`reports/qa/<需求编号>/<执行批次或交付包>/`，按用途生成`results.csv`/`results.html`、`manual.csv`及必要证据，详见[团队流程](../docs/team-testing.md)。从Telegram任务执行时，原始API结果仍在reports/qa，团队包、人工导入和统一BUG评审位于`reports/telegram/runs/<job>/`，与活动任务绑定。新需求不再建立UI自动化目录；人工UI场景保留在总用例和人工执行清单中。
 
-ISOP-2022当前只有设计、总用例和契约评审，API执行配置尚未实现，也没有本轮实测BUG清单。ISOP-2027多出的`execution-*.md`、`coverage-*.md`和`ui/execution-*.md`是试点阶段记录，不作为新需求的必备模板；其既有BUG清单路径保持兼容。`plan.json`和`preparation.csv`是通用配置与准备资料，并非UI专属文件。
+ISOP-2022已接入plan.json及API数据表，首轮与限定复核结果见[问题评审](ISOP-2022/bug-review.md)；候选未获建单确认，部分API组合实测不等于父需求全量验收。ISOP-2027多出的`execution-*.md`、`coverage-*.md`和`ui/execution-*.md`是试点阶段记录，不作为新需求的必备模板；其既有BUG清单路径保持兼容。`plan.json`和`preparation.csv`是通用配置与准备资料，并非UI专属文件。
 
 ## 开始一个需求
 

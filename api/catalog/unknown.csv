@@ -19,12 +19,14 @@ unknown,kyc,GET,/admin/promo/update,/admin/promo/update,,yes,活动/后台-活�
 unknown,kyc,GET,/promo/rotate/reg/detail,/promo/rotate/reg/detail?pid=11,,yes,活动/注册kyc送旋转活动/活动详情.bru,活动详情
 unknown,other,POST,/cmpl/record/api,/cmpl/record/api,hardcoded_env,,mx/record_api.bru,record_api
 unknown,other,POST,/gapi/fs/create,/gapi/fs/create,hardcoded_env,,免费旋转/创建免费旋转.bru,创建免费旋转
+unknown,other,GET,/gapi/fs/search,/gapi/fs/search?venue_tag=mi&uid=<redacted>&gid=<id>&fs_id=<id>&fs_created_at=1787975361384&third_fs_id=%25%21d%28string%3D<id>%29,hardcoded_env,,Untitled 2.bru,Untitled 2
 unknown,other,GET,/gapi/fs/search,/gapi/fs/search?venue_tag=fc&uid=<redacted>&gid=123&fs_id=123&third_fs_id=123,hardcoded_env,,免费旋转/查询免费旋转.bru,查询免费旋转
 unknown,promo,GET,,,invalid_url,,活动/后台-活动管理/抽奖活动/编辑抽奖活动.bru,编辑抽奖活动
 unknown,promo,GET,,,invalid_url,,活动/后台-活动管理/每日多存阶梯活动/每日多存导出.bru,每日多存导出
 unknown,promo,GET,/aa,/aa,,,活动/后台-活动管理/大转盘/中奖记录.bru,中奖记录
 unknown,promo,GET,/aa,/aa,,,活动/后台-活动管理/大转盘/中奖记录导出.bru,中奖记录导出
 unknown,promo,GET,/admin/member/promo/list,/admin/member/promo/list?page=1&pagesize=20&pid=1&bonusmin=5000&bonusmax=700000,,,活动/盲盒/后台获取明细列表.bru,后台获取明细列表
+unknown,promo,GET,/admin/promo/betting/rebate/export,/admin/promo/betting/rebate/export,,,活动/后台-活动管理/投注返利活动/导出.bru,导出
 unknown,promo,POST,/admin/promo/insert,/admin/promo/insert,,,活动/盲盒/后台新增活动.bru,后台新增活动
 unknown,promo,POST,/admin/promo/lottery/task/insert,/admin/promo/lottery/task/insert,,,活动/后台-活动管理/抽奖活动/创建抽奖任务.bru,创建抽奖任务
 unknown,promo,POST,/admin/promo/lottery/user/clear,/admin/promo/lottery/user/clear,,,活动/后台-活动管理/抽奖活动/清空抽奖用户名单.bru,清空抽奖用户名单
@@ -35,6 +37,7 @@ unknown,promo,GET,/admin/promo/turntable/reward/goods/list,/admin/promo/turntabl
 unknown,promo,POST,/admin/promo/turntable/reward/goods/update,/admin/promo/turntable/reward/goods/update,,,活动/后台-活动管理/大转盘/大转盘-编辑奖励商品.bru,大转盘-编辑奖励商品
 unknown,promo,POST,/admin/promo/turntable/reward/menu/clear,/admin/promo/turntable/reward/menu/clear,,,活动/后台-活动管理/大转盘/清理商品名单.bru,清理商品名单
 unknown,promo,GET,/admin/promo/update,/admin/promo/update,,,活动/后台-活动管理/存款活动（一存，2存，3存，多存）/编辑活动.bru,编辑活动
+unknown,promo,GET,/admin/promo/update,/admin/promo/update,,,活动/后台-活动管理/投注返利活动/活动编辑.bru,活动编辑
 unknown,promo,GET,/admin/promo/update,/admin/promo/update,,,活动/后台-活动管理/日存款+投注活动/编辑活动.bru,编辑活动
 unknown,promo,GET,/admin/promo/update,/admin/promo/update,,,活动/后台-活动管理/王牌翻转活动/编辑.bru,编辑
 unknown,promo,GET,/admin/promo/update,/admin/promo/update,,,活动/后台-活动管理/编辑活动.bru,编辑活动
@@ -59,7 +62,9 @@ unknown,promo,GET,/promo/inviter/rewards/commission,/promo/inviter/rewards/commi
 unknown,promo,GET,/promo/inviter/rewards/upgrade,/promo/inviter/rewards/upgrade,,,活动/邀请好友/里程碑奖励详情.bru,里程碑奖励详情
 unknown,promo,GET,/promo/lottery/machine/claim,/promo/lottery/machine/claim,,,活动/抽奖活动/批量开奖名单.bru,批量开奖名单
 unknown,promo,GET,/promo/lottery/machine/detail,/promo/lottery/machine/detail,,,活动/抽奖活动/活动详情.bru,活动详情
+unknown,promo,GET,/promo/notify/change/balance,/promo/notify/change/balance,,,活动/优惠通知/余额变动接口.bru,余额变动接口
 unknown,promo,GET,/promo/notify/list,/promo/notify/list,,,活动/优惠通知/通知接口.bru,通知接口
+unknown,promo,POST,/promo/notify/read/balance,/promo/notify/read/balance,,,活动/优惠通知/余额变动已读接口.bru,余额变动已读接口
 unknown,promo,GET,/promo/playstar/detail,/promo/playstar/detail,,,活动/playstar/详情.bru,详情
 unknown,promo,GET,/promo/rotate/bet/detail,/promo/rotate/bet/detail?pid=13&is_barrage=1,,,活动/每日充值+投注阶梯送礼金和旋转次数/弹目消息.bru,弹目消息
 unknown,promo,GET,/promo/rotate/bet/detail,/promo/rotate/bet/detail?pid=13&is_welfare=1,,,活动/每日充值+投注阶梯送礼金和旋转次数/福利详情.bru,福利详情
@@ -86,6 +91,7 @@ unknown,report,GET,/admin/member/promo/report,/admin/member/promo/report?pid=1&a
 unknown,report,GET,/admin/member/promo/report,/admin/member/promo/report?pid=1&action=daily&st=2025-03-02&et=2025-04-03,,,活动/盲盒/每日领取分析.bru,每日领取分析
 unknown,report,GET,/admin/promo//flip/card/export,/admin/promo//flip/card/export,,,活动/后台-活动管理/王牌翻转活动/报表导出.bru,报表导出
 unknown,report,GET,/admin/promo//flip/card/report,/admin/promo//flip/card/report,,,活动/后台-活动管理/王牌翻转活动/报表.bru,报表
+unknown,report,GET,/admin/promo/betting/rebate/report,/admin/promo/betting/rebate/report,,,活动/后台-活动管理/投注返利活动/报表.bru,报表
 unknown,report,GET,/admin/promo/lottery/task/record/export,/admin/promo/lottery/task/record/export,,,活动/后台-活动管理/抽奖活动/抽奖任务报表导出.bru,抽奖任务报表导出
 unknown,report,GET,/admin/promo/lottery/task/record/list,/admin/promo/lottery/task/record/list,,,活动/后台-活动管理/抽奖活动/抽奖任务报表.bru,抽奖任务报表
 unknown,report,GET,/admin/promo/lottery/user/record/export,/admin/promo/lottery/user/record/export,,,活动/后台-活动管理/抽奖活动/抽奖人员名单报表导出.bru,抽奖人员名单报表导出

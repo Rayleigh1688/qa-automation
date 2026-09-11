@@ -1,15 +1,28 @@
 """Offline case catalogue and concise result views. Never executes tests."""
 from collections import Counter, defaultdict
+from datetime import datetime, timedelta, timezone
 import csv
 from html import escape
 import io
 import json
 from pathlib import Path
 import re
+from qa_core.result_language import friendly_row, STATUS_LABELS
 
 FIELDS = ['用例编号', '类型', '模块/接口', '用例名称', '前置条件', '参数/步骤', '预期结果', '级别', '验收点']
 RESULT_FIELDS = FIELDS + ['执行结果', '实际结果/失败点', '分类', '证据']
 STATUSES = ('PASS', 'FAIL', 'NOT_RUN', 'ERROR')
+
+
+def display_time(value):
+    """Display offset-aware timestamps in UTC+8; preserve unknown timezones."""
+    try:
+        parsed = datetime.fromisoformat(value.replace('Z', '+00:00'))
+    except (ValueError, TypeError, AttributeError):
+        return value
+    if parsed.tzinfo is None:
+        return value
+    return parsed.astimezone(timezone(timedelta(hours=8))).strftime('%Y-%m-%d %H:%M:%S') + '（UTC+8）'
 
 
 def execution_status(item):
@@ -75,7 +88,7 @@ def join_results(cases, report):
         for row in rows:
             item = indexed.get(row['用例编号'],{})
             row.update({'执行方式':{'manual':'手动','automatic':'自动'}.get(report['execution_methods'].get(row['用例编号']), '未指定'),
-                '执行人':item.get('executor',''),'执行时间':item.get('executed_at',item.get('source_time','')),
+                '执行人':item.get('executor',''),'执行时间':display_time(item.get('executed_at',item.get('source_time',''))),
                 '来源批次':item.get('source_run_id',report.get('packet_id',''))})
     return rows
 
@@ -92,7 +105,7 @@ def csv_text(rows, fields):
 
 
 def write_views(folder, cases, report, *, extra_views=True):
-    rows = join_results(cases, report)
+    rows = [friendly_row(row) for row in join_results(cases, report)]
     folder = Path(folder)
     folder.mkdir(parents=True, exist_ok=True)
     counts = Counter(r['执行结果'] for r in rows)
@@ -125,7 +138,7 @@ def render_html(rows, summary, folder, *, extra_views=True):
     body = []
     for (kind, module), items in groups.items():
         counts = Counter(r['执行结果'] for r in items)
-        label = ' · '.join(f'{s} {counts[s]}' for s in STATUSES if counts[s])
+        label = ' · '.join(f'{STATUS_LABELS[s]} {counts[s]}' for s in STATUSES if counts[s])
         body.append(f'<details class="group" open><summary>{escape(kind)} / {escape(module)} <small>{label}</small></summary>')
         for row in items:
             status = row['执行结果']
@@ -138,10 +151,10 @@ def render_html(rows, summary, folder, *, extra_views=True):
                 href = quote(os.path.relpath(source.resolve(), folder.resolve()), safe='/')
                 evidence = f'<a href="{escape(href, quote=True)}">查看证据</a>'
             actual = f'<span class="actual">{escape(row["实际结果/失败点"])}</span>' if status != 'PASS' else ''
-            body.append(f'<details class="case" data-status="{status}"><summary><b class="{status}">{status}</b> '
-                        f'{escape(row["用例编号"])}　{escape(row["用例名称"])}{actual}</summary><dl>' +
+            body.append(f'<details class="case" data-status="{status}"><summary><b class="{status}">{STATUS_LABELS[status]}</b> '
+                        f'{escape(row["用例名称"])}{actual}</summary><dl><dt>用例编号</dt><dd>{escape(row["用例编号"])}</dd>' +
                         ''.join(f'<dt>{key}</dt><dd>{escape(row[key])}</dd>' for key in ['前置条件', '参数/步骤', '预期结果', '实际结果/失败点', '分类']+([k for k in ['执行方式','执行人','执行时间','来源批次'] if k in row])) +
-                        f'<dt>证据</dt><dd>{evidence or "—"}</dd></dl></details>')
+                        f'<dt>证据</dt><dd>{evidence or "—"}</dd></dl>' + ('<details class="technical"><summary>技术断言（供排查）</summary><pre>'+escape(row["技术断言"])+'</pre></details>' if row.get("技术断言") else '') + '</details>')
         body.append('</details>')
     return '''<!doctype html><html lang="zh"><meta charset="utf-8"><meta name="viewport" content="width=device-width">
 <title>测试结果</title><style>
@@ -150,14 +163,14 @@ h1{font-size:26px}summary{cursor:pointer;padding:12px}.group{background:white;bo
 .case{border-top:1px solid #eee;margin:0 12px}.case summary{font-size:14px}small{color:#666;margin-left:12px}
 b{display:inline-block;min-width:76px}.PASS{color:#147d43}.FAIL{color:#bf2635}.ERROR{color:#9b5100}.NOT_RUN{color:#666}
 .actual{display:block;margin:6px 0 0 80px;color:#555}dl{display:grid;grid-template-columns:100px 1fr;gap:10px;padding:0 12px 12px}dt{color:#777}dd{margin:0;white-space:pre-wrap;overflow-wrap:anywhere}
-input,select{padding:10px;border:1px solid #aaa;border-radius:5px}nav{display:flex;gap:12px;flex-wrap:wrap}.hidden{display:none}
-</style><h1>测试结果</h1>''' + f'<p>{escape(summary["run_id"])} · {escape(summary["environment"])} · {escape(summary["source_time"])}</p>' + (
+.technical{margin:0 24px 16px}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#f5f6f8;padding:12px}input,select{padding:10px;border:1px solid #aaa;border-radius:5px}nav{display:flex;gap:12px;flex-wrap:wrap}.hidden{display:none}
+</style><h1>测试结果</h1>''' + f'<p>{escape(summary["run_id"])} · {escape(summary["environment"])} · {escape(display_time(summary["source_time"]))}</p>' + (
         '<p>部署版本：'+escape(str(summary['deployment']))+' · '+escape({'declared':'声明版本，未远程核验','not_provided':'未提供版本','verified':'已由执行流程核验','incomplete':'版本核验未完成'}.get(summary.get('deployment_verification'),'未核验'))+'</p>' if 'deployment' in summary else '') + (
         '<p>历史证据整理，本次未重新测试；仅统计此用例表。</p>' if summary['mode'] == 'historical-summary' else '<p>人工回填与自动证据汇总；来源可能为不同批次，本次导入未执行测试。</p>' if summary['mode']=='evidence-summary' else '<p>执行准备清单，尚未执行测试；人工用例等待回填。</p>' if summary['mode']=='manual-preparation' else '') + \
-        '<p>' + '　'.join(f'{key} <strong>{summary[key]}</strong>' for key in STATUSES) + \
+        '<p>' + '　'.join(f'{STATUS_LABELS[key]} <strong>{summary[key]}</strong>' for key in STATUSES) + \
         f'　总用例 {summary["total"]}（执行错误和未执行不计入已执行）</p>' + '''
 <nav><input id="search" aria-label="搜索用例" placeholder="搜索编号、名称、失败点">
-<select id="status" aria-label="执行结果"><option value="">全部结果</option><option>FAIL</option><option>PASS</option><option>NOT_RUN</option><option>ERROR</option></select>
+<select id="status" aria-label="执行结果"><option value="">全部结果</option><option value="FAIL">失败</option><option value="PASS">通过</option><option value="NOT_RUN">未执行</option><option value="ERROR">执行出错</option></select>
 <a href="results.csv">全部结果</a>''' + ('<a href="cases.csv">用例CSV</a><a href="failures.csv">失败清单</a><a href="pending.csv">未执行/执行错误</a>' if extra_views else '') + '</nav>' + ''.join(body) + '''
 <script>function filter(){let q=document.getElementById('search').value.toLowerCase(),s=document.getElementById('status').value;
 document.querySelectorAll('.case').forEach(e=>e.classList.toggle('hidden',!!((s&&e.dataset.status!==s)||!e.textContent.toLowerCase().includes(q))));

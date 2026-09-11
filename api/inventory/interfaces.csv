@@ -1,4 +1,6 @@
 file,top_domain,name,method,host,path,suggested_base_var,surface,module,clean_url,flags,p0_candidate,p0_domain,url
+Untitled 1.bru,(root),Untitled 1,POST,client-fat.filbet2025.com,/finance/payment/callback/deposit/coinph,{{api_url}},client,finance,{{api_url}}/finance/payment/callback/deposit/coinph,hardcoded_env,,finance,https://client-fat.filbet2025.com/finance/payment/callback/deposit/coinph
+Untitled 2.bru,(root),Untitled 2,GET,127.0.0.1:5252,/gapi/fs/search,,unknown,other,/gapi/fs/search?venue_tag=mi&uid=<redacted>&gid=<id>&fs_id=<id>&fs_created_at=1787975361384&third_fs_id=%25%21d%28string%3D<id>%29,hardcoded_env,,,http://127.0.0.1:5252/gapi/fs/search?venue_tag=mi&uid=<redacted>&gid=<id>&fs_id=<id>&fs_created_at=1787975361384&third_fs_id=%25%21d%28string%3D<id>%29
 collection.bru,(root),,,,,,unknown,other,,non_request,,,
 environments/admin.bru,environments,,,,,,unknown,other,,non_request,,,
 environments/agency.bru,environments,,,,,,unknown,other,,non_request,,,
@@ -139,6 +141,7 @@ test.bru,(root),test,GET,client-beta.filbet.zone,/member/stmt,{{api_url}},client
 前台/VIP/领取全部奖励.bru,前台,领取全部奖励,POST,client-fat.filbet2025.com,/promo/vip/log/claim/all,{{api_url}},client,promo,{{api_url}}/promo/vip/log/claim/all,hardcoded_env,,,https://client-fat.filbet2025.com/promo/vip/log/claim/all
 前台/VIP/领取奖励-aliang.bru,前台,领取奖励-aliang,POST,client-fat.filbet2025.com,/promo/vip/log/claim/byid,{{api_url}},client,promo,{{api_url}}/promo/vip/log/claim/byid,hardcoded_env,,,https://client-fat.filbet2025.com/promo/vip/log/claim/byid
 前台/VIP/领取奖励历史记录列表-aliang.bru,前台,领取奖励历史记录列表-aliang,GET,client-fat.filbet2025.com,/promo/vip/log/history,{{api_url}},client,promo,{{api_url}}/promo/vip/log/history,hardcoded_env,,,https://client-fat.filbet2025.com/promo/vip/log/history
+前台/coinph 测试.bru,前台,coinph 测试,POST,client-fat.filbet2025.com,/finance/payment/callback/withdraw/coinph,{{api_url}},client,finance,{{api_url}}/finance/payment/callback/withdraw/coinph,hardcoded_env,yes,finance,https://client-fat.filbet2025.com/finance/payment/callback/withdraw/coinph
 前台/feedback/feedback history-ducky.bru,前台,feedback history-ducky,GET,{{test_url}},/member/feedback/history,{{api_url}},client,member,{{api_url}}/member/feedback/history?page=1&page_size=10,,,,{{test_url}}/member/feedback/history?page=1&page_size=10
 前台/feedback/feedback read-ducky.bru,前台,feedback read-ducky,POST,{{test_url}},/member/feedback/read,{{api_url}},client,member,{{api_url}}/member/feedback/read,,,,{{test_url}}/member/feedback/read
 前台/feedback/feedback-ducky.bru,前台,feedback-ducky,POST,{{test_url}},/member/feedback,{{api_url}},client,member,{{api_url}}/member/feedback,,,,{{test_url}}/member/feedback
@@ -375,7 +378,7 @@ test.bru,(root),test,GET,client-beta.filbet.zone,/member/stmt,{{api_url}},client
 合规/游戏记录/folder.bru,合规,游戏记录,,,,,unknown,game,,non_request,,,
 合规/游戏记录/jackpot记录-owen.bru,合规,jackpot记录-owen,POST,{{admin_url}},/cmpl/jackpot/list,{{admin_url}},admin,game,{{admin_url}}/cmpl/jackpot/list,,,,{{admin_url}}/cmpl/jackpot/list
 合规/游戏记录/jackpot记录导出-owen.bru,合规,jackpot记录导出-owen,POST,{{admin_url}},/cmpl/jackpot/export,{{admin_url}},admin,game,{{admin_url}}/cmpl/jackpot/export,,,,{{admin_url}}/cmpl/jackpot/export
-合规/游戏记录/全平台投注记录-wesley-owen.bru,合规,全平台投注记录-wesley/owen,POST,{{admin_url}},/cmpl/record/bet,{{admin_url}},admin,game,{{admin_url}}/cmpl/record/bet,,,,{{admin_url}}/cmpl/record/bet
+合规/游戏记录/全平台投注记录-wesley-owen.bru,合规,全平台投注记录-wesley/owen,POST,{{admin_url}},/cmpl/record/game,{{admin_url}},admin,game,{{admin_url}}/cmpl/record/game,,,,{{admin_url}}/cmpl/record/game
 合规/游戏记录/游戏记录导出-wesley-owen.bru,合规,游戏记录导出-wesley/owen,POST,{{admin_url}},/cmpl/record/export,{{admin_url}},admin,game,{{admin_url}}/cmpl/record/export,,,,{{admin_url}}/cmpl/record/export
 合规/系统管理/folder.bru,合规,系统管理,,,,,unknown,other,,non_request,,,
 合规/系统管理/权限管理/folder.bru,合规,权限管理,,,,,unknown,permission,,non_request,,,
@@ -457,6 +460,8 @@ test.bru,(root),test,GET,client-beta.filbet.zone,/member/stmt,{{api_url}},client
 后台/game管理/场馆管理/场馆列表-owen.bru,后台,场馆列表-owen,POST,admin-antd.filbet2025.com,/admin/platform/list,{{admin_url}},admin,game,{{admin_url}}/admin/platform/list,hardcoded_env,,,https://admin-antd.filbet2025.com/admin/platform/list
 后台/game管理/场馆管理/场馆更新状态-owen.bru,后台,场馆更新状态-owen,POST,{{cbor_request_proxy}},/admin/platform/update/state,{{admin_url}},admin,game,{{admin_url}}/admin/platform/update/state,,,,{{cbor_request_proxy}}/admin/platform/update/state
 后台/game管理/场馆管理/查询缓存-owen.bru,后台,查询缓存-owen,POST,{{cbor_request_proxy}},/admin/gameclass/member/index,{{admin_url}},admin,game,{{admin_url}}/admin/gameclass/member/index,,,,{{cbor_request_proxy}}/admin/gameclass/member/index
+后台/game管理/投注紀錄/folder.bru,后台,投注紀錄,,,,,unknown,game,,non_request,,,
+后台/game管理/投注紀錄/投注紀錄.bru,后台,投注紀錄,POST,{{admin_url}},/admin/record/game,{{admin_url}},admin,game,{{admin_url}}/admin/record/game,,,,{{admin_url}}/admin/record/game
 后台/game管理/游戏管理/+修改 -权重标签--owen.bru,后台,+修改 <权重标签>-owen,POST,{{cbor_request_proxy}},/admin/game/dictweighttag/update/state,{{admin_url}},admin,game,{{admin_url}}/admin/game/dictweighttag/update/state,,,,{{cbor_request_proxy}}/admin/game/dictweighttag/update/state
 后台/game管理/游戏管理/+修改 -类型标签--owen.bru,后台,+修改 <类型标签>-owen,POST,{{cbor_request_proxy}},/admin/game/dicttypetag/update/state,{{admin_url}},admin,game,{{admin_url}}/admin/game/dicttypetag/update/state,,,,{{cbor_request_proxy}}/admin/game/dicttypetag/update/state
 后台/game管理/游戏管理/+添加 -权重标签--owen.bru,后台,+添加 <权重标签>-owen,POST,{{cbor_request_proxy}},/admin/game/dictweighttag/insert,{{admin_url}},admin,game,{{admin_url}}/admin/game/dictweighttag/insert,,,,{{cbor_request_proxy}}/admin/game/dictweighttag/insert
@@ -483,6 +488,8 @@ test.bru,(root),test,GET,client-beta.filbet.zone,/member/stmt,{{api_url}},client
 后台/kyc/kyc 审核通过 - double.bru,后台,kyc 审核通过 - double,POST,{{admin_url}},/admin/kyc/approve,{{admin_url}},admin,kyc,{{admin_url}}/admin/kyc/approve,,yes,kyc,{{admin_url}}/admin/kyc/approve
 后台/kyc/kyc 审核驳回 - double.bru,后台,kyc 审核驳回 - double,POST,{{admin_url}},/admin/kyc/reject,{{admin_url}},admin,kyc,{{admin_url}}/admin/kyc/reject,,yes,kyc,{{admin_url}}/admin/kyc/reject
 后台/kyc/uid数组查询详情页.bru,后台,uid数组查询详情页,POST,{{admin_url}},/admin/kyc/details,{{admin_url}},admin,kyc,{{admin_url}}/admin/kyc/details,,yes,kyc,{{admin_url}}/admin/kyc/details
+后台/kyc/复核.bru,后台,复核,POST,admin-fat.filbet2025.com,/admin/kyc/review,{{admin_url}},admin,kyc,{{admin_url}}/admin/kyc/review,hardcoded_env,yes,kyc,https://admin-fat.filbet2025.com/admin/kyc/review
+后台/kyc/复核列表.bru,后台,复核列表,GET,admin-fat.filbet2025.com,/admin/kyc/review/list,{{admin_url}},admin,kyc,{{admin_url}}/admin/kyc/review/list?state=1,hardcoded_env,yes,kyc,https://admin-fat.filbet2025.com/admin/kyc/review/list?state=1
 后台/kyc/异动记录.bru,后台,异动记录,GET,admin-fat.filbet2025.com,/admin/kyc/ekyc/log,{{admin_url}},admin,kyc,{{admin_url}}/admin/kyc/ekyc/log?uid=<redacted>,hardcoded_env,yes,kyc,https://admin-fat.filbet2025.com/admin/kyc/ekyc/log?uid=<redacted>
 后台/kyc/更新 kyc - double.bru,后台,更新 kyc - double,POST,{{admin_url}},/admin/kyc/update,{{admin_url}},admin,kyc,{{admin_url}}/admin/kyc/update,,yes,kyc,{{admin_url}}/admin/kyc/update
 后台/kyc/统计每天审核通过数量.bru,后台,统计每天审核通过数量,GET,{{admin_url}},/admin/kyc/approved/count,{{admin_url}},admin,kyc,{{admin_url}}/admin/kyc/approved/count,,yes,kyc,{{admin_url}}/admin/kyc/approved/count
@@ -745,7 +752,7 @@ test.bru,(root),test,GET,client-beta.filbet.zone,/member/stmt,{{api_url}},client
 后台/财务管理/支付渠道/添加支付平台.bru,后台,添加支付平台,POST,{{admin_url}},/admin/finance/payment/platform/insert,{{admin_url}},admin,finance,{{admin_url}}/admin/finance/payment/platform/insert,,yes,finance,{{admin_url}}/admin/finance/payment/platform/insert
 后台/财务管理/支付渠道/添加支付渠道通道.bru,后台,添加支付渠道通道,POST,{{admin_url}},/admin/finance/payment/channel/insert,{{admin_url}},admin,finance,{{admin_url}}/admin/finance/payment/channel/insert,,yes,finance,{{admin_url}}/admin/finance/payment/channel/insert
 后台/财务管理/注单管理/folder.bru,后台,注单管理,,,,,unknown,finance,,non_request,,,
-后台/财务管理/注单管理/游戏记录-wesley.bru,后台,游戏记录-wesley,POST,{{admin_url}},/admin/record/bet,{{admin_url}},admin,finance,{{admin_url}}/admin/record/bet,,,,{{admin_url}}/admin/record/bet
+后台/财务管理/注单管理/游戏记录-wesley.bru,后台,注单管理,POST,{{admin_url}},/admin/record/bet,{{admin_url}},admin,finance,{{admin_url}}/admin/record/bet,,,,{{admin_url}}/admin/record/bet
 后台/财务管理/银行卡/folder.bru,后台,银行卡,,,,,unknown,finance,,non_request,,,
 后台/财务管理/银行卡/开启关闭按钮.bru,后台,开启关闭按钮,POST,admin-antd.filbet2025.com,/admin/finance/payment/bank/enable,{{admin_url}},admin,finance,{{admin_url}}/admin/finance/payment/bank/enable,hardcoded_env,yes,finance,https://admin-antd.filbet2025.com/admin/finance/payment/bank/enable
 后台/财务管理/银行卡/银行卡列表.bru,后台,银行卡列表,GET,admin-antd.filbet2025.com,/admin/finance/payment/bank/list,{{admin_url}},admin,finance,{{admin_url}}/admin/finance/payment/bank/list,hardcoded_env,yes,finance,https://admin-antd.filbet2025.com/admin/finance/payment/bank/list
@@ -970,6 +977,8 @@ test.bru,(root),test,GET,client-beta.filbet.zone,/member/stmt,{{api_url}},client
 活动/世界杯活动/冠军排行榜.bru,活动,冠军排行榜,GET,(relative_abs),/promo/world/cup/rank,,unknown,promo,/promo/world/cup/rank,,,,/promo/world/cup/rank
 活动/世界杯活动/手动添加.bru,活动,手动添加,POST,(relative_abs),/free/spin/insert,,unknown,promo,/free/spin/insert,,,,/free/spin/insert
 活动/优惠通知/folder.bru,活动,优惠通知,,,,,unknown,promo,,non_request,,,
+活动/优惠通知/余额变动已读接口.bru,活动,余额变动已读接口,POST,(relative_abs),/promo/notify/read/balance,,unknown,promo,/promo/notify/read/balance,,,,/promo/notify/read/balance
+活动/优惠通知/余额变动接口.bru,活动,余额变动接口,GET,(relative_abs),/promo/notify/change/balance,,unknown,promo,/promo/notify/change/balance,,,,/promo/notify/change/balance
 活动/优惠通知/通知接口.bru,活动,通知接口,GET,(relative_abs),/promo/notify/list,,unknown,promo,/promo/notify/list,,,,/promo/notify/list
 活动/后台-活动管理/KYC通过送免费旋转/folder.bru,活动,KYC通过送免费旋转,,,,,unknown,kyc,,non_request,yes,kyc,
 活动/后台-活动管理/KYC通过送免费旋转/列表.bru,活动,列表,GET,admin-fat.filbet2025.com,/admin/promo/rotate/kyc/list,{{admin_url}},admin,kyc,{{admin_url}}/admin/promo/rotate/kyc/list,hardcoded_env,yes,kyc,https://admin-fat.filbet2025.com/admin/promo/rotate/kyc/list
@@ -1008,6 +1017,10 @@ test.bru,(root),test,GET,client-beta.filbet.zone,/member/stmt,{{api_url}},client
 活动/后台-活动管理/存款活动（一存，2存，3存，多存）/编辑活动.bru,活动,编辑活动,GET,(relative_abs),/admin/promo/update,,unknown,promo,/admin/promo/update,,,,/admin/promo/update
 活动/后台-活动管理/存款活动（一存，2存，3存，多存）/首存阶梯报表.bru,活动,首存阶梯报表,GET,(relative_abs),/admin/promo/deposit/first/list,,unknown,finance,/admin/promo/deposit/first/list,,,finance,/admin/promo/deposit/first/list
 活动/后台-活动管理/存款活动（一存，2存，3存，多存）/首存阶梯报表导出.bru,活动,首存阶梯报表导出,GET,(relative_abs),/admin/promo/deposit/first/export,,unknown,finance,/admin/promo/deposit/first/export,,,finance,/admin/promo/deposit/first/export
+活动/后台-活动管理/投注返利活动/folder.bru,活动,投注返利活动,,,,,unknown,promo,,non_request,,,
+活动/后台-活动管理/投注返利活动/导出.bru,活动,导出,GET,(relative_abs),/admin/promo/betting/rebate/export,,unknown,promo,/admin/promo/betting/rebate/export,,,,/admin/promo/betting/rebate/export
+活动/后台-活动管理/投注返利活动/报表.bru,活动,报表,GET,(relative_abs),/admin/promo/betting/rebate/report,,unknown,report,/admin/promo/betting/rebate/report,,,,/admin/promo/betting/rebate/report
+活动/后台-活动管理/投注返利活动/活动编辑.bru,活动,活动编辑,GET,(relative_abs),/admin/promo/update,,unknown,promo,/admin/promo/update,,,,/admin/promo/update
 活动/后台-活动管理/投注返水/folder.bru,活动,投注返水,,,,,unknown,promo,,non_request,,,
 活动/后台-活动管理/投注返水/返水列表.bru,活动,返水列表,GET,admin-fat.filbet2025.com,/admin/promo/rebate/rebat/report,{{admin_url}},admin,report,{{admin_url}}/admin/promo/rebate/rebat/report?uid=<redacted>,hardcoded_env,,,https://admin-fat.filbet2025.com/admin/promo/rebate/rebat/report?uid=<redacted>
 活动/后台-活动管理/投注返水/返水列表导出.bru,活动,返水列表导出,GET,admin-fat.filbet2025.com,/admin/promo/rebate/rebat/export,{{admin_url}},admin,promo,{{admin_url}}/admin/promo/rebate/rebat/export,hardcoded_env,,,https://admin-fat.filbet2025.com/admin/promo/rebate/rebat/export

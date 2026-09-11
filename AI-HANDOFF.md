@@ -8,7 +8,7 @@
 
 - 2027远端人工“通过”与Davinci负责人已逐行保留，新增C18“临近分行变更联动游戏类型限制”纳入18条业务总用例。来源、待关联的人工批次与自动化边界见[2027用例](requirements/ISOP-2027/test-cases.md)。冻结计划仍覆盖C01—C17，C18未实现独立自动断言；旧Restore失败、API候选、未回填manual.csv和当前原始结果均不因人工记录改变。
 
-- ISOP-2022最新准备核对（2026-09-11）：用户授权有条件推进完整API测试。已读取backend_api ca3c1c2相对69c9be0的新提交、Jira2022/2044/2045/2046、FAT源表元数据和限定样本；当前完整验收条件未齐，详见[2022契约评审](requirements/ISOP-2022/api/contract-review.md#2026-09-11-测试条件核对)。未执行业务API/UI或造数。CLI路径修复后，用户自行扫描已完成AI分析，ISOP-2085提测归到2022；环境和完整验收条件仍需核对，来源及边界见[Telegram续接](docs/telegram-next-session.md#最新扫描与cli修复2026-09-11)。
+- ISOP-2022/2085已按用户最新“直接开测、逐轮出结果”指令完成FAT首轮与限定复核（2026-09-11），替代此前等全部条件齐备再执行的安排。新增统一plan.json、API数据视图及只读筛选/金额断言；现有53组合、48可执行，当前完整计划尚未全部按最新hash重跑。实际批次、计数、4项候选及空值契约差异集中在[问题评审](requirements/ISOP-2022/bug-review.md)。首轮和8项限定复核均保留真实失败，未算作整条业务/全量父需求验收；latest当前指向限定复核。每轮fresh登录，只读API与DB，没有造数/重算、BUG提交或发群。
 
 - 待确认列表按requirements已有需求编号展示，子任务归并；终端和preview.md保持简洁，详细消息/用例缺口留在preview.json。本地`qa:telegram -- preview`不扫描或调用AI；`run --requirements ... --revision ...`按需求选择，多批次须用原--candidates明确选择。本轮未执行测试，验证与保留状态见[列表续接](docs/telegram-next-session.md#需求级待确认列表2026-09-11)。
 
@@ -32,7 +32,7 @@
 
 - 远端补充记录（提交ce0274a，2026-09-11）：Windows FAT无认证doctor网络检查通过，未登录或发送业务请求；2022业务仍受契约/样本缺口影响。原执行尝试和BLOCKED_DATA/BLOCKED_EXPECTATION记录已保留在[2022用例](requirements/ISOP-2022/test-cases.md)，不替代本机数据库准备核对或业务验收。
 
-- 新对话先运行本地`npm run qa:telegram -- preview`，读取requirements/ISOP-2022/api/contract-review.md及本次提测来源2085，核对环境、体育切表契约、独立对账源和缺少的样本。条件齐备后再补2022执行计划/API数据并测试；不要把有提测通知或有用例目录当成已完整可执行。2027仅请求更新UAT，2030限手工UI；新消息仍由用户扫描后整理，不自动重扫或发群。
+- 用户最新决定（2026-09-11）：2022等待修复，暂停主动复测；此前逐轮开测授权保留，但不覆盖本次暂停决定。已有问题与报告保持。收到修复/重新开测指令后再按明确范围fresh登录复验；BUG提交仍需确认，测试过程不发群。
 
 - 团队实际执行当前manual.csv，回填六列并附脱敏证据；自动侧按本批范围执行，再明确选择真实来源导入。优先完善API数据与断言，UI按人工验收推进。
 - [候选BUG](requirements/ISOP-2027/api/BUG-review-2026-09-10.md)尚未获建单批准。旧API证据已清理，提交前需按当前版本补充复现；Restore最近一次失败截图仍在当前UI批次。
@@ -54,3 +54,11 @@
 提交前核对及后续远端合并见[整理记录](docs/project-cleanup-2026-09-11.md)；此前扫描执行与版本衔接的阶段验证见[优化计划](docs/new-requirement-automation-plan.md#扫描执行与版本衔接2026-09-11)。Git提交/推送按用户最新授权处理，本次未运行真实API/UI业务测试、创建BUG或发群。
 
 最新整理验证只在[整理记录](docs/project-cleanup-2026-09-11.md)维护。本地`npm run check`不连接FAT/UAT，也不证明业务或Windows/Linux、CI验收通过。架构与命令分别见[架构说明](docs/architecture.md)、[命令说明](docs/commands.md)。
+
+2022本轮代码校验：`npm run check`通过（298项单测）；首次沙箱因本地测试端口监听受限失败，离线校验网络权限重试后通过。计划离线导出通过。业务结果以问题评审链接的两个批次为准，不由本地校验替代。
+
+2022报告中文展示（2026-09-11）：按用户要求，首轮与限定复核的原results.html/results.csv已更新为中文场景和实际结果说明；HTML状态显示通过/失败/未执行/执行出错，编号及原技术断言放在展开详情。原result.json和冻结快照hash保持，原视图备份为results.before-chinese.*；没有重跑业务或改判。公共展示转换在qa_core/result_language.py，2022历史标题适配在filbet/record_report.py，统一执行与离线重建入口后续沿用。`npm run check`通过（300项单测），浏览器实查中文布局及14项失败筛选通过。
+
+接口最新扫描（2026-09-11）：backend_api本地与远端main均b8daa7d，较ca3c1c2新增2提交、5份合规报表文档变更；主要为2028的总GGR、JP贡献/派奖字段，关联按内容推断。详见[2028接口评审](requirements/ISOP-2028/api/contract-review.md)。inventory/catalog已离线刷新，累计资产变化与本次提交增量分开记录；P0范围不变。2022两处查询文档无改动，此次没有业务测试、Telegram扫描或发群。
+
+2022报告时区（2026-09-11）：按用户要求，20260911T092623Z-a2618c63/results.html的报告时间改为2026-09-11 17:26:23（UTC+8）。公共case_report渲染器后续将带时区的报告时间及执行时间转为东八区；未注明时区的值保留原文。原始JSON、批次编号和测试结论未改，没有重跑业务。跨日和已有+08:00转换校验通过；`npm run check`通过（300项单测，首次沙箱端口限制后提权重试）。

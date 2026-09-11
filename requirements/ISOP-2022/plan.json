@@ -1,0 +1,6881 @@
+{
+  "schema_version": 2,
+  "requirement": "ISOP-2022",
+  "execution_policy": "api-first",
+  "services": {
+    "admin": {
+      "env": "ADMIN_URL"
+    }
+  },
+  "actors": {
+    "A": {
+      "services": [
+        "admin"
+      ]
+    }
+  },
+  "contracts": {
+    "bet": {
+      "service": "admin",
+      "method": "POST",
+      "path": "/admin/record/bet",
+      "encoding": "cbor",
+      "write": false
+    },
+    "game": {
+      "service": "admin",
+      "method": "POST",
+      "path": "/admin/record/game",
+      "encoding": "cbor",
+      "write": false
+    }
+  },
+  "variables": {},
+  "acceptance_ids": [
+    "R01",
+    "R02",
+    "R03",
+    "R04",
+    "R05",
+    "R06",
+    "R07",
+    "R08",
+    "R09",
+    "R10",
+    "R11",
+    "R12",
+    "R13",
+    "R14",
+    "R15",
+    "R16",
+    "R17",
+    "R18",
+    "R19",
+    "R20",
+    "R21",
+    "R22",
+    "R23",
+    "R24",
+    "R25",
+    "R26",
+    "R27",
+    "R28",
+    "R29",
+    "R30",
+    "R31"
+  ],
+  "cases": [
+    {
+      "id": "bet-bet-all",
+      "review": {
+        "用例编号": "bet-bet-all",
+        "类型": "API",
+        "模块/接口": "ISOP-2085 两处注单查询",
+        "用例名称": "投注时间查询全部类型",
+        "前置条件": "FAT；本轮fresh登录；仅验证本组合，父级用例不自动通过",
+        "参数/步骤": "见执行步骤",
+        "预期结果": "投注时间查询全部类型；数据形状、筛选及适用金额/分页断言成立；空结果不证明源表完整性",
+        "级别": "专项",
+        "验收点": "R30"
+      },
+      "delivery": {
+        "mode": "automatic"
+      },
+      "steps": [
+        {
+          "id": "query",
+          "actor": "A",
+          "action": "api",
+          "contract": "bet",
+          "body": {
+            "page": 1,
+            "page_size": 20,
+            "start_time": 1788796800000,
+            "end_time": 1789142399999
+          },
+          "auth": "valid",
+          "expect": [
+            {
+              "path": "http",
+              "op": "eq",
+              "value": 200
+            },
+            {
+              "path": "body.status",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "body.data",
+              "op": "type",
+              "value": "object"
+            },
+            {
+              "path": "body.data.d",
+              "op": "type",
+              "value": "array"
+            },
+            {
+              "path": "body.data.t",
+              "op": "type",
+              "value": "integer"
+            },
+            {
+              "path": "body.data.s",
+              "op": "type",
+              "value": "integer"
+            },
+            {
+              "path": "body.data.a.subtotal",
+              "op": "type",
+              "value": "object"
+            },
+            {
+              "path": "body.data.a.total",
+              "op": "type",
+              "value": "object"
+            },
+            {
+              "path": "body.data.d",
+              "op": "nonempty"
+            }
+          ],
+          "extract": {
+            "data": "body.data"
+          }
+        },
+        {
+          "id": "verify",
+          "actor": "A",
+          "action": "method",
+          "method": "bet_record_check",
+          "params": {
+            "data": "${data}",
+            "request": {
+              "page": 1,
+              "page_size": 20,
+              "start_time": 1788796800000,
+              "end_time": 1789142399999
+            }
+          },
+          "expect": [
+            {
+              "path": "checks.page_count",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.page_limit",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.total_count",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.payout_sign",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.subtotal_bet_amount",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.subtotal_valid_bet_amount",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.subtotal_grand_inc",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.subtotal_ggr",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.subtotal_order_count",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.bet_time_range",
+              "op": "eq",
+              "value": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "bet-settle-default",
+      "review": {
+        "用例编号": "bet-settle-default",
+        "类型": "API",
+        "模块/接口": "ISOP-2085 两处注单查询",
+        "用例名称": "结算查询默认排除体育",
+        "前置条件": "FAT；本轮fresh登录；仅验证本组合，父级用例不自动通过",
+        "参数/步骤": "见执行步骤",
+        "预期结果": "结算查询默认排除体育；数据形状、筛选及适用金额/分页断言成立；空结果不证明源表完整性",
+        "级别": "专项",
+        "验收点": "R10"
+      },
+      "delivery": {
+        "mode": "automatic"
+      },
+      "steps": [
+        {
+          "id": "query",
+          "actor": "A",
+          "action": "api",
+          "contract": "bet",
+          "body": {
+            "page": 1,
+            "page_size": 20,
+            "settle_start_time": 1788796800000,
+            "settle_end_time": 1789142399999
+          },
+          "auth": "valid",
+          "expect": [
+            {
+              "path": "http",
+              "op": "eq",
+              "value": 200
+            },
+            {
+              "path": "body.status",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "body.data",
+              "op": "type",
+              "value": "object"
+            },
+            {
+              "path": "body.data.d",
+              "op": "type",
+              "value": "array"
+            },
+            {
+              "path": "body.data.t",
+              "op": "type",
+              "value": "integer"
+            },
+            {
+              "path": "body.data.s",
+              "op": "type",
+              "value": "integer"
+            },
+            {
+              "path": "body.data.a.subtotal",
+              "op": "type",
+              "value": "object"
+            },
+            {
+              "path": "body.data.a.total",
+              "op": "type",
+              "value": "object"
+            },
+            {
+              "path": "body.data.d",
+              "op": "nonempty"
+            }
+          ],
+          "extract": {
+            "data": "body.data"
+          }
+        },
+        {
+          "id": "verify",
+          "actor": "A",
+          "action": "method",
+          "method": "bet_record_check",
+          "params": {
+            "data": "${data}",
+            "request": {
+              "page": 1,
+              "page_size": 20,
+              "settle_start_time": 1788796800000,
+              "settle_end_time": 1789142399999
+            }
+          },
+          "expect": [
+            {
+              "path": "checks.page_count",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.page_limit",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.total_count",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.payout_sign",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.subtotal_bet_amount",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.subtotal_valid_bet_amount",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.subtotal_grand_inc",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.subtotal_ggr",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.subtotal_order_count",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.settle_time_range",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.exclude_sports",
+              "op": "eq",
+              "value": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "bet-node-1",
+      "review": {
+        "用例编号": "bet-node-1",
+        "类型": "API",
+        "模块/接口": "ISOP-2085 两处注单查询",
+        "用例名称": "投注查询1线隔离",
+        "前置条件": "FAT；本轮fresh登录；仅验证本组合，父级用例不自动通过",
+        "参数/步骤": "见执行步骤",
+        "预期结果": "投注查询1线隔离；数据形状、筛选及适用金额/分页断言成立；空结果不证明源表完整性",
+        "级别": "专项",
+        "验收点": "R14"
+      },
+      "delivery": {
+        "mode": "automatic"
+      },
+      "steps": [
+        {
+          "id": "query",
+          "actor": "A",
+          "action": "api",
+          "contract": "bet",
+          "body": {
+            "page": 1,
+            "page_size": 20,
+            "start_time": 1788796800000,
+            "end_time": 1789142399999,
+            "node": 1
+          },
+          "auth": "valid",
+          "expect": [
+            {
+              "path": "http",
+              "op": "eq",
+              "value": 200
+            },
+            {
+              "path": "body.status",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "body.data",
+              "op": "type",
+              "value": "object"
+            },
+            {
+              "path": "body.data.d",
+              "op": "type",
+              "value": "array"
+            },
+            {
+              "path": "body.data.t",
+              "op": "type",
+              "value": "integer"
+            },
+            {
+              "path": "body.data.s",
+              "op": "type",
+              "value": "integer"
+            },
+            {
+              "path": "body.data.a.subtotal",
+              "op": "type",
+              "value": "object"
+            },
+            {
+              "path": "body.data.a.total",
+              "op": "type",
+              "value": "object"
+            },
+            {
+              "path": "body.data.d",
+              "op": "nonempty"
+            }
+          ],
+          "extract": {
+            "data": "body.data"
+          }
+        },
+        {
+          "id": "verify",
+          "actor": "A",
+          "action": "method",
+          "method": "bet_record_check",
+          "params": {
+            "data": "${data}",
+            "request": {
+              "page": 1,
+              "page_size": 20,
+              "start_time": 1788796800000,
+              "end_time": 1789142399999,
+              "node": 1
+            }
+          },
+          "expect": [
+            {
+              "path": "checks.page_count",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.page_limit",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.total_count",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.payout_sign",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.subtotal_bet_amount",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.subtotal_valid_bet_amount",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.subtotal_grand_inc",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.subtotal_ggr",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.subtotal_order_count",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.bet_time_range",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.node_filter",
+              "op": "eq",
+              "value": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "bet-node-2",
+      "review": {
+        "用例编号": "bet-node-2",
+        "类型": "API",
+        "模块/接口": "ISOP-2085 两处注单查询",
+        "用例名称": "投注查询2线集合",
+        "前置条件": "FAT；本轮fresh登录；仅验证本组合，父级用例不自动通过",
+        "参数/步骤": "见执行步骤",
+        "预期结果": "投注查询2线集合；数据形状、筛选及适用金额/分页断言成立；空结果不证明源表完整性",
+        "级别": "专项",
+        "验收点": "R13"
+      },
+      "delivery": {
+        "mode": "automatic"
+      },
+      "steps": [
+        {
+          "id": "query",
+          "actor": "A",
+          "action": "api",
+          "contract": "bet",
+          "body": {
+            "page": 1,
+            "page_size": 20,
+            "start_time": 1788796800000,
+            "end_time": 1789142399999,
+            "node": 2
+          },
+          "auth": "valid",
+          "expect": [
+            {
+              "path": "http",
+              "op": "eq",
+              "value": 200
+            },
+            {
+              "path": "body.status",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "body.data",
+              "op": "type",
+              "value": "object"
+            },
+            {
+              "path": "body.data.d",
+              "op": "type",
+              "value": "array"
+            },
+            {
+              "path": "body.data.t",
+              "op": "type",
+              "value": "integer"
+            },
+            {
+              "path": "body.data.s",
+              "op": "type",
+              "value": "integer"
+            },
+            {
+              "path": "body.data.a.subtotal",
+              "op": "type",
+              "value": "object"
+            },
+            {
+              "path": "body.data.a.total",
+              "op": "type",
+              "value": "object"
+            },
+            {
+              "path": "body.data.d",
+              "op": "nonempty"
+            }
+          ],
+          "extract": {
+            "data": "body.data"
+          }
+        },
+        {
+          "id": "verify",
+          "actor": "A",
+          "action": "method",
+          "method": "bet_record_check",
+          "params": {
+            "data": "${data}",
+            "request": {
+              "page": 1,
+              "page_size": 20,
+              "start_time": 1788796800000,
+              "end_time": 1789142399999,
+              "node": 2
+            }
+          },
+          "expect": [
+            {
+              "path": "checks.page_count",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.page_limit",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.total_count",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.payout_sign",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.subtotal_bet_amount",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.subtotal_valid_bet_amount",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.subtotal_grand_inc",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.subtotal_ggr",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.subtotal_order_count",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.bet_time_range",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.node_filter",
+              "op": "eq",
+              "value": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "bet-settle-node-1",
+      "review": {
+        "用例编号": "bet-settle-node-1",
+        "类型": "API",
+        "模块/接口": "ISOP-2085 两处注单查询",
+        "用例名称": "结算查询1线隔离",
+        "前置条件": "FAT；本轮fresh登录；仅验证本组合，父级用例不自动通过",
+        "参数/步骤": "见执行步骤",
+        "预期结果": "结算查询1线隔离；数据形状、筛选及适用金额/分页断言成立；空结果不证明源表完整性",
+        "级别": "专项",
+        "验收点": "R14"
+      },
+      "delivery": {
+        "mode": "automatic"
+      },
+      "steps": [
+        {
+          "id": "query",
+          "actor": "A",
+          "action": "api",
+          "contract": "bet",
+          "body": {
+            "page": 1,
+            "page_size": 20,
+            "settle_start_time": 1788796800000,
+            "settle_end_time": 1789142399999,
+            "node": 1
+          },
+          "auth": "valid",
+          "expect": [
+            {
+              "path": "http",
+              "op": "eq",
+              "value": 200
+            },
+            {
+              "path": "body.status",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "body.data",
+              "op": "type",
+              "value": "object"
+            },
+            {
+              "path": "body.data.d",
+              "op": "type",
+              "value": "array"
+            },
+            {
+              "path": "body.data.t",
+              "op": "type",
+              "value": "integer"
+            },
+            {
+              "path": "body.data.s",
+              "op": "type",
+              "value": "integer"
+            },
+            {
+              "path": "body.data.a.subtotal",
+              "op": "type",
+              "value": "object"
+            },
+            {
+              "path": "body.data.a.total",
+              "op": "type",
+              "value": "object"
+            },
+            {
+              "path": "body.data.d",
+              "op": "nonempty"
+            }
+          ],
+          "extract": {
+            "data": "body.data"
+          }
+        },
+        {
+          "id": "verify",
+          "actor": "A",
+          "action": "method",
+          "method": "bet_record_check",
+          "params": {
+            "data": "${data}",
+            "request": {
+              "page": 1,
+              "page_size": 20,
+              "settle_start_time": 1788796800000,
+              "settle_end_time": 1789142399999,
+              "node": 1
+            }
+          },
+          "expect": [
+            {
+              "path": "checks.page_count",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.page_limit",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.total_count",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.payout_sign",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.subtotal_bet_amount",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.subtotal_valid_bet_amount",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.subtotal_grand_inc",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.subtotal_ggr",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.subtotal_order_count",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.settle_time_range",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.node_filter",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.exclude_sports",
+              "op": "eq",
+              "value": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "bet-settle-node-2",
+      "review": {
+        "用例编号": "bet-settle-node-2",
+        "类型": "API",
+        "模块/接口": "ISOP-2085 两处注单查询",
+        "用例名称": "结算查询2线集合",
+        "前置条件": "FAT；本轮fresh登录；仅验证本组合，父级用例不自动通过",
+        "参数/步骤": "见执行步骤",
+        "预期结果": "结算查询2线集合；数据形状、筛选及适用金额/分页断言成立；空结果不证明源表完整性",
+        "级别": "专项",
+        "验收点": "R13"
+      },
+      "delivery": {
+        "mode": "automatic"
+      },
+      "steps": [
+        {
+          "id": "query",
+          "actor": "A",
+          "action": "api",
+          "contract": "bet",
+          "body": {
+            "page": 1,
+            "page_size": 20,
+            "settle_start_time": 1788796800000,
+            "settle_end_time": 1789142399999,
+            "node": 2
+          },
+          "auth": "valid",
+          "expect": [
+            {
+              "path": "http",
+              "op": "eq",
+              "value": 200
+            },
+            {
+              "path": "body.status",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "body.data",
+              "op": "type",
+              "value": "object"
+            },
+            {
+              "path": "body.data.d",
+              "op": "type",
+              "value": "array"
+            },
+            {
+              "path": "body.data.t",
+              "op": "type",
+              "value": "integer"
+            },
+            {
+              "path": "body.data.s",
+              "op": "type",
+              "value": "integer"
+            },
+            {
+              "path": "body.data.a.subtotal",
+              "op": "type",
+              "value": "object"
+            },
+            {
+              "path": "body.data.a.total",
+              "op": "type",
+              "value": "object"
+            },
+            {
+              "path": "body.data.d",
+              "op": "nonempty"
+            }
+          ],
+          "extract": {
+            "data": "body.data"
+          }
+        },
+        {
+          "id": "verify",
+          "actor": "A",
+          "action": "method",
+          "method": "bet_record_check",
+          "params": {
+            "data": "${data}",
+            "request": {
+              "page": 1,
+              "page_size": 20,
+              "settle_start_time": 1788796800000,
+              "settle_end_time": 1789142399999,
+              "node": 2
+            }
+          },
+          "expect": [
+            {
+              "path": "checks.page_count",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.page_limit",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.total_count",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.payout_sign",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.subtotal_bet_amount",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.subtotal_valid_bet_amount",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.subtotal_grand_inc",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.subtotal_ggr",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.subtotal_order_count",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.settle_time_range",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.node_filter",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.exclude_sports",
+              "op": "eq",
+              "value": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "bet-bet-sport-game_type",
+      "review": {
+        "用例编号": "bet-bet-sport-game_type",
+        "类型": "API",
+        "模块/接口": "ISOP-2085 两处注单查询",
+        "用例名称": "投注时间+体育game_type",
+        "前置条件": "FAT；本轮fresh登录；仅验证本组合，父级用例不自动通过",
+        "参数/步骤": "见执行步骤",
+        "预期结果": "投注时间+体育game_type；数据形状、筛选及适用金额/分页断言成立；空结果不证明源表完整性",
+        "级别": "专项",
+        "验收点": "R31"
+      },
+      "delivery": {
+        "mode": "automatic"
+      },
+      "steps": [
+        {
+          "id": "query",
+          "actor": "A",
+          "action": "api",
+          "contract": "bet",
+          "body": {
+            "page": 1,
+            "page_size": 20,
+            "start_time": 1788796800000,
+            "end_time": 1789142399999,
+            "game_type": 4
+          },
+          "auth": "valid",
+          "expect": [
+            {
+              "path": "http",
+              "op": "eq",
+              "value": 200
+            },
+            {
+              "path": "body.status",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "body.data",
+              "op": "type",
+              "value": "object"
+            },
+            {
+              "path": "body.data.d",
+              "op": "type",
+              "value": "array"
+            },
+            {
+              "path": "body.data.t",
+              "op": "type",
+              "value": "integer"
+            },
+            {
+              "path": "body.data.s",
+              "op": "type",
+              "value": "integer"
+            },
+            {
+              "path": "body.data.a.subtotal",
+              "op": "type",
+              "value": "object"
+            },
+            {
+              "path": "body.data.a.total",
+              "op": "type",
+              "value": "object"
+            },
+            {
+              "path": "body.data.d",
+              "op": "nonempty"
+            }
+          ],
+          "extract": {
+            "data": "body.data"
+          }
+        },
+        {
+          "id": "verify",
+          "actor": "A",
+          "action": "method",
+          "method": "bet_record_check",
+          "params": {
+            "data": "${data}",
+            "request": {
+              "page": 1,
+              "page_size": 20,
+              "start_time": 1788796800000,
+              "end_time": 1789142399999,
+              "game_type": 4
+            }
+          },
+          "expect": [
+            {
+              "path": "checks.page_count",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.page_limit",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.total_count",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.payout_sign",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.subtotal_bet_amount",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.subtotal_valid_bet_amount",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.subtotal_grand_inc",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.subtotal_ggr",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.subtotal_order_count",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.bet_time_range",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.sports_only",
+              "op": "eq",
+              "value": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "bet-bet-sport-pagcor_game_type",
+      "review": {
+        "用例编号": "bet-bet-sport-pagcor_game_type",
+        "类型": "API",
+        "模块/接口": "ISOP-2085 两处注单查询",
+        "用例名称": "投注时间+体育PAGCOR分类",
+        "前置条件": "FAT；本轮fresh登录；仅验证本组合，父级用例不自动通过",
+        "参数/步骤": "见执行步骤",
+        "预期结果": "投注时间+体育PAGCOR分类；数据形状、筛选及适用金额/分页断言成立；空结果不证明源表完整性",
+        "级别": "专项",
+        "验收点": "R31"
+      },
+      "delivery": {
+        "mode": "automatic"
+      },
+      "steps": [
+        {
+          "id": "query",
+          "actor": "A",
+          "action": "api",
+          "contract": "bet",
+          "body": {
+            "page": 1,
+            "page_size": 20,
+            "start_time": 1788796800000,
+            "end_time": 1789142399999,
+            "pagcor_game_type": "sports_betting"
+          },
+          "auth": "valid",
+          "expect": [
+            {
+              "path": "http",
+              "op": "eq",
+              "value": 200
+            },
+            {
+              "path": "body.status",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "body.data",
+              "op": "type",
+              "value": "object"
+            },
+            {
+              "path": "body.data.d",
+              "op": "type",
+              "value": "array"
+            },
+            {
+              "path": "body.data.t",
+              "op": "type",
+              "value": "integer"
+            },
+            {
+              "path": "body.data.s",
+              "op": "type",
+              "value": "integer"
+            },
+            {
+              "path": "body.data.a.subtotal",
+              "op": "type",
+              "value": "object"
+            },
+            {
+              "path": "body.data.a.total",
+              "op": "type",
+              "value": "object"
+            },
+            {
+              "path": "body.data.d",
+              "op": "nonempty"
+            }
+          ],
+          "extract": {
+            "data": "body.data"
+          }
+        },
+        {
+          "id": "verify",
+          "actor": "A",
+          "action": "method",
+          "method": "bet_record_check",
+          "params": {
+            "data": "${data}",
+            "request": {
+              "page": 1,
+              "page_size": 20,
+              "start_time": 1788796800000,
+              "end_time": 1789142399999,
+              "pagcor_game_type": "sports_betting"
+            }
+          },
+          "expect": [
+            {
+              "path": "checks.page_count",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.page_limit",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.total_count",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.payout_sign",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.subtotal_bet_amount",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.subtotal_valid_bet_amount",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.subtotal_grand_inc",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.subtotal_ggr",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.subtotal_order_count",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.bet_time_range",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.sports_only",
+              "op": "eq",
+              "value": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "bet-settle-sport-game_type",
+      "review": {
+        "用例编号": "bet-settle-sport-game_type",
+        "类型": "API",
+        "模块/接口": "ISOP-2085 两处注单查询",
+        "用例名称": "结算时间+体育game_type",
+        "前置条件": "FAT；本轮fresh登录；仅验证本组合，父级用例不自动通过",
+        "参数/步骤": "见执行步骤",
+        "预期结果": "结算时间+体育game_type；数据形状、筛选及适用金额/分页断言成立；空结果不证明源表完整性",
+        "级别": "专项",
+        "验收点": "R31"
+      },
+      "delivery": {
+        "mode": "automatic"
+      },
+      "steps": [
+        {
+          "id": "query",
+          "actor": "A",
+          "action": "api",
+          "contract": "bet",
+          "body": {
+            "page": 1,
+            "page_size": 20,
+            "settle_start_time": 1788796800000,
+            "settle_end_time": 1789142399999,
+            "game_type": 4
+          },
+          "auth": "valid",
+          "expect": [
+            {
+              "path": "http",
+              "op": "eq",
+              "value": 200
+            },
+            {
+              "path": "body.status",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "body.data",
+              "op": "type",
+              "value": "object"
+            },
+            {
+              "path": "body.data.d",
+              "op": "type",
+              "value": "array"
+            },
+            {
+              "path": "body.data.t",
+              "op": "type",
+              "value": "integer"
+            },
+            {
+              "path": "body.data.s",
+              "op": "type",
+              "value": "integer"
+            },
+            {
+              "path": "body.data.a.subtotal",
+              "op": "type",
+              "value": "object"
+            },
+            {
+              "path": "body.data.a.total",
+              "op": "type",
+              "value": "object"
+            },
+            {
+              "path": "body.data.d",
+              "op": "nonempty"
+            }
+          ],
+          "extract": {
+            "data": "body.data"
+          }
+        },
+        {
+          "id": "verify",
+          "actor": "A",
+          "action": "method",
+          "method": "bet_record_check",
+          "params": {
+            "data": "${data}",
+            "request": {
+              "page": 1,
+              "page_size": 20,
+              "settle_start_time": 1788796800000,
+              "settle_end_time": 1789142399999,
+              "game_type": 4
+            }
+          },
+          "expect": [
+            {
+              "path": "checks.page_count",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.page_limit",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.total_count",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.payout_sign",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.subtotal_bet_amount",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.subtotal_valid_bet_amount",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.subtotal_grand_inc",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.subtotal_ggr",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.subtotal_order_count",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.settle_time_range",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.sports_only",
+              "op": "eq",
+              "value": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "bet-settle-sport-pagcor_game_type",
+      "review": {
+        "用例编号": "bet-settle-sport-pagcor_game_type",
+        "类型": "API",
+        "模块/接口": "ISOP-2085 两处注单查询",
+        "用例名称": "结算时间+体育PAGCOR分类",
+        "前置条件": "FAT；本轮fresh登录；仅验证本组合，父级用例不自动通过",
+        "参数/步骤": "见执行步骤",
+        "预期结果": "结算时间+体育PAGCOR分类；数据形状、筛选及适用金额/分页断言成立；空结果不证明源表完整性",
+        "级别": "专项",
+        "验收点": "R31"
+      },
+      "delivery": {
+        "mode": "automatic"
+      },
+      "steps": [
+        {
+          "id": "query",
+          "actor": "A",
+          "action": "api",
+          "contract": "bet",
+          "body": {
+            "page": 1,
+            "page_size": 20,
+            "settle_start_time": 1788796800000,
+            "settle_end_time": 1789142399999,
+            "pagcor_game_type": "sports_betting"
+          },
+          "auth": "valid",
+          "expect": [
+            {
+              "path": "http",
+              "op": "eq",
+              "value": 200
+            },
+            {
+              "path": "body.status",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "body.data",
+              "op": "type",
+              "value": "object"
+            },
+            {
+              "path": "body.data.d",
+              "op": "type",
+              "value": "array"
+            },
+            {
+              "path": "body.data.t",
+              "op": "type",
+              "value": "integer"
+            },
+            {
+              "path": "body.data.s",
+              "op": "type",
+              "value": "integer"
+            },
+            {
+              "path": "body.data.a.subtotal",
+              "op": "type",
+              "value": "object"
+            },
+            {
+              "path": "body.data.a.total",
+              "op": "type",
+              "value": "object"
+            },
+            {
+              "path": "body.data.d",
+              "op": "nonempty"
+            }
+          ],
+          "extract": {
+            "data": "body.data"
+          }
+        },
+        {
+          "id": "verify",
+          "actor": "A",
+          "action": "method",
+          "method": "bet_record_check",
+          "params": {
+            "data": "${data}",
+            "request": {
+              "page": 1,
+              "page_size": 20,
+              "settle_start_time": 1788796800000,
+              "settle_end_time": 1789142399999,
+              "pagcor_game_type": "sports_betting"
+            }
+          },
+          "expect": [
+            {
+              "path": "checks.page_count",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.page_limit",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.total_count",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.payout_sign",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.subtotal_bet_amount",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.subtotal_valid_bet_amount",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.subtotal_grand_inc",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.subtotal_ggr",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.subtotal_order_count",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.settle_time_range",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.sports_only",
+              "op": "eq",
+              "value": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "bet-order-1",
+      "review": {
+        "用例编号": "bet-order-1",
+        "类型": "API",
+        "模块/接口": "ISOP-2085 两处注单查询",
+        "用例名称": "普通注单类型筛选",
+        "前置条件": "FAT；本轮fresh登录；仅验证本组合，父级用例不自动通过",
+        "参数/步骤": "见执行步骤",
+        "预期结果": "普通注单类型筛选；数据形状、筛选及适用金额/分页断言成立；空结果不证明源表完整性",
+        "级别": "专项",
+        "验收点": "R30"
+      },
+      "delivery": {
+        "mode": "automatic"
+      },
+      "steps": [
+        {
+          "id": "query",
+          "actor": "A",
+          "action": "api",
+          "contract": "bet",
+          "body": {
+            "page": 1,
+            "page_size": 20,
+            "start_time": 1788796800000,
+            "end_time": 1789142399999,
+            "order_type": 1
+          },
+          "auth": "valid",
+          "expect": [
+            {
+              "path": "http",
+              "op": "eq",
+              "value": 200
+            },
+            {
+              "path": "body.status",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "body.data",
+              "op": "type",
+              "value": "object"
+            },
+            {
+              "path": "body.data.d",
+              "op": "type",
+              "value": "array"
+            },
+            {
+              "path": "body.data.t",
+              "op": "type",
+              "value": "integer"
+            },
+            {
+              "path": "body.data.s",
+              "op": "type",
+              "value": "integer"
+            },
+            {
+              "path": "body.data.a.subtotal",
+              "op": "type",
+              "value": "object"
+            },
+            {
+              "path": "body.data.a.total",
+              "op": "type",
+              "value": "object"
+            },
+            {
+              "path": "body.data.d",
+              "op": "nonempty"
+            }
+          ],
+          "extract": {
+            "data": "body.data"
+          }
+        },
+        {
+          "id": "verify",
+          "actor": "A",
+          "action": "method",
+          "method": "bet_record_check",
+          "params": {
+            "data": "${data}",
+            "request": {
+              "page": 1,
+              "page_size": 20,
+              "start_time": 1788796800000,
+              "end_time": 1789142399999,
+              "order_type": 1
+            }
+          },
+          "expect": [
+            {
+              "path": "checks.page_count",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.page_limit",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.total_count",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.payout_sign",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.subtotal_bet_amount",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.subtotal_valid_bet_amount",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.subtotal_grand_inc",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.subtotal_ggr",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.subtotal_order_count",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.bet_time_range",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.order_type_filter",
+              "op": "eq",
+              "value": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "bet-order-2",
+      "review": {
+        "用例编号": "bet-order-2",
+        "类型": "API",
+        "模块/接口": "ISOP-2085 两处注单查询",
+        "用例名称": "免费旋转注单类型筛选",
+        "前置条件": "FAT；本轮fresh登录；仅验证本组合，父级用例不自动通过",
+        "参数/步骤": "见执行步骤",
+        "预期结果": "免费旋转注单类型筛选；数据形状、筛选及适用金额/分页断言成立；空结果不证明源表完整性",
+        "级别": "专项",
+        "验收点": "R30"
+      },
+      "delivery": {
+        "mode": "automatic"
+      },
+      "steps": [
+        {
+          "id": "query",
+          "actor": "A",
+          "action": "api",
+          "contract": "bet",
+          "body": {
+            "page": 1,
+            "page_size": 20,
+            "start_time": 1788796800000,
+            "end_time": 1789142399999,
+            "order_type": 2
+          },
+          "auth": "valid",
+          "expect": [
+            {
+              "path": "http",
+              "op": "eq",
+              "value": 200
+            },
+            {
+              "path": "body.status",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "body.data",
+              "op": "type",
+              "value": "object"
+            },
+            {
+              "path": "body.data.d",
+              "op": "type",
+              "value": "array"
+            },
+            {
+              "path": "body.data.t",
+              "op": "type",
+              "value": "integer"
+            },
+            {
+              "path": "body.data.s",
+              "op": "type",
+              "value": "integer"
+            },
+            {
+              "path": "body.data.a.subtotal",
+              "op": "type",
+              "value": "object"
+            },
+            {
+              "path": "body.data.a.total",
+              "op": "type",
+              "value": "object"
+            },
+            {
+              "path": "body.data.d",
+              "op": "nonempty"
+            }
+          ],
+          "extract": {
+            "data": "body.data"
+          }
+        },
+        {
+          "id": "verify",
+          "actor": "A",
+          "action": "method",
+          "method": "bet_record_check",
+          "params": {
+            "data": "${data}",
+            "request": {
+              "page": 1,
+              "page_size": 20,
+              "start_time": 1788796800000,
+              "end_time": 1789142399999,
+              "order_type": 2
+            }
+          },
+          "expect": [
+            {
+              "path": "checks.page_count",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.page_limit",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.total_count",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.payout_sign",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.subtotal_bet_amount",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.subtotal_valid_bet_amount",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.subtotal_grand_inc",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.subtotal_ggr",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.subtotal_order_count",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.bet_time_range",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.order_type_filter",
+              "op": "eq",
+              "value": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "bet-order-3",
+      "review": {
+        "用例编号": "bet-order-3",
+        "类型": "API",
+        "模块/接口": "ISOP-2085 两处注单查询",
+        "用例名称": "Jackpot注单类型筛选",
+        "前置条件": "FAT；本轮fresh登录；仅验证本组合，父级用例不自动通过",
+        "参数/步骤": "见执行步骤",
+        "预期结果": "Jackpot注单类型筛选；数据形状、筛选及适用金额/分页断言成立；空结果不证明源表完整性",
+        "级别": "专项",
+        "验收点": "R30"
+      },
+      "delivery": {
+        "mode": "automatic"
+      },
+      "steps": [
+        {
+          "id": "query",
+          "actor": "A",
+          "action": "api",
+          "contract": "bet",
+          "body": {
+            "page": 1,
+            "page_size": 20,
+            "start_time": 1788796800000,
+            "end_time": 1789142399999,
+            "order_type": 3
+          },
+          "auth": "valid",
+          "expect": [
+            {
+              "path": "http",
+              "op": "eq",
+              "value": 200
+            },
+            {
+              "path": "body.status",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "body.data",
+              "op": "type",
+              "value": "object"
+            },
+            {
+              "path": "body.data.d",
+              "op": "type",
+              "value": "array"
+            },
+            {
+              "path": "body.data.t",
+              "op": "type",
+              "value": "integer"
+            },
+            {
+              "path": "body.data.s",
+              "op": "type",
+              "value": "integer"
+            },
+            {
+              "path": "body.data.a.subtotal",
+              "op": "type",
+              "value": "object"
+            },
+            {
+              "path": "body.data.a.total",
+              "op": "type",
+              "value": "object"
+            },
+            {
+              "path": "body.data.d",
+              "op": "nonempty"
+            }
+          ],
+          "extract": {
+            "data": "body.data"
+          }
+        },
+        {
+          "id": "verify",
+          "actor": "A",
+          "action": "method",
+          "method": "bet_record_check",
+          "params": {
+            "data": "${data}",
+            "request": {
+              "page": 1,
+              "page_size": 20,
+              "start_time": 1788796800000,
+              "end_time": 1789142399999,
+              "order_type": 3
+            }
+          },
+          "expect": [
+            {
+              "path": "checks.page_count",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.page_limit",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.total_count",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.payout_sign",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.subtotal_bet_amount",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.subtotal_valid_bet_amount",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.subtotal_grand_inc",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.subtotal_ggr",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.subtotal_order_count",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.bet_time_range",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.order_type_filter",
+              "op": "eq",
+              "value": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "bet-settled",
+      "review": {
+        "用例编号": "bet-settled",
+        "类型": "API",
+        "模块/接口": "ISOP-2085 两处注单查询",
+        "用例名称": "已结算状态筛选",
+        "前置条件": "FAT；本轮fresh登录；仅验证本组合，父级用例不自动通过",
+        "参数/步骤": "见执行步骤",
+        "预期结果": "已结算状态筛选；数据形状、筛选及适用金额/分页断言成立；空结果不证明源表完整性",
+        "级别": "专项",
+        "验收点": "R24"
+      },
+      "delivery": {
+        "mode": "automatic"
+      },
+      "steps": [
+        {
+          "id": "query",
+          "actor": "A",
+          "action": "api",
+          "contract": "bet",
+          "body": {
+            "page": 1,
+            "page_size": 20,
+            "settle_start_time": 1788796800000,
+            "settle_end_time": 1789142399999,
+            "state": "1"
+          },
+          "auth": "valid",
+          "expect": [
+            {
+              "path": "http",
+              "op": "eq",
+              "value": 200
+            },
+            {
+              "path": "body.status",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "body.data",
+              "op": "type",
+              "value": "object"
+            },
+            {
+              "path": "body.data.d",
+              "op": "type",
+              "value": "array"
+            },
+            {
+              "path": "body.data.t",
+              "op": "type",
+              "value": "integer"
+            },
+            {
+              "path": "body.data.s",
+              "op": "type",
+              "value": "integer"
+            },
+            {
+              "path": "body.data.a.subtotal",
+              "op": "type",
+              "value": "object"
+            },
+            {
+              "path": "body.data.a.total",
+              "op": "type",
+              "value": "object"
+            },
+            {
+              "path": "body.data.d",
+              "op": "nonempty"
+            }
+          ],
+          "extract": {
+            "data": "body.data"
+          }
+        },
+        {
+          "id": "verify",
+          "actor": "A",
+          "action": "method",
+          "method": "bet_record_check",
+          "params": {
+            "data": "${data}",
+            "request": {
+              "page": 1,
+              "page_size": 20,
+              "settle_start_time": 1788796800000,
+              "settle_end_time": 1789142399999,
+              "state": "1"
+            }
+          },
+          "expect": [
+            {
+              "path": "checks.page_count",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.page_limit",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.total_count",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.payout_sign",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.subtotal_bet_amount",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.subtotal_valid_bet_amount",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.subtotal_grand_inc",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.subtotal_ggr",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.subtotal_order_count",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.settle_time_range",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.exclude_sports",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.state_filter",
+              "op": "eq",
+              "value": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "bet-millisecond-inclusive",
+      "review": {
+        "用例编号": "bet-millisecond-inclusive",
+        "类型": "API",
+        "模块/接口": "ISOP-2085 两处注单查询",
+        "用例名称": "已知投注时刻的闭区间点查询",
+        "前置条件": "FAT；本轮fresh登录；仅验证本组合，父级用例不自动通过",
+        "参数/步骤": "见执行步骤",
+        "预期结果": "已知投注时刻的闭区间点查询；数据形状、筛选及适用金额/分页断言成立；空结果不证明源表完整性",
+        "级别": "专项",
+        "验收点": "R16,R30"
+      },
+      "delivery": {
+        "mode": "automatic"
+      },
+      "steps": [
+        {
+          "id": "query",
+          "actor": "A",
+          "action": "api",
+          "contract": "bet",
+          "body": {
+            "page": 1,
+            "page_size": 20,
+            "start_time": 1788943654000,
+            "end_time": 1788943654000,
+            "node": 1
+          },
+          "auth": "valid",
+          "expect": [
+            {
+              "path": "http",
+              "op": "eq",
+              "value": 200
+            },
+            {
+              "path": "body.status",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "body.data",
+              "op": "type",
+              "value": "object"
+            },
+            {
+              "path": "body.data.d",
+              "op": "type",
+              "value": "array"
+            },
+            {
+              "path": "body.data.t",
+              "op": "type",
+              "value": "integer"
+            },
+            {
+              "path": "body.data.s",
+              "op": "type",
+              "value": "integer"
+            },
+            {
+              "path": "body.data.a.subtotal",
+              "op": "type",
+              "value": "object"
+            },
+            {
+              "path": "body.data.a.total",
+              "op": "type",
+              "value": "object"
+            },
+            {
+              "path": "body.data.d",
+              "op": "nonempty"
+            }
+          ],
+          "extract": {
+            "data": "body.data"
+          }
+        },
+        {
+          "id": "verify",
+          "actor": "A",
+          "action": "method",
+          "method": "bet_record_check",
+          "params": {
+            "data": "${data}",
+            "request": {
+              "page": 1,
+              "page_size": 20,
+              "start_time": 1788943654000,
+              "end_time": 1788943654000,
+              "node": 1
+            }
+          },
+          "expect": [
+            {
+              "path": "checks.page_count",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.page_limit",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.total_count",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.payout_sign",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.subtotal_bet_amount",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.subtotal_valid_bet_amount",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.subtotal_grand_inc",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.subtotal_ggr",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.subtotal_order_count",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.bet_time_range",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.node_filter",
+              "op": "eq",
+              "value": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "bet-millisecond-before",
+      "review": {
+        "用例编号": "bet-millisecond-before",
+        "类型": "API",
+        "模块/接口": "ISOP-2085 两处注单查询",
+        "用例名称": "已知投注时刻前1毫秒查询",
+        "前置条件": "FAT；本轮fresh登录；仅验证本组合，父级用例不自动通过",
+        "参数/步骤": "见执行步骤",
+        "预期结果": "已知投注时刻前1毫秒查询；数据形状、筛选及适用金额/分页断言成立；空结果不证明源表完整性",
+        "级别": "专项",
+        "验收点": "R16,R30"
+      },
+      "delivery": {
+        "mode": "automatic"
+      },
+      "steps": [
+        {
+          "id": "query",
+          "actor": "A",
+          "action": "api",
+          "contract": "bet",
+          "body": {
+            "page": 1,
+            "page_size": 20,
+            "start_time": 1788943653999,
+            "end_time": 1788943653999,
+            "node": 1
+          },
+          "auth": "valid",
+          "expect": [
+            {
+              "path": "http",
+              "op": "eq",
+              "value": 200
+            },
+            {
+              "path": "body.status",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "body.data",
+              "op": "type",
+              "value": "object"
+            },
+            {
+              "path": "body.data.d",
+              "op": "type",
+              "value": "array"
+            },
+            {
+              "path": "body.data.t",
+              "op": "type",
+              "value": "integer"
+            },
+            {
+              "path": "body.data.s",
+              "op": "type",
+              "value": "integer"
+            },
+            {
+              "path": "body.data.a.subtotal",
+              "op": "type",
+              "value": "object"
+            },
+            {
+              "path": "body.data.a.total",
+              "op": "type",
+              "value": "object"
+            }
+          ],
+          "extract": {
+            "data": "body.data"
+          }
+        },
+        {
+          "id": "verify",
+          "actor": "A",
+          "action": "method",
+          "method": "bet_record_check",
+          "params": {
+            "data": "${data}",
+            "request": {
+              "page": 1,
+              "page_size": 20,
+              "start_time": 1788943653999,
+              "end_time": 1788943653999,
+              "node": 1
+            }
+          },
+          "expect": [
+            {
+              "path": "checks.page_count",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.page_limit",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.total_count",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "value",
+              "op": "eq",
+              "value": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "bet-millisecond-after",
+      "review": {
+        "用例编号": "bet-millisecond-after",
+        "类型": "API",
+        "模块/接口": "ISOP-2085 两处注单查询",
+        "用例名称": "已知投注时刻后1毫秒查询",
+        "前置条件": "FAT；本轮fresh登录；仅验证本组合，父级用例不自动通过",
+        "参数/步骤": "见执行步骤",
+        "预期结果": "已知投注时刻后1毫秒查询；数据形状、筛选及适用金额/分页断言成立；空结果不证明源表完整性",
+        "级别": "专项",
+        "验收点": "R16,R30"
+      },
+      "delivery": {
+        "mode": "automatic"
+      },
+      "steps": [
+        {
+          "id": "query",
+          "actor": "A",
+          "action": "api",
+          "contract": "bet",
+          "body": {
+            "page": 1,
+            "page_size": 20,
+            "start_time": 1788943654001,
+            "end_time": 1788943654001,
+            "node": 1
+          },
+          "auth": "valid",
+          "expect": [
+            {
+              "path": "http",
+              "op": "eq",
+              "value": 200
+            },
+            {
+              "path": "body.status",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "body.data",
+              "op": "type",
+              "value": "object"
+            },
+            {
+              "path": "body.data.d",
+              "op": "type",
+              "value": "array"
+            },
+            {
+              "path": "body.data.t",
+              "op": "type",
+              "value": "integer"
+            },
+            {
+              "path": "body.data.s",
+              "op": "type",
+              "value": "integer"
+            },
+            {
+              "path": "body.data.a.subtotal",
+              "op": "type",
+              "value": "object"
+            },
+            {
+              "path": "body.data.a.total",
+              "op": "type",
+              "value": "object"
+            }
+          ],
+          "extract": {
+            "data": "body.data"
+          }
+        },
+        {
+          "id": "verify",
+          "actor": "A",
+          "action": "method",
+          "method": "bet_record_check",
+          "params": {
+            "data": "${data}",
+            "request": {
+              "page": 1,
+              "page_size": 20,
+              "start_time": 1788943654001,
+              "end_time": 1788943654001,
+              "node": 1
+            }
+          },
+          "expect": [
+            {
+              "path": "checks.page_count",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.page_limit",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.total_count",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "value",
+              "op": "eq",
+              "value": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "bet-pagination",
+      "review": {
+        "用例编号": "bet-pagination",
+        "类型": "API",
+        "模块/接口": "ISOP-2085 两处注单查询",
+        "用例名称": "历史窗口翻页全量合计与总数不变",
+        "前置条件": "FAT；本轮fresh登录；仅验证本组合，父级用例不自动通过",
+        "参数/步骤": "见执行步骤",
+        "预期结果": "翻页全量合计不变；查询不写业务数据",
+        "级别": "专项",
+        "验收点": "R18"
+      },
+      "delivery": {
+        "mode": "automatic"
+      },
+      "steps": [
+        {
+          "id": "query",
+          "actor": "A",
+          "action": "api",
+          "contract": "bet",
+          "body": {
+            "page": 1,
+            "page_size": 5,
+            "start_time": 1788796800000,
+            "end_time": 1789055999999
+          },
+          "auth": "valid",
+          "expect": [
+            {
+              "path": "http",
+              "op": "eq",
+              "value": 200
+            },
+            {
+              "path": "body.status",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "body.data",
+              "op": "type",
+              "value": "object"
+            },
+            {
+              "path": "body.data.d",
+              "op": "type",
+              "value": "array"
+            },
+            {
+              "path": "body.data.t",
+              "op": "type",
+              "value": "integer"
+            },
+            {
+              "path": "body.data.s",
+              "op": "type",
+              "value": "integer"
+            },
+            {
+              "path": "body.data.a.subtotal",
+              "op": "type",
+              "value": "object"
+            },
+            {
+              "path": "body.data.a.total",
+              "op": "type",
+              "value": "object"
+            }
+          ],
+          "extract": {
+            "total": "body.data.a.total",
+            "count": "body.data.t"
+          }
+        },
+        {
+          "id": "page2",
+          "actor": "A",
+          "action": "api",
+          "contract": "bet",
+          "body": {
+            "page": 2,
+            "page_size": 5,
+            "start_time": 1788796800000,
+            "end_time": 1789055999999
+          },
+          "auth": "valid",
+          "expect": [
+            {
+              "path": "http",
+              "op": "eq",
+              "value": 200
+            },
+            {
+              "path": "body.status",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "body.data",
+              "op": "type",
+              "value": "object"
+            },
+            {
+              "path": "body.data.d",
+              "op": "type",
+              "value": "array"
+            },
+            {
+              "path": "body.data.t",
+              "op": "type",
+              "value": "integer"
+            },
+            {
+              "path": "body.data.s",
+              "op": "type",
+              "value": "integer"
+            },
+            {
+              "path": "body.data.a.subtotal",
+              "op": "type",
+              "value": "object"
+            },
+            {
+              "path": "body.data.a.total",
+              "op": "type",
+              "value": "object"
+            },
+            {
+              "path": "body.data.a.total",
+              "op": "eq",
+              "value": "${total}"
+            },
+            {
+              "path": "body.data.t",
+              "op": "eq",
+              "value": "${count}"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "bet-auth-missing",
+      "review": {
+        "用例编号": "bet-auth-missing",
+        "类型": "API",
+        "模块/接口": "ISOP-2085 两处注单查询",
+        "用例名称": "鉴权拒绝且无明细",
+        "前置条件": "FAT；本轮fresh登录；仅验证本组合，父级用例不自动通过",
+        "参数/步骤": "见执行步骤",
+        "预期结果": "鉴权拒绝且无明细；查询不写业务数据",
+        "级别": "专项",
+        "验收点": "R29"
+      },
+      "delivery": {
+        "mode": "automatic"
+      },
+      "steps": [
+        {
+          "id": "query",
+          "actor": "A",
+          "action": "api",
+          "contract": "bet",
+          "body": {
+            "page": 1,
+            "page_size": 5,
+            "start_time": 1788796800000,
+            "end_time": 1789142399999
+          },
+          "auth": "missing",
+          "expect": [
+            {
+              "path": "http",
+              "op": "eq",
+              "value": 200
+            },
+            {
+              "path": "body.status",
+              "op": "eq",
+              "value": false
+            },
+            {
+              "path": "body.data",
+              "op": "eq",
+              "value": "token"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "bet-auth-invalid",
+      "review": {
+        "用例编号": "bet-auth-invalid",
+        "类型": "API",
+        "模块/接口": "ISOP-2085 两处注单查询",
+        "用例名称": "鉴权拒绝且无明细",
+        "前置条件": "FAT；本轮fresh登录；仅验证本组合，父级用例不自动通过",
+        "参数/步骤": "见执行步骤",
+        "预期结果": "鉴权拒绝且无明细；查询不写业务数据",
+        "级别": "专项",
+        "验收点": "R29"
+      },
+      "delivery": {
+        "mode": "automatic"
+      },
+      "steps": [
+        {
+          "id": "query",
+          "actor": "A",
+          "action": "api",
+          "contract": "bet",
+          "body": {
+            "page": 1,
+            "page_size": 5,
+            "start_time": 1788796800000,
+            "end_time": 1789142399999
+          },
+          "auth": "invalid",
+          "expect": [
+            {
+              "path": "http",
+              "op": "eq",
+              "value": 200
+            },
+            {
+              "path": "body.status",
+              "op": "eq",
+              "value": false
+            },
+            {
+              "path": "body.data",
+              "op": "eq",
+              "value": "token"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "bet-empty",
+      "review": {
+        "用例编号": "bet-empty",
+        "类型": "API",
+        "模块/接口": "ISOP-2085 两处注单查询",
+        "用例名称": "空窗口记录为空",
+        "前置条件": "FAT；本轮fresh登录；仅验证本组合，父级用例不自动通过",
+        "参数/步骤": "见执行步骤",
+        "预期结果": "空窗口记录为空；查询不写业务数据",
+        "级别": "专项",
+        "验收点": "R19"
+      },
+      "delivery": {
+        "mode": "automatic"
+      },
+      "steps": [
+        {
+          "id": "query",
+          "actor": "A",
+          "action": "api",
+          "contract": "bet",
+          "body": {
+            "page": 1,
+            "page_size": 20,
+            "start_time": 0,
+            "end_time": 1
+          },
+          "auth": "valid",
+          "expect": [
+            {
+              "path": "http",
+              "op": "eq",
+              "value": 200
+            },
+            {
+              "path": "body.status",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "body.data",
+              "op": "type",
+              "value": "object"
+            },
+            {
+              "path": "body.data.d",
+              "op": "type",
+              "value": "array"
+            },
+            {
+              "path": "body.data.t",
+              "op": "type",
+              "value": "integer"
+            },
+            {
+              "path": "body.data.s",
+              "op": "type",
+              "value": "integer"
+            },
+            {
+              "path": "body.data.a.subtotal",
+              "op": "type",
+              "value": "object"
+            },
+            {
+              "path": "body.data.a.total",
+              "op": "type",
+              "value": "object"
+            },
+            {
+              "path": "body.data.d",
+              "op": "count",
+              "value": 0
+            },
+            {
+              "path": "body.data.t",
+              "op": "eq",
+              "value": 0
+            }
+          ],
+          "extract": {
+            "data": "body.data"
+          }
+        }
+      ]
+    },
+    {
+      "id": "game-bet-all",
+      "review": {
+        "用例编号": "game-bet-all",
+        "类型": "API",
+        "模块/接口": "ISOP-2085 两处注单查询",
+        "用例名称": "投注时间查询全部类型",
+        "前置条件": "FAT；本轮fresh登录；仅验证本组合，父级用例不自动通过",
+        "参数/步骤": "见执行步骤",
+        "预期结果": "投注时间查询全部类型；数据形状、筛选及适用金额/分页断言成立；空结果不证明源表完整性",
+        "级别": "专项",
+        "验收点": "R30"
+      },
+      "delivery": {
+        "mode": "automatic"
+      },
+      "steps": [
+        {
+          "id": "query",
+          "actor": "A",
+          "action": "api",
+          "contract": "game",
+          "body": {
+            "page": 1,
+            "page_size": 20,
+            "start_time": 1788796800000,
+            "end_time": 1789142399999
+          },
+          "auth": "valid",
+          "expect": [
+            {
+              "path": "http",
+              "op": "eq",
+              "value": 200
+            },
+            {
+              "path": "body.status",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "body.data",
+              "op": "type",
+              "value": "object"
+            },
+            {
+              "path": "body.data.d",
+              "op": "type",
+              "value": "array"
+            },
+            {
+              "path": "body.data.t",
+              "op": "type",
+              "value": "integer"
+            },
+            {
+              "path": "body.data.s",
+              "op": "type",
+              "value": "integer"
+            },
+            {
+              "path": "body.data.a.subtotal",
+              "op": "type",
+              "value": "object"
+            },
+            {
+              "path": "body.data.a.total",
+              "op": "type",
+              "value": "object"
+            },
+            {
+              "path": "body.data.d",
+              "op": "nonempty"
+            }
+          ],
+          "extract": {
+            "data": "body.data"
+          }
+        },
+        {
+          "id": "verify",
+          "actor": "A",
+          "action": "method",
+          "method": "bet_record_check",
+          "params": {
+            "data": "${data}",
+            "request": {
+              "page": 1,
+              "page_size": 20,
+              "start_time": 1788796800000,
+              "end_time": 1789142399999
+            }
+          },
+          "expect": [
+            {
+              "path": "checks.page_count",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.page_limit",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.total_count",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.payout_sign",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.subtotal_bet_amount",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.subtotal_valid_bet_amount",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.subtotal_grand_inc",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.subtotal_ggr",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.subtotal_order_count",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.bet_time_range",
+              "op": "eq",
+              "value": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "game-settle-default",
+      "review": {
+        "用例编号": "game-settle-default",
+        "类型": "API",
+        "模块/接口": "ISOP-2085 两处注单查询",
+        "用例名称": "结算查询默认排除体育",
+        "前置条件": "FAT；本轮fresh登录；仅验证本组合，父级用例不自动通过",
+        "参数/步骤": "见执行步骤",
+        "预期结果": "结算查询默认排除体育；数据形状、筛选及适用金额/分页断言成立；空结果不证明源表完整性",
+        "级别": "专项",
+        "验收点": "R11"
+      },
+      "delivery": {
+        "mode": "automatic"
+      },
+      "steps": [
+        {
+          "id": "query",
+          "actor": "A",
+          "action": "api",
+          "contract": "game",
+          "body": {
+            "page": 1,
+            "page_size": 20,
+            "settle_start_time": 1788796800000,
+            "settle_end_time": 1789142399999
+          },
+          "auth": "valid",
+          "expect": [
+            {
+              "path": "http",
+              "op": "eq",
+              "value": 200
+            },
+            {
+              "path": "body.status",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "body.data",
+              "op": "type",
+              "value": "object"
+            },
+            {
+              "path": "body.data.d",
+              "op": "type",
+              "value": "array"
+            },
+            {
+              "path": "body.data.t",
+              "op": "type",
+              "value": "integer"
+            },
+            {
+              "path": "body.data.s",
+              "op": "type",
+              "value": "integer"
+            },
+            {
+              "path": "body.data.a.subtotal",
+              "op": "type",
+              "value": "object"
+            },
+            {
+              "path": "body.data.a.total",
+              "op": "type",
+              "value": "object"
+            },
+            {
+              "path": "body.data.d",
+              "op": "nonempty"
+            }
+          ],
+          "extract": {
+            "data": "body.data"
+          }
+        },
+        {
+          "id": "verify",
+          "actor": "A",
+          "action": "method",
+          "method": "bet_record_check",
+          "params": {
+            "data": "${data}",
+            "request": {
+              "page": 1,
+              "page_size": 20,
+              "settle_start_time": 1788796800000,
+              "settle_end_time": 1789142399999
+            }
+          },
+          "expect": [
+            {
+              "path": "checks.page_count",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.page_limit",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.total_count",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.payout_sign",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.subtotal_bet_amount",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.subtotal_valid_bet_amount",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.subtotal_grand_inc",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.subtotal_ggr",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.subtotal_order_count",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.settle_time_range",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.exclude_sports",
+              "op": "eq",
+              "value": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "game-node-1",
+      "review": {
+        "用例编号": "game-node-1",
+        "类型": "API",
+        "模块/接口": "ISOP-2085 两处注单查询",
+        "用例名称": "投注查询1线隔离",
+        "前置条件": "FAT；本轮fresh登录；仅验证本组合，父级用例不自动通过",
+        "参数/步骤": "见执行步骤",
+        "预期结果": "投注查询1线隔离；数据形状、筛选及适用金额/分页断言成立；空结果不证明源表完整性",
+        "级别": "专项",
+        "验收点": "R14"
+      },
+      "delivery": {
+        "mode": "automatic"
+      },
+      "steps": [
+        {
+          "id": "query",
+          "actor": "A",
+          "action": "api",
+          "contract": "game",
+          "body": {
+            "page": 1,
+            "page_size": 20,
+            "start_time": 1788796800000,
+            "end_time": 1789142399999,
+            "node": 1
+          },
+          "auth": "valid",
+          "expect": [
+            {
+              "path": "http",
+              "op": "eq",
+              "value": 200
+            },
+            {
+              "path": "body.status",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "body.data",
+              "op": "type",
+              "value": "object"
+            },
+            {
+              "path": "body.data.d",
+              "op": "type",
+              "value": "array"
+            },
+            {
+              "path": "body.data.t",
+              "op": "type",
+              "value": "integer"
+            },
+            {
+              "path": "body.data.s",
+              "op": "type",
+              "value": "integer"
+            },
+            {
+              "path": "body.data.a.subtotal",
+              "op": "type",
+              "value": "object"
+            },
+            {
+              "path": "body.data.a.total",
+              "op": "type",
+              "value": "object"
+            },
+            {
+              "path": "body.data.d",
+              "op": "nonempty"
+            }
+          ],
+          "extract": {
+            "data": "body.data"
+          }
+        },
+        {
+          "id": "verify",
+          "actor": "A",
+          "action": "method",
+          "method": "bet_record_check",
+          "params": {
+            "data": "${data}",
+            "request": {
+              "page": 1,
+              "page_size": 20,
+              "start_time": 1788796800000,
+              "end_time": 1789142399999,
+              "node": 1
+            }
+          },
+          "expect": [
+            {
+              "path": "checks.page_count",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.page_limit",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.total_count",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.payout_sign",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.subtotal_bet_amount",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.subtotal_valid_bet_amount",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.subtotal_grand_inc",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.subtotal_ggr",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.subtotal_order_count",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.bet_time_range",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.node_filter",
+              "op": "eq",
+              "value": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "game-node-2",
+      "review": {
+        "用例编号": "game-node-2",
+        "类型": "API",
+        "模块/接口": "ISOP-2085 两处注单查询",
+        "用例名称": "投注查询2线集合",
+        "前置条件": "FAT；本轮fresh登录；仅验证本组合，父级用例不自动通过",
+        "参数/步骤": "见执行步骤",
+        "预期结果": "投注查询2线集合；数据形状、筛选及适用金额/分页断言成立；空结果不证明源表完整性",
+        "级别": "专项",
+        "验收点": "R13"
+      },
+      "delivery": {
+        "mode": "automatic"
+      },
+      "steps": [
+        {
+          "id": "query",
+          "actor": "A",
+          "action": "api",
+          "contract": "game",
+          "body": {
+            "page": 1,
+            "page_size": 20,
+            "start_time": 1788796800000,
+            "end_time": 1789142399999,
+            "node": 2
+          },
+          "auth": "valid",
+          "expect": [
+            {
+              "path": "http",
+              "op": "eq",
+              "value": 200
+            },
+            {
+              "path": "body.status",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "body.data",
+              "op": "type",
+              "value": "object"
+            },
+            {
+              "path": "body.data.d",
+              "op": "type",
+              "value": "array"
+            },
+            {
+              "path": "body.data.t",
+              "op": "type",
+              "value": "integer"
+            },
+            {
+              "path": "body.data.s",
+              "op": "type",
+              "value": "integer"
+            },
+            {
+              "path": "body.data.a.subtotal",
+              "op": "type",
+              "value": "object"
+            },
+            {
+              "path": "body.data.a.total",
+              "op": "type",
+              "value": "object"
+            },
+            {
+              "path": "body.data.d",
+              "op": "nonempty"
+            }
+          ],
+          "extract": {
+            "data": "body.data"
+          }
+        },
+        {
+          "id": "verify",
+          "actor": "A",
+          "action": "method",
+          "method": "bet_record_check",
+          "params": {
+            "data": "${data}",
+            "request": {
+              "page": 1,
+              "page_size": 20,
+              "start_time": 1788796800000,
+              "end_time": 1789142399999,
+              "node": 2
+            }
+          },
+          "expect": [
+            {
+              "path": "checks.page_count",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.page_limit",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.total_count",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.payout_sign",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.subtotal_bet_amount",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.subtotal_valid_bet_amount",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.subtotal_grand_inc",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.subtotal_ggr",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.subtotal_order_count",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.bet_time_range",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.node_filter",
+              "op": "eq",
+              "value": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "game-settle-node-1",
+      "review": {
+        "用例编号": "game-settle-node-1",
+        "类型": "API",
+        "模块/接口": "ISOP-2085 两处注单查询",
+        "用例名称": "结算查询1线隔离",
+        "前置条件": "FAT；本轮fresh登录；仅验证本组合，父级用例不自动通过",
+        "参数/步骤": "见执行步骤",
+        "预期结果": "结算查询1线隔离；数据形状、筛选及适用金额/分页断言成立；空结果不证明源表完整性",
+        "级别": "专项",
+        "验收点": "R14"
+      },
+      "delivery": {
+        "mode": "automatic"
+      },
+      "steps": [
+        {
+          "id": "query",
+          "actor": "A",
+          "action": "api",
+          "contract": "game",
+          "body": {
+            "page": 1,
+            "page_size": 20,
+            "settle_start_time": 1788796800000,
+            "settle_end_time": 1789142399999,
+            "node": 1
+          },
+          "auth": "valid",
+          "expect": [
+            {
+              "path": "http",
+              "op": "eq",
+              "value": 200
+            },
+            {
+              "path": "body.status",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "body.data",
+              "op": "type",
+              "value": "object"
+            },
+            {
+              "path": "body.data.d",
+              "op": "type",
+              "value": "array"
+            },
+            {
+              "path": "body.data.t",
+              "op": "type",
+              "value": "integer"
+            },
+            {
+              "path": "body.data.s",
+              "op": "type",
+              "value": "integer"
+            },
+            {
+              "path": "body.data.a.subtotal",
+              "op": "type",
+              "value": "object"
+            },
+            {
+              "path": "body.data.a.total",
+              "op": "type",
+              "value": "object"
+            },
+            {
+              "path": "body.data.d",
+              "op": "nonempty"
+            }
+          ],
+          "extract": {
+            "data": "body.data"
+          }
+        },
+        {
+          "id": "verify",
+          "actor": "A",
+          "action": "method",
+          "method": "bet_record_check",
+          "params": {
+            "data": "${data}",
+            "request": {
+              "page": 1,
+              "page_size": 20,
+              "settle_start_time": 1788796800000,
+              "settle_end_time": 1789142399999,
+              "node": 1
+            }
+          },
+          "expect": [
+            {
+              "path": "checks.page_count",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.page_limit",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.total_count",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.payout_sign",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.subtotal_bet_amount",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.subtotal_valid_bet_amount",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.subtotal_grand_inc",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.subtotal_ggr",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.subtotal_order_count",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.settle_time_range",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.node_filter",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.exclude_sports",
+              "op": "eq",
+              "value": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "game-settle-node-2",
+      "review": {
+        "用例编号": "game-settle-node-2",
+        "类型": "API",
+        "模块/接口": "ISOP-2085 两处注单查询",
+        "用例名称": "结算查询2线集合",
+        "前置条件": "FAT；本轮fresh登录；仅验证本组合，父级用例不自动通过",
+        "参数/步骤": "见执行步骤",
+        "预期结果": "结算查询2线集合；数据形状、筛选及适用金额/分页断言成立；空结果不证明源表完整性",
+        "级别": "专项",
+        "验收点": "R13"
+      },
+      "delivery": {
+        "mode": "automatic"
+      },
+      "steps": [
+        {
+          "id": "query",
+          "actor": "A",
+          "action": "api",
+          "contract": "game",
+          "body": {
+            "page": 1,
+            "page_size": 20,
+            "settle_start_time": 1788796800000,
+            "settle_end_time": 1789142399999,
+            "node": 2
+          },
+          "auth": "valid",
+          "expect": [
+            {
+              "path": "http",
+              "op": "eq",
+              "value": 200
+            },
+            {
+              "path": "body.status",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "body.data",
+              "op": "type",
+              "value": "object"
+            },
+            {
+              "path": "body.data.d",
+              "op": "type",
+              "value": "array"
+            },
+            {
+              "path": "body.data.t",
+              "op": "type",
+              "value": "integer"
+            },
+            {
+              "path": "body.data.s",
+              "op": "type",
+              "value": "integer"
+            },
+            {
+              "path": "body.data.a.subtotal",
+              "op": "type",
+              "value": "object"
+            },
+            {
+              "path": "body.data.a.total",
+              "op": "type",
+              "value": "object"
+            },
+            {
+              "path": "body.data.d",
+              "op": "nonempty"
+            }
+          ],
+          "extract": {
+            "data": "body.data"
+          }
+        },
+        {
+          "id": "verify",
+          "actor": "A",
+          "action": "method",
+          "method": "bet_record_check",
+          "params": {
+            "data": "${data}",
+            "request": {
+              "page": 1,
+              "page_size": 20,
+              "settle_start_time": 1788796800000,
+              "settle_end_time": 1789142399999,
+              "node": 2
+            }
+          },
+          "expect": [
+            {
+              "path": "checks.page_count",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.page_limit",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.total_count",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.payout_sign",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.subtotal_bet_amount",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.subtotal_valid_bet_amount",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.subtotal_grand_inc",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.subtotal_ggr",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.subtotal_order_count",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.settle_time_range",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.node_filter",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.exclude_sports",
+              "op": "eq",
+              "value": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "game-bet-sport-game_type",
+      "review": {
+        "用例编号": "game-bet-sport-game_type",
+        "类型": "API",
+        "模块/接口": "ISOP-2085 两处注单查询",
+        "用例名称": "投注时间+体育game_type",
+        "前置条件": "FAT；本轮fresh登录；仅验证本组合，父级用例不自动通过",
+        "参数/步骤": "见执行步骤",
+        "预期结果": "投注时间+体育game_type；数据形状、筛选及适用金额/分页断言成立；空结果不证明源表完整性",
+        "级别": "专项",
+        "验收点": "R31"
+      },
+      "delivery": {
+        "mode": "automatic"
+      },
+      "steps": [
+        {
+          "id": "query",
+          "actor": "A",
+          "action": "api",
+          "contract": "game",
+          "body": {
+            "page": 1,
+            "page_size": 20,
+            "start_time": 1788796800000,
+            "end_time": 1789142399999,
+            "game_type": 4
+          },
+          "auth": "valid",
+          "expect": [
+            {
+              "path": "http",
+              "op": "eq",
+              "value": 200
+            },
+            {
+              "path": "body.status",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "body.data",
+              "op": "type",
+              "value": "object"
+            },
+            {
+              "path": "body.data.d",
+              "op": "type",
+              "value": "array"
+            },
+            {
+              "path": "body.data.t",
+              "op": "type",
+              "value": "integer"
+            },
+            {
+              "path": "body.data.s",
+              "op": "type",
+              "value": "integer"
+            },
+            {
+              "path": "body.data.a.subtotal",
+              "op": "type",
+              "value": "object"
+            },
+            {
+              "path": "body.data.a.total",
+              "op": "type",
+              "value": "object"
+            },
+            {
+              "path": "body.data.d",
+              "op": "nonempty"
+            }
+          ],
+          "extract": {
+            "data": "body.data"
+          }
+        },
+        {
+          "id": "verify",
+          "actor": "A",
+          "action": "method",
+          "method": "bet_record_check",
+          "params": {
+            "data": "${data}",
+            "request": {
+              "page": 1,
+              "page_size": 20,
+              "start_time": 1788796800000,
+              "end_time": 1789142399999,
+              "game_type": 4
+            }
+          },
+          "expect": [
+            {
+              "path": "checks.page_count",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.page_limit",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.total_count",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.payout_sign",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.subtotal_bet_amount",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.subtotal_valid_bet_amount",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.subtotal_grand_inc",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.subtotal_ggr",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.subtotal_order_count",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.bet_time_range",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.sports_only",
+              "op": "eq",
+              "value": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "game-bet-sport-pagcor_game_type",
+      "review": {
+        "用例编号": "game-bet-sport-pagcor_game_type",
+        "类型": "API",
+        "模块/接口": "ISOP-2085 两处注单查询",
+        "用例名称": "投注时间+体育PAGCOR分类",
+        "前置条件": "FAT；本轮fresh登录；仅验证本组合，父级用例不自动通过",
+        "参数/步骤": "见执行步骤",
+        "预期结果": "投注时间+体育PAGCOR分类；数据形状、筛选及适用金额/分页断言成立；空结果不证明源表完整性",
+        "级别": "专项",
+        "验收点": "R31"
+      },
+      "delivery": {
+        "mode": "automatic"
+      },
+      "steps": [
+        {
+          "id": "query",
+          "actor": "A",
+          "action": "api",
+          "contract": "game",
+          "body": {
+            "page": 1,
+            "page_size": 20,
+            "start_time": 1788796800000,
+            "end_time": 1789142399999,
+            "pagcor_game_type": "sports_betting"
+          },
+          "auth": "valid",
+          "expect": [
+            {
+              "path": "http",
+              "op": "eq",
+              "value": 200
+            },
+            {
+              "path": "body.status",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "body.data",
+              "op": "type",
+              "value": "object"
+            },
+            {
+              "path": "body.data.d",
+              "op": "type",
+              "value": "array"
+            },
+            {
+              "path": "body.data.t",
+              "op": "type",
+              "value": "integer"
+            },
+            {
+              "path": "body.data.s",
+              "op": "type",
+              "value": "integer"
+            },
+            {
+              "path": "body.data.a.subtotal",
+              "op": "type",
+              "value": "object"
+            },
+            {
+              "path": "body.data.a.total",
+              "op": "type",
+              "value": "object"
+            },
+            {
+              "path": "body.data.d",
+              "op": "nonempty"
+            }
+          ],
+          "extract": {
+            "data": "body.data"
+          }
+        },
+        {
+          "id": "verify",
+          "actor": "A",
+          "action": "method",
+          "method": "bet_record_check",
+          "params": {
+            "data": "${data}",
+            "request": {
+              "page": 1,
+              "page_size": 20,
+              "start_time": 1788796800000,
+              "end_time": 1789142399999,
+              "pagcor_game_type": "sports_betting"
+            }
+          },
+          "expect": [
+            {
+              "path": "checks.page_count",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.page_limit",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.total_count",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.payout_sign",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.subtotal_bet_amount",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.subtotal_valid_bet_amount",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.subtotal_grand_inc",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.subtotal_ggr",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.subtotal_order_count",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.bet_time_range",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.sports_only",
+              "op": "eq",
+              "value": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "game-settle-sport-game_type",
+      "review": {
+        "用例编号": "game-settle-sport-game_type",
+        "类型": "API",
+        "模块/接口": "ISOP-2085 两处注单查询",
+        "用例名称": "结算时间+体育game_type",
+        "前置条件": "FAT；本轮fresh登录；仅验证本组合，父级用例不自动通过",
+        "参数/步骤": "见执行步骤",
+        "预期结果": "结算时间+体育game_type；数据形状、筛选及适用金额/分页断言成立；空结果不证明源表完整性",
+        "级别": "专项",
+        "验收点": "R31"
+      },
+      "delivery": {
+        "mode": "automatic"
+      },
+      "steps": [
+        {
+          "id": "query",
+          "actor": "A",
+          "action": "api",
+          "contract": "game",
+          "body": {
+            "page": 1,
+            "page_size": 20,
+            "settle_start_time": 1788796800000,
+            "settle_end_time": 1789142399999,
+            "game_type": 4
+          },
+          "auth": "valid",
+          "expect": [
+            {
+              "path": "http",
+              "op": "eq",
+              "value": 200
+            },
+            {
+              "path": "body.status",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "body.data",
+              "op": "type",
+              "value": "object"
+            },
+            {
+              "path": "body.data.d",
+              "op": "type",
+              "value": "array"
+            },
+            {
+              "path": "body.data.t",
+              "op": "type",
+              "value": "integer"
+            },
+            {
+              "path": "body.data.s",
+              "op": "type",
+              "value": "integer"
+            },
+            {
+              "path": "body.data.a.subtotal",
+              "op": "type",
+              "value": "object"
+            },
+            {
+              "path": "body.data.a.total",
+              "op": "type",
+              "value": "object"
+            },
+            {
+              "path": "body.data.d",
+              "op": "nonempty"
+            }
+          ],
+          "extract": {
+            "data": "body.data"
+          }
+        },
+        {
+          "id": "verify",
+          "actor": "A",
+          "action": "method",
+          "method": "bet_record_check",
+          "params": {
+            "data": "${data}",
+            "request": {
+              "page": 1,
+              "page_size": 20,
+              "settle_start_time": 1788796800000,
+              "settle_end_time": 1789142399999,
+              "game_type": 4
+            }
+          },
+          "expect": [
+            {
+              "path": "checks.page_count",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.page_limit",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.total_count",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.payout_sign",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.subtotal_bet_amount",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.subtotal_valid_bet_amount",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.subtotal_grand_inc",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.subtotal_ggr",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.subtotal_order_count",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.settle_time_range",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.sports_only",
+              "op": "eq",
+              "value": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "game-settle-sport-pagcor_game_type",
+      "review": {
+        "用例编号": "game-settle-sport-pagcor_game_type",
+        "类型": "API",
+        "模块/接口": "ISOP-2085 两处注单查询",
+        "用例名称": "结算时间+体育PAGCOR分类",
+        "前置条件": "FAT；本轮fresh登录；仅验证本组合，父级用例不自动通过",
+        "参数/步骤": "见执行步骤",
+        "预期结果": "结算时间+体育PAGCOR分类；数据形状、筛选及适用金额/分页断言成立；空结果不证明源表完整性",
+        "级别": "专项",
+        "验收点": "R31"
+      },
+      "delivery": {
+        "mode": "automatic"
+      },
+      "steps": [
+        {
+          "id": "query",
+          "actor": "A",
+          "action": "api",
+          "contract": "game",
+          "body": {
+            "page": 1,
+            "page_size": 20,
+            "settle_start_time": 1788796800000,
+            "settle_end_time": 1789142399999,
+            "pagcor_game_type": "sports_betting"
+          },
+          "auth": "valid",
+          "expect": [
+            {
+              "path": "http",
+              "op": "eq",
+              "value": 200
+            },
+            {
+              "path": "body.status",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "body.data",
+              "op": "type",
+              "value": "object"
+            },
+            {
+              "path": "body.data.d",
+              "op": "type",
+              "value": "array"
+            },
+            {
+              "path": "body.data.t",
+              "op": "type",
+              "value": "integer"
+            },
+            {
+              "path": "body.data.s",
+              "op": "type",
+              "value": "integer"
+            },
+            {
+              "path": "body.data.a.subtotal",
+              "op": "type",
+              "value": "object"
+            },
+            {
+              "path": "body.data.a.total",
+              "op": "type",
+              "value": "object"
+            },
+            {
+              "path": "body.data.d",
+              "op": "nonempty"
+            }
+          ],
+          "extract": {
+            "data": "body.data"
+          }
+        },
+        {
+          "id": "verify",
+          "actor": "A",
+          "action": "method",
+          "method": "bet_record_check",
+          "params": {
+            "data": "${data}",
+            "request": {
+              "page": 1,
+              "page_size": 20,
+              "settle_start_time": 1788796800000,
+              "settle_end_time": 1789142399999,
+              "pagcor_game_type": "sports_betting"
+            }
+          },
+          "expect": [
+            {
+              "path": "checks.page_count",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.page_limit",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.total_count",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.payout_sign",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.subtotal_bet_amount",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.subtotal_valid_bet_amount",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.subtotal_grand_inc",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.subtotal_ggr",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.subtotal_order_count",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.settle_time_range",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.sports_only",
+              "op": "eq",
+              "value": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "game-order-1",
+      "review": {
+        "用例编号": "game-order-1",
+        "类型": "API",
+        "模块/接口": "ISOP-2085 两处注单查询",
+        "用例名称": "普通注单类型筛选",
+        "前置条件": "FAT；本轮fresh登录；仅验证本组合，父级用例不自动通过",
+        "参数/步骤": "见执行步骤",
+        "预期结果": "普通注单类型筛选；数据形状、筛选及适用金额/分页断言成立；空结果不证明源表完整性",
+        "级别": "专项",
+        "验收点": "R30"
+      },
+      "delivery": {
+        "mode": "automatic"
+      },
+      "steps": [
+        {
+          "id": "query",
+          "actor": "A",
+          "action": "api",
+          "contract": "game",
+          "body": {
+            "page": 1,
+            "page_size": 20,
+            "start_time": 1788796800000,
+            "end_time": 1789142399999,
+            "order_type": 1
+          },
+          "auth": "valid",
+          "expect": [
+            {
+              "path": "http",
+              "op": "eq",
+              "value": 200
+            },
+            {
+              "path": "body.status",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "body.data",
+              "op": "type",
+              "value": "object"
+            },
+            {
+              "path": "body.data.d",
+              "op": "type",
+              "value": "array"
+            },
+            {
+              "path": "body.data.t",
+              "op": "type",
+              "value": "integer"
+            },
+            {
+              "path": "body.data.s",
+              "op": "type",
+              "value": "integer"
+            },
+            {
+              "path": "body.data.a.subtotal",
+              "op": "type",
+              "value": "object"
+            },
+            {
+              "path": "body.data.a.total",
+              "op": "type",
+              "value": "object"
+            },
+            {
+              "path": "body.data.d",
+              "op": "nonempty"
+            }
+          ],
+          "extract": {
+            "data": "body.data"
+          }
+        },
+        {
+          "id": "verify",
+          "actor": "A",
+          "action": "method",
+          "method": "bet_record_check",
+          "params": {
+            "data": "${data}",
+            "request": {
+              "page": 1,
+              "page_size": 20,
+              "start_time": 1788796800000,
+              "end_time": 1789142399999,
+              "order_type": 1
+            }
+          },
+          "expect": [
+            {
+              "path": "checks.page_count",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.page_limit",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.total_count",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.payout_sign",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.subtotal_bet_amount",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.subtotal_valid_bet_amount",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.subtotal_grand_inc",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.subtotal_ggr",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.subtotal_order_count",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.bet_time_range",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.order_type_filter",
+              "op": "eq",
+              "value": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "game-order-2",
+      "review": {
+        "用例编号": "game-order-2",
+        "类型": "API",
+        "模块/接口": "ISOP-2085 两处注单查询",
+        "用例名称": "免费旋转注单类型筛选",
+        "前置条件": "FAT；本轮fresh登录；仅验证本组合，父级用例不自动通过",
+        "参数/步骤": "见执行步骤",
+        "预期结果": "免费旋转注单类型筛选；数据形状、筛选及适用金额/分页断言成立；空结果不证明源表完整性",
+        "级别": "专项",
+        "验收点": "R30"
+      },
+      "delivery": {
+        "mode": "automatic"
+      },
+      "steps": [
+        {
+          "id": "query",
+          "actor": "A",
+          "action": "api",
+          "contract": "game",
+          "body": {
+            "page": 1,
+            "page_size": 20,
+            "start_time": 1788796800000,
+            "end_time": 1789142399999,
+            "order_type": 2
+          },
+          "auth": "valid",
+          "expect": [
+            {
+              "path": "http",
+              "op": "eq",
+              "value": 200
+            },
+            {
+              "path": "body.status",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "body.data",
+              "op": "type",
+              "value": "object"
+            },
+            {
+              "path": "body.data.d",
+              "op": "type",
+              "value": "array"
+            },
+            {
+              "path": "body.data.t",
+              "op": "type",
+              "value": "integer"
+            },
+            {
+              "path": "body.data.s",
+              "op": "type",
+              "value": "integer"
+            },
+            {
+              "path": "body.data.a.subtotal",
+              "op": "type",
+              "value": "object"
+            },
+            {
+              "path": "body.data.a.total",
+              "op": "type",
+              "value": "object"
+            },
+            {
+              "path": "body.data.d",
+              "op": "nonempty"
+            }
+          ],
+          "extract": {
+            "data": "body.data"
+          }
+        },
+        {
+          "id": "verify",
+          "actor": "A",
+          "action": "method",
+          "method": "bet_record_check",
+          "params": {
+            "data": "${data}",
+            "request": {
+              "page": 1,
+              "page_size": 20,
+              "start_time": 1788796800000,
+              "end_time": 1789142399999,
+              "order_type": 2
+            }
+          },
+          "expect": [
+            {
+              "path": "checks.page_count",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.page_limit",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.total_count",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.payout_sign",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.subtotal_bet_amount",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.subtotal_valid_bet_amount",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.subtotal_grand_inc",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.subtotal_ggr",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.subtotal_order_count",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.bet_time_range",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.order_type_filter",
+              "op": "eq",
+              "value": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "game-order-3",
+      "review": {
+        "用例编号": "game-order-3",
+        "类型": "API",
+        "模块/接口": "ISOP-2085 两处注单查询",
+        "用例名称": "Jackpot注单类型筛选",
+        "前置条件": "FAT；本轮fresh登录；仅验证本组合，父级用例不自动通过",
+        "参数/步骤": "见执行步骤",
+        "预期结果": "Jackpot注单类型筛选；数据形状、筛选及适用金额/分页断言成立；空结果不证明源表完整性",
+        "级别": "专项",
+        "验收点": "R30"
+      },
+      "delivery": {
+        "mode": "automatic"
+      },
+      "steps": [
+        {
+          "id": "query",
+          "actor": "A",
+          "action": "api",
+          "contract": "game",
+          "body": {
+            "page": 1,
+            "page_size": 20,
+            "start_time": 1788796800000,
+            "end_time": 1789142399999,
+            "order_type": 3
+          },
+          "auth": "valid",
+          "expect": [
+            {
+              "path": "http",
+              "op": "eq",
+              "value": 200
+            },
+            {
+              "path": "body.status",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "body.data",
+              "op": "type",
+              "value": "object"
+            },
+            {
+              "path": "body.data.d",
+              "op": "type",
+              "value": "array"
+            },
+            {
+              "path": "body.data.t",
+              "op": "type",
+              "value": "integer"
+            },
+            {
+              "path": "body.data.s",
+              "op": "type",
+              "value": "integer"
+            },
+            {
+              "path": "body.data.a.subtotal",
+              "op": "type",
+              "value": "object"
+            },
+            {
+              "path": "body.data.a.total",
+              "op": "type",
+              "value": "object"
+            },
+            {
+              "path": "body.data.d",
+              "op": "nonempty"
+            }
+          ],
+          "extract": {
+            "data": "body.data"
+          }
+        },
+        {
+          "id": "verify",
+          "actor": "A",
+          "action": "method",
+          "method": "bet_record_check",
+          "params": {
+            "data": "${data}",
+            "request": {
+              "page": 1,
+              "page_size": 20,
+              "start_time": 1788796800000,
+              "end_time": 1789142399999,
+              "order_type": 3
+            }
+          },
+          "expect": [
+            {
+              "path": "checks.page_count",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.page_limit",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.total_count",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.payout_sign",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.subtotal_bet_amount",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.subtotal_valid_bet_amount",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.subtotal_grand_inc",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.subtotal_ggr",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.subtotal_order_count",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.bet_time_range",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.order_type_filter",
+              "op": "eq",
+              "value": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "game-settled",
+      "review": {
+        "用例编号": "game-settled",
+        "类型": "API",
+        "模块/接口": "ISOP-2085 两处注单查询",
+        "用例名称": "已结算状态筛选",
+        "前置条件": "FAT；本轮fresh登录；仅验证本组合，父级用例不自动通过",
+        "参数/步骤": "见执行步骤",
+        "预期结果": "已结算状态筛选；数据形状、筛选及适用金额/分页断言成立；空结果不证明源表完整性",
+        "级别": "专项",
+        "验收点": "R24"
+      },
+      "delivery": {
+        "mode": "automatic"
+      },
+      "steps": [
+        {
+          "id": "query",
+          "actor": "A",
+          "action": "api",
+          "contract": "game",
+          "body": {
+            "page": 1,
+            "page_size": 20,
+            "settle_start_time": 1788796800000,
+            "settle_end_time": 1789142399999,
+            "state": "1"
+          },
+          "auth": "valid",
+          "expect": [
+            {
+              "path": "http",
+              "op": "eq",
+              "value": 200
+            },
+            {
+              "path": "body.status",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "body.data",
+              "op": "type",
+              "value": "object"
+            },
+            {
+              "path": "body.data.d",
+              "op": "type",
+              "value": "array"
+            },
+            {
+              "path": "body.data.t",
+              "op": "type",
+              "value": "integer"
+            },
+            {
+              "path": "body.data.s",
+              "op": "type",
+              "value": "integer"
+            },
+            {
+              "path": "body.data.a.subtotal",
+              "op": "type",
+              "value": "object"
+            },
+            {
+              "path": "body.data.a.total",
+              "op": "type",
+              "value": "object"
+            },
+            {
+              "path": "body.data.d",
+              "op": "nonempty"
+            }
+          ],
+          "extract": {
+            "data": "body.data"
+          }
+        },
+        {
+          "id": "verify",
+          "actor": "A",
+          "action": "method",
+          "method": "bet_record_check",
+          "params": {
+            "data": "${data}",
+            "request": {
+              "page": 1,
+              "page_size": 20,
+              "settle_start_time": 1788796800000,
+              "settle_end_time": 1789142399999,
+              "state": "1"
+            }
+          },
+          "expect": [
+            {
+              "path": "checks.page_count",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.page_limit",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.total_count",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.payout_sign",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.subtotal_bet_amount",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.subtotal_valid_bet_amount",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.subtotal_grand_inc",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.subtotal_ggr",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.subtotal_order_count",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.settle_time_range",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.exclude_sports",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.state_filter",
+              "op": "eq",
+              "value": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "game-millisecond-inclusive",
+      "review": {
+        "用例编号": "game-millisecond-inclusive",
+        "类型": "API",
+        "模块/接口": "ISOP-2085 两处注单查询",
+        "用例名称": "已知投注时刻的闭区间点查询",
+        "前置条件": "FAT；本轮fresh登录；仅验证本组合，父级用例不自动通过",
+        "参数/步骤": "见执行步骤",
+        "预期结果": "已知投注时刻的闭区间点查询；数据形状、筛选及适用金额/分页断言成立；空结果不证明源表完整性",
+        "级别": "专项",
+        "验收点": "R16,R30"
+      },
+      "delivery": {
+        "mode": "automatic"
+      },
+      "steps": [
+        {
+          "id": "query",
+          "actor": "A",
+          "action": "api",
+          "contract": "game",
+          "body": {
+            "page": 1,
+            "page_size": 20,
+            "start_time": 1788943654000,
+            "end_time": 1788943654000,
+            "node": 1
+          },
+          "auth": "valid",
+          "expect": [
+            {
+              "path": "http",
+              "op": "eq",
+              "value": 200
+            },
+            {
+              "path": "body.status",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "body.data",
+              "op": "type",
+              "value": "object"
+            },
+            {
+              "path": "body.data.d",
+              "op": "type",
+              "value": "array"
+            },
+            {
+              "path": "body.data.t",
+              "op": "type",
+              "value": "integer"
+            },
+            {
+              "path": "body.data.s",
+              "op": "type",
+              "value": "integer"
+            },
+            {
+              "path": "body.data.a.subtotal",
+              "op": "type",
+              "value": "object"
+            },
+            {
+              "path": "body.data.a.total",
+              "op": "type",
+              "value": "object"
+            },
+            {
+              "path": "body.data.d",
+              "op": "nonempty"
+            }
+          ],
+          "extract": {
+            "data": "body.data"
+          }
+        },
+        {
+          "id": "verify",
+          "actor": "A",
+          "action": "method",
+          "method": "bet_record_check",
+          "params": {
+            "data": "${data}",
+            "request": {
+              "page": 1,
+              "page_size": 20,
+              "start_time": 1788943654000,
+              "end_time": 1788943654000,
+              "node": 1
+            }
+          },
+          "expect": [
+            {
+              "path": "checks.page_count",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.page_limit",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.total_count",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.payout_sign",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.subtotal_bet_amount",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.subtotal_valid_bet_amount",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.subtotal_grand_inc",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.subtotal_ggr",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.subtotal_order_count",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.bet_time_range",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.node_filter",
+              "op": "eq",
+              "value": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "game-millisecond-before",
+      "review": {
+        "用例编号": "game-millisecond-before",
+        "类型": "API",
+        "模块/接口": "ISOP-2085 两处注单查询",
+        "用例名称": "已知投注时刻前1毫秒查询",
+        "前置条件": "FAT；本轮fresh登录；仅验证本组合，父级用例不自动通过",
+        "参数/步骤": "见执行步骤",
+        "预期结果": "已知投注时刻前1毫秒查询；数据形状、筛选及适用金额/分页断言成立；空结果不证明源表完整性",
+        "级别": "专项",
+        "验收点": "R16,R30"
+      },
+      "delivery": {
+        "mode": "automatic"
+      },
+      "steps": [
+        {
+          "id": "query",
+          "actor": "A",
+          "action": "api",
+          "contract": "game",
+          "body": {
+            "page": 1,
+            "page_size": 20,
+            "start_time": 1788943653999,
+            "end_time": 1788943653999,
+            "node": 1
+          },
+          "auth": "valid",
+          "expect": [
+            {
+              "path": "http",
+              "op": "eq",
+              "value": 200
+            },
+            {
+              "path": "body.status",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "body.data",
+              "op": "type",
+              "value": "object"
+            },
+            {
+              "path": "body.data.d",
+              "op": "type",
+              "value": "array"
+            },
+            {
+              "path": "body.data.t",
+              "op": "type",
+              "value": "integer"
+            },
+            {
+              "path": "body.data.s",
+              "op": "type",
+              "value": "integer"
+            },
+            {
+              "path": "body.data.a.subtotal",
+              "op": "type",
+              "value": "object"
+            },
+            {
+              "path": "body.data.a.total",
+              "op": "type",
+              "value": "object"
+            }
+          ],
+          "extract": {
+            "data": "body.data"
+          }
+        },
+        {
+          "id": "verify",
+          "actor": "A",
+          "action": "method",
+          "method": "bet_record_check",
+          "params": {
+            "data": "${data}",
+            "request": {
+              "page": 1,
+              "page_size": 20,
+              "start_time": 1788943653999,
+              "end_time": 1788943653999,
+              "node": 1
+            }
+          },
+          "expect": [
+            {
+              "path": "checks.page_count",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.page_limit",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.total_count",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "value",
+              "op": "eq",
+              "value": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "game-millisecond-after",
+      "review": {
+        "用例编号": "game-millisecond-after",
+        "类型": "API",
+        "模块/接口": "ISOP-2085 两处注单查询",
+        "用例名称": "已知投注时刻后1毫秒查询",
+        "前置条件": "FAT；本轮fresh登录；仅验证本组合，父级用例不自动通过",
+        "参数/步骤": "见执行步骤",
+        "预期结果": "已知投注时刻后1毫秒查询；数据形状、筛选及适用金额/分页断言成立；空结果不证明源表完整性",
+        "级别": "专项",
+        "验收点": "R16,R30"
+      },
+      "delivery": {
+        "mode": "automatic"
+      },
+      "steps": [
+        {
+          "id": "query",
+          "actor": "A",
+          "action": "api",
+          "contract": "game",
+          "body": {
+            "page": 1,
+            "page_size": 20,
+            "start_time": 1788943654001,
+            "end_time": 1788943654001,
+            "node": 1
+          },
+          "auth": "valid",
+          "expect": [
+            {
+              "path": "http",
+              "op": "eq",
+              "value": 200
+            },
+            {
+              "path": "body.status",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "body.data",
+              "op": "type",
+              "value": "object"
+            },
+            {
+              "path": "body.data.d",
+              "op": "type",
+              "value": "array"
+            },
+            {
+              "path": "body.data.t",
+              "op": "type",
+              "value": "integer"
+            },
+            {
+              "path": "body.data.s",
+              "op": "type",
+              "value": "integer"
+            },
+            {
+              "path": "body.data.a.subtotal",
+              "op": "type",
+              "value": "object"
+            },
+            {
+              "path": "body.data.a.total",
+              "op": "type",
+              "value": "object"
+            }
+          ],
+          "extract": {
+            "data": "body.data"
+          }
+        },
+        {
+          "id": "verify",
+          "actor": "A",
+          "action": "method",
+          "method": "bet_record_check",
+          "params": {
+            "data": "${data}",
+            "request": {
+              "page": 1,
+              "page_size": 20,
+              "start_time": 1788943654001,
+              "end_time": 1788943654001,
+              "node": 1
+            }
+          },
+          "expect": [
+            {
+              "path": "checks.page_count",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.page_limit",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.total_count",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "value",
+              "op": "eq",
+              "value": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "game-pagination",
+      "review": {
+        "用例编号": "game-pagination",
+        "类型": "API",
+        "模块/接口": "ISOP-2085 两处注单查询",
+        "用例名称": "历史窗口翻页全量合计与总数不变",
+        "前置条件": "FAT；本轮fresh登录；仅验证本组合，父级用例不自动通过",
+        "参数/步骤": "见执行步骤",
+        "预期结果": "翻页全量合计不变；查询不写业务数据",
+        "级别": "专项",
+        "验收点": "R18"
+      },
+      "delivery": {
+        "mode": "automatic"
+      },
+      "steps": [
+        {
+          "id": "query",
+          "actor": "A",
+          "action": "api",
+          "contract": "game",
+          "body": {
+            "page": 1,
+            "page_size": 5,
+            "start_time": 1788796800000,
+            "end_time": 1789055999999
+          },
+          "auth": "valid",
+          "expect": [
+            {
+              "path": "http",
+              "op": "eq",
+              "value": 200
+            },
+            {
+              "path": "body.status",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "body.data",
+              "op": "type",
+              "value": "object"
+            },
+            {
+              "path": "body.data.d",
+              "op": "type",
+              "value": "array"
+            },
+            {
+              "path": "body.data.t",
+              "op": "type",
+              "value": "integer"
+            },
+            {
+              "path": "body.data.s",
+              "op": "type",
+              "value": "integer"
+            },
+            {
+              "path": "body.data.a.subtotal",
+              "op": "type",
+              "value": "object"
+            },
+            {
+              "path": "body.data.a.total",
+              "op": "type",
+              "value": "object"
+            }
+          ],
+          "extract": {
+            "total": "body.data.a.total",
+            "count": "body.data.t"
+          }
+        },
+        {
+          "id": "page2",
+          "actor": "A",
+          "action": "api",
+          "contract": "game",
+          "body": {
+            "page": 2,
+            "page_size": 5,
+            "start_time": 1788796800000,
+            "end_time": 1789055999999
+          },
+          "auth": "valid",
+          "expect": [
+            {
+              "path": "http",
+              "op": "eq",
+              "value": 200
+            },
+            {
+              "path": "body.status",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "body.data",
+              "op": "type",
+              "value": "object"
+            },
+            {
+              "path": "body.data.d",
+              "op": "type",
+              "value": "array"
+            },
+            {
+              "path": "body.data.t",
+              "op": "type",
+              "value": "integer"
+            },
+            {
+              "path": "body.data.s",
+              "op": "type",
+              "value": "integer"
+            },
+            {
+              "path": "body.data.a.subtotal",
+              "op": "type",
+              "value": "object"
+            },
+            {
+              "path": "body.data.a.total",
+              "op": "type",
+              "value": "object"
+            },
+            {
+              "path": "body.data.a.total",
+              "op": "eq",
+              "value": "${total}"
+            },
+            {
+              "path": "body.data.t",
+              "op": "eq",
+              "value": "${count}"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "game-auth-missing",
+      "review": {
+        "用例编号": "game-auth-missing",
+        "类型": "API",
+        "模块/接口": "ISOP-2085 两处注单查询",
+        "用例名称": "鉴权拒绝且无明细",
+        "前置条件": "FAT；本轮fresh登录；仅验证本组合，父级用例不自动通过",
+        "参数/步骤": "见执行步骤",
+        "预期结果": "鉴权拒绝且无明细；查询不写业务数据",
+        "级别": "专项",
+        "验收点": "R29"
+      },
+      "delivery": {
+        "mode": "automatic"
+      },
+      "steps": [
+        {
+          "id": "query",
+          "actor": "A",
+          "action": "api",
+          "contract": "game",
+          "body": {
+            "page": 1,
+            "page_size": 5,
+            "start_time": 1788796800000,
+            "end_time": 1789142399999
+          },
+          "auth": "missing",
+          "expect": [
+            {
+              "path": "http",
+              "op": "eq",
+              "value": 200
+            },
+            {
+              "path": "body.status",
+              "op": "eq",
+              "value": false
+            },
+            {
+              "path": "body.data",
+              "op": "eq",
+              "value": "token"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "game-auth-invalid",
+      "review": {
+        "用例编号": "game-auth-invalid",
+        "类型": "API",
+        "模块/接口": "ISOP-2085 两处注单查询",
+        "用例名称": "鉴权拒绝且无明细",
+        "前置条件": "FAT；本轮fresh登录；仅验证本组合，父级用例不自动通过",
+        "参数/步骤": "见执行步骤",
+        "预期结果": "鉴权拒绝且无明细；查询不写业务数据",
+        "级别": "专项",
+        "验收点": "R29"
+      },
+      "delivery": {
+        "mode": "automatic"
+      },
+      "steps": [
+        {
+          "id": "query",
+          "actor": "A",
+          "action": "api",
+          "contract": "game",
+          "body": {
+            "page": 1,
+            "page_size": 5,
+            "start_time": 1788796800000,
+            "end_time": 1789142399999
+          },
+          "auth": "invalid",
+          "expect": [
+            {
+              "path": "http",
+              "op": "eq",
+              "value": 200
+            },
+            {
+              "path": "body.status",
+              "op": "eq",
+              "value": false
+            },
+            {
+              "path": "body.data",
+              "op": "eq",
+              "value": "token"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "game-empty",
+      "review": {
+        "用例编号": "game-empty",
+        "类型": "API",
+        "模块/接口": "ISOP-2085 两处注单查询",
+        "用例名称": "空窗口记录为空",
+        "前置条件": "FAT；本轮fresh登录；仅验证本组合，父级用例不自动通过",
+        "参数/步骤": "见执行步骤",
+        "预期结果": "空窗口记录为空；查询不写业务数据",
+        "级别": "专项",
+        "验收点": "R19"
+      },
+      "delivery": {
+        "mode": "automatic"
+      },
+      "steps": [
+        {
+          "id": "query",
+          "actor": "A",
+          "action": "api",
+          "contract": "game",
+          "body": {
+            "page": 1,
+            "page_size": 20,
+            "start_time": 0,
+            "end_time": 1
+          },
+          "auth": "valid",
+          "expect": [
+            {
+              "path": "http",
+              "op": "eq",
+              "value": 200
+            },
+            {
+              "path": "body.status",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "body.data",
+              "op": "type",
+              "value": "object"
+            },
+            {
+              "path": "body.data.d",
+              "op": "type",
+              "value": "array"
+            },
+            {
+              "path": "body.data.t",
+              "op": "type",
+              "value": "integer"
+            },
+            {
+              "path": "body.data.s",
+              "op": "type",
+              "value": "integer"
+            },
+            {
+              "path": "body.data.a.subtotal",
+              "op": "type",
+              "value": "object"
+            },
+            {
+              "path": "body.data.a.total",
+              "op": "type",
+              "value": "object"
+            },
+            {
+              "path": "body.data.d",
+              "op": "count",
+              "value": 0
+            },
+            {
+              "path": "body.data.t",
+              "op": "eq",
+              "value": 0
+            }
+          ],
+          "extract": {
+            "data": "body.data"
+          }
+        }
+      ]
+    },
+    {
+      "id": "pending-sport-source",
+      "review": {
+        "用例编号": "pending-sport-source",
+        "类型": "API",
+        "模块/接口": "ISOP-2085 两处注单查询",
+        "用例名称": "sport-source",
+        "前置条件": "FAT；本轮fresh登录；仅验证本组合，父级用例不自动通过",
+        "参数/步骤": "见执行步骤",
+        "预期结果": "sport-source；查询不写业务数据",
+        "级别": "专项",
+        "验收点": "R07,R31"
+      },
+      "delivery": {
+        "mode": "automatic"
+      },
+      "blocked": "长周期体育与主表/独立副本来源证明未齐；本轮体育参数查询不替代切表验收"
+    },
+    {
+      "id": "pending-historical-node0",
+      "review": {
+        "用例编号": "pending-historical-node0",
+        "类型": "API",
+        "模块/接口": "ISOP-2085 两处注单查询",
+        "用例名称": "historical-node0",
+        "前置条件": "FAT；本轮fresh登录；仅验证本组合，父级用例不自动通过",
+        "参数/步骤": "见执行步骤",
+        "预期结果": "historical-node0；查询不写业务数据",
+        "级别": "专项",
+        "验收点": "R13"
+      },
+      "delivery": {
+        "mode": "automatic"
+      },
+      "blocked": "本次有界样本未找到历史node=0"
+    },
+    {
+      "id": "pending-resettlement",
+      "review": {
+        "用例编号": "pending-resettlement",
+        "类型": "API",
+        "模块/接口": "ISOP-2085 两处注单查询",
+        "用例名称": "resettlement",
+        "前置条件": "FAT；本轮fresh登录；仅验证本组合，父级用例不自动通过",
+        "参数/步骤": "见执行步骤",
+        "预期结果": "resettlement；查询不写业务数据",
+        "级别": "专项",
+        "验收点": "R25"
+      },
+      "delivery": {
+        "mode": "automatic"
+      },
+      "blocked": "缺少重结算前后独立快照"
+    },
+    {
+      "id": "pending-roles",
+      "review": {
+        "用例编号": "pending-roles",
+        "类型": "API",
+        "模块/接口": "ISOP-2085 两处注单查询",
+        "用例名称": "roles",
+        "前置条件": "FAT；本轮fresh登录；仅验证本组合，父级用例不自动通过",
+        "参数/步骤": "见执行步骤",
+        "预期结果": "roles；查询不写业务数据",
+        "级别": "专项",
+        "验收点": "R29"
+      },
+      "delivery": {
+        "mode": "automatic"
+      },
+      "blocked": "缺少明确受限角色，管理员及无token反例不替代"
+    },
+    {
+      "id": "pending-reports",
+      "review": {
+        "用例编号": "pending-reports",
+        "类型": "API",
+        "模块/接口": "ISOP-2085 两处注单查询",
+        "用例名称": "reports",
+        "前置条件": "FAT；本轮fresh登录；仅验证本组合，父级用例不自动通过",
+        "参数/步骤": "见执行步骤",
+        "预期结果": "reports；查询不写业务数据",
+        "级别": "专项",
+        "验收点": "R01,R08,R09,R20,R21,R23,R26,R27,R28"
+      },
+      "delivery": {
+        "mode": "automatic"
+      },
+      "blocked": "父需求其他统计报表部署/映射/刷新证据未齐，本轮仅2085两入口"
+    },
+    {
+      "id": "bet-page-size-5",
+      "review": {
+        "用例编号": "bet-page-size-5",
+        "类型": "API",
+        "模块/接口": "ISOP-2085 两处注单查询",
+        "用例名称": "page_size=5时返回不超过5条",
+        "前置条件": "FAT；本轮fresh登录；仅验证本组合，父级用例不自动通过",
+        "参数/步骤": "见执行步骤",
+        "预期结果": "page_size=5时返回不超过5条；金额和筛选断言成立",
+        "级别": "专项",
+        "验收点": "R18"
+      },
+      "delivery": {
+        "mode": "automatic"
+      },
+      "steps": [
+        {
+          "id": "query",
+          "actor": "A",
+          "action": "api",
+          "contract": "bet",
+          "body": {
+            "page": 1,
+            "page_size": 5,
+            "start_time": 1788796800000,
+            "end_time": 1789055999999,
+            "node": 1
+          },
+          "auth": "valid",
+          "expect": [
+            {
+              "path": "http",
+              "op": "eq",
+              "value": 200
+            },
+            {
+              "path": "body.status",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "body.data",
+              "op": "type",
+              "value": "object"
+            },
+            {
+              "path": "body.data.d",
+              "op": "type",
+              "value": "array"
+            },
+            {
+              "path": "body.data.t",
+              "op": "type",
+              "value": "integer"
+            },
+            {
+              "path": "body.data.s",
+              "op": "type",
+              "value": "integer"
+            },
+            {
+              "path": "body.data.a.subtotal",
+              "op": "type",
+              "value": "object"
+            },
+            {
+              "path": "body.data.a.total",
+              "op": "type",
+              "value": "object"
+            },
+            {
+              "path": "body.data.d",
+              "op": "nonempty"
+            }
+          ],
+          "extract": {
+            "data": "body.data"
+          }
+        },
+        {
+          "id": "verify",
+          "actor": "A",
+          "action": "method",
+          "method": "bet_record_check",
+          "params": {
+            "data": "${data}",
+            "request": {
+              "page": 1,
+              "page_size": 5,
+              "start_time": 1788796800000,
+              "end_time": 1789055999999,
+              "node": 1
+            }
+          },
+          "expect": [
+            {
+              "path": "checks.page_count",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.page_limit",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.total_count",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.payout_sign",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.subtotal_bet_amount",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.subtotal_valid_bet_amount",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.subtotal_grand_inc",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.subtotal_ggr",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.subtotal_order_count",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.bet_time_range",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.node_filter",
+              "op": "eq",
+              "value": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "bet-short-10min",
+      "review": {
+        "用例编号": "bet-short-10min",
+        "类型": "API",
+        "模块/接口": "ISOP-2085 两处注单查询",
+        "用例名称": "已知历史投注记录位于10分钟范围内",
+        "前置条件": "FAT；本轮fresh登录；仅验证本组合，父级用例不自动通过",
+        "参数/步骤": "见执行步骤",
+        "预期结果": "已知历史投注记录位于10分钟范围内；金额和筛选断言成立",
+        "级别": "专项",
+        "验收点": "R16"
+      },
+      "delivery": {
+        "mode": "automatic"
+      },
+      "steps": [
+        {
+          "id": "query",
+          "actor": "A",
+          "action": "api",
+          "contract": "bet",
+          "body": {
+            "page": 1,
+            "page_size": 20,
+            "start_time": 1788943354000,
+            "end_time": 1788943954000,
+            "node": 1
+          },
+          "auth": "valid",
+          "expect": [
+            {
+              "path": "http",
+              "op": "eq",
+              "value": 200
+            },
+            {
+              "path": "body.status",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "body.data",
+              "op": "type",
+              "value": "object"
+            },
+            {
+              "path": "body.data.d",
+              "op": "type",
+              "value": "array"
+            },
+            {
+              "path": "body.data.t",
+              "op": "type",
+              "value": "integer"
+            },
+            {
+              "path": "body.data.s",
+              "op": "type",
+              "value": "integer"
+            },
+            {
+              "path": "body.data.a.subtotal",
+              "op": "type",
+              "value": "object"
+            },
+            {
+              "path": "body.data.a.total",
+              "op": "type",
+              "value": "object"
+            },
+            {
+              "path": "body.data.d",
+              "op": "nonempty"
+            }
+          ],
+          "extract": {
+            "data": "body.data"
+          }
+        },
+        {
+          "id": "verify",
+          "actor": "A",
+          "action": "method",
+          "method": "bet_record_check",
+          "params": {
+            "data": "${data}",
+            "request": {
+              "page": 1,
+              "page_size": 20,
+              "start_time": 1788943354000,
+              "end_time": 1788943954000,
+              "node": 1
+            }
+          },
+          "expect": [
+            {
+              "path": "checks.page_count",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.page_limit",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.total_count",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.payout_sign",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.subtotal_bet_amount",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.subtotal_valid_bet_amount",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.subtotal_grand_inc",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.subtotal_ggr",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.subtotal_order_count",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.bet_time_range",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.node_filter",
+              "op": "eq",
+              "value": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "bet-settle-millisecond",
+      "review": {
+        "用例编号": "bet-settle-millisecond",
+        "类型": "API",
+        "模块/接口": "ISOP-2085 两处注单查询",
+        "用例名称": "已知历史结算时刻的毫秒邻域",
+        "前置条件": "FAT；本轮fresh登录；仅验证本组合，父级用例不自动通过",
+        "参数/步骤": "见执行步骤",
+        "预期结果": "已知历史结算时刻的毫秒邻域；金额和筛选断言成立",
+        "级别": "专项",
+        "验收点": "R04"
+      },
+      "delivery": {
+        "mode": "automatic"
+      },
+      "steps": [
+        {
+          "id": "query",
+          "actor": "A",
+          "action": "api",
+          "contract": "bet",
+          "body": {
+            "page": 1,
+            "page_size": 20,
+            "settle_start_time": 1788943653999,
+            "settle_end_time": 1788943654001,
+            "node": 1
+          },
+          "auth": "valid",
+          "expect": [
+            {
+              "path": "http",
+              "op": "eq",
+              "value": 200
+            },
+            {
+              "path": "body.status",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "body.data",
+              "op": "type",
+              "value": "object"
+            },
+            {
+              "path": "body.data.d",
+              "op": "type",
+              "value": "array"
+            },
+            {
+              "path": "body.data.t",
+              "op": "type",
+              "value": "integer"
+            },
+            {
+              "path": "body.data.s",
+              "op": "type",
+              "value": "integer"
+            },
+            {
+              "path": "body.data.a.subtotal",
+              "op": "type",
+              "value": "object"
+            },
+            {
+              "path": "body.data.a.total",
+              "op": "type",
+              "value": "object"
+            },
+            {
+              "path": "body.data.d",
+              "op": "nonempty"
+            }
+          ],
+          "extract": {
+            "data": "body.data"
+          }
+        },
+        {
+          "id": "verify",
+          "actor": "A",
+          "action": "method",
+          "method": "bet_record_check",
+          "params": {
+            "data": "${data}",
+            "request": {
+              "page": 1,
+              "page_size": 20,
+              "settle_start_time": 1788943653999,
+              "settle_end_time": 1788943654001,
+              "node": 1
+            }
+          },
+          "expect": [
+            {
+              "path": "checks.page_count",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.page_limit",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.total_count",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.payout_sign",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.subtotal_bet_amount",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.subtotal_valid_bet_amount",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.subtotal_grand_inc",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.subtotal_ggr",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.subtotal_order_count",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.settle_time_range",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.node_filter",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.exclude_sports",
+              "op": "eq",
+              "value": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "game-page-size-5",
+      "review": {
+        "用例编号": "game-page-size-5",
+        "类型": "API",
+        "模块/接口": "ISOP-2085 两处注单查询",
+        "用例名称": "page_size=5时返回不超过5条",
+        "前置条件": "FAT；本轮fresh登录；仅验证本组合，父级用例不自动通过",
+        "参数/步骤": "见执行步骤",
+        "预期结果": "page_size=5时返回不超过5条；金额和筛选断言成立",
+        "级别": "专项",
+        "验收点": "R18"
+      },
+      "delivery": {
+        "mode": "automatic"
+      },
+      "steps": [
+        {
+          "id": "query",
+          "actor": "A",
+          "action": "api",
+          "contract": "game",
+          "body": {
+            "page": 1,
+            "page_size": 5,
+            "start_time": 1788796800000,
+            "end_time": 1789055999999,
+            "node": 1
+          },
+          "auth": "valid",
+          "expect": [
+            {
+              "path": "http",
+              "op": "eq",
+              "value": 200
+            },
+            {
+              "path": "body.status",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "body.data",
+              "op": "type",
+              "value": "object"
+            },
+            {
+              "path": "body.data.d",
+              "op": "type",
+              "value": "array"
+            },
+            {
+              "path": "body.data.t",
+              "op": "type",
+              "value": "integer"
+            },
+            {
+              "path": "body.data.s",
+              "op": "type",
+              "value": "integer"
+            },
+            {
+              "path": "body.data.a.subtotal",
+              "op": "type",
+              "value": "object"
+            },
+            {
+              "path": "body.data.a.total",
+              "op": "type",
+              "value": "object"
+            },
+            {
+              "path": "body.data.d",
+              "op": "nonempty"
+            }
+          ],
+          "extract": {
+            "data": "body.data"
+          }
+        },
+        {
+          "id": "verify",
+          "actor": "A",
+          "action": "method",
+          "method": "bet_record_check",
+          "params": {
+            "data": "${data}",
+            "request": {
+              "page": 1,
+              "page_size": 5,
+              "start_time": 1788796800000,
+              "end_time": 1789055999999,
+              "node": 1
+            }
+          },
+          "expect": [
+            {
+              "path": "checks.page_count",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.page_limit",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.total_count",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.payout_sign",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.subtotal_bet_amount",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.subtotal_valid_bet_amount",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.subtotal_grand_inc",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.subtotal_ggr",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.subtotal_order_count",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.bet_time_range",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.node_filter",
+              "op": "eq",
+              "value": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "game-short-10min",
+      "review": {
+        "用例编号": "game-short-10min",
+        "类型": "API",
+        "模块/接口": "ISOP-2085 两处注单查询",
+        "用例名称": "已知历史投注记录位于10分钟范围内",
+        "前置条件": "FAT；本轮fresh登录；仅验证本组合，父级用例不自动通过",
+        "参数/步骤": "见执行步骤",
+        "预期结果": "已知历史投注记录位于10分钟范围内；金额和筛选断言成立",
+        "级别": "专项",
+        "验收点": "R16"
+      },
+      "delivery": {
+        "mode": "automatic"
+      },
+      "steps": [
+        {
+          "id": "query",
+          "actor": "A",
+          "action": "api",
+          "contract": "game",
+          "body": {
+            "page": 1,
+            "page_size": 20,
+            "start_time": 1788943354000,
+            "end_time": 1788943954000,
+            "node": 1
+          },
+          "auth": "valid",
+          "expect": [
+            {
+              "path": "http",
+              "op": "eq",
+              "value": 200
+            },
+            {
+              "path": "body.status",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "body.data",
+              "op": "type",
+              "value": "object"
+            },
+            {
+              "path": "body.data.d",
+              "op": "type",
+              "value": "array"
+            },
+            {
+              "path": "body.data.t",
+              "op": "type",
+              "value": "integer"
+            },
+            {
+              "path": "body.data.s",
+              "op": "type",
+              "value": "integer"
+            },
+            {
+              "path": "body.data.a.subtotal",
+              "op": "type",
+              "value": "object"
+            },
+            {
+              "path": "body.data.a.total",
+              "op": "type",
+              "value": "object"
+            },
+            {
+              "path": "body.data.d",
+              "op": "nonempty"
+            }
+          ],
+          "extract": {
+            "data": "body.data"
+          }
+        },
+        {
+          "id": "verify",
+          "actor": "A",
+          "action": "method",
+          "method": "bet_record_check",
+          "params": {
+            "data": "${data}",
+            "request": {
+              "page": 1,
+              "page_size": 20,
+              "start_time": 1788943354000,
+              "end_time": 1788943954000,
+              "node": 1
+            }
+          },
+          "expect": [
+            {
+              "path": "checks.page_count",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.page_limit",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.total_count",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.payout_sign",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.subtotal_bet_amount",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.subtotal_valid_bet_amount",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.subtotal_grand_inc",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.subtotal_ggr",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.subtotal_order_count",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.bet_time_range",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.node_filter",
+              "op": "eq",
+              "value": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "game-settle-millisecond",
+      "review": {
+        "用例编号": "game-settle-millisecond",
+        "类型": "API",
+        "模块/接口": "ISOP-2085 两处注单查询",
+        "用例名称": "已知历史结算时刻的毫秒邻域",
+        "前置条件": "FAT；本轮fresh登录；仅验证本组合，父级用例不自动通过",
+        "参数/步骤": "见执行步骤",
+        "预期结果": "已知历史结算时刻的毫秒邻域；金额和筛选断言成立",
+        "级别": "专项",
+        "验收点": "R04"
+      },
+      "delivery": {
+        "mode": "automatic"
+      },
+      "steps": [
+        {
+          "id": "query",
+          "actor": "A",
+          "action": "api",
+          "contract": "game",
+          "body": {
+            "page": 1,
+            "page_size": 20,
+            "settle_start_time": 1788943653999,
+            "settle_end_time": 1788943654001,
+            "node": 1
+          },
+          "auth": "valid",
+          "expect": [
+            {
+              "path": "http",
+              "op": "eq",
+              "value": 200
+            },
+            {
+              "path": "body.status",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "body.data",
+              "op": "type",
+              "value": "object"
+            },
+            {
+              "path": "body.data.d",
+              "op": "type",
+              "value": "array"
+            },
+            {
+              "path": "body.data.t",
+              "op": "type",
+              "value": "integer"
+            },
+            {
+              "path": "body.data.s",
+              "op": "type",
+              "value": "integer"
+            },
+            {
+              "path": "body.data.a.subtotal",
+              "op": "type",
+              "value": "object"
+            },
+            {
+              "path": "body.data.a.total",
+              "op": "type",
+              "value": "object"
+            },
+            {
+              "path": "body.data.d",
+              "op": "nonempty"
+            }
+          ],
+          "extract": {
+            "data": "body.data"
+          }
+        },
+        {
+          "id": "verify",
+          "actor": "A",
+          "action": "method",
+          "method": "bet_record_check",
+          "params": {
+            "data": "${data}",
+            "request": {
+              "page": 1,
+              "page_size": 20,
+              "settle_start_time": 1788943653999,
+              "settle_end_time": 1788943654001,
+              "node": 1
+            }
+          },
+          "expect": [
+            {
+              "path": "checks.page_count",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.page_limit",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.total_count",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.payout_sign",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.subtotal_bet_amount",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.subtotal_valid_bet_amount",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.subtotal_grand_inc",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.subtotal_ggr",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.subtotal_order_count",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.settle_time_range",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.node_filter",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "checks.exclude_sports",
+              "op": "eq",
+              "value": true
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -71,7 +71,7 @@ admin,finance,GET,/admin/ops-tools/first-deposit-no-second/export,{{admin_url}}/
 admin,finance,GET,/admin/promo/task/transaction,{{admin_url}}/admin/promo/task/transaction,,,后台/vip任务中心/任务奖金列表-seven.bru,任务奖金列表-seven
 admin,finance,GET,/admin/promo/task/transaction/export,{{admin_url}}/admin/promo/task/transaction/export,,,后台/vip任务中心/任务奖励列表导出-seven.bru,任务奖励列表导出-seven
 admin,finance,GET,/admin/promotion_first_deposit,{{admin_url}}/admin/promotion_first_deposit?page=1&page_size=15,hardcoded_env,,后台/推广管理/首充日活分析.bru,首充日活分析
-admin,finance,POST,/admin/record/bet,{{admin_url}}/admin/record/bet,,,后台/财务管理/注单管理/游戏记录-wesley.bru,游戏记录-wesley
+admin,finance,POST,/admin/record/bet,{{admin_url}}/admin/record/bet,,,后台/财务管理/注单管理/游戏记录-wesley.bru,注单管理
 admin,finance,GET,/admin/sys/config/deposit/multiple/list,{{admin_url}}/admin/sys/config/deposit/multiple/list,hardcoded_env,,后台/运营管理/客户端管理/平台倍率/平台充值倍率列表-aliang.bru,平台充值倍率列表-aliang
 admin,finance,GET,/admin/sys/config/deposit/multiple/log,{{admin_url}}/admin/sys/config/deposit/multiple/log?page=1&page_size=20,hardcoded_env,,后台/运营管理/客户端管理/平台倍率/平台充值倍率异动记录-aliang.bru,平台充值倍率异动记录-aliang
 admin,finance,POST,/admin/sys/config/deposit/multiple/update,{{admin_url}}/admin/sys/config/deposit/multiple/update,hardcoded_env,,后台/运营管理/客户端管理/平台倍率/平台充值倍率更新-aliang.bru,平台充值倍率更新-aliang

@@ -44,6 +44,9 @@ def main():
     if args.rebuild:
         report = json.loads((args.rebuild/'result.json').read_text())
         snapshot = json.loads((args.rebuild/'cases.snapshot.json').read_text())
+        if report.get('requirement') == 'ISOP-2022':
+            from filbet.record_report import display_cases
+            snapshot = display_cases(snapshot)
         write_views(args.rebuild.parent/(args.rebuild.name+'-views-'+uuid.uuid4().hex[:8]), snapshot, report, extra_views=args.extra_views)
         return 0
     from filbet.requirement_adapter import Adapter, METHODS
@@ -104,7 +107,11 @@ def main():
         (folder/'result.json').write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n')
         (folder/'cases.snapshot.json').write_text(json.dumps(snapshot,ensure_ascii=False,indent=2)+'\n')
         report_started = time.monotonic()
-        write_views(folder,snapshot,report,extra_views=args.extra_views)
+        display_snapshot = snapshot
+        if args.story == 'ISOP-2022':
+            from filbet.record_report import display_cases
+            display_snapshot = display_cases(snapshot)
+        write_views(folder,display_snapshot,report,extra_views=args.extra_views)
         report['timings_ms']['report'] = round((time.monotonic()-report_started)*1000)
         (folder/'result.json').write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n')
         if any(item.get('steps') for item in report['results']):

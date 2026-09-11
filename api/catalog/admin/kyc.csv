@@ -11,6 +11,8 @@ admin,kyc,GET,/admin/kyc/ekyc/log,{{admin_url}}/admin/kyc/ekyc/log?uid=<redacted
 admin,kyc,POST,/admin/kyc/list,{{admin_url}}/admin/kyc/list?phone=<redacted>&created_end_time=1774972799999&created_start_time=1772294400000&source=default,hardcoded_env,yes,后台/kyc/获取 kyc 列表 - double-owen.bru,获取 kyc 列表 - double/owen
 admin,kyc,GET,/admin/kyc/pending/count,{{admin_url}}/admin/kyc/pending/count,,yes,后台/kyc/获取 kyc 待审批数量.bru,获取 kyc 待审批数量
 admin,kyc,POST,/admin/kyc/reject,{{admin_url}}/admin/kyc/reject,,yes,后台/kyc/kyc 审核驳回 - double.bru,kyc 审核驳回 - double
+admin,kyc,POST,/admin/kyc/review,{{admin_url}}/admin/kyc/review,hardcoded_env,yes,后台/kyc/复核.bru,复核
+admin,kyc,GET,/admin/kyc/review/list,{{admin_url}}/admin/kyc/review/list?state=1,hardcoded_env,yes,后台/kyc/复核列表.bru,复核列表
 admin,kyc,POST,/admin/kyc/update,{{admin_url}}/admin/kyc/update,,yes,后台/kyc/更新 kyc - double.bru,更新 kyc - double
 admin,kyc,GET,/admin/promo/rotate/kyc/export,{{admin_url}}/admin/promo/rotate/kyc/export?topic_id=1234567,hardcoded_env,yes,活动/后台-活动管理/KYC通过送免费旋转/导出.bru,导出
 admin,kyc,GET,/admin/promo/rotate/kyc/list,{{admin_url}}/admin/promo/rotate/kyc/list,hardcoded_env,yes,活动/后台-活动管理/KYC通过送免费旋转/列表.bru,列表
