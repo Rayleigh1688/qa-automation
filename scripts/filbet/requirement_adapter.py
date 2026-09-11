@@ -102,3 +102,6 @@ METHODS['kyc_race'] = {'call':race,'scope':'kyc-review','business':True,'validat
 
 from filbet.requirement_records import record_check
 METHODS['bet_record_check'] = {'call':record_check,'scope':None,'business':False,'read_only':True}
+
+from filbet.requirement_readonly import probe as readonly_probe, validate as validate_readonly_probe
+METHODS['readonly_query'] = {'call':readonly_probe,'scope':None,'business':True,'read_only':True,'validate':validate_readonly_probe}

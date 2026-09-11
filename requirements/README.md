@@ -4,6 +4,8 @@
 
 新需求执行能力当前按[API/UI完善计划](../docs/new-requirement-automation-plan.md)分阶段推进；ISOP-2027阶段1、2及固定UI阶段3已交付，证据与剩余事项见[API记录](../docs/new-requirement-stage1-2.md)和[UI记录](../docs/new-requirement-stage3.md)。用户查看以自动生成的`results.csv`/`results.html`为主，保留用例、预期、实际与通过/失败；普通用例逐步迁移为结构化执行数据，尚未迁移的历史资产不视为已可一键重跑。
 
+2026-09-11新交付接口已按顺序开测，中文报告、实际失败和未执行范围见[本轮结果](api-test-round-20260911.md)。
+
 ## 需求索引与组织约定
 
 按 Jira 编号建立 `requirements/<Jira编号>/`，不再按年/月套目录。同一需求的补充、复测与重新打开继续维护原目录；新的 Jira 需求建新目录并链接相关需求。日期、来源版本和执行批次记录在文档中。
@@ -23,10 +25,10 @@
 | ISOP-2038 | 合規後台 - 移除 Jackpot 記錄選單 | [设计](ISOP-2038/design.md) · [问题](ISOP-2038/questions.md) · [总用例](ISOP-2038/cases.csv) · [用例设计](ISOP-2038/test-cases.md) |
 | ISOP-2037 | 合規後台 - 全平台投注紀錄增加欄位 | [设计](ISOP-2037/design.md) · [问题](ISOP-2037/questions.md) · [总用例](ISOP-2037/cases.csv) · [用例设计](ISOP-2037/test-cases.md) · [API数据](ISOP-2037/api/data-cases.csv) |
 | ISOP-2032 | 用戶端 - 投注返利活動 | [设计](ISOP-2032/design.md) · [问题](ISOP-2032/questions.md) · [总用例](ISOP-2032/cases.csv) · [用例设计](ISOP-2032/test-cases.md) · [API数据](ISOP-2032/api/data-cases.csv) |
-| ISOP-2031 | 新增金額動畫效果 | [设计](ISOP-2031/design.md) · [问题](ISOP-2031/questions.md) · [总用例](ISOP-2031/cases.csv) · [用例设计](ISOP-2031/test-cases.md) |
+| ISOP-2031 | 新增金額動畫效果 | [设计](ISOP-2031/design.md) · [问题](ISOP-2031/questions.md) · [总用例](ISOP-2031/cases.csv) · [用例设计](ISOP-2031/test-cases.md) · [API数据](ISOP-2031/api/data-cases.csv) |
 | ISOP-2030 | 用戶端 - 遊戲頁面改版 | [设计](ISOP-2030/design.md) · [问题](ISOP-2030/questions.md) · [总用例](ISOP-2030/cases.csv) · [用例设计](ISOP-2030/test-cases.md) |
 | ISOP-2029 | 用戶端 - 免費旋轉領取文案調整 | [设计](ISOP-2029/design.md) · [问题](ISOP-2029/questions.md) · [总用例](ISOP-2029/cases.csv) · [用例设计](ISOP-2029/test-cases.md) |
-| ISOP-2028 | 合規後台 - 統計數據時間調整 | [设计](ISOP-2028/design.md) · [问题](ISOP-2028/questions.md) · [总用例](ISOP-2028/cases.csv) · [用例设计](ISOP-2028/test-cases.md) |
+| ISOP-2028 | 合規後台 - 統計數據時間調整 | [设计](ISOP-2028/design.md) · [问题](ISOP-2028/questions.md) · [总用例](ISOP-2028/cases.csv) · [用例设计](ISOP-2028/test-cases.md) · [API数据](ISOP-2028/api/data-cases.csv) |
 | ISOP-2027 | 管理後台 - KYC 複核功能 | [设计](ISOP-2027/design.md) · [问题](ISOP-2027/questions.md) · [总用例](ISOP-2027/cases.csv) · [用例设计](ISOP-2027/test-cases.md) · [API数据](ISOP-2027/api/data-cases.csv) |
 | ISOP-2022 | 管理后台统计数据时间调整 | [设计](ISOP-2022/design.md) · [问题](ISOP-2022/questions.md) · [总用例](ISOP-2022/cases.csv) · [用例设计](ISOP-2022/test-cases.md) · [API数据](ISOP-2022/api/data-cases.csv) · [问题评审](ISOP-2022/bug-review.md) |
 
@@ -38,7 +40,7 @@
 
 ## 总用例与API数据分开
 
-每个需求自己的`cases.csv`是业务总表，来自`test-cases.md`；有自动执行资产时，`api/data-cases.csv`独立保存具体数据组合、请求和断言。两表通过总用例编号关联，详细数据不再展开到总表。JSON仍是自动执行输入，生成CSV不手工双向维护。当前13个需求均有总表；2022、2027、2032、2037、2043已有API数据表，其余不伪造未实现资产。
+每个需求自己的`cases.csv`是业务总表，来自`test-cases.md`；有自动执行资产时，`api/data-cases.csv`独立保存具体数据组合、请求和断言。两表通过总用例编号关联，详细数据不再展开到总表。JSON仍是自动执行输入，生成CSV不手工双向维护。当前13个需求均有总表；2022、2027、2028、2031、2032、2037、2043已有API数据表，其余不伪造未实现资产。
 
 `npm run qa:cases -- ISOP-2027`更新单需求，`npm run qa:cases -- --all`更新全部，均不登录。API表包含未具备前提的执行项，不把“有数据表”当作可全量运行；来源和编号规则见[测试流程](../docs/testing-workflow.md#文件与执行入口)。
 
@@ -116,3 +118,5 @@ P0运行结果会被清理覆盖；新需求统一执行器按次保存到report
 新需求专项采用CSV用例、前置清单和四状态结果树，详见[用例与结果流程](../docs/testing-workflow.md)。旧结果已按用户授权清理，日期结论不等于本次实测；登录和数据准备不计业务PASS，脚本错误不直接计产品FAIL。
 
 当前新需求交付采用[API自动执行与UI人工验收](../docs/team-testing.md)。人工步骤也维护在plan.json，CSV是生成/回填界面；暂不建设新需求UI自动化；P0的API与核心UI自动化保持。
+
+2026-09-11：[2022—2072已提交接口与未测范围](api-coverage-review-20260911.md)，区分首次未测、历史部分已测、待修复及尚无接口提交依据；不将旧证据清理误记为从未测试。

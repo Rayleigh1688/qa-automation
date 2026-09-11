@@ -3,6 +3,8 @@ import json
 
 STATUS_LABELS = {'PASS':'通过','FAIL':'失败','NOT_RUN':'未执行','ERROR':'执行出错'}
 FIELDS = {'http':'HTTP状态','body.status':'业务处理状态','body.data':'返回数据',
+          'body.data.list':'记录列表','checks.amounts_valid':'金额字段及格式',
+          'checks.auth_denied':'未授权请求拒绝',
           'body.data.d':'记录列表','body.data.t':'总记录数','body.data.s':'本页记录数',
           'body.data.a.total':'全部记录合计','body.data.a.subtotal':'本页小计',
           'checks.page_limit':'每页条数限制','checks.page_count':'本页记录数',
@@ -27,8 +29,10 @@ def friendly_row(row):
         path, op = c['path'],c['op']
         field = FIELDS.get(path,'该项检查')
         actual, expected = c.get('actual'),c.get('expected')
-        if path=='body.data.d' and (actual=='NoneType' or c.get('actual_type')=='NoneType' or (op=='count' and actual is None)):
+        if path in {'body.data.d','body.data.list'} and (actual=='NoneType' or c.get('actual_type')=='NoneType' or (op=='count' and actual is None)):
             phrase='预期返回记录列表；实际返回空值（null），没有可读取的列表。'
+        elif path=='checks.amounts_valid' and actual=='<missing>':
+            phrase='未取得可检查的记录，金额字段及格式尚未验证。'
         elif op=='type':
             phrase=f'预期{field}为{TYPES.get(expected,"约定类型")}；实际为{TYPES.get(actual,"其他类型")}。'
         elif path=='body.data.t' and op=='eq':

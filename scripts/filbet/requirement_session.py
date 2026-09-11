@@ -75,3 +75,15 @@ class Session:
         if result['http'] != 200 or not isinstance(result['body'], dict) or result['body'].get('status') is not True or not isinstance(result['body'].get('data'),str) or not result['body']['data']:
             raise RuntimeError('admin login rejected')
         self.token = conf.get('ADMIN_TOKEN_PREFIX','') + result['body']['data']
+
+    def login_client_password(self):
+        """FAT read-only client lane; issue a fresh token without global state."""
+        if self.admin or self.config.get('CLIENT_AUTH_MODE', 'password') != 'password':
+            raise ValueError('client password lane required')
+        result = self.request('POST', '/member/v2/login', body={
+            'login_text': self.config['CLIENT_PHONE'], 'password': self.config['CLIENT_PASSWORD']}, auth='missing')
+        from filbet.smoke import extract_token
+        token = extract_token({'decoded_body': result.get('body')})
+        if result['http'] != 200 or not token:
+            raise RuntimeError('client login rejected')
+        self.token = token

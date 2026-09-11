@@ -1,0 +1,676 @@
+{
+  "schema_version": 2,
+  "requirement": "ISOP-2028",
+  "execution_policy": "api-first",
+  "services": {
+    "admin": {
+      "env": "ADMIN_URL"
+    },
+    "client": {
+      "env": "API_URL"
+    }
+  },
+  "actors": {
+    "A": {
+      "services": [
+        "admin",
+        "client"
+      ]
+    }
+  },
+  "contracts": {},
+  "variables": {},
+  "acceptance_ids": [
+    "C01",
+    "C02",
+    "C03",
+    "C04",
+    "C05",
+    "C06",
+    "C07",
+    "C08",
+    "C09"
+  ],
+  "cases": [
+    {
+      "id": "pagcor-list-structure",
+      "review": {
+        "用例编号": "pagcor-list-structure",
+        "类型": "API",
+        "模块/接口": "Pagcor税报",
+        "用例名称": "Pagcor税报：响应结构",
+        "前置条件": "FAT；本轮独立登录；只验证本组合，不代表整项验收完成",
+        "参数/步骤": "见步骤",
+        "预期结果": "Pagcor税报：响应结构",
+        "级别": "专项",
+        "验收点": "C08"
+      },
+      "delivery": {
+        "mode": "automatic"
+      },
+      "steps": [
+        {
+          "id": "query",
+          "action": "method",
+          "method": "readonly_query",
+          "actor": "A",
+          "params": {
+            "route": "pagcor-list",
+            "body": {
+              "start_time": 1788796800000,
+              "end_time": 1789055999999,
+              "current": 1,
+              "size": 20
+            }
+          },
+          "expect": [
+            {
+              "path": "http",
+              "op": "eq",
+              "value": 200
+            },
+            {
+              "path": "body.status",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "body.data",
+              "op": "type",
+              "value": "object"
+            },
+            {
+              "path": "body.data.list",
+              "op": "type",
+              "value": "array"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "pagcor-list-jp",
+      "review": {
+        "用例编号": "pagcor-list-jp",
+        "类型": "API",
+        "模块/接口": "Pagcor税报",
+        "用例名称": "Pagcor税报：总GGR与新增JP字段",
+        "前置条件": "FAT；本轮独立登录；只验证本组合，不代表整项验收完成",
+        "参数/步骤": "见步骤",
+        "预期结果": "Pagcor税报：总GGR与新增JP字段",
+        "级别": "专项",
+        "验收点": "C01"
+      },
+      "delivery": {
+        "mode": "automatic"
+      },
+      "steps": [
+        {
+          "id": "query",
+          "action": "method",
+          "method": "readonly_query",
+          "actor": "A",
+          "params": {
+            "route": "pagcor-list",
+            "body": {
+              "start_time": 1788796800000,
+              "end_time": 1789055999999,
+              "current": 1,
+              "size": 20
+            },
+            "amount_fields": [
+              "totalGGR",
+              "totalJpContribution"
+            ]
+          },
+          "expect": [
+            {
+              "path": "http",
+              "op": "eq",
+              "value": 200
+            },
+            {
+              "path": "body.status",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "body.data.list",
+              "op": "rows_have_keys",
+              "value": [
+                "totalGGR",
+                "totalJpContribution"
+              ]
+            },
+            {
+              "path": "checks.amounts_valid",
+              "op": "eq",
+              "value": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "pagcor-list-missing",
+      "review": {
+        "用例编号": "pagcor-list-missing",
+        "类型": "API",
+        "模块/接口": "Pagcor税报",
+        "用例名称": "Pagcor税报：未授权请求拒绝",
+        "前置条件": "FAT；本轮独立登录；只验证本组合，不代表整项验收完成",
+        "参数/步骤": "见步骤",
+        "预期结果": "Pagcor税报：未授权请求拒绝",
+        "级别": "专项",
+        "验收点": "C08"
+      },
+      "delivery": {
+        "mode": "automatic"
+      },
+      "steps": [
+        {
+          "id": "query",
+          "action": "method",
+          "method": "readonly_query",
+          "actor": "A",
+          "params": {
+            "route": "pagcor-list",
+            "body": {
+              "start_time": 1788796800000,
+              "end_time": 1789055999999,
+              "current": 1,
+              "size": 20
+            },
+            "auth": "missing"
+          },
+          "expect": [
+            {
+              "path": "checks.auth_denied",
+              "op": "eq",
+              "value": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "pagcor-list-invalid",
+      "review": {
+        "用例编号": "pagcor-list-invalid",
+        "类型": "API",
+        "模块/接口": "Pagcor税报",
+        "用例名称": "Pagcor税报：未授权请求拒绝",
+        "前置条件": "FAT；本轮独立登录；只验证本组合，不代表整项验收完成",
+        "参数/步骤": "见步骤",
+        "预期结果": "Pagcor税报：未授权请求拒绝",
+        "级别": "专项",
+        "验收点": "C08"
+      },
+      "delivery": {
+        "mode": "automatic"
+      },
+      "steps": [
+        {
+          "id": "query",
+          "action": "method",
+          "method": "readonly_query",
+          "actor": "A",
+          "params": {
+            "route": "pagcor-list",
+            "body": {
+              "start_time": 1788796800000,
+              "end_time": 1789055999999,
+              "current": 1,
+              "size": 20
+            },
+            "auth": "invalid"
+          },
+          "expect": [
+            {
+              "path": "checks.auth_denied",
+              "op": "eq",
+              "value": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "shop-list-structure",
+      "review": {
+        "用例编号": "shop-list-structure",
+        "类型": "API",
+        "模块/接口": "门店税报",
+        "用例名称": "门店税报：响应结构",
+        "前置条件": "FAT；本轮独立登录；只验证本组合，不代表整项验收完成",
+        "参数/步骤": "见步骤",
+        "预期结果": "门店税报：响应结构",
+        "级别": "专项",
+        "验收点": "C08"
+      },
+      "delivery": {
+        "mode": "automatic"
+      },
+      "steps": [
+        {
+          "id": "query",
+          "action": "method",
+          "method": "readonly_query",
+          "actor": "A",
+          "params": {
+            "route": "shop-list",
+            "body": {
+              "start_time": 1788796800000,
+              "end_time": 1789055999999
+            }
+          },
+          "expect": [
+            {
+              "path": "http",
+              "op": "eq",
+              "value": 200
+            },
+            {
+              "path": "body.status",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "body.data",
+              "op": "type",
+              "value": "array"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "shop-list-jp",
+      "review": {
+        "用例编号": "shop-list-jp",
+        "类型": "API",
+        "模块/接口": "门店税报",
+        "用例名称": "门店税报：总GGR与新增JP字段",
+        "前置条件": "FAT；本轮独立登录；只验证本组合，不代表整项验收完成",
+        "参数/步骤": "见步骤",
+        "预期结果": "门店税报：总GGR与新增JP字段",
+        "级别": "专项",
+        "验收点": "C01"
+      },
+      "delivery": {
+        "mode": "automatic"
+      },
+      "steps": [
+        {
+          "id": "query",
+          "action": "method",
+          "method": "readonly_query",
+          "actor": "A",
+          "params": {
+            "route": "shop-list",
+            "body": {
+              "start_time": 1788796800000,
+              "end_time": 1789055999999
+            },
+            "amount_fields": [
+              "total_ggr",
+              "total_jp_contribution"
+            ]
+          },
+          "expect": [
+            {
+              "path": "http",
+              "op": "eq",
+              "value": 200
+            },
+            {
+              "path": "body.status",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "body.data",
+              "op": "rows_have_keys",
+              "value": [
+                "total_ggr",
+                "total_jp_contribution"
+              ]
+            },
+            {
+              "path": "checks.amounts_valid",
+              "op": "eq",
+              "value": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "shop-list-missing",
+      "review": {
+        "用例编号": "shop-list-missing",
+        "类型": "API",
+        "模块/接口": "门店税报",
+        "用例名称": "门店税报：未授权请求拒绝",
+        "前置条件": "FAT；本轮独立登录；只验证本组合，不代表整项验收完成",
+        "参数/步骤": "见步骤",
+        "预期结果": "门店税报：未授权请求拒绝",
+        "级别": "专项",
+        "验收点": "C08"
+      },
+      "delivery": {
+        "mode": "automatic"
+      },
+      "steps": [
+        {
+          "id": "query",
+          "action": "method",
+          "method": "readonly_query",
+          "actor": "A",
+          "params": {
+            "route": "shop-list",
+            "body": {
+              "start_time": 1788796800000,
+              "end_time": 1789055999999
+            },
+            "auth": "missing"
+          },
+          "expect": [
+            {
+              "path": "checks.auth_denied",
+              "op": "eq",
+              "value": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "shop-list-invalid",
+      "review": {
+        "用例编号": "shop-list-invalid",
+        "类型": "API",
+        "模块/接口": "门店税报",
+        "用例名称": "门店税报：未授权请求拒绝",
+        "前置条件": "FAT；本轮独立登录；只验证本组合，不代表整项验收完成",
+        "参数/步骤": "见步骤",
+        "预期结果": "门店税报：未授权请求拒绝",
+        "级别": "专项",
+        "验收点": "C08"
+      },
+      "delivery": {
+        "mode": "automatic"
+      },
+      "steps": [
+        {
+          "id": "query",
+          "action": "method",
+          "method": "readonly_query",
+          "actor": "A",
+          "params": {
+            "route": "shop-list",
+            "body": {
+              "start_time": 1788796800000,
+              "end_time": 1789055999999
+            },
+            "auth": "invalid"
+          },
+          "expect": [
+            {
+              "path": "checks.auth_denied",
+              "op": "eq",
+              "value": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "summary-structure",
+      "review": {
+        "用例编号": "summary-structure",
+        "类型": "API",
+        "模块/接口": "报告摘要",
+        "用例名称": "报告摘要：响应结构",
+        "前置条件": "FAT；本轮独立登录；只验证本组合，不代表整项验收完成",
+        "参数/步骤": "见步骤",
+        "预期结果": "报告摘要：响应结构",
+        "级别": "专项",
+        "验收点": "C08"
+      },
+      "delivery": {
+        "mode": "automatic"
+      },
+      "steps": [
+        {
+          "id": "query",
+          "action": "method",
+          "method": "readonly_query",
+          "actor": "A",
+          "params": {
+            "route": "summary",
+            "body": {
+              "start_time": 1788796800000,
+              "end_time": 1789055999999
+            }
+          },
+          "expect": [
+            {
+              "path": "http",
+              "op": "eq",
+              "value": 200
+            },
+            {
+              "path": "body.status",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "body.data",
+              "op": "type",
+              "value": "object"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "summary-jp",
+      "review": {
+        "用例编号": "summary-jp",
+        "类型": "API",
+        "模块/接口": "报告摘要",
+        "用例名称": "报告摘要：总GGR与新增JP字段",
+        "前置条件": "FAT；本轮独立登录；只验证本组合，不代表整项验收完成",
+        "参数/步骤": "见步骤",
+        "预期结果": "报告摘要：总GGR与新增JP字段",
+        "级别": "专项",
+        "验收点": "C06"
+      },
+      "delivery": {
+        "mode": "automatic"
+      },
+      "steps": [
+        {
+          "id": "query",
+          "action": "method",
+          "method": "readonly_query",
+          "actor": "A",
+          "params": {
+            "route": "summary",
+            "body": {
+              "start_time": 1788796800000,
+              "end_time": 1789055999999
+            },
+            "amount_fields": [
+              "total_ggr",
+              "total_jp_contribution",
+              "total_jp_winning"
+            ]
+          },
+          "expect": [
+            {
+              "path": "http",
+              "op": "eq",
+              "value": 200
+            },
+            {
+              "path": "body.status",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "body.data.total_ggr",
+              "op": "type",
+              "value": "string"
+            },
+            {
+              "path": "body.data.total_jp_contribution",
+              "op": "type",
+              "value": "string"
+            },
+            {
+              "path": "body.data.total_jp_winning",
+              "op": "type",
+              "value": "string"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "summary-missing",
+      "review": {
+        "用例编号": "summary-missing",
+        "类型": "API",
+        "模块/接口": "报告摘要",
+        "用例名称": "报告摘要：未授权请求拒绝",
+        "前置条件": "FAT；本轮独立登录；只验证本组合，不代表整项验收完成",
+        "参数/步骤": "见步骤",
+        "预期结果": "报告摘要：未授权请求拒绝",
+        "级别": "专项",
+        "验收点": "C08"
+      },
+      "delivery": {
+        "mode": "automatic"
+      },
+      "steps": [
+        {
+          "id": "query",
+          "action": "method",
+          "method": "readonly_query",
+          "actor": "A",
+          "params": {
+            "route": "summary",
+            "body": {
+              "start_time": 1788796800000,
+              "end_time": 1789055999999
+            },
+            "auth": "missing"
+          },
+          "expect": [
+            {
+              "path": "checks.auth_denied",
+              "op": "eq",
+              "value": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "summary-invalid",
+      "review": {
+        "用例编号": "summary-invalid",
+        "类型": "API",
+        "模块/接口": "报告摘要",
+        "用例名称": "报告摘要：未授权请求拒绝",
+        "前置条件": "FAT；本轮独立登录；只验证本组合，不代表整项验收完成",
+        "参数/步骤": "见步骤",
+        "预期结果": "报告摘要：未授权请求拒绝",
+        "级别": "专项",
+        "验收点": "C08"
+      },
+      "delivery": {
+        "mode": "automatic"
+      },
+      "steps": [
+        {
+          "id": "query",
+          "action": "method",
+          "method": "readonly_query",
+          "actor": "A",
+          "params": {
+            "route": "summary",
+            "body": {
+              "start_time": 1788796800000,
+              "end_time": 1789055999999
+            },
+            "auth": "invalid"
+          },
+          "expect": [
+            {
+              "path": "checks.auth_denied",
+              "op": "eq",
+              "value": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "pagcor-export",
+      "review": {
+        "用例编号": "pagcor-export",
+        "类型": "API",
+        "模块/接口": "Pagcor报表实际导出",
+        "用例名称": "Pagcor报表实际导出",
+        "前置条件": "FAT；本轮独立登录；只验证本组合，不代表整项验收完成",
+        "参数/步骤": "见步骤",
+        "预期结果": "Pagcor报表实际导出",
+        "级别": "专项",
+        "验收点": "C07"
+      },
+      "delivery": {
+        "mode": "automatic"
+      },
+      "blocked": "缺少异步导出文件获取/任务关联契约，尚不能验证真实文件内容"
+    },
+    {
+      "id": "shop-export",
+      "review": {
+        "用例编号": "shop-export",
+        "类型": "API",
+        "模块/接口": "门店报表实际导出",
+        "用例名称": "门店报表实际导出",
+        "前置条件": "FAT；本轮独立登录；只验证本组合，不代表整项验收完成",
+        "参数/步骤": "见步骤",
+        "预期结果": "门店报表实际导出",
+        "级别": "专项",
+        "验收点": "C07"
+      },
+      "delivery": {
+        "mode": "automatic"
+      },
+      "blocked": "缺少异步导出文件获取/任务关联契约，尚不能验证真实文件内容"
+    },
+    {
+      "id": "formula",
+      "review": {
+        "用例编号": "formula",
+        "类型": "API",
+        "模块/接口": "新GGR独立公式及税额",
+        "用例名称": "新GGR独立公式及税额",
+        "前置条件": "FAT；本轮独立登录；只验证本组合，不代表整项验收完成",
+        "参数/步骤": "见步骤",
+        "预期结果": "新GGR独立公式及税额",
+        "级别": "专项",
+        "验收点": "C02,C03,C04"
+      },
+      "delivery": {
+        "mode": "automatic"
+      },
+      "blocked": "有效派彩源字段、税率及舍入层级未确认；结构通过不证明公式正确"
+    }
+  ]
+}

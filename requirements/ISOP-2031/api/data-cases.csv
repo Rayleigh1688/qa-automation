@@ -1,0 +1,17 @@
+﻿执行用例编号,总用例编号,用例名称,接口/流程,前置条件,数据集,输入变量,请求/步骤,预期/断言,就绪情况
+notify-structure,ISOP-2031-C02,余额变动通知：返回状态与列表结构,余额变动通知,FAT；本轮独立登录；只验证本组合，不代表整项验收完成,固定组合,{},"query [A] readonly_query {""params"":{""route"":""balance-notifications""}}","余额变动通知：返回状态与列表结构
+query: http eq 200
+query: body.status eq true
+query: body.data type ""object""
+query: body.data.list type ""array""",可执行
+notify-fields,"ISOP-2031-C02,ISOP-2031-C03",余额变动通知：事件编号、类型、金额和标题,余额变动通知,FAT；本轮独立登录；只验证本组合，不代表整项验收完成,固定组合,{},"query [A] readonly_query {""params"":{""route"":""balance-notifications"",""amount_fields"":[""balance""]}}","余额变动通知：事件编号、类型、金额和标题
+query: http eq 200
+query: body.status eq true
+query: body.data.list rows_have_keys [""id"", ""ty"", ""sub_ty"", ""balance"", ""name""]
+query: checks.amounts_valid eq true",可执行
+notify-auth-missing,ISOP-2031-C04,余额通知：未登录不得读取消息,余额通知,FAT；本轮独立登录；只验证本组合，不代表整项验收完成,固定组合,{},"query [A] readonly_query {""params"":{""route"":""balance-notifications"",""auth"":""missing""}}","余额通知：未登录不得读取消息
+query: checks.auth_denied eq true",可执行
+notify-auth-invalid,ISOP-2031-C04,余额通知：无效凭证不得读取消息,余额通知,FAT；本轮独立登录；只验证本组合，不代表整项验收完成,固定组合,{},"query [A] readonly_query {""params"":{""route"":""balance-notifications"",""auth"":""invalid""}}","余额通知：无效凭证不得读取消息
+query: checks.auth_denied eq true",可执行
+notify-read,ISOP-2031-C03,标记本轮消息已读,标记本轮消息已读,FAT；本轮独立登录；只验证本组合，不代表整项验收完成,固定组合,{},见步骤,标记本轮消息已读,未具备本轮专用到账事件；不消费现有会员历史通知。已读请求块/read/balance与正文/change/balance冲突待核对
+mqtt-dedup,"ISOP-2031-C01,ISOP-2031-C03",API/MQTT同一事件去重及到期,API/MQTT同一事件去重及到期,FAT；本轮独立登录；只验证本组合，不代表整项验收完成,固定组合,{},见步骤,API/MQTT同一事件去重及到期,缺少专用事件回放、MQTT订阅及可控制的到期样本；读取列表不证明消费/去重

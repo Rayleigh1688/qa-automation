@@ -1,0 +1,45 @@
+﻿执行用例编号,总用例编号,用例名称,接口/流程,前置条件,数据集,输入变量,请求/步骤,预期/断言,就绪情况
+pagcor-list-structure,ISOP-2028-C08,Pagcor税报：响应结构,Pagcor税报,FAT；本轮独立登录；只验证本组合，不代表整项验收完成,固定组合,{},"query [A] readonly_query {""params"":{""route"":""pagcor-list"",""body"":{""start_time"":1788796800000,""end_time"":1789055999999,""current"":1,""size"":20}}}","Pagcor税报：响应结构
+query: http eq 200
+query: body.status eq true
+query: body.data type ""object""
+query: body.data.list type ""array""",可执行
+pagcor-list-jp,ISOP-2028-C01,Pagcor税报：总GGR与新增JP字段,Pagcor税报,FAT；本轮独立登录；只验证本组合，不代表整项验收完成,固定组合,{},"query [A] readonly_query {""params"":{""route"":""pagcor-list"",""body"":{""start_time"":1788796800000,""end_time"":1789055999999,""current"":1,""size"":20},""amount_fields"":[""totalGGR"",""totalJpContribution""]}}","Pagcor税报：总GGR与新增JP字段
+query: http eq 200
+query: body.status eq true
+query: body.data.list rows_have_keys [""totalGGR"", ""totalJpContribution""]
+query: checks.amounts_valid eq true",可执行
+pagcor-list-missing,ISOP-2028-C08,Pagcor税报：未授权请求拒绝,Pagcor税报,FAT；本轮独立登录；只验证本组合，不代表整项验收完成,固定组合,{},"query [A] readonly_query {""params"":{""route"":""pagcor-list"",""body"":{""start_time"":1788796800000,""end_time"":1789055999999,""current"":1,""size"":20},""auth"":""missing""}}","Pagcor税报：未授权请求拒绝
+query: checks.auth_denied eq true",可执行
+pagcor-list-invalid,ISOP-2028-C08,Pagcor税报：未授权请求拒绝,Pagcor税报,FAT；本轮独立登录；只验证本组合，不代表整项验收完成,固定组合,{},"query [A] readonly_query {""params"":{""route"":""pagcor-list"",""body"":{""start_time"":1788796800000,""end_time"":1789055999999,""current"":1,""size"":20},""auth"":""invalid""}}","Pagcor税报：未授权请求拒绝
+query: checks.auth_denied eq true",可执行
+shop-list-structure,ISOP-2028-C08,门店税报：响应结构,门店税报,FAT；本轮独立登录；只验证本组合，不代表整项验收完成,固定组合,{},"query [A] readonly_query {""params"":{""route"":""shop-list"",""body"":{""start_time"":1788796800000,""end_time"":1789055999999}}}","门店税报：响应结构
+query: http eq 200
+query: body.status eq true
+query: body.data type ""array""",可执行
+shop-list-jp,ISOP-2028-C01,门店税报：总GGR与新增JP字段,门店税报,FAT；本轮独立登录；只验证本组合，不代表整项验收完成,固定组合,{},"query [A] readonly_query {""params"":{""route"":""shop-list"",""body"":{""start_time"":1788796800000,""end_time"":1789055999999},""amount_fields"":[""total_ggr"",""total_jp_contribution""]}}","门店税报：总GGR与新增JP字段
+query: http eq 200
+query: body.status eq true
+query: body.data rows_have_keys [""total_ggr"", ""total_jp_contribution""]
+query: checks.amounts_valid eq true",可执行
+shop-list-missing,ISOP-2028-C08,门店税报：未授权请求拒绝,门店税报,FAT；本轮独立登录；只验证本组合，不代表整项验收完成,固定组合,{},"query [A] readonly_query {""params"":{""route"":""shop-list"",""body"":{""start_time"":1788796800000,""end_time"":1789055999999},""auth"":""missing""}}","门店税报：未授权请求拒绝
+query: checks.auth_denied eq true",可执行
+shop-list-invalid,ISOP-2028-C08,门店税报：未授权请求拒绝,门店税报,FAT；本轮独立登录；只验证本组合，不代表整项验收完成,固定组合,{},"query [A] readonly_query {""params"":{""route"":""shop-list"",""body"":{""start_time"":1788796800000,""end_time"":1789055999999},""auth"":""invalid""}}","门店税报：未授权请求拒绝
+query: checks.auth_denied eq true",可执行
+summary-structure,ISOP-2028-C08,报告摘要：响应结构,报告摘要,FAT；本轮独立登录；只验证本组合，不代表整项验收完成,固定组合,{},"query [A] readonly_query {""params"":{""route"":""summary"",""body"":{""start_time"":1788796800000,""end_time"":1789055999999}}}","报告摘要：响应结构
+query: http eq 200
+query: body.status eq true
+query: body.data type ""object""",可执行
+summary-jp,ISOP-2028-C06,报告摘要：总GGR与新增JP字段,报告摘要,FAT；本轮独立登录；只验证本组合，不代表整项验收完成,固定组合,{},"query [A] readonly_query {""params"":{""route"":""summary"",""body"":{""start_time"":1788796800000,""end_time"":1789055999999},""amount_fields"":[""total_ggr"",""total_jp_contribution"",""total_jp_winning""]}}","报告摘要：总GGR与新增JP字段
+query: http eq 200
+query: body.status eq true
+query: body.data.total_ggr type ""string""
+query: body.data.total_jp_contribution type ""string""
+query: body.data.total_jp_winning type ""string""",可执行
+summary-missing,ISOP-2028-C08,报告摘要：未授权请求拒绝,报告摘要,FAT；本轮独立登录；只验证本组合，不代表整项验收完成,固定组合,{},"query [A] readonly_query {""params"":{""route"":""summary"",""body"":{""start_time"":1788796800000,""end_time"":1789055999999},""auth"":""missing""}}","报告摘要：未授权请求拒绝
+query: checks.auth_denied eq true",可执行
+summary-invalid,ISOP-2028-C08,报告摘要：未授权请求拒绝,报告摘要,FAT；本轮独立登录；只验证本组合，不代表整项验收完成,固定组合,{},"query [A] readonly_query {""params"":{""route"":""summary"",""body"":{""start_time"":1788796800000,""end_time"":1789055999999},""auth"":""invalid""}}","报告摘要：未授权请求拒绝
+query: checks.auth_denied eq true",可执行
+pagcor-export,ISOP-2028-C07,Pagcor报表实际导出,Pagcor报表实际导出,FAT；本轮独立登录；只验证本组合，不代表整项验收完成,固定组合,{},见步骤,Pagcor报表实际导出,缺少异步导出文件获取/任务关联契约，尚不能验证真实文件内容
+shop-export,ISOP-2028-C07,门店报表实际导出,门店报表实际导出,FAT；本轮独立登录；只验证本组合，不代表整项验收完成,固定组合,{},见步骤,门店报表实际导出,缺少异步导出文件获取/任务关联契约，尚不能验证真实文件内容
+formula,"ISOP-2028-C02,ISOP-2028-C03,ISOP-2028-C04",新GGR独立公式及税额,新GGR独立公式及税额,FAT；本轮独立登录；只验证本组合，不代表整项验收完成,固定组合,{},见步骤,新GGR独立公式及税额,有效派彩源字段、税率及舍入层级未确认；结构通过不证明公式正确

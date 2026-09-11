@@ -1,0 +1,256 @@
+{
+  "schema_version": 2,
+  "requirement": "ISOP-2031",
+  "execution_policy": "api-first",
+  "services": {
+    "admin": {
+      "env": "ADMIN_URL"
+    },
+    "client": {
+      "env": "API_URL"
+    }
+  },
+  "actors": {
+    "A": {
+      "services": [
+        "admin",
+        "client"
+      ]
+    }
+  },
+  "contracts": {},
+  "variables": {},
+  "acceptance_ids": [
+    "C01",
+    "C02",
+    "C03",
+    "C04",
+    "C05",
+    "C06",
+    "C07",
+    "C08",
+    "C09",
+    "C10",
+    "C11",
+    "C12"
+  ],
+  "cases": [
+    {
+      "id": "notify-structure",
+      "review": {
+        "用例编号": "notify-structure",
+        "类型": "API",
+        "模块/接口": "余额变动通知",
+        "用例名称": "余额变动通知：返回状态与列表结构",
+        "前置条件": "FAT；本轮独立登录；只验证本组合，不代表整项验收完成",
+        "参数/步骤": "见步骤",
+        "预期结果": "余额变动通知：返回状态与列表结构",
+        "级别": "专项",
+        "验收点": "C02"
+      },
+      "delivery": {
+        "mode": "automatic"
+      },
+      "steps": [
+        {
+          "id": "query",
+          "action": "method",
+          "method": "readonly_query",
+          "actor": "A",
+          "params": {
+            "route": "balance-notifications"
+          },
+          "expect": [
+            {
+              "path": "http",
+              "op": "eq",
+              "value": 200
+            },
+            {
+              "path": "body.status",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "body.data",
+              "op": "type",
+              "value": "object"
+            },
+            {
+              "path": "body.data.list",
+              "op": "type",
+              "value": "array"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "notify-fields",
+      "review": {
+        "用例编号": "notify-fields",
+        "类型": "API",
+        "模块/接口": "余额变动通知",
+        "用例名称": "余额变动通知：事件编号、类型、金额和标题",
+        "前置条件": "FAT；本轮独立登录；只验证本组合，不代表整项验收完成",
+        "参数/步骤": "见步骤",
+        "预期结果": "余额变动通知：事件编号、类型、金额和标题",
+        "级别": "专项",
+        "验收点": "C02,C03"
+      },
+      "delivery": {
+        "mode": "automatic"
+      },
+      "steps": [
+        {
+          "id": "query",
+          "action": "method",
+          "method": "readonly_query",
+          "actor": "A",
+          "params": {
+            "route": "balance-notifications",
+            "amount_fields": [
+              "balance"
+            ]
+          },
+          "expect": [
+            {
+              "path": "http",
+              "op": "eq",
+              "value": 200
+            },
+            {
+              "path": "body.status",
+              "op": "eq",
+              "value": true
+            },
+            {
+              "path": "body.data.list",
+              "op": "rows_have_keys",
+              "value": [
+                "id",
+                "ty",
+                "sub_ty",
+                "balance",
+                "name"
+              ]
+            },
+            {
+              "path": "checks.amounts_valid",
+              "op": "eq",
+              "value": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "notify-auth-missing",
+      "review": {
+        "用例编号": "notify-auth-missing",
+        "类型": "API",
+        "模块/接口": "余额通知",
+        "用例名称": "余额通知：未登录不得读取消息",
+        "前置条件": "FAT；本轮独立登录；只验证本组合，不代表整项验收完成",
+        "参数/步骤": "见步骤",
+        "预期结果": "余额通知：未登录不得读取消息",
+        "级别": "专项",
+        "验收点": "C04"
+      },
+      "delivery": {
+        "mode": "automatic"
+      },
+      "steps": [
+        {
+          "id": "query",
+          "action": "method",
+          "method": "readonly_query",
+          "actor": "A",
+          "params": {
+            "route": "balance-notifications",
+            "auth": "missing"
+          },
+          "expect": [
+            {
+              "path": "checks.auth_denied",
+              "op": "eq",
+              "value": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "notify-auth-invalid",
+      "review": {
+        "用例编号": "notify-auth-invalid",
+        "类型": "API",
+        "模块/接口": "余额通知",
+        "用例名称": "余额通知：无效凭证不得读取消息",
+        "前置条件": "FAT；本轮独立登录；只验证本组合，不代表整项验收完成",
+        "参数/步骤": "见步骤",
+        "预期结果": "余额通知：无效凭证不得读取消息",
+        "级别": "专项",
+        "验收点": "C04"
+      },
+      "delivery": {
+        "mode": "automatic"
+      },
+      "steps": [
+        {
+          "id": "query",
+          "action": "method",
+          "method": "readonly_query",
+          "actor": "A",
+          "params": {
+            "route": "balance-notifications",
+            "auth": "invalid"
+          },
+          "expect": [
+            {
+              "path": "checks.auth_denied",
+              "op": "eq",
+              "value": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "notify-read",
+      "review": {
+        "用例编号": "notify-read",
+        "类型": "API",
+        "模块/接口": "标记本轮消息已读",
+        "用例名称": "标记本轮消息已读",
+        "前置条件": "FAT；本轮独立登录；只验证本组合，不代表整项验收完成",
+        "参数/步骤": "见步骤",
+        "预期结果": "标记本轮消息已读",
+        "级别": "专项",
+        "验收点": "C03"
+      },
+      "delivery": {
+        "mode": "automatic"
+      },
+      "blocked": "未具备本轮专用到账事件；不消费现有会员历史通知。已读请求块/read/balance与正文/change/balance冲突待核对"
+    },
+    {
+      "id": "mqtt-dedup",
+      "review": {
+        "用例编号": "mqtt-dedup",
+        "类型": "API",
+        "模块/接口": "API/MQTT同一事件去重及到期",
+        "用例名称": "API/MQTT同一事件去重及到期",
+        "前置条件": "FAT；本轮独立登录；只验证本组合，不代表整项验收完成",
+        "参数/步骤": "见步骤",
+        "预期结果": "API/MQTT同一事件去重及到期",
+        "级别": "专项",
+        "验收点": "C01,C03"
+      },
+      "delivery": {
+        "mode": "automatic"
+      },
+      "blocked": "缺少专用事件回放、MQTT订阅及可控制的到期样本；读取列表不证明消费/去重"
+    }
+  ]
+}
