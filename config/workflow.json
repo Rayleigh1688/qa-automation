@@ -1,0 +1,84 @@
+{
+  "schema_version": 1,
+  "authorization_source": "AI-HANDOFF.md及2026-09-14用户第1—4项实施指令；继承既有执行范围，2022暂停，不建单/发群，不适配UAT",
+  "stories": {
+    "ISOP-2041": {
+      "authorized": false,
+      "paused": false,
+      "allow_write": [],
+      "plan_sha256": null
+    },
+    "ISOP-2070": {
+      "authorized": false,
+      "paused": false,
+      "allow_write": [],
+      "plan_sha256": null
+    },
+    "ISOP-2022": {
+      "authorized": false,
+      "paused": true,
+      "allow_write": [],
+      "plan_sha256": "3cbe4a0faf925e2db1c4e30688b43acf7ce8b9be53d5f21d61963dea88e689e2"
+    },
+    "ISOP-2038": {
+      "authorized": false,
+      "paused": false,
+      "allow_write": [],
+      "plan_sha256": null
+    },
+    "ISOP-2031": {
+      "authorized": true,
+      "paused": false,
+      "allow_write": [],
+      "plan_sha256": "c29f29ef10458ba3f0adf3c87af62a8605a930fb197e935502c4cece7fcedd31"
+    },
+    "ISOP-2030": {
+      "authorized": false,
+      "paused": false,
+      "allow_write": [],
+      "plan_sha256": null
+    },
+    "ISOP-2037": {
+      "authorized": true,
+      "paused": false,
+      "allow_write": [],
+      "plan_sha256": null
+    },
+    "ISOP-2027": {
+      "authorized": true,
+      "paused": false,
+      "allow_write": [],
+      "plan_sha256": "fd0d95f1bc8098e9177dd09667793a67b045514bccbf6740628a43ee8f4f0423"
+    },
+    "ISOP-2029": {
+      "authorized": false,
+      "paused": false,
+      "allow_write": [],
+      "plan_sha256": null
+    },
+    "ISOP-2072": {
+      "authorized": false,
+      "paused": false,
+      "allow_write": [],
+      "plan_sha256": null
+    },
+    "ISOP-2043": {
+      "authorized": true,
+      "paused": false,
+      "allow_write": [],
+      "plan_sha256": "0f10c8165c12423077823ff20168e233ee187714144b7000ec4869d5b8377403"
+    },
+    "ISOP-2028": {
+      "authorized": true,
+      "paused": false,
+      "allow_write": [],
+      "plan_sha256": "07edd88c0993ccd52a9339c52f96bad3dc34c084ed13a7975077a964d0364c57"
+    },
+    "ISOP-2032": {
+      "authorized": true,
+      "paused": false,
+      "allow_write": [],
+      "plan_sha256": null
+    }
+  }
+}

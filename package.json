@@ -59,7 +59,8 @@
     "qa:report": "node scripts/python-launcher.mjs scripts/build-case-report.py",
     "qa:requirement": "node scripts/python-launcher.mjs scripts/run-requirement.py",
     "qa:delivery": "node scripts/python-launcher.mjs scripts/prepare-test-delivery.py",
-    "qa:cases": "node scripts/python-launcher.mjs scripts/export-requirement-cases.py"
+    "qa:cases": "node scripts/python-launcher.mjs scripts/export-requirement-cases.py",
+    "qa": "node scripts/python-launcher.mjs scripts/run-qa.py"
   },
   "devDependencies": {
     "@playwright/test": "^1.57.0",

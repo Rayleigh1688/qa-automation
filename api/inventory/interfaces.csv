@@ -1055,6 +1055,8 @@ test.bru,(root),test,GET,client-beta.filbet.zone,/member/stmt,{{api_url}},client
 活动/存款阶梯活动/folder.bru,活动,存款阶梯活动,,,,,unknown,promo,,non_request,,,
 活动/存款阶梯活动/存款阶梯活动详情.bru,活动,存款阶梯活动详情,GET,(relative_abs),/promo/deposit/ladder/detail,,unknown,finance,/promo/deposit/ladder/detail,,,finance,/promo/deposit/ladder/detail
 活动/存款阶梯活动/存款阶梯配置活动.bru,活动,存款阶梯配置活动,GET,(relative_abs),/promo/deposit/ladder/deposit/conf,,unknown,finance,/promo/deposit/ladder/deposit/conf,,,finance,/promo/deposit/ladder/deposit/conf
+活动/投注返利活动/folder.bru,活动,投注返利活动,,,,,unknown,promo,,non_request,,,
+活动/投注返利活动/投注返利活动详情.bru,活动,投注返利活动详情,GET,(relative_abs),/promo/betting/rebate/detail,,unknown,promo,/promo/betting/rebate/detail?pid=40,,,,/promo/betting/rebate/detail?pid=40
 活动/投注返积分/folder.bru,活动,投注返积分,,,,,unknown,promo,,non_request,,,
 活动/投注返积分/总积分.bru,活动,总积分,GET,{{test_url}},/promo/task/tokens/balance,,unknown,promo,/promo/task/tokens/balance,,,,{{test_url}}/promo/task/tokens/balance
 活动/投注返积分/积分账变.bru,活动,积分账变,GET,{{test_url}},/promo/task/transaction,,unknown,finance,/promo/task/transaction,,,finance,{{test_url}}/promo/task/transaction

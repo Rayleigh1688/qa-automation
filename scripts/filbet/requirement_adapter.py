@@ -18,31 +18,71 @@ class Adapter:
         self.recoveries = {}
         self.recovery_failed = False
         self.login_ms = 0
+        self.fixture_preparation_failed = False
+        self.login_failed_actors = set()
+
+    def case_blocker(self, case):
+        methods = {s.get('method') for s in case.get('steps', [])}
+        if self.recovery_failed:
+            return '本轮权限恢复尚未验证，暂停后续检查；需先核对原配置与账号身份'
+        if self.login_failed_actors and ('kyc_fixture' in methods or any(s.get('actor') in self.login_failed_actors for s in case.get('steps', []))):
+            return '本轮管理员登录前置已失败，暂停依赖检查；不重复尝试登录'
+        if self.fixture_preparation_failed and methods & {'kyc_fixture','kyc_reuse_processed_ui'}:
+            return '本轮会员注册前置已失败，暂停依赖造数的检查；需定位原始失败后明确续测范围'
+        if 'kyc_reuse_processed_ui' in methods and not getattr(self, 'normal_ui_pool', None):
+            return '本轮共享的已处理申请未准备成功，尚未执行只读UI检查'
+        return ''
 
     def preflight(self, cases):
         if any(s['action']=='ui' for c in cases for s in c.get('steps',[])):
             from qa_core.ui_contract import load_assets
             self.ui_assets = load_assets(self.plan)
-        if self.config.get('ADMIN_URL') != 'https://admin-fat.filbet2025.com' or self.config.get('API_URL') != 'https://client-fat.filbet2025.com':
-            raise ValueError('pilot execution is authorized for FAT only')
+        endpoints = (self.config.get('ADMIN_URL'), self.config.get('API_URL'))
+        if endpoints == ('https://admin-fat.filbet2025.com', 'https://client-fat.filbet2025.com'):
+            if Path(self.args.env).name == '.env.uat':
+                raise ValueError('UAT selection cannot use FAT endpoints')
+            self.environment = 'FAT'
+        elif (endpoints == ('https://admin-antd.filbet.zone', 'https://client-beta.filbet.zone')
+              and Path(self.args.env).name == '.env.uat' and self.plan.get('requirement') == 'ISOP-2027'):
+            self.environment = 'UAT'
+            if self.config.get('ADMIN_GOOGLE_CODE') or not (self.config.get('ADMIN_LOGIN_TOTP_SECRET') or self.config.get('ADMIN_APPROVAL_TOTP_SECRET')):
+                raise ValueError('UAT requires dynamic admin login credentials')
+            if any(s.get('method') == 'kyc_fixture' for c in cases for s in c.get('steps', [])):
+                if (self.config.get('REGISTER_OTP') or self.config.get('CLIENT_OTP')
+                    or self.config.get('REGISTER_OTP_SOURCE') != 'admin_sms'
+                    or not self.config.get('ADMIN_APPROVAL_TOTP_SECRET')):
+                    raise ValueError('UAT fixtures require dynamic registration OTP via admin_sms')
+        else:
+            raise ValueError('unsupported or mixed requirement environment endpoints')
         for case in cases:
             for step in case.get('steps',[]):
                 scope = self.plan['contracts'][step['contract']].get('scope') if step['action']=='api' else 'kyc-review' if step['action']=='ui' else METHODS[step['method']]['scope']
                 if scope and scope not in self.args.allow_write:
                     raise ValueError('selected case requires --allow-write ' + scope)
         if any(s['actor']=='B' or s.get('method')=='kyc_fixture' for c in cases for s in c.get('steps',[])):
-            reviewer = self.config.get('QA_REVIEWER_ENV','.env.fat.reviewer.local')
-            self.reviewer = {**self.config, **read_values(reviewer)}
+            reviewer = self.config.get('QA_REVIEWER_ENV',f'.env.{self.environment.lower()}.reviewer.local')
+            overlay = read_values(reviewer)
+            if self.environment == 'UAT' and (
+                not all(overlay.get(k) for k in ('ADMIN_URL', 'ADMIN_EMAIL', 'ADMIN_PASSWORD', 'ADMIN_LOGIN_TOTP_SECRET'))
+                or overlay.get('ADMIN_GOOGLE_CODE')):
+                raise ValueError('UAT reviewer requires its own dynamic login credentials')
+            self.reviewer = {**self.config, **overlay}
             if self.reviewer.get('ADMIN_URL') != self.config['ADMIN_URL'] or self.reviewer['ADMIN_EMAIL'].lower() == self.config['ADMIN_EMAIL'].lower():
                 raise ValueError('reviewer must be a distinct account on same service')
 
     def session(self, actor):
+        if actor in self.login_failed_actors:
+            raise RuntimeError('earlier actor login failed; no repeated login attempts')
         if actor not in self.sessions:
             if actor == 'client': raise ValueError('client fixture not prepared')
             conf = self.reviewer if actor == 'B' else self.config
             session = Session(conf['ADMIN_URL'],conf,timeout=self.args.timeout,insecure=self.args.insecure)
             started = time.monotonic()
-            session.login()
+            try:
+                session.login()
+            except Exception:
+                self.login_failed_actors.add(actor)
+                raise
             self.login_ms += round((time.monotonic()-started)*1000)
             identity = session.request('GET','/admin/me/detail')
             if identity['http'] != 200 or identity['body'].get('status') is not True: raise RuntimeError('identity query failed')
@@ -105,3 +145,6 @@ METHODS['bet_record_check'] = {'call':record_check,'scope':None,'business':False
 
 from filbet.requirement_readonly import probe as readonly_probe, validate as validate_readonly_probe
 METHODS['readonly_query'] = {'call':readonly_probe,'scope':None,'business':True,'read_only':True,'validate':validate_readonly_probe}
+
+from filbet.protected_edit import verify as verify_protected_edit
+METHODS['kyc_verify_protected_edit'] = {'call':verify_protected_edit,'scope':None,'read_only':True}

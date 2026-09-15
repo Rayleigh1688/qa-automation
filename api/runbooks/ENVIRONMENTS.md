@@ -48,6 +48,8 @@ KYC 每轮独立新号，永久 BASIC 保持未认证，资金号按执行者及
 
 ## 执行规则
 
+2026-09-14用户授权ISOP-2027 UAT复测：本机已核对UAT后台为`https://admin-antd.filbet.zone`、客户端为`https://client-beta.filbet.zone`，读取`.env.uat`；不要按FAT域名机械替换成未配置的地址。2027统一执行器支持这组匹配地址，并与FAT严格隔离，其他需求的UAT能力不因此推定可用。复核账号独立读取忽略的`.env.uat.reviewer.local`（或`QA_REVIEWER_ENV`），使用自己的动态登录令牌；测试会员注册沿用`REGISTER_OTP_SOURCE=admin_sms`，固定注册/客户端OTP在UAT前置拒绝。测试号码预留分别保存到`requirement-reservations-fat.json`和`requirement-reservations-uat.json`。
+
 ```bash
 # FAT safe gate
 python3 scripts/run-api-tests.py p0 --env .env.fat --scope FAT --safe-only

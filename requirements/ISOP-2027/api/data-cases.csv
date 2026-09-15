@@ -342,10 +342,12 @@ after: snapshot eq ""${baseline}""",可执行
 2027-API-018,ISOP-2027-C05,只读字段篡改,KYC输入与并发,本轮独立数据；有效登录,固定组合,{},"prepare [A] kyc_fixture {}
 payload [A] kyc_edit_payload {""params"":{""first_name"":""CodexPlan"",""current_address"":""Manila QA Plan"",""phone"":""000000000000"",""user_message"":""QA immutable field"",""kyc_status"":5}}
 protected-edit [B] POST /admin/kyc/edit {""body"":""${edit}""}
-after [A] kyc_snapshot {}","手机号和留言不进入变更草稿
+after [A] kyc_snapshot {}
+verify-protection [A] kyc_verify_protected_edit {""params"":{""before"":""${baseline}"",""after"":""${after}"",""accepted"":""${accepted}"",""changes"":{""first_name"":""CodexPlan"",""current_address"":""Manila QA Plan"",""user_message"":""QA immutable field""}}}","手机号和KYC状态不能被编辑覆盖；用户留言可修改。拒绝须无副作用，接受则仅合法变更进入待复核草稿。
 protected-edit: http eq 200
-protected-edit: body.status eq false
-after: snapshot eq ""${baseline}""",可执行
+protected-edit: body.status eq true
+after: snapshot.formal eq ""${baseline.formal}""
+verify-protection: checks.protected_edit eq true",可执行
 2027-API-019,ISOP-2027-C10,列表撤权,角色权限,仅B使用Codex角色；已备份原权限,固定组合,{},"prepare [A] kyc_fixture {}
 payload [A] kyc_edit_payload {""params"":{""first_name"":""CodexPlan"",""current_address"":""Manila QA Plan""}}
 permission [A] kyc_permission {""params"":{""kind"":""list"",""payload"":""${edit}""}}","撤权请求拒绝；恢复与原配置一致
@@ -457,7 +459,7 @@ verify: checks.audit_append eq true
 filter: http eq 200
 filter: body.status eq true
 filter: body.data.t eq 0
-filter: body.data.d pluck_set []
+filter: body.data.d empty_or_null ""null或[]""
 query-no-effects: snapshot eq ""${after}""",可执行
 2027-API-031,ISOP-2027-C12,中间名命中,/admin/kyc/review/list,已知两条已处理申请；固定UID,固定组合,{},"prepare [A] kyc_fixture {}
 payload [A] kyc_edit_payload {""params"":{""first_name"":""CodexPlan"",""current_address"":""Manila QA Plan""}}
@@ -544,7 +546,7 @@ verify: checks.audit_append eq true
 filter: http eq 200
 filter: body.status eq true
 filter: body.data.t eq 0
-filter: body.data.d pluck_set []
+filter: body.data.d empty_or_null ""null或[]""
 query-no-effects: snapshot eq ""${after}""",可执行
 2027-API-034,ISOP-2027-C12,中间名不命中,/admin/kyc/review/list,已知两条已处理申请；固定UID,固定组合,{},"prepare [A] kyc_fixture {}
 payload [A] kyc_edit_payload {""params"":{""first_name"":""CodexPlan"",""current_address"":""Manila QA Plan""}}
@@ -573,7 +575,7 @@ verify: checks.audit_append eq true
 filter: http eq 200
 filter: body.status eq true
 filter: body.data.t eq 0
-filter: body.data.d pluck_set []
+filter: body.data.d empty_or_null ""null或[]""
 query-no-effects: snapshot eq ""${after}""",可执行
 2027-API-035,ISOP-2027-C12,姓氏不命中,/admin/kyc/review/list,已知两条已处理申请；固定UID,固定组合,{},"prepare [A] kyc_fixture {}
 payload [A] kyc_edit_payload {""params"":{""first_name"":""CodexPlan"",""current_address"":""Manila QA Plan""}}
@@ -602,7 +604,7 @@ verify: checks.audit_append eq true
 filter: http eq 200
 filter: body.status eq true
 filter: body.data.t eq 0
-filter: body.data.d pluck_set []
+filter: body.data.d empty_or_null ""null或[]""
 query-no-effects: snapshot eq ""${after}""",可执行
 2027-API-036,ISOP-2027-C12,提交人命中,/admin/kyc/review/list,已知两条已处理申请；固定UID,固定组合,{},"prepare [A] kyc_fixture {}
 payload [A] kyc_edit_payload {""params"":{""first_name"":""CodexPlan"",""current_address"":""Manila QA Plan""}}
@@ -660,7 +662,7 @@ verify: checks.audit_append eq true
 filter: http eq 200
 filter: body.status eq true
 filter: body.data.t eq 0
-filter: body.data.d pluck_set []
+filter: body.data.d empty_or_null ""null或[]""
 query-no-effects: snapshot eq ""${after}""",可执行
 2027-API-038,ISOP-2027-C12,时间窗命中,/admin/kyc/review/list,已知两条已处理申请；固定UID,固定组合,{},"prepare [A] kyc_fixture {}
 payload [A] kyc_edit_payload {""params"":{""first_name"":""CodexPlan"",""current_address"":""Manila QA Plan""}}
@@ -718,7 +720,7 @@ verify: checks.audit_append eq true
 filter: http eq 200
 filter: body.status eq true
 filter: body.data.t eq 0
-filter: body.data.d pluck_set []
+filter: body.data.d empty_or_null ""null或[]""
 query-no-effects: snapshot eq ""${after}""",可执行
 2027-API-040,ISOP-2027-C12,过去时间不命中,/admin/kyc/review/list,已知两条已处理申请；固定UID,固定组合,{},"prepare [A] kyc_fixture {}
 payload [A] kyc_edit_payload {""params"":{""first_name"":""CodexPlan"",""current_address"":""Manila QA Plan""}}
@@ -747,7 +749,7 @@ verify: checks.audit_append eq true
 filter: http eq 200
 filter: body.status eq true
 filter: body.data.t eq 0
-filter: body.data.d pluck_set []
+filter: body.data.d empty_or_null ""null或[]""
 query-no-effects: snapshot eq ""${after}""",可执行
 2027-API-041,ISOP-2027-C12,组合条件命中,/admin/kyc/review/list,已知两条已处理申请；固定UID,固定组合,{},"prepare [A] kyc_fixture {}
 payload [A] kyc_edit_payload {""params"":{""first_name"":""CodexPlan"",""current_address"":""Manila QA Plan""}}
@@ -805,7 +807,7 @@ verify: checks.audit_append eq true
 filter: http eq 200
 filter: body.status eq true
 filter: body.data.t eq 0
-filter: body.data.d pluck_set []
+filter: body.data.d empty_or_null ""null或[]""
 query-no-effects: snapshot eq ""${after}""",可执行
 2027-API-043,ISOP-2027-C12,越界分页,/admin/kyc/review/list,已处理总数2,固定组合,{},"prepare [A] kyc_fixture {}
 payload [A] kyc_edit_payload {""params"":{""first_name"":""CodexPlan"",""current_address"":""Manila QA Plan""}}

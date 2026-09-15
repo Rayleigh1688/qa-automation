@@ -21,7 +21,7 @@ class UIContractTests(unittest.TestCase):
         plan=json.loads((ROOT/'requirements/ISOP-2027/plan.json').read_text())
         plan['cases']=[next(c for c in plan['cases'] if c['id']=='2027-UI-001')]
         validate(plan,METHODS)
-        for change in [{'element':'missing'},{'op':'eval'}, {'expect':[]}, {'response':{'contract':'missing'}}]:
+        for change in [{'element':'missing'},{'op':'confirm_or_ready','ready_element':'missing'},{'op':'eval'}, {'expect':[]}, {'response':{'contract':'missing'}}]:
             bad=copy.deepcopy(plan); bad['cases'][0]['steps'][3].update(change)
             with self.assertRaises(ValueError): validate(bad,METHODS)
 
@@ -42,6 +42,8 @@ class RequirementUIBrowserTests(unittest.TestCase):
                 <button id="query" onclick="fetch('/api?uid=current')">Query</button>
                 <button id="stale">No request</button>
                 <button class="duplicate">Duplicate</button><button class="duplicate">Duplicate</button>
+                <input id="direct-form"><input id="confirmed-form" hidden>
+                <button id="confirm" onclick="document.querySelector('#confirmed-form').hidden=false;this.remove()">Yes</button>
                 <input id="value"><input id="file" type="file" onchange="let f=new FormData();f.append('file',this.files[0]);fetch('/upload',{method:'POST',body:f})">
                 <button id="blocked" style="position:absolute;left:0;top:200px">Restore</button>
                 <div style="position:absolute;left:0;top:200px;width:200px;height:60px;z-index:5">cover</div>
@@ -57,6 +59,12 @@ class RequirementUIBrowserTests(unittest.TestCase):
                 self.assertTrue(worker.call({'op':'init','config':{'origin':origin,'assets':assets,'contracts':contracts,'scopes':['test'],'folder':directory,'insecure':False,'timeout_ms':400}})['ready'])
                 def run(step,actor='A'):
                     return worker.call({'actor':actor,'caseId':'local','auth':{},'owned':{'uid':['current']},'step':{'id':'action',**step},'png':base64.b64encode(b'local synthetic bytes').decode()})
+                direct=run({'op':'confirm_or_ready','target':{'css':'#absent'},'ready_target':{'css':'#direct-form'}})
+                self.assertEqual(direct['summary'],'form-already-visible')
+                confirmed=run({'op':'confirm_or_ready','target':{'css':'#confirm'},'ready_target':{'css':'#confirmed-form'}})
+                self.assertEqual(confirmed['summary'],'confirmation-clicked')
+                unknown=run({'op':'confirm_or_ready','target':{'css':'#absent'},'ready_target':{'css':'#absent-form'}})
+                self.assertFalse(unknown['checks']['completed'])
                 live=run({'op':'click','target':{'css':'#query'},'response':{'contract':'query','match':{'uid':'current'}}})
                 self.assertEqual(live['request_count'],1);self.assertFalse(live['body']['status'])
                 negative=run({'op':'click','target':{'css':'#stale'},'response':{'contract':'query','none':True,'window_ms':100,'match':{'uid':'old'}}})

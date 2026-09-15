@@ -27,6 +27,7 @@ def execute_ui(adapter, step, case_id):
     page = assets['pages'][step['page']]
     compiled = {**step,'path':page['path'],'ready':page['ready']}
     if step.get('element'): compiled['target'] = resolve(assets['elements'][step['element']],variables)
+    if step.get('ready_element'): compiled['ready_target'] = resolve(assets['elements'][step['ready_element']],variables)
     payload = {'actor':step['actor'],'step':compiled,'caseId':case_id,'auth':auth,
         'owned':{key:list(values) for key,values in fixture['owned'].items()}}
     if step['op']=='upload': payload['png'] = base64.b64encode(png_bytes(step['size'])).decode()

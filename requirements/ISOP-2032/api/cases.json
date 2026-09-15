@@ -470,7 +470,7 @@
       ],
       "title": "后台文案与通知",
       "kind": "acceptance",
-      "blocked": "Q-04/Q-07/Q-09：正式MQTT/pending未冻结，title/copy仅前端适配；禁止把localhost Mock、去重当后端业务聚合。"
+      "blocked": "Q-04/Q-07规则已确认；缺本轮真实返利通知接口、登录/投注/派发关联样本及可执行闭环。无未读状态，不以Mock代替真实登录弹窗验证。"
     },
     {
       "id": "ISOP-2032-C12-closure",
@@ -540,9 +540,9 @@
       "case_ids": [
         "ISOP-2032-C19"
       ],
-      "title": "聚合通知不合并账变",
+      "title": "登录返利通知与分类型账变",
       "kind": "acceptance",
-      "blocked": "Q-04/Q-07/Q-09：正式MQTT/pending未冻结，title/copy仅前端适配；禁止把localhost Mock、去重当后端业务聚合。"
+      "blocked": "Q-04/Q-07规则已确认；缺本轮真实返利通知接口、登录/投注/派发关联样本及可执行闭环。无未读状态，不以Mock代替真实登录弹窗验证。"
     },
     {
       "id": "ISOP-2032-C20-closure",
@@ -560,7 +560,7 @@
       ],
       "title": "派发说明与配置文案",
       "kind": "acceptance",
-      "blocked": "Q-04/Q-07/Q-09：正式MQTT/pending未冻结，title/copy仅前端适配；禁止把localhost Mock、去重当后端业务聚合。"
+      "blocked": "Q-04/Q-07规则已确认；缺本轮真实返利通知接口、登录/投注/派发关联样本及可执行闭环。无未读状态，不以Mock代替真实登录弹窗验证。"
     }
   ]
 }

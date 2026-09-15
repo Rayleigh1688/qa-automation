@@ -7,6 +7,7 @@ from contextlib import contextmanager, redirect_stdout
 import io
 import json
 import os
+from pathlib import Path
 import re
 from qa_core.redaction import sanitize_error
 import struct
@@ -109,7 +110,18 @@ def fixture(adapter, step, case_id):
             reserve_phone(flow,args)
             adapter.journal(case_id,'fixture-register',phase='INTENT',phone=args.register_phone)
             rs = flow.register_new_user(args)
-            if not rs or not all(r.get('business_status') is True for r in rs): raise RuntimeError('registration failed')
+            if not rs or not all(r.get('business_status') is True for r in rs):
+                adapter.fixture_preparation_failed = True
+                for record in rs:
+                    if record.get('business_status') is True:
+                        continue
+                    data = record.get('data')
+                    marker = data if isinstance(data, str) else record.get('reason', '')
+                    marker = re.sub(r'\d{5,}', '<id>', sanitize_error(marker, config))
+                    adapter.journal(case_id,'fixture-register-failed',stage=record.get('name'),
+                        http=record.get('http_status'),business_status=record.get('business_status'),
+                        marker=marker,data_type=type(data).__name__)
+                raise RuntimeError('registration failed; later fixtures blocked')
             token = os.environ.get('API_TOKEN','')
             if not token: raise RuntimeError('registration token missing')
             client = Session(adapter.config['API_URL'],adapter.config,admin=False,timeout=adapter.args.timeout,insecure=adapter.args.insecure)
@@ -210,7 +222,8 @@ METHOD_REGISTRY['kyc_member_payload'] = {'call':member_payload,'scope':None}
 
 def reserve_phone(flow,args):
     """Durable reservation prevents reuse while the member search index catches up."""
-    reservation = flow.PHONE_CURSOR_DIR / 'requirement-reservations-fat.json'
+    environment = 'uat' if Path(args.env).name == '.env.uat' else 'fat'
+    reservation = flow.PHONE_CURSOR_DIR / f'requirement-reservations-{environment}.json'
     reserved = json.loads(reservation.read_text()) if reservation.exists() else {}
     cursor = flow.load_phone_cursor(flow.phone_cursor_path(args.env))
     start = max(int(cursor or '9000000000'), int(reserved.get('last_phone','9000000000'))) + 1

@@ -39,11 +39,13 @@ UI 用例依赖 `ui/elements/` 和 `ui/framework/`，页面、弹窗、游戏点
 
 | 信息 | 权威入口 |
 | --- | --- |
+| 需求级提测、测试、发布及关闭状态 | [requirements/status.html](../requirements/status.html)，链接原始来源；不复制用例通过率 |
 | 当前证据、有效例外、下一步 | `AI-HANDOFF.md` |
 | 命令行为、写入范围 | `docs/commands.md`，实现以 CLI 为准 |
 | FAT/UAT 契约与当前环境接受标准 | `api/runbooks/ENVIRONMENTS.md` |
 | 可执行用例、顺序、lane | `api/p0/` 固定资产；默认 UI 清单在 `ui/data/` |
 | 长期方法 | `skills/` |
+| 跨需求已确认业务规则、来源及断言映射 | `skills/business-rules.md`导航至`skills/business-rules/`；需求引用编号及适用差异 |
 | AI 任务阅读路由 | `.agents/skills/filbet-p0-automation/SKILL.md` |
 | 操作步骤 | `api/runbooks/`、`ui/README.md` |
 | 故障、复现及过期处理 | `harness/` |
@@ -95,3 +97,9 @@ UI 用例依赖 `ui/elements/` 和 `ui/framework/`，页面、弹窗、游戏点
 新统一执行和团队交付默认仅生成results.csv/results.html；`--extra-views`按需生成其他视图。公共write_views保留旧默认值以兼容P0外的旧查询/通用报告消费者；原始结果及快照不因视图精简而删除。
 
 业务总表和API数据视图由`qa_core/case_catalogue.py`生成，`export-requirement-cases.py`仅负责选择需求和加载已验证JSON。总表读取test-cases.md的固定业务表；执行历史表不参与导出。API组合逐条验证总用例引用，缺失/错误引用时拒绝更新视图；不会聚合成验收PASS。CSV由现有公共csv_text输出，保持UTF-8 BOM和公式注入防护，不新增表格运行依赖。
+
+## 需求工作流与本地状态
+
+`scripts/run-qa.py`是薄CLI，`qa_workflow/cli.py`编排有限批次。`documents.py`固定Git提交并复用Bruno资产构建器；`generation.py`复用既有AI只读适配并校验草稿来源；`service.py`复用计划、业务adapter及delivery pipeline，检查授权/暂停/计划hash并去重触发。`state.py`追加保存自动证据和独立人工修订；`web.py`提供本地HTML及带版本检查的状态保存接口，不提供业务执行接口。
+
+状态权威为本机SQLite及各轮来源证据，HTML是视图；仓库seed仅用于初始化。旧Markdown完整保留为迁移历史，操作与备份边界见[统一命令手册](requirement-workflow-cli.md)。上述模块是本项目工作流，不进入通用qa_core导出白名单。

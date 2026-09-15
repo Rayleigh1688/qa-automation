@@ -1,5 +1,11 @@
 # 新需求 AI 自动化测试设计
 
+设计相关模块前先查[业务规则入口](../skills/business-rules.md)，在design引用编号、版本及适用差异。KYC已有[可复用规则](../skills/business-rules/kyc.md)，无需从历史报告重新梳理；规则确认与实测通过分开记录。
+
+先看[需求状态列表](status.html)：统一查看各Story的提测、测试进度、待修复、上线与关闭状态及下一步；业务用例和报告仍在各自目录维护。
+
+需求出来即按[API准备与评估标准](api-readiness.md)推导接口能力、准备独立预期和正反例；提测后在design.md明确功能覆盖、可测性与实测结论。设计/接口评审模板已补齐，数据结构与链路有影响时使用api/data-review.md；[2028示例](ISOP-2028/design.md#接口能力预期与当前评估)展示当前缺口，回归能力按FAT/UAT分别验收。
+
 日常 P0 回归入口仍在 [README](../README.md)。这里按需求组织设计与执行证据，不要求先覆盖全部接口，也不因新需求自动扩展 P0。
 
 新需求执行能力当前按[API/UI完善计划](../docs/new-requirement-automation-plan.md)分阶段推进；ISOP-2027阶段1、2及固定UI阶段3已交付，证据与剩余事项见[API记录](../docs/new-requirement-stage1-2.md)和[UI记录](../docs/new-requirement-stage3.md)。用户查看以自动生成的`results.csv`/`results.html`为主，保留用例、预期、实际与通过/失败；普通用例逐步迁移为结构化执行数据，尚未迁移的历史资产不视为已可一键重跑。

@@ -335,3 +335,17 @@ def render_report(folder, p, report):
                       '步骤：' + ' → '.join(b['steps']), '', '预期：' + b['expected'], '', '实际：' + b['actual'], '',
                       '证据：' + ', '.join(b['evidence']), ''])
     (folder / 'report.md').write_text('\n'.join(lines) + '\n', encoding='utf-8')
+    # HTML is the review surface; rendering never approves or submits candidates.
+    import html
+    sections = ['<!doctype html><html lang="zh-CN"><meta charset="utf-8">',
+                '<meta name="viewport" content="width=device-width,initial-scale=1">',
+                '<title>BUG候选评审</title><style>body{font:16px/1.6 system-ui;max-width:1100px;margin:32px auto;padding:20px}pre{white-space:pre-wrap}article{border:1px solid #ccd5df;border-radius:8px;padding:16px;margin:16px 0}h1{font-size:26px}</style>',
+                '<h1>'+html.escape(p['story'])+' · BUG候选评审</h1>',
+                '<p>具体清单经用户确认后才建单；此报告不代表已提交。模板和责任人映射暂缓。</p>',
+                '<pre>'+html.escape('环境：'+p['environment']+'；版本：'+p['build']+'；结果：'+report['status']+'\n'+report['summary'])+'</pre>']
+    for bug in report['bugs']:
+        sections.append('<article><h2>'+html.escape(bug['id']+' '+bug['title'])+'</h2><pre>'+html.escape(
+            json.dumps(bug,ensure_ascii=False,indent=2))+'</pre></article>')
+    if not report['bugs']: sections.append('<p>当前没有已分类的BUG候选；不表示所有测试通过。</p>')
+    sections.append('<h2>逐项执行记录</h2><pre>'+html.escape(json.dumps(report['results'],ensure_ascii=False,indent=2))+'</pre></html>')
+    (folder/'report.html').write_text('\n'.join(sections),encoding='utf-8')

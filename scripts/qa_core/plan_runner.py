@@ -14,6 +14,11 @@ def execute(cases, adapter, run_id, checkpoint=None):
             item['actual'] = case.get('blocked') or '仅人工执行；尚未导入人工结果，不计自动通过'
             if checkpoint: checkpoint(results)
             continue
+        blocker = getattr(adapter, 'case_blocker', lambda case: '')(case)
+        if blocker:
+            item['actual'] = blocker
+            if checkpoint: checkpoint(results)
+            continue
         variables = {**copy.deepcopy(case['variables']), 'run':{'id':run_id}}
         stopped = False
         for source in case['steps']:
@@ -65,5 +70,10 @@ def execute(cases, adapter, run_id, checkpoint=None):
             item['recovery_failed'] = True
             if item['status'] == 'PASS': item.update(status='ERROR',actual='业务断言通过，但权限恢复未获验证')
         item['elapsed_ms'] = sum(s.get('elapsed_ms',0) for s in item['steps'])
+        if getattr(adapter, 'after_case', None):
+            try:
+                adapter.after_case(case, item)
+            except Exception as error:
+                item.update(status='ERROR', actual=type(error).__name__ + '；用例后置核对失败')
         if checkpoint: checkpoint(results)
     return results

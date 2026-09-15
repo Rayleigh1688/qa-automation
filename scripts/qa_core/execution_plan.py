@@ -7,7 +7,7 @@ from pathlib import Path
 from qa_core.case_report import FIELDS, csv_text, validate_cases
 
 REF = re.compile(r'\$\{([A-Za-z][A-Za-z0-9_.]*)\}')
-OPS = {'eq', 'type', 'exists', 'count', 'set', 'contains', 'nonempty', 'rows_eq', 'append_only', 'pluck_set', 'max_count', 'rows_have_keys'}
+OPS = {'eq', 'type', 'exists', 'count', 'set', 'contains', 'nonempty', 'rows_eq', 'append_only', 'pluck_set', 'max_count', 'rows_have_keys', 'empty_or_null'}
 TYPES = {'object': dict, 'array': list, 'integer': int, 'string': str, 'boolean': bool, 'null': type(None)}
 MISSING = object()
 
@@ -72,7 +72,7 @@ def expand(plan):
                     params = {k:step[k] for k in ['body','query','params','upload','auth','element','value','property','response'] if k in step}
                     descriptions.append(step['id']+' ['+step['actor']+'] '+target.strip()+' '+json.dumps(params,ensure_ascii=False,separators=(',',':')))
                     for check in step.get('expect',[]):
-                        expectations.append(step['id']+': '+check['path']+' '+check['op']+' '+json.dumps(check.get('value','非空'),ensure_ascii=False))
+                        expectations.append(step['id']+': '+check['path']+' '+check['op']+' '+json.dumps(check.get('value','null或[]' if check['op']=='empty_or_null' else '非空'),ensure_ascii=False))
                 if name is not None:
                     descriptions.append('数据集 '+name+': '+json.dumps(plan['datasets'][name],ensure_ascii=False))
                 item['review']['参数/步骤'] = '\n'.join(descriptions)
@@ -147,7 +147,7 @@ def validate(plan, methods=None):
                         raise ValueError('unknown assertion')
                     if check['op'] == 'type' and check.get('value') not in TYPES:
                         raise ValueError('unknown assertion type')
-                    if check['op'] != 'nonempty' and 'value' not in check:
+                    if check['op'] not in {'nonempty','empty_or_null'} and 'value' not in check:
                         raise ValueError('assertion needs expected value')
                 if not case.get('observational') and not any(c['path'] == 'body.status' and c['op'] == 'eq' and type(c.get('value')) is bool for c in checks):
                     raise ValueError('business result must have a fixed expectation')
@@ -161,7 +161,7 @@ def validate(plan, methods=None):
                         raise ValueError('unknown UI assertion')
                     if check['op']=='type' and check.get('value') not in TYPES:
                         raise ValueError('unknown UI assertion type')
-                    if check['op']!='nonempty' and 'value' not in check:
+                    if check['op'] not in {'nonempty','empty_or_null'} and 'value' not in check:
                         raise ValueError('UI assertion needs expected value')
             elif step['action'] == 'method':
                 if step.get('method') not in methods:
@@ -227,6 +227,8 @@ def assertions(checks, response):
                 ok = isinstance(value, list) and len(value) <= expected
             elif op == 'rows_have_keys':
                 ok = isinstance(value, list) and bool(value) and all(isinstance(row,dict) and all(k in row for k in expected) for row in value)
+            elif op == 'empty_or_null':
+                ok = value is None or (isinstance(value, list) and not value)
             elif op == 'pluck_set':
                 ok = isinstance(value, list) and isinstance(expected, list) and all(at(row, check['field']) is not MISSING for row in value) and sorted(json.dumps(at(row, check['field']),sort_keys=True) for row in value) == sorted(json.dumps(v,sort_keys=True) for v in expected)
             elif op == 'rows_eq':

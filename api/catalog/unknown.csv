@@ -42,6 +42,7 @@ unknown,promo,GET,/admin/promo/update,/admin/promo/update,,,活动/后台-活动
 unknown,promo,GET,/admin/promo/update,/admin/promo/update,,,活动/后台-活动管理/王牌翻转活动/编辑.bru,编辑
 unknown,promo,GET,/admin/promo/update,/admin/promo/update,,,活动/后台-活动管理/编辑活动.bru,编辑活动
 unknown,promo,POST,/free/spin/insert,/free/spin/insert,,,活动/世界杯活动/手动添加.bru,手动添加
+unknown,promo,GET,/promo/betting/rebate/detail,/promo/betting/rebate/detail?pid=40,,,活动/投注返利活动/投注返利活动详情.bru,投注返利活动详情
 unknown,promo,POST,/promo/blindbox/claim,/promo/blindbox/claim,,,活动/盲盒/领取盲盒 - felix.bru,领取盲盒 - felix
 unknown,promo,GET,/promo/blindbox/detail,/promo/blindbox/detail?pid=1&ym=2025-06,,,活动/盲盒/获取盲盒详情 - felix.bru,获取盲盒详情 - felix
 unknown,promo,GET,/promo/blindbox/query/bonus,/promo/blindbox/query/bonus?type=4001,,,活动/盲盒/查询盲盒待领取记录.bru,查询盲盒待领取记录

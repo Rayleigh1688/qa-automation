@@ -3,7 +3,7 @@ import json
 import re
 from pathlib import Path
 
-OPERATIONS = {'open','click','fill','select','check','upload','wait','press','scroll','observe'}
+OPERATIONS = {'open','click','confirm_or_ready','fill','select','check','upload','wait','press','scroll','observe'}
 PROPERTIES = {'count','url','disabled','text','value','loaded','visible'}
 
 
@@ -42,6 +42,8 @@ def validate_ui(plan, step):
         raise ValueError('UI actor/service mismatch')
     if step['op'] not in {'open','press'} and step.get('element') not in assets['elements']:
         raise ValueError('unknown UI element')
+    if step['op']=='confirm_or_ready' and step.get('ready_element') not in assets['elements']:
+        raise ValueError('confirmation needs an explicit ready element')
     from qa_core.execution_plan import references
     if step.get('element'):
         for ref in references(assets['elements'][step['element']]):

@@ -3077,7 +3077,7 @@
         "用例名称": "只读字段篡改",
         "前置条件": "本轮独立数据；有效登录",
         "参数/步骤": "只读字段篡改",
-        "预期结果": "手机号和留言不进入变更草稿",
+        "预期结果": "手机号和KYC状态不能被编辑覆盖；用户留言可修改。拒绝须无副作用，接受则仅合法变更进入待复核草稿。",
         "级别": "验收",
         "验收点": "C05"
       },
@@ -3123,9 +3123,12 @@
             {
               "path": "body.status",
               "op": "eq",
-              "value": false
+              "value": true
             }
-          ]
+          ],
+          "extract": {
+            "accepted": "body.status"
+          }
         },
         {
           "id": "after",
@@ -3135,9 +3138,35 @@
           "diagnostic": true,
           "expect": [
             {
-              "path": "snapshot",
+              "path": "snapshot.formal",
               "op": "eq",
-              "value": "${baseline}"
+              "value": "${baseline.formal}"
+            }
+          ],
+          "extract": {
+            "after": "snapshot"
+          }
+        },
+        {
+          "id": "verify-protection",
+          "action": "method",
+          "actor": "A",
+          "method": "kyc_verify_protected_edit",
+          "params": {
+            "before": "${baseline}",
+            "after": "${after}",
+            "accepted": "${accepted}",
+            "changes": {
+              "first_name": "CodexPlan",
+              "current_address": "Manila QA Plan",
+              "user_message": "QA immutable field"
+            }
+          },
+          "expect": [
+            {
+              "path": "checks.protected_edit",
+              "op": "eq",
+              "value": true
             }
           ]
         }
@@ -4193,9 +4222,7 @@
             },
             {
               "path": "body.data.d",
-              "op": "pluck_set",
-              "field": "id",
-              "value": []
+              "op": "empty_or_null"
             }
           ]
         },
@@ -4892,9 +4919,7 @@
             },
             {
               "path": "body.data.d",
-              "op": "pluck_set",
-              "field": "id",
-              "value": []
+              "op": "empty_or_null"
             }
           ]
         },
@@ -5125,9 +5150,7 @@
             },
             {
               "path": "body.data.d",
-              "op": "pluck_set",
-              "field": "id",
-              "value": []
+              "op": "empty_or_null"
             }
           ]
         },
@@ -5358,9 +5381,7 @@
             },
             {
               "path": "body.data.d",
-              "op": "pluck_set",
-              "field": "id",
-              "value": []
+              "op": "empty_or_null"
             }
           ]
         },
@@ -5824,9 +5845,7 @@
             },
             {
               "path": "body.data.d",
-              "op": "pluck_set",
-              "field": "id",
-              "value": []
+              "op": "empty_or_null"
             }
           ]
         },
@@ -6291,9 +6310,7 @@
             },
             {
               "path": "body.data.d",
-              "op": "pluck_set",
-              "field": "id",
-              "value": []
+              "op": "empty_or_null"
             }
           ]
         },
@@ -6524,9 +6541,7 @@
             },
             {
               "path": "body.data.d",
-              "op": "pluck_set",
-              "field": "id",
-              "value": []
+              "op": "empty_or_null"
             }
           ]
         },
@@ -6995,9 +7010,7 @@
             },
             {
               "path": "body.data.d",
-              "op": "pluck_set",
-              "field": "id",
-              "value": []
+              "op": "empty_or_null"
             }
           ]
         },
@@ -7261,7 +7274,7 @@
         "用例名称": "只读字段控件",
         "前置条件": "本轮独立KYC会员；A/B已授权；kyc-review范围；固定页面资产",
         "参数/步骤": "打开编辑表单",
-        "预期结果": "手机号/留言/状态禁用",
+        "预期结果": "手机号和KYC状态禁用；用户留言允许编辑。",
         "级别": "验收",
         "验收点": "C05"
       },
@@ -7414,7 +7427,7 @@
           "action": "ui",
           "actor": "B",
           "page": "list",
-          "op": "click",
+          "op": "confirm_or_ready",
           "expect": [
             {
               "path": "checks.completed",
@@ -7427,7 +7440,8 @@
               "value": true
             }
           ],
-          "element": "yes"
+          "element": "yes",
+          "ready_element": "first_name"
         },
         {
           "id": "form-ready",
@@ -7498,7 +7512,7 @@
           "property": "disabled"
         },
         {
-          "id": "readonly-user_message",
+          "id": "editable-user_message",
           "action": "ui",
           "actor": "B",
           "page": "list",
@@ -7517,7 +7531,7 @@
             {
               "path": "value",
               "op": "eq",
-              "value": true
+              "value": false
             }
           ],
           "element": "readonly_user_message",
@@ -7553,7 +7567,7 @@
       "delivery": {
         "mode": "manual",
         "precondition": "FAT；仅使用本批专用KYC测试会员并记录脱敏编号；具备B编辑、A复核权限，A/B为不同人员；缺数据或权限时填NOT_RUN。",
-        "steps": "B进入KYC列表，按本批会员手机号查询，确认唯一目标，点击Edit并确认Yes，等待原资料完整显示。\n检查手机号、用户留言和KYC状态三个控件是否可输入或选择。",
+        "steps": "B进入KYC列表，按本批会员手机号查询，确认唯一目标，点击Edit并确认Yes，等待原资料完整显示。\n检查手机号和KYC状态只读，用户留言可编辑。",
         "expected": "三项控件只读；字段显示完整，不遮挡其他可编辑项。服务端绕过修改由API用例验证。"
       }
     },
@@ -7719,7 +7733,7 @@
           "action": "ui",
           "actor": "B",
           "page": "list",
-          "op": "click",
+          "op": "confirm_or_ready",
           "expect": [
             {
               "path": "checks.completed",
@@ -7732,7 +7746,8 @@
               "value": true
             }
           ],
-          "element": "yes"
+          "element": "yes",
+          "ready_element": "first_name"
         },
         {
           "id": "form-ready",
@@ -8026,7 +8041,7 @@
           "action": "ui",
           "actor": "B",
           "page": "list",
-          "op": "click",
+          "op": "confirm_or_ready",
           "expect": [
             {
               "path": "checks.completed",
@@ -8039,7 +8054,8 @@
               "value": true
             }
           ],
-          "element": "yes"
+          "element": "yes",
+          "ready_element": "first_name"
         },
         {
           "id": "form-ready",
@@ -8586,7 +8602,7 @@
           "action": "ui",
           "actor": "B",
           "page": "list",
-          "op": "click",
+          "op": "confirm_or_ready",
           "expect": [
             {
               "path": "checks.completed",
@@ -8599,7 +8615,8 @@
               "value": true
             }
           ],
-          "element": "yes"
+          "element": "yes",
+          "ready_element": "first_name"
         },
         {
           "id": "form-ready",
@@ -8871,7 +8888,7 @@
           "action": "ui",
           "actor": "B",
           "page": "list",
-          "op": "click",
+          "op": "confirm_or_ready",
           "expect": [
             {
               "path": "checks.completed",
@@ -8884,7 +8901,8 @@
               "value": true
             }
           ],
-          "element": "yes"
+          "element": "yes",
+          "ready_element": "first_name"
         },
         {
           "id": "form-ready",
@@ -12755,7 +12773,7 @@
           "action": "ui",
           "actor": "B",
           "page": "list",
-          "op": "click",
+          "op": "confirm_or_ready",
           "expect": [
             {
               "path": "checks.completed",
@@ -12768,7 +12786,8 @@
               "value": true
             }
           ],
-          "element": "yes"
+          "element": "yes",
+          "ready_element": "first_name"
         },
         {
           "id": "form-ready",
@@ -13153,7 +13172,7 @@
           "action": "ui",
           "actor": "B",
           "page": "list",
-          "op": "click",
+          "op": "confirm_or_ready",
           "expect": [
             {
               "path": "checks.completed",
@@ -13166,7 +13185,8 @@
               "value": true
             }
           ],
-          "element": "yes"
+          "element": "yes",
+          "ready_element": "first_name"
         },
         {
           "id": "form-ready",
@@ -13864,7 +13884,7 @@
           "action": "ui",
           "actor": "B",
           "page": "list",
-          "op": "click",
+          "op": "confirm_or_ready",
           "expect": [
             {
               "path": "checks.completed",
@@ -13877,7 +13897,8 @@
               "value": true
             }
           ],
-          "element": "yes"
+          "element": "yes",
+          "ready_element": "first_name"
         },
         {
           "id": "form-ready",

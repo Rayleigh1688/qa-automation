@@ -27,6 +27,7 @@ def main():
     parser.add_argument('--expected-plan-sha256', help='Reject a plan changed since task confirmation')
     parser.add_argument('--result-index', type=Path, help='Write this invocation result path to a new local index file')
     parser.add_argument('--only', nargs='+')
+    parser.add_argument('--profile', choices=['normal','regression'], help='ISOP-2027 explicit scope; regression retains security/state/concurrency and lists deferred cases')
     parser.add_argument('--layer', choices=['API','UI','FLOW'])
     parser.add_argument('--export-cases', action='store_true')
     parser.add_argument('--extra-views', action='store_true', help='Also export cases/failures/pending CSV and summary JSON')
@@ -52,6 +53,17 @@ def main():
     from filbet.requirement_adapter import Adapter, METHODS
     path = ROOT/'requirements'/args.story/'plan.json'
     plan, cases, digest = load(path, METHODS)
+    profile = None
+    if args.profile:
+        if args.story != 'ISOP-2027' or args.layer:
+            raise ValueError('normal profile is exclusive to ISOP-2027 and cannot combine with layer')
+        profile = json.loads((path.parent/'regression-profile.json').read_text())
+        if not set(profile['cases']) <= {c['id'] for c in cases}:
+            raise ValueError('normal profile references unknown cases')
+        cases = [c for c in cases if c['id'] in profile['cases']]
+        from filbet.normal_profile import prepare_cases, reuse_ui
+        METHODS['kyc_reuse_processed_ui'] = {'call':reuse_ui,'scope':'kyc-review'}
+        cases = prepare_cases(cases)
     if args.expected_plan_sha256 and digest != args.expected_plan_sha256:
         raise ValueError('execution plan changed since confirmation')
     if args.export_cases:
@@ -62,7 +74,12 @@ def main():
         if not set(args.only) <= {c['id'] for c in cases}: raise ValueError('unknown case selection')
         cases = [c for c in cases if c['id'] in args.only]
     if args.layer: cases = [c for c in cases if c['review']['类型'] == args.layer]
-    if plan.get('execution_policy')=='api-first' and not args.only and not args.layer and not args.include_ui_automation:
+    if profile:
+        from filbet.normal_profile import UI_READ_CASES
+        selected_ids = {c['id'] for c in cases}
+        if selected_ids & UI_READ_CASES and '2027-UI-006' not in selected_ids:
+            raise ValueError('shared UI checks require 2027-UI-006 in the same run')
+    if plan.get('execution_policy')=='api-first' and not args.only and not args.layer and not args.include_ui_automation and not profile:
         from qa_core.team_delivery import select_automatic
         cases = select_automatic(cases)
     if not cases: raise ValueError('empty selection')
@@ -74,9 +91,17 @@ def main():
     with local_run_lock():
         adapter = Adapter(plan,args,folder)
         adapter.preflight(cases)
+        role_preconditions = None
+        if profile:
+            from filbet.normal_profile import apply_role_preconditions
+            role_preconditions = apply_role_preconditions(adapter,cases)
+        if profile:
+            from filbet.normal_profile import after_case
+            adapter.after_case = lambda case, item: after_case(adapter,case,item)
         folder.mkdir(parents=True,exist_ok=False)
         report = {'schema_version':2,'requirement':args.story,'run_id':run_id,'environment':adapter.environment,'source_time':datetime.now(timezone.utc).isoformat(),'mode':'execution','cases_sha256':digest,'deployment':args.version,
                   'deployment_verification':{'status':'not_provided' if args.version=='未提供' else 'declared','source':'cli'}}
+        if role_preconditions is not None: report['role_preconditions'] = role_preconditions
         if getattr(adapter,'ui_assets',None):
             import hashlib
             asset_text = json.dumps(adapter.ui_assets,ensure_ascii=False,indent=2)+'\n'
@@ -84,6 +109,8 @@ def main():
             report['ui_assets_sha256'] = hashlib.sha256(asset_text.encode()).hexdigest()
         snapshot = [c['review'] for c in cases]
         (folder/'plan.snapshot.json').write_text(json.dumps(plan,ensure_ascii=False,indent=2)+'\n')
+        if profile:
+            (folder/'execution-cases.snapshot.json').write_text(json.dumps(cases,ensure_ascii=False,indent=2)+'\n')
         (folder/'cases.snapshot.json').write_text(json.dumps(snapshot,ensure_ascii=False,indent=2)+'\n')
         def checkpoint(results):
             report['results'] = results
@@ -108,10 +135,22 @@ def main():
         (folder/'cases.snapshot.json').write_text(json.dumps(snapshot,ensure_ascii=False,indent=2)+'\n')
         report_started = time.monotonic()
         display_snapshot = snapshot
+        if profile:
+            from filbet.requirement_report import display_cases
+            report['profile'] = args.profile
+            (folder/'profile.snapshot.json').write_text(json.dumps(profile,ensure_ascii=False,indent=2)+'\n')
+            display_snapshot = display_cases(snapshot,profile,adapter.environment)
         if args.story == 'ISOP-2022':
             from filbet.record_report import display_cases
             display_snapshot = display_cases(snapshot)
-        write_views(folder,display_snapshot,report,extra_views=args.extra_views)
+        if profile:
+            from filbet.requirement_report import write_reviewed_views
+            write_reviewed_views(folder,display_snapshot,report,extra_views=args.extra_views)
+        else:
+            write_views(folder,display_snapshot,report,extra_views=args.extra_views)
+        if profile:
+            from filbet.requirement_report import write_assessment
+            write_assessment(folder,snapshot,report,profile)
         report['timings_ms']['report'] = round((time.monotonic()-report_started)*1000)
         (folder/'result.json').write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n')
         if any(item.get('steps') for item in report['results']):
@@ -121,6 +160,9 @@ def main():
             temp.replace(latest)
             (folder.parent/'latest.html').write_text('<!doctype html><meta charset="utf-8"><title>最近一次实测</title><a href="'+run_id+'/results.html">打开最近一次实测结果</a>')
         print('Results:',folder/'results.html')
+        if args.story == 'ISOP-2027':
+            from qa_core.report_retention import retain_latest
+            retain_latest(folder,state_dir=ROOT/'api/local-state')
         if args.result_index:
             with args.result_index.open('x',encoding='utf-8') as index:
                 json.dump({'raw':str((folder/'result.json').resolve()),'run_id':run_id},index)

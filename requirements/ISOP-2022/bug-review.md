@@ -1,5 +1,7 @@
 # ISOP-2022 / 2085 首轮问题评审
 
+2026-09-14后续：已完成七需求本轮可执行FAT测试，2022解除暂停，最新结果见[七需求本轮记录](../test-round-20260914-seven.md)。下方早先批次结论按日期保留，不作为本轮结果。
+
 2026-09-11，FAT，部署构建未提供。用户授权直接开测、逐轮出结果；以下问题只留本地，**尚未获建单确认，未创建Jira BUG或发群**。两处接口均为POST、CBOR：`/admin/record/bet`、`/admin/record/game`。每轮fresh登录，只读查询，无业务写入。
 
 首轮[结果表](../../reports/qa/ISOP-2022/20260911T092623Z-a2618c63/results.html)：28 PASS、14 FAIL、5 NOT_RUN、0 ERROR。随后针对失败做[8项限定复核](../../reports/qa/ISOP-2022/20260911T092848Z-52a352ee/results.html)，8项均FAIL；这不是第二轮全量回归，不与首轮累加计算通过率。原失败未覆盖、未改判。数值诊断与只读体育源表汇总在[diagnostic-20260911](../../reports/qa/ISOP-2022/diagnostic-20260911/)；响应身份字段未落盘。

@@ -18,6 +18,13 @@ export function locate(root, spec) {
   if (spec.index !== undefined) target = target.nth(spec.index);
   return target;
 }
+export async function confirmOrReady(page, target, ready) {
+  await target.or(ready).filter({visible:true}).first().waitFor({state:'visible'});
+  if (await ready.isVisible()) return 'form-already-visible';
+  await target.click();
+  await ready.waitFor({state:'visible'});
+  return 'confirmation-clicked';
+}
 function safeNumbers(value) {
   if (typeof value === 'number' && Number.isInteger(value) && !Number.isSafeInteger(value)) throw new Error('unsafe integer identity');
   if (value && typeof value === 'object') Object.values(value).forEach(safeNumbers);
@@ -58,7 +65,7 @@ export class RequirementUI {
         fs.appendFileSync(path.join(this.config.folder,'private-ui-intents.jsonl'),JSON.stringify({case:s.caseId,step:s.stepId,actor,path:contract.path,phase:'INTENT'})+'\n',{mode:0o600});
       } else {
         const allowed = this.config.assets.requests.some(r => (r.service ? origin : r.origin) === url.origin && r.method === req.method() && new RegExp(r.path_pattern).test(url.pathname));
-        if (!allowed) { s.denied.push({ path: url.pathname, reason: 'unregistered route' }); return route.abort(); }
+        if (!allowed) { s.denied.push({ origin: url.origin, path: url.pathname, method: req.method(), reason: 'unregistered route' }); return route.abort(); }
       }
       if (url.origin === origin && url.pathname.startsWith('/admin/')) {
         const headers = req.headers();
@@ -98,6 +105,7 @@ export class RequirementUI {
         switch (step.op) {
           case 'open': await page.goto(this.config.origin + step.path); await locate(page,step.ready).waitFor(); break;
           case 'click': await target.click(); break;
+          case 'confirm_or_ready': out.summary = await confirmOrReady(page,target,locate(page,step.ready_target)); break;
           case 'fill': await target.fill(String(step.value)); break;
           case 'select': await target.selectOption({label:String(step.value)}); break;
           case 'check': await target.setChecked(step.value); break;

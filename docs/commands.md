@@ -101,6 +101,8 @@ ENV_FILE=.env.fat ENV_FILE_PRECEDENCE=shell EXECUTE_WITHDRAW_UI=true CLIENT_WITH
 
 固定UI使用`--layer UI`；双账号三图UI核准/驳回使用`--only 2027-FLOW-003 2027-FLOW-004`，均需`--execute --insecure --allow-write kyc-review`。页面资产、会话与实测边界见[阶段3记录](new-requirement-stage3.md)。
 
+2026-09-14新增用户授权的2027 UAT执行：`npm run qa:requirement -- ISOP-2027 --env .env.uat --include-ui-automation --execute --insecure --allow-write kyc-review --allow-write kyc-permissions`运行现有API/UI固定计划，包含独立会员注册/KYC编辑复核及专用Codex角色撤权/恢复；范围不是只读。UAT地址对、复核账号独立配置和动态OTP要求见[环境手册](../api/runbooks/ENVIRONMENTS.md)。其他需求、扫描器默认授权和自动触发策略不因此开放UAT。
+
 ## 团队执行包与回填
 
 `npm run qa:delivery -- prepare <Story> --environment FAT --out <新目录>`离线生成API自动表与人工清单；`import --packet <执行包> --manual <回填CSV> --out <新报告目录>`导入人工结果，可重复提供`--auto-results <原始结果JSON>`。细节见[团队流程](team-testing.md)。ISOP-2027默认qa:requirement执行自动分配项；`--include-ui-automation`恢复包含既有UI脚本的范围，`--only/--layer UI`仍可显式选择。
@@ -121,3 +123,15 @@ ENV_FILE=.env.fat ENV_FILE_PRECEDENCE=shell EXECUTE_WITHDRAW_UI=true CLIENT_WITH
 
 
 `qa:telegram run`对有plan.json的需求使用统一API执行器，按已确认计划hash/用例选择执行；UI生成team-packet/manual.csv供人工执行，不启动新需求浏览器。`npm run qa:telegram -- import-manual --job <job> --revision <当前报告版本> --manual <本批回填CSV>`合并明确API来源和人工结果、重新评审BUG，不重跑业务、不建单或发群；导入后使用新revision确认BUG。写范围和未迁移需求兼容规则见[Telegram流程](telegram-qa.md#测试与证据边界)。
+
+## 统一需求工作流
+
+`npm run qa -- status --serve`打开持久保存的本地需求状态页；`npm run qa -- run --execute`按固定授权完成接口同步、提测扫描、AI用例草稿、检查及就绪API执行。单独的sync/generate/check/scan与离线模式见[统一命令手册](requirement-workflow-cli.md)。旧入口保持兼容，2022暂停，UAT适配、BUG模板/责任人映射不在本轮；新入口不建单、不发群。
+
+### 2027修正回归范围与报告保留（2026-09-14）
+
+`npm run qa:requirement -- ISOP-2027 --profile regression --env .env.fat --execute --insecure --allow-write kyc-review --allow-write kyc-permissions`按修正范围执行API/UI；UAT将env改为.env.uat。旧`--profile normal`兼容为同一修正范围，不再沿用29项窄范围。
+
+[范围配置](../requirements/ISOP-2027/regression-profile.json)逐项列出66项保留检查与23项暂略过项，合计89项。仅略过空白/缺失/非法参数及长度、图片大小、分页边界；保留权限、自审、重复操作、并发、查询不命中。7项未实现/恢复占位仍列在结果里。复核权限前置不足的自审/身份保护检查应阻塞，不能把permission拒绝当作业务保护通过。角色撤权用例finally恢复原授权，不自动补授缺失权限。
+
+UI-006准备一次已处理申请，UI-007至013共享该申请并前后核对快照，不能脱离006单独选择。新报告生成成功后，2027同一需求内FAT/UAT各保留最近一份报告；旧执行目录删除，仅必要业务定位标识留忽略的api/local-state。latest-fat.html/latest-uat.html分别导航，latest.html保持最近执行兼容。其他需求不随2027执行清理。

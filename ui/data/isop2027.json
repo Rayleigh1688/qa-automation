@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "source": "ISOP-2027 reviewed FAT UI evidence 2026-09-10; fixed document order guarded by exact collection size",
+  "source": "ISOP-2027 reviewed FAT UI evidence 2026-09-10; UAT 2026-09-14 review-page image CDN observed; fixed document order guarded by exact collection size",
   "auth": {
     "path": "/user/login?redirect=/kyc",
     "steps": [
@@ -129,6 +129,12 @@
     {
       "id": "kyc-images",
       "origin": "https://images-ph-kyc.oss-ap-southeast-6.aliyuncs.com",
+      "method": "GET",
+      "path_pattern": "^/kyc(%2[Ff]|/)[0-9%Ff/]+\\.(webp|png|jpg|jpeg)$"
+    },
+    {
+      "id": "kyc-images-cdn",
+      "origin": "https://images-ph.filbet.com",
       "method": "GET",
       "path_pattern": "^/kyc(%2[Ff]|/)[0-9%Ff/]+\\.(webp|png|jpg|jpeg)$"
     },
