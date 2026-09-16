@@ -1,6 +1,6 @@
 # ISOP-2022：问题与决定
 
-[测试设计](design.md) · [独立测试用例](test-cases.md)
+[设计](design.md) · [问题与决定](questions.md) · [业务用例](test-cases.md) · [总用例表](cases.csv) · [API数据](api/data-cases.csv) · [班车报告](../../reports/qa/batch-20260914-seven/ISOP-2022/results.html)
 
 保留首轮表单评审和用户答复历史。Q/D编号不变；下文数据库证据均指 [设计中的只读核对记录](design.md#数据库只读核对记录2026-09-07)。后续答复记录日期、决定及来源，再同步验收规则和用例。
 

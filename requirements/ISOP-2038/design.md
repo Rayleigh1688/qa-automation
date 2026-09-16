@@ -2,7 +2,7 @@
 
 当前阶段：需求评审/测试准备；不代表业务测试通过。评审日期：2026-09-07（UTC+8）。
 
-[可分派测试用例](test-cases.md) · [问题与决定](questions.md) · [批次评审](../review-summary.md) · [需求索引](../README.md)
+[可分派测试用例](test-cases.md) · [问题与决定](questions.md) · [批次评审](../../docs/history/requirement-records-20260907-11.md#review-20260907) · [需求索引](../README.md)
 
 ## 来源与范围
 

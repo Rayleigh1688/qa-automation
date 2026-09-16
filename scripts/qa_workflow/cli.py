@@ -13,13 +13,14 @@ from .documents import sync
 from .generation import generate
 from .service import preflight, process_candidates
 from .web import export, serve
+from .evidence import check_all
 
 ROOT = Path(__file__).resolve().parents[2]
 
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('mode',choices=['sync','generate','check','scan','run','status'])
+    parser.add_argument('mode',choices=['sync','generate','check','scan','run','status','evidence'])
     parser.add_argument('story',nargs='?')
     parser.add_argument('--config',default='config/telegram/local.json')
     parser.add_argument('--state',default='reports/workflow')
@@ -31,11 +32,19 @@ def main():
     parser.add_argument('--serve',action='store_true')
     parser.add_argument('--validate-output',action='store_true',help='Revalidate the saved AI output against identical source context, without calling AI')
     parser.add_argument('--port',type=int,default=8765)
+    parser.add_argument('--allow-pending',action='store_true',help='Evidence check: allow explicitly unreviewed sources; never ignore drift/errors')
     args = parser.parse_args()
     if args.validate_output and args.mode!='generate': parser.error('--validate-output requires generate')
     if args.execute and args.mode not in ('scan','run'): parser.error('--execute only applies to scan/run')
     if args.offline and args.execute: parser.error('--offline cannot execute')
     if args.serve and args.mode != 'status': parser.error('--serve requires status')
+    if args.allow_pending and args.mode != 'evidence': parser.error('--allow-pending requires evidence')
+    if args.mode == 'evidence':
+        results = check_all(ROOT, args.story)
+        for value in results:
+            print(value['story'], value['status'], '；'.join(value['errors'] + value['pending']))
+        if any(r['errors'] for r in results): return 1
+        return 2 if not args.allow_pending and any(r['pending'] for r in results) else 0
     state = State(ROOT,ROOT/args.state)
     try:
         if args.mode=='status':

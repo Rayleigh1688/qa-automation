@@ -100,6 +100,8 @@ UI 用例依赖 `ui/elements/` 和 `ui/framework/`，页面、弹窗、游戏点
 
 ## 需求工作流与本地状态
 
+`qa_workflow/evidence.py`只读检查逐需求证据基线、文件变化及来源/Case关联；`qa evidence`不依赖凭据或状态库。已登记基线失效时生成与自动触发检查停止该需求；未登记及部分来源显式提示，独立旧CLI兼容。自然语言对照和远端刷新由[证据同步流程](../requirements/evidence-sync-plan.md)负责，hash一致不等于完整需求核验或业务通过。
+
 `scripts/run-qa.py`是薄CLI，`qa_workflow/cli.py`编排有限批次。`documents.py`固定Git提交并复用Bruno资产构建器；`generation.py`复用既有AI只读适配并校验草稿来源；`service.py`复用计划、业务adapter及delivery pipeline，检查授权/暂停/计划hash并去重触发。`state.py`追加保存自动证据和独立人工修订；`web.py`提供本地HTML及带版本检查的状态保存接口，不提供业务执行接口。
 
 状态权威为本机SQLite及各轮来源证据，HTML是视图；仓库seed仅用于初始化。旧Markdown完整保留为迁移历史，操作与备份边界见[统一命令手册](requirement-workflow-cli.md)。上述模块是本项目工作流，不进入通用qa_core导出白名单。

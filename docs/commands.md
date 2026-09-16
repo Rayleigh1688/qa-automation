@@ -126,6 +126,8 @@ ENV_FILE=.env.fat ENV_FILE_PRECEDENCE=shell EXECUTE_WITHDRAW_UI=true CLIENT_WITH
 
 ## 统一需求工作流
 
+`npm run qa -- evidence [ISOP-2032]`只读检查需求证据同步基线，无需凭据、不初始化状态库；省略编号检查全部。退出0为登记范围完整、1为文件变化/无效关联、2为未登记/部分来源未核；`--allow-pending`允许明确列出的缺口但不忽略错误。流程及边界见[证据同步计划](../requirements/evidence-sync-plan.md)。
+
 `npm run qa -- status --serve`打开持久保存的本地需求状态页；`npm run qa -- run --execute`按固定授权完成接口同步、提测扫描、AI用例草稿、检查及就绪API执行。单独的sync/generate/check/scan与离线模式见[统一命令手册](requirement-workflow-cli.md)。旧入口保持兼容，2022暂停，UAT适配、BUG模板/责任人映射不在本轮；新入口不建单、不发群。
 
 ### 2027修正回归范围与报告保留（2026-09-14）

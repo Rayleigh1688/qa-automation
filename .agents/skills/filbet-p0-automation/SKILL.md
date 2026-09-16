@@ -35,6 +35,8 @@ Do not treat generated files under `api/results/`, `ui/results/`, or `ui/reports
 
 ## Keep documentation linked
 
+For requirement supplements, follow `../../../requirements/evidence-sync-plan.md`: compare Jira body/comments with linked Lark documents and relevant subtasks, record unread scope, then update design/questions/cases and executable assertions/blockers together. Do not treat a linked document as a replacement for the Jira body. Check `npm run qa -- evidence <Story>` before generating or executing revised cases; reviewed hashes do not establish remote freshness or a business PASS.
+
 When a decision changes:
 
 - current evidence or next action → `AI-HANDOFF.md`;

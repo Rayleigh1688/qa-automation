@@ -1,8 +1,10 @@
-# ISOP-2027 API 测试
+# ISOP-2027：API测试说明
+
+[设计](../design.md) · [问题与决定](../questions.md) · [业务用例](../test-cases.md) · [API数据](data-cases.csv) · [班车报告](../../../reports/qa/batch-20260914-seven/ISOP-2027/results.html)
 
 最新限定复测：[历史报告已清理；查看最新FAT报告](../test-report-2026-09-14.md)。FAT人工通过按用户确认登记；接口反例仍有失败，不能据此替换人工结果或宣布UAT验收完成。
 
-[验收用例](../test-cases.md) · [契约评审](contract-review.md) · [正反例数据](cases.json)
+[契约评审](contract-review.md) · [正反例数据](cases.json)
 
 用例数据按需求归属；共享执行器复用现有CBOR和后台登录。`case_ids`引用验收Case，`id`标识数据组合；列表结构、筛选命中和完整业务闭环分别记结果。空列表不能使筛选/金额断言通过。
 

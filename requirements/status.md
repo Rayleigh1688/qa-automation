@@ -1,15 +1,28 @@
-# 需求状态入口
+# 当前班车状态
 
-2026-09-14后续：已完成七需求本轮可执行FAT测试，2022解除暂停，最新结果见[七需求本轮记录](test-round-20260914-seven.md)。下方早先批次结论按日期保留，不作为本轮结果。
+同步日期：2026-09-15。来源：[2026年9月第二次班车](https://alibaba-international.atlassian.net/wiki/spaces/QT/pages/418938887/2026-9)（页面标注同步日期2026-09-14；本次浏览器已读14行）及14张Jira当前状态（更新于2026-09-15 17:27，UTC+8）。
 
-2026-09-14最新：2027已在FAT授予复核权限后重新测试，并按同样66项范围重测UAT；另23项暂略过。结果和未完成原因见[FAT报告](ISOP-2027/test-report-2026-09-14.md)、[UAT报告](ISOP-2027/test-report-uat-2026-09-14.md)。UAT仍受注册/数据前置阻塞，两环境均非全量通过；保留人工来源，不自动关闭需求。旧报告按用户授权清理，每环境只留最新一份。
+**执行约定：待上线的需求本轮不再测试。** 共6项暂停：2027、2029、2037、2038、2110、2086。2032仅管理后台已提测，客户端先不测；未提测项等待提测。状态同步不修改已有API/UI结果，也不等同于生产发布。
 
-2026-09-14后续：2027已完成本轮[API/UI联合复测](ISOP-2027/test-report-2026-09-14.md)，仍有失败及未覆盖项；人工FAT通过和进入UAT的历史来源独立保留，不由此自动关闭需求。该联合批次包含UI，不能冒充纯API批次或人工UI回填。
+[状态页面](status.html) · [上轮测试记录](test-round-20260914-seven.md) · [历史状态](status-history-20260914.md)
 
-当前入口已改为[需求状态HTML页面](status.html)。运行 `npm run qa -- status --serve`，打开命令打印的本地地址，即可修改API人工记录、UI手工测试和需求阶段，保存后重启仍保留。
+| 需求 | 班车状态 | Jira状态 | 本轮处理 |
+| --- | --- | --- | --- |
+| [ISOP-2022](https://alibaba-international.atlassian.net/browse/ISOP-2022) | 测试中 | FAT 测试 | 数据库表需要重建；重建及修复就绪后再执行可测API |
+| [ISOP-2027](https://alibaba-international.atlassian.net/browse/ISOP-2027) | 待上线 | 待上线 | 本轮不再测试 |
+| [ISOP-2028](https://alibaba-international.atlassian.net/browse/ISOP-2028) | 未提测 | 待办 | 等待正式提测 |
+| [ISOP-2029](https://alibaba-international.atlassian.net/browse/ISOP-2029) | 待上线 | 待上线 | 本轮不再测试 |
+| [ISOP-2030](https://alibaba-international.atlassian.net/browse/ISOP-2030) | 需求调整 | 審查失敗 | 暂停；等待调整后重新明确范围 |
+| [ISOP-2031](https://alibaba-international.atlassian.net/browse/ISOP-2031) | 待验收 | 待办 | 生产验收由人工推进；不从父单待办推断需重测 |
+| [ISOP-2032](https://alibaba-international.atlassian.net/browse/ISOP-2032) | 部分提测 | 待办 | 仅管理后台已提测；客户端未提测，先不测客户端 |
+| [ISOP-2037](https://alibaba-international.atlassian.net/browse/ISOP-2037) | 待上线 | 待上线 | 本轮不再测试 |
+| [ISOP-2038](https://alibaba-international.atlassian.net/browse/ISOP-2038) | 待上线 | 待上线 | 本轮不再测试 |
+| [ISOP-2041](https://alibaba-international.atlassian.net/browse/ISOP-2041) | 待确认 | 已完成 | Jira已完成；班车验收结论仍待确认，不自动视作已上线 |
+| [ISOP-2043](https://alibaba-international.atlassian.net/browse/ISOP-2043) | 未提测 | 待办 | 等待表完成及正式提测 |
+| [ISOP-2072](https://alibaba-international.atlassian.net/browse/ISOP-2072) | 未提测 | 待办 | 等待正式提测 |
+| [ISOP-2110](https://alibaba-international.atlassian.net/browse/ISOP-2110) | 待上线 | 验收通过 | Jira验收通过；按班车待上线，本轮不再测试 |
+| [ISOP-2086](https://alibaba-international.atlassian.net/browse/ISOP-2086) | 待验收 | 待上线 | Jira已待上线；按用户要求本轮不再测试，保留班车待验收差异 |
 
-自动执行证据与人工修订分开保存。修改人、来源、原因、时间和上一修订版本均保留；人工通过不覆盖API失败，阶段修改不会触发测试、建单或发群。API PASS只代表对应环境、版本和所选用例范围。
+2086班车待验收、Jira待上线，本轮按用户待上线不测处理；2110班车待上线、Jira验收通过；2041班车待确认、Jira已完成；2031班车待验收、Jira待办。差异并列，不用父单状态覆盖班车细分范围。2070未列入本次14项，旧状态保留。
 
-[迁移前完整记录](status-history-20260914.md)保留截至2026-09-14的13项需求、原始来源及用户决定。[初始数据](status-seed.json)只用于新工作区初始化，不作为第二份实时状态表；离线HTML为基线快照，实时状态以本地服务为准。
-
-使用与数据恢复方式见[统一需求命令](../docs/requirement-workflow-cli.md)。2022继续暂停，UAT适配不在本轮。
+本地HTML状态通过`npm run qa -- status --serve`查看。班车阶段保存为带来源的独立状态修订，API/UI记录原样保留；待上线项同时在执行配置中暂停。独立旧CLI仍可显式调用，但本轮约定不再选择这些需求。

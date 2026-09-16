@@ -12,13 +12,19 @@ from qa_delivery.pipeline import run_pipeline, check_account
 from filbet.requirement_adapter import Adapter, METHODS
 from .generation import context
 from .state import collect_results
+from .evidence import review
 
 
 def preflight(state, config, story, environment='FAT', payload=None, policy=None):
     reasons, warnings = [], []
+    evidence = review(state.root, story)
+    warnings.append('证据同步：' + evidence['status'] + '；' + '；'.join(evidence['errors'] + evidence['pending']))
+    reasons.extend(evidence['errors'])
     policy = policy or json.loads((state.root/'config/workflow.json').read_text(encoding='utf-8'))
     rule = policy.get('stories',{}).get(story,{})
-    if story == 'ISOP-2022' or rule.get('paused'):
+    if rule.get('paused'):
+        reasons.append('已暂停：' + (rule.get('pause_reason') or '按当前状态及用户范围不执行'))
+    elif story == 'ISOP-2022':
         reasons.append('2022等待修复，暂停优先；需用户重新开测指令')
     if environment != 'FAT': reasons.append('本轮仅适配FAT；UAT不在范围内')
     if not rule.get('authorized'): reasons.append('本需求尚无可沿用的自动执行授权')

@@ -16,7 +16,7 @@ def context(root, story):
     if not re.fullmatch(r'ISOP-\d+',story): raise ValueError('invalid requirement')
     directory = root/'requirements'/story
     sources = {}
-    for name in ('design.md','questions.md','test-cases.md','preparation.csv','api/contract-review.md','api/data-review.md','plan.json'):
+    for name in ('design.md','questions.md','test-cases.md','evidence-sync.md','evidence-sync.json','preparation.csv','api/contract-review.md','api/data-review.md','plan.json','api/cases.json'):
         path = directory/name
         if path.is_file():
             text = path.read_text(encoding='utf-8-sig')
@@ -49,6 +49,10 @@ def validate(value, data):
 
 
 def generate(state, story, config, analyzer=ai, validate_output=False):
+    from .evidence import review
+    evidence = review(state.root, story)
+    if evidence['errors']:
+        raise ValueError('证据同步基线已失效：' + '；'.join(evidence['errors']))
     data = context(state.root,story)
     key = digest([data, SCHEMA])
     folder = state.directory/'generation'/story/key
@@ -70,6 +74,8 @@ def generate(state, story, config, analyzer=ai, validate_output=False):
             'independent data reconciliation and asynchronous risks where applicable. '
             'source_ids must be supplied file names; acceptance_ids must literally exist in sources. '
             'Never invent endpoints, expected formulas, sample IDs or decisions. Record unresolved dependencies in blockers/questions. '
+            'Use evidence-sync source coverage and decisions when present. Unread sources are gaps, not proof of missing requirements. '
+            'Respect confirmed scope exclusions and never reopen resolved questions because historical text differs. '
             'Do not copy API responses as expected values. This is a draft, not executed code or a PASS result.', data, SCHEMA)
     validate(value,data)
     value.update(case_checks={c['id']: ('BLOCKED_EXPECTATION' if not c['acceptance_ids'] else 'BLOCKED' if c['blockers'] else 'DRAFT_LINKED') for c in value['cases']},
