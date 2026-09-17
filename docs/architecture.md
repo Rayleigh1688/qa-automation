@@ -37,6 +37,8 @@ UI 用例依赖 `ui/elements/` 和 `ui/framework/`，页面、弹窗、游戏点
 
 ## 文档归属
 
+现有后台功能的菜单、字段规则及模块验证清单放在[modules](../modules/README.md)，先首页BI、后KYC；引用已有长期业务规则与需求证据，不迁移执行脚本或复制第二套权威规则。requirements继续维护Story变更与交付，reports保存本机执行证据。
+
 | 信息 | 权威入口 |
 | --- | --- |
 | 需求级提测、测试、发布及关闭状态 | [requirements/status.html](../requirements/status.html)，链接原始来源；不复制用例通过率 |
