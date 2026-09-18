@@ -8,6 +8,7 @@ from types import SimpleNamespace
 from unittest.mock import Mock
 
 from support import ROOT
+from requirement_paths import requirement_dir, requirement_dirs
 from qa_workflow.evidence import file_hash, review
 from qa_workflow.generation import generate, context
 
@@ -20,11 +21,11 @@ class EvidenceSyncTests(unittest.TestCase):
         self.story = 'ISOP-2032'
         self.folder = self.root / 'requirements' / self.story
         self.folder.mkdir(parents=True)
-        self.data = json.loads((ROOT / 'requirements' / self.story / 'evidence-sync.json').read_text())
+        self.data = json.loads((requirement_dir(ROOT, self.story) / 'evidence-sync.json').read_text())
         for name in self.data['files']:
             path = self.folder / name
             path.parent.mkdir(parents=True, exist_ok=True)
-            path.write_bytes((ROOT / 'requirements' / self.story / name).read_bytes())
+            path.write_bytes((requirement_dir(ROOT, self.story) / name).read_bytes())
         self.save()
 
     def save(self):

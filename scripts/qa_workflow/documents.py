@@ -1,4 +1,5 @@
 """Commit-pinned Bruno discovery and traceable requirement association."""
+from requirement_paths import requirement_dirs
 import importlib.util
 import io
 import json
@@ -64,8 +65,8 @@ def sync(state, source, ref='HEAD', fetch=False):
         scanner.write_markdown(rows,source,state.root/'api/inventory/interfaces.csv',state.root/'api/inventory/interfaces.md')
     subprocess.run([sys.executable, 'scripts/build-api-catalog.py'], cwd=state.root, check=True, capture_output=True)
     evidence = {}
-    for seed in state.seed():
-        directory = state.root/'requirements'/seed['story']
+    for directory in requirement_dirs(state.root):
+        seed = {'story': directory.name}
         evidence[seed['story']] = '\n'.join(p.read_text(encoding='utf-8') for p in
             (directory/'design.md',directory/'test-cases.md',directory/'api/contract-review.md') if p.is_file())
     changes = []

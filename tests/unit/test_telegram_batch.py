@@ -50,6 +50,8 @@ class BatchTests(unittest.TestCase):
         patcher.start(); self.addCleanup(patcher.stop)
         self.temp = tempfile.TemporaryDirectory(); self.state = Path(self.temp.name)
         self.store = Store(self.state / 'queue.sqlite3'); self.c = config(); self.c.pop('submitter_ids')
+        catalog = patch('qa_delivery.intake.requirement_catalog', return_value={'ISOP-2037': 'Fixture requirement'})
+        catalog.start(); self.addCleanup(catalog.stop)
     def tearDown(self): self.store.close(); self.temp.cleanup()
     def scan(self, text='https://test.atlassian.net/browse/ISOP-2067 @ssxx 合規後台提測', **extras):
         inbox = Inbox([[msg(1, text, **extras)]])

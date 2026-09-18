@@ -11,6 +11,7 @@ import tempfile
 import threading
 import unittest
 from support import ROOT
+from requirement_paths import requirement_dir, requirement_dirs
 from qa_core.json_worker import JsonWorker
 from qa_core.execution_plan import validate
 from filbet.requirement_adapter import METHODS
@@ -18,7 +19,7 @@ from filbet.requirement_adapter import METHODS
 
 class UIContractTests(unittest.TestCase):
     def test_bad_ui_assets_actions_responses_fail_offline(self):
-        plan=json.loads((ROOT/'requirements/ISOP-2027/plan.json').read_text())
+        plan=json.loads((requirement_dir(ROOT, 'ISOP-2027') / 'plan.json').read_text())
         plan['cases']=[next(c for c in plan['cases'] if c['id']=='2027-UI-001')]
         validate(plan,METHODS)
         for change in [{'element':'missing'},{'op':'confirm_or_ready','ready_element':'missing'},{'op':'eval'}, {'expect':[]}, {'response':{'contract':'missing'}}]:

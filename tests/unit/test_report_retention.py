@@ -7,6 +7,7 @@ from filbet.normal_profile import prepare_cases,reuse_ui
 from types import SimpleNamespace
 from unittest.mock import patch
 from support import ROOT
+from requirement_paths import requirement_dir, requirement_dirs
 
 class ReportRetentionTests(unittest.TestCase):
     def test_keeps_latest_per_environment_and_identifiers(self):
@@ -39,7 +40,7 @@ class ReportRetentionTests(unittest.TestCase):
     def test_real_shared_ui_queries_resolve_processed_record_id(self):
         from qa_core.execution_plan import load,resolve
         from filbet.requirement_adapter import METHODS
-        _,cases,_=load(ROOT/'requirements/ISOP-2027/plan.json',METHODS)
+        _,cases,_=load(requirement_dir(ROOT, 'ISOP-2027') / 'plan.json',METHODS)
         for case in prepare_cases(cases):
             if case['id'] not in {f'2027-UI-{i:03}' for i in range(7,14)}:
                 continue
@@ -51,10 +52,10 @@ class ReportRetentionTests(unittest.TestCase):
                     self.assertEqual(assertion['value'],'owned-record')
 
     def test_corrected_scope_does_not_drop_security_or_missing_implementations(self):
-        profile=json.loads((ROOT/'requirements/ISOP-2027/regression-profile.json').read_text())
+        profile=json.loads((requirement_dir(ROOT, 'ISOP-2027') / 'regression-profile.json').read_text())
         from qa_core.execution_plan import load
         from filbet.requirement_adapter import METHODS
-        _,cases,_=load(ROOT/'requirements/ISOP-2027/plan.json',METHODS)
+        _,cases,_=load(requirement_dir(ROOT, 'ISOP-2027') / 'plan.json',METHODS)
         selected=set(profile['cases']);deferred={x['id'] for x in profile['deferred']}
         self.assertFalse(selected & deferred)
         self.assertEqual(selected|deferred,{c['id'] for c in cases})

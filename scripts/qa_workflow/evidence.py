@@ -1,4 +1,5 @@
 """Offline review-baseline checks. Hash agreement is not semantic or business approval."""
+from requirement_paths import requirement_dir, requirement_dirs
 import hashlib
 import json
 import re
@@ -15,7 +16,7 @@ def file_hash(path):
 def review(root, story):
     if not re.fullmatch(r'ISOP-\d+', story):
         raise ValueError('invalid requirement')
-    folder = Path(root) / 'requirements' / story
+    folder = requirement_dir(root, story)
     manifest = folder / 'evidence-sync.json'
     result = {'story': story, 'status': 'UNREVIEWED', 'errors': [], 'pending': []}
     if not folder.is_dir():
@@ -77,6 +78,6 @@ def review(root, story):
     return result
 
 
-def check_all(root, story=None):
-    stories = [story] if story else sorted(p.name for p in (Path(root) / 'requirements').glob('ISOP-*') if p.is_dir())
+def check_all(root, story=None, *, include_history=False):
+    stories = [story] if story else sorted(p.name for p in requirement_dirs(root, include_history=include_history))
     return [review(root, name) for name in stories]

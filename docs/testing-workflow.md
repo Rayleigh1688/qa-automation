@@ -76,7 +76,7 @@ npm run qa:requirement -- ISOP-2027 --export-cases
 
 ```bash
 # 只检查用例结构；不登录、不运行测试
-npm run qa:report -- --cases requirements/ISOP-2027/cases.csv
+npm run qa:report -- --cases requirements/history/through-ISOP-2072/ISOP-2027/cases.csv
 # 从最近真实执行的原始结果及冻结用例重建精简视图，不登录
 npm run qa:requirement -- ISOP-2027 --rebuild reports/qa/ISOP-2027/20260911T050501Z-d626392b
 ```

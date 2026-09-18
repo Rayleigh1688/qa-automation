@@ -1,60 +1,64 @@
 {
   "schema_version": 1,
-  "authorization_source": "AI-HANDOFF.md及2026-09-14用户第1—4项实施指令；继承既有执行范围，2022暂停，不建单/发群，不适配UAT；2026-09-15用户要求待上线不再测，班车及Jira核对见requirements/status.md",
+  "authorization_source": "AI-HANDOFF.md及2026-09-14用户第1—4项实施指令；继承既有执行范围，2022暂停，不建单/发群，不适配UAT；2026-09-15用户要求待上线不再测，班车及Jira核对见requirements/status.md；2026-09-18用户确认2072及之前已完成归档，停止其自动执行",
   "stories": {
     "ISOP-2041": {
       "authorized": false,
-      "paused": false,
+      "paused": true,
       "allow_write": [],
-      "plan_sha256": null
+      "plan_sha256": null,
+      "pause_reason": "2026-09-18用户确认已完成并实体归档；退出自动扫描/执行，历史回归须显式运行CLI"
     },
     "ISOP-2070": {
       "authorized": false,
-      "paused": false,
+      "paused": true,
       "allow_write": [],
-      "plan_sha256": null
+      "plan_sha256": null,
+      "pause_reason": "2026-09-18用户确认已完成并实体归档；退出自动扫描/执行，历史回归须显式运行CLI"
     },
     "ISOP-2022": {
       "authorized": false,
       "paused": true,
       "allow_write": [],
       "plan_sha256": "3cbe4a0faf925e2db1c4e30688b43acf7ce8b9be53d5f21d61963dea88e689e2",
-      "pause_reason": "班车测试中；等待数据库表重建及修复就绪，本次状态同步不启动重测"
+      "pause_reason": "2026-09-18用户确认已完成并实体归档；退出自动扫描/执行，历史回归须显式运行CLI"
     },
     "ISOP-2038": {
       "authorized": false,
       "paused": true,
       "allow_write": [],
       "plan_sha256": null,
-      "pause_reason": "2026-09-15班车/Jira待上线，用户要求本轮不再测试；已有结果保留",
+      "pause_reason": "2026-09-18用户确认已完成并实体归档；退出自动扫描/执行，历史回归须显式运行CLI",
       "status_source": "https://alibaba-international.atlassian.net/wiki/spaces/QT/pages/418938887/2026-9"
     },
     "ISOP-2031": {
-      "authorized": true,
-      "paused": false,
+      "authorized": false,
+      "paused": true,
       "allow_write": [],
-      "plan_sha256": "c29f29ef10458ba3f0adf3c87af62a8605a930fb197e935502c4cece7fcedd31"
+      "plan_sha256": "c29f29ef10458ba3f0adf3c87af62a8605a930fb197e935502c4cece7fcedd31",
+      "pause_reason": "2026-09-18用户确认已完成并实体归档；退出自动扫描/执行，历史回归须显式运行CLI"
     },
     "ISOP-2030": {
       "authorized": false,
-      "paused": false,
-      "allow_write": [],
-      "plan_sha256": null
-    },
-    "ISOP-2037": {
-      "authorized": true,
       "paused": true,
       "allow_write": [],
       "plan_sha256": null,
-      "pause_reason": "2026-09-15班车/Jira待上线，用户要求本轮不再测试；已有结果保留",
+      "pause_reason": "2026-09-18用户确认已完成并实体归档；退出自动扫描/执行，历史回归须显式运行CLI"
+    },
+    "ISOP-2037": {
+      "authorized": false,
+      "paused": true,
+      "allow_write": [],
+      "plan_sha256": null,
+      "pause_reason": "2026-09-18用户确认已完成并实体归档；退出自动扫描/执行，历史回归须显式运行CLI",
       "status_source": "https://alibaba-international.atlassian.net/wiki/spaces/QT/pages/418938887/2026-9"
     },
     "ISOP-2027": {
-      "authorized": true,
+      "authorized": false,
       "paused": true,
       "allow_write": [],
       "plan_sha256": "fd0d95f1bc8098e9177dd09667793a67b045514bccbf6740628a43ee8f4f0423",
-      "pause_reason": "2026-09-15班车/Jira待上线，用户要求本轮不再测试；已有结果保留",
+      "pause_reason": "2026-09-18用户确认已完成并实体归档；退出自动扫描/执行，历史回归须显式运行CLI",
       "status_source": "https://alibaba-international.atlassian.net/wiki/spaces/QT/pages/418938887/2026-9"
     },
     "ISOP-2029": {
@@ -62,32 +66,36 @@
       "paused": true,
       "allow_write": [],
       "plan_sha256": null,
-      "pause_reason": "2026-09-15班车/Jira待上线，用户要求本轮不再测试；已有结果保留",
+      "pause_reason": "2026-09-18用户确认已完成并实体归档；退出自动扫描/执行，历史回归须显式运行CLI",
       "status_source": "https://alibaba-international.atlassian.net/wiki/spaces/QT/pages/418938887/2026-9"
     },
     "ISOP-2072": {
       "authorized": false,
-      "paused": false,
+      "paused": true,
       "allow_write": [],
-      "plan_sha256": null
+      "plan_sha256": null,
+      "pause_reason": "2026-09-18用户确认已完成并实体归档；退出自动扫描/执行，历史回归须显式运行CLI"
     },
     "ISOP-2043": {
-      "authorized": true,
-      "paused": false,
+      "authorized": false,
+      "paused": true,
       "allow_write": [],
-      "plan_sha256": "0f10c8165c12423077823ff20168e233ee187714144b7000ec4869d5b8377403"
+      "plan_sha256": "0f10c8165c12423077823ff20168e233ee187714144b7000ec4869d5b8377403",
+      "pause_reason": "2026-09-18用户确认已完成并实体归档；退出自动扫描/执行，历史回归须显式运行CLI"
     },
     "ISOP-2028": {
-      "authorized": true,
-      "paused": false,
+      "authorized": false,
+      "paused": true,
       "allow_write": [],
-      "plan_sha256": "07edd88c0993ccd52a9339c52f96bad3dc34c084ed13a7975077a964d0364c57"
+      "plan_sha256": "07edd88c0993ccd52a9339c52f96bad3dc34c084ed13a7975077a964d0364c57",
+      "pause_reason": "2026-09-18用户确认已完成并实体归档；退出自动扫描/执行，历史回归须显式运行CLI"
     },
     "ISOP-2032": {
-      "authorized": true,
-      "paused": false,
+      "authorized": false,
+      "paused": true,
       "allow_write": [],
-      "plan_sha256": null
+      "plan_sha256": null,
+      "pause_reason": "2026-09-18用户确认已完成并实体归档；退出自动扫描/执行，历史回归须显式运行CLI"
     },
     "ISOP-2086": {
       "authorized": false,

@@ -115,7 +115,7 @@ ENV_FILE=.env.fat ENV_FILE_PRECEDENCE=shell EXECUTE_WITHDRAW_UI=true CLIENT_WITH
 
 ## 分离总用例与API数据
 
-`npm run qa:cases -- <Story...>`离线导出指定需求的cases.csv总表，以及已有执行资产的api/data-cases.csv；`--all`导出全部需求。总表来自test-cases.md，API表来自plan.json或旧api/cases.json，不登录、不生成运行结果。没有API执行源的需求只导出总表，命令明确显示API未实现。
+`npm run qa:cases -- <Story...>`离线导出指定需求的cases.csv总表，以及已有执行资产的api/data-cases.csv；`--all`只导出当前需求，`--all --include-history`包含历史归档。显式指定旧编号时自动定位历史目录。总表来自test-cases.md，API表来自plan.json或旧api/cases.json，不登录、不生成运行结果。没有API执行源的需求只导出总表，命令明确显示API未实现。
 
 原`qa:requirement -- <Story> --export-cases`同步生成这两类表并继续更新旧查询兼容JSON。总表使用业务Case ID，数据表和`--only`使用执行Case ID；总表ID不直接传给`--only`。详细执行结果用本批冻结快照重建，不能与业务总表按执行编号直接合并。已有团队执行包不自动重写。
 
@@ -134,6 +134,6 @@ ENV_FILE=.env.fat ENV_FILE_PRECEDENCE=shell EXECUTE_WITHDRAW_UI=true CLIENT_WITH
 
 `npm run qa:requirement -- ISOP-2027 --profile regression --env .env.fat --execute --insecure --allow-write kyc-review --allow-write kyc-permissions`按修正范围执行API/UI；UAT将env改为.env.uat。旧`--profile normal`兼容为同一修正范围，不再沿用29项窄范围。
 
-[范围配置](../requirements/ISOP-2027/regression-profile.json)逐项列出66项保留检查与23项暂略过项，合计89项。仅略过空白/缺失/非法参数及长度、图片大小、分页边界；保留权限、自审、重复操作、并发、查询不命中。7项未实现/恢复占位仍列在结果里。复核权限前置不足的自审/身份保护检查应阻塞，不能把permission拒绝当作业务保护通过。角色撤权用例finally恢复原授权，不自动补授缺失权限。
+[范围配置](../requirements/history/through-ISOP-2072/ISOP-2027/regression-profile.json)逐项列出66项保留检查与23项暂略过项，合计89项。仅略过空白/缺失/非法参数及长度、图片大小、分页边界；保留权限、自审、重复操作、并发、查询不命中。7项未实现/恢复占位仍列在结果里。复核权限前置不足的自审/身份保护检查应阻塞，不能把permission拒绝当作业务保护通过。角色撤权用例finally恢复原授权，不自动补授缺失权限。
 
 UI-006准备一次已处理申请，UI-007至013共享该申请并前后核对快照，不能脱离006单独选择。新报告生成成功后，2027同一需求内FAT/UAT各保留最近一份报告；旧执行目录删除，仅必要业务定位标识留忽略的api/local-state。latest-fat.html/latest-uat.html分别导航，latest.html保持最近执行兼容。其他需求不随2027执行清理。

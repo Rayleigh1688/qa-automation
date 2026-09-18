@@ -11,9 +11,9 @@
 | `requirements/review-summary.md` | [历史章节](#review-20260907) | `6ec36562693b9b55a831c6d1063d7dd03e54e01bd28a67758a2aa001bc70f633` |
 | `requirements/api-coverage-review-20260911.md` | [历史章节](#coverage-20260911) | `79150fd43d0d5ef06f81852f31ff36a049b0c64f329cbdfa89f73457a5060092` |
 | `requirements/api-test-round-20260911.md` | [历史章节](#test-20260911) | `65f47edd1880e7eb6a5a489644b33318062ae069eb64ba4e9d2650445f25d860` |
-| `requirements/ISOP-2032/api/execution-2026-09-10.md` | [历史章节](#isop-2032-20260910) | `9ebb4272c38f2f1f3d6244f24bacf0b4b958a10a795b6c6a1e87beaf84b96a28` |
-| `requirements/ISOP-2037/api/execution-2026-09-10.md` | [历史章节](#isop-2037-20260910) | `cb4ce196ea7026aecd0a7c0184f7b71d447df8e246c7d04a7dae09d6fc493cab` |
-| `requirements/ISOP-2043/api/execution-2026-09-10.md` | [历史章节](#isop-2043-20260910) | `b4ccafb2071881f6ad7b69f57760e24af5c6b68c5ee96d6c61b05696fc8d8b15` |
+| `requirements/history/through-ISOP-2072/ISOP-2032/api/execution-2026-09-10.md` | [历史章节](#isop-2032-20260910) | `9ebb4272c38f2f1f3d6244f24bacf0b4b958a10a795b6c6a1e87beaf84b96a28` |
+| `requirements/history/through-ISOP-2072/ISOP-2037/api/execution-2026-09-10.md` | [历史章节](#isop-2037-20260910) | `cb4ce196ea7026aecd0a7c0184f7b71d447df8e246c7d04a7dae09d6fc493cab` |
+| `requirements/history/through-ISOP-2072/ISOP-2043/api/execution-2026-09-10.md` | [历史章节](#isop-2043-20260910) | `b4ccafb2071881f6ad7b69f57760e24af5c6b68c5ee96d6c61b05696fc8d8b15` |
 
 <a id="review-20260907"></a>
 
@@ -41,17 +41,17 @@ ORDER BY created DESC, key DESC
 
 | 创建时间（UTC+8） | Story | 首轮审阅范围 | 分派入口 |
 | --- | --- | --- | --- |
-| 2026-09-07 16:47:15 | [ISOP-2070](https://alibaba-international.atlassian.net/browse/ISOP-2070) Funky 時間回傳問題 | Funky纯日期、+8日界、重试 | [设计](../../requirements/ISOP-2070/design.md) · [问题](../../requirements/ISOP-2070/questions.md) · [用例](../../requirements/ISOP-2070/test-cases.md) |
-| 2026-09-07 00:20:36 | [ISOP-2043](https://alibaba-international.atlassian.net/browse/ISOP-2043) 管理後台 - 新增 JP 資訊 | 会员/游戏/财务五组JP表单 | [设计](../../requirements/ISOP-2043/design.md) · [问题](../../requirements/ISOP-2043/questions.md) · [用例](../../requirements/ISOP-2043/test-cases.md) |
-| 2026-09-07 00:06:12 | [ISOP-2041](https://alibaba-international.atlassian.net/browse/ISOP-2041) JP 注單寫入方式調整 | JP字段拆分、历史修复、资金不变 | [设计](../../requirements/ISOP-2041/design.md) · [问题](../../requirements/ISOP-2041/questions.md) · [用例](../../requirements/ISOP-2041/test-cases.md) |
-| 2026-09-05 00:32:02 | [ISOP-2038](https://alibaba-international.atlassian.net/browse/ISOP-2038) 合規後台 - 移除 Jackpot 記錄選單 | 菜单和旧路由移除 | [设计](../../requirements/ISOP-2038/design.md) · [问题](../../requirements/ISOP-2038/questions.md) · [用例](../../requirements/ISOP-2038/test-cases.md) |
-| 2026-09-05 00:16:03 | [ISOP-2037](https://alibaba-international.atlassian.net/browse/ISOP-2037) 合規後台 - 全平台投注紀錄增加欄位 | 四JP列、Multi、类型筛选、24列CSV | [设计](../../requirements/ISOP-2037/design.md) · [问题](../../requirements/ISOP-2037/questions.md) · [用例](../../requirements/ISOP-2037/test-cases.md) |
-| 2026-09-03 18:39:25 | [ISOP-2032](https://alibaba-international.atlassian.net/browse/ISOP-2032) 用戶端 - 投注返利活動 | 活动配置、返利计算、派发/流水、通知、报表 | [设计](../../requirements/ISOP-2032/design.md) · [问题](../../requirements/ISOP-2032/questions.md) · [用例](../../requirements/ISOP-2032/test-cases.md) |
-| 2026-09-03 18:38:52 | [ISOP-2031](https://alibaba-international.atlassian.net/browse/ISOP-2031) 用戶端 - 新增金額動畫效果 | 事件范围、通知去重/到期、金额动画 | [设计](../../requirements/ISOP-2031/design.md) · [问题](../../requirements/ISOP-2031/questions.md) · [用例](../../requirements/ISOP-2031/test-cases.md) |
-| 2026-09-03 18:37:08 | [ISOP-2030](https://alibaba-international.atlassian.net/browse/ISOP-2030) 用戶端 - 遊戲頁面改版 | Header、Games、Rewards、Filcoin、My | [设计](../../requirements/ISOP-2030/design.md) · [问题](../../requirements/ISOP-2030/questions.md) · [用例](../../requirements/ISOP-2030/test-cases.md) |
-| 2026-09-03 18:36:44 | [ISOP-2029](https://alibaba-international.atlassian.net/browse/ISOP-2029) 用戶端 - 免費旋轉領取文案調整 | 领取成功文案、两按钮、既有流程回归 | [设计](../../requirements/ISOP-2029/design.md) · [问题](../../requirements/ISOP-2029/questions.md) · [用例](../../requirements/ISOP-2029/test-cases.md) |
-| 2026-09-03 18:31:21 | [ISOP-2028](https://alibaba-international.atlassian.net/browse/ISOP-2028) 合規後台 - 統計數據時間調整 | 两税报、报告摘要、JP/GGR公式和导出 | [设计](../../requirements/ISOP-2028/design.md) · [问题](../../requirements/ISOP-2028/questions.md) · [用例](../../requirements/ISOP-2028/test-cases.md) |
-| 2026-09-03 18:30:58 | [ISOP-2027](https://alibaba-international.atlassian.net/browse/ISOP-2027) 管理後台 - KYC 複核功能 | KYC编辑复核、图片、双人权限、同步及审计 | [设计](../../requirements/ISOP-2027/design.md) · [问题](../../requirements/ISOP-2027/questions.md) · [用例](../../requirements/ISOP-2027/test-cases.md) |
+| 2026-09-07 16:47:15 | [ISOP-2070](https://alibaba-international.atlassian.net/browse/ISOP-2070) Funky 時間回傳問題 | Funky纯日期、+8日界、重试 | [设计](../../requirements/history/through-ISOP-2072/ISOP-2070/design.md) · [问题](../../requirements/history/through-ISOP-2072/ISOP-2070/questions.md) · [用例](../../requirements/history/through-ISOP-2072/ISOP-2070/test-cases.md) |
+| 2026-09-07 00:20:36 | [ISOP-2043](https://alibaba-international.atlassian.net/browse/ISOP-2043) 管理後台 - 新增 JP 資訊 | 会员/游戏/财务五组JP表单 | [设计](../../requirements/history/through-ISOP-2072/ISOP-2043/design.md) · [问题](../../requirements/history/through-ISOP-2072/ISOP-2043/questions.md) · [用例](../../requirements/history/through-ISOP-2072/ISOP-2043/test-cases.md) |
+| 2026-09-07 00:06:12 | [ISOP-2041](https://alibaba-international.atlassian.net/browse/ISOP-2041) JP 注單寫入方式調整 | JP字段拆分、历史修复、资金不变 | [设计](../../requirements/history/through-ISOP-2072/ISOP-2041/design.md) · [问题](../../requirements/history/through-ISOP-2072/ISOP-2041/questions.md) · [用例](../../requirements/history/through-ISOP-2072/ISOP-2041/test-cases.md) |
+| 2026-09-05 00:32:02 | [ISOP-2038](https://alibaba-international.atlassian.net/browse/ISOP-2038) 合規後台 - 移除 Jackpot 記錄選單 | 菜单和旧路由移除 | [设计](../../requirements/history/through-ISOP-2072/ISOP-2038/design.md) · [问题](../../requirements/history/through-ISOP-2072/ISOP-2038/questions.md) · [用例](../../requirements/history/through-ISOP-2072/ISOP-2038/test-cases.md) |
+| 2026-09-05 00:16:03 | [ISOP-2037](https://alibaba-international.atlassian.net/browse/ISOP-2037) 合規後台 - 全平台投注紀錄增加欄位 | 四JP列、Multi、类型筛选、24列CSV | [设计](../../requirements/history/through-ISOP-2072/ISOP-2037/design.md) · [问题](../../requirements/history/through-ISOP-2072/ISOP-2037/questions.md) · [用例](../../requirements/history/through-ISOP-2072/ISOP-2037/test-cases.md) |
+| 2026-09-03 18:39:25 | [ISOP-2032](https://alibaba-international.atlassian.net/browse/ISOP-2032) 用戶端 - 投注返利活動 | 活动配置、返利计算、派发/流水、通知、报表 | [设计](../../requirements/history/through-ISOP-2072/ISOP-2032/design.md) · [问题](../../requirements/history/through-ISOP-2072/ISOP-2032/questions.md) · [用例](../../requirements/history/through-ISOP-2072/ISOP-2032/test-cases.md) |
+| 2026-09-03 18:38:52 | [ISOP-2031](https://alibaba-international.atlassian.net/browse/ISOP-2031) 用戶端 - 新增金額動畫效果 | 事件范围、通知去重/到期、金额动画 | [设计](../../requirements/history/through-ISOP-2072/ISOP-2031/design.md) · [问题](../../requirements/history/through-ISOP-2072/ISOP-2031/questions.md) · [用例](../../requirements/history/through-ISOP-2072/ISOP-2031/test-cases.md) |
+| 2026-09-03 18:37:08 | [ISOP-2030](https://alibaba-international.atlassian.net/browse/ISOP-2030) 用戶端 - 遊戲頁面改版 | Header、Games、Rewards、Filcoin、My | [设计](../../requirements/history/through-ISOP-2072/ISOP-2030/design.md) · [问题](../../requirements/history/through-ISOP-2072/ISOP-2030/questions.md) · [用例](../../requirements/history/through-ISOP-2072/ISOP-2030/test-cases.md) |
+| 2026-09-03 18:36:44 | [ISOP-2029](https://alibaba-international.atlassian.net/browse/ISOP-2029) 用戶端 - 免費旋轉領取文案調整 | 领取成功文案、两按钮、既有流程回归 | [设计](../../requirements/history/through-ISOP-2072/ISOP-2029/design.md) · [问题](../../requirements/history/through-ISOP-2072/ISOP-2029/questions.md) · [用例](../../requirements/history/through-ISOP-2072/ISOP-2029/test-cases.md) |
+| 2026-09-03 18:31:21 | [ISOP-2028](https://alibaba-international.atlassian.net/browse/ISOP-2028) 合規後台 - 統計數據時間調整 | 两税报、报告摘要、JP/GGR公式和导出 | [设计](../../requirements/history/through-ISOP-2072/ISOP-2028/design.md) · [问题](../../requirements/history/through-ISOP-2072/ISOP-2028/questions.md) · [用例](../../requirements/history/through-ISOP-2072/ISOP-2028/test-cases.md) |
+| 2026-09-03 18:30:58 | [ISOP-2027](https://alibaba-international.atlassian.net/browse/ISOP-2027) 管理後台 - KYC 複核功能 | KYC编辑复核、图片、双人权限、同步及审计 | [设计](../../requirements/history/through-ISOP-2072/ISOP-2027/design.md) · [问题](../../requirements/history/through-ISOP-2072/ISOP-2027/questions.md) · [用例](../../requirements/history/through-ISOP-2072/ISOP-2027/test-cases.md) |
 
 <a id="review-20260907-跨需求必须一起核对的地方"></a>
 
@@ -59,7 +59,7 @@ ORDER BY created DESC, key DESC
 
 | 关系 | 已确定的区别/依赖 | 下一步 |
 | --- | --- | --- |
-| 2041 → 2037 / 2043 / 2028 | 写入先分一般输赢与JP，管理聚合jackpot_payout需映射；合规明细GGR与合规税报GGR不是同一公式 | 用一组供应商一般派彩/JP/贡献已知样本穿透对账；优先回答 [2028 Q-02](../../requirements/ISOP-2028/questions.md) 防止重复扣JP |
+| 2041 → 2037 / 2043 / 2028 | 写入先分一般输赢与JP，管理聚合jackpot_payout需映射；合规明细GGR与合规税报GGR不是同一公式 | 用一组供应商一般派彩/JP/贡献已知样本穿透对账；优先回答 [2028 Q-02](../../requirements/history/through-ISOP-2072/ISOP-2028/questions.md) 防止重复扣JP |
 | 2022 ↔ 2043 | 管理报表时间/线路与新增JP列需同筛选；邀请好友已按用户决定取消 | 保留已确认node及体育分支规则；2043邀请统计文字列为需修订，不恢复功能 |
 | 2037 ↔ 2038 | 2038删独立菜单，JP明细保留在2037的Multi Modal | 不删除JP数据；不要把“展开”实现为列内展开 |
 | 2037 ↔ 2028 | 明细无JP用 -，税报无JP为0.00；明细贡献4位，汇总舍入待定 | 分别断言，不能使用一个全局格式/公式替换所有页面 |
@@ -70,14 +70,14 @@ ORDER BY created DESC, key DESC
 
 ### 优先请用户补充的业务决定
 
-1. [2028 Q-02](../../requirements/ISOP-2028/questions.md)：JP已拆分后，有效派彩是否包含JP、具体取什么字段/公式？这决定三份JP报表如何独立对账。
-2. [2032 Q-01/02](../../requirements/ISOP-2032/questions.md)：同类型多个游戏规则如何各自封顶和打码，再如何在类型明细展示？门槛已由9月7日晚新版明确为每类型/每规则独立判断及全额计提，不再询问。
-3. [2032 Q-03/05](../../requirements/ISOP-2032/questions.md)：返利业务日/迟到单/配置版本，以及停用游戏规则是否回退类型规则、混合奖金投注如何防循环？
-4. [2030 Q-01/02](../../requirements/ISOP-2030/questions.md)：All弹层和默认状态、Header页面范围、My删除清单、Favorites是否本版？
-5. [2031 Q-01/02](../../requirements/ISOP-2031/questions.md)：三事件范围、派发起算及五页效果已明确；仅需补齐一月边界、消费去重和聚合规则。
-6. [2027 Q-01](../../requirements/ISOP-2027/questions.md) 已由用户确认：待审核时不能提交新的KYC；用例改为验证前后端拒绝新提交，不再等待合并/覆盖策略答复。
-7. [2041 Q-01](../../requirements/ISOP-2041/questions.md)：9/1历史修复的完整时间边界及依据哪一个时间字段？
-8. [2028 Q-01](../../requirements/ISOP-2028/questions.md)：标题仍叫时间调整，本次是否另外包含时间逻辑，还是仅正文JP变更？
+1. [2028 Q-02](../../requirements/history/through-ISOP-2072/ISOP-2028/questions.md)：JP已拆分后，有效派彩是否包含JP、具体取什么字段/公式？这决定三份JP报表如何独立对账。
+2. [2032 Q-01/02](../../requirements/history/through-ISOP-2072/ISOP-2032/questions.md)：同类型多个游戏规则如何各自封顶和打码，再如何在类型明细展示？门槛已由9月7日晚新版明确为每类型/每规则独立判断及全额计提，不再询问。
+3. [2032 Q-03/05](../../requirements/history/through-ISOP-2072/ISOP-2032/questions.md)：返利业务日/迟到单/配置版本，以及停用游戏规则是否回退类型规则、混合奖金投注如何防循环？
+4. [2030 Q-01/02](../../requirements/history/through-ISOP-2072/ISOP-2030/questions.md)：All弹层和默认状态、Header页面范围、My删除清单、Favorites是否本版？
+5. [2031 Q-01/02](../../requirements/history/through-ISOP-2072/ISOP-2031/questions.md)：三事件范围、派发起算及五页效果已明确；仅需补齐一月边界、消费去重和聚合规则。
+6. [2027 Q-01](../../requirements/history/through-ISOP-2072/ISOP-2027/questions.md) 已由用户确认：待审核时不能提交新的KYC；用例改为验证前后端拒绝新提交，不再等待合并/覆盖策略答复。
+7. [2041 Q-01](../../requirements/history/through-ISOP-2072/ISOP-2041/questions.md)：9/1历史修复的完整时间边界及依据哪一个时间字段？
+8. [2028 Q-01](../../requirements/history/through-ISOP-2072/ISOP-2028/questions.md)：标题仍叫时间调整，本次是否另外包含时间逻辑，还是仅正文JP变更？
 
 每个需求还列出开发应补的接口/字段/版本和少量展示问题；这些不是全部都需要用户回答，也不会阻塞不相关用例。Funky的+8日期与yyyy-MM-dd已从附件确认，免费旋转英语文案也已明确，不重复询问。
 
@@ -112,14 +112,14 @@ ORDER BY created DESC, key DESC
 
 - 2032：规则级门槛替代活动级门槛；三步配置补全；弹窗由不聚合改需聚合，具体聚合粒度待确认；导出具体小节改Xlsx但概述仍写CSV。原C01—C15保留并修订，补C16—C21。
 - 2031：本版仅充值成功/Daily Reward/投注返利；从派发起算1个月；五主页面即时动画，其他页返回仅最终图片；首页与My充值均删Details回首页。保留C01—C08并修订，补C09—C12。
-- 优先待确认：[2032问题](../../requirements/ISOP-2032/questions.md)中的类型内多规则展示、聚合粒度、文案及导出格式；[2031问题](../../requirements/ISOP-2031/questions.md)中的消费语义、充值返回时点和通知先后竞争。两Story返利文案仍不同，Lark仍有旧领取/无限通知说法。
+- 优先待确认：[2032问题](../../requirements/history/through-ISOP-2072/ISOP-2032/questions.md)中的类型内多规则展示、聚合粒度、文案及导出格式；[2031问题](../../requirements/history/through-ISOP-2072/ISOP-2031/questions.md)中的消费语义、充值返回时点和通知先后竞争。两Story返利文案仍不同，Lark仍有旧领取/无限通知说法。
 - 本次读取两个新版Jira、10个新增关联子任务、两份Lark及Step2截图。没有执行活动配置、派发、充值或其他业务测试；原型与附件不作为FAT通过证据。首轮102条为历史统计，本次两需求用例数量以各自文件为准。
 
 <a id="review-20260907-2026-09-08补充isop-2072"></a>
 
 ### 2026-09-08：补充ISOP-2072
 
-[报表排程需求](../../requirements/ISOP-2072/design.md) 创建于9月7日21:13，晚于首轮批次快照，单独补充到倒序索引，未改写原11个Story的历史查询结论。核心为BI每5分钟、Pagcor每10分钟且从第2分钟开始，以及指定表/日期重算API；差异/当日全量、跨日修复、切换范围与完成时效待确认。设计、问题和12条未执行用例分别维护；与2022/RisingWave及JP报表联动。
+[报表排程需求](../../requirements/history/through-ISOP-2072/ISOP-2072/design.md) 创建于9月7日21:13，晚于首轮批次快照，单独补充到倒序索引，未改写原11个Story的历史查询结论。核心为BI每5分钟、Pagcor每10分钟且从第2分钟开始，以及指定表/日期重算API；差异/当日全量、跨日修复、切换范围与完成时效待确认。设计、问题和12条未执行用例分别维护；与2022/RisingWave及JP报表联动。
 
 
 <a id="coverage-20260911"></a>
@@ -138,7 +138,7 @@ ORDER BY created DESC, key DESC
 
 | 需求 | 接口/变更 | 提交依据 | 当前证据与测试缺口 |
 | --- | --- | --- | --- |
-| 2028 合规报表 | POST /cmpl/report/pagcor/list、/cmpl/report/pagcor/export、/cmpl/report/shop/list、/cmpl/report/shop/export、/cmpl/report/summary/list | cddc218，合并于b8daa7d | 5处新增总GGR/JP贡献，摘要另增JP派奖；无执行计划、无实测报告。[契约评审](../../requirements/ISOP-2028/api/contract-review.md)已列完整路径及公式缺口 |
+| 2028 合规报表 | POST /cmpl/report/pagcor/list、/cmpl/report/pagcor/export、/cmpl/report/shop/list、/cmpl/report/shop/export、/cmpl/report/summary/list | cddc218，合并于b8daa7d | 5处新增总GGR/JP贡献，摘要另增JP派奖；无执行计划、无实测报告。[契约评审](../../requirements/history/through-ISOP-2072/ISOP-2028/api/contract-review.md)已列完整路径及公式缺口 |
 | 2031 金额动画/到账通知 | GET /promo/notify/change/balance；POST /promo/notify/read/balance | 3797cae、cea06b1、9b03edc、ca3c1c2 | 2处HTTP接口未实现需求执行配置、无实测证据；通知GET及MQTT已给id/ty/sub_ty/balance等结构。已读会消费通知，需本轮专用事件；HTTP通过也不能替代MQTT去重、消费和到期验证 |
 | 2043 管理后台JP统计 | GET /admin/reports/venue/node、/admin/reports/game/node、/admin/reports/gameclass/node、/admin/reports/member、/admin/reports/member-daily-game/aggregate | 12311df（2026-09-11） | 5处新增jp_winning，当前cases.json只覆盖两条record查询，不含这5条统计。9月10日测试早于该提交；2022的9月11日查询也未断言这些统计JP字段 |
 | 2032 投注返利 | /admin/promo/update；GET /admin/promo/betting/rebate/export | 0bdec54、59844d4 | 编辑和导出未执行；编辑请求块GET与正文POST冲突，导出异步文件获取契约未完整。已测report查询不能证明配置编辑、T+1计算/入账或导出正确 |
@@ -154,8 +154,8 @@ ORDER BY created DESC, key DESC
 
 | 需求 | 本次分类 | 说明/依据 |
 | --- | --- | --- |
-| 2022 | 已部分实测，等待修复 | 两处注单查询已有首轮和限定复核；按用户最新要求暂停复测。[问题与报告](../../requirements/ISOP-2022/bug-review.md)；不列为从未测 |
-| 2027 | 已部分实测，仍有覆盖缺口 | KYC复核已有历史API及当前固定UI批次中的API步骤；C18分行联动游戏限制等尚未实现。UAT消息仅请求更新，不等于部署完成；不把准备包算实测。[契约评审](../../requirements/ISOP-2027/api/contract-review.md) |
+| 2022 | 已部分实测，等待修复 | 两处注单查询已有首轮和限定复核；按用户最新要求暂停复测。[问题与报告](../../requirements/history/through-ISOP-2072/ISOP-2022/bug-review.md)；不列为从未测 |
+| 2027 | 已部分实测，仍有覆盖缺口 | KYC复核已有历史API及当前固定UI批次中的API步骤；C18分行联动游戏限制等尚未实现。UAT消息仅请求更新，不等于部署完成；不把准备包算实测。[契约评审](../../requirements/history/through-ISOP-2072/ISOP-2027/api/contract-review.md) |
 | 2028 | 新接口字段已提交，未测 | 见上方5处报表/导出 |
 | 2029 | 未定位明确的新API交付 | 主范围为免费旋转领取文案；notify/list字段变化仅相关线索，不据此新增整套接口范围 |
 | 2030 | 当前限人工UI | 用户已确定H5改版按人工UI，未见本期明确API变更；不因扫描默认API范围重复列待测接口 |
@@ -214,8 +214,8 @@ ORDER BY created DESC, key DESC
 | 2031 | 已读消费、MQTT重复/过期与动画联动 | 本轮专用到账事件、订阅/重放条件；已读正文路径与请求块还存在冲突。本轮未消费通知 |
 | 2043 | JP独立聚合对账 | 冻结源记录、截止点和独立预期金额；字段存在不能代替对账 |
 | 2028 | Pagcor/门店实际导出、GGR和税额公式 | 导出topic订阅与分片完成/文件组装契约，以及源金额/税率/舍入基准 |
-| 2032 | 配置编辑、返利实际导出 | 编辑GET/POST冲突及活动32/40映射尚未消除，缺少本轮专用活动；导出只提供topic_id和ok响应，缺少文件获取流程。详见[问题](../../requirements/ISOP-2032/questions.md)Q-11、Q-13 |
-| 2037 | 实际导出24栏、顺序/金额/跨页完整性 | 异步topic文件获取条件不足；最新文档CSV表头实际为23项，与需求C10的24栏不一致，需先明确缺少的列。详见[问题](../../requirements/ISOP-2037/questions.md)Q-04 |
+| 2032 | 配置编辑、返利实际导出 | 编辑GET/POST冲突及活动32/40映射尚未消除，缺少本轮专用活动；导出只提供topic_id和ok响应，缺少文件获取流程。详见[问题](../../requirements/history/through-ISOP-2072/ISOP-2032/questions.md)Q-11、Q-13 |
+| 2037 | 实际导出24栏、顺序/金额/跨页完整性 | 异步topic文件获取条件不足；最新文档CSV表头实际为23项，与需求C10的24栏不一致，需先明确缺少的列。详见[问题](../../requirements/history/through-ISOP-2072/ISOP-2037/questions.md)Q-04 |
 
 2032、2037本轮完成契约复核，**没有发送其编辑/导出请求，也没有新执行批次**。现有查询的9月10日历史记录不能填充这次未测导出结果。全仓文档可找到部分MQTT导出分片说明，但尚未找到本环境订阅鉴权/连接与这两项文件完成判定的完整契约；不猜topic或借用他人任务。
 
@@ -236,7 +236,7 @@ ORDER BY created DESC, key DESC
 
 > 留存说明（2026-09-11）：本文是原日期的文字结论。用户已授权删除旧结果、扫描和临时脚本，文内旧路径只表示历史来源，不能作为当前可复核/可导入证据；当前入口与保留范围见[清理记录](../project-cleanup-2026-09-11.md)。
 
-[正反例数据](../../requirements/ISOP-2032/api/cases.json) · [契约评审](../../requirements/ISOP-2032/api/contract-review.md) · [验收用例](../../requirements/ISOP-2032/test-cases.md)
+[正反例数据](../../requirements/history/through-ISOP-2072/ISOP-2032/api/cases.json) · [契约评审](../../requirements/history/through-ISOP-2072/ISOP-2032/api/contract-review.md) · [验收用例](../../requirements/history/through-ISOP-2072/ISOP-2032/test-cases.md)
 
 执行环境沿用设计FAT；部署版本未提供。先生成数据，完成本地断言校验，再执行真实API。复用本轮新登录，未使用旧token；未编辑配置、审批会员、创建投注、派奖或导出任务。
 
@@ -270,7 +270,7 @@ ORDER BY created DESC, key DESC
 
 > 留存说明（2026-09-11）：本文是原日期的文字结论。用户已授权删除旧结果、扫描和临时脚本，文内旧路径只表示历史来源，不能作为当前可复核/可导入证据；当前入口与保留范围见[清理记录](../project-cleanup-2026-09-11.md)。
 
-[正反例数据](../../requirements/ISOP-2037/api/cases.json) · [契约评审](../../requirements/ISOP-2037/api/contract-review.md) · [验收用例](../../requirements/ISOP-2037/test-cases.md)
+[正反例数据](../../requirements/history/through-ISOP-2072/ISOP-2037/api/cases.json) · [契约评审](../../requirements/history/through-ISOP-2072/ISOP-2037/api/contract-review.md) · [验收用例](../../requirements/history/through-ISOP-2072/ISOP-2037/test-cases.md)
 
 执行环境沿用设计FAT；部署版本未提供。先生成数据，完成本地断言校验，再执行真实API。复用本轮新登录，未使用旧token；未编辑配置、审批会员、创建投注、派奖或导出任务。
 
@@ -305,7 +305,7 @@ ORDER BY created DESC, key DESC
 
 > 留存说明（2026-09-11）：本文是原日期的文字结论。用户已授权删除旧结果、扫描和临时脚本，文内旧路径只表示历史来源，不能作为当前可复核/可导入证据；当前入口与保留范围见[清理记录](../project-cleanup-2026-09-11.md)。
 
-[正反例数据](../../requirements/ISOP-2043/api/cases.json) · [契约评审](../../requirements/ISOP-2043/api/contract-review.md) · [验收用例](../../requirements/ISOP-2043/test-cases.md)
+[正反例数据](../../requirements/history/through-ISOP-2072/ISOP-2043/api/cases.json) · [契约评审](../../requirements/history/through-ISOP-2072/ISOP-2043/api/contract-review.md) · [验收用例](../../requirements/history/through-ISOP-2072/ISOP-2043/test-cases.md)
 
 执行环境沿用设计FAT；部署版本未提供。先生成数据，完成本地断言校验，再执行真实API。复用本轮新登录，未使用旧token；未编辑配置、审批会员、创建投注、派奖或导出任务。
 

@@ -1,4 +1,5 @@
 """Shared preflight and finite event-to-API orchestration; no Jira writes/outbox."""
+from requirement_paths import requirement_dir, is_archived
 import json
 from pathlib import Path
 import re
@@ -17,6 +18,8 @@ from .evidence import review
 
 def preflight(state, config, story, environment='FAT', payload=None, policy=None):
     reasons, warnings = [], []
+    if is_archived(state.root, story):
+        reasons.append('需求已完成归档，不参与自动执行；历史回归请显式使用独立CLI')
     evidence = review(state.root, story)
     warnings.append('证据同步：' + evidence['status'] + '；' + '；'.join(evidence['errors'] + evidence['pending']))
     reasons.extend(evidence['errors'])
@@ -39,8 +42,8 @@ def preflight(state, config, story, environment='FAT', payload=None, policy=None
         if not selection:
             reasons.append('尚无统一执行计划；保留旧CLI，自动触发不猜测旧契约')
         else:
-            plan,cases,_ = load(state.root/'requirements'/story/'plan.json',METHODS)
-            business = overview_rows(design_rows(state.root/'requirements'/story/'test-cases.md',story),story)
+            plan,cases,_ = load(requirement_dir(state.root, story)/'plan.json',METHODS)
+            business = overview_rows(design_rows(requirement_dir(state.root, story)/'test-cases.md',story),story)
             api_rows = plan_api_rows(plan,cases,{r['用例编号'] for r in business})
             warnings.append(f'业务用例关联已检查：{len(business)} 条总用例、{len(api_rows)} 条API组合；不代表未覆盖能力已实现')
             if selection['plan_sha256'] != rule.get('plan_sha256'):
@@ -50,7 +53,7 @@ def preflight(state, config, story, environment='FAT', payload=None, policy=None
             if set(selection['allow_write']) - set(rule.get('allow_write',[])):
                 reasons.append('配置写入范围超过已保存授权')
             if not reasons:
-                plan,cases,_ = load(state.root/'requirements'/story/'plan.json',METHODS)
+                plan,cases,_ = load(requirement_dir(state.root, story)/'plan.json',METHODS)
                 selected = [c for c in cases if c['id'] in selection['automatic_ids']]
                 env = config['environments'][environment]
                 args = SimpleNamespace(env=str(state.root/env['env_file']),allow_write=selection['allow_write'],timeout=15,insecure=selection['insecure'])

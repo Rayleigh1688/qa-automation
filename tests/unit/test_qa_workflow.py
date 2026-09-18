@@ -12,6 +12,7 @@ from http.server import HTTPServer
 from pathlib import Path
 from unittest.mock import Mock, patch
 from support import ROOT
+from requirement_paths import requirement_dir, requirement_dirs
 from qa_delivery.state import digest
 from qa_workflow.state import State, collect_results
 from qa_workflow.generation import generate, validate, context
@@ -38,7 +39,7 @@ class WorkflowTests(unittest.TestCase):
         dest = self.root/'requirements'/self.story
         dest.mkdir()
         for name in ('plan.json','design.md','questions.md','test-cases.md'):
-            (dest/name).write_bytes((ROOT/'requirements'/self.story/name).read_bytes())
+            (dest/name).write_bytes((requirement_dir(ROOT, self.story)/name).read_bytes())
         self.config = {'stories':{self.story:{'environments':['FAT']}},'environments':{'FAT':{'env_file':'.env.fat'}}}
 
     def edit(self, channel='ui', base=0):

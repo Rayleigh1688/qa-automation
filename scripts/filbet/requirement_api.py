@@ -2,6 +2,7 @@
 from collections import Counter
 from datetime import datetime, timezone
 from decimal import Decimal, InvalidOperation
+from requirement_paths import requirement_dir
 import hashlib
 import json
 import os
@@ -33,7 +34,7 @@ TYPES = {'object': dict, 'array': list, 'integer': int, 'string': str, 'boolean'
 def load_suite(requirement):
     if not re.fullmatch(r'ISOP-\d+', requirement):
         raise ValueError('invalid requirement identifier')
-    folder = ROOT / 'requirements' / requirement
+    folder = requirement_dir(ROOT, requirement)
     source = folder / 'plan.json'
     if source.is_file():
         from qa_core.execution_plan import legacy_query_suite
@@ -287,7 +288,7 @@ def run(args):
                 report['results'].append(item)
                 overall[status] += 1
                 print(key, case['id'], status, flush=True)
-            folder = ROOT / 'requirements' / key / 'api/results' / run_id
+            folder = requirement_dir(ROOT, key) / 'api/results' / run_id
             write_reports(folder, report, suite)
             print('Report:', folder / 'views/results.html', flush=True)
     os.environ.pop('ADMIN_TOKEN', None)

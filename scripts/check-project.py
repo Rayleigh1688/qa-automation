@@ -36,7 +36,8 @@ def document_errors(path: Path, root: Path, commands: set[str]) -> list[str]:
                 continue  # Latest-run artifacts are optional and routinely cleaned.
             if resolved.is_relative_to(root.resolve() / 'requirements'):
                 relative = resolved.relative_to(root.resolve()).parts
-                if len(relative) >= 4 and relative[2:4] == ('api', 'results'):
+                if any(re.fullmatch(r'ISOP-\d+', relative[i]) and relative[i+1:i+3] == ('api', 'results')
+                       for i in range(1, len(relative)-2)):
                     continue  # Requirement evidence is local, not a checkout prerequisite.
             if not resolved.exists():
                 errors.append(f"{label}: missing link target {target}")

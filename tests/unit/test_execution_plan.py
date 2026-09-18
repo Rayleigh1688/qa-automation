@@ -1,13 +1,14 @@
 import copy
 import unittest
 from support import ROOT
+from requirement_paths import requirement_dir, requirement_dirs
 from filbet.requirement_adapter import METHODS
 from qa_core.execution_plan import load, validate, resolve, assertions, MISSING, at
 
 
 class ExecutionPlanTests(unittest.TestCase):
     def setUp(self):
-        self.plan, self.cases, _ = load(ROOT / 'requirements/ISOP-2027/plan.json', METHODS)
+        self.plan, self.cases, _ = load(requirement_dir(ROOT, 'ISOP-2027') / 'plan.json', METHODS)
 
     def test_historical_ids_preserved(self):
         self.assertTrue({'2027-FLOW-001', '2027-API-001', 'review-list-state-1'} <= {c['id'] for c in self.cases})

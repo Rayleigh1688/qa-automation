@@ -1,5 +1,6 @@
 """Confirmed API execution, manual UI handoff, version evidence and local triage."""
 from collections import Counter
+from requirement_paths import requirement_dir, is_archived
 import json
 import os
 from pathlib import Path
@@ -99,7 +100,7 @@ def ai(config, folder, phase, instruction, data, schema):
 
 
 def acceptance(story):
-    texts = {name: (ROOT / 'requirements' / story / name).read_text(encoding='utf-8')
+    texts = {name: (requirement_dir(ROOT, story) / name).read_text(encoding='utf-8')
              for name in ('design.md', 'questions.md', 'test-cases.md')}
     ids = set(re.findall(r'\|\s*((?:ISOP-\d+-)?[CR]\d+)\s*\|', texts['test-cases.md']))
     if not ids:
@@ -186,6 +187,8 @@ def run_pipeline(config, job, folder):
     results, notes = [], []
     report = {'status': 'BLOCKED', 'summary': '', 'results': results, 'bugs': []}
     try:
+        if is_archived(ROOT, p['story']):
+            raise ValueError('需求已完成归档；旧排队任务不再自动执行，请显式使用历史回归CLI')
         if digest(config) != job['config_hash']:
             raise ValueError('configuration changed since enqueue')
         story = config['stories'][p['story']]
@@ -201,13 +204,13 @@ def run_pipeline(config, job, folder):
         if not before_verified:
             notes.append('部署版本未核验：只记录本次环境、时间及用例证据，无法锁定具体发布版本。')
         from .requirement_bridge import run_unified
-        unified = (ROOT/'requirements'/p['story']/'plan.json').is_file()
+        unified = (requirement_dir(ROOT, p['story'])/'plan.json').is_file()
         if unified:
             report['workflow'] = 'api-manual'
             results.extend(run_unified(ROOT,config,p,folder,command))
             notes.append('UI由人工执行；在team-packet/manual.csv回填后用import-manual导入，未测保持NOT_RUN。')
         elif 'api' in p['scopes']:
-            base = ROOT / 'requirements' / p['story'] / 'api/results'
+            base = requirement_dir(ROOT, p['story']) / 'api/results'
             with local_run_lock():
                 old = set(base.glob('*/result.json'))
                 code = command([sys.executable, 'scripts/run-requirement-api.py', p['story'],

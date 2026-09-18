@@ -8,7 +8,7 @@
 
 - 本轮UI：管理后台KYC管理下的`/kyc`与`/kyc-review`，当前角色可见范围；按钮可见不证明后端授权正确。
 - [长期规则](../../../skills/business-rules/kyc.md)：2026-09-14版本，KYC-EDIT-01/02/03、KYC-REVIEW-01、KYC-QUERY-01。本模块引用规则，不复制维护另一套版本。
-- [2027设计](../../../requirements/ISOP-2027/design.md)、[决定](../../../requirements/ISOP-2027/questions.md)、[接口映射](../../../requirements/ISOP-2027/api/contract-review.md)：本地已有来源，本轮未刷新Jira，不把旧批次通过视为当前通过。
+- [2027设计](../../../requirements/history/through-ISOP-2072/ISOP-2027/design.md)、[决定](../../../requirements/history/through-ISOP-2072/ISOP-2027/questions.md)、[接口映射](../../../requirements/history/through-ISOP-2072/ISOP-2027/api/contract-review.md)：本地已有来源，本轮未刷新Jira，不把旧批次通过视为当前通过。
 - [KYC接口目录](../../../api/catalog/admin/kyc.csv)：发现依据，以下映射未在本轮捕获Network逐一验证。合规`/cmpl/kyc/*`、活动KYC奖励、客户端提交属于关联流程，不混作本菜单已覆盖。
 
 ## 菜单、按钮与API映射

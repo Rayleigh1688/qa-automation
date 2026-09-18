@@ -58,6 +58,8 @@ UI 用例依赖 `ui/elements/` 和 `ui/framework/`，页面、弹窗、游戏点
 
 ## 专项资产与兼容策略
 
+需求目录由`scripts/requirement_paths.py`统一解析：顶层`requirements/ISOP-*`为当前需求，`requirements/history/<版本>/ISOP-*`为完成归档。默认发现只返回当前需求，显式编号可查归档；重复编号报错。自动工作流阻止归档任务，历史回归通过独立CLI显式发起。统一报告位置保持`reports/qa/`，原需求内`api/results/`随目录归档。
+
 旧扫描脚本、快照、截图与manifest已于2026-09-11按用户授权删除；[退出索引](../archive/interface-scans/README.md)保留原导航路径。当前接口资产在api/inventory、api/catalog与api/p0，构建器不依赖已删除扫描。`check:archive`保留CLI名称，现检查旧扫描目录只含退出说明。
 
 当前执行包、最近真实需求批次和活动Telegram任务保持；旧结果目录中的临时脚本已迁移至固定模块后删除。具体范围见[整理记录](project-cleanup-2026-09-11.md)。

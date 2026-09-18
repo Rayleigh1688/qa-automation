@@ -1,4 +1,5 @@
 """Bind a confirmed task to unified API execution and a frozen manual packet."""
+from requirement_paths import requirement_dir
 import hashlib
 import json
 from pathlib import Path
@@ -19,7 +20,7 @@ def write(path, value):
 
 def task_plan(root, config, payload):
     """Offline preview, also re-evaluated immediately before execution."""
-    path = root/'requirements'/payload['story']/'plan.json'
+    path = requirement_dir(root, payload['story'])/'plan.json'
     if not path.is_file():
         return None
     plan, cases, checksum = load(path, METHODS)
@@ -83,7 +84,7 @@ def run_unified(root, config, payload, folder, command):
         raise ValueError('execution plan/scope changed or not confirmed; scan and confirm again')
     if payload['environment']!='FAT':
         raise ValueError('unified business adapter currently supports FAT only')
-    plan,cases,checksum = load(root/'requirements'/payload['story']/'plan.json',METHODS)
+    plan,cases,checksum = load(requirement_dir(root, payload['story'])/'plan.json',METHODS)
     if checksum!=selection['plan_sha256']:
         raise ValueError('execution plan changed while preparing the confirmed task')
     cases = [c for c in cases if c['id'] in selection['case_ids']]

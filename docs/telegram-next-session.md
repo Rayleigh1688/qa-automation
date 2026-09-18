@@ -41,9 +41,9 @@
 ## 当前证据和后续工作
 
 - 当前团队执行包为`reports/qa/ISOP-2027/team-ready-20260911/`，人工尚未回填；最近真实需求执行在`reports/qa/ISOP-2027/latest.html`。使用规则见[团队流程](team-testing.md)。
-- 后续API/UI专项的旧结果、阶段汇总及结果目录临时脚本已删除，不再从旧路径继续或导入。业务规则与日期结论保留；候选统一从[BUG清单](../requirements/ISOP-2027/api/BUG-review-2026-09-10.md)确认。旧API候选提交前需重新取当前版本证据，不能以旧Telegram空PRODUCT清单推断后续没有候选。
+- 后续API/UI专项的旧结果、阶段汇总及结果目录临时脚本已删除，不再从旧路径继续或导入。业务规则与日期结论保留；候选统一从[BUG清单](../requirements/history/through-ISOP-2072/ISOP-2027/api/BUG-review-2026-09-10.md)确认。旧API候选提交前需重新取当前版本证据，不能以旧Telegram空PRODUCT清单推断后续没有候选。
 - 异常会员/申请的最小定位索引保存在忽略且0600的`api/local-state/requirement-records-fat.json`，属于历史状态，不是实时查询。不要复用旧会员或核准分行异常草稿来补成功；本次没有清理业务数据。
-- 账号A/B和reviewer本地配置保留；普通角色新增复核权限节点、完整UI权限矩阵、状态1/4、精确原因最大长度、第三复核身份及故障恢复缺口见[准备清单](../requirements/ISOP-2027/preparation.csv)。已实现范围见[API阶段](new-requirement-stage1-2.md)、[可选UI阶段](new-requirement-stage3.md)。
+- 账号A/B和reviewer本地配置保留；普通角色新增复核权限节点、完整UI权限矩阵、状态1/4、精确原因最大长度、第三复核身份及故障恢复缺口见[准备清单](../requirements/history/through-ISOP-2072/ISOP-2027/preparation.csv)。已实现范围见[API阶段](new-requirement-stage1-2.md)、[可选UI阶段](new-requirement-stage3.md)。
 - 下一步先让团队使用人工清单并回填，按本批范围执行API，再导入明确来源。真正Jira建单、Story关联、整批群清单和超长附件的线上验收仍未完成，离线检查不能替代。
 
 凭据在忽略的`.env.telegram`，人员/负责人/UI配置在`config/telegram/local.json`，reviewer在`.env.fat.reviewer.local`。不将数字身份、token、证件或个人资料写进可提交文档。Codex可执行文件沿用本机配置，扩展升级导致失效时再重新定位。

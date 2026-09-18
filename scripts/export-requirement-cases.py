@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """Export per-story business overviews and API data tables, entirely offline."""
+from requirement_paths import requirement_dir, requirement_dirs
 import argparse
 import json
 from pathlib import Path
@@ -15,14 +16,16 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('stories', nargs='*')
     parser.add_argument('--all', action='store_true', help='Export every requirement design')
+    parser.add_argument('--include-history', action='store_true', help='Include archived requirements with --all')
     args = parser.parse_args()
+    if args.include_history and not args.all: parser.error('--include-history requires --all')
     if args.all == bool(args.stories):
         parser.error('select story IDs or --all')
-    stories = sorted(p.name for p in (ROOT / 'requirements').glob('ISOP-*') if p.is_dir()) if args.all else args.stories
+    stories = sorted(p.name for p in requirement_dirs(ROOT, include_history=args.include_history)) if args.all else args.stories
     for story in stories:
         if not re.fullmatch(r'ISOP-\d+', story):
             parser.error('invalid story ID')
-        folder = ROOT / 'requirements' / story
+        folder = requirement_dir(ROOT, story)
         plan = cases = suite = None
         if (folder / 'plan.json').is_file():
             from filbet.requirement_adapter import METHODS

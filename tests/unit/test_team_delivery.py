@@ -8,6 +8,7 @@ from pathlib import Path
 import tempfile
 import unittest
 from support import ROOT
+from requirement_paths import requirement_dir, requirement_dirs
 from qa_core.case_report import FIELDS, csv_text
 from qa_core.execution_plan import expand
 from qa_core.team_delivery import MANUAL_FIELDS, prepare, import_results, select_automatic
@@ -104,7 +105,7 @@ class TeamDeliveryTests(unittest.TestCase):
         from qa_core.execution_plan import validate
         from qa_core.plan_runner import execute
         from filbet.requirement_adapter import METHODS
-        plan=json.loads((ROOT/'requirements/ISOP-2027/plan.json').read_text())
+        plan=json.loads((requirement_dir(ROOT, 'ISOP-2027') / 'plan.json').read_text())
         row=next(c for c in plan['cases'] if c['id']=='2027-UI-001')
         row.pop('steps');plan['cases']=[row]
         cases=validate(plan,METHODS)

@@ -1,4 +1,5 @@
 """AI business-case drafts with source hashes; fixed executable plans remain authoritative."""
+from requirement_paths import requirement_dir
 import json
 import re
 from pathlib import Path
@@ -14,7 +15,7 @@ SCHEMA = obj({'summary':STRING,'cases':{'type':'array','items':CASE_SCHEMA},'que
 
 def context(root, story):
     if not re.fullmatch(r'ISOP-\d+',story): raise ValueError('invalid requirement')
-    directory = root/'requirements'/story
+    directory = requirement_dir(root, story)
     sources = {}
     for name in ('design.md','questions.md','test-cases.md','evidence-sync.md','evidence-sync.json','preparation.csv','api/contract-review.md','api/data-review.md','plan.json','api/cases.json'):
         path = directory/name

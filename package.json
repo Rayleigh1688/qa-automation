@@ -61,7 +61,7 @@
     "qa:delivery": "node scripts/python-launcher.mjs scripts/prepare-test-delivery.py",
     "qa:cases": "node scripts/python-launcher.mjs scripts/export-requirement-cases.py",
     "qa": "node scripts/python-launcher.mjs scripts/run-qa.py",
-    "check:evidence": "node scripts/python-launcher.mjs scripts/run-qa.py evidence --allow-pending"
+    "check:evidence": "node scripts/python-launcher.mjs scripts/run-qa.py evidence --allow-pending --include-history"
   },
   "devDependencies": {
     "@playwright/test": "^1.57.0",

@@ -54,7 +54,7 @@ Thumbs.db
 .vscode/
 
 # Requirement API evidence (per-run, separate from P0)
-requirements/*/api/results/
+requirements/**/api/results/
 
 # Telegram local routing and credentials stay on this host
 /config/telegram/local.json

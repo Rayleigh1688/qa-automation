@@ -1,8 +1,18 @@
 # 当前交接
 
-更新：2026-09-17。当前结论见下方；9月11日清理与合并记录见[整理记录](docs/project-cleanup-2026-09-11.md)及Git历史。
+更新：2026-09-18。当前结论见下方；9月11日清理与合并记录见[整理记录](docs/project-cleanup-2026-09-11.md)及Git历史。
 
 ## 当前入口
+
+- 2026-09-18用户明确确认ISOP-2072及之前均已完成，并授权实体归档：13个需求目录已移到[历史版本](requirements/history/README.md)，requirements根目录仅保留20个后续需求。同步文档链接、统一编号路径解析和忽略规则；默认发现/批量导出/自动检查只处理当前需求，显式旧编号仍可运行历史回归，旧排队任务停止自动执行。历史API/UI证据及发布状态保留，完成状态来源为本次用户确认，不代表本次复测。此决定替代此前“仅导航归类”的方案。
+
+  本次验证：`npm run check`通过（含350项离线单测、当前及归档证据检查）；13个归档目录与20个当前目录核对一致，原执行计划/API用例JSON内容一致。未登录业务系统，未执行远端API/UI或修改Jira。
+
+- 2026-09-18用户要求将评审逐单落实：已为2086—2120范围内20条独立单新增各自design/questions/test-cases/evidence-sync文档及生成cases.csv，共80条初版业务用例，见[需求索引](requirements/README.md)。2090评论17355新口径已进入具体断言；未决规则逐条关联Q并BLOCKED，2086/2110沿用户决定OUT_OF_SCOPE；没有API执行资产、业务请求或远端写入。来源沿本日已读取证据，未再次刷新，未读素材仍保留；新目录机器基线UNREVIEWED，不能视为全量来源同步或自动可测。下一步补读素材/答复剩余Q，再做接口映射与样本准备，不自动执行。
+
+  本次验证：20目录qa:cases生成成功；80条Case→AC/Q引用及CSV计数核对一致；check:docs通过222份文档，git diff --check通过；evidence --allow-pending通过但新目录仍UNREVIEWED。仅文档/离线资产校验，未运行业务API/UI或全套npm run check。
+
+- 2026-09-18按用户要求评审2072之后独立单：JQL末页确认20条（16故事/2任务/2缺陷），已读正文/全部返回评论及8直属子任务、4份Lark文本、2份Confluence相关正文和3张需求截图。见[逐单评审](requirements/review-after-2072-20260918.md)：2090正文与产品变更相反、2092日期表冲突、2104展示公式与计返门槛/上限需对齐、2103/2120同源范围未拆、2116/2118/2102验收输入不足。Board/Figma、GCash视频等未完整读取，SA文档超时，明确保留初审边界；无业务测试、远端改动或建BUG，不解除既有执行暂停。下一步先同步2090明确变更，再补新问题决定与未读素材。
 
 - 2026-09-17提交整理：用户要求以四项现状说明提交本批文档。合并前无未解决冲突，本地落后origin/main的74e88fa（仅2043用例），已快进保留远端及本地改动。会员详情GGR/累计投注和钱包期初/期末筛选缺陷保留；提现36/35差异、历史鉴权疑点待核，锁页暂略过。礼金日志仅部分页面观察（筛选、状态选项及一条已领取返利），未完成模块文档/API验证；扫描暂因提交整理暂停。
 
@@ -58,13 +68,13 @@
 
 - 2026-09-16提测时间核对：实时读取本班车14个Story、42个直属子任务的完整Jira状态历史，逐项时间与历史ID见[提测时间记录](requirements/submission-history-20260916.md)。2032客户端已有FAT/UAT流转、2028已FAT、2022已UAT、2030已待上线；2043后端FAT后退回进行中。9月15日状态表保留日期快照并加最新差异入口，不再把旧「未提测」作为当前Jira结论。仅只读取证及文档整理，不解除暂停/扩大测试授权，不修改API/UI结果或远端工单。
 
-- 2026-09-16提交前整理：合并本入口重复过程记录，2022新发现归入现有[问题评审](requirements/ISOP-2022/bug-review.md#2026-09-16-体育数据一致性续查)。详细响应、HTML和本机账号状态仍由Git忽略，不随提交携带；摘要保留，未删除原始证据。提交后再整理整体流程，本次不新增执行机制。本次`npm run check`通过（346项单测），`git diff --check`通过；首次5项因沙箱禁止本机监听失败，允许回环监听后完整重跑通过。未执行业务测试或Git提交/推送。
+- 2026-09-16提交前整理：合并本入口重复过程记录，2022新发现归入现有[问题评审](requirements/history/through-ISOP-2072/ISOP-2022/bug-review.md#2026-09-16-体育数据一致性续查)。详细响应、HTML和本机账号状态仍由Git忽略，不随提交携带；摘要保留，未删除原始证据。提交后再整理整体流程，本次不新增执行机制。本次`npm run check`通过（346项单测），`git diff --check`通过；首次5项因沙箱禁止本机监听失败，允许回环监听后完整重跑通过。未执行业务测试或Git提交/推送。
 
 - 2022：已确认会员尾号8570的5笔跨日体育单在主表存在、体育表缺失，16日日统计漏计有效流水217.15；另一会员尾号6707的体育样本仅体育表有，主表无，需核对样本来源。根因及Doris映射未确认，不能把“接口内部金额一致”当作无漏单证明。仅只读SQL/API，未回填或删表，全量自动执行仍暂停。详见上述问题评审及其本地证据链接。
 
-- 2032：9月16日后台补测已复用资金会员（UID尾号2565，完整定位在忽略的api/local-state/isop2032-selected-member.json），配置文案保存/重开/恢复及API读回完成，其他名单/游戏/开关/富文本只改草稿后取消。C12/C13/C16已记FAIL，具体失败与未测边界见[用例](requirements/ISOP-2032/test-cases.md)及[后台报告](reports/qa/ISOP-2032/backend-20260916/results.html)。此前[API报告](reports/qa/ISOP-2032/20260916T024749807756Z/results.html)仅查询/鉴权范围，不证明派发；正常批次、导出文件、低权限及部分持久化仍未完成。客户端未提测不测，无新注册/资金/派发/数据库写入或外部建单。
+- 2032：9月16日后台补测已复用资金会员（UID尾号2565，完整定位在忽略的api/local-state/isop2032-selected-member.json），配置文案保存/重开/恢复及API读回完成，其他名单/游戏/开关/富文本只改草稿后取消。C12/C13/C16已记FAIL，具体失败与未测边界见[用例](requirements/history/through-ISOP-2072/ISOP-2032/test-cases.md)及[后台报告](reports/qa/ISOP-2032/backend-20260916/results.html)。此前[API报告](reports/qa/ISOP-2032/20260916T024749807756Z/results.html)仅查询/鉴权范围，不证明派发；正常批次、导出文件、低权限及部分持久化仍未完成。客户端未提测不测，无新注册/资金/派发/数据库写入或外部建单。
 
-- 2032规则以[问题与决定](requirements/ISOP-2032/questions.md)为准：已合读Jira正文/评论及Lark，不再将已写明的优先级、弹窗、筛选或用户已确认的时间规则重复列为问题。9月16日新增最低返利0.01、低于门槛不返、指定游戏停用回落类型、仅后台配置；其他精度仍待核。按[实际配置](requirements/ISOP-2032/api/contract-review.md#当前后台配置)准备，当前id/ty=40与需求ID32差异保留。来源和改动范围统一见[证据同步记录](requirements/ISOP-2032/evidence-sync.md)，基线仍PARTIAL，不能视为业务通过。
+- 2032规则以[问题与决定](requirements/history/through-ISOP-2072/ISOP-2032/questions.md)为准：已合读Jira正文/评论及Lark，不再将已写明的优先级、弹窗、筛选或用户已确认的时间规则重复列为问题。9月16日新增最低返利0.01、低于门槛不返、指定游戏停用回落类型、仅后台配置；其他精度仍待核。按[实际配置](requirements/history/through-ISOP-2072/ISOP-2032/api/contract-review.md#当前后台配置)准备，当前id/ty=40与需求ID32差异保留。来源和改动范围统一见[证据同步记录](requirements/history/through-ISOP-2072/ISOP-2032/evidence-sync.md)，基线仍PARTIAL，不能视为业务通过。
 
 - 9月15日班车14项状态及来源见[状态页](requirements/status.md)：待上线的2027/2029/2037/2038/2110/2086本轮不再测；2022等待重建及修复；2032只测已提测后台；2028/2043/2072未提测。workflow暂停配置已同步，历史结果保留；此前执行7项不等于班车全部范围，2070不在本班车。
 
@@ -85,7 +95,7 @@
 
 - 2026-09-14 18:13（UTC+8）用户要求FAT单测只读字段并尽量复用账号：已复用当前FAT批次API019会员，fresh A/B/客户端登录确认状态2且待处理/已处理/审计均0，发送一次018原混合编辑请求，未注册/发短信/复核。HTTP200/status=true；phone=000000000000与user_message=QA immutable field写入新待复核草稿，kyc_status=5被忽略仍2；三端正式资料未变，待复核0→1、审计0→1。已确认草稿层只读保护失败，正式落库未经复核未验证。最新FAT报告已更新018及字段对照，其他65项未重跑，汇总不变。证据在当前FAT目录readonly-fields-recheck，操作标识在忽略的api/local-state/fat-readonly-fields-recheck.json；该复用会员现在不干净，不得再作无待审前置。UAT未执行。
 
-- 2026-09-14最新：按用户“全都重新搞一下”，FAT授予Codex复核列表20010/复核20011后重新执行，UAT同样按66项保留+23项暂略过复测。当前结果与下一步分别见[FAT报告](requirements/ISOP-2027/test-report-2026-09-14.md)、[UAT报告](requirements/ISOP-2027/test-report-uat-2026-09-14.md)，不再沿用此前29项窄范围计数。FAT原5项权限相关检查全部通过；UAT角色权限满足，021恢复后首次登录验证失败，后续只读核验原配置完整恢复且B登录成功，没有再次写角色。
+- 2026-09-14最新：按用户“全都重新搞一下”，FAT授予Codex复核列表20010/复核20011后重新执行，UAT同样按66项保留+23项暂略过复测。当前结果与下一步分别见[FAT报告](requirements/history/through-ISOP-2072/ISOP-2027/test-report-2026-09-14.md)、[UAT报告](requirements/history/through-ISOP-2072/ISOP-2027/test-report-uat-2026-09-14.md)，不再沿用此前29项窄范围计数。FAT原5项权限相关检查全部通过；UAT角色权限满足，021恢复后首次登录验证失败，后续只读核验原配置完整恢复且B登录成功，没有再次写角色。
 
 - 当前仅保留FAT 20260914T094238Z-146be4ae与UAT 20260914T095424Z-8713f2ec，固定入口latest-fat.html/latest-uat.html。旧报告与旧诊断页已按授权删除，不再是可打开证据；本轮补测及首次尝试保留在各自目录和attempt_history。FAT私有加权前后配置仍在api/local-state/fat-codex-review-grant.json；业务定位状态不随报告删除。后续不要把历史路径恢复为当前报告。
 
@@ -99,15 +109,15 @@
 
 - 本轮接口同步：从交接已核验的b8daa7d建立基线，再同步本机231d55d，新增/修改2份投注返利文档；按2032设计业务范围关联推断，不代表部署。inventory/catalog已更新，P0范围保持；未提交的接口仓库内容不进入快照，原目录未checkout/reset。文档差异与后续映射修订按版本保存在reports/workflow/documents。
 
-- 2026-09-14最新联合复测：用户明确要求2027 API和UI一起复测并生成报告，已执行保留的完整固定计划；结果、分类和未覆盖边界统一见[联合报告](requirements/ISOP-2027/test-report-2026-09-14.md)。普通Codex复核仍返回permission，Restore遮挡再次复现；并发核准/驳回本次未复现，不关闭历史候选。三个撤权测试的原角色恢复均已验证。此次授权覆盖2027现有UI复测，不推定其他新需求UI策略全部改变；2022继续暂停，无BUG提交或发群。
+- 2026-09-14最新联合复测：用户明确要求2027 API和UI一起复测并生成报告，已执行保留的完整固定计划；结果、分类和未覆盖边界统一见[联合报告](requirements/history/through-ISOP-2072/ISOP-2027/test-report-2026-09-14.md)。普通Codex复核仍返回permission，Restore遮挡再次复现；并发核准/驳回本次未复现，不关闭历史候选。三个撤权测试的原角色恢复均已验证。此次授权覆盖2027现有UI复测，不推定其他新需求UI策略全部改变；2022继续暂停，无BUG提交或发群。
 
-- 2026-09-14权限疑问核对：用户称2022并提供KYC复核权限截图，截图实际对应2027；已在[2027问题清单](requirements/ISOP-2027/api/BUG-review-2026-09-10.md)记录列表勾选、复核未勾选及证据边界。不能从截图判定已修复或缓存根因，权限阻塞不能解释独立的Restore遮挡及API校验/并发失败。此次只读本地证据，无业务复测，2022暂停保持。后续失败先保留原批次，按产品/权限环境/契约/脚本/数据缺口分类；诊断须有假设、限定次数和停止条件，不通过换超级管理员、强制点击、放宽断言或重复写入制造通过。
+- 2026-09-14权限疑问核对：用户称2022并提供KYC复核权限截图，截图实际对应2027；已在[2027问题清单](requirements/history/through-ISOP-2072/ISOP-2027/api/BUG-review-2026-09-10.md)记录列表勾选、复核未勾选及证据边界。不能从截图判定已修复或缓存根因，权限阻塞不能解释独立的Restore遮挡及API校验/并发失败。此次只读本地证据，无业务复测，2022暂停保持。后续失败先保留原批次，按产品/权限环境/契约/脚本/数据缺口分类；诊断须有假设、限定次数和停止条件，不通过换超级管理员、强制点击、放宽断言或重复写入制造通过。
 
 - 2026-09-14扫描授权补充：用户明确授权恢复Telegram/Jira扫描，并将相关上下文交给Codex AI分析。该授权解决上一轮自动审批提出的数据发送确认缺口，后续同范围分析不重复询问；不扩大业务执行、BUG提交或发群权限。
 
-- 2026-09-14最新：用户明确进入UAT表示人工已通过测试环境验收，2027状态已据此更新，人工与API结论分开。2027已用本轮专用fixture复测正常流程及历史风险项，结果集中在[历史报告已清理；查看最新FAT报告](requirements/ISOP-2027/test-report-2026-09-14.md)；仍有失败，尚未提交BUG/发群，异常定位留本批private-checkpoints。Codex CLI报错为local.json固定旧扩展路径，已修复并本地验证；恢复扫描被自动审批以外部AI分析上下文发送未明确授权拒绝，尚未重试。用户希望减少逐步人工驱动，方案见[协作收敛建议](docs/new-requirement-automation-plan.md#2026-09-14人机协作收敛建议)，当时事件驱动/页面/统一入口尚未实现，现见上方第1—4项实施记录。
+- 2026-09-14最新：用户明确进入UAT表示人工已通过测试环境验收，2027状态已据此更新，人工与API结论分开。2027已用本轮专用fixture复测正常流程及历史风险项，结果集中在[历史报告已清理；查看最新FAT报告](requirements/history/through-ISOP-2072/ISOP-2027/test-report-2026-09-14.md)；仍有失败，尚未提交BUG/发群，异常定位留本批private-checkpoints。Codex CLI报错为local.json固定旧扩展路径，已修复并本地验证；恢复扫描被自动审批以外部AI分析上下文发送未明确授权拒绝，尚未重试。用户希望减少逐步人工驱动，方案见[协作收敛建议](docs/new-requirement-automation-plan.md#2026-09-14人机协作收敛建议)，当时事件驱动/页面/统一入口尚未实现，现见上方第1—4项实施记录。
 
-- API测试有效性准备（2026-09-14）：用户明确要求需求先有接口能力预期、提测后功能评估、测试后固化FAT/UAT一键回归。已补[标准](requirements/api-readiness.md)、设计/契约/数据核对模板及[2028评估](requirements/ISOP-2028/design.md#接口能力预期与当前评估)；2028结论为契约部分满足、业务公式/导出未完整验证，数据核对为计划而非实查。代码核对发现统一adapter仍限FAT，合规地址固定FAT、客户端密码路径未适配UAT动态登录；双环境回归仍待实现和实测。其他需求尚未批量补评估，不改变原报告或2022暂停。本轮仅文档准备，无API/数据库执行、BUG提交或发群。
+- API测试有效性准备（2026-09-14）：用户明确要求需求先有接口能力预期、提测后功能评估、测试后固化FAT/UAT一键回归。已补[标准](requirements/api-readiness.md)、设计/契约/数据核对模板及[2028评估](requirements/history/through-ISOP-2072/ISOP-2028/design.md#接口能力预期与当前评估)；2028结论为契约部分满足、业务公式/导出未完整验证，数据核对为计划而非实查。代码核对发现统一adapter仍限FAT，合规地址固定FAT、客户端密码路径未适配UAT动态登录；双环境回归仍待实现和实测。其他需求尚未批量补评估，不改变原报告或2022暂停。本轮仅文档准备，无API/数据库执行、BUG提交或发群。
 
 - 需求状态管理（2026-09-14）：新增[需求状态列表](requirements/status.md)，集中维护13个Story的提测、测试、上线/关闭、下一步和来源。首次登记依据截至9月11日本地证据，没有刷新Jira/群消息或生产发布；未知状态明确待核实，没有将部分API通过或人工表通过直接升级为整单完成。后续提测、测试、修复、发布、关闭均更新此表及变更记录。2022暂停、BUG提交需确认和不发群约定保持。
 
@@ -115,13 +125,13 @@
 
 - 提交准备及后续合并见[整理记录](docs/project-cleanup-2026-09-11.md#远端合并2026-09-11)。用户最新指令允许提交和推送，替代此前由用户自行提交的安排；合并保留双方有效内容、当前配置和证据。新对话先读取本文件和AGENTS.md，再按下面的续接顺序推进。
 
-- 2027远端人工“通过”与Davinci负责人已逐行保留，新增C18“临近分行变更联动游戏类型限制”纳入18条业务总用例。来源、待关联的人工批次与自动化边界见[2027用例](requirements/ISOP-2027/test-cases.md)。冻结计划仍覆盖C01—C17，C18未实现独立自动断言；旧Restore失败、API候选、未回填manual.csv和当前原始结果均不因人工记录改变。
+- 2027远端人工“通过”与Davinci负责人已逐行保留，新增C18“临近分行变更联动游戏类型限制”纳入18条业务总用例。来源、待关联的人工批次与自动化边界见[2027用例](requirements/history/through-ISOP-2072/ISOP-2027/test-cases.md)。冻结计划仍覆盖C01—C17，C18未实现独立自动断言；旧Restore失败、API候选、未回填manual.csv和当前原始结果均不因人工记录改变。
 
-- ISOP-2022/2085已按用户最新“直接开测、逐轮出结果”指令完成FAT首轮与限定复核（2026-09-11），替代此前等全部条件齐备再执行的安排。新增统一plan.json、API数据视图及只读筛选/金额断言；现有53组合、48可执行，当前完整计划尚未全部按最新hash重跑。实际批次、计数、4项候选及空值契约差异集中在[问题评审](requirements/ISOP-2022/bug-review.md)。首轮和8项限定复核均保留真实失败，未算作整条业务/全量父需求验收；latest当前指向限定复核。每轮fresh登录，只读API与DB，没有造数/重算、BUG提交或发群。
+- ISOP-2022/2085已按用户最新“直接开测、逐轮出结果”指令完成FAT首轮与限定复核（2026-09-11），替代此前等全部条件齐备再执行的安排。新增统一plan.json、API数据视图及只读筛选/金额断言；现有53组合、48可执行，当前完整计划尚未全部按最新hash重跑。实际批次、计数、4项候选及空值契约差异集中在[问题评审](requirements/history/through-ISOP-2072/ISOP-2022/bug-review.md)。首轮和8项限定复核均保留真实失败，未算作整条业务/全量父需求验收；latest当前指向限定复核。每轮fresh登录，只读API与DB，没有造数/重算、BUG提交或发群。
 
 - 待确认列表按requirements已有需求编号展示，子任务归并；终端和preview.md保持简洁，详细消息/用例缺口留在preview.json。本地`qa:telegram -- preview`不扫描或调用AI；`run --requirements ... --revision ...`按需求选择，多批次须用原--candidates明确选择。本轮未执行测试，验证与保留状态见[列表续接](docs/telegram-next-session.md#需求级待确认列表2026-09-11)。
 
-- ISOP-2030当前仅有H5页面改版提测依据，原列表API来自扫描器默认范围，已纠正为手工UI。本地test_scopes限制同时用于预览与任务确认，8条总用例同步为人工UI；后续有明确API变更再评审。原候选、队列和证据未改，配置变更后使用新预览版本，详见[2030设计](requirements/ISOP-2030/design.md#测试分工与准备)。
+- ISOP-2030当前仅有H5页面改版提测依据，原列表API来自扫描器默认范围，已纠正为手工UI。本地test_scopes限制同时用于预览与任务确认，8条总用例同步为人工UI；后续有明确API变更再评审。原候选、队列和证据未改，配置变更后使用新预览版本，详见[2030设计](requirements/history/through-ISOP-2072/ISOP-2030/design.md#测试分工与准备)。
 
 - 扫描执行衔接：有plan.json的新任务使用统一API执行器，UI输出人工包；import-manual合并结果并产生新BUG评审版本。任务确认绑定计划hash与选择范围。--version记录声明版本，Telegram前后探针均匹配才核验。实现及本轮验证见[优化计划](docs/new-requirement-automation-plan.md#扫描执行与版本衔接2026-09-11)。本机配置默认写范围未扩大，活动任务及原证据保持。
 
@@ -133,18 +143,18 @@
 
 - [团队测试流程](docs/team-testing.md)：API自动执行优先，UI由AI整理用例、人执行并回填。当前执行包为`reports/qa/ISOP-2027/team-ready-20260911/`，人工表尚未执行；不要把准备视图当通过结果。
 - [新需求计划](docs/new-requirement-automation-plan.md)：阶段1、2及固定UI能力已实施；不继续建设新需求UI自动化或通用混合流程，P0自动化继续维护。实施说明见[API阶段](docs/new-requirement-stage1-2.md)、[可选UI阶段](docs/new-requirement-stage3.md)。
-- `requirements/ISOP-2027/plan.json`是唯一执行源。`npm run qa:requirement -- ISOP-2027`默认离线校验；默认自动侧排除人工项，显式`--only`、`--layer UI`或`--include-ui-automation`继续兼容已有UI能力。
+- `requirements/history/through-ISOP-2072/ISOP-2027/plan.json`是唯一执行源。`npm run qa:requirement -- ISOP-2027`默认离线校验；默认自动侧排除人工项，显式`--only`、`--layer UI`或`--include-ui-automation`继续兼容已有UI能力。
 - 2027报告入口：[最新UAT](reports/qa/ISOP-2027/latest-uat.html)、[最新FAT](reports/qa/ISOP-2027/latest-fat.html)；每环境保留最新一份。历史报告已按最新授权清理。
-- [需求入口](requirements/README.md)、[问题与决定](requirements/ISOP-2027/questions.md)、[准备清单](requirements/ISOP-2027/preparation.csv)保留业务规则和缺口；历史文字结论保持日期，原始文件已清理的地方明确注明。
+- [需求入口](requirements/README.md)、[问题与决定](requirements/history/through-ISOP-2072/ISOP-2027/questions.md)、[准备清单](requirements/history/through-ISOP-2072/ISOP-2027/preparation.csv)保留业务规则和缺口；历史文字结论保持日期，原始文件已清理的地方明确注明。
 
 ## 下一步与未结事项
 
-- 远端补充记录（提交ce0274a，2026-09-11）：Windows FAT无认证doctor网络检查通过，未登录或发送业务请求；2022业务仍受契约/样本缺口影响。原执行尝试和BLOCKED_DATA/BLOCKED_EXPECTATION记录已保留在[2022用例](requirements/ISOP-2022/test-cases.md)，不替代本机数据库准备核对或业务验收。
+- 远端补充记录（提交ce0274a，2026-09-11）：Windows FAT无认证doctor网络检查通过，未登录或发送业务请求；2022业务仍受契约/样本缺口影响。原执行尝试和BLOCKED_DATA/BLOCKED_EXPECTATION记录已保留在[2022用例](requirements/history/through-ISOP-2072/ISOP-2022/test-cases.md)，不替代本机数据库准备核对或业务验收。
 
 - 用户最新决定（2026-09-11）：2022等待修复，暂停主动复测；此前逐轮开测授权保留，但不覆盖本次暂停决定。已有问题与报告保持。收到修复/重新开测指令后再按明确范围fresh登录复验；BUG提交仍需确认，测试过程不发群。
 
 - 团队实际执行当前manual.csv，回填六列并附脱敏证据；自动侧按本批范围执行，再明确选择真实来源导入。优先完善API数据与断言，UI按人工验收推进。
-- [候选BUG](requirements/ISOP-2027/api/BUG-review-2026-09-10.md)尚未获建单批准。旧API证据已清理，提交前需按当前版本补充复现；Restore最近一次失败截图仍在当前UI批次。
+- [候选BUG](requirements/history/through-ISOP-2072/ISOP-2027/api/BUG-review-2026-09-10.md)尚未获建单批准。旧API证据已清理，提交前需按当前版本补充复现；Restore最近一次失败截图仍在当前UI批次。
 - 异常测试会员未做业务清理。旧会员/申请定位信息收敛至忽略且0600的`api/local-state/requirement-records-fat.json`，只含标识和历史状态，使用前须只读查实时状态，不重放或核准旧异常申请。号码预留状态未改。
 - B保持用户指定Codex角色，已执行的权限恢复结论见日期记录；普通角色新增复核权限契约、UI权限矩阵、状态1/4、精确原因最大长度、第三复核身份和故障恢复仍有缺口。分行名称与sid异常草稿不能用于补成功。
 - [Telegram续接](docs/telegram-next-session.md)：任务`58bed509adb9b8a9`仍REVIEW且未批准，config_hash已与当前配置不同，不沿用旧确认或改hash绕过检查；原报告留作历史参考，后续BUG用当前批次补证据。本次整理未改队列或游标。Telegram新任务已能消费统一API结果和人工包回填；真实建单、关联后整批群清单及超长附件验收未完成。
@@ -168,7 +178,7 @@
 
 2022报告中文展示（2026-09-11）：按用户要求，首轮与限定复核的原results.html/results.csv已更新为中文场景和实际结果说明；HTML状态显示通过/失败/未执行/执行出错，编号及原技术断言放在展开详情。原result.json和冻结快照hash保持，原视图备份为results.before-chinese.*；没有重跑业务或改判。公共展示转换在qa_core/result_language.py，2022历史标题适配在filbet/record_report.py，统一执行与离线重建入口后续沿用。`npm run check`通过（300项单测），浏览器实查中文布局及14项失败筛选通过。
 
-接口最新扫描（2026-09-11）：backend_api本地与远端main均b8daa7d，较ca3c1c2新增2提交、5份合规报表文档变更；主要为2028的总GGR、JP贡献/派奖字段，关联按内容推断。详见[2028接口评审](requirements/ISOP-2028/api/contract-review.md)。inventory/catalog已离线刷新，累计资产变化与本次提交增量分开记录；P0范围不变。2022两处查询文档无改动，此次没有业务测试、Telegram扫描或发群。
+接口最新扫描（2026-09-11）：backend_api本地与远端main均b8daa7d，较ca3c1c2新增2提交、5份合规报表文档变更；主要为2028的总GGR、JP贡献/派奖字段，关联按内容推断。详见[2028接口评审](requirements/history/through-ISOP-2072/ISOP-2028/api/contract-review.md)。inventory/catalog已离线刷新，累计资产变化与本次提交增量分开记录；P0范围不变。2022两处查询文档无改动，此次没有业务测试、Telegram扫描或发群。
 
 2022报告时区（2026-09-11）：按用户要求，20260911T092623Z-a2618c63/results.html的报告时间改为2026-09-11 17:26:23（UTC+8）。公共case_report渲染器后续将带时区的报告时间及执行时间转为东八区；未注明时区的值保留原文。原始JSON、批次编号和测试结论未改，没有重跑业务。跨日和已有+08:00转换校验通过；`npm run check`通过（300项单测，首次沙箱端口限制后提权重试）。
 

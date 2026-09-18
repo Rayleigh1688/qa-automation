@@ -6,6 +6,7 @@ from pathlib import Path
 import tempfile
 import unittest
 from support import ROOT
+from requirement_paths import requirement_dir, requirement_dirs
 from filbet.requirement_report import assessment_status, write_assessment
 
 
@@ -54,7 +55,7 @@ class RequirementReportTests(unittest.TestCase):
 
     def test_known_ids_are_empty_set_queries_in_actual_plan(self):
         from filbet.requirement_report import EMPTY_QUERY_IDS
-        plan=json.loads((ROOT/'requirements/ISOP-2027/plan.json').read_text())
+        plan=json.loads((requirement_dir(ROOT, 'ISOP-2027') / 'plan.json').read_text())
         cases={x['id']:x for x in plan['cases']}
         for ident in EMPTY_QUERY_IDS:
             query=next(x for x in cases[ident]['steps'] if x['id']=='filter')
@@ -79,7 +80,7 @@ class ConsistentReportViewsTests(unittest.TestCase):
     def test_detail_html_csv_and_assessment_share_reassessed_status(self):
         from filbet.requirement_report import write_reviewed_views, display_report
         from qa_core.case_report import FIELDS
-        item=empty_result();item['evidence']=str(ROOT/'requirements/ISOP-2027/plan.json')
+        item=empty_result();item['evidence']=str(requirement_dir(ROOT, 'ISOP-2027') / 'plan.json')
         report={'results':[item],'environment':'FAT','source_time':'2026-09-14T10:00:00Z'}
         original=copy.deepcopy(report)
         row={k:'测试' for k in FIELDS};row.update({'用例编号':item['id'],'用例名称':'手机号不命中','类型':'API'})

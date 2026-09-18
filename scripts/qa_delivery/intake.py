@@ -1,4 +1,5 @@
 """Natural-language submissions are evidence for local review, never execution authority."""
+from requirement_paths import requirement_dir
 import json
 import re
 from .state import digest, encoded
@@ -89,7 +90,7 @@ def preview(store, config):
         if row.get('story') in catalog:
             rows.append({**row, 'requirement_title': catalog[row['story']]})
         else:
-            unmatched.append({**row, 'unmatched_reason': '所属需求未核实' if not row.get('story') else '需求目录尚未建立'})
+            unmatched.append({**row, 'unmatched_reason': '所属需求未核实' if not row.get('story') else '需求已归档或目录尚未建立'})
     from .pipeline import ROOT
     from .requirement_bridge import task_plan
     for row in rows:
@@ -144,7 +145,7 @@ def confirm(store, config, selected, revision):
                 raise ValueError('当前试跑仅开放配置的pilot_story')
             if p['environment'] not in config['stories'][p['story']]['environments']:
                 raise ValueError('环境尚未开放')
-            if not (ROOT / 'requirements' / p['story'] / 'test-cases.md').is_file():
+            if not (requirement_dir(ROOT, p['story']) / 'test-cases.md').is_file():
                 raise ValueError('缺少需求验收用例')
             if not p.get('tester_id'):
                 raise ValueError('请先为Story指定一名固定测试负责人')

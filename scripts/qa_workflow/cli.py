@@ -1,4 +1,5 @@
 """One entry point for document sync, AI cases, preflight, scans and local status."""
+from requirement_paths import requirement_dirs
 import argparse
 import json
 import os
@@ -33,14 +34,16 @@ def main():
     parser.add_argument('--validate-output',action='store_true',help='Revalidate the saved AI output against identical source context, without calling AI')
     parser.add_argument('--port',type=int,default=8765)
     parser.add_argument('--allow-pending',action='store_true',help='Evidence check: allow explicitly unreviewed sources; never ignore drift/errors')
+    parser.add_argument('--include-history', action='store_true', help='Evidence checks: include archived requirements')
     args = parser.parse_args()
+    if args.include_history and args.mode != 'evidence': parser.error('--include-history requires evidence')
     if args.validate_output and args.mode!='generate': parser.error('--validate-output requires generate')
     if args.execute and args.mode not in ('scan','run'): parser.error('--execute only applies to scan/run')
     if args.offline and args.execute: parser.error('--offline cannot execute')
     if args.serve and args.mode != 'status': parser.error('--serve requires status')
     if args.allow_pending and args.mode != 'evidence': parser.error('--allow-pending requires evidence')
     if args.mode == 'evidence':
-        results = check_all(ROOT, args.story)
+        results = check_all(ROOT, args.story, include_history=args.include_history)
         for value in results:
             print(value['story'], value['status'], '；'.join(value['errors'] + value['pending']))
         if any(r['errors'] for r in results): return 1
@@ -62,7 +65,7 @@ def main():
                 value = generate(state,args.story,config,validate_output=args.validate_output)
                 print(args.story,'AI草稿用例：',len(value['cases']))
             if args.mode=='check':
-                stories = [args.story] if args.story else [r['story'] for r in state.seed()]
+                stories = [args.story] if args.story else [p.name for p in requirement_dirs(ROOT)]
                 results = [preflight(state,config,story) for story in stories]
                 for value in results:
                     state.append(value['story'],'preflight',{**value,'source':'config/workflow.json'})

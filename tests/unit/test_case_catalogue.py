@@ -7,6 +7,7 @@ import tempfile
 import unittest
 
 from support import ROOT
+from requirement_paths import requirement_dir, requirement_dirs
 from filbet.requirement_adapter import METHODS
 from qa_core.case_catalogue import API_FIELDS, design_rows, overview_rows, export_catalogues
 from qa_core.execution_plan import load
@@ -14,7 +15,7 @@ from qa_core.execution_plan import load
 
 class CaseCatalogueTests(unittest.TestCase):
     def setUp(self):
-        self.folder = ROOT / 'requirements/ISOP-2027'
+        self.folder = requirement_dir(ROOT, 'ISOP-2027')
         self.plan, self.cases, _ = load(self.folder / 'plan.json', METHODS)
         self.temp = tempfile.TemporaryDirectory()
         self.out = Path(self.temp.name) / 'ISOP-2027'
@@ -72,7 +73,7 @@ class CaseCatalogueTests(unittest.TestCase):
 
     def test_other_stories_use_their_own_design_and_preserve_legacy_data(self):
         from qa_core.case_catalogue import legacy_api_rows
-        for folder in (ROOT / 'requirements').glob('ISOP-*'):
+        for folder in requirement_dirs(ROOT, include_history=True):
             with self.subTest(story=folder.name):
                 overview = overview_rows(design_rows(folder / 'test-cases.md', folder.name), folder.name)
                 known = {r['用例编号'] for r in overview}

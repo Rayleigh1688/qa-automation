@@ -6,7 +6,7 @@
 
 ## 阶段1：统一用例与结果
 
-已建立 `requirements/ISOP-2027/plan.json` 为新入口唯一执行源：保留原68条审阅编号，加入6条既有查询组合；CSV由源生成，历史编号不重排。未迁移场景明确NOT_RUN，不以历史PASS代替本轮执行。旧 `api/cases.json` 同样由plan.json生成；原查询CLI读取统一源构造兼容视图，原路径及产物不变。
+已建立 `requirements/history/through-ISOP-2072/ISOP-2027/plan.json` 为新入口唯一执行源：保留原68条审阅编号，加入6条既有查询组合；CSV由源生成，历史编号不重排。未迁移场景明确NOT_RUN，不以历史PASS代替本轮执行。旧 `api/cases.json` 同样由plan.json生成；原查询CLI读取统一源构造兼容视图，原路径及产物不变。
 
 `qa_core/execution_plan.py`提供数据集展开、类型保留的变量替换、顺序提取、接口/账号引用及断言校验；`qa_core/plan_runner.py`提供步骤结果、依赖停止与独立用例继续。缺字段与null、大整数与布尔类型分别处理。公共原始结果记录预期、脱敏实际、失败步骤、耗时和证据。配置继续使用既有环境加载器，actor B引用本地忽略的reviewer配置。
 
@@ -34,7 +34,7 @@ npm run qa:requirement -- ISOP-2027 --env .env.fat --execute --insecure --allow-
 - 权限测试先核实B独占当前Codex角色，保存本轮原配置；finally恢复并fresh登录核对，recovery独立记录。恢复成功不改原FAIL，恢复失败可见并阻止后续业务请求。
 - 新产物只写到`reports/qa/ISOP-2027/<run-id>/`。latest.html/latest.json指向最近真实执行（可为定向复验），离线归并/重建不更新它。旧P0/npm/查询CLI产物契约保留；已退出的历史报告已清理。
 
-阶段2曾在2026-09-11 FAT验证主读写、边界、权限恢复、并发、查询及状态3/5组合；原批次标识为20260911T040816Z-c3787853、20260911T041944Z-a6f06bb3、20260911T042406Z-2432ecb0、20260911T042758Z-44802c76。旧结果现已删除，只保留这段日期来源说明；不能据此作为当前回归或BUG提交的原始证据。权限GET契约405的修正依据见[契约核对](../requirements/ISOP-2027/api/contract-review.md)。
+阶段2曾在2026-09-11 FAT验证主读写、边界、权限恢复、并发、查询及状态3/5组合；原批次标识为20260911T040816Z-c3787853、20260911T041944Z-a6f06bb3、20260911T042406Z-2432ecb0、20260911T042758Z-44802c76。旧结果现已删除，只保留这段日期来源说明；不能据此作为当前回归或BUG提交的原始证据。权限GET契约405的修正依据见[契约核对](../requirements/history/through-ISOP-2072/ISOP-2027/api/contract-review.md)。
 
 ### 剩余事项
 

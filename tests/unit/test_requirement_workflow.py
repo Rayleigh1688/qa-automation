@@ -13,6 +13,7 @@ from types import SimpleNamespace
 import unittest
 from unittest.mock import Mock, patch
 from support import ROOT
+from requirement_paths import requirement_dir, requirement_dirs
 from qa_core.case_report import csv_text
 from qa_core.team_delivery import MANUAL_FIELDS, prepare, import_results
 from qa_core.execution_plan import load
@@ -29,7 +30,7 @@ class WorkflowTests(unittest.TestCase):
         self.root=Path(self.temp.name); self.story='ISOP-2027'
         self.req=self.root/'requirements'/self.story; self.req.mkdir(parents=True)
         for name in ('plan.json','design.md','questions.md','test-cases.md'):
-            (self.req/name).write_bytes((ROOT/'requirements'/self.story/name).read_bytes())
+            (self.req/name).write_bytes((requirement_dir(ROOT, self.story)/name).read_bytes())
         self.plan,self.cases,self.checksum=load(self.req/'plan.json',METHODS)
         self.config={'stories':{self.story:{'tester_id':2,'environments':['FAT'],
             'execution':{'case_ids':['review-list-state-1','2027-UI-001','2027-FLOW-001']}}},

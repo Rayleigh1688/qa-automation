@@ -16,8 +16,8 @@
 | --- | --- | --- |
 | TLSQ-78 | [BI数据调整](https://alibaba-international.atlassian.net/browse/TLSQ-78)正文及[产品评论16500](https://alibaba-international.atlassian.net/browse/TLSQ-78?focusedCommentId=16500) | 2026-09-16实时读取；正文更新时间2026-03-13 18:56:47 +08:00，评论更新03-12 10:57:50；返回1条评论（未提供分页总数），无子任务/关联单；1张布局附件未视觉复核；正文未见Lark链接 |
 | UI-16 | 本轮首页、20张指标卡及问号提示、查询与图表交互 | 当前可见实现，不替代业务验收；未保存账号或个人资料 |
-| REQ-2022 | [已确认统计规则](../../../requirements/ISOP-2022/design.md) §1、AC-01/02及问题决定 | GGR统计按结算时间，非体育投注检索扩窗±1日，体育独立处理；本轮未刷新远端正文或确认部署 |
-| REQ-2072 | [排程需求](../../../requirements/ISOP-2072/design.md) | BI表五分钟排程为历史需求；用户本轮另确认首页BI五分钟时效目标，测试环境可能未达。实际部署、时效起止及水位仍待验证，排程频率不代替端到端时效 |
+| REQ-2022 | [已确认统计规则](../../../requirements/history/through-ISOP-2072/ISOP-2022/design.md) §1、AC-01/02及问题决定 | GGR统计按结算时间，非体育投注检索扩窗±1日，体育独立处理；本轮未刷新远端正文或确认部署 |
+| REQ-2072 | [排程需求](../../../requirements/history/through-ISOP-2072/ISOP-2072/design.md) | BI表五分钟排程为历史需求；用户本轮另确认首页BI五分钟时效目标，测试环境可能未达。实际部署、时效起止及水位仍待验证，排程频率不代替端到端时效 |
 | CAT | [管理报表接口目录](../../../api/catalog/admin/report.csv) | GET /admin/reports/bi/basic为候选，含report_type示例；未捕获本轮Network，参数枚举和字段映射未验证 |
 
 代理后台BI和游戏集成平台BI是其他模块，不混入本页。平台业绩报表/导出在接口目录中出现，但本轮首页未见相应按钮，不强行作为首页功能。

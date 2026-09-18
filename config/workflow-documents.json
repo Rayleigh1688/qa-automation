@@ -3,7 +3,7 @@
     {
       "prefix": "活动/投注返利活动/",
       "story": "ISOP-2032",
-      "basis": "requirements/ISOP-2032/design.md AC-03/05/07：投注返利活动与客户端通知；按业务范围关联推断，不代表已部署"
+      "basis": "requirements/history/through-ISOP-2072/ISOP-2032/design.md AC-03/05/07：投注返利活动与客户端通知；按业务范围关联推断，不代表已部署"
     }
   ]
 }

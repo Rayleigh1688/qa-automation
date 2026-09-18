@@ -6,7 +6,7 @@
 
 ## 实现
 
-- `requirements/ISOP-2027/plan.json`继续作为唯一执行源，UI步骤与API/业务方法共享actor、变量、提取、断言和四状态结果。生成CSV保留原UI/FLOW编号。普通动作与用例只修改JSON；正式运行不扫描页面，不调用AI，不导入结果目录脚本。
+- `requirements/history/through-ISOP-2072/ISOP-2027/plan.json`继续作为唯一执行源，UI步骤与API/业务方法共享actor、变量、提取、断言和四状态结果。生成CSV保留原UI/FLOW编号。普通动作与用例只修改JSON；正式运行不扫描页面，不调用AI，不导入结果目录脚本。
 - [固定页面资产](../ui/data/isop2027.json)使用服务别名和页面路径，集中维护列表、表单、确认框、复核抽屉、图片预览等定位。旧`isop2027-fat.json`已确认无当前消费者并删除。目标必须唯一；文档槽位使用明确位置，并先断言集合大小为3或6，不能静默取首项。
 - `ui/framework/requirement-ui.mjs`提供可导入的打开、真实点击、输入、选择、勾选、上传、等待、键盘、滚动及观测能力。表单先等待本轮原值初始化；响应监听在触发前安装，同时关联新request对象和本轮参数。HTTP与业务状态分别断言；前端拦截检查有界窗口内请求数为0，并检查页面反馈与适用的API不变性。
 - `scripts/telegram-ui.mjs`成为兼容CLI，旧scan/run实现迁到可导入的`legacy-requirement-ui.mjs`，原命令、scan/result文件和状态口径保留。Telegram接入统一新入口属于后续阶段5，未在本轮替换。

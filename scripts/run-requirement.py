@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """Validate, select and execute versioned requirement plans; old CLI stays compatible."""
+from requirement_paths import requirement_dir
 import argparse
 from datetime import datetime, timezone
 import json
@@ -51,7 +52,7 @@ def main():
         write_views(args.rebuild.parent/(args.rebuild.name+'-views-'+uuid.uuid4().hex[:8]), snapshot, report, extra_views=args.extra_views)
         return 0
     from filbet.requirement_adapter import Adapter, METHODS
-    path = ROOT/'requirements'/args.story/'plan.json'
+    path = requirement_dir(ROOT, args.story)/'plan.json'
     plan, cases, digest = load(path, METHODS)
     profile = None
     if args.profile:

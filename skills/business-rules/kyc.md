@@ -14,7 +14,7 @@
 | KYC-REVIEW-01 | 草稿与正式资料 | 编辑成功后合法变更入草稿，正式资料在复核前不变；待处理、已处理及审计仅出现本次预期变化 |
 | KYC-QUERY-01 | 不命中查询 | data.d=null或[]均可接受，同时要求HTTP200、业务成功、data.t=0及原用例无副作用；正向命中仍须证明指定记录存在 |
 
-字段权限关联[2027设计AC-02](../../requirements/ISOP-2027/design.md)。用户2026-09-14明确确认“用户留言是可以修改的，这个不算失败”，替代此前留言只读的错误预期；同日确认不命中返回null没有问题。空集规则目前适用于2027用例030、033、034、035、037、039、040、042，不泛化为所有列表接口规则。缺失字段、错误响应或非零总数均不能当正常空集。
+字段权限关联[2027设计AC-02](../../requirements/history/through-ISOP-2072/ISOP-2027/design.md)。用户2026-09-14明确确认“用户留言是可以修改的，这个不算失败”，替代此前留言只读的错误预期；同日确认不命中返回null没有问题。空集规则目前适用于2027用例030、033、034、035、037、039、040、042，不泛化为所有列表接口规则。缺失字段、错误响应或非零总数均不能当正常空集。
 
 是否可修改取决于接口业务权限，不能仅按字段是否存在于页面或数据库判断。
 
@@ -28,7 +28,7 @@ POST /admin/kyc/edit中的kyc_status与POST /admin/kyc/review中的review_status
 
 | 规则 | 固定资产 | 证据边界 |
 | --- | --- | --- |
-| KYC-EDIT-01/02/03、KYC-REVIEW-01 | [计划](../../requirements/ISOP-2027/plan.json)的2027-API-018；[校验函数](../../scripts/filbet/protected_edit.py)；[离线测试](../../tests/unit/test_protected_edit.py) | FAT 2026-09-14 18:57（UTC+8）编辑证据按留言可编辑规则离线复评通过；未新增请求、未复核该申请，不证明复核后的最终落库 |
+| KYC-EDIT-01/02/03、KYC-REVIEW-01 | [计划](../../requirements/history/through-ISOP-2072/ISOP-2027/plan.json)的2027-API-018；[校验函数](../../scripts/filbet/protected_edit.py)；[离线测试](../../tests/unit/test_protected_edit.py) | FAT 2026-09-14 18:57（UTC+8）编辑证据按留言可编辑规则离线复评通过；未新增请求、未复核该申请，不证明复核后的最终落库 |
 | 三个字段的页面表现 | 同一计划的2027-UI-001 | 留言可编辑的新预期尚未重测，API证据不替代UI |
 | KYC-QUERY-01 | [empty_or_null断言](../../scripts/qa_core/execution_plan.py)；[报告复评](../../scripts/filbet/requirement_report.py) | 满足条件的FAT/UAT原证据离线复评；未执行项不改判 |
 

@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """Prepare API/manual team views or import manual evidence. Entirely offline."""
+from requirement_paths import requirement_dir
 import argparse
 from pathlib import Path
 from qa_core.team_delivery import prepare, import_results, DeliveryError
@@ -24,7 +25,7 @@ def main():
         import re
         if not re.fullmatch(r'ISOP-\d+',args.story): raise ValueError('invalid story')
         from filbet.requirement_adapter import METHODS
-        plan,cases,digest=load(ROOT/'requirements'/args.story/'plan.json',METHODS)
+        plan,cases,digest=load(requirement_dir(ROOT, args.story)/'plan.json',METHODS)
         result=prepare(plan,cases,digest,args.out,args.environment,args.version,extra_views=args.extra_views)
         if args.story=='ISOP-2027':
             from filbet.requirement_kyc import png_bytes

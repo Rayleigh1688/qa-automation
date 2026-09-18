@@ -1,16 +1,16 @@
-# 新需求 AI 自动化测试设计
+# 需求设计与版本索引
 
 现有功能先对照[业务模块基线](../modules/README.md)：按菜单维护长期规则与覆盖缺口，需求目录记录本次变更、影响和交付。首页BI先整理，KYC随后复用已有规则；模块观察不替代需求验收。
 
-所有需求文档遵循[统一格式约束](document-style.md)：章节保留原文编号和`§`、问题编号用`Q-01`、日期格式统一，保留业务用例和执行数据的机器字段。当前班车7个需求已统一入口和历史记录归属。
+所有需求文档遵循[统一格式约束](document-style.md)：章节保留原文编号和`§`、问题编号用`Q-01`、日期格式统一，保留业务用例和执行数据的机器字段。原班车7个需求的记录已随完成批次归档。
 
-需求补充先执行[证据同步流程](evidence-sync-plan.md)：合读Jira正文/评论、关联Lark与子任务，将决定同步到设计、用例和执行源；来源版本及未读范围必须可追溯。`npm run qa -- evidence`离线查看同步缺口，首次落地见[2032记录](ISOP-2032/evidence-sync.md)。
+需求补充先执行[证据同步流程](evidence-sync-plan.md)：合读Jira正文/评论、关联Lark与子任务，将决定同步到设计、用例和执行源；来源版本及未读范围必须可追溯。`npm run qa -- evidence`离线查看同步缺口，首次落地见[2032记录](history/through-ISOP-2072/ISOP-2032/evidence-sync.md)。
 
 设计相关模块前先查[业务规则入口](../skills/business-rules.md)，在design引用编号、版本及适用差异。KYC已有[可复用规则](../skills/business-rules/kyc.md)，无需从历史报告重新梳理；规则确认与实测通过分开记录。
 
 先看[需求状态列表](status.html)：统一查看各Story的提测、测试进度、待修复、上线与关闭状态及下一步；业务用例和报告仍在各自目录维护。
 
-需求出来即按[API准备与评估标准](api-readiness.md)推导接口能力、准备独立预期和正反例；提测后在design.md明确功能覆盖、可测性与实测结论。设计/接口评审模板已补齐，数据结构与链路有影响时使用api/data-review.md；[2028示例](ISOP-2028/design.md#接口能力预期与当前评估)展示当前缺口，回归能力按FAT/UAT分别验收。
+需求出来即按[API准备与评估标准](api-readiness.md)推导接口能力、准备独立预期和正反例；提测后在design.md明确功能覆盖、可测性与实测结论。设计/接口评审模板已补齐，数据结构与链路有影响时使用api/data-review.md；[2028示例](history/through-ISOP-2072/ISOP-2028/design.md#接口能力预期与当前评估)展示当前缺口，回归能力按FAT/UAT分别验收。
 
 日常 P0 回归入口仍在 [README](../README.md)。这里按需求组织设计与执行证据，不要求先覆盖全部接口，也不因新需求自动扩展 P0。
 
@@ -20,29 +20,49 @@
 
 ## 需求索引与组织约定
 
-按 Jira 编号建立 `requirements/<Jira编号>/`，不再按年/月套目录。同一需求的补充、复测与重新打开继续维护原目录；新的 Jira 需求建新目录并链接相关需求。日期、来源版本和执行批次记录在文档中。
+- [当前需求：ISOP-2072之后](#当前需求)
+- [历史版本：ISOP-2072及之前](history/README.md)
 
-需求索引按创建时间倒序，新需求在上、老需求在下；后续新增需求按此顺序插入。完成的需求保留原目录及索引位置，完成状态以需求文档中的验收结论为准，不从排序推断。单个需求内的验收点、问题及用例按编号正序，便于引用和执行。
+2026-09-18用户确认ISOP-2072及之前已完成，实体归档至`requirements/history/through-ISOP-2072/`。顶层仅保留当前需求；显式编号CLI兼容查找历史目录，历史测试证据不改写为本轮通过。
 
-当前班车范围与实际结果见[七需求记录](test-round-20260914-seven.md)。早期选取依据和跨需求评审保留在[历史评审](../docs/history/requirement-records-20260907-11.md#review-20260907)。
+2026-09-18：[ISOP-2072之后20条独立单初审](review-after-2072-20260918.md)，已逐单落实下表20个目录的设计、问题、用例与CSV，保留来源和未读素材边界；不代表业务验收或新增执行授权。
 
-群消息扫描的待确认任务以这里已有需求目录的工单为单位，子任务提测归并到所属需求；无提测记录不因目录存在而列入。终端显示简洁需求列表，详细依据保存在本地preview.json；查看与选择命令见[Telegram流程](../docs/telegram-qa.md#手动扫描一次)。
+当前需求按 Jira 编号建立 `requirements/<Jira编号>/`；完成批次移入`history/<版本>/`，本次版本标识为`through-ISOP-2072`。同一需求的补充、复测与重新打开继续维护原目录；新的 Jira 需求建新目录并链接相关需求。日期、来源版本和执行批次记录在文档中。
+
+当前及历史版本索引内部按创建时间倒序；后续新增需求放入当前需求。完成的需求按批次实体归档；用户完成确认与历史实测结论分别保留。单个需求内的验收点、问题及用例按编号正序，便于引用和执行。
+
+2026-09-14历史班车范围与实际结果见[七需求记录](test-round-20260914-seven.md)。早期选取依据和跨需求评审保留在[历史评审](../docs/history/requirement-records-20260907-11.md#review-20260907)。
+
+群消息扫描的待确认任务仅以顶层当前需求目录的工单为单位，子任务提测归并到所属需求；无提测记录不因目录存在而列入。终端显示简洁需求列表，详细依据保存在本地preview.json；查看与选择命令见[Telegram流程](../docs/telegram-qa.md#手动扫描一次)。
+
+### 当前需求
+
+编号大于ISOP-2072，共20条独立单。历史13条见[历史版本入口](history/README.md)。
 
 | Jira 编号 | 需求名称 | 分离文档 |
 | --- | --- | --- |
-| ISOP-2072 | 報表數據更改爲排程計算 | [设计](ISOP-2072/design.md) · [问题](ISOP-2072/questions.md) · [总用例](ISOP-2072/cases.csv) · [用例设计](ISOP-2072/test-cases.md) |
-| ISOP-2070 | Funky 時間回傳問題 | [设计](ISOP-2070/design.md) · [问题](ISOP-2070/questions.md) · [总用例](ISOP-2070/cases.csv) · [用例设计](ISOP-2070/test-cases.md) |
-| ISOP-2043 | 管理後台 - 新增 JP 資訊 | [设计](ISOP-2043/design.md) · [问题](ISOP-2043/questions.md) · [总用例](ISOP-2043/cases.csv) · [用例设计](ISOP-2043/test-cases.md) · [API数据](ISOP-2043/api/data-cases.csv) |
-| ISOP-2041 | JP 注單寫入方式調整 | [设计](ISOP-2041/design.md) · [问题](ISOP-2041/questions.md) · [总用例](ISOP-2041/cases.csv) · [用例设计](ISOP-2041/test-cases.md) |
-| ISOP-2038 | 合規後台 - 移除 Jackpot 記錄選單 | [设计](ISOP-2038/design.md) · [问题](ISOP-2038/questions.md) · [总用例](ISOP-2038/cases.csv) · [用例设计](ISOP-2038/test-cases.md) |
-| ISOP-2037 | 合規後台 - 全平台投注紀錄增加欄位 | [设计](ISOP-2037/design.md) · [问题](ISOP-2037/questions.md) · [总用例](ISOP-2037/cases.csv) · [用例设计](ISOP-2037/test-cases.md) · [API数据](ISOP-2037/api/data-cases.csv) |
-| ISOP-2032 | 用戶端 - 投注返利活動 | [设计](ISOP-2032/design.md) · [问题](ISOP-2032/questions.md) · [总用例](ISOP-2032/cases.csv) · [用例设计](ISOP-2032/test-cases.md) · [API数据](ISOP-2032/api/data-cases.csv) |
-| ISOP-2031 | 新增金額動畫效果 | [设计](ISOP-2031/design.md) · [问题](ISOP-2031/questions.md) · [总用例](ISOP-2031/cases.csv) · [用例设计](ISOP-2031/test-cases.md) · [API数据](ISOP-2031/api/data-cases.csv) |
-| ISOP-2030 | 用戶端 - 遊戲頁面改版 | [设计](ISOP-2030/design.md) · [问题](ISOP-2030/questions.md) · [总用例](ISOP-2030/cases.csv) · [用例设计](ISOP-2030/test-cases.md) |
-| ISOP-2029 | 用戶端 - 免費旋轉領取文案調整 | [设计](ISOP-2029/design.md) · [问题](ISOP-2029/questions.md) · [总用例](ISOP-2029/cases.csv) · [用例设计](ISOP-2029/test-cases.md) |
-| ISOP-2028 | 合規後台 - 統計數據時間調整 | [设计](ISOP-2028/design.md) · [问题](ISOP-2028/questions.md) · [总用例](ISOP-2028/cases.csv) · [用例设计](ISOP-2028/test-cases.md) · [API数据](ISOP-2028/api/data-cases.csv) |
-| ISOP-2027 | 管理後台 - KYC 複核功能 | [设计](ISOP-2027/design.md) · [问题](ISOP-2027/questions.md) · [总用例](ISOP-2027/cases.csv) · [用例设计](ISOP-2027/test-cases.md) · [API数据](ISOP-2027/api/data-cases.csv) |
-| ISOP-2022 | 管理后台统计数据时间调整 | [设计](ISOP-2022/design.md) · [问题](ISOP-2022/questions.md) · [总用例](ISOP-2022/cases.csv) · [用例设计](ISOP-2022/test-cases.md) · [API数据](ISOP-2022/api/data-cases.csv) · [问题评审](ISOP-2022/bug-review.md) |
+| ISOP-2120 | 金幣派發效果二期 | [设计](ISOP-2120/design.md) · [问题](ISOP-2120/questions.md) · [总用例](ISOP-2120/cases.csv) · [用例设计](ISOP-2120/test-cases.md) |
+| ISOP-2119 | 管理後台 - 遊戲廠商類型編輯調整 | [设计](ISOP-2119/design.md) · [问题](ISOP-2119/questions.md) · [总用例](ISOP-2119/cases.csv) · [用例设计](ISOP-2119/test-cases.md) |
+| ISOP-2118 | 投返二期 | [设计](ISOP-2118/design.md) · [问题](ISOP-2118/questions.md) · [总用例](ISOP-2118/cases.csv) · [用例设计](ISOP-2118/test-cases.md) |
+| ISOP-2117 | Daily Rewards 顯示調整 | [设计](ISOP-2117/design.md) · [问题](ISOP-2117/questions.md) · [总用例](ISOP-2117/cases.csv) · [用例设计](ISOP-2117/test-cases.md) |
+| ISOP-2116 | PlayTime 遊戲對接 | [设计](ISOP-2116/design.md) · [问题](ISOP-2116/questions.md) · [总用例](ISOP-2116/cases.csv) · [用例设计](ISOP-2116/test-cases.md) |
+| ISOP-2111 | [Filplay] 直向手機點大廳遊戲會開到旁邊那一款 | [设计](ISOP-2111/design.md) · [问题](ISOP-2111/questions.md) · [总用例](ISOP-2111/cases.csv) · [用例设计](ISOP-2111/test-cases.md) |
+| ISOP-2110 | 編輯彈窗檢查邏輯調整 | [设计](ISOP-2110/design.md) · [问题](ISOP-2110/questions.md) · [总用例](ISOP-2110/cases.csv) · [用例设计](ISOP-2110/test-cases.md) |
+| ISOP-2109 | 前端頁面調整 | [设计](ISOP-2109/design.md) · [问题](ISOP-2109/questions.md) · [总用例](ISOP-2109/cases.csv) · [用例设计](ISOP-2109/test-cases.md) |
+| ISOP-2104 | 投注返利活動頁 | [设计](ISOP-2104/design.md) · [问题](ISOP-2104/questions.md) · [总用例](ISOP-2104/cases.csv) · [用例设计](ISOP-2104/test-cases.md) |
+| ISOP-2103 | 免費旋轉派發彈窗 | [设计](ISOP-2103/design.md) · [问题](ISOP-2103/questions.md) · [总用例](ISOP-2103/cases.csv) · [用例设计](ISOP-2103/test-cases.md) |
+| ISOP-2102 | MX API 調整 | [设计](ISOP-2102/design.md) · [问题](ISOP-2102/questions.md) · [总用例](ISOP-2102/cases.csv) · [用例设计](ISOP-2102/test-cases.md) |
+| ISOP-2100 | 代理後台調整 | [设计](ISOP-2100/design.md) · [问题](ISOP-2100/questions.md) · [总用例](ISOP-2100/cases.csv) · [用例设计](ISOP-2100/test-cases.md) |
+| ISOP-2098 | SA 投注詳情新增 | [设计](ISOP-2098/design.md) · [问题](ISOP-2098/questions.md) · [总用例](ISOP-2098/cases.csv) · [用例设计](ISOP-2098/test-cases.md) |
+| ISOP-2094 | [Filplay] 地域限制 | [设计](ISOP-2094/design.md) · [问题](ISOP-2094/questions.md) · [总用例](ISOP-2094/cases.csv) · [用例设计](ISOP-2094/test-cases.md) |
+| ISOP-2093 | Gcash 充值後跳轉流程 | [设计](ISOP-2093/design.md) · [问题](ISOP-2093/questions.md) · [总用例](ISOP-2093/cases.csv) · [用例设计](ISOP-2093/test-cases.md) |
+| ISOP-2092 | 後台首頁數據看板 | [设计](ISOP-2092/design.md) · [问题](ISOP-2092/questions.md) · [总用例](ISOP-2092/cases.csv) · [用例设计](ISOP-2092/test-cases.md) |
+| ISOP-2091 | 廠商排行榜活動 | [设计](ISOP-2091/design.md) · [问题](ISOP-2091/questions.md) · [总用例](ISOP-2091/cases.csv) · [用例设计](ISOP-2091/test-cases.md) |
+| ISOP-2090 | 輸值返利活動 | [设计](ISOP-2090/design.md) · [问题](ISOP-2090/questions.md) · [总用例](ISOP-2090/cases.csv) · [用例设计](ISOP-2090/test-cases.md) |
+| ISOP-2089 | Search 頁面改版 | [设计](ISOP-2089/design.md) · [问题](ISOP-2089/questions.md) · [总用例](ISOP-2089/cases.csv) · [用例设计](ISOP-2089/test-cases.md) |
+| ISOP-2086 | 修改 Nav 的 Reward 為 Promos | [设计](ISOP-2086/design.md) · [问题](ISOP-2086/questions.md) · [总用例](ISOP-2086/cases.csv) · [用例设计](ISOP-2086/test-cases.md) |
+
+### 文档组织
 
 每个需求保留三份文档入口：`design.md`写验收规则/影响/测试策略，`questions.md`写问题及答复决定，`test-cases.md`保留验收用例、实现映射与历史证据链接。新执行结果统一生成到结果表，不在Markdown再手工抄写实时通过率。问题解决后同步规则和期望，不将讨论过程塞进用例步骤；索引不复制实时通过率。
 
@@ -52,9 +72,9 @@
 
 ## 总用例与API数据分开
 
-每个需求自己的`cases.csv`是业务总表，来自`test-cases.md`；有自动执行资产时，`api/data-cases.csv`独立保存具体数据组合、请求和断言。两表通过总用例编号关联，详细数据不再展开到总表。JSON仍是自动执行输入，生成CSV不手工双向维护。当前13个需求均有总表；2022、2027、2028、2031、2032、2037、2043已有API数据表，其余不伪造未实现资产。
+每个需求自己的`cases.csv`是业务总表，来自`test-cases.md`；有自动执行资产时，`api/data-cases.csv`独立保存具体数据组合、请求和断言。两表通过总用例编号关联，详细数据不再展开到总表。JSON仍是自动执行输入，生成CSV不手工双向维护。当前33个独立单目录均有总表（含20个本次初审落地目录）；2022、2027、2028、2031、2032、2037、2043已有API数据表，其余不伪造未实现资产。
 
-`npm run qa:cases -- ISOP-2027`更新单需求，`npm run qa:cases -- --all`更新全部，均不登录。API表包含未具备前提的执行项，不把“有数据表”当作可全量运行；来源和编号规则见[测试流程](../docs/testing-workflow.md#文件与执行入口)。
+`npm run qa:cases -- ISOP-2027`更新单需求，`npm run qa:cases -- --all`更新当前需求；增加`--include-history`才覆盖历史需求，均不登录。API表包含未具备前提的执行项，不把“有数据表”当作可全量运行；来源和编号规则见[测试流程](../docs/testing-workflow.md#文件与执行入口)。
 
 ## 常规需求目录
 
@@ -77,7 +97,7 @@ requirements/<需求编号>/
 
 独立执行的新结果和人工回填放在`reports/qa/<需求编号>/<执行批次或交付包>/`，按用途生成`results.csv`/`results.html`、`manual.csv`及必要证据，详见[团队流程](../docs/team-testing.md)。从Telegram任务执行时，原始API结果仍在reports/qa，团队包、人工导入和统一BUG评审位于`reports/telegram/runs/<job>/`，与活动任务绑定。新需求不再建立UI自动化目录；人工UI场景保留在总用例和人工执行清单中。
 
-ISOP-2022已接入plan.json及API数据表，首轮与限定复核结果见[问题评审](ISOP-2022/bug-review.md)；候选未获建单确认，部分API组合实测不等于父需求全量验收。ISOP-2027多出的`execution-*.md`、`coverage-*.md`和`ui/execution-*.md`是试点阶段记录，不作为新需求的必备模板；其既有BUG清单路径保持兼容。`plan.json`和`preparation.csv`是通用配置与准备资料，并非UI专属文件。
+ISOP-2022已接入plan.json及API数据表，首轮与限定复核结果见[问题评审](history/through-ISOP-2072/ISOP-2022/bug-review.md)；候选未获建单确认，部分API组合实测不等于父需求全量验收。ISOP-2027多出的`execution-*.md`、`coverage-*.md`和`ui/execution-*.md`是试点阶段记录，不作为新需求的必备模板；其既有BUG清单路径保持兼容。`plan.json`和`preparation.csv`是通用配置与准备资料，并非UI专属文件。
 
 ## 开始一个需求
 
@@ -119,11 +139,11 @@ P0运行结果会被清理覆盖；新需求统一执行器按次保存到report
 
 | 需求 | 接口评审 |
 | --- | --- |
-| ISOP-2043 | [契约对照](ISOP-2043/api/contract-review.md) |
-| ISOP-2037 | [契约对照](ISOP-2037/api/contract-review.md) |
-| ISOP-2032 | [契约对照](ISOP-2032/api/contract-review.md) |
-| ISOP-2027 | [契约对照](ISOP-2027/api/contract-review.md) |
-| ISOP-2022 | [契约对照](ISOP-2022/api/contract-review.md) |
+| ISOP-2043 | [契约对照](history/through-ISOP-2072/ISOP-2043/api/contract-review.md) |
+| ISOP-2037 | [契约对照](history/through-ISOP-2072/ISOP-2037/api/contract-review.md) |
+| ISOP-2032 | [契约对照](history/through-ISOP-2072/ISOP-2032/api/contract-review.md) |
+| ISOP-2027 | [契约对照](history/through-ISOP-2072/ISOP-2027/api/contract-review.md) |
+| ISOP-2022 | [契约对照](history/through-ISOP-2072/ISOP-2022/api/contract-review.md) |
 
 ## 简洁用例与结果
 
