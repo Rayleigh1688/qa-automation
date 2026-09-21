@@ -6,7 +6,7 @@
 
 ## 需求与验收依据
 
-- 范围：正文仅活动页数据与SQL调整；与2104 A版的关系及是否影响计返仍待明确。
+- 范围：正文仅活动页数据与SQL调整；`Bet` 已确认指有效投注；与2104 A版的关系及是否影响计返仍待明确。
 - 主来源：[Jira ISOP-2118](https://alibaba-international.atlassian.net/browse/ISOP-2118)。
 - 已有决定：仅采用已读来源中的明确条款；未决建议不当产品决定。
 - 关联：[ISOP-2104](../ISOP-2104/design.md)、[ISOP-2032](../history/through-ISOP-2072/ISOP-2032/questions.md)
@@ -26,6 +26,13 @@
 | AC-02 | 待补预期 | SQL改动前后对账（预备） | J提纲；Q-01、Q-02 | ISOP-2118-C02 |
 
 具体步骤和断言维护在[test-cases.md](test-cases.md)，问题答复维护在[questions.md](questions.md)，避免重复维护公式。
+
+### 已确认统计口径
+
+- `Bet` = 有效投注额。
+- 返利比例由管理后台配置，前端和统计计算不得写死比例。
+- `CashBack Bonus` 按有效投注额乘以管理后台对应游戏类别的返利比例计算。
+- Today / Yesterday 的具体时间边界及时区仍待确认。
 
 ## 影响与回归选择
 

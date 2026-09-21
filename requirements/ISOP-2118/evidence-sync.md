@@ -10,6 +10,10 @@
 
 [Jira ISOP-2118](https://alibaba-international.atlassian.net/browse/ISOP-2118)
 
+2026-09-21：用户确认 `Bet` 为有效投注额。该决定已同步至 design.md、questions.md 和 test-cases.md；仅更新需求口径，未执行 API/UI 或数据库操作。
+
+2026-09-21：用户确认返利比例由管理后台配置。已同步至 design.md、questions.md 和 test-cases.md；未执行配置变更或业务验证。
+
 ## 本次落实
 
 | 变更 | 来源与性质 | 落地位置 | 验证边界 |
