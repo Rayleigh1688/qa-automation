@@ -17,8 +17,11 @@
 | S01 | J附件23972 | AC-01 / ISOP-2089-C01；design.md、questions.md、test-cases.md、生成cases.csv | 设计同步；NOT_RUN，无业务执行 |
 | S02 | J附件23972；尚需Q-02 | AC-02 / ISOP-2089-C02；design.md、questions.md、test-cases.md、生成cases.csv | 设计同步；BLOCKED，无业务执行 |
 | S03 | J附件23972 | AC-03 / ISOP-2089-C03；design.md、questions.md、test-cases.md、生成cases.csv | 设计同步；NOT_RUN，无业务执行 |
-| S04 | J附件23972；尚需Q-01 | AC-04 / ISOP-2089-C04；design.md、questions.md、test-cases.md、生成cases.csv | 设计同步；BLOCKED，无业务执行 |
+| S04 | J附件23972；当时尚需Q-01 | AC-04 / ISOP-2089-C04；design.md、questions.md、test-cases.md、生成cases.csv | 历史设计同步记录；Trending规则后续已由用户补充，当前用例NOT_RUN，无业务执行 |
 | S05 | J附件23972；尚需Q-02 | AC-05 / ISOP-2089-C05；design.md、questions.md、test-cases.md、生成cases.csv | 设计同步；BLOCKED，无业务执行 |
+| S06 | 2026-09-21用户补充 | AC-04 / ISOP-2089-C04；design.md、questions.md、test-cases.md、cases.csv | Trending Games规则已同步；NOT_RUN，Filbet Ranking数据、合规字段和进入游戏契约仍待核对 |
+| S07 | 2026-09-21用户补充 | AC-04 / ISOP-2089-C04；design.md、questions.md、test-cases.md、cases.csv | Recommended Games规则已同步；NOT_RUN，推荐权重、合规字段和进入游戏契约仍待核对 |
+| S08 | 2026-09-21用户补充 | AC-01、AC-02、AC-05 / ISOP-2089-C01、C02、C05；design.md、questions.md、test-cases.md、cases.csv | 搜索框交互规则已同步；NOT_RUN，匹配算法、分类空集及清空后的页面状态仍待核对 |
 
 ## 未完成
 
