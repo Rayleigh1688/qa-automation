@@ -4,7 +4,7 @@
 
 ## 来源基线
 
-2026-09-18依据本会话已读取来源整理；本次落地未重新刷新远端。J正文/0评论；[Lark](https://qsgpn7a1512s.sg.larksuite.com/wiki/KgnywLVttitU5YkIw4xlYNvzglb)正文及排名评论已读，Board/Figma未展开。
+2026-09-21重新读取Jira正文、评论区、21个附件列表和6个子任务列表。正文内Lark/Figma/后台原型链接均可见；未逐一下载附件、操作原型或展开子任务详情页。正文规则已同步，接口契约/部署/业务执行仍未核验。
 
 详细来源读取边界见[本日评审](../review-after-2072-20260918.md)。Jira状态仅为日期快照，不是本轮执行结果。
 
@@ -14,13 +14,13 @@
 
 | 变更 | 来源与性质 | 落地位置 | 验证边界 |
 | --- | --- | --- | --- |
-| S01 | Lark需求核心 | AC-01 / ISOP-2091-C01；design.md、questions.md、test-cases.md、生成cases.csv | 设计同步；NOT_RUN，无业务执行 |
-| S02 | Lark基本配置 | AC-02 / ISOP-2091-C02；design.md、questions.md、test-cases.md、生成cases.csv | 设计同步；NOT_RUN，无业务执行 |
-| S03 | Lark排名评论 | AC-03 / ISOP-2091-C03；design.md、questions.md、test-cases.md、生成cases.csv | 设计同步；NOT_RUN，无业务执行 |
-| S04 | Lark奖励派发；尚需Q-01 | AC-04 / ISOP-2091-C04；design.md、questions.md、test-cases.md、生成cases.csv | 设计同步；BLOCKED，无业务执行 |
-| S05 | Lark奖励派发；尚需Q-02 | AC-05 / ISOP-2091-C05；design.md、questions.md、test-cases.md、生成cases.csv | 设计同步；BLOCKED，无业务执行 |
-| S06 | Lark基本配置；尚需Q-01、Q-03 | AC-06 / ISOP-2091-C06；design.md、questions.md、test-cases.md、生成cases.csv | 设计同步；BLOCKED，无业务执行 |
+| S01 | Jira正文功能概述/2.1 | AC-01/AC-02 / ISOP-2091-C01/C02；design.md、questions.md、test-cases.md、cases.csv | 规则同步；NOT_RUN，无业务执行 |
+| S02 | Jira正文2.2排名 | AC-04 / ISOP-2091-C04；design.md、questions.md、test-cases.md、cases.csv | Q-01已解除；NOT_RUN，无业务执行 |
+| S03 | Jira正文2.3奖励、2.4派发 | AC-05/AC-09 / ISOP-2091-C05/C09；design.md、questions.md、test-cases.md、cases.csv | Q-02已解除；NOT_RUN，无业务执行 |
+| S04 | Jira正文2.5配置修改 | AC-06 / ISOP-2091-C06；design.md、questions.md、test-cases.md、cases.csv | Q-03已解除；NOT_RUN，无业务执行 |
+| S05 | Jira正文3.2后台配置 | AC-03/AC-07 / ISOP-2091-C03/C07；design.md、test-cases.md、cases.csv | 原型/契约待核；NOT_RUN，无业务执行 |
+| S06 | Jira正文3.3/四及附件设计 | AC-08 / ISOP-2091-C08；design.md、questions.md、test-cases.md、cases.csv | Q-04设计稿缺陷保留；BLOCKED，无业务执行 |
 
 ## 未完成
 
-上述未读素材与待确认问题仍保留；未建立远端完整同步或自动执行就绪结论。本目录尚未登记机器hash基线，证据检查应显示UNREVIEWED，而不是伪造完整已审阅。收到新决定/补读来源后逐项更新再登记。
+上述子任务详情、附件原图逐项视觉核验、接口契约、部署版本和业务执行仍未完成；未建立自动执行就绪结论。本目录尚未登记机器hash基线，证据检查应显示UNREVIEWED，而不是伪造完整已审阅。Q-01至Q-03已同步为正文决定，Q-04/Q-05继续保留。
