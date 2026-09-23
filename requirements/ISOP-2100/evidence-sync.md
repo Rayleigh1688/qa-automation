@@ -14,10 +14,16 @@
 
 | 变更 | 来源与性质 | 落地位置 | 验证边界 |
 | --- | --- | --- | --- |
-| S01 | 原型首页说明；尚需Q-01、Q-02 | AC-01 / ISOP-2100-C01；design.md、questions.md、test-cases.md、生成cases.csv | 设计同步；BLOCKED，无业务执行 |
-| S02 | 原型首页说明；尚需Q-02 | AC-02 / ISOP-2100-C02；design.md、questions.md、test-cases.md、生成cases.csv | 设计同步；BLOCKED，无业务执行 |
-| S03 | 评审建议：需确认权限规则；尚需Q-01 | AC-03 / ISOP-2100-C03；design.md、questions.md、test-cases.md、生成cases.csv | 设计同步；BLOCKED，无业务执行 |
+| S01 | 原型首页说明；尚需Q-01、Q-02、Q-03、Q-04、Q-05 | AC-01 / ISOP-2100-C01；design.md、questions.md、test-cases.md、生成cases.csv | 设计同步；BLOCKED，无业务执行 |
+| S02 | 原型首页说明；尚需Q-02、Q-05 | AC-02 / ISOP-2100-C02；design.md、questions.md、test-cases.md、生成cases.csv | 设计同步；BLOCKED，无业务执行 |
+| S03 | 评审建议：需确认权限规则；尚需Q-01、Q-04 | AC-03 / ISOP-2100-C03；design.md、questions.md、test-cases.md、生成cases.csv | 设计同步；BLOCKED，无业务执行 |
 
 ## 未完成
 
 上述未读素材与待确认问题仍保留；未建立远端完整同步或自动执行就绪结论。本目录尚未登记机器hash基线，证据检查应显示UNREVIEWED，而不是伪造完整已审阅。收到新决定/补读来源后逐项更新再登记。
+
+## 2026-09-23问题写法调整
+
+原Q-01保留发布范围，统计和代理权限拆为Q-03、Q-04；原Q-02的更新时间拆为Q-05。设计、用例和本页引用已同步。
+
+首屏改为短名称索引，详情按场景、问题点、需要确认展开，来源和用例关联后置；已确认项保留决定。此次仅整理现有证据，未取得新业务答复、未刷新远端、未补读缺失素材或执行业务测试；原有执行状态和机器证据未登记状态保留。

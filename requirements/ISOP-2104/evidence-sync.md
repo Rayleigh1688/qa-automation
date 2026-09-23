@@ -14,14 +14,27 @@
 
 | 变更 | 来源与性质 | 落地位置 | 验证边界 |
 | --- | --- | --- | --- |
-| S01 | J§一/三及评论17349；尚需Q-01 | AC-01 / ISOP-2104-C01；design.md、questions.md、test-cases.md、生成cases.csv | 设计同步；BLOCKED，无业务执行 |
-| S02 | J§一至四；尚需Q-01 | AC-02 / ISOP-2104-C02；design.md、questions.md、test-cases.md、生成cases.csv | 设计同步；BLOCKED，无业务执行 |
-| S03 | J§四；2032 Q-02/Q-05；尚需Q-01、Q-02 | AC-03 / ISOP-2104-C03；design.md、questions.md、test-cases.md、生成cases.csv | 设计同步；BLOCKED，无业务执行 |
+| S01 | J§一/三及评论17349；2128评论17394/17403访客B版；Q-01核交付 | AC-01 / ISOP-2104-C01；design.md、questions.md、test-cases.md、生成cases.csv | 访客前置已明确；NOT_RUN，版本/契约未核，无业务执行 |
+| S02 | J§一至四；2118§2及2128评论登录A版；Q-01核交付 | AC-02 / ISOP-2104-C02；design.md、questions.md、test-cases.md、生成cases.csv | 登录前置已明确；NOT_RUN，版本/契约未核，无业务执行 |
+| S03 | J§四；2032 Q-02/Q-05；Q-02显示金额、Q-06结算阶段仍待产品决定 | AC-03 / ISOP-2104-C03；design.md、questions.md、test-cases.md、生成cases.csv | 页面展示口径BLOCKED，无业务执行 |
 | S04 | J§四/六 | AC-04 / ISOP-2104-C04；design.md、questions.md、test-cases.md、生成cases.csv | 设计同步；NOT_RUN，无业务执行 |
 | S05 | J§六 | AC-05 / ISOP-2104-C05；design.md、questions.md、test-cases.md、生成cases.csv | 设计同步；NOT_RUN，无业务执行 |
 | S06 | J§二/五 | AC-06 / ISOP-2104-C06；design.md、questions.md、test-cases.md、生成cases.csv | 设计同步；NOT_RUN，无业务执行 |
-| S07 | J§三/四；尚需Q-03 | AC-07 / ISOP-2104-C07；design.md、questions.md、test-cases.md、生成cases.csv | 设计同步；BLOCKED，无业务执行 |
-| S08 | J§六未决边界；尚需Q-04 | AC-08 / ISOP-2104-C08；design.md、questions.md、test-cases.md、生成cases.csv | 设计同步；BLOCKED，无业务执行 |
+| S07 | J§三/四；Q-03跳转、Q-05合计比例 | AC-07 / ISOP-2104-C07；design.md、questions.md、test-cases.md、生成cases.csv | 设计同步；BLOCKED，无业务执行 |
+| S08 | J§六未决边界；Q-04无可展示游戏、Q-07不足10个、Q-08加载失败 | AC-08 / ISOP-2104-C08；design.md、questions.md、test-cases.md、生成cases.csv | 已有访客规则移至C01；其余BLOCKED，无业务执行 |
+| S09 | 2032 Q-05及2026-09-16用户决定；已有门槛/封顶规则 | AC-09 / ISOP-2104-C09；design.md、questions.md、test-cases.md、生成cases.csv | 派发规则对账独立准备；NOT_RUN，无业务执行；不推定页面展示 |
+
+## 2026-09-23问题分流
+
+仅依据上述已读来源及仓库中2032、2118的既有记录重排问题，未刷新Jira/Figma或取得新答复。Q-01交付核验从产品决策中分出；Q-02至Q-04仍待答复，具体一次确认包见[问题文件](questions.md#一次确认包与并行工作)。C01/C02由业务预期BLOCKED改为版本待核的NOT_RUN，C09把已确认派发计算从C03页面展示断言中分离；均不是执行通过或部署确认。
+
+同日后续重读[2118 Jira](https://alibaba-international.atlassian.net/browse/ISOP-2118)新增正文及2128开发评论：二期A版会员统计、访客B版已明确，2128称前端发SIT；Q-01已据此缩为前后端版本/契约/非零样本核验。未独立核SIT/Figma，未改变Q-02页面金额口径或本需求执行状态。
+
+## 2026-09-23问题写法调整
+
+按用户要求改为短标题索引和“场景→问题点→需要确认”，来源/用例关联后置。保留Q-01—Q-04，原Q-03的合计比例拆至Q-05，原Q-02的结算阶段拆至Q-06，原Q-04的数量不足/接口失败拆至Q-07/Q-08；问题变细不表示新增需求。已有访客B版依据从待答描述移到C01，C08继续保留推荐边界和加载失败；C09金额示例补明确“后两组满足门槛”的前置。
+
+同步AC/Case问题引用，业务用例仍为9条、执行状态未变。更新问题模板和写法约定，其他需求未批量改写；此次仅沿用前述证据，未刷新远端或执行业务测试，机器基线仍未登记。
 
 ## 未完成
 

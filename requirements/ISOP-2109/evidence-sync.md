@@ -18,8 +18,14 @@
 | S02 | Lark第2项 | AC-02 / ISOP-2109-C02；design.md、questions.md、test-cases.md、生成cases.csv | 设计同步；NOT_RUN，无业务执行 |
 | S03 | Lark第3项及2086 | AC-03 / ISOP-2109-C03；design.md、questions.md、test-cases.md、生成cases.csv | 设计同步；NOT_RUN，无业务执行 |
 | S04 | Lark第4项 | AC-04 / ISOP-2109-C04；design.md、questions.md、test-cases.md、生成cases.csv | 设计同步；NOT_RUN，无业务执行 |
-| S05 | Lark第2/4项；尚需Q-02 | AC-05 / ISOP-2109-C05；design.md、questions.md、test-cases.md、生成cases.csv | 设计同步；BLOCKED，无业务执行 |
+| S05 | Lark第2/4项；尚需Q-02、Q-03 | AC-05 / ISOP-2109-C05；design.md、questions.md、test-cases.md、生成cases.csv | 设计同步；BLOCKED，无业务执行 |
 
 ## 未完成
 
 上述未读素材与待确认问题仍保留；未建立远端完整同步或自动执行就绪结论。本目录尚未登记机器hash基线，证据检查应显示UNREVIEWED，而不是伪造完整已审阅。收到新决定/补读来源后逐项更新再登记。
+
+## 2026-09-23问题写法调整
+
+原Q-02拆为签到入口Q-02和活动列表Q-03，同步设计及用例；Q-01放入已有答案和待同步事项，Promos沿2086复用，未重新提出业务决定。
+
+首屏改为短名称索引，详情按场景、问题点、需要确认展开，来源和用例关联后置；已确认项保留决定。此次仅整理现有证据，未取得新业务答复、未刷新远端、未补读缺失素材或执行业务测试；原有执行状态和机器证据未登记状态保留。

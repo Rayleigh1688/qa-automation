@@ -16,8 +16,12 @@
 | --- | --- | --- | --- |
 | S01 | Lark需求细节3；尚需Q-01、Q-02 | AC-01 / ISOP-2120-C01；design.md、questions.md、test-cases.md、生成cases.csv | 设计同步；BLOCKED，无业务执行 |
 | S02 | J标题；Lark文案列表；尚需Q-01 | AC-02 / ISOP-2120-C02；design.md、questions.md、test-cases.md、生成cases.csv | 设计同步；BLOCKED，无业务执行 |
-| S03 | Lark用户链路未读边界；尚需Q-02 | AC-03 / ISOP-2120-C03；design.md、questions.md、test-cases.md、生成cases.csv | 设计同步；BLOCKED，无业务执行 |
+| S03 | Lark用户链路未读边界；尚需Q-02、Q-03 | AC-03 / ISOP-2120-C03；design.md、questions.md、test-cases.md、生成cases.csv | 设计同步；BLOCKED，无业务执行 |
 
 ## 未完成
 
 上述未读素材与待确认问题仍保留；未建立远端完整同步或自动执行就绪结论。本目录尚未登记机器hash基线，证据检查应显示UNREVIEWED，而不是伪造完整已审阅。收到新决定/补读来源后逐项更新再登记。
+
+## 2026-09-23问题写法调整
+
+按用户认可的2104写法改为短名称、具体场景、问题点和待答事项，依据及用例关联后置。原Q-02拆为余额变动时序Q-02、多事件/重连Q-03；设计、用例依赖及生成CSV同步。仅整理已有证据，未刷新远端、未收到新决定，已有业务状态及未读范围保留。
