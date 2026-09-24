@@ -7,7 +7,7 @@ import tempfile
 import unittest
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[2] / 'scripts'))
-from qa_core.case_report import FIELDS, csv_text, execution_status, join_results, load_cases, write_views
+from qa_core.case_report import CATALOGUE_FIELDS, FIELDS, csv_text, execution_status, join_results, load_cases, write_views
 
 
 def case(key):
@@ -87,6 +87,21 @@ class CaseReportTests(unittest.TestCase):
                 path.write_text(csv_text(rows, FIELDS))
                 with self.assertRaises(ValueError):
                     load_cases(path)
+
+    def test_design_catalogue_rejects_invalid_metadata_and_projects_only_execution_fields(self):
+        record = {**case('A'), '类型': '功能', '状态': 'PASS', '负责人': 'Davinci', '验证方式': 'UI+API'}
+        with tempfile.TemporaryDirectory() as folder:
+            path = Path(folder) / 'cases.csv'
+            path.write_text(csv_text([record], CATALOGUE_FIELDS))
+            rows = load_cases(path)
+            self.assertEqual(rows, [{**case('A'), '类型': 'FLOW'}])
+            self.assertEqual(join_results(rows, {'results': []})[0]['执行结果'], 'NOT_RUN')
+            for changed in ({'类型': 'UI'}, {'类型': 'API'}, {'状态': '已完成'},
+                            {'负责人': '  '}, {'验证方式': '手动'}, {'预期结果': ''}):
+                with self.subTest(changed=changed):
+                    path.write_text(csv_text([{**record, **changed}], CATALOGUE_FIELDS))
+                    with self.assertRaises(ValueError):
+                        load_cases(path)
 
     def test_existing_api_runner_adds_views_without_relabeling_script_errors_as_bugs(self):
         from filbet.requirement_api import write_reports

@@ -100,9 +100,11 @@ UI 用例依赖 `ui/elements/` 和 `ui/framework/`，页面、弹窗、游戏点
 
 新统一执行和团队交付默认仅生成results.csv/results.html；`--extra-views`按需生成其他视图。公共write_views保留旧默认值以兼容P0外的旧查询/通用报告消费者；原始结果及快照不因视图精简而删除。
 
-业务总表和API数据视图由`qa_core/case_catalogue.py`生成，`export-requirement-cases.py`仅负责选择需求和加载已验证JSON。总表读取test-cases.md的固定业务表；执行历史表不参与导出。API组合逐条验证总用例引用，缺失/错误引用时拒绝更新视图；不会聚合成验收PASS。CSV由现有公共csv_text输出，保持UTF-8 BOM和公式注入防护，不新增表格运行依赖。
+业务总表和API数据视图由`qa_core/case_catalogue.py`生成，`export-requirement-cases.py`仅负责选择需求和加载已验证JSON。总表读取test-cases.md及存在时的api/test-cases.md，兼容旧固定业务表与卡片；执行历史不参与导出。新版卡片生成独立总表字段，功能在前/API在后，并保留登记状态、负责人及验证方式；执行端仍使用原FIELDS和API/UI/FLOW，读取新总表时投影为原用例定义，不将登记状态当本批结果。API组合逐条验证总用例引用，缺失/错误引用时拒绝更新视图；不会聚合成验收PASS。CSV由现有公共csv_text输出，保持UTF-8 BOM和公式注入防护，不新增表格运行依赖。
 
 ## 需求工作流与本地状态
+
+`qa_core/case_design.py`统一解析功能/独立API用例卡片及旧表格，向总表、证据检查、AI上下文和旧执行入口提供稳定的用例字段与编号；解析不登录、不执行接口。正文仅维护一份，索引、详情和关联表不一致时拒绝生成新总表。
 
 `qa_workflow/evidence.py`只读检查逐需求证据基线、文件变化及来源/Case关联；`qa evidence`不依赖凭据或状态库。已登记基线失效时生成与自动触发检查停止该需求；未登记及部分来源显式提示，独立旧CLI兼容。自然语言对照和远端刷新由[证据同步流程](../requirements/evidence-sync-plan.md)负责，hash一致不等于完整需求核验或业务通过。
 

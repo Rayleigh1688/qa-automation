@@ -8,8 +8,11 @@ import json
 from pathlib import Path
 import re
 from qa_core.result_language import friendly_row, STATUS_LABELS
+from qa_core.case_design import DESIGN_STATUSES, verification_kind
 
 FIELDS = ['用例编号', '类型', '模块/接口', '用例名称', '前置条件', '参数/步骤', '预期结果', '级别', '验收点']
+CATALOGUE_FIELDS = ['用例编号', '类型', '用例名称', '状态', '负责人', '模块/接口',
+                    '级别', '验收点', '前置条件', '参数/步骤', '预期结果', '验证方式']
 RESULT_FIELDS = FIELDS + ['执行结果', '实际结果/失败点', '分类', '证据']
 STATUSES = ('PASS', 'FAIL', 'NOT_RUN', 'ERROR')
 
@@ -42,9 +45,27 @@ def execution_status(item):
 def load_cases(path):
     with Path(path).open(encoding='utf-8-sig', newline='') as stream:
         reader = csv.DictReader(stream)
-        if reader.fieldnames != FIELDS:
-            raise ValueError('CSV columns must be: ' + ', '.join(FIELDS))
+        if reader.fieldnames not in (FIELDS, CATALOGUE_FIELDS):
+            raise ValueError('CSV columns must match an execution or design catalogue')
         cases = list(reader)
+        if reader.fieldnames == CATALOGUE_FIELDS:
+            return project_catalogue(cases)
+    validate_cases(cases)
+    return cases
+
+
+def project_catalogue(rows):
+    """Read a design catalogue as cases; its registered states are not results."""
+    cases = []
+    for row in rows:
+        if set(row) != set(CATALOGUE_FIELDS) or any(not isinstance(v, str) or not v.strip() for v in row.values()):
+            raise ValueError('malformed design catalogue row')
+        kind = verification_kind(row['验证方式'])
+        if row['类型'] != ('API' if kind == 'API' else '功能'):
+            raise ValueError('catalogue layer differs from verification method')
+        if row['状态'] not in DESIGN_STATUSES:
+            raise ValueError('invalid design catalogue state')
+        cases.append({key: kind if key == '类型' else row[key] for key in FIELDS})
     validate_cases(cases)
     return cases
 

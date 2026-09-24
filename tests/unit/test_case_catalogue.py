@@ -10,6 +10,7 @@ from support import ROOT
 from requirement_paths import requirement_dir, requirement_dirs
 from filbet.requirement_adapter import METHODS
 from qa_core.case_catalogue import API_FIELDS, design_rows, overview_rows, export_catalogues
+from qa_core.case_report import FIELDS
 from qa_core.execution_plan import load
 
 
@@ -29,7 +30,9 @@ class CaseCatalogueTests(unittest.TestCase):
         original = copy.deepcopy(self.cases)
         overview_count, api_count = export_catalogues(self.out, plan=self.plan, cases=self.cases)
         with (self.out / 'cases.csv').open(encoding='utf-8-sig', newline='') as stream:
-            overview = list(csv.DictReader(stream))
+            reader = csv.DictReader(stream)
+            self.assertEqual(reader.fieldnames, FIELDS)
+            overview = list(reader)
         with (self.out / 'api/data-cases.csv').open(encoding='utf-8-sig', newline='') as stream:
             reader = csv.DictReader(stream)
             self.assertEqual(reader.fieldnames, API_FIELDS)

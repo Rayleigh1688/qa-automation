@@ -158,7 +158,10 @@ class WorkflowTests(unittest.TestCase):
         git('init');git('config','user.email','fixture@example.invalid');git('config','user.name','Fixture')
         source = repo/'collection';source.mkdir()
         path = source/'first.bru'
-        path.write_text('meta {\n name: ISOP-2028 example\n}\nget {\n url: {{api_url}}/example\n}\n')
+        api_design = self.root/'requirements'/self.story/'api/test-cases.md'
+        api_design.parent.mkdir()
+        api_design.write_text('独立 API 设计引用 /example')
+        path.write_text('meta {\n name: fixture example\n}\nget {\n url: {{api_url}}/example\n}\n')
         git('add','.');git('commit','-m','initial')
         first = git('rev-parse','HEAD')
         a = sync(self.state,source)

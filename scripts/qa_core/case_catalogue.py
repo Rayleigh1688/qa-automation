@@ -2,40 +2,15 @@
 import json
 from pathlib import Path
 import re
-
-from qa_core.case_report import FIELDS, csv_text, validate_cases
-
-DESIGN_FIELDS = ['Case ID', '优先级/验收点', '场景', '数据前置', '操作步骤',
-                 '预期结果及副作用检查', '方式', '依赖/待确认', '状态', '负责人']
+from qa_core.case_report import FIELDS, CATALOGUE_FIELDS, csv_text, validate_cases, project_catalogue
+from qa_core.case_design import DESIGN_FIELDS, design_rows, is_card_design
 API_FIELDS = ['执行用例编号', '总用例编号', '用例名称', '接口/流程', '前置条件',
               '数据集', '输入变量', '请求/步骤', '预期/断言', '就绪情况']
 
 
-def design_rows(path, story):
-    """Read the established design table, not execution-history or mapping tables."""
-    rows, active = [], False
-    for line in Path(path).read_text(encoding='utf-8').splitlines():
-        if not line.startswith('|'):
-            if active:
-                break
-            continue
-        cells = [s.strip().replace('\\|', '|') for s in re.split(r'(?<!\\)\|', line.strip()[1:-1])]
-        if cells == DESIGN_FIELDS:
-            if active:
-                raise ValueError('duplicate design table')
-            active = True
-            continue
-        if not active or all(re.fullmatch(r':?-+:?', c) for c in cells):
-            continue
-        if len(cells) != len(DESIGN_FIELDS):
-            raise ValueError('malformed design row')
-        row = dict(zip(DESIGN_FIELDS, cells))
-        if not re.fullmatch(r'(?:' + re.escape(story) + r'-C\d+|R\d+)', row['Case ID']):
-            raise ValueError('design case must belong to this story')
-        rows.append(row)
-    if not rows or len({r['Case ID'] for r in rows}) != len(rows):
-        raise ValueError('missing/duplicate design cases')
-    return rows
+def catalogue_text(value):
+    """Keep link labels readable in CSV without carrying Markdown destinations."""
+    return re.sub(r'(?<!!)\[([^\]\n]+)\]\([^\n)]+\)', r'\1', value)
 
 
 def overview_rows(design, story):
@@ -51,9 +26,23 @@ def overview_rows(design, story):
             prerequisite = '已移出本需求测试范围；' + prerequisite
         if row['依赖/待确认'] not in {'', '—', '-'}:
             prerequisite += '；依赖：' + row['依赖/待确认']
-        rows.append(dict(zip(FIELDS, [row['Case ID'], kind, story, row['场景'], prerequisite,
-                                     row['操作步骤'], row['预期结果及副作用检查'], priority.strip(), acceptance.strip()])))
+        values = [row['Case ID'], kind, story, row['场景'], prerequisite,
+                  row['操作步骤'], row['预期结果及副作用检查'], priority.strip(), acceptance.strip()]
+        rows.append(dict(zip(FIELDS, map(catalogue_text, values))))
+    rows.sort(key=lambda row: row['类型'] == 'API')
     validate_cases(rows)
+    return rows
+
+
+def catalogue_rows(design, story):
+    """Design registration states remain metadata, never execution evidence."""
+    source = {row['Case ID']: row for row in design}
+    rows = []
+    for row in overview_rows(design, story):
+        item = source[row['用例编号']]
+        rows.append({**row, '类型': 'API' if row['类型'] == 'API' else '功能',
+                     '状态': item['状态'], '负责人': item['负责人'], '验证方式': item['方式']})
+    project_catalogue(rows)
     return rows
 
 
@@ -111,7 +100,10 @@ def export_catalogues(folder, *, plan=None, cases=None, suite=None):
     # Finish validation before replacing either generated view.
     if data is not None and len({r['执行用例编号'] for r in data}) != len(data):
         raise ValueError('duplicate API execution ID')
-    (folder / 'cases.csv').write_text(csv_text(overview, FIELDS), encoding='utf-8')
+    modern = is_card_design(folder / 'test-cases.md')
+    catalogue = catalogue_rows(design, story) if modern else overview
+    fields = CATALOGUE_FIELDS if modern else FIELDS
+    (folder / 'cases.csv').write_text(csv_text(catalogue, fields), encoding='utf-8')
     if data is not None:
         (folder / 'api').mkdir(exist_ok=True)
         (folder / 'api/data-cases.csv').write_text(csv_text(data, API_FIELDS), encoding='utf-8')

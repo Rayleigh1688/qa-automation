@@ -33,7 +33,7 @@ def review(root, story):
             raise ValueError('缺少复核时间或复核人')
         files = data['files']
         required = {'design.md', 'questions.md', 'test-cases.md', 'cases.csv', 'evidence-sync.md'}
-        required.update(name for name in ('plan.json', 'api/cases.json', 'api/data-cases.csv', 'api/contract-review.md')
+        required.update(name for name in ('plan.json', 'api/cases.json', 'api/data-cases.csv', 'api/contract-review.md', 'api/test-cases.md')
                         if (folder / name).is_file())
         if not required <= files.keys():
             raise ValueError('同步基线遗漏现有设计、执行源或生成视图')

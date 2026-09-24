@@ -68,7 +68,7 @@ def sync(state, source, ref='HEAD', fetch=False):
     for directory in requirement_dirs(state.root):
         seed = {'story': directory.name}
         evidence[seed['story']] = '\n'.join(p.read_text(encoding='utf-8') for p in
-            (directory/'design.md',directory/'test-cases.md',directory/'api/contract-review.md') if p.is_file())
+            (directory/'design.md',directory/'test-cases.md',directory/'api/test-cases.md',directory/'api/contract-review.md') if p.is_file())
     changes = []
     for name in changed:
         content = texts.get(name,'')

@@ -100,11 +100,13 @@ def ai(config, folder, phase, instruction, data, schema):
 
 
 def acceptance(story):
+    from qa_core.case_design import design_case_ids
     texts = {name: (requirement_dir(ROOT, story) / name).read_text(encoding='utf-8')
              for name in ('design.md', 'questions.md', 'test-cases.md')}
-    ids = set(re.findall(r'\|\s*((?:ISOP-\d+-)?[CR]\d+)\s*\|', texts['test-cases.md']))
-    if not ids:
-        raise ValueError('no acceptance cases found')
+    folder = requirement_dir(ROOT, story)
+    if (folder / 'api/test-cases.md').is_file():
+        texts['api/test-cases.md'] = (folder / 'api/test-cases.md').read_text(encoding='utf-8')
+    ids = design_case_ids(folder / 'test-cases.md', story)
     return texts, ids
 
 

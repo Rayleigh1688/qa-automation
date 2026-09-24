@@ -17,7 +17,7 @@ def context(root, story):
     if not re.fullmatch(r'ISOP-\d+',story): raise ValueError('invalid requirement')
     directory = requirement_dir(root, story)
     sources = {}
-    for name in ('design.md','questions.md','test-cases.md','evidence-sync.md','evidence-sync.json','preparation.csv','api/contract-review.md','api/data-review.md','plan.json','api/cases.json'):
+    for name in ('design.md','questions.md','test-cases.md','api/test-cases.md','evidence-sync.md','evidence-sync.json','preparation.csv','api/contract-review.md','api/data-review.md','plan.json','api/cases.json'):
         path = directory/name
         if path.is_file():
             text = path.read_text(encoding='utf-8-sig')

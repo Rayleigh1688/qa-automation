@@ -14,6 +14,7 @@ from filbet import smoke
 from qa_core.environment import load_environment
 from qa_core.local_lock import local_run_lock
 from qa_core.case_report import execution_status, write_views
+from qa_core.case_design import design_case_ids
 
 ROOT = Path(__file__).resolve().parents[2]
 # Query-only POSTs are intentionally explicit. Export and edit are not queries.
@@ -45,7 +46,7 @@ def load_suite(requirement):
         suite = json.loads(raw)
     if suite['requirement'] != requirement:
         raise ValueError('suite requirement mismatch')
-    acceptance = set(re.findall(r'\| (ISOP-\d+-C\d+) \|', (folder / 'test-cases.md').read_text()))
+    acceptance = design_case_ids(folder / 'test-cases.md', requirement)
     seen = set()
     for case in suite['cases']:
         if case['id'] in seen or not case['case_ids'] or not set(case['case_ids']) <= acceptance:

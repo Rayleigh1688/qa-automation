@@ -115,7 +115,7 @@ ENV_FILE=.env.fat ENV_FILE_PRECEDENCE=shell EXECUTE_WITHDRAW_UI=true CLIENT_WITH
 
 ## 分离总用例与API数据
 
-`npm run qa:cases -- <Story...>`离线导出指定需求的cases.csv总表，以及已有执行资产的api/data-cases.csv；`--all`只导出当前需求，`--all --include-history`包含历史归档。显式指定旧编号时自动定位历史目录。总表来自test-cases.md，API表来自plan.json或旧api/cases.json，不登录、不生成运行结果。没有API执行源的需求只导出总表，命令明确显示API未实现。
+`npm run qa:cases -- <Story...>`离线导出指定需求的cases.csv总表，以及已有执行资产的api/data-cases.csv；`--all`只导出当前需求，`--all --include-history`包含历史归档。显式指定旧编号时自动定位历史目录。总表读取test-cases.md及存在时的api/test-cases.md，兼容卡片与旧宽表，功能在前/API在后；卡片生成的新版总表带登记状态、负责人及验证方式。API数据表来自plan.json或旧api/cases.json，不登录、不生成运行结果。没有API执行源的需求只导出总表，命令明确显示API未实现。
 
 原`qa:requirement -- <Story> --export-cases`同步生成这两类表并继续更新旧查询兼容JSON。总表使用业务Case ID，数据表和`--only`使用执行Case ID；总表ID不直接传给`--only`。详细执行结果用本批冻结快照重建，不能与业务总表按执行编号直接合并。已有团队执行包不自动重写。
 
