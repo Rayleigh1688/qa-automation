@@ -22,6 +22,11 @@
 | S06 | J§二；BI D-03；尚需Q-03 | AC-06 / ISOP-2092-C06；design.md、questions.md、test-cases.md、生成cases.csv | 设计同步；BLOCKED，无业务执行 |
 | S07 | J§二；尚需Q-04 | AC-07 / ISOP-2092-C07；design.md、questions.md、test-cases.md、生成cases.csv | 设计同步；BLOCKED，无业务执行 |
 | S08 | J§二；尚需Q-04 | AC-08 / ISOP-2092-C08；design.md、questions.md、test-cases.md、生成cases.csv | 设计同步；BLOCKED，无业务执行 |
+| S09 | 2026-09-25用户补充 | AC-04 / ISOP-2092-C04；design.md、questions.md、test-cases.md、cases.csv | 已明确以当前点击日期作为快捷日期推演基准；NOT_RUN，具体起止及180天限制仍待确认 |
+| S10 | 2026-09-25用户补充 | AC-05 / ISOP-2092-C05；design.md、questions.md、test-cases.md、cases.csv | 已明确首充为用户注册后的第一笔充值；后续根据TLSQ-78评论16500补齐复充口径 |
+| S13 | TLSQ-78评论16500及本地首页BI规则记录 | AC-05 / ISOP-2092-C05；design.md、questions.md、test-cases.md、cases.csv | 规则已明确：首充为第一笔Completed充值（gt=1）；复充为gt!=1且首次充值时间为统计当日；历史首充用户后续充值不计入复充，多日按每日分类结果累加；NOT_RUN，字段映射待核验 |
+| S11 | 2026-09-25用户补充 | AC-07、AC-08 / ISOP-2092-C07、C08；design.md、questions.md、test-cases.md、cases.csv | 已明确显示值为0时展示整数0且不显示小数点；NOT_RUN，零分母及其他舍入规则仍待核验 |
+| S12 | 2026-09-25用户截图补充 | AC-07 / ISOP-2092-C07；design.md、questions.md、test-cases.md、cases.csv | 已明确总派彩包含一般注单、FS和Jackpot；使用不区分bet_type的注单回推并加上jp_winning总和，不使用net_amount回推；NOT_RUN，GGR字段及正负号仍待核验 |
 
 ## 未完成
 
