@@ -1,4 +1,8 @@
-﻿用例编号,类型,模块/接口,用例名称,前置条件,参数/步骤,预期结果,级别,验收点
-ISOP-2110-C01,UI,ISOP-2110,有signature且结果未返回,已移出本需求测试范围；具编辑权限且under review；signatureID非空、overallresult空,点击编辑,显示确认提示；点是后进入编辑弹窗,高,AC-01
-ISOP-2110-C02,UI,ISOP-2110,已有PASS/FAIL结果,已移出本需求测试范围；其他编辑前置满足；signatureID非空、结果PASS或FAIL,分别点击编辑,不因本单等待结果条件弹出提示；不改变KYC状态,高,AC-02
-ISOP-2110-C03,UI,ISOP-2110,无signatureID,已移出本需求测试范围；符合编辑前置的手动KYC记录,点击编辑,不触发本单等待三方结果提示,高,AC-03
+﻿用例编号,类型,用例名称,状态,负责人,模块/接口,级别,验收点,前置条件,参数/步骤,预期结果,验证方式
+ISOP-2110-C01,功能,有signature且结果未返回,OUT_OF_SCOPE,待分派,ISOP-2110,高,AC-01,"已移出本需求测试范围；- 具编辑权限且under review；
+- signatureID非空、overallresult空",1. 点击编辑,"'- 显示确认提示；
+- 点是后进入编辑弹窗",人工UI
+ISOP-2110-C02,功能,已有PASS/FAIL结果,OUT_OF_SCOPE,待分派,ISOP-2110,高,AC-02,"已移出本需求测试范围；- 其他编辑前置满足；
+- signatureID非空、结果PASS或FAIL",1. 分别点击编辑,"'- 不因本单等待结果条件弹出提示；
+- 不改变KYC状态",人工UI
+ISOP-2110-C03,功能,无signatureID,OUT_OF_SCOPE,待分派,ISOP-2110,高,AC-03,已移出本需求测试范围；- 符合编辑前置的手动KYC记录,1. 点击编辑,'- 不触发本单等待三方结果提示,人工UI
