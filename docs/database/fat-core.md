@@ -8,7 +8,7 @@
 | --- | --- | --- |
 | fat.fb_members | 会员主表，uid关联登录、充值、提现 | last_login_at为可变最新值，不能重建历史日登录；first/second/third_deposit及deposit_count用于状态转换交叉核对 |
 | fat.fb_members_login_log | 登录日志，uid为会员/账号关联标识 | 来源由用户确认；created_at为秒，不能复用会员表毫秒条件；注册及代理操作也在此表 |
-| fat.fb_deposits | 充值订单，uid关联会员 | status、gt、save_ty、amount、paid_amount、created_at和paid_at分别核对；不要把申请金额直接当到账 |
+| fat.fb_deposits | 充值订单，uid关联会员 | status、gt、save_ty、amount、paid_amount、created_at和paid_at分别核对；按指标选择字段；2092充值统计用户确认取amount，不取paid_amount |
 | fat.fb_withdraws | 提现订单，uid关联会员 | 完成状态、save_ty及申请/到账字段分开；历史差额曾由系统生成单混入造成 |
 | fat.fb_members_balance / fb_members_balance_new | 钱包表 | 存在旧/新口径，balance为decimal(20,8)；本轮只读结构，未确定每种页面取哪张表 |
 | fat.fb_balance_transaction | 账变 | created_at为bigint，state注释仅场馆业务使用；非全表通用“支付状态” |
@@ -58,3 +58,11 @@ gt=0不是单一业务场景，当前全表状态/来源分布及次数核查见
 - deposits.save_ty：1会员提交、2系统自动生成。paid_amount四位，amount八位；“金额都只存四位”不成立。枚举不代替具体报表纳入范围。
 - 主/体育注单state：0未结算、1已结算、2会员取消、3无效（字段注释）。bet_amount/net_amount为钱包币种，net_amount注释为玩家输赢，不得不区分视角直接当公司GGR。
 - 2092派彩按用户09-29明确口径，用bet_amount + net_amount回推，覆盖全部类型，再按需求计JP且核实不重复。总投注/有效投注仅bet_type 1/3是2092规则，不能套到派彩。不把源码派彩缺独立字段继续当阻塞，09-29已按新口径对账，4日差额登记TEST-3203；源加工根因仍待定位。
+
+2092充值金额最新字段依据：用户确认取amount，Completed会员提交等筛选不变；这是报表定义，不表示amount与paid_amount在数据库里恒等。07-03分别1600/1360，报表1600正确。详见[Q-05](../../requirements/ISOP-2092/questions.md#q-05)。
+
+## 2092总派彩两表取数补充（09-29）
+
+按用户提供的新取数逻辑：UTC+8的settle_time、state=1、prefix='fat'、site_id=0；orders.tbl_game_record仅取game_class<>'4'，orders.tbl_game_record_sport仅取game_class='4'，不限制bet_type。分别SUM(bet_amount+net_amount+jp_winning)后相加；无记录的SUM按0处理。该范围用于本次总派彩对账，不自动扩大为总投注/GGR等其他指标的已验证口径。
+
+8月31日及月报实时核对完全一致，总額585207.335；该月无符合条件的体育专表记录。09-16体育来源替换后对平，其他三个已核9月日期仍有差额。此前主表89日差额属于旧取数口径，后续以[补核记录](../../requirements/ISOP-2092/verification-20260929-payout-review.md)为准，不能直接将旧对账推广为当前结论。

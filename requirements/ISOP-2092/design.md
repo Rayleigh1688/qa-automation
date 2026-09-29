@@ -1,5 +1,9 @@
 # ISOP-2092：後台首頁數據看板
 
+> 最新派彩结论：09-29按用户新SQL补核总派彩：站点0、主表非体育加体育专表，全部bet_type；8月实时DB与31日报及月报完全对平，总额585207.335。09-16原差额由体育来源替换解释，09-15/22/25差额仍待核。详见[来源复核](verification-20260929-payout-review.md)。原89日主表检查属于旧口径，未按新口径重跑全部89日。
+
+> 09-29金额字段更正：充值统计使用amount，保留Completed会员提交及各指标既定条件；paid_amount不作为充值金额预期。SRC04离线复评对平、TEST-3204撤回，详见Q-05。
+
 > 2026-09-29最新核定：复充金额仅统计数据库gt>1，同时满足Completed、会员提交及首充当天；gt=0和gt=1均排除。替代此前gt!=1解释。89日现有证据离线复评金额全部一致，SRC01为PASS，TEST-3201撤回结案；不扩大复充人数结论。
 
 > 2026-09-28最新补验与用户决定见[边界、截断及首充记录](verification-20260928-followup.md)：外层少于90天、内层最多180天；全部数值展示向零截断。首充API受支付通道阻塞，源单已有差额归为失败。历史描述不覆盖此决定。
@@ -53,7 +57,7 @@
 | --- | --- | --- | --- |
 | CAP-01 / ISOP-2092-C02 | 单日/快捷时间及注册统计；样本与断言见用例 | `GET /admin/reports/bi/basic`；report_type=1—6快捷、7自定义，UTC+8毫秒首尾端点 | 已实测；详情见本轮结果 |
 | CAP-02 / ISOP-2092-C03 | 自定义90天边界；样本与断言见用例 | `GET /admin/reports/bi/basic`；report_type=1—6快捷、7自定义，UTC+8毫秒首尾端点 | 已实测；详情见本轮结果 |
-| CAP-03 / ISOP-2092-C05 | 复充人群和金额；首充为用户注册后的第一笔 Completed 充值；复充金额按数据库gt>1且首次充值时间为统计当日；样本与断言见用例 | basic的first_deposit/refill_deposit及对应_amount；源单gt/paid_amount及会员first_deposit | GCash数据库首笔1、二笔2已实测；复充金额按gt>1离线复评89日对平，SRC01 PASS |
+| CAP-03 / ISOP-2092-C05 | 复充人群和金额；首充为用户注册后的第一笔 Completed 充值；复充金额按数据库gt>1且首次充值时间为统计当日；样本与断言见用例 | basic的first_deposit/refill_deposit及对应_amount；源单gt/amount及会员first_deposit | GCash数据库首笔1、二笔2已实测；复充金额按gt>1离线复评89日对平，SRC01 PASS |
 | CAP-04 / ISOP-2092-C06 | 跨日人数和ARPU；样本与断言见用例 | basic的login_count/bets_people/arppu/arpu；detail与chart映射 | 已复现两日与三日处理不同及月聚合问题 |
 | CAP-05 / ISOP-2092-C07 | 一般/FS/JP派彩与GGR；样本与断言见用例 | basic/detail/chart的ggr、fs_ggr、jp_winning及七类字段 | FS/JP已核；09-28总GGR与七类差额回归通过，源单全链路未验收 |
 | CAP-06 / ISOP-2092-C08 | 充提差与投充比；样本与断言见用例 | basic/detail/chart的dw_diff、bets_deposit | 09-28详情及月图公式回归通过；历史差异见原报告 |
@@ -90,3 +94,7 @@ Q-02明确gt=0为首充并排除复充，替代将gt!=1直接等同复充的旧�
 ## 2026-09-29整体复测更新
 
 最新执行见[整体复测报告](verification-20260929-full.md)。用户新增文案预期：“登陆人数”改“登录人数”，总派彩提示删除“此次调整”。本轮两项均失败；默认月图已裁到180天可加载，完整六个月首月不完整仍需协调。最新用户确认复充金额gt>1，89日离线复评对平，SRC01改PASS，TEST-3201撤回；派彩按投注加玩家净盈利及JP回推，4日差额。旧通过/缺口由本轮明确结论替代，不回写旧原始证据。
+
+## 总派彩数据库取数补充（09-29）
+
+按用户提供的新取数逻辑：UTC+8的settle_time、state=1、prefix='fat'、site_id=0；orders.tbl_game_record仅取game_class<>'4'，orders.tbl_game_record_sport仅取game_class='4'，不限制bet_type。分别SUM(bet_amount+net_amount+jp_winning)后相加；无记录的SUM按0处理。该范围用于本次总派彩对账，不自动扩大为总投注/GGR等其他指标的已验证口径。
