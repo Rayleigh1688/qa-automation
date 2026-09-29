@@ -96,3 +96,7 @@ npm run test:ui:inventory
 npm run ui:p0-points
 npm run test:ui:login
 ```
+
+### 点击导出后网页无变化
+
+2026-09-28 ISOP-2092 FAT已证实：Chrome/macOS原生保存窗口可能不体现在网页DOM/普通下载事件里。先按[保存窗口流程](../ui/README.md#export-save)检查浏览器原生应用，再判断触发、落盘和内容三个阶段。`showSaveFilePicker`取消的`AbortError`不自动等于产品BUG。早期“无请求即导出失败”的观测依据不足；实际版本是否修复须有对应日期证据，不能倒推。
