@@ -1,6 +1,6 @@
 # FILBET QA Automation
 
-FILBET 的 Python API 与 Playwright UI 自动化项目。API 验证接口契约和订单关联，UI 提供真实页面及三方游戏交互证据。
+FILBET 的 Python API 与 Playwright UI 自动化项目。API 验证接口契约和订单关联，UI 提供真实页面及三方游戏交互证据。当前需求、报告与历史查询从[需求入口](requirements/README.md)进入；接续工作看[当前交接](AI-HANDOFF.md)。
 
 ## 开始使用
 
@@ -45,7 +45,9 @@ API P0 与默认 UI P0 使用 `.env.fat`，切换 UAT 时在对应命令前加 `
 npm run qa:telegram
 ```
 
-读取提测群消息，只将带ISOP工单的消息交AI整理，优先用design里的子任务记录找到父Story，并按需求合并候选，输出带判断依据的本地候选清单后退出。任何成员都可提测；你确认清单后，按终端给出的 `run` 命令执行测试。每个 Story 固定一名测试负责人，所有子任务和测试批次沿用。测试过程、报告及候选 BUG 留本机；核对具体 BUG 后用 `approve` 确认，再运行 `npm run qa:telegram -- submit` 创建并关联 Story。整批成功后才一次性向测试群发送 BUG 链接清单。默认从上次处理位置继续扫描，记录扫描时间；可用 `npm run qa:telegram -- --since 2026-09-10T15:00:00+08:00` 选择起始时间。没有长期监听。
+读取提测群消息，只将带ISOP工单的消息交AI整理，优先用design里的子任务记录找到父Story，并按当前需求合并候选，输出本地清单后退出。任何成员都可提测；确认范围、负责人及执行前置后再运行所选批次。每个 Story 固定一名测试负责人，所有子任务和测试批次沿用。测试过程、报告及候选 BUG 留本机。默认从上次处理位置继续扫描，记录扫描时间；可用 `npm run qa:telegram -- --since 2026-09-10T15:00:00+08:00` 选择起始时间。没有长期监听。
+
+**BUG交付按[当前提单与群同步流程](docs/telegram-qa.md#bug-delivery)执行：** 用户确认具体缺陷后查重，创建TEST项目缺陷或补齐既有单，设置QA／开发负责人、关联需求并回读；整批完成后向 **filbet提测发布群** 发一份链接清单。TEST／QA及短群汇总已有定向交付证据，已解决后的QA回归通知另见[通知规则与验证边界](docs/telegram-qa.md#resolved-notification)。旧 `qa:telegram -- submit` 尚未适配这套TEST／QA／目标群规则，不是给已存在Jira单补发通知的入口；不能直接用它补发本批或重放旧队列。
 
 首次使用先补齐人员、Jira 和首个需求的环境/页面配置，见 [接入清单](docs/telegram-qa.md#首次接入需要补充的信息)。`npm run qa:telegram -- check` 只检查本地配置，不读取群消息或执行测试。机器人待处理更新最多保留24小时，不提供任意群历史扫描；提测格式、身份查询和恢复命令见 [Telegram 手册](docs/telegram-qa.md)。
 
@@ -69,18 +71,32 @@ npm run test:ui:business -- --env .env.ui-p0.fat --execute --new-kyc-account --b
 
 | 内容 | 打开位置 |
 | --- | --- |
-| API 报告 | [p0-api-report.html](api/results/p0-api-report.html) |
-| UI 报告（含过程与截图） | [p0-ui-report.html](ui/reports/p0-ui-report.html) |
-| UI 业务全流程报告（断言、图片及对账） | [ui-business-report.html](ui/reports/ui-business-report.html) |
+| API 报告 | `api/results/p0-api-report.html`，由API P0命令生成 |
+| UI 报告（含过程与截图） | `ui/reports/p0-ui-report.html`，由UI P0命令生成 |
+| UI 业务全流程报告（断言、图片及对账） | `ui/reports/ui-business-report.html`，由UI业务命令生成 |
 | API/P0 用例总索引 | [test-cases.csv](api/p0/test-cases.csv) |
 | 默认 UI 用例清单（中文名称） | [client-p0-default-suite.json](ui/data/client-p0-default-suite.json) |
 | UI 测试点与正反例设计 | [client-p0-test-points.json](ui/data/client-p0-test-points.json) |
 
-报告在执行后生成，运行目录保留最近一次结果；UI 业务新一轮会清理旧 UI 产物。日常回归与受控业务全流程按上述不同入口执行；组合资金链、单阶段写入和排障参数统一放在 [高级命令说明](docs/commands.md)。
+报告在相应命令执行后生成；上表是固定输出路径，文件暂缺表示本机没有该轮产物。运行目录保留最近一次结果，UI 业务新一轮会清理旧 UI 产物。需求报告从[需求入口](requirements/README.md)查看。日常回归与受控业务全流程按上述不同入口执行；组合资金链、单阶段写入和排障参数统一放在 [高级命令说明](docs/commands.md)。
 
 ## 接下来：新需求测试
 
-新需求从 [测试设计入口](requirements/README.md) 开始，使用需求模板关联验收标准、API/UI 用例和现有 P0。低频低风险接口随需求迭代补充；旧扫描已[清理退出](archive/interface-scans/README.md)，当前接口资产继续维护。
+新需求从 [测试设计入口](requirements/README.md) 开始，使用需求模板关联验收标准、API/UI 用例和现有 P0。当前采用API自动优先、UI人工清单与回填，暂不建设新需求UI自动化；P0继续维护API与核心UI自动化。
+
+功能总表`cases.csv`与API数据表`api/data-cases.csv`通过用例编号关联，`npm run qa:cases -- --all`离线更新当前需求；`npm run qa:delivery`离线准备与汇总交付包。登录和数据准备不计业务PASS，脚本错误不直接计产品FAIL。低频低风险接口随需求迭代补充；旧扫描已[清理退出](archive/interface-scans/README.md)，当前接口资产继续维护。
+
+日常工作按下表进入，单次执行进度仍查交接及需求报告：
+
+| 要做的事 | 日常说明 |
+| --- | --- |
+| 评审功能预期、API断言及生成用例总表 | [用例与结果流程](docs/testing-workflow.md)；[文档格式](requirements/document-style.md) |
+| 配置API自动执行、准备人工UI清单及合并结果 | [团队测试](docs/team-testing.md)；[命令范围](docs/commands.md) |
+| 查需求状态、人工修订、归档与自动执行门槛 | [需求工作流](docs/requirement-workflow-cli.md) |
+| 提交BUG、关联负责人、同步提测发布群及回归通知 | [Jira／Telegram交付](docs/telegram-qa.md#bug-delivery) |
+| 独立核对业务源数据 | [数据库只读取数参考](docs/database/README.md) |
+
+功能/API用例卡片与总表导出已有实现；通用新模板仍待用户首稿，JMeter／Postman导出与测试空间简体需求副本尚未落地，不能据讨论记录当作现成功能。10-05起当前需求仅ISOP-2100，归档需求保留历史查询与显式回归入口，不自动恢复执行。
 
 ## 项目结构
 
@@ -91,7 +107,8 @@ npm run test:ui:business -- --env .env.ui-p0.fat --execute --new-kyc-account --b
 | `api/runbooks/` | API 执行、后台鉴权、环境契约 |
 | `ui/cases/`、`ui/elements/` | Playwright 编排与页面操作 |
 | `ui/data/`、`ui/framework/` | 页面资产、固定套件和基础能力 |
-| `scripts/` | 兼容 CLI 入口及单元测试；`qa_core/` 存放共享 API 基础能力 |
+| `scripts/` | 兼容 CLI 入口；`qa_core/` 存放共享能力，`filbet/` 存放业务实现 |
+| `tests/unit/` | 本地离线单元测试 |
 | `tools/provisioning/` | 独立账号准备工具 |
 | `.agents/skills/`、`skills/` | AI 任务路由及长期测试方法 |
 | `harness/` | 故障定位与有状态的已知问题记录 |
@@ -108,18 +125,12 @@ npm run test:ui:business -- --env .env.ui-p0.fat --execute --new-kyc-account --b
 - 修改仓库：[AGENTS.md](AGENTS.md)；业务任务由 [FILBET Skill](.agents/skills/filbet-p0-automation/SKILL.md) 按需路由。
 - API 资产：[P0 说明](api/p0/README.md)；UI 执行：[UI 说明](ui/README.md)。
 - 排障：[Harness](harness/README.md)；扫描退出说明：[接口发现](archive/interface-scans/README.md)。
-- 历史成果：[冻结交接](docs/history/handoff-2026-09-04.md)；CI 验证边界：[CI 状态](docs/ci.md)。
+- 历史需求：[历史索引](requirements/history/README.md)；CI 验证边界：[CI 状态](docs/ci.md)。
 
 ## 结果与业务边界
 
-API 结果及跨 API/UI 主流程报告写入 `api/results/`；UI 原始结果写 `ui/results/`，可读报告写 `ui/reports/`，Playwright 附件写 `test-results/` 和 `playwright-report/`。这些运行目录只保留最近一次结果，历史归档按 CI 状态说明处理；旧专项扫描快照已清理，当前执行包/活动状态保留，见[整理记录](docs/project-cleanup-2026-09-11.md)。
+API 结果及跨 API/UI 主流程报告写入 `api/results/`；UI 原始结果写 `ui/results/`，可读报告写 `ui/reports/`，Playwright 附件写 `test-results/` 和 `playwright-report/`。这些P0运行目录保留最近一次结果；需求结果按批次放在`reports/qa/`，留存边界见[CI状态](docs/ci.md)。用户授权清理的静态历史证据已退出，当前需求依赖、账号预留与活动状态保留，范围见[整理记录](docs/project-cleanup-2026-10-05.md)。
 
 每个 runner fresh login，跨进程通过本轮 uid、订单号与时间窗口关联证据。数据库仅只读诊断；业务步骤失败时停止后续成功动作。真实凭据与未脱敏个人资料只留本地忽略配置或 CI 凭据。环境接受标准见 [环境手册](api/runbooks/ENVIRONMENTS.md)，不能把待审建单表述为最终出款成功。
 
 新项目复用公共运行能力，见 [跨项目运行核心](docs/runtime-reuse.md)：包含白名单导出、独立接入示例与 Windows/Mac/Linux 验证边界。
-
-## 简洁用例与结果
-
-新需求按Story分开保存cases.csv业务总表和api/data-cases.csv数据驱动表，通过总用例编号关联；`npm run qa:cases -- --all`离线更新。前置清单和四状态结果树见[用例与结果流程](docs/testing-workflow.md)。历史结果已按用户授权清理；登录和数据准备不计业务PASS，脚本错误不直接计产品FAIL。
-
-新需求当前采用[API自动优先、UI人工清单与回填](docs/team-testing.md)，使用`npm run qa:delivery`离线准备与汇总；新需求暂不建设UI自动化，旧专项脚本保留兼容。P0继续维护API与核心UI自动化。

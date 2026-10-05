@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "authorization_source": "AI-HANDOFF.md及2026-09-14用户第1—4项实施指令；继承既有执行范围，2022暂停，不建单/发群，不适配UAT；2026-09-15用户要求待上线不再测，班车及Jira核对见requirements/status.md；2026-09-18用户确认2072及之前已完成归档，停止其自动执行",
+  "authorization_source": "AI-HANDOFF.md及2026-09-14用户第1—4项实施指令；继承既有执行范围，2022暂停，不建单/发群，不适配UAT；2026-09-15用户要求待上线不再测，班车及Jira核对见requirements/history/records-through-20261005/status.md；2026-09-18用户确认2072及之前已完成归档，停止其自动执行",
   "stories": {
     "ISOP-2041": {
       "authorized": false,

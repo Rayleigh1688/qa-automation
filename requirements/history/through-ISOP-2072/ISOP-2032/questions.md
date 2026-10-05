@@ -1,6 +1,8 @@
 # ISOP-2032：问题与决定
 
-[设计](design.md) · [问题与决定](questions.md) · [业务用例](test-cases.md) · [总用例表](cases.csv) · [API数据](api/data-cases.csv) · [证据同步](evidence-sync.md) · [班车报告](../../../../reports/qa/batch-20260914-seven/ISOP-2032/results.html)
+2026-10-05证据退出：本文引用的非2100静态测试结果已按用户授权清理，日期结论保留为当时记录，不代表当前实测；范围见[整理记录](../../../../docs/project-cleanup-2026-10-05.md)。
+
+[设计](design.md) · [问题与决定](questions.md) · [业务用例](test-cases.md) · [总用例表](cases.csv) · [API数据](api/data-cases.csv) · [证据同步](evidence-sync.md) · 班车报告（原文件已退出，历史路径：`../../../../reports/qa/batch-20260914-seven/ISOP-2032/results.html`）
 
 2026-09-15对照[Lark正文][L]（页面显示9月11日更新）。**问题并非全部来自Lark**：下表区分需求疑问、跨文档差异、接口冲突和实测发现。Q编号及用例关联保持不变。
 
@@ -11,7 +13,7 @@
 | L | [用户提供的Lark][L]：第1—7节 | 本轮已读正文；第4节仍写明天回来领取、通知无过期，第6节仍用Cash Back文案 |
 | J | [Jira ISOP-2032][J]：§2.1/§2.6、§3.3/§3.4及配置表单；[本地摘录](design.md#验收依据) | 9月15日已重读正文（更新于9月14日10:52，UTC+8）；本轮重新读取评论17330（9月8日更新），子单2078评论17329亦已核对 |
 | A | [接口契约评审](api/contract-review.md#接口与验收对照)：版本69c9be0 | 历史接口冲突；本轮未核对最新接口版本 |
-| T | [9月10日金额记录](../../../../docs/history/requirement-records-20260907-11.md#isop-2032-20260910-发现与处理)、[9月14日测试报告](../../../../reports/qa/batch-20260914-seven/ISOP-2032/results.html) | 测试现象，不是Lark原文；9月10日原始报告已清理，数值仅为历史记录 |
+| T | [9月10日金额记录](../../../../docs/history/requirement-records-20260907-11.md#isop-2032-20260910-发现与处理)、9月14日测试报告（原文件已退出，历史路径：`../../../../reports/qa/batch-20260914-seven/ISOP-2032/results.html`） | 测试现象，不是Lark原文；9月10日原始报告已清理，数值仅为历史记录 |
 
 ## 对照结论
 
@@ -37,7 +39,7 @@
 
 Q-05实测来源：9月10日文字记录为报表0.40、conf 0.405；9月14日求和检查仍失败。新批次未保存这组具体差值，不冒充同一数值再次复现，也不直接认定发奖错误。
 
-9月15日证据同步已刷新正文和已返回评论，并沿关联链接补读2104及Lark落地页；详细读取边界见[同步记录](evidence-sync.md)。接口仍待最新版本核对；未重跑业务或改已有结果。上述“待同步”是文档维护项；数据、权限、导出文件链路等执行准备另见[本轮报告](../../../../reports/qa/batch-20260914-seven/ISOP-2032/results.html)。答复按“Q编号／结论／答复人／日期／来源”更新对应行。
+9月15日证据同步已刷新正文和已返回评论，并沿关联链接补读2104及Lark落地页；详细读取边界见[同步记录](evidence-sync.md)。接口仍待最新版本核对；未重跑业务或改已有结果。上述“待同步”是文档维护项；数据、权限、导出文件链路等执行准备另见本轮报告（原文件已退出，历史路径：`../../../../reports/qa/batch-20260914-seven/ISOP-2032/results.html`）。答复按“Q编号／结论／答复人／日期／来源”更新对应行。
 
 [L]: https://qsgpn7a1512s.sg.larksuite.com/wiki/Jg61wE3DRijwnqkQXjPl3OUFg4e
 [L1]: https://qsgpn7a1512s.sg.larksuite.com/wiki/Jg61wE3DRijwnqkQXjPl3OUFg4e#XgKVdHlhLoyx0vxiSJKlemyegrg
@@ -49,4 +51,4 @@ Q-05实测来源：9月10日文字记录为报表0.40、conf 0.405；9月14日�
 [J4]: https://alibaba-international.atlassian.net/browse/ISOP-2032?focusedCommentId=17330
 [J9]: https://alibaba-international.atlassian.net/browse/ISOP-2078?focusedCommentId=17329
 
-2026-09-16后台实测：已验证文案保存、重开读回和恢复，UI不再等待Q-11接口方法确认。明细1500含排除额1200，实际计返300；0.90返利可解释，但UI未体现排除额导致与列表不一致。详见[后台补充报告](../../../../reports/qa/ISOP-2032/backend-20260916/results.html)；不把展示缺陷当成发奖计算错误。
+2026-09-16后台实测：已验证文案保存、重开读回和恢复，UI不再等待Q-11接口方法确认。明细1500含排除额1200，实际计返300；0.90返利可解释，但UI未体现排除额导致与列表不一致。详见后台补充报告（原文件已退出，历史路径：`../../../../reports/qa/ISOP-2032/backend-20260916/results.html`）；不把展示缺陷当成发奖计算错误。

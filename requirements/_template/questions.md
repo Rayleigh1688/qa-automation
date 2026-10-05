@@ -2,7 +2,7 @@
 
 [测试设计](design.md) · [独立测试用例](test-cases.md)
 
-先看问题名称，再看具体场景。格式遵循[需求文档约束](../document-style.md)，写法示例见[ISOP-2104](../ISOP-2104/questions.md)。
+先看问题名称，再看具体场景。格式遵循[需求文档约束](../document-style.md)，写法示例见[ISOP-2104](../history/archived-20261005/ISOP-2104/questions.md)。
 
 ## 问题清单
 

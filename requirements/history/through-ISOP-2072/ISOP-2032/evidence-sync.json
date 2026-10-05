@@ -230,14 +230,28 @@
     }
   ],
   "files": {
-    "design.md": "e70b63f04ee03b29d5eb254cee743b9bb20e56de39847c87a0a3550877179ae1",
-    "questions.md": "ef1f4398045ac44214410217e25ae3a758ee24fa44eb7d7872626f2169b527d3",
-    "test-cases.md": "7114bb239b4d1af67172f084db696efa90db0b1381eb55cb4ed945668081dcca",
+    "design.md": "b4ebb74409b05fce89b2cfdbf840710eec56d23ba00b92af96958d35bbaf9d12",
+    "questions.md": "000165d48819246a109db8d11b194dfeabe1aadd9b6458b1c6ffb16d2d4b39d4",
+    "test-cases.md": "f8c62ae8379a58253804948903c5fa74833b08ebc61af7a91ff20aa93ce0af67",
     "cases.csv": "e872ac878eea28775a5124f39d76881584bfdce49d8185288fe6cca60533df7d",
-    "evidence-sync.md": "1b358dfa6019788d5aab696002c0ab2634a96920fbb903f2238cd9dec4d9b026",
-    "api/contract-review.md": "e7fecd1994adf01622e6da3a9b9119f556fbebd609c1fe13f6ba38161a31e960",
-    "api/README.md": "fb0ec084207d5c563d6f82e4ca97c34825bb8b86473e3fef0acaad13418161c5",
+    "evidence-sync.md": "98199d2fc806aa16eb2bbee27a455dea87a87238638e4b56bf6d7be3708090e4",
+    "api/contract-review.md": "7e13780996ab101505cb50de8dd315c10d2420de7e3038b2801b5d88b4ad4db6",
+    "api/README.md": "c79938c95d5fb9eec2a26a7824059196830db13b9b4ae72b1aadc630ff68c6a5",
     "api/cases.json": "0cd5ddf02af5b59fae2f4a1fe7a4a86dd1b3d39901d4b8bb9cee345aa5799e40",
     "api/data-cases.csv": "b86ad5a913d3888db5f03cf758c88f095940f2c19e88e96177740d8d4b8ca622"
+  },
+  "local_maintenance": {
+    "updated_at": "2026-10-05",
+    "reviewer": "Codex",
+    "scope": "用户授权归档导航与静态证据退出；仅核对本地文档变化，不刷新远端或改变业务结论",
+    "files": [
+      "design.md",
+      "questions.md",
+      "test-cases.md",
+      "evidence-sync.md",
+      "api/contract-review.md",
+      "api/README.md"
+    ],
+    "verification": "原基线hash及迁移前文件hash均与Git正文一致；逐项diff仅路径、链接退出与维护说明；保留来源日期及pending范围"
   }
 }

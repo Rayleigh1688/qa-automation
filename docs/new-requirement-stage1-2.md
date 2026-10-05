@@ -1,5 +1,7 @@
 # ISOP-2027 阶段1、2实施记录
 
+2026-10-05证据退出：本文引用的非2100静态测试结果已按用户授权清理，日期结论保留为当时记录，不代表当前实测；范围见[整理记录](project-cleanup-2026-10-05.md)。
+
 2026-09-11。依据[已批准计划](new-requirement-automation-plan.md)。本文记录阶段交付；2026-09-11随后按用户授权删除旧批次及归并报告，保留实施说明和日期结论，详见[清理记录](project-cleanup-2026-09-11.md)。当前不再有可导入的旧API原始证据。
 
 后续用户已要求分离业务总表和数据驱动表：当前cases.csv从test-cases.md生成，API组合从plan.json生成api/data-cases.csv；下方阶段实施时的展开CSV行为已由[当前流程](testing-workflow.md)替代，执行ID和原始报告协议不改。

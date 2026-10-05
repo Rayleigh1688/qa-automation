@@ -1,6 +1,8 @@
 # API自动执行与UI人工验收
 
-2026-09-11，按用户最新澄清：**P0继续维护API与核心UI自动化；新需求采用API自动执行、UI人工验收，暂不建设新需求UI自动化。** 此次调整只影响新需求的后续投入。旧P0、资金链及Telegram状态保持；旧报告已按用户授权清理，见[整理记录](project-cleanup-2026-09-11.md)。
+2026-10-05证据退出：本文引用的非2100静态测试结果已按用户授权清理，日期结论保留为当时记录，不代表当前实测；范围见[整理记录](project-cleanup-2026-10-05.md)。
+
+2026-09-11确立的分工：**P0继续维护API与核心UI自动化；新需求采用API自动执行、UI人工验收，暂不建设新需求UI自动化。** 2026-10-03补充为[人工确认功能预期及API断言](testing-workflow.md#人工确认预期与断言)，AI按已确认目标执行。UI聚焦关键节点的具体场景尚待明确，不据此删除现有P0覆盖。旧报告已按用户授权清理，见[整理记录](project-cleanup-2026-09-11.md)。
 
 ## 自动化范围
 
@@ -13,13 +15,15 @@
 
 ## 用例分工
 
-用例仍按需求/模块/验收点组织，`类型`表示API/UI/FLOW验证层级；`delivery.mode`独立表示automatic/manual执行方式。API覆盖业务规则、参数矩阵、鉴权、状态、边界和精确数据对账；手动覆盖页面展示、交互、反馈、预览和代表性用户流程。相同业务场景可以有不同层级断言，但不把API参数组合再复制成人工点选矩阵。数据库只读。
+用例仍按需求/模块/验收点组织。新版总表的`类型`为功能/API，另列`验证方式`、登记状态及负责人；执行端仍使用API/UI/FLOW验证层级，`delivery.mode`独立表示automatic/manual执行方式。登记状态不自动等于本批执行结果。API覆盖业务规则、参数矩阵、鉴权、状态、边界和精确数据对账；手动覆盖页面展示、交互、反馈、预览和代表性用户流程。相同业务场景可以有不同层级断言，但不把API参数组合再复制成人工点选矩阵。数据库只读。
 
-[人工用例plan示例](../requirements/_template/team-plan.example.json)用于新增需求起步，须替换占位内容。`plan.json`仍是执行配置唯一维护源；业务总表维护在test-cases.md，文件分工见[用例与数据分离](testing-workflow.md#文件与执行入口)。人工执行项在plan中维护：人工项增加`delivery.precondition/steps/expected`中文说明；不要求添加Playwright步骤。已有自动步骤保留，自动结果不能自动升级为人工PASS。原用例ID、验收点和旧CSV字段不重排。
+[人工用例plan示例](../requirements/_template/team-plan.example.json)用于新增需求起步，须替换占位内容。采用统一计划的需求以`plan.json`维护执行配置，旧查询入口继续读取`api/cases.json`；设计卡片和生成CSV不会自行成为可执行计划，文件分工见[用例与数据分离](testing-workflow.md#文件与执行入口)。人工执行项在plan中维护：人工项增加`delivery.precondition/steps/expected`中文说明；不要求添加Playwright步骤。已有自动步骤保留，自动结果不能自动升级为人工PASS。原用例ID、验收点和旧CSV字段不重排。
 
-ISOP-2027新增`execution_policy=api-first`：新入口默认执行自动分配项，包含API型和后台FLOW；仍受既有写范围门禁约束。`--only`、`--layer UI`显式选择或`--include-ui-automation`可使用原UI自动化。其他未设置策略的需求保持原行为。未实现的人工项即使误选自动入口，也只记NOT_RUN。
+历史试点ISOP-2027使用`execution_policy=api-first`：入口默认执行自动分配项，包含API型和后台FLOW；仍受既有写范围门禁约束。`--only`、`--layer UI`显式选择或`--include-ui-automation`可使用原UI自动化。其他未设置策略的需求保持原行为。未实现的人工项即使误选自动入口，也只记NOT_RUN。
 
 ## 一次交付
+
+以下使用已有统一计划的ISOP-2027展示兼容命令。该需求已归档，不能据此重新开测；统一工作流及队列执行会拦截归档需求，独立CLI历史回归须有本轮明确范围与授权。2026-10-05当前需求ISOP-2100尚无固定API计划，不能直接套用本例宣称一键执行已就绪。
 
 ```bash
 # 离线生成执行包；目录必须是新的，不登录
@@ -54,14 +58,14 @@ npm run qa:delivery -- import --packet reports/qa/ISOP-2027/team-next --manual r
 
 导入拒绝缺行/重复编号、改动固定列、未知状态、缺执行信息、失效本地证据或不匹配的自动来源。有效回填复制到新的报告目录并计算hash；原CSV、原结果及失败现场均不覆盖。结果CSV/HTML区分执行方式、执行人、执行时间和来源批次。没有自动证据的自动项也保持NOT_RUN。
 
-## 本轮交付与边界
+## 历史试点与交付边界
 
-试点交付：[API自动表](../reports/qa/ISOP-2027/team-ready-20260911/api-auto.csv) · [UI人工清单/回填表](../reports/qa/ISOP-2027/team-ready-20260911/manual.csv) · [准备视图](../reports/qa/ISOP-2027/team-ready-20260911/results.html)。自动侧71条（65条有执行步骤，6条尚缺前提/实现），人工18条，既有编号保留。
+试点交付：API自动表（原文件已退出，历史路径：`../reports/qa/ISOP-2027/team-ready-20260911/api-auto.csv`） · UI人工清单/回填表（原文件已退出，历史路径：`../reports/qa/ISOP-2027/team-ready-20260911/manual.csv`） · 准备视图（原文件已退出，历史路径：`../reports/qa/ISOP-2027/team-ready-20260911/results.html`）。自动侧71条（65条有执行步骤，6条尚缺前提/实现），人工18条，既有编号保留。
 
-旧导入演示、离线样例与阶段归并报告已删除。当前准备视图仍全部NOT_RUN，没有实际人工回填；最近实测另从`reports/qa/ISOP-2027/latest.html`查看，不能把它当作本批人工结果。旧API原始来源已清理，需执行新批次后再导入。
+2026-09-11的准备视图当时全部NOT_RUN、没有实际人工回填；当时的最近实测入口为`reports/qa/ISOP-2027/latest.html`。2026-10-05该准备包及实测入口均已退出，保留上述日期记录；需要新的执行与人工包时重新生成，不从已删除结果导入。
 
-新需求执行、执行包准备及导入默认只生成`results.csv`/`results.html`两份结果视图；HTML内可搜索和筛选失败/未执行。需要额外`cases.csv`、`failures.csv`、`pending.csv`、`summary.json`时，对相应命令加`--extra-views`。原始result.json、冻结快照、api-auto.csv、manual.csv和必要证据仍保留。旧P0、查询CLI及通用qa:report产物契约不变。
+新需求执行、执行包准备及导入默认只生成`results.csv`/`results.html`两份结果视图；HTML内可搜索和筛选失败/未执行。需要额外`cases.csv`、`failures.csv`、`pending.csv`、`summary.json`时，对相应命令加`--extra-views`。新批次同时保存原始result.json、冻结快照、api-auto.csv、manual.csv和必要证据。旧P0、查询CLI及通用qa:report产物契约不变。
 
-最新离线验证见[整理记录](project-cleanup-2026-09-11.md)。本次没有执行FAT API/UI或实际人工验收；BUG提交仍需确认，测试过程不发群。
+该试点的离线验证见[2026-09-11整理记录](project-cleanup-2026-09-11.md)，当时未执行FAT API/UI或实际人工验收。BUG提交沿用具体任务授权，测试过程不发群。
 
-下一步由团队使用UI清单真实执行并回填，继续完善API数据、断言和执行效率。新需求UI自动化不列为后续待办；P0的API和核心UI自动化继续维护。Telegram已接入统一API结果、按范围生成团队包和import-manual回填，见[提测流程](telegram-qa.md)。旧执行包和活动任务未迁移；自动留存仍待后续，Jira投递规则保持。
+下一步由团队使用UI清单真实执行并回填，继续完善API数据、断言和执行效率。新需求UI自动化不列为后续待办；P0的API和核心UI自动化继续维护。Telegram已接入统一API结果、按范围生成团队包和import-manual回填，见[提测流程](telegram-qa.md)。2026-10-05旧执行包已退出，活动任务与队列状态保留；自动留存仍待后续，Jira投递规则保持。

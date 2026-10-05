@@ -54,15 +54,15 @@ ROLLBACK;
 
 gt=0不是单一业务场景，当前全表状态/来源分布及次数核查见[09-29专项说明](gt-zero-20260929.md)。默认待处理、多次成功充值、系统生成及未归因历史记录均存在，不能一概当首充或第四次以后。
 
-- deposits.gt注释：0其他、1首充、2二充、3三充。[GCash实测](../../requirements/ISOP-2092/verification-20260929-gcash.md)提单PENDING均gt=0，完成首笔变1、二笔变2；老账号第42次完成仍0。2092用户最新核定复充金额取gt>1，并结合Completed、会员提交及首充当天判断；gt=0和gt=1均排除，见[Q-02](../../requirements/ISOP-2092/questions.md#q-02)。三充3仅注释，本轮未新增三充实测。
+- deposits.gt注释：0其他、1首充、2二充、3三充。[GCash实测](../../requirements/history/archived-20261005/ISOP-2092/verification-20260929-gcash.md)提单PENDING均gt=0，完成首笔变1、二笔变2；老账号第42次完成仍0。2092用户最新核定复充金额取gt>1，并结合Completed、会员提交及首充当天判断；gt=0和gt=1均排除，见[Q-02](../../requirements/history/archived-20261005/ISOP-2092/questions.md#q-02)。三充3仅注释，本轮未新增三充实测。
 - deposits.save_ty：1会员提交、2系统自动生成。paid_amount四位，amount八位；“金额都只存四位”不成立。枚举不代替具体报表纳入范围。
 - 主/体育注单state：0未结算、1已结算、2会员取消、3无效（字段注释）。bet_amount/net_amount为钱包币种，net_amount注释为玩家输赢，不得不区分视角直接当公司GGR。
 - 2092派彩按用户09-29明确口径，用bet_amount + net_amount回推，覆盖全部类型，再按需求计JP且核实不重复。总投注/有效投注仅bet_type 1/3是2092规则，不能套到派彩。不把源码派彩缺独立字段继续当阻塞，09-29已按新口径对账，4日差额登记TEST-3203；源加工根因仍待定位。
 
-2092充值金额最新字段依据：用户确认取amount，Completed会员提交等筛选不变；这是报表定义，不表示amount与paid_amount在数据库里恒等。07-03分别1600/1360，报表1600正确。详见[Q-05](../../requirements/ISOP-2092/questions.md#q-05)。
+2092充值金额最新字段依据：用户确认取amount，Completed会员提交等筛选不变；这是报表定义，不表示amount与paid_amount在数据库里恒等。07-03分别1600/1360，报表1600正确。详见[Q-05](../../requirements/history/archived-20261005/ISOP-2092/questions.md#q-05)。
 
 ## 2092总派彩两表取数补充（09-29）
 
 按用户提供的新取数逻辑：UTC+8的settle_time、state=1、prefix='fat'、site_id=0；orders.tbl_game_record仅取game_class<>'4'，orders.tbl_game_record_sport仅取game_class='4'，不限制bet_type。分别SUM(bet_amount+net_amount+jp_winning)后相加；无记录的SUM按0处理。该范围用于本次总派彩对账，不自动扩大为总投注/GGR等其他指标的已验证口径。
 
-8月31日及月报实时核对完全一致，总額585207.335；该月无符合条件的体育专表记录。09-16体育来源替换后对平，其他三个已核9月日期仍有差额。此前主表89日差额属于旧取数口径，后续以[补核记录](../../requirements/ISOP-2092/verification-20260929-payout-review.md)为准，不能直接将旧对账推广为当前结论。
+8月31日及月报实时核对完全一致，总額585207.335；该月无符合条件的体育专表记录。09-16体育来源替换后对平，其他三个已核9月日期仍有差额。此前主表89日差额属于旧取数口径，后续以[补核记录](../../requirements/history/archived-20261005/ISOP-2092/verification-20260929-payout-review.md)为准，不能直接将旧对账推广为当前结论。

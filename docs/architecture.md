@@ -44,6 +44,7 @@ UI 用例依赖 `ui/elements/` 和 `ui/framework/`，页面、弹窗、游戏点
 | 需求级提测、测试、发布及关闭状态 | [requirements/status.html](../requirements/status.html)，链接原始来源；不复制用例通过率 |
 | 当前证据、有效例外、下一步 | `AI-HANDOFF.md` |
 | 命令行为、写入范围 | `docs/commands.md`，实现以 CLI 为准 |
+| BUG项目／类型、QA与负责人、查重关联、群汇总和回归通知 | [Jira／Telegram交付](telegram-qa.md#bug-delivery)；单批结果留需求交付记录，通用CLI缺口单列 |
 | FAT/UAT 契约与当前环境接受标准 | `api/runbooks/ENVIRONMENTS.md` |
 | 可执行用例、顺序、lane | `api/p0/` 固定资产；默认 UI 清单在 `ui/data/` |
 | 长期方法 | `skills/` |
@@ -56,13 +57,15 @@ UI 用例依赖 `ui/elements/` 和 `ui/framework/`，页面、弹窗、游戏点
 
 上层导航链接到权威文件；代码与文档不一致时先确认实际行为，再修正语义，不能把过时文档当成强制执行脚本。
 
+功能或流程发生变化时，应在同次交付中更新对应日常说明及受影响的README／命令入口，再将日期、证据和下一步记入交接。仅写 `AI-HANDOFF.md` 或单批报告不足以更新长期操作规则。文档分别说明“当前代码可执行”“通过定向操作已验证”“仍待接入通用入口”；远端自动化已保存、真实消息已送达、所有分支已验证也要分开记录。文档检查能发现断链和命令错误，不能证明这些语义自动一致。
+
 ## 专项资产与兼容策略
 
-需求目录由`scripts/requirement_paths.py`统一解析：顶层`requirements/ISOP-*`为当前需求，`requirements/history/<版本>/ISOP-*`为完成归档。默认发现只返回当前需求，显式编号可查归档；重复编号报错。自动工作流阻止归档任务，历史回归通过独立CLI显式发起。统一报告位置保持`reports/qa/`，原需求内`api/results/`随目录归档。
+需求目录由`scripts/requirement_paths.py`统一解析：顶层`requirements/ISOP-*`为当前需求，`requirements/history/<批次>/ISOP-*`为历史归档。默认发现只返回当前需求，显式编号可查归档；重复编号报错。归档不自动表示完成或业务通过。自动工作流阻止归档任务，历史回归通过独立CLI显式发起。统一报告输出位置保持`reports/qa/`。
 
 旧扫描脚本、快照、截图与manifest已于2026-09-11按用户授权删除；[退出索引](../archive/interface-scans/README.md)保留原导航路径。当前接口资产在api/inventory、api/catalog与api/p0，构建器不依赖已删除扫描。`check:archive`保留CLI名称，现检查旧扫描目录只含退出说明。
 
-当前执行包、最近真实需求批次和活动Telegram任务保持；旧结果目录中的临时脚本已迁移至固定模块后删除。具体范围见[整理记录](project-cleanup-2026-09-11.md)。
+2026-10-05当前仅保留ISOP-2100；其余需求已归档，非2100静态测试结果已清理，原始证据退出。2100报告及跨目录依赖、持久状态保留，范围见[本次整理记录](project-cleanup-2026-10-05.md)。早期脚本抽取与清理过程见[2026-09-11记录](project-cleanup-2026-09-11.md)。
 
 后续工作以 [新需求设计](../requirements/README.md) 为入口，按变更影响补用例并评估是否纳入 P0，不要求全接口自动化后再做需求测试。
 
@@ -79,6 +82,8 @@ UI 用例依赖 `ui/elements/` 和 `ui/framework/`，页面、弹窗、游戏点
 `requirements/<编号>/api/cases.json`持有本需求参数与断言并引用验收Case；`scripts/run-requirement-api.py`负责CLI，`filbet/requirement_api.py`校验、编排和生成脱敏报告，复用`filbet/smoke.py`的认证/CBOR请求及公共本机锁。当前执行器只允许明确的查询路由；未知契约或需专用写入样本的闭环保留BLOCKED。报告按需求/运行时间隔离，P0入口与清理范围保持原定义。
 
 ## 提测消息编排
+
+当前交付规则以[提单与群同步](telegram-qa.md#bug-delivery)为准：TEST缺陷、QA／开发负责人、需求关联及回读，完成后向提测发布群发送整批清单。9月下旬以来的定向交付已实做；本节旧队列代码仍缺TEST／QA字段及正确投递群适配，不能把连接器可调用等同完整自动流程已接通。线上Jira已解决通知是另一条远端规则，验证范围见[回归通知](telegram-qa.md#resolved-notification)。
 
 `run-telegram-qa.py`保留可执行兼容入口，参数与命令处理位于`qa_delivery/cli.py`；`qa_delivery/intake_ai.py`持久保存脱敏消息、调用AI识别意图并校验引用；`qa_delivery/intake.py`核对Story并绑定预览确认；`qa_delivery/batch.py`分别编排扫描、确认后执行及BUG提交的有限批次并退出；`qa_delivery/state.py`管理队列、outbox与确认快照，移除已退出生产流程的旧`/test`解析器；`pipeline.py`编排版本核对和AI缺陷分析，`requirement_bridge.py`绑定确认计划、统一API执行、冻结人工包及回填证据；未迁移需求复用旧查询执行器，新任务不启动专项UI浏览器，`connectors.py`管理Telegram/Jira投递。保留的独立浏览器工具只执行`telegram-ui.mjs`支持的动作，响应解码复用`ui/framework/business-response.mjs`，AI不直接调用Jira。状态与证据放在忽略的`reports/telegram/`，与P0结果隔离；该包不进入通用运行核心导出白名单。接入与恢复见[Telegram手册](telegram-qa.md)。
 

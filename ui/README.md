@@ -236,4 +236,4 @@ ISOP-2027使用`npm run qa:requirement -- ISOP-2027 --layer UI`离线校验；�
 5. 打开实际文件，核对编码、表头与每行列数、列序/单位、日期端点、总行数和完整分页范围，再逐字段对照相同筛选的接口/源数据。按钮与保存通过不代表CSV内容通过。
 6. 遇到`AbortError`或取消时，保存取消证据，先查窗口是否仍打开/已取消及已有文件。取消原因未证实时不归因用户，不当作业务失败；确认状态后再决定是否重试，避免重复打开窗口或覆盖文件。
 
-首次实测修正及后续完整四份文件核验见[导出回归](../requirements/ISOP-2092/verification-20260928.md#test-3177导出补充回归约1311起)与[全面测试](../requirements/ISOP-2092/verification-20260928-full.md)。此处为执行方法，未新增通用自动化脚本或扩展默认P0范围。
+首次实测修正及后续完整四份文件核验见[导出回归](../requirements/history/archived-20261005/ISOP-2092/verification-20260928.md#test-3177导出补充回归约1311起)与[全面测试](../requirements/history/archived-20261005/ISOP-2092/verification-20260928-full.md)。此处为执行方法，未新增通用自动化脚本或扩展默认P0范围。

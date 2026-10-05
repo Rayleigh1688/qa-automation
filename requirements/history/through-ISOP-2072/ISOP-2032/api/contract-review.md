@@ -1,5 +1,7 @@
 # ISOP-2032：接口契约评审
 
+2026-10-05证据退出：本文引用的非2100静态测试结果已按用户授权清理，日期结论保留为当时记录，不代表当前实测；范围见[整理记录](../../../../../docs/project-cleanup-2026-10-05.md)。
+
 [验收用例](../test-cases.md) · [问题与决定](../questions.md) · [设计](../design.md) · [流程](../../../../workflow.md)
 
 评审日期：2026-09-10。来源：本机 `/Users/rayleigh/API/FB`，接口文档版本 `69c9be0631a11b2f9ae08624dc5d9380c6069362`，相对 `365c785` 的10个提交。仅读取Git对象，未发业务请求；需求关联按内容推断。接口文档更新不等于部署完成。CoinPH不属于本期范围。
@@ -46,4 +48,4 @@
 | jili | 5 | 1 | 1000 | 1 | 0 |
 | cq9 | 10 | 0 | 10 | 1 | 0 |
 
-规则state枚举未由本次列表查询证明，不能套用活动state枚举判开关。source_rule=1、activity_range=0保留原值；配置来源按用户决定只看后台。弹窗为 `Congratulations! You received Cashback Bonus!`。快照见[脱敏查询记录](../../../../../reports/qa/ISOP-2032/config-read-20260916.json)；未读取客户端，也未验证实际派发。
+规则state枚举未由本次列表查询证明，不能套用活动state枚举判开关。source_rule=1、activity_range=0保留原值；配置来源按用户决定只看后台。弹窗为 `Congratulations! You received Cashback Bonus!`。快照见脱敏查询记录（原文件已退出，历史路径：`../../../../../reports/qa/ISOP-2032/config-read-20260916.json`）；未读取客户端，也未验证实际派发。

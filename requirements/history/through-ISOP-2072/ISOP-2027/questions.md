@@ -1,6 +1,8 @@
 # ISOP-2027：问题与决定
 
-[设计](design.md) · [问题与决定](questions.md) · [业务用例](test-cases.md) · [总用例表](cases.csv) · [API数据](api/data-cases.csv) · [班车报告](../../../../reports/qa/batch-20260914-seven/ISOP-2027/results.html)
+2026-10-05证据退出：本文引用的非2100静态测试结果已按用户授权清理，日期结论保留为当时记录，不代表当前实测；范围见[整理记录](../../../../docs/project-cleanup-2026-10-05.md)。
+
+[设计](design.md) · [问题与决定](questions.md) · [业务用例](test-cases.md) · [总用例表](cases.csv) · [API数据](api/data-cases.csv) · 班车报告（原文件已退出，历史路径：`../../../../reports/qa/batch-20260914-seven/ISOP-2027/results.html`）
 
 来源快照：2026-09-07。这里记录文档冲突、缺失契约与已确认决定；不是缺陷清单，也不把未提测功能判为失败。用例中的Q编号仅指本文件，跨需求依赖写明Jira编号。
 

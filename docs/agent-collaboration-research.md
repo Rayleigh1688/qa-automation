@@ -2,7 +2,7 @@
 
 研究日期：2026-09-23。当前阶段是需求澄清与方案讨论，尚未确定交互平台、数据格式或运行框架，未实现发送和自动处理。
 
-[需求入口](../requirements/README.md) · [问题写法](../requirements/document-style.md) · [2104问题示例](../requirements/ISOP-2104/questions.md)
+[需求入口](../requirements/README.md) · [问题写法](../requirements/document-style.md) · [2104问题示例](../requirements/history/archived-20261005/ISOP-2104/questions.md)
 
 ## 已有共识
 

@@ -1,5 +1,7 @@
 # KYC 可复用业务规则
 
+2026-10-05证据退出：本文引用的非2100静态测试结果已按用户授权清理，日期结论保留为当时记录，不代表当前实测；范围见[整理记录](../../docs/project-cleanup-2026-10-05.md)。
+
 规则版本：2026-09-14。来源：ISOP-2027需求及当日用户确认。本文随仓库维护，不随历史报告清理删除；业务结果仍按环境和批次分别记录。
 
 适用范围：管理后台KYC编辑、待复核草稿及相关查询。其他模块可复用验证方法，字段权限、状态枚举和空集约定须按对应契约核对。
@@ -32,7 +34,7 @@ POST /admin/kyc/edit中的kyc_status与POST /admin/kyc/review中的review_status
 | 三个字段的页面表现 | 同一计划的2027-UI-001 | 留言可编辑的新预期尚未重测，API证据不替代UI |
 | KYC-QUERY-01 | [empty_or_null断言](../../scripts/qa_core/execution_plan.py)；[报告复评](../../scripts/filbet/requirement_report.py) | 满足条件的FAT/UAT原证据离线复评；未执行项不改判 |
 
-FAT证据定位：批次20260914T094238Z-146be4ae下readonly-fields-fixcheck，从[最新FAT报告](../../reports/qa/ISOP-2027/latest-fat.html)进入。UAT018完整草稿保护证据不足，需按新规则验证，不能继承FAT通过。报告滚动清理后注明原始证据已退出，日期结论不能冒充当前实测。
+FAT证据定位：批次20260914T094238Z-146be4ae下readonly-fields-fixcheck，从最新FAT报告（原文件已退出，历史路径：`../../reports/qa/ISOP-2027/latest-fat.html`）进入。UAT018完整草稿保护证据不足，需按新规则验证，不能继承FAT通过。报告滚动清理后注明原始证据已退出，日期结论不能冒充当前实测。
 
 ## 后续复用与更新
 

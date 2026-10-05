@@ -85,7 +85,9 @@ ENV_FILE=.env.fat ENV_FILE_PRECEDENCE=shell EXECUTE_WITHDRAW_UI=true CLIENT_WITH
 
 ## Telegram 提测
 
-`npm run qa:telegram` 只扫描并输出requirements目录内的需求级待确认列表，不执行测试。`npm run qa:telegram -- preview`只读本地队列刷新清单，不扫描或调用AI。确认后用 `run --requirements ISOP-2022,ISOP-2032 --revision ...` 按需求选择；同需求多个批次须用兼容的`--candidates`明确选择。每个Story固定一名负责人；报告和候选留本机，用 `approve --job ... --revision ... --bugs B1,B2` 确认具体产品BUG，再用 `submit` 创建并关联，整批成功后才一次性发群清单。`check` 离线检查；`verify` 只读核对Telegram和Jira连接。无常驻监听，详见 [Telegram接入手册](telegram-qa.md)。
+`npm run qa:telegram` 只扫描并输出当前requirements目录内的需求级待确认列表，不执行测试。`npm run qa:telegram -- preview`只读本地队列刷新清单，不扫描或调用AI。确认后用 `run --requirements <当前需求编号> --revision ...` 按需求选择；同需求多个批次须用兼容的`--candidates`明确选择，执行仍核对配置及前置。每个Story固定一名负责人，报告和候选留本机；归档需求不能由旧队列自动恢复执行。`check` 离线检查；`verify` 只读核对Telegram和Jira连接。无常驻监听，详见 [Telegram接入手册](telegram-qa.md)。
+
+当前已实际使用的BUG交付是用户确认后查重、创建TEST／缺陷或补齐既有单，设置QA和开发负责人、关联需求并回读，最后整批同步 **filbet提测发布群**（`submission_chat_id`）。操作与授权沿[当前交付流程](telegram-qa.md#bug-delivery)。旧队列的 `approve --job ... --revision ... --bugs B1,B2`／`submit` 仍保留，但其建单器按Story前缀选项目且未写QA／负责人，投递器仍指向 `testing_chat_id`；适配完成前不用于当前TEST交付。`submit` 还会扫描群消息并处理已批准任务，不能当作“指定已有Jira单补发”的命令。
 
 ## CSV用例与结果树
 
@@ -128,7 +130,7 @@ ENV_FILE=.env.fat ENV_FILE_PRECEDENCE=shell EXECUTE_WITHDRAW_UI=true CLIENT_WITH
 
 `npm run qa -- evidence [ISOP-2032]`只读检查需求证据同步基线，无需凭据、不初始化状态库；省略编号检查全部。退出0为登记范围完整、1为文件变化/无效关联、2为未登记/部分来源未核；`--allow-pending`允许明确列出的缺口但不忽略错误。流程及边界见[证据同步计划](../requirements/evidence-sync-plan.md)。
 
-`npm run qa -- status --serve`打开持久保存的本地需求状态页；`npm run qa -- run --execute`按固定授权完成接口同步、提测扫描、AI用例草稿、检查及就绪API执行。单独的sync/generate/check/scan与离线模式见[统一命令手册](requirement-workflow-cli.md)。旧入口保持兼容，2022暂停，UAT适配、BUG模板/责任人映射不在本轮；新入口不建单、不发群。
+`npm run qa -- status --serve`打开持久保存的本地需求状态页；`npm run qa -- run --execute`只对通过当前配置、授权及计划检查的需求编排接口同步、提测扫描、AI用例草稿和就绪API执行。单独的sync/generate/check/scan与离线模式见[统一命令手册](requirement-workflow-cli.md)。10-05起当前仅保留2100，归档与暂停检查阻止旧需求自动续跑，目录存在不代表已有可执行计划。该自动编排仍限FAT且不建单、不发群；独立旧CLI的UAT能力及已实际使用的定向BUG交付不因此被判为未实现。
 
 ### 2027修正回归范围与报告保留（2026-09-14）
 

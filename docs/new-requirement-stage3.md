@@ -1,6 +1,8 @@
 # ISOP-2027 阶段3：UI完整可执行
 
-2026-09-11，依据[已批准计划](new-requirement-automation-plan.md)，接续[阶段1、2](new-requirement-stage1-2.md)。本轮使用既有FAT测试授权；BUG未提交，测试过程未发群，当时的原修改和异常现场未覆盖。后续已清理旧报告与调试轮次，当前仅保留本文最后一批真实UI证据，见[清理记录](project-cleanup-2026-09-11.md)。
+2026-10-05证据退出：本文引用的非2100静态测试结果已按用户授权清理，日期结论保留为当时记录，不代表当前实测；范围见[整理记录](project-cleanup-2026-10-05.md)。
+
+2026-09-11，依据[已批准计划](new-requirement-automation-plan.md)，接续[阶段1、2](new-requirement-stage1-2.md)。本轮使用既有FAT测试授权；BUG未提交，测试过程未发群，当时的原修改和异常现场未覆盖。后续已清理旧报告与调试轮次，2026-09-11当时保留本文最后一批真实UI证据，2026-10-05已按本次授权退出，见[清理记录](project-cleanup-2026-09-11.md)。
 
 后续用户已调整为[API自动优先、UI人工验收](team-testing.md)：本文保留阶段3交付时的行为与证据；当前新需求UI由人工执行，既有UI脚本仅保留兼容，不列为后续建设项；P0的API与核心UI自动化继续维护。
 
@@ -29,10 +31,10 @@ npm run qa:requirement -- ISOP-2027 --only 2027-FLOW-003 2027-FLOW-004 --execute
 
 ## 实测过程与证据
 
-最终整批：`20260911T050501Z-d626392b`。[结果树](../reports/qa/ISOP-2027/20260911T050501Z-d626392b/results.html) · [结果CSV](../reports/qa/ISOP-2027/20260911T050501Z-d626392b/results.csv)。18条：**15 PASS、1 FAIL、2 NOT_RUN、0 ERROR**。这是同一轮新会员实测，不是历史归并。
+最终整批：`20260911T050501Z-d626392b`。结果树（原文件已退出，历史路径：`../reports/qa/ISOP-2027/20260911T050501Z-d626392b/results.html`） · 结果CSV（原文件已退出，历史路径：`../reports/qa/ISOP-2027/20260911T050501Z-d626392b/results.csv`）。18条：**15 PASS、1 FAIL、2 NOT_RUN、0 ERROR**。这是同一轮新会员实测，不是历史归并。
 
 - PASS覆盖只读字段、无变更、空原因、图片上下边界、精确已处理UID/申请ID筛选、只读详情、六张前后图片预览，以及B三图编辑→A核准/驳回→三端资料与审计对账。
-- FAIL仅UI-014 Restore：真实点击被旁边Replace photo按钮遮挡；[局部截图](../reports/qa/ISOP-2027/20260911T050501Z-d626392b/2027-UI-014-restore-click-target.png)与`ui-diagnostics.jsonl`保存命中元素/矩形证据。未强制点击，依赖的还原后提交未执行。属于待确认候选，不自动建BUG。
+- FAIL仅UI-014 Restore：真实点击被旁边Replace photo按钮遮挡；局部截图（原文件已退出，历史路径：`../reports/qa/ISOP-2027/20260911T050501Z-d626392b/2027-UI-014-restore-click-target.png`）与`ui-diagnostics.jsonl`保存命中元素/矩形证据。未强制点击，依赖的还原后提交未执行。属于待确认候选，不自动建BUG。
 - NOT_RUN为UI-015/016权限矩阵，原批次记为“尚未迁移”，本轮plan已进一步明确具体角色/契约缺口，未撤改角色配置。
 - 记录耗时：准备53.755秒（含API登录0.865秒）、显式API请求9.279秒、UI63.709秒（含本轮UI登录和15秒遮挡等待）、对账13.892秒、报告3毫秒。各项不是纯产品响应时间；本批UI登录尚合并在首次页面步骤中。
 

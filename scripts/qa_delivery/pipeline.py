@@ -190,7 +190,7 @@ def run_pipeline(config, job, folder):
     report = {'status': 'BLOCKED', 'summary': '', 'results': results, 'bugs': []}
     try:
         if is_archived(ROOT, p['story']):
-            raise ValueError('需求已完成归档；旧排队任务不再自动执行，请显式使用历史回归CLI')
+            raise ValueError('需求已归档；旧排队任务不再自动执行，请显式使用历史回归CLI')
         if digest(config) != job['config_hash']:
             raise ValueError('configuration changed since enqueue')
         story = config['stories'][p['story']]

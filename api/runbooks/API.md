@@ -1,5 +1,7 @@
 # P0 API AI Runbook
 
+2026-10-05证据退出：本文引用的非2100静态测试结果已按用户授权清理，日期结论保留为当时记录，不代表当前实测；范围见[整理记录](../../docs/project-cleanup-2026-10-05.md)。
+
 上级入口：[`api/p0/README.md`](../p0/README.md)。FAT/UAT 差异统一查看 [`ENVIRONMENTS.md`](ENVIRONMENTS.md)；涉及后台登录、权限或审批时继续阅读 [`ADMIN.md`](ADMIN.md)；出现环境或响应异常时从 [`harness/README.md`](../../harness/README.md) 选择排障分支。
 
 ## 目标

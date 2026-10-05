@@ -1,6 +1,8 @@
 # ISOP-2032：投注返利活動 — 测试设计
 
-[设计](design.md) · [问题与决定](questions.md) · [业务用例](test-cases.md) · [总用例表](cases.csv) · [API数据](api/data-cases.csv) · [证据同步](evidence-sync.md) · [班车报告](../../../../reports/qa/batch-20260914-seven/ISOP-2032/results.html)
+2026-10-05证据退出：本文引用的非2100静态测试结果已按用户授权清理，日期结论保留为当时记录，不代表当前实测；范围见[整理记录](../../../../docs/project-cleanup-2026-10-05.md)。
+
+[设计](design.md) · [问题与决定](questions.md) · [业务用例](test-cases.md) · [总用例表](cases.csv) · [API数据](api/data-cases.csv) · [证据同步](evidence-sync.md) · 班车报告（原文件已退出，历史路径：`../../../../reports/qa/batch-20260914-seven/ISOP-2032/results.html`）
 
 设计基线：需求评审/测试准备；实际执行见班车报告。复审日期：2026-09-10（UTC+8）。
 

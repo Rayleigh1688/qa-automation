@@ -1,88 +1,60 @@
-# 需求设计与版本索引
+# 需求设计与测试入口
 
-首页/报表统计新需求可从[首页BI复用入口](../modules/admin/home-bi/README.md#后续需求复用入口2026-09-29)直接查到ISOP-2092最新规则、用例和证据；其他关联功能按[模块读取顺序](../modules/README.md#新需求关联资料的读取顺序)选择，不自动继承历史PASS或执行豁免。
+2026-10-05按用户决定，当前仅保留ISOP-2100；其余32条从[历史索引](history/README.md)查阅。归档不代表新增完成、上线或PASS。已退出证据和本次清理范围统一见[整理记录](../docs/project-cleanup-2026-10-05.md)。
 
-现有功能先对照[业务模块基线](../modules/README.md)：按菜单维护长期规则与覆盖缺口，需求目录记录本次变更、影响和交付。首页BI先整理，KYC随后复用已有规则；模块观察不替代需求验收。
+当前工作从下面的入口阅读，日期快照不再混入日常待办：
 
-所有需求文档遵循[统一格式约束](document-style.md)：章节保留原文编号和`§`、问题编号用`Q-01`、日期格式统一，保留业务用例和执行数据的机器字段。原班车7个需求的记录已随完成批次归档。
+| 内容 | 入口与用途 |
+| --- | --- |
+| 本期验收结论 | [10-05核查说明](ISOP-2100/acceptance-20261005.md) · [HTML报告](../reports/qa/ISOP-2100/20261005-requirement-review/views/report.html)，按本期需求正文收敛范围 |
+| 当前BUG与交付 | [问题清单](ISOP-2100/questions.md#current-bugs) · [Jira及群同步记录](ISOP-2100/bug-delivery-20261005.md) |
+| 最新补测依据 | [10-05补测说明](ISOP-2100/verification-20261005-followup.md) · [HTML报告](../reports/qa/ISOP-2100/20261005-followup/views/report.html)，含本轮未覆盖边界 |
+| 前批测试明细 | [10-02执行与BUG报告](../reports/qa/ISOP-2100/20261002-bugs/views/bugs.html)，保留原日期及范围 |
+| 需求状态 | [状态列表](status.html)，自动证据与人工修订独立保存 |
 
-问题文档按“简短名称→具体场景→问题点→需要确认”阅读，来源和用例关联放在后面，见[2104示例](ISOP-2104/questions.md)。跨团队Agent如何交接问题、转交人工和追踪答复，先讨论[参考项目与场景](../docs/agent-collaboration-research.md)；平台及消息格式尚未确定。
+## 日常工作
 
-需求补充先执行[证据同步流程](evidence-sync-plan.md)：合读Jira正文/评论、关联Lark与子任务，将决定同步到设计、用例和执行源；来源版本及未读范围必须可追溯。`npm run qa -- evidence`离线查看同步缺口，首次落地见[2032记录](history/through-ISOP-2072/ISOP-2032/evidence-sync.md)。
+| 要做的事 | 权威说明 |
+| --- | --- |
+| 评审功能预期、API断言、用例卡片和总表 | [测试流程](../docs/testing-workflow.md) · [文档格式](document-style.md) |
+| 合读Jira、评论、关联文档和子任务 | [证据同步](evidence-sync-plan.md)，本地hash检查不代表远端已刷新 |
+| 准备接口能力、独立预期和数据 | [API评估标准](api-readiness.md) |
+| API执行、人工UI清单与结果回填 | [团队测试](../docs/team-testing.md) · [命令范围](../docs/commands.md) |
+| 状态修订、归档和自动执行门槛 | [工作流](../docs/requirement-workflow-cli.md) |
+| BUG提单、负责人、群汇总和已解决回归通知 | [当前交付流程](../docs/telegram-qa.md#bug-delivery) |
+| 关联已有功能与长期规则 | [模块基线](../modules/README.md) · [业务规则](../skills/business-rules.md) |
 
-设计相关模块前先查[业务规则入口](../skills/business-rules.md)，在design引用编号、版本及适用差异。KYC已有[可复用规则](../skills/business-rules/kyc.md)，无需从历史报告重新梳理；规则确认与实测通过分开记录。
-
-先看[需求状态列表](status.html)：统一查看各Story的提测、测试进度、待修复、上线与关闭状态及下一步；业务用例和报告仍在各自目录维护。
-
-2026-09-24：[当前Sprint 2026W25的11单提测核对与产品确认顺序](sprint-2026w25-20260924.md)。按开发子任务及部署评论判断交付，保留部分端提测与数据未就绪的差异；先同步questions中的已有答案和剩余问题，确认规则后再生成用例。
-
-需求出来即按[API准备与评估标准](api-readiness.md)推导接口能力、准备独立预期和正反例；提测后在design.md明确功能覆盖、可测性与实测结论。设计/接口评审模板已补齐，数据结构与链路有影响时使用api/data-review.md；[2028示例](history/through-ISOP-2072/ISOP-2028/design.md#接口能力预期与当前评估)展示当前缺口，回归能力按FAT/UAT分别验收。
-
-日常 P0 回归入口仍在 [README](../README.md)。这里按需求组织设计与执行证据，不要求先覆盖全部接口，也不因新需求自动扩展 P0。
-
-新需求执行能力当前按[API/UI完善计划](../docs/new-requirement-automation-plan.md)分阶段推进；ISOP-2027阶段1、2及固定UI阶段3已交付，证据与剩余事项见[API记录](../docs/new-requirement-stage1-2.md)和[UI记录](../docs/new-requirement-stage3.md)。用户查看以自动生成的`results.csv`/`results.html`为主，保留用例、预期、实际与通过/失败；普通用例逐步迁移为结构化执行数据，尚未迁移的历史资产不视为已可一键重跑。
-
-2026-09-11新交付接口已按顺序开测，中文报告、实际失败和未执行范围见[本轮结果](../docs/history/requirement-records-20260907-11.md#test-20260911)。
+功能预期和API断言先由人工确认，AI按明确目标加速执行。新需求API自动执行，UI人工验收；P0继续维护API与核心UI自动化。通用功能模板、JMeter／Postman导出和测试空间简体副本仍待落地，具体缺口见[当前优化项](../docs/new-requirement-automation-plan.md#下一步)。
 
 ## 需求索引与组织约定
 
-- [当前需求：ISOP-2072之后](#当前需求)
-- [历史版本：ISOP-2072及之前](history/README.md)
+当前需求放在`requirements/<Jira编号>/`；按用户决定实体归档到`history/<批次>/`，显式编号CLI兼容查询历史。默认扫描、批量导出和工作流只处理当前需求，旧队列不能恢复归档需求执行。
 
-2026-09-18用户确认ISOP-2072及之前已完成，实体归档至`requirements/history/through-ISOP-2072/`。顶层仅保留当前需求；显式编号CLI兼容查找历史目录，历史测试证据不改写为本轮通过。
+同一需求的补充、复测和重新打开维护原目录；新Jira需求建新目录。业务编号保持稳定，验收点／用例按编号正序，版本索引按创建时间倒序。历史规则必须核对适用差异，不能继承历史PASS或执行豁免。历史日期快照集中在[历史索引](history/README.md)，不作为当前待办。
 
-2026-09-18：[ISOP-2072之后20条独立单初审](review-after-2072-20260918.md)，已逐单落实下表20个目录的设计、问题、用例与CSV，保留来源和未读素材边界；不代表业务验收或新增执行授权。
+## 当前需求
 
-当前需求按 Jira 编号建立 `requirements/<Jira编号>/`；完成批次移入`history/<版本>/`，本次版本标识为`through-ISOP-2072`。同一需求的补充、复测与重新打开继续维护原目录；新的 Jira 需求建新目录并链接相关需求。日期、来源版本和执行批次记录在文档中。
-
-当前及历史版本索引内部按创建时间倒序；后续新增需求放入当前需求。完成的需求按批次实体归档；用户完成确认与历史实测结论分别保留。单个需求内的验收点和用例按编号正序；问题按便于理解的顺序展开，已有答案单列，稳定编号用于引用。
-
-2026-09-14历史班车范围与实际结果见[七需求记录](test-round-20260914-seven.md)。早期选取依据和跨需求评审保留在[历史评审](../docs/history/requirement-records-20260907-11.md#review-20260907)。
-
-群消息扫描的待确认任务仅以顶层当前需求目录的工单为单位，子任务提测归并到所属需求；无提测记录不因目录存在而列入。终端显示简洁需求列表，详细依据保存在本地preview.json；查看与选择命令见[Telegram流程](../docs/telegram-qa.md#手动扫描一次)。
-
-### 当前需求
-
-编号大于ISOP-2072，共20条独立单。历史13条见[历史版本入口](history/README.md)。
+当前仅ISOP-2100一条。其余32条需求及跨需求日期快照见[历史记录](history/README.md)；默认扫描、批量导出只处理顶层当前目录。
 
 | Jira 编号 | 需求名称 | 分离文档 |
 | --- | --- | --- |
-| ISOP-2120 | 金幣派發效果二期 | [设计](ISOP-2120/design.md) · [问题](ISOP-2120/questions.md) · [总用例](ISOP-2120/cases.csv) · [用例设计](ISOP-2120/test-cases.md) |
-| ISOP-2119 | 管理後台 - 遊戲廠商類型編輯調整 | [设计](ISOP-2119/design.md) · [问题](ISOP-2119/questions.md) · [总用例](ISOP-2119/cases.csv) · [用例设计](ISOP-2119/test-cases.md) |
-| ISOP-2118 | 投返二期 | [设计](ISOP-2118/design.md) · [问题](ISOP-2118/questions.md) · [总用例](ISOP-2118/cases.csv) · [用例设计](ISOP-2118/test-cases.md) |
-| ISOP-2117 | Daily Rewards 顯示調整 | [设计](ISOP-2117/design.md) · [问题](ISOP-2117/questions.md) · [总用例](ISOP-2117/cases.csv) · [用例设计](ISOP-2117/test-cases.md) |
-| ISOP-2116 | PlayTime 遊戲對接 | [设计](ISOP-2116/design.md) · [问题](ISOP-2116/questions.md) · [总用例](ISOP-2116/cases.csv) · [用例设计](ISOP-2116/test-cases.md) |
-| ISOP-2111 | [Filplay] 直向手機點大廳遊戲會開到旁邊那一款 | [设计](ISOP-2111/design.md) · [问题](ISOP-2111/questions.md) · [总用例](ISOP-2111/cases.csv) · [用例设计](ISOP-2111/test-cases.md) |
-| ISOP-2110 | 編輯彈窗檢查邏輯調整 | [设计](ISOP-2110/design.md) · [问题](ISOP-2110/questions.md) · [总用例](ISOP-2110/cases.csv) · [用例设计](ISOP-2110/test-cases.md) |
-| ISOP-2109 | 前端頁面調整 | [设计](ISOP-2109/design.md) · [问题](ISOP-2109/questions.md) · [总用例](ISOP-2109/cases.csv) · [用例设计](ISOP-2109/test-cases.md) |
-| ISOP-2104 | 投注返利活動頁 | [设计](ISOP-2104/design.md) · [问题](ISOP-2104/questions.md) · [总用例](ISOP-2104/cases.csv) · [用例设计](ISOP-2104/test-cases.md) |
-| ISOP-2103 | 免費旋轉派發彈窗 | [设计](ISOP-2103/design.md) · [问题](ISOP-2103/questions.md) · [总用例](ISOP-2103/cases.csv) · [用例设计](ISOP-2103/test-cases.md) |
-| ISOP-2102 | MX API 調整 | [设计](ISOP-2102/design.md) · [问题](ISOP-2102/questions.md) · [总用例](ISOP-2102/cases.csv) · [用例设计](ISOP-2102/test-cases.md) |
 | ISOP-2100 | 代理後台調整 | [设计](ISOP-2100/design.md) · [问题](ISOP-2100/questions.md) · [总用例](ISOP-2100/cases.csv) · [用例设计](ISOP-2100/test-cases.md) |
-| ISOP-2098 | SA 投注詳情新增 | [设计](ISOP-2098/design.md) · [问题](ISOP-2098/questions.md) · [总用例](ISOP-2098/cases.csv) · [用例设计](ISOP-2098/test-cases.md) |
-| ISOP-2094 | [Filplay] 地域限制 | [设计](ISOP-2094/design.md) · [问题](ISOP-2094/questions.md) · [总用例](ISOP-2094/cases.csv) · [用例设计](ISOP-2094/test-cases.md) |
-| ISOP-2093 | Gcash 充值後跳轉流程 | [设计](ISOP-2093/design.md) · [问题](ISOP-2093/questions.md) · [总用例](ISOP-2093/cases.csv) · [用例设计](ISOP-2093/test-cases.md) |
-| ISOP-2092 | 後台首頁數據看板 | [设计](ISOP-2092/design.md) · [问题](ISOP-2092/questions.md) · [总用例](ISOP-2092/cases.csv) · [用例设计](ISOP-2092/test-cases.md) |
-| ISOP-2091 | 廠商排行榜活動 | [设计](ISOP-2091/design.md) · [问题](ISOP-2091/questions.md) · [总用例](ISOP-2091/cases.csv) · [用例设计](ISOP-2091/test-cases.md) |
-| ISOP-2090 | 輸值返利活動 | [设计](ISOP-2090/design.md) · [问题](ISOP-2090/questions.md) · [总用例](ISOP-2090/cases.csv) · [用例设计](ISOP-2090/test-cases.md) |
-| ISOP-2089 | Search 頁面改版 | [设计](ISOP-2089/design.md) · [问题](ISOP-2089/questions.md) · [总用例](ISOP-2089/cases.csv) · [用例设计](ISOP-2089/test-cases.md) |
-| ISOP-2086 | 修改 Nav 的 Reward 為 Promos | [设计](ISOP-2086/design.md) · [问题](ISOP-2086/questions.md) · [总用例](ISOP-2086/cases.csv) · [用例设计](ISOP-2086/test-cases.md) |
 
 ### 文档组织
 
 每个需求保留三份文档入口：`design.md`写验收规则/影响/测试策略，`questions.md`写问题及答复决定，`test-cases.md`供人评审功能用例。评审主要阅读questions与功能用例；`cases.csv`集中查看功能/API用例覆盖和登记状态，API数据组合供AI准备和执行接口测试。新执行结果统一生成到结果表，不在Markdown再手工抄写实时通过率。问题解决后同步规则和期望，不将讨论过程塞进用例步骤。
 
-排版统一：`questions.md`沿用[问题写法](document-style.md#问题文档的阅读顺序)。`test-cases.md`新版采用短名称索引和“前置条件→操作步骤→预期结果→待确认”卡片，优先级/验收点/方式及实现说明后置，见[功能用例写法](document-style.md#功能用例的阅读顺序)。2026-09-25按用户确认的[2092新版](ISOP-2092/test-cases.md)，当前20个需求已统一为总览与详情卡片；历史归档的旧宽表保持兼容。已有编号、历史决定和执行证据保留，未提供的信息明确标注，不为统一格式补造结论。
+排版统一：`questions.md`沿用[问题写法](document-style.md#问题文档的阅读顺序)。`test-cases.md`新版采用短名称索引和“前置条件→操作步骤→预期结果→待确认”卡片，优先级/验收点/方式及实现说明后置，见[功能用例写法](document-style.md#功能用例的阅读顺序)。历史归档的旧宽表保持兼容。已有编号、历史决定和执行证据保留，未提供的信息明确标注，不为统一格式补造结论。
 
-需求文档、专项 API 数据和场景代码集中在 `requirements/<Jira编号>/`，优先保持单个需求内容清晰。`api/contract-review.md` 记录接口与验收点的对照；接口契约确认后再增加 `api/cases.json` 和必要的场景代码。请求、登录、编码及报告复用 `scripts/filbet/`、`scripts/qa_core/` 的已有能力，不复制底层框架。新需求独立于 P0 门禁；当前API自动执行，UI人工验收，暂不建设新需求UI自动化。P0的API与核心UI自动化继续维护；已有[Telegram专项实现](../docs/telegram-qa.md)仅保留兼容。阶段分工见 [测试流程](workflow.md)。
+需求文档、专项 API 数据和场景代码集中在 `requirements/<Jira编号>/`，优先保持单个需求内容清晰。`api/contract-review.md` 记录接口与验收点的对照；接口契约确认后再增加 `api/cases.json` 和必要的场景代码。请求、登录、编码及报告复用 `scripts/filbet/`、`scripts/qa_core/` 的已有能力，不复制底层框架。新需求独立于 P0 门禁；当前API自动执行，UI人工验收，暂不建设新需求UI自动化。P0的API与核心UI自动化继续维护；已有新需求UI专项实现仅保留兼容，Telegram统一API／人工包编排继续使用[日常流程](../docs/telegram-qa.md)。阶段分工见 [测试流程](workflow.md)。
 
 ## 总用例与API数据分开
 
 每个需求的`cases.csv`是总用例表，合并`test-cases.md`中的功能用例及存在时的`api/test-cases.md`中的API用例；功能在前、API在后。新版总表保留状态、负责人和验证方式，便于查看覆盖与登记进度；功能包含原UI及跨API/UI场景。状态来自用例登记，不会把“已实现”或某一接口组合通过自动算成功能通过，实际结果仍须查看对应批次报告。
 
-有自动执行资产时，`api/data-cases.csv`独立保存具体数据组合、请求和断言，供AI核对和执行接口测试；与总表通过稳定用例编号关联，一条总用例可对应多组数据。JSON仍是执行器输入，CSV由它生成，不手工双向维护。旧宽表导出保留原九列CSV及API/UI/FLOW类型；执行报告和人工回填格式不变。当前33个独立单目录均有总表；2022、2027、2028、2031、2032、2037、2043已有API数据表，其余不伪造未实现资产。
+有自动执行资产时，`api/data-cases.csv`独立保存具体数据组合、请求和断言，供AI核对和执行接口测试；与总表通过稳定用例编号关联，一条总用例可对应多组数据。JSON仍是执行器输入，CSV由它生成，不手工双向维护。旧宽表导出保留原九列CSV及API/UI/FLOW类型；执行报告和人工回填格式不变。没有执行配置的需求不生成API数据表。
 
-`npm run qa:cases -- ISOP-2027`更新单需求，`npm run qa:cases -- --all`更新当前需求；增加`--include-history`才覆盖历史需求，均不登录。API表包含未具备前提的执行项，不把“有数据表”当作可全量运行；来源和编号规则见[测试流程](../docs/testing-workflow.md#文件与执行入口)。
+`npm run qa:cases -- ISOP-2100`更新单需求，`npm run qa:cases -- --all`更新当前需求；增加`--include-history`才覆盖历史需求，均不登录。API表包含未具备前提的执行项，不把“有数据表”当作可全量运行；来源和编号规则见[测试流程](../docs/testing-workflow.md#文件与执行入口)。
 
 ## 常规需求目录
 
@@ -106,7 +78,7 @@ requirements/<需求编号>/
 
 独立执行的新结果和人工回填放在`reports/qa/<需求编号>/<执行批次或交付包>/`，按用途生成`results.csv`/`results.html`、`manual.csv`及必要证据，详见[团队流程](../docs/team-testing.md)。从Telegram任务执行时，原始API结果仍在reports/qa，团队包、人工导入和统一BUG评审位于`reports/telegram/runs/<job>/`，与活动任务绑定。新需求不再建立UI自动化目录；人工UI场景保留在总用例和人工执行清单中。
 
-ISOP-2022已接入plan.json及API数据表，首轮与限定复核结果见[问题评审](history/through-ISOP-2072/ISOP-2022/bug-review.md)；候选未获建单确认，部分API组合实测不等于父需求全量验收。ISOP-2027多出的`execution-*.md`、`coverage-*.md`和`ui/execution-*.md`是试点阶段记录，不作为新需求的必备模板；其既有BUG清单路径保持兼容。`plan.json`和`preparation.csv`是通用配置与准备资料，并非UI专属文件。
+历史试点的`execution-*.md`、`coverage-*.md`和`ui/execution-*.md`不作为新需求的必备模板；既有BUG清单路径保持兼容。`plan.json`和`preparation.csv`是通用配置与准备资料，并非UI专属文件。
 
 ## 开始一个需求
 
@@ -140,24 +112,10 @@ ISOP-2022已接入plan.json及API数据表，首轮与限定复核结果见[问�
 
 P0运行结果会被清理覆盖；新需求统一执行器按次保存到reports/qa，旧查询入口仍保留各需求api/results路径。本地忽略产物也不等于持久证据存储。用例文件中保留脱敏结论，并在具备 CI/证据存储时记录持久链接。当前 CI 尚未验收，不宣称已自动阻断发布。
 
-新需求使用 `python3 scripts/run-requirement-api.py ISOP-2027 ISOP-2032 ISOP-2037 ISOP-2043` 离线校验；显式增加 `--env .env.fat --execute --insecure` 才执行查询正反例。结果放在各需求 `api/results/<运行标识>/`，P0清理器不清理此目录。用例前置/执行边界和本轮结论见各需求api/README.md。
-
-## 本期接口评审
-
-接口文档基线为 backend_api 的 `365c785..69c9be0`（2026-09-08至09-10），提交关联按内容推断，不视为部署完成。CoinPH 及无本期需求依据的临时调试请求不纳入。
-
-| 需求 | 接口评审 |
-| --- | --- |
-| ISOP-2043 | [契约对照](history/through-ISOP-2072/ISOP-2043/api/contract-review.md) |
-| ISOP-2037 | [契约对照](history/through-ISOP-2072/ISOP-2037/api/contract-review.md) |
-| ISOP-2032 | [契约对照](history/through-ISOP-2072/ISOP-2032/api/contract-review.md) |
-| ISOP-2027 | [契约对照](history/through-ISOP-2072/ISOP-2027/api/contract-review.md) |
-| ISOP-2022 | [契约对照](history/through-ISOP-2072/ISOP-2022/api/contract-review.md) |
+已有旧查询配置可使用`python3 scripts/run-requirement-api.py <编号>`离线校验；显式增加`--env .env.fat --execute --insecure`才执行查询正反例。结果仍放在各需求`api/results/<运行标识>/`，P0清理器不处理此目录；有目录或报告不代表已有自动执行计划。
 
 ## 简洁用例与结果
 
-新需求专项采用CSV用例、前置清单和四状态结果树，详见[用例与结果流程](../docs/testing-workflow.md)。旧结果已按用户授权清理，日期结论不等于本次实测；登录和数据准备不计业务PASS，脚本错误不直接计产品FAIL。
+执行报告使用通过、失败、未执行和执行出错四种状态。登录和数据准备不计业务PASS，脚本错误不直接计产品FAIL。新需求用例、断言及必要恢复逻辑放在需求资产或可导入模块中；新结果目录只保存输出和证据，不新增可执行脚本。既有2100临时采集／报告构建脚本因仍有依赖保留，复用前迁入模块，不从结果目录导入执行能力。
 
-当前新需求交付采用[API自动执行与UI人工验收](../docs/team-testing.md)。人工步骤也维护在plan.json，CSV是生成/回填界面；暂不建设新需求UI自动化；P0的API与核心UI自动化保持。
-
-2026-09-11：[2022—2072已提交接口与未测范围](../docs/history/requirement-records-20260907-11.md#coverage-20260911)，区分首次未测、历史部分已测、待修复及尚无接口提交依据；不将旧证据清理误记为从未测试。
+同一批次保留当前报告和必要原始证据，重建时不额外保存`before-*`页面副本；已有兼容CLI的输出契约保持。清理前核对BUG、活动任务和恢复依赖，SQLite、游标、去重状态、账号与号码预留单独保护。被删除证据须在原记录或整理说明标明退出，不能靠删除失败记录改变结论。

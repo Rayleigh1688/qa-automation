@@ -4,19 +4,21 @@
 
 ## 后续需求复用入口（2026-09-29）
 
-后续涉及首页报表、BI指标、统计日期、GGR/派彩、充值人群或导出的需求，先读取[ISOP-2092设计](../../../requirements/ISOP-2092/design.md)及[最新问题与决定](../../../requirements/ISOP-2092/questions.md)，再选读对应[测试用例](../../../requirements/ISOP-2092/test-cases.md)和[来源记录](../../../requirements/ISOP-2092/evidence-sync.md)。新需求在自己的design中记录引用的验收点、日期及差异，不复用旧测试结果作为新版本通过证据。
+2026-10-03最新纠正见[2092 Q-04](../../../requirements/history/archived-20261005/ISOP-2092/questions.md#q-04)：用户指出原产品文档GGR规则有误，已确认总量扣JP派彩及各游戏类型独立计算原则。相关物理源字段和分类断言待人工核定，新口径尚未回归；历史总分类内部一致性不能证明公式正确。原标题保留既有导航锚点，最新决定日期以本段及questions为准。
+
+后续涉及首页报表、BI指标、统计日期、GGR/派彩、充值人群或导出的需求，先读取[ISOP-2092设计](../../../requirements/history/archived-20261005/ISOP-2092/design.md)及[最新问题与决定](../../../requirements/history/archived-20261005/ISOP-2092/questions.md)，再选读对应[测试用例](../../../requirements/history/archived-20261005/ISOP-2092/test-cases.md)和[来源记录](../../../requirements/history/archived-20261005/ISOP-2092/evidence-sync.md)。新需求在自己的design中记录引用的验收点、日期及差异，不复用旧测试结果作为新版本通过证据。
 
 下文20卡片、旧GGR分类、图表免测及未指定舍入的描述均为09-16整理快照；2092对首页的新版布局与明确规则优先见上述入口，不将旧快照当作当前完整定义。
 
 | 关联内容 | 读取位置 | 复用边界 |
 | --- | --- | --- |
-| 首页统计日期、趋势图、两位截断、零值和跨日人均 | [2092 Q-01—Q-06](../../../requirements/ISOP-2092/questions.md) | 属于首页规则；其他报表不得只因名称相似套用90/180天、精度或跨日隐藏规则 |
-| 派彩回推、投注/GGR与充值统计 | 同上及[源单与边界补验](../../../requirements/ISOP-2092/verification-20260928-followup.md) | 以最新09-29决定覆盖旧派彩解释；源状态、时间归属、JP重复及Doris差额需按新需求核验 |
-| 充值gt状态变化、GCash造数经验 | [09-29GCash实测](../../../requirements/ISOP-2092/verification-20260929-gcash.md) | gt=1/2及gt=0观察有具体样本；通道可用性为FAT日期证据，重新核前置，不复用旧token或审批旧单 |
+| 首页统计日期、趋势图、两位截断、零值和跨日人均 | [2092 Q-01—Q-06](../../../requirements/history/archived-20261005/ISOP-2092/questions.md) | 属于首页规则；其他报表不得只因名称相似套用90/180天、精度或跨日隐藏规则 |
+| 派彩回推、投注/GGR与充值统计 | 同上及[源单与边界补验](../../../requirements/history/archived-20261005/ISOP-2092/verification-20260928-followup.md) | GGR按10-03人工纠正优先，派彩及充值沿09-29各自决定；源状态、时间归属、JP重复及Doris差额需按新需求核验 |
+| 充值gt状态变化、GCash造数经验 | [09-29GCash实测](../../../requirements/history/archived-20261005/ISOP-2092/verification-20260929-gcash.md) | gt=1/2及gt=0观察有具体样本；通道可用性为FAT日期证据，重新核前置，不复用旧token或审批旧单 |
 | 导出原生保存窗口、文件落盘及内容核验 | [通用UI操作手册](../../../ui/README.md#export-save) | 可跨报表复用方法；每次仍按实际浏览器/系统窗口验证 |
-| 失败场景及回归候选 | [最新复测](../../../requirements/ISOP-2092/verification-20260929-full.md)、[缺陷交付](../../../requirements/ISOP-2092/bug-delivery-20260929.md) | 先看顶部最新纠正；BUG状态需重新查，历史失败/通过均不代表当前部署 |
+| 失败场景及回归候选 | [最新复测](../../../requirements/history/archived-20261005/ISOP-2092/verification-20260929-full.md)、[缺陷交付](../../../requirements/history/archived-20261005/ISOP-2092/bug-delivery-20260929.md) | 先看顶部最新纠正；BUG状态需重新查，历史失败/通过均不代表当前部署 |
 
-本模块通过[模块总索引](../../README.md)连接会员列表、会员详情、KYC等资料；只有新需求确实涉及相应字段、状态或流程时才继续加载。月初/跨年暂不测、早期登录日志缺源待核是2092当前执行安排，不自动继承为新需求免测条件。原始报告在本机忽略目录，其他工作区可能没有文件，不能假定证据可用。
+本模块通过[模块总索引](../../README.md)连接会员列表、会员详情、KYC等资料；只有新需求确实涉及相应字段、状态或流程时才继续加载。月初/跨年暂不测、早期登录日志缺源待核是2092归档前的执行安排，不自动继承为新需求免测条件。2026-10-05该需求已归档、原始静态报告已清理；日期结论保留为历史，不能假定原始证据仍可用。
 
 ## 2026-09-16历史整理快照
 

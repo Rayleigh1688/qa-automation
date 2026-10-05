@@ -1,5 +1,7 @@
 # 首页BI：时间归属验证（2026-09-16）
 
+2026-10-05证据退出：本文引用的非2100静态测试结果已按用户授权清理，日期结论保留为当时记录，不代表当前实测；范围见[整理记录](../../../docs/project-cleanup-2026-10-05.md)。
+
 [功能基线](README.md) · [问题与决定](questions.md)
 
 用户明确要求通过数据库核对投注/GGR时间口径。本轮复用FAT已登录首页，数据库使用本机FAT配置、只读事务；没有调用重算、修改订单或生成业务数据。
@@ -18,10 +20,10 @@
 ## 查询范围和时间换算
 
 - 来源：orders.tbl_game_record_sport，prefix=fat、state=1；只输出计数、时间日序号及金额汇总，无个人或订单标识。
-- 9月15日UTC+8区间：[1789401600000,1789488000000)，9月16日区间：[1789488000000,1789574400000)。字段为毫秒。
+- 9月15日UTC+8区间：1789401600000,1789488000000)，9月16日区间：[1789488000000,1789574400000)。字段为毫秒。
 - 日分组采用FLOOR((timestamp_ms+28800000)/86400000)：20711=9月15日，20712=9月16日，避免依赖数据库会话时区。
 - 初次探索用了FROM_UNIXTIME再加8小时，发现会话为SYSTEM/CST后撤销该日期分组结论，改用以上毫秒算法重新查询；本表仅使用修正后结果。
-- [本轮SQL](../../../reports/qa/home-bi/20260916/time-basis.sql)与[汇总结果](../../../reports/qa/home-bi/20260916/time-basis.tsv)为本机忽略证据。最终两种口径及跨日样本在同一次只读事务返回。
+- [本轮SQL（原文件已退出，历史路径：`../../../reports/qa/home-bi/20260916/time-basis.sql`）与汇总结果（原文件已退出，历史路径：`../../../reports/qa/home-bi/20260916/time-basis.tsv`）为本机忽略证据。最终两种口径及跨日样本在同一次只读事务返回。
 
 ## 未解决边界
 
@@ -40,7 +42,7 @@
 - 源订单表fat.fb_deposits有created_at、paid_at、updated_at、amount、paid_amount、fee、status。字段名本身不证明BI实际使用它。
 - 9月15日按created_at筛选，有2笔COMPLETED，amount与paid_amount均合计100，fee=0，但paid_at均0。此前首页昨日充值100与创建日金额一致，只能说明数据相等，不能据此确认按创建时间或否定另有到账来源。
 - 找到历史样本：6月26日10:41:30.460创建、6月29日16:07:49.181到账，amount=100、paid_amount=70、fee=30。金额字段与手续费相减关系仅为此样本观察，未将全表paid_amount认定为统一金额口径。
-- 选择创建日、到账日、到账日前缀截止15:55和16:15四种窗口。未带report_type首次返回HTTP200/status=false，保留[首次结果](../../../reports/qa/home-bi/20260916/deposit-time-probe.json)。按文档加report_type=1后四次HTTP200/status=true，充值金额均0，见[完整参数结果](../../../reports/qa/home-bi/20260916/deposit-time-probe-with-type.json)。文档1含义为今日，因此不能确认自定义历史窗口生效，也不能将这些0当作样本未入账证明。此次参数诊断不改判首次失败。
+- 选择创建日、到账日、到账日前缀截止15:55和16:15四种窗口。未带report_type首次返回HTTP200/status=false，保留首次结果（原文件已退出，历史路径：`../../../reports/qa/home-bi/20260916/deposit-time-probe.json`）。按文档加report_type=1后四次HTTP200/status=true，充值金额均0，见完整参数结果（原文件已退出，历史路径：`../../../reports/qa/home-bi/20260916/deposit-time-probe-with-type.json`）。文档1含义为今日，因此不能确认自定义历史窗口生效，也不能将这些0当作样本未入账证明。此次参数诊断不改判首次失败。
 - 当前首页UI已观察到的输入仅日期。用户提出的分钟截止法需先确认API确实支持分钟过滤且不按日截断；否则用跨日创建/到账样本分别比较两天，同样可以区分归属。
 - 已检查本机.env系列配置的键名，未发现Doris专用配置；不输出凭据、不猜连接地址。后续需实际Doris连接入口/聚合表映射或BI服务的自定义时间契约，才能完成源订单→Doris→API对账。
 
@@ -50,7 +52,7 @@
 
 用户在收敛资产范围后明确“开始测”。本轮使用`.env.fat`重新登录，执行首页basic的昨日（report_type=2）、上周（4）、上月（6）和无认证昨日查询；未调用图表、重算或资金接口。沙箱首次网络连接失败，获网络执行许可后重新登录成功；连接失败不计业务失败。
 
-证据：[API响应](../../../reports/qa/home-bi/20260916/api-readonly/responses.json)、[断言](../../../reports/qa/home-bi/20260916/api-readonly/assertions.json)、[基础库SQL](../../../reports/qa/home-bi/20260916/api-readonly/source.sql)、[源数据汇总](../../../reports/qa/home-bi/20260916/api-readonly/source-summary.json)。API采集时间2026-09-16 16:41:17 UTC+8，数据库为同轮后续只读事务，两者不是同一快照。
+证据：API响应（原文件已退出，历史路径：`../../../reports/qa/home-bi/20260916/api-readonly/responses.json`）、断言（原文件已退出，历史路径：`../../../reports/qa/home-bi/20260916/api-readonly/assertions.json`）、基础库SQL（原文件已退出，历史路径：`../../../reports/qa/home-bi/20260916/api-readonly/source.sql`）、源数据汇总（原文件已退出，历史路径：`../../../reports/qa/home-bi/20260916/api-readonly/source-summary.json`）。API采集时间2026-09-16 16:41:17 UTC+8，数据库为同轮后续只读事务，两者不是同一快照。
 
 | 检查 | 实际结果 | 结论边界 |
 | --- | --- | --- |

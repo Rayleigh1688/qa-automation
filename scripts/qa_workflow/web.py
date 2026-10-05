@@ -1,5 +1,6 @@
 """Local HTML state editor; explicit evidence routes never expose private checkpoints/env."""
 import json
+import os
 import secrets
 from http.server import BaseHTTPRequestHandler, HTTPServer
 from pathlib import Path
@@ -15,7 +16,13 @@ def render(root, data):
 def export(state):
     collect_results(state)
     path = state.directory/'status.html'
-    path.write_text(render(state.root,state.view()),encoding='utf-8')
+    data = state.view()
+    try:
+        data['evidence_base'] = Path(os.path.relpath(state.root, state.directory)).as_posix().rstrip('/') + '/'
+    except ValueError:
+        # Windows cannot make a relative path between different drives.
+        data['evidence_base'] = state.root.resolve().as_uri().rstrip('/') + '/'
+    path.write_text(render(state.root,data),encoding='utf-8')
     return path
 
 

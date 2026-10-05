@@ -1,6 +1,8 @@
 # ISOP-2037：测试用例
 
-[设计](design.md) · [问题与决定](questions.md) · [业务用例](test-cases.md) · [总用例表](cases.csv) · [API数据](api/data-cases.csv) · [班车报告](../../../../reports/qa/batch-20260914-seven/ISOP-2037/results.html)
+2026-10-05证据退出：本文引用的非2100静态测试结果已按用户授权清理，日期结论保留为当时记录，不代表当前实测；范围见[整理记录](../../../../docs/project-cleanup-2026-10-05.md)。
+
+[设计](design.md) · [问题与决定](questions.md) · [业务用例](test-cases.md) · [总用例表](cases.csv) · [API数据](api/data-cases.csv) · 班车报告（原文件已退出，历史路径：`../../../../reports/qa/batch-20260914-seven/ISOP-2037/results.html`）
 
 本文件维护业务场景，总表不展开请求JSON、逐条机器断言或数据集；必要的业务边界和设计样例可保留。用例数据与总表通过Case ID关联，CSV由`qa:cases`离线生成。
 

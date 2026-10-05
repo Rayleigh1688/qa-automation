@@ -1,6 +1,8 @@
 # ISOP-2022：问题与决定
 
-[设计](design.md) · [问题与决定](questions.md) · [业务用例](test-cases.md) · [总用例表](cases.csv) · [API数据](api/data-cases.csv) · [班车报告](../../../../reports/qa/batch-20260914-seven/ISOP-2022/results.html)
+2026-10-05证据退出：本文引用的非2100静态测试结果已按用户授权清理，日期结论保留为当时记录，不代表当前实测；范围见[整理记录](../../../../docs/project-cleanup-2026-10-05.md)。
+
+[设计](design.md) · [问题与决定](questions.md) · [业务用例](test-cases.md) · [总用例表](cases.csv) · [API数据](api/data-cases.csv) · 班车报告（原文件已退出，历史路径：`../../../../reports/qa/batch-20260914-seven/ISOP-2022/results.html`）
 
 保留首轮表单评审和用户答复历史。Q/D编号不变；下文数据库证据均指 [设计中的只读核对记录](design.md#数据库只读核对记录2026-09-07)。后续答复记录日期、决定及来源，再同步验收规则和用例。
 

@@ -1,6 +1,8 @@
 # ISOP-2027：API测试说明
 
-[设计](../design.md) · [问题与决定](../questions.md) · [业务用例](../test-cases.md) · [API数据](data-cases.csv) · [班车报告](../../../../../reports/qa/batch-20260914-seven/ISOP-2027/results.html)
+2026-10-05证据退出：本文引用的非2100静态测试结果已按用户授权清理，日期结论保留为当时记录，不代表当前实测；范围见[整理记录](../../../../../docs/project-cleanup-2026-10-05.md)。
+
+[设计](../design.md) · [问题与决定](../questions.md) · [业务用例](../test-cases.md) · [API数据](data-cases.csv) · 班车报告（原文件已退出，历史路径：`../../../../../reports/qa/batch-20260914-seven/ISOP-2027/results.html`）
 
 最新限定复测：[历史报告已清理；查看最新FAT报告](../test-report-2026-09-14.md)。FAT人工通过按用户确认登记；接口反例仍有失败，不能据此替换人工结果或宣布UAT验收完成。
 
@@ -19,9 +21,9 @@ python3 scripts/run-requirement-api.py ISOP-2027 --env .env.fat --execute --inse
 
 首轮只读结论见 [历史报告已清理；查看最新FAT报告](../test-report-2026-09-14.md)。定向复测可增加 `--only <组合ID> ...`，每次产生独立证据。
 
-用户另行授权的本轮受控读写与边界见[历史报告已清理；查看最新FAT报告](../test-report-2026-09-14.md)、[历史报告已清理；查看最新FAT报告](../test-report-2026-09-14.md)和[历史报告已清理；查看最新FAT报告](../test-report-2026-09-14.md)。[历史报告已清理；查看最新FAT报告](../test-report-2026-09-14.md)单独记录，[候选BUG统一确认入口](BUG-review-2026-09-10.md)尚未提交。上述受控场景使用本轮独立会员，不由通用只读命令隐式执行。
+用户另行授权的受控读写与边界见[FAT日期记录](../test-report-2026-09-14.md)，[候选BUG统一确认入口](BUG-review-2026-09-10.md)保留当时尚未提交的结论。上述受控场景使用本轮独立会员，不由通用只读命令隐式执行；原始测试证据已退出，日期记录不能直接用于当前批次复核。
 
-本需求当前审阅入口：[简洁CSV用例](../cases.csv)、[前置清单](../preparation.csv)。当前团队执行包位于本机`reports/qa/ISOP-2027/team-ready-20260911/`，旧历史归并和API批次已清理。准备视图不表示执行通过，提交BUG前需补当前证据。
+本需求审阅入口：[简洁CSV用例](../cases.csv)、[前置清单](../preparation.csv)。2026-09-11团队执行包原位于本机`reports/qa/ISOP-2027/team-ready-20260911/`，该包已于2026-10-05退出；旧历史归并和API批次的原始结果也已清理，不再存在。准备视图不表示执行通过，后续需重新生成执行包并补当前证据，不能从已退出文件导入或据此提交BUG。
 
 ## 统一API执行入口
 

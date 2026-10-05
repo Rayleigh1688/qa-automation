@@ -17,7 +17,7 @@ from qa_delivery.state import digest
 from qa_workflow.state import State, collect_results
 from qa_workflow.generation import generate, validate, context
 from qa_workflow.service import preflight, process_candidates, event_reason
-from qa_workflow.web import handler, render
+from qa_workflow.web import export, handler, render
 from qa_delivery.pipeline import render_report
 
 
@@ -145,6 +145,21 @@ class WorkflowTests(unittest.TestCase):
         html = (folder/'report.html').read_text()
         self.assertIn('&lt;script&gt;',html)
         self.assertIn('确认后才建单',html)
+
+    def test_status_export_evidence_links_support_relative_and_cross_drive_paths(self):
+        def exported_data():
+            html = export(self.state).read_text(encoding='utf-8')
+            return json.loads(html.split('<script id="initial-data" type="application/json">',1)[1].split('</script>',1)[0])
+
+        self.state.manual(self.story,self.edit())
+        relative = exported_data()
+        self.assertEqual(relative['evidence_base'],'../../')
+        with patch('qa_workflow.web.os.path.relpath',side_effect=ValueError('path is on a different drive')):
+            cross_drive = exported_data()
+        self.assertEqual(cross_drive['evidence_base'],self.root.resolve().as_uri()+'/')
+        self.assertEqual(cross_drive['requirements'],relative['requirements'])
+        row = next(r for r in cross_drive['requirements'] if r['story']==self.story)
+        self.assertEqual(row['manual']['ui']['status'],'通过')
 
 
     def test_document_sync_tracks_commits_deletions_and_does_not_checkout(self):

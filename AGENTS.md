@@ -3,6 +3,8 @@
 - 开始前检查 `git status --short`，保留用户已有修改；当前证据与下一步见 [AI-HANDOFF.md](AI-HANDOFF.md)。
 - 业务任务使用 [.agents/skills/filbet-p0-automation/SKILL.md](.agents/skills/filbet-p0-automation/SKILL.md) 按需加载资料。文档也需要核对；冲突应结合代码、已验证证据与用户最新决定修正。
 - 文档职责与目录依赖见 [架构说明](docs/architecture.md)，命令范围见 [命令说明](docs/commands.md)。不要在多个入口复制实时通过率。
+- 功能／流程变更同步到对应日常说明和受影响入口，再记交接；不能仅写 `AI-HANDOFF.md` 或单批报告。区分代码已实现、定向操作已验证和通用入口待接入，不以文档检查通过代替语义核对。
+- Jira提单、群汇总及已解决回归通知先读 [当前交付流程](docs/telegram-qa.md#bug-delivery)，沿用已有用户授权和最新群路由，不从旧队列默认值推断当前操作。
 - 保持现有 npm/CLI 入口和报告路径兼容。共享能力抽取到可导入模块，CLI 负责参数和编排。
 - 本地校验运行 `npm run check`；只改文档可先运行 `npm run check:docs`。联网 API/UI 门禁会登录系统，受控命令还会写业务数据，不作为文档修改的默认验证。
 - 业务失败不能通过继续调用成功接口制造通过；数据库只读。凭据、证件、token 和未脱敏个人资料不提交。

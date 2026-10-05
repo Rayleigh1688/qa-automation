@@ -19,7 +19,7 @@ from .evidence import review
 def preflight(state, config, story, environment='FAT', payload=None, policy=None):
     reasons, warnings = [], []
     if is_archived(state.root, story):
-        reasons.append('需求已完成归档，不参与自动执行；历史回归请显式使用独立CLI')
+        reasons.append('需求已归档，不参与自动执行；历史回归请显式使用独立CLI')
     evidence = review(state.root, story)
     warnings.append('证据同步：' + evidence['status'] + '；' + '；'.join(evidence['errors'] + evidence['pending']))
     reasons.extend(evidence['errors'])

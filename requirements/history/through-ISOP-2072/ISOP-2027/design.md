@@ -1,6 +1,8 @@
 # ISOP-2027：管理後台 - KYC 複核功能 — 测试设计
 
-[设计](design.md) · [问题与决定](questions.md) · [业务用例](test-cases.md) · [总用例表](cases.csv) · [API数据](api/data-cases.csv) · [班车报告](../../../../reports/qa/batch-20260914-seven/ISOP-2027/results.html)
+2026-10-05证据退出：本文引用的非2100静态测试结果已按用户授权清理，日期结论保留为当时记录，不代表当前实测；范围见[整理记录](../../../../docs/project-cleanup-2026-10-05.md)。
+
+[设计](design.md) · [问题与决定](questions.md) · [业务用例](test-cases.md) · [总用例表](cases.csv) · [API数据](api/data-cases.csv) · 班车报告（原文件已退出，历史路径：`../../../../reports/qa/batch-20260914-seven/ISOP-2027/results.html`）
 
 复用规则：[KYC业务规则](../../../../skills/business-rules/kyc.md)，版本2026-09-14，KYC-EDIT-01/02/03、KYC-REVIEW-01、KYC-QUERY-01；适用于本需求编辑/复核与不命中查询。具体验收用例和执行计划仍在本需求维护。
 
