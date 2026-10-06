@@ -60,6 +60,7 @@
     "qa:requirement": "node scripts/python-launcher.mjs scripts/run-requirement.py",
     "qa:delivery": "node scripts/python-launcher.mjs scripts/prepare-test-delivery.py",
     "qa:cases": "node scripts/python-launcher.mjs scripts/export-requirement-cases.py",
+    "qa:xmind": "node scripts/python-launcher.mjs scripts/xmind-test-cases.py",
     "qa": "node scripts/python-launcher.mjs scripts/run-qa.py",
     "check:evidence": "node scripts/python-launcher.mjs scripts/run-qa.py evidence --allow-pending --include-history"
   },

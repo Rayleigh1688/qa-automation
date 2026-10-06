@@ -91,3 +91,5 @@ node scripts/python-launcher.mjs scripts/run-checks.py
 新需求通用导出另包含`case_report.py`、`execution_plan.py`和`plan_runner.py`：调用者提供服务/账号元数据和固定方法注册表，公共层不登录、不导入FILBET。实际业务adapter自行提供，导出不包含ISOP用例或本机证据。
 
 `qa_core/case_catalogue.py`提供离线业务总表/API数据视图，包含在公共导出中；调用者传入设计文件、Story和执行资产。它只生成审阅CSV并验证Case引用，不执行业务、不修改源JSON或人工执行结果。项目CLI不随公共核心导出。
+
+`qa_core/xmind_archive.py`与`xmind_cases.py`包含在公共导出中，提供纯离线Xmind主题树及用例交换能力，调用者提供导图、九列用例定义和明确结果。完整字段协议、设计源选择及客户端验证边界见源仓库`docs/xmind-test-cases.md`，该说明与项目CLI不随公共核心导出。能力不包含业务执行计划生成。

@@ -19,6 +19,8 @@
 
 [人工用例plan示例](../requirements/_template/team-plan.example.json)用于新增需求起步，须替换占位内容。采用统一计划的需求以`plan.json`维护执行配置，旧查询入口继续读取`api/cases.json`；设计卡片和生成CSV不会自行成为可执行计划，文件分工见[用例与数据分离](testing-workflow.md#文件与执行入口)。人工执行项在plan中维护：人工项增加`delivery.precondition/steps/expected`中文说明；不要求添加Playwright步骤。已有自动步骤保留，自动结果不能自动升级为人工PASS。原用例ID、验收点和旧CSV字段不重排。
 
+人工也可先写[Xmind测试用例](xmind-test-cases.md)，导入后由AI核对并按本轮已确认范围执行或准备人工清单。Xmind导入不会自动接入`plan.json`、团队包或Telegram任务；结果回填导图与团队包`manual.csv`导入为独立离线入口，均须沿用本批稳定编号与证据。
+
 历史试点ISOP-2027使用`execution_policy=api-first`：入口默认执行自动分配项，包含API型和后台FLOW；仍受既有写范围门禁约束。`--only`、`--layer UI`显式选择或`--include-ui-automation`可使用原UI自动化。其他未设置策略的需求保持原行为。未实现的人工项即使误选自动入口，也只记NOT_RUN。
 
 ## 一次交付

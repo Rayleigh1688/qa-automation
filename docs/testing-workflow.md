@@ -2,7 +2,7 @@
 
 2026-10-05证据退出：本文引用的非2100静态测试结果已按用户授权清理，日期结论保留为当时记录，不代表当前实测；范围见[整理记录](project-cleanup-2026-10-05.md)。
 
-适用：新需求专项；2026-09-11起按此流程组织。原P0、资金链和CLI继续兼容。ISOP-2027为历史试点；2026-10-05当前仅保留ISOP-2100，其余需求及执行包已归档或清理，见[整理记录](project-cleanup-2026-10-05.md)。
+适用：新需求专项；2026-09-11起按此流程组织。原P0、资金链和CLI继续兼容。ISOP-2027为历史试点；10-05归档／清理范围见[整理记录](project-cleanup-2026-10-05.md)，当前任务单见[需求索引](../requirements/README.md#当前需求)。W26各单的规则、待确认问题及初步测试重点分别放在本单`design.md`、`questions.md`、`test-cases.md`，批次总页只维护整体结论与导航。
 
 执行能力与剩余事项见[当前计划](new-requirement-automation-plan.md)，阶段实现见[API记录](new-requirement-stage1-2.md)和[可选UI记录](new-requirement-stage3.md)，清理范围见[整理记录](project-cleanup-2026-09-11.md)。
 
@@ -24,6 +24,8 @@
 ## 用例怎么写
 
 人读的评审入口是questions与[功能用例模板](../requirements/_template/test-cases.md)：先看短名称，再看前置、步骤、预期和待确认。总表使用[总用例模板](../requirements/_template/cases.csv)，按功能/API分组，展示登记状态与负责人。具体数据组合通过[API数据表](../requirements/_template/api/data-cases.csv)关联总用例；实际请求与机器断言以执行JSON为准，CSV供审阅，不直接执行。数据准备见[前置清单模板](../requirements/_template/preparation.csv)。
+
+也可用[Xmind向右逻辑图](xmind-test-cases.md)人工编写和评审：离线导入为兼容九列用例定义，执行后按精确编号回填一份新导图。导入不生成执行计划；采用导图时明确本批设计源，修订后重新核对，避免与Markdown同时手工维护两份预期。
 
 - API：按文档的方法、参数、类型、必填和边界准备正反例，独立请求、独立断言。跨账号/多步状态流单列FLOW，不要求每个单接口用例重跑全链。
 - UI：提测前按需求/设计/原型列预期；提测后由人工核对实际页面，补齐可直接操作的步骤，不要求编写自动化定位。页面实现不能反过来定义预期。

@@ -44,6 +44,7 @@ UI 用例依赖 `ui/elements/` 和 `ui/framework/`，页面、弹窗、游戏点
 | 需求级提测、测试、发布及关闭状态 | [requirements/status.html](../requirements/status.html)，链接原始来源；不复制用例通过率 |
 | 当前证据、有效例外、下一步 | `AI-HANDOFF.md` |
 | 命令行为、写入范围 | `docs/commands.md`，实现以 CLI 为准 |
+| Xmind人工用例格式、导入来源及结果回填 | [Xmind测试用例](xmind-test-cases.md)；用例定义与执行计划分开 |
 | BUG项目／类型、QA与负责人、查重关联、群汇总和回归通知 | [Jira／Telegram交付](telegram-qa.md#bug-delivery)；单批结果留需求交付记录，通用CLI缺口单列 |
 | FAT/UAT 契约与当前环境接受标准 | `api/runbooks/ENVIRONMENTS.md` |
 | 可执行用例、顺序、lane | `api/p0/` 固定资产；默认 UI 清单在 `ui/data/` |
@@ -65,7 +66,7 @@ UI 用例依赖 `ui/elements/` 和 `ui/framework/`，页面、弹窗、游戏点
 
 旧扫描脚本、快照、截图与manifest已于2026-09-11按用户授权删除；[退出索引](../archive/interface-scans/README.md)保留原导航路径。当前接口资产在api/inventory、api/catalog与api/p0，构建器不依赖已删除扫描。`check:archive`保留CLI名称，现检查旧扫描目录只含退出说明。
 
-2026-10-05当前仅保留ISOP-2100；其余需求已归档，非2100静态测试结果已清理，原始证据退出。2100报告及跨目录依赖、持久状态保留，范围见[本次整理记录](project-cleanup-2026-10-05.md)。早期脚本抽取与清理过程见[2026-09-11记录](project-cleanup-2026-09-11.md)。
+2026-10-05整理曾仅保留ISOP-2100，非2100静态测试结果已清理、原始证据退出，范围见[本次整理记录](project-cleanup-2026-10-05.md)。10-06按用户要求把W26评审纳入顶层任务单目录；四项已有归档资料保留为`requirements/history/archived-20261005/snapshots/<编号>/`日期快照，不参与需求实体发现，避免同号冲突。当前规则、问题与测试重点在顶层本单维护，日期快照不恢复旧执行资产。早期抽取与清理见[2026-09-11记录](project-cleanup-2026-09-11.md)。
 
 后续工作以 [新需求设计](../requirements/README.md) 为入口，按变更影响补用例并评估是否纳入 P0，不要求全接口自动化后再做需求测试。
 
@@ -106,6 +107,8 @@ UI 用例依赖 `ui/elements/` 和 `ui/framework/`，页面、弹窗、游戏点
 新统一执行和团队交付默认仅生成results.csv/results.html；`--extra-views`按需生成其他视图。公共write_views保留旧默认值以兼容P0外的旧查询/通用报告消费者；原始结果及快照不因视图精简而删除。
 
 业务总表和API数据视图由`qa_core/case_catalogue.py`生成，`export-requirement-cases.py`仅负责选择需求和加载已验证JSON。总表读取test-cases.md及存在时的api/test-cases.md，兼容旧固定业务表与卡片；执行历史不参与导出。新版卡片生成独立总表字段，功能在前/API在后，并保留登记状态、负责人及验证方式；执行端仍使用原FIELDS和API/UI/FLOW，读取新总表时投影为原用例定义，不将登记状态当本批结果。API组合逐条验证总用例引用，缺失/错误引用时拒绝更新视图；不会聚合成验收PASS。CSV由现有公共csv_text输出，保持UTF-8 BOM和公式注入防护，不新增表格运行依赖。
+
+Xmind交换由`qa_core/xmind_archive.py`处理ZIP及现代JSON／经典XML主题树，`qa_core/xmind_cases.py`处理用例字段、九列定义、来源定位与精确编号结果回填；`xmind-test-cases.py`仅负责参数和离线编排。公共模块不依赖FILBET、凭据或业务会话。它们不改写`plan.json`或需求设计源，也不把人工步骤转成可执行代码；格式与客户端复核边界见[Xmind说明](xmind-test-cases.md)。
 
 ## 需求工作流与本地状态
 

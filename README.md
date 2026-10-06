@@ -91,12 +91,13 @@ npm run test:ui:business -- --env .env.ui-p0.fat --execute --new-kyc-account --b
 | 要做的事 | 日常说明 |
 | --- | --- |
 | 评审功能预期、API断言及生成用例总表 | [用例与结果流程](docs/testing-workflow.md)；[文档格式](requirements/document-style.md) |
+| 人工编写Xmind向右逻辑图、导入用例并回填结果 | [Xmind测试用例](docs/xmind-test-cases.md)，`npm run qa:xmind`纯离线处理 |
 | 配置API自动执行、准备人工UI清单及合并结果 | [团队测试](docs/team-testing.md)；[命令范围](docs/commands.md) |
 | 查需求状态、人工修订、归档与自动执行门槛 | [需求工作流](docs/requirement-workflow-cli.md) |
 | 提交BUG、关联负责人、同步提测发布群及回归通知 | [Jira／Telegram交付](docs/telegram-qa.md#bug-delivery) |
 | 独立核对业务源数据 | [数据库只读取数参考](docs/database/README.md) |
 
-功能/API用例卡片与总表导出已有实现；通用新模板仍待用户首稿，JMeter／Postman导出与测试空间简体需求副本尚未落地，不能据讨论记录当作现成功能。10-05起当前需求仅ISOP-2100，归档需求保留历史查询与显式回归入口，不自动恢复执行。
+功能/API用例卡片与总表导出已有实现；通用新模板仍待用户首稿，JMeter／Postman导出与测试空间简体需求副本尚未落地，不能据讨论记录当作现成功能。当前需求与评审从[任务单目录索引](requirements/README.md#当前需求)进入；W26按任务单独立维护问题、设计与测试重点，尚无执行计划。历史归档保留查询与显式回归入口，不自动恢复执行。
 
 ## 项目结构
 

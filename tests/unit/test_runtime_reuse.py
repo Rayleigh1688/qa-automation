@@ -29,9 +29,13 @@ import sys
 from qa_core.workflow import run_stages
 from qa_core.environment import load_environment
 from qa_core.reporting import write_html_report
+from qa_core.xmind_archive import read_xmind, write_xmind
+from qa_core.xmind_cases import template_sheets, extract_cases
 root = Path(__file__).resolve().parents[1]
 assert load_environment(root/'settings.env', environ={})['PROJECT_VALUE'] == 'synthetic'
 write_html_report(title='Example', scope='LOCAL', report_kind='Example', verdict='PASS', verdict_detail='offline', items=[], output=root/'report.html')
+write_xmind(root/'cases.xmind', template_sheets())
+assert len(extract_cases(read_xmind(root/'cases.xmind'))[0]) == 2
 assert not any(n == 'filbet' or n.startswith('filbet.') for n in sys.modules)
 raise SystemExit(run_stages([['python', '-c', 'import sys; print("isolated-ok"); sys.exit(7)']], project_root=root, namespace='qa-runtime-export-test'))
 ''')

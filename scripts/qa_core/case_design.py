@@ -37,6 +37,24 @@ def has_cards(text):
     return '<!-- case-cards:' in text or CARD_END in text
 
 
+def has_design_definition(path):
+    """Detect a declared formal design, not its validity or execution readiness.
+
+    A legacy header's leading fields also identify malformed formal tables;
+    their strict parser must reject them rather than treating them as reviews.
+    ID-only tables and prose test priorities do not declare a formal design.
+    """
+    for source in design_paths(path):
+        if not source.is_file():
+            continue
+        text = source.read_text(encoding='utf-8')
+        if has_cards(text) or any(
+                cells and cells[:2] == DESIGN_FIELDS[:2]
+                for line in text.splitlines() if (cells := _cells(line)) is not None):
+            return True
+    return False
+
+
 def is_card_design(path):
     return any(has_cards(p.read_text(encoding='utf-8')) for p in design_paths(path))
 

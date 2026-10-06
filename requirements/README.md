@@ -1,8 +1,12 @@
 # 需求设计与测试入口
 
-2026-10-05按用户决定，当前仅保留ISOP-2100；其余32条从[历史索引](history/README.md)查阅。归档不代表新增完成、上线或PASS。已退出证据和本次清理范围统一见[整理记录](../docs/project-cleanup-2026-10-05.md)。
+当前需求包括ISOP-2100和W26的10个评审工作项，各按任务单维护独立目录。W26的待确认问题放在各自`questions.md`，规则与来源放`design.md`，初步测试重点放`test-cases.md`。
 
-当前工作从下面的入口阅读，日期快照不再混入日常待办：
+W26的整体结论和逐单导航见[批次评审](reviews/2026W26-20261006.md)，摘要见[向右展开Xmind](../reports/qa/W26/20261006-requirement-review/W26-requirement-review.xmind)。总页不再维护问题全文；答复直接写回对应任务单。W26仍在评审阶段，尚未执行业务测试或建立自动执行计划。
+
+2026-10-05曾按用户决定只保留ISOP-2100、归档其余32条；10-06重新纳入W26评审的四项保留原资料为日期快照，其余归档继续从[历史索引](history/README.md)查阅。归档不代表新增完成、上线或PASS；已退出原始证据见[整理记录](../docs/project-cleanup-2026-10-05.md)。
+
+当前执行工作从下面的入口阅读，日期快照不再混入日常待办：
 
 | 内容 | 入口与用途 |
 | --- | --- |
@@ -17,6 +21,7 @@
 | 要做的事 | 权威说明 |
 | --- | --- |
 | 评审功能预期、API断言、用例卡片和总表 | [测试流程](../docs/testing-workflow.md) · [文档格式](document-style.md) |
+| 用Xmind人工编写、交换用例和查看回填结果 | [Xmind测试用例](../docs/xmind-test-cases.md)，导入定义后仍须明确执行资产和本轮范围 |
 | 合读Jira、评论、关联文档和子任务 | [证据同步](evidence-sync-plan.md)，本地hash检查不代表远端已刷新 |
 | 准备接口能力、独立预期和数据 | [API评估标准](api-readiness.md) |
 | API执行、人工UI清单与结果回填 | [团队测试](../docs/team-testing.md) · [命令范围](../docs/commands.md) |
@@ -34,11 +39,21 @@
 
 ## 当前需求
 
-当前仅ISOP-2100一条。其余32条需求及跨需求日期快照见[历史记录](history/README.md)；默认扫描、批量导出只处理顶层当前目录。
+默认发现处理下列顶层任务单目录。W26当前只有规则、问题和初步测试重点，尚无正式用例总表或执行计划；目录可查询不等于可自动执行。历史资料和跨需求日期快照见[历史记录](history/README.md)。
 
 | Jira 编号 | 需求名称 | 分离文档 |
 | --- | --- | --- |
 | ISOP-2100 | 代理後台調整 | [设计](ISOP-2100/design.md) · [问题](ISOP-2100/questions.md) · [总用例](ISOP-2100/cases.csv) · [用例设计](ISOP-2100/test-cases.md) |
+| ISOP-2090 | 輸值返利活動 | [设计](ISOP-2090/design.md) · [问题](ISOP-2090/questions.md) · [测试重点](ISOP-2090/test-cases.md) |
+| ISOP-2120 | 金幣派發效果二期 | [设计](ISOP-2120/design.md) · [问题](ISOP-2120/questions.md) · [测试重点](ISOP-2120/test-cases.md) |
+| ISOP-2103 | 免費旋轉派發彈窗 | [设计](ISOP-2103/design.md) · [问题](ISOP-2103/questions.md) · [测试重点](ISOP-2103/test-cases.md) |
+| ISOP-2177 | BNG注單排查 | [设计](ISOP-2177/design.md) · [问题](ISOP-2177/questions.md) · [测试重点](ISOP-2177/test-cases.md) |
+| ISOP-2116 | SG遊戲對接 | [设计](ISOP-2116/design.md) · [问题](ISOP-2116/questions.md) · [测试重点](ISOP-2116/test-cases.md) |
+| ISOP-2122 | Sexy進入指定桌檯 | [设计](ISOP-2122/design.md) · [问题](ISOP-2122/questions.md) · [测试重点](ISOP-2122/test-cases.md) |
+| ISOP-2171 | FILPLAY用戶端介面調整 | [设计](ISOP-2171/design.md) · [问题](ISOP-2171/questions.md) · [测试重点](ISOP-2171/test-cases.md) |
+| ISOP-2183 | PP CHICKEN+刷水問題 | [设计](ISOP-2183/design.md) · [问题](ISOP-2183/questions.md) · [测试重点](ISOP-2183/test-cases.md) |
+| ISOP-2189 | H5遊戲頁內不顯示爆獎提示 | [设计](ISOP-2189/design.md) · [问题](ISOP-2189/questions.md) · [测试重点](ISOP-2189/test-cases.md) |
+| ISOP-2190 | 管理後台首頁GGR%分類分母 | [设计](ISOP-2190/design.md) · [问题](ISOP-2190/questions.md) · [测试重点](ISOP-2190/test-cases.md) |
 
 ### 文档组织
 

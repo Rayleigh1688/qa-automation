@@ -8,6 +8,7 @@ CORE_FILES = (
     '__init__.py', 'codec.py', 'environment.py', 'local_lock.py', 'process.py',
     'process_command.py', 'windows_job.py', 'terminal.py', 'workflow.py', 'reporting.py',
     'redaction.py', 'values.py', 'case_report.py', 'result_language.py', 'case_design.py', 'case_catalogue.py', 'execution_plan.py', 'plan_runner.py', 'team_delivery.py', 'ui_contract.py', 'json_worker.py',
+    'xmind_archive.py', 'xmind_cases.py',
 )
 JS_FILES = ('python-runtime.mjs', 'python-launcher.mjs')
 

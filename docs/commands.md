@@ -93,6 +93,10 @@ ENV_FILE=.env.fat ENV_FILE_PRECEDENCE=shell EXECUTE_WITHDRAW_UI=true CLIENT_WITH
 
 `npm run qa:report -- --cases <cases.csv>`仅离线校验用例；同时提供`--results <recorded-results.json> --out <新目录>`生成结果树和CSV，不登录、不执行业务。报告生成成功不代表测试通过。格式与迁移范围见[统一流程](testing-workflow.md)。
 
+## Xmind用例交换
+
+`npm run qa:xmind -- template --out <新.xmind>`生成向右逻辑图模板；`export --cases <cases.csv> --out <新.xmind>`从已有总表导出，二者可加`--title <标题>`。`import --input <人工.xmind> --out <新目录>`生成九列CSV、JSON定义和来源定位；`fill-results --input <用例.xmind> --results <本批结果.json> --out <新结果.xmind>`按精确编号回填，可加`--cases <本批冻结.csv或.json>`核对。均为离线文件操作，不生成`plan.json`或执行API/UI；写法及边界见[Xmind说明](xmind-test-cases.md)。
+
 ## 新需求统一执行入口（ISOP-2027试点）
 
 `python3 scripts/run-requirement.py ISOP-2027`默认离线校验；`--export-cases`从plan.json生成CSV；`--only <id...>`、`--layer API`选择范围；`--rebuild <run目录>`离线重建到新视图目录。实施与验证见[阶段记录](new-requirement-stage1-2.md)。旧run-requirement-api.py与P0入口保持兼容。
@@ -119,6 +123,8 @@ ENV_FILE=.env.fat ENV_FILE_PRECEDENCE=shell EXECUTE_WITHDRAW_UI=true CLIENT_WITH
 
 `npm run qa:cases -- <Story...>`离线导出指定需求的cases.csv总表，以及已有执行资产的api/data-cases.csv；`--all`只导出当前需求，`--all --include-history`包含历史归档。显式指定旧编号时自动定位历史目录。总表读取test-cases.md及存在时的api/test-cases.md，兼容卡片与旧宽表，功能在前/API在后；卡片生成的新版总表带登记状态、负责人及验证方式。API数据表来自plan.json或旧api/cases.json，不登录、不生成运行结果。没有API执行源的需求只导出总表，命令明确显示API未实现。
 
+仅有评审测试重点、尚未声明正式卡片或旧宽表的目录，批量导出明确显示“评审未就绪”并跳过，不创建用例CSV或执行计划。显式选择此类编号时拒绝，所选目录均不写文件；已声明正式设计但格式损坏时仍报错，不按未就绪跳过。正式设计会在任何导出写入前统一预检，历史`snapshots/`日期资料不作为批量导出实体。
+
 原`qa:requirement -- <Story> --export-cases`同步生成这两类表并继续更新旧查询兼容JSON。总表使用业务Case ID，数据表和`--only`使用执行Case ID；总表ID不直接传给`--only`。详细执行结果用本批冻结快照重建，不能与业务总表按执行编号直接合并。已有团队执行包不自动重写。
 
 当前执行策略（2026-09-11）：P0继续运行并维护API与核心UI自动化；新需求使用API自动执行与UI人工回填，暂不建设新需求UI自动化。本文保留的专项UI参数只说明兼容能力，不表示应自动续跑新需求UI或停止P0 UI。
@@ -130,7 +136,7 @@ ENV_FILE=.env.fat ENV_FILE_PRECEDENCE=shell EXECUTE_WITHDRAW_UI=true CLIENT_WITH
 
 `npm run qa -- evidence [ISOP-2032]`只读检查需求证据同步基线，无需凭据、不初始化状态库；省略编号检查全部。退出0为登记范围完整、1为文件变化/无效关联、2为未登记/部分来源未核；`--allow-pending`允许明确列出的缺口但不忽略错误。流程及边界见[证据同步计划](../requirements/evidence-sync-plan.md)。
 
-`npm run qa -- status --serve`打开持久保存的本地需求状态页；`npm run qa -- run --execute`只对通过当前配置、授权及计划检查的需求编排接口同步、提测扫描、AI用例草稿和就绪API执行。单独的sync/generate/check/scan与离线模式见[统一命令手册](requirement-workflow-cli.md)。10-05起当前仅保留2100，归档与暂停检查阻止旧需求自动续跑，目录存在不代表已有可执行计划。该自动编排仍限FAT且不建单、不发群；独立旧CLI的UAT能力及已实际使用的定向BUG交付不因此被判为未实现。
+`npm run qa -- status --serve`打开持久保存的本地需求状态页；`npm run qa -- run --execute`只对通过当前配置、授权及计划检查的需求编排接口同步、提测扫描、AI用例草稿和就绪API执行。单独的sync/generate/check/scan与离线模式见[统一命令手册](requirement-workflow-cli.md)。当前任务单范围见需求索引；W26处于评审阶段、尚无执行计划，归档与暂停检查继续阻止旧需求自动续跑。目录存在不代表已有可执行计划。该自动编排仍限FAT且不建单、不发群；独立旧CLI的UAT能力及已实际使用的定向BUG交付不因此被判为未实现。
 
 ### 2027修正回归范围与报告保留（2026-09-14）
 

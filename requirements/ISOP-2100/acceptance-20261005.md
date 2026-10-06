@@ -1,6 +1,6 @@
 # ISOP-2100：本期需求核查报告
 
-**结论：本期需求仍有问题，暂不能判定OK。** 以[ISOP-2100需求正文](https://alibaba-international.atlassian.net/browse/ISOP-2100)为验收依据，按五处交付功能核查；本报告不以47条扩展细项全部完成作为结论依据。
+**结论：本期需求仍有问题，暂不能判定OK。** 最新BUG结果与实际页面／CSV边界以[10-05晚批回归](../../modules/agency/regression-20261005.md)为准。下文是10-05早批需求核查快照，保留当时的失败与来源，不继续当作实时复现。以[ISOP-2100需求正文](https://alibaba-international.atlassian.net/browse/ISOP-2100)为验收依据，按五处交付功能核查；本报告不以47条扩展细项全部完成作为结论依据。
 
 [打开本期需求报告](../../reports/qa/ISOP-2100/20261005-requirement-review/views/report.html)。统计沿用10月2日00:00起（暂含当天，GMT+8）；业务实测使用10-05已完成的接口／只读源及注明日期的页面证据。本次重新读取需求、复算证据并收敛范围，没有重新执行资金链路。
 

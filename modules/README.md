@@ -8,6 +8,7 @@
 | 2 | [KYC管理（KYC、KYC复核）](admin/kyc/README.md) | 已完成首轮菜单/表单发现，建立规则引用、API映射及验证设计；留言禁用与已确认规则冲突，其余缺口见模块问题 |
 | 3 | [会员列表](admin/member-list/README.md) | 首轮筛选/列表/批量查询/创建/风控/转移表单发现完成；规则缺口与API设计待补 |
 | 4 | [会员详情](admin/member-detail/README.md) | 已建立[逐页计划](admin/member-detail/plan.md)，17项页签及列表遗留项全量跟踪；当前基础信息组进行中 |
+| 5 | [代理三套后台](agency/README.md) | 10-05用户追加整体只读摸底；[本轮记录](agency/verification-20261005.md)覆盖代理端、独立代理管理、主管理关联，需求验收与整体候选分开 |
 
 ## 当前工作范围（2026-09-16用户确认）
 

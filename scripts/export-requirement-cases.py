@@ -6,26 +6,40 @@ import json
 from pathlib import Path
 import re
 
-from qa_core.case_catalogue import export_catalogues
+from qa_core.case_catalogue import export_catalogues, overview_rows
+from qa_core.case_design import design_rows, has_design_definition
 from qa_core.execution_plan import load
 
 ROOT = Path(__file__).resolve().parents[1]
 
 
-def main():
+def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('stories', nargs='*')
     parser.add_argument('--all', action='store_true', help='Export every requirement design')
     parser.add_argument('--include-history', action='store_true', help='Include archived requirements with --all')
-    args = parser.parse_args()
+    args = parser.parse_args(argv)
     if args.include_history and not args.all: parser.error('--include-history requires --all')
     if args.all == bool(args.stories):
         parser.error('select story IDs or --all')
     stories = sorted(p.name for p in requirement_dirs(ROOT, include_history=args.include_history)) if args.all else args.stories
+    folders = []
     for story in stories:
         if not re.fullmatch(r'ISOP-\d+', story):
             parser.error('invalid story ID')
         folder = requirement_dir(ROOT, story)
+        if not has_design_definition(folder / 'test-cases.md'):
+            message = f'{story}: 评审未就绪：尚无正式用例设计；未写入文件'
+            if not args.all:
+                parser.error(message)
+            print(message + '; skipped; no login')
+            continue
+        # Preflight every selected definition before exporting any file. A
+        # declared but malformed design is an error, never a review to skip.
+        overview_rows(design_rows(folder / 'test-cases.md', story), story)
+        folders.append(folder)
+    for folder in folders:
+        story = folder.name
         plan = cases = suite = None
         if (folder / 'plan.json').is_file():
             from filbet.requirement_adapter import METHODS
