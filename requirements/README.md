@@ -1,8 +1,8 @@
 # 需求设计与测试入口
 
-当前需求包括ISOP-2100和W26的10个评审工作项，各按任务单维护独立目录。W26的待确认问题放在各自`questions.md`，规则与来源放`design.md`，初步测试重点放`test-cases.md`。
+当前需求包括ISOP-2100和W26的10个工作项，各按任务单维护独立目录。ISOP-2090已于2026-10-12进入提测测试，正式用例、测试顺序和定向API能力见本单入口；其他W26工作项仍以评审资料为主。待确认问题放在各自`questions.md`，规则与来源放`design.md`，用例或初步测试重点放`test-cases.md`。
 
-W26的整体结论和逐单导航见[批次评审](reviews/2026W26-20261006.md)，摘要见[向右展开Xmind](../reports/qa/W26/20261006-requirement-review/W26-requirement-review.xmind)。总页不再维护问题全文；答复直接写回对应任务单。W26仍在评审阶段，尚未执行业务测试或建立自动执行计划。
+W26的10-06评审结论和逐单导航见[批次评审](reviews/2026W26-20261006.md)，摘要见[向右展开Xmind](../reports/qa/W26/20261006-requirement-review/W26-requirement-review.xmind)。总页不维护问题全文；答复直接写回对应任务单。10-06批次的“未执行”是当日边界，不能覆盖2090后续提测实测；独立定向API实现也不等于统一执行计划已就绪。
 
 2026-10-05曾按用户决定只保留ISOP-2100、归档其余32条；10-06重新纳入W26评审的四项保留原资料为日期快照，其余归档继续从[历史索引](history/README.md)查阅。归档不代表新增完成、上线或PASS；已退出原始证据见[整理记录](../docs/project-cleanup-2026-10-05.md)。
 
@@ -14,6 +14,7 @@ W26的整体结论和逐单导航见[批次评审](reviews/2026W26-20261006.md)�
 | 当前BUG与交付 | [问题清单](ISOP-2100/questions.md#current-bugs) · [Jira及群同步记录](ISOP-2100/bug-delivery-20261005.md) |
 | 最新补测依据 | [10-05补测说明](ISOP-2100/verification-20261005-followup.md) · [HTML报告](../reports/qa/ISOP-2100/20261005-followup/views/report.html)，含本轮未覆盖边界 |
 | 前批测试明细 | [10-02执行与BUG报告](../reports/qa/ISOP-2100/20261002-bugs/views/bugs.html)，保留原日期及范围 |
+| 输值返利提测测试 | [测试顺序](ISOP-2090/execution-order.md) · [正式用例](ISOP-2090/test-cases.md) · [总表](ISOP-2090/cases.csv) · [API能力](ISOP-2090/api/README.md)，本轮结果与未测边界已归并到[10-12执行记录](ISOP-2090/verification-20261012.md) |
 | 需求状态 | [状态列表](status.html)，自动证据与人工修订独立保存 |
 
 ## 日常工作
@@ -39,12 +40,12 @@ W26的整体结论和逐单导航见[批次评审](reviews/2026W26-20261006.md)�
 
 ## 当前需求
 
-默认发现处理下列顶层任务单目录。W26当前只有规则、问题和初步测试重点，尚无正式用例总表或执行计划；目录可查询不等于可自动执行。历史资料和跨需求日期快照见[历史记录](history/README.md)。
+默认发现处理下列顶层任务单目录。ISOP-2090已有正式用例总表与定向只读、受控配置能力，完整覆盖和执行边界从本单记录查询；其余W26工作项仍仅有规则、问题和初步测试重点。目录可查询、CSV可生成或独立脚本存在均不等于统一自动执行就绪。历史资料和跨需求日期快照见[历史记录](history/README.md)。
 
 | Jira 编号 | 需求名称 | 分离文档 |
 | --- | --- | --- |
 | ISOP-2100 | 代理後台調整 | [设计](ISOP-2100/design.md) · [问题](ISOP-2100/questions.md) · [总用例](ISOP-2100/cases.csv) · [用例设计](ISOP-2100/test-cases.md) |
-| ISOP-2090 | 輸值返利活動 | [设计](ISOP-2090/design.md) · [问题](ISOP-2090/questions.md) · [测试重点](ISOP-2090/test-cases.md) |
+| ISOP-2090 | 輸值返利活動 | [设计](ISOP-2090/design.md) · [问题](ISOP-2090/questions.md) · [正式用例](ISOP-2090/test-cases.md) · [总表](ISOP-2090/cases.csv) · [顺序](ISOP-2090/execution-order.md) · [API能力](ISOP-2090/api/README.md) · [10-12记录](ISOP-2090/verification-20261012.md) |
 | ISOP-2120 | 金幣派發效果二期 | [设计](ISOP-2120/design.md) · [问题](ISOP-2120/questions.md) · [测试重点](ISOP-2120/test-cases.md) |
 | ISOP-2103 | 免費旋轉派發彈窗 | [设计](ISOP-2103/design.md) · [问题](ISOP-2103/questions.md) · [测试重点](ISOP-2103/test-cases.md) |
 | ISOP-2177 | BNG注單排查 | [设计](ISOP-2177/design.md) · [问题](ISOP-2177/questions.md) · [测试重点](ISOP-2177/test-cases.md) |

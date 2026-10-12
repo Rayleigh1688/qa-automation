@@ -80,6 +80,57 @@ class CaseReportTests(unittest.TestCase):
             with (target / 'results.csv').open(encoding='utf-8-sig') as stream:
                 self.assertEqual(next(csv.DictReader(stream))['执行结果'], 'NOT_RUN')
 
+    def test_readonly_reassessment_shows_original_provenance_and_partial_scope(self):
+        report = {'results': [{'id': 'A', 'status': 'PASS', 'actual': '已核只读子项', 'evidence': 'x'}],
+                  'run_id': 'review-2', 'source_run_id': 'original-1',
+                  'source_time': '2026-10-12T16:34:41+08:00',
+                  'mode': 'recorded-readonly-reassessment',
+                  'classification': {'reviewed_at': '2026-10-12T16:39:23+08:00'},
+                  'scope': 'GET /example; <script>scope()</script>',
+                  'boundaries': ['未验证真实入账', '<img src=x onerror=alert(1)>']}
+        with tempfile.TemporaryDirectory() as folder:
+            summary = write_views(folder, [case('A')], report, extra_views=False)
+            html = (Path(folder) / 'results.html').read_text()
+            self.assertIn('本次未重新测试；新请求0次', html)
+            self.assertIn('原采集批次：original-1', html)
+            self.assertIn('原采集时间：2026-10-12 16:34:41（UTC+8）', html)
+            self.assertIn('重分类复核时间：2026-10-12 16:39:23（UTC+8）', html)
+            self.assertIn('不能自动代表复合功能用例整体通过', html)
+            self.assertIn('未验证真实入账', html)
+            self.assertIn('&lt;script&gt;scope()&lt;/script&gt;', html)
+            self.assertNotIn('<script>scope()</script>', html)
+            self.assertNotIn('<img src=x onerror=alert(1)>', html)
+            self.assertEqual(summary['source_time'], report['source_time'])
+            self.assertEqual(summary['PASS'], 1)
+            with (Path(folder) / 'results.csv').open(encoding='utf-8-sig') as stream:
+                self.assertEqual(next(csv.DictReader(stream))['执行结果'], 'PASS')
+
+    def test_directed_readonly_view_labels_live_subitems_without_reassessment_claim(self):
+        with tempfile.TemporaryDirectory() as folder:
+            write_views(folder, [case('A')], {'results': [], 'mode': 'directed-readonly',
+                        'scope': 'report arithmetic', 'boundaries': ['未取得实际CSV']}, extra_views=False)
+            html = (Path(folder) / 'results.html').read_text()
+            self.assertIn('定向只读实测', html)
+            self.assertIn('本报告范围：report arithmetic', html)
+            self.assertIn('未取得实际CSV', html)
+            self.assertNotIn('新请求0次', html)
+
+    def test_long_multiple_evidence_references_render_as_text(self):
+        with tempfile.TemporaryDirectory() as folder:
+            target = Path(folder)
+            original = target / 'private-evidence.json'
+            original.write_text('{}')
+            refs = '; '.join([str(original)] * 100)
+            self.assertGreater(len(refs), 4096)
+            write_views(target / 'views', [case('A')], {'results': [
+                {'id': 'A', 'status': 'FAIL', 'actual': '保留原始失败', 'evidence': refs}]}, extra_views=False)
+            html = (target / 'views/results.html').read_text()
+            self.assertIn(refs, html)
+            self.assertNotIn('查看证据</a>', html)
+            self.assertTrue(original.is_file())
+            with (target / 'views/results.csv').open(encoding='utf-8-sig') as stream:
+                self.assertEqual(next(csv.DictReader(stream))['证据'], refs)
+
     def test_catalogue_requires_clear_steps_and_unique_ids(self):
         for rows in [[case('A'), case('A')], [{**case('A'), '预期结果': ''}]]:
             with tempfile.TemporaryDirectory() as folder:

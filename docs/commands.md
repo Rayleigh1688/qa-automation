@@ -8,6 +8,8 @@
 | --- | --- | --- |
 | `python3 scripts/run-requirement-api.py ISOP-2032` | 需求API数据与Case引用离线校验 | 不联网；多个需求用空格分隔。增加`--env .env.fat --execute --insecure`执行白名单查询及鉴权/参数反例，按需求留存独立结果；无配置/审批/发奖/导出任务写入 |
 | `npm run check` | 资产、文档、源码语法和本地单元测试 | 无业务请求 |
+| `npm run qa:time`／本机 `Time` | 显示今天、昨天、本周、本月、上月的开始／结束毫秒时间戳；GMT+8、周一开周 | 纯离线计算，结束含最后一毫秒；支持`--date YYYY-MM-DD`与`--json`，本机命令配置见[Time说明](../tools/time/README.md) |
+| `npm run qa:time:package` | 生成独立Mac分享包`reports/tools/Time-mac.zip`；支持`-- --out <目标.zip>` | 仅打包白名单工具文件；接收方需Python3.10+，可双击查看或自行选择安装终端命令，不含业务配置 |
 | `npm run test:p0:api:read` | safe API + 默认保护性反例 | 有认证请求，不创建资金订单；不包含已知会建单的充值限额探针 |
 | `npm run test:ui:p0` | 固定默认 UI 清单 | 默认只验证页面/游戏启动；专项写入开关应保持关闭 |
 | `ENV_FILE=.env.fat npm run test:ui:kyc` | 独立 FAT KYC UI 提交，`--approve` 衔接本轮后台审核和浏览器刷新 | 会上传/提交测试资料；不进入默认 10 条，不执行资金链；账号或业务失败即停 |
@@ -110,6 +112,8 @@ ENV_FILE=.env.fat ENV_FILE_PRECEDENCE=shell EXECUTE_WITHDRAW_UI=true CLIENT_WITH
 2026-09-14新增用户授权的2027 UAT执行：`npm run qa:requirement -- ISOP-2027 --env .env.uat --include-ui-automation --execute --insecure --allow-write kyc-review --allow-write kyc-permissions`运行现有API/UI固定计划，包含独立会员注册/KYC编辑复核及专用Codex角色撤权/恢复；范围不是只读。UAT地址对、复核账号独立配置和动态OTP要求见[环境手册](../api/runbooks/ENVIRONMENTS.md)。其他需求、扫描器默认授权和自动触发策略不因此开放UAT。
 
 ## 团队执行包与回填
+
+ISOP-2090当前使用[定向命令](../requirements/ISOP-2090/api/README.md)：只读日报与客户端采集、离线重分类分别留批次；受控配置校验独立执行并核恢复。不接入默认P0或`qa:requirement`，不推定已有完整`plan.json`或UAT能力；实际覆盖和未测范围以[本单记录](../requirements/ISOP-2090/verification-20261012.md)为准。
 
 `npm run qa:delivery -- prepare <Story> --environment FAT --out <新目录>`离线生成API自动表与人工清单；`import --packet <执行包> --manual <回填CSV> --out <新报告目录>`导入人工结果，可重复提供`--auto-results <原始结果JSON>`。细节见[团队流程](team-testing.md)。ISOP-2027默认qa:requirement执行自动分配项；`--include-ui-automation`恢复包含既有UI脚本的范围，`--only/--layer UI`仍可显式选择。
 

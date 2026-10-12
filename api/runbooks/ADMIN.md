@@ -16,7 +16,7 @@
 请求必须满足：
 
 - `content-type` 使用 CBOR runner 时为 `application/cbor`。
-- FAT 测试环境后台登录的 `google_code` 当前固定使用 `111111`。
+- 登录码以选中账号的已验证配置为准。2026-10-12 FAT主管理本轮账号已用新二维码的SHA256动态TOTP完成API／页面登录，不能沿用旧固定码结论。
 - `google_code` 必须按数字发送，不要按字符串发送。
 - `google_secret` 字段需要保留，当前可为空字符串。
 - `x-device-id` 可从浏览器真实请求或环境变量注入；无人值守 runner 未收到 `ADMIN_DEVICE_ID`/`X_DEVICE_ID` 时，为本次进程生成新的 UUID，且不跨命令持久化。
@@ -34,7 +34,9 @@
 ADMIN_URL=https://admin-fat.filbet2025.com
 ADMIN_EMAIL=<admin email>
 ADMIN_PASSWORD=<admin password>
-ADMIN_GOOGLE_CODE=111111
+ADMIN_GOOGLE_CODE=
+ADMIN_LOGIN_TOTP_SECRET=<real login totp secret>
+ADMIN_LOGIN_TOTP_ALGORITHM=SHA256
 ADMIN_DEVICE_ID=<x-device-id from browser request>
 ADMIN_GOOGLE_SECRET=
 ADMIN_APPROVAL_TOTP_SECRET=<real approval totp secret>
@@ -45,7 +47,7 @@ ADMIN_CLIENT_VERSION=Chrome/151.0.0.0
 ADMIN_TOKEN_PREFIX=
 ```
 
-注意：FAT 的 `ADMIN_GOOGLE_CODE=111111` 只用于后台登录。若目标环境后台登录也要求动态码，可将 `ADMIN_GOOGLE_CODE` 留空；runner 会优先使用 `ADMIN_LOGIN_TOTP_SECRET`，未配置时回退到 `ADMIN_APPROVAL_TOTP_SECRET`，算法同样优先使用 login 专用变量再回退到 approval 算法。充值补单、提现审核、KYC 审核等动作始终需要真实动态验证码，不能用 FAT 固定登录码代替。当前 FAT 与已验证 UAT 管理账号均使用 SHA256。
+将 `ADMIN_GOOGLE_CODE` 留空时，runner会优先使用 `ADMIN_LOGIN_TOTP_SECRET`，未配置时回退到 `ADMIN_APPROVAL_TOTP_SECRET`；算法优先使用login专用变量，再回退到approval算法。历史FAT固定码只适用于已核实仍支持它的账号，不推定当前环境都接受；本轮仅更新忽略的`.env.fat`，没有重新绑定远端令牌或改权限。充值补单、提现审核、KYC审核等动作需要真实动态验证码。2026-10-12本轮FAT及此前已验证UAT管理账号使用SHA256，其他lane配置须独立核对。
 
 同一受控流程包含多个审核动作时，每个动作必须使用新的动态验证码。controlled runner 优先使用 `ADMIN_APPROVAL_TOTP_SECRET` 现场生成，并在检测到与上一个审核动作处于同一 TOTP 窗口时等待下一窗口；`.env` 中的 `ADMIN_APPROVAL_CODE` 只在没有 secret 时作为单次兜底，不能在 KYC、补单、清流和提现审核之间复用。
 
@@ -64,7 +66,7 @@ t: t:<admin token>
 ## 已验证命令
 
 ```bash
-ADMIN_EMAIL=<admin email> ADMIN_PASSWORD=<admin password> ADMIN_GOOGLE_CODE=111111 ADMIN_DEVICE_ID=<x-device-id> \
+ADMIN_EMAIL=<admin email> ADMIN_PASSWORD=<admin password> ADMIN_GOOGLE_CODE='' ADMIN_DEVICE_ID=<x-device-id> \
 python3 scripts/api-smoke-runner.py \
   --admin-login \
   --execute \
@@ -151,7 +153,15 @@ UAT 会员账号筛选的实测契约：
 
 用户已明确独立代理管理首页不展示本次数据；整体回归跳过其首页／BI／图表接口。代理自己的首页属于2100范围，不能一同略过。先固定当前全部直属UID集合、窗口与采集时间；旧M1／M2／M0只是子集，同期其他测试新增会员必须分列，不能将金额变动误报。有效投注按已结算type1／3，GGR按正文不分bet_type，普通／FS／JP分别留源，避免套用同一类型过滤。
 
-代理统计使用同一GMT+8窗口分别取全量、实际20条分页、精确账号筛选；累计会员不随区间改变，各页集合去重比较，金额小计按当页、总计按全量，比例字段按定义计算。UI要等明细加载完成，不能以先变化的页码判结果。另从第2页改变代理筛选，核页码／总数重置与命中行；正常翻页通过不能覆盖这一场景。点击代理下钻核目标页、代理及起止日期，不只检查URL路径。
+代理统计使用同一GMT+8窗口分别取全量、用户指定页大小的实际分页、精确账号筛选；累计会员不随区间改变，金额小计按当页、总计按全部符合条件明细，比例字段按汇总分子／分母重算，不相加。UI要等明细加载完成，不能以先变化的页码判结果。另从第2页改变代理筛选，核页码／总数重置与命中行；正常翻页通过不能覆盖这一场景。点击代理下钻核目标页、代理及起止日期，不只检查URL路径。
+
+主管理会员个人统计须分别保存明细行数、去重UID人数和UID／所属代理／统计日期组成的行粒度；同UID被拆为不同归属的行不能先丢弃再求金额合计。分页读至实际短页或空页，再与较大页查询的完整集合比较，不能仅按`t`推定已读完；后页`t=0`或业务成功且`d=null`的空边界不直接当产品失败，首屏正总数而无明细须另核合同。还要核页面可达的最后一页，避免接口全量已取得却实际分页截断。人数口径解释与分页可达性分开记录。
+
+跨请求对账保留起止快照与每页截止时间；投注持续更新时，不以金额变化直接判分页错误。同响应内`a`与`d`的算术差、NGR与GGR减Bonus的公式差仍可独立判断。两位页面行值相加的分位差先核原始精度，不自定舍入算法。10条分页及后续修复的定向证据见[10-09分页核验](../../modules/agency/pagination-20261009.md#10月修复复验)，没有新增通用批量CLI或P0门禁。
+
+NGR异常须分别取正、负、零GGR行，逐行检验`NGR=GGR−Bonus`，不从总计符号推定负数归零。修复后分别记录明细、当页小计`a`、全量总计`s`的公式及加总结果；明细修复不代表总计同步恢复。能在单个较大页响应包含完整集合时，直接核`sum(d.ngr)`、`s.ggr−s.bonus`与`s.ngr`，避免将同响应差异归为采集间投注变化。若固定差额与JP相关，按精确直属代理和同窗口核会员报表`jp_winning`、GGR及Bonus；同时保留`bet_amounts−payout_amount`等字段关系和各次查询时间。报表间数值相等仅为相关性，需独立已结算注单及计算实现才能确定JP漏扣、重复计入或其他根因。
+
+JP对账先确认“派彩／净赢”是否已含JP，再核平台视角，不能从已有GGR列再默认减一次JP。当前会员报表分栏可按`GGR=投注−派彩−jp_winning`复算；独立源沿[2100 Q-03](../../requirements/ISOP-2100/questions.md#q-03)核净赢字段内容，避免重复计入。双报表按精确父级UID聚合有代理会员，另列无代理会员，不能拿全站会员总计直接与代理总计对账。保留不同来源采集时间和源持续更新证据，未取得统一取数截止点时不把相邻响应金额差直接判成漏数或延迟BUG。定向样本及未对平边界见[10-09 JP对账](../../modules/agency/pagination-20261009.md#最新jp与ggr对账)。
 
 真实导出先保留实际下载文件，再按账号／十进制UID核行集合、金额、所属代理UID／账号值及代理端遮蔽；只有表头或“导出完成”提示不判通过。姓名为分段对象时分别核接口非空遮蔽值、页面与CSV，不能把有姓名的会员显示／导出空值当成遮蔽通过。标准下载事件捕捉超时可按本次文件名／时刻核默认下载目录的新文件；主管理若使用原生保存窗口且桌面连接不可用，记录未取得文件与实际日志，交用户保存后续验，不用API生成CSV替代产品导出，也不因工具未完成保存报产品漏行。定向回归证据见[10-05记录](../../modules/agency/regression-20261005.md)，未接入通用CLI。
 
@@ -172,6 +182,10 @@ UAT 会员账号筛选的实测契约：
 用户明确授权批量准备直属会员后，逐代理核当前推荐码、手机号和真实上级，已成功记录只读复查并跳过。号码游标保存的是最近分配候选；连续批量注册时，下一起点还须大于本批已成功使用的最大号码，不能只依赖即时列表查重，避免新会员索引延迟造成重复候选。注册前落盘尝试边界，业务失败停止；本地分配拦截且尚未发短信／注册的号，可确认日志后继续未开始部分。该批处理仍是定向操作，未接入通用CLI。
 
 统计与名单查询各自保留时间及日期窗口。UID拒绝浮点并按十进制字符串匹配；精确账号筛选核完整响应是否只含目标，不能先截取目标子集再声称筛选正确。独立直属名单同时核顶层`parent_uid`与嵌套`parent.uid/username`；主管理会员详情当前不返回`parent_name`，姓名交叉核客户端主档或独立名单。日报或在线行未齐只做有上限的只读等待，不增加注册或充值来强行显示。
+
+## 代理直属会员资金准备
+
+用户明确指定代理组、直属人数和金额后，按[账号准备手册](../../tools/provisioning/README.md#代理下的多人资金样本)处理，金额落在直属会员而非代理本人。身份和KYC准备、充值到账、用户真实投注及报表准确性分别记录；业务失败后的资金链只读核后态，不继续补单成功动作。支付商户修复后的独立资金续批仍沿该手册核零订单／零到账，已有注册和KYC不重放。当前定向批次见[10-09准备](../../modules/agency/preparation-20261009.md)，不将该脚本当作已接通的通用批量命令。
 
 ## 主管理历史调试问题
 

@@ -61,6 +61,8 @@
     "qa:delivery": "node scripts/python-launcher.mjs scripts/prepare-test-delivery.py",
     "qa:cases": "node scripts/python-launcher.mjs scripts/export-requirement-cases.py",
     "qa:xmind": "node scripts/python-launcher.mjs scripts/xmind-test-cases.py",
+    "qa:time": "node scripts/python-launcher.mjs tools/time/cli.py",
+    "qa:time:package": "node scripts/python-launcher.mjs tools/time/package.py",
     "qa": "node scripts/python-launcher.mjs scripts/run-qa.py",
     "check:evidence": "node scripts/python-launcher.mjs scripts/run-qa.py evidence --allow-pending --include-history"
   },

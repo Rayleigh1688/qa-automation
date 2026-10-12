@@ -93,9 +93,11 @@ npm run test:ui:business -- --env .env.ui-p0.fat --execute --new-kyc-account --b
 | 评审功能预期、API断言及生成用例总表 | [用例与结果流程](docs/testing-workflow.md)；[文档格式](requirements/document-style.md) |
 | 人工编写Xmind向右逻辑图、导入用例并回填结果 | [Xmind测试用例](docs/xmind-test-cases.md)，`npm run qa:xmind`纯离线处理 |
 | 配置API自动执行、准备人工UI清单及合并结果 | [团队测试](docs/team-testing.md)；[命令范围](docs/commands.md) |
+| 输值返利2090正式测试与次日对账接续 | [测试顺序](requirements/ISOP-2090/execution-order.md)；[本单验证与边界](requirements/ISOP-2090/verification-20261012.md) |
 | 查需求状态、人工修订、归档与自动执行门槛 | [需求工作流](docs/requirement-workflow-cli.md) |
 | 提交BUG、关联负责人、同步提测发布群及回归通知 | [Jira／Telegram交付](docs/telegram-qa.md#bug-delivery) |
 | 独立核对业务源数据 | [数据库只读取数参考](docs/database/README.md) |
+| 快速获取日／周／月范围的毫秒时间戳 | [Time小工具](tools/time/README.md)，`npm run qa:time`或本机`Time`；`npm run qa:time:package`生成Mac分享包 |
 
 功能/API用例卡片与总表导出已有实现；通用新模板仍待用户首稿，JMeter／Postman导出与测试空间简体需求副本尚未落地，不能据讨论记录当作现成功能。当前需求与评审从[任务单目录索引](requirements/README.md#当前需求)进入；W26按任务单独立维护问题、设计与测试重点，尚无执行计划。历史归档保留查询与显式回归入口，不自动恢复执行。
 
@@ -111,6 +113,7 @@ npm run test:ui:business -- --env .env.ui-p0.fat --execute --new-kyc-account --b
 | `scripts/` | 兼容 CLI 入口；`qa_core/` 存放共享能力，`filbet/` 存放业务实现 |
 | `tests/unit/` | 本地离线单元测试 |
 | `tools/provisioning/` | 独立账号准备工具 |
+| `tools/time/` | 离线日／周／月毫秒时间戳工具 |
 | `.agents/skills/`、`skills/` | AI 任务路由及长期测试方法 |
 | `harness/` | 故障定位与有状态的已知问题记录 |
 | `testing-plan/` | 阶段目标与验收规划 |

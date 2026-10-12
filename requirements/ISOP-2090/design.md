@@ -1,8 +1,8 @@
 # ISOP-2090：输值返利活动设计
 
-[设计](design.md) · [问题](questions.md) · [测试重点](test-cases.md) · [W26批次评审](../reviews/2026W26-20261006.md)
+[设计](design.md) · [问题](questions.md) · [正式用例](test-cases.md) · [测试顺序](execution-order.md) · [API能力](api/README.md) · [来源同步](evidence-sync.md) · [W26批次评审](../reviews/2026W26-20261006.md)
 
-2026-10-06已读证据确认 v2.0 核心规则，可准备定向用例。旧 Lark、设计占位值按新规则纠偏；JP字段、日内快照／跨日及停用组仍依赖[问题清单](questions.md)。本次是需求评审，没有实际派发、账变或客户端验收通过证据。
+2026-10-12用户说明已提测并要求全面测试，已刷新Jira主项、两条评论、六子任务与关联Confluence，仍采用v2.0。本轮定向只读、页面和受控配置结果已归并到[10-12执行记录](verification-20261012.md)，存量接口／源对账证据与完整验收分别记录；不能把存量入账证明当本次自动05:00派发或客户端全面通过。JP字段、日内版本／跨日及停用组仍依赖[Q-01—Q-03](questions.md)。
 
 ## 当前规则
 
@@ -16,6 +16,8 @@
 
 ## 文档纠偏
 
+以下视觉和Lark纠偏来自2026-10-06已读资料；本轮未重开Lark、原型、Figma或Jira附件，不宣称这些远端内容已在2026-10-12保持不变。
+
 - Lark仍有周／月结、可选派发时间、上限留空即无限、独立推荐配置及T&C §3“无最高上限”，均与完整v2.0冲突；沿用Jira新规则修正文档和最终T&C，不新增已决定的结算／上限问题。
 - 图24125及实时原型Step 3已写每日GMT+8、总净输严格超过门槛、最高返利、规则净赢不返及自动05:00。配置正上限时不能仍向会员宣告无上限；这是原型纠正证据，实际前台仍须验证读取后台富文本。
 - Figma／图24128中的Platinum 3%、Diamond 5%与后台截图／mock的Slot 2.5%、3.0%不同；正文已规定动态读后台值，任一截图数字均不固化为预期。图中Cashback 1%、仅指定游戏及3X打码是正文已说明的占位条款。
@@ -23,25 +25,32 @@
 
 ## 影响与依赖
 
-- 2192／2193／2196在2026-10-06快照为待办，2194／2195／2197为进行中；六个子任务正文／评论为空，没有另一套计算合同。状态不证明实现或验收结果。
+- 2026-10-12回读：2192、2193、2194、2195为FAT测试，2197已完成，2196进行中；六子任务正文为空、评论均为0，环境与版本字段为空，没有新增计算合同。各自变迁及日期见下方来源表；状态不证明部署、接口或验收结果。
 - 若[ISOP-2183](../ISOP-2183/design.md)改变公共注单／流水，需回归本活动的已结算和跨日样本；不能未经合同确认共用同一种归日规则。
 - 本活动净输与[ISOP-2190](../ISOP-2190/design.md)的GGR不是已证明相同的指标；JP口径不得跨项移植。返利指定组也不改变首页游戏类型分类。以上是测试影响推断，不新增产品规则。
-- 仅依赖未决问题的场景暂不能定案，普通日、冻结配置及其他已明确场景继续准备。未建立自动执行计划或P0门禁。
+- 仅依赖未决问题的场景暂不能定案，普通日、冻结配置及其他已明确场景继续测试。已有定向只读suite及受控配置能力，未接入统一`plan.json`或默认P0门禁；范围与命令见[API能力](api/README.md)。
+
+## 本轮执行决定
+
+2026-10-12用户确认数据库只读、本轮不改权限；这不撤销其他已明确的FAT测试授权，业务准备仍沿用专用对象与受控范围。目前没有已确认的日结命令，今天继续测试可独立项，2026-10-13对账2026-10-12统计日；不调用未经确认的重跑或成功标记替代自动派发。原话与范围只在[用户决定](questions.md#本轮用户决定)维护，顺序与前置见[执行顺序](execution-order.md)。
 
 ## 来源与读取边界
 
-全部读取结论截至2026-10-06，来源更新时间与读取日期分开记录。本次整理未重新联网，依据[W26批次本单段](../reviews/2026W26-20261006.md)及忽略目录内本批finance工作稿。
+本轮Jira与Confluence实际读取日期为2026-10-12，来源更新时间另记。复核依据保留在忽略目录`reports/qa/ISOP-2090/20261012-full/evidence/`的`source-review.md`、`jira-source.json`和`jira-delivery-source.json`及两份Confluence快照。Lark、原型、Figma和附件保留2026-10-06读取范围，本轮未刷新；来源同步为部分完成，不能由本地hash推出远端无变化。
 
 | 来源 | 定位与实际读取范围 |
 | --- | --- |
-| [Jira主项](https://alibaba-international.atlassian.net/browse/ISOP-2090) | 正文§二后台配置、§三计算与结算、§四报表、§五前台活动页及六子任务均已读；主项两评论完整分页。 |
-| [评论17491](https://alibaba-international.atlassian.net/browse/ISOP-2090?focusedCommentId=17491)／[17355](https://alibaba-international.atlassian.net/browse/ISOP-2090?focusedCommentId=17355) | 2026-09-28 v2.0明确取代2026-09-16版本；不按页面时间猜测版本优先级。 |
-| [Lark](https://qsgpn7a1512s.sg.larksuite.com/wiki/ITOnwma9BiT8xRktp0el1LMQgge) | 全文章节及T&C已读，评论0；页面Modified Sep 24未带年份。前端UI白板尚未细读。 |
-| Jira图24124—24128 | 五图已视觉查看；配置、报表／明细及前台占位内容已对照，均非实际修复测试。 |
-| [活动33原型](https://vip-admin-gray.vercel.app/admin/activity-list) | 只读三步配置、覆盖组tooltip、启用／停用选项、日报和一个封顶明细；未保存配置。原型commit `452ac45`为mock参考。 |
-| [Figma Section 2](https://www.figma.com/design/XE9elEs82OqiFpHl0V66vm/FB_Invite-to-Earn_Design_Summary?node-id=1689-4661) | 375×1622完整页及375×812首屏版、当前3条可见评论已读；评论涉及排行／代理，未找到停用组规则。其他页面及全文件历史评论未遍历，未发评论。 |
+| [Jira主项](https://alibaba-international.atlassian.net/browse/ISOP-2090) | 2026-10-12重读正文§二—§五；updated为2026-10-05 10:06:14（GMT+8）。评论startAt0／maxResults2／total2完整返回17355、17491，没有新增Q答复。 |
+| [评论17491](https://alibaba-international.atlassian.net/browse/ISOP-2090?focusedCommentId=17491)／[17355](https://alibaba-international.atlassian.net/browse/ISOP-2090?focusedCommentId=17355) | 2026-10-12均已重读；09-28 v2.0明确取代09-16版本，规则优先级不按页面时间猜测。 |
+| 六子任务2192—2197 | 2026-10-12正文／评论及返回changelog已读。2192、2193在10-09 19:32转FAT；2194在10-12 10:12转FAT；2195在10-10 14:28转FAT；2197在10-12 10:07完成，2196同日10:07转进行中。正文空、评论0，environment及版本字段为空。 |
+| [Confluence班车页422772740](https://alibaba-international.atlassian.net/wiki/pages/viewpage.action?pageId=422772740) | 2026-10-12已读，版本11／2026-09-30；仍写未提测，属于旧日期资料，不覆盖用户最新提测指示与子任务变迁。 |
+| [Confluence输值返利430899213](https://alibaba-international.atlassian.net/wiki/spaces/QT/pages/430899213) | 2026-10-12已读，2026-10-07创建、版本1；正文为空，页脚及内联评论均返回空，没有新合同。 |
+| [Lark](https://qsgpn7a1512s.sg.larksuite.com/wiki/ITOnwma9BiT8xRktp0el1LMQgge) | 仅2026-10-06已读：全文章节、T&C及评论0；页面Modified Sep 24未带年份，前端UI白板未细读。10-12未刷新。 |
+| Jira图24124—24128 | 仅2026-10-06五图视觉对照；10-12只取得附件元信息，没有重新视觉查看。 |
+| [活动33原型](https://vip-admin-gray.vercel.app/admin/activity-list) | 仅2026-10-06三步配置、覆盖tooltip、启停、日报和一个封顶明细；未保存配置。commit `452ac45`为mock，10-12未重开，不等于真实FAT活动身份。 |
+| [Figma Section 2](https://www.figma.com/design/XE9elEs82OqiFpHl0V66vm/FB_Invite-to-Earn_Design_Summary?node-id=1689-4661) | 仅2026-10-06已读375×1622完整页、375×812首屏及3条可见评论；其他页面／全历史未遍历。10-12未刷新。 |
 
-原始附件及脱敏快照保留在忽略的`reports/qa/W26/20261006-requirement-review/evidence/`；本目录不复制原始附件或旧历史规则。
+10-06原始附件及脱敏快照留`reports/qa/W26/20261006-requirement-review/evidence/`；10-12新增来源与实测留本批目录，不复制原始附件或旧规则。源文档、公开前端SDK和实际业务结果分别提供规则、契约及执行证据，不互相替代。
 
 ## 历史日期资料
 

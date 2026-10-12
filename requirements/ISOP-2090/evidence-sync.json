@@ -1,0 +1,366 @@
+{
+  "schema_version": 1,
+  "story": "ISOP-2090",
+  "reviewed_at": "2026-10-12T17:28:50.524877+08:00",
+  "reviewer": "Codex / coverage_review 独立语义复核",
+  "sources": [
+    {
+      "id": "J",
+      "locator": "https://alibaba-international.atlassian.net/browse/ISOP-2090",
+      "revision": "updated 2026-10-05 10:06:14 GMT+8",
+      "status": "READ",
+      "coverage": "正文配置、公式、结算、日报和前台；附件视觉仅10-06范围",
+      "checked_at": "2026-10-12"
+    },
+    {
+      "id": "JC",
+      "locator": "https://alibaba-international.atlassian.net/browse/ISOP-2090?focusedCommentId=17491",
+      "revision": "17355发布09-16；17491发布09-28；startAt0/maxResults2/total2",
+      "status": "READ",
+      "coverage": "完整两评论重读，17491 v2.0明确取代17355；没有新增Q答复，不推断未来无新评论",
+      "checked_at": "2026-10-12"
+    },
+    {
+      "id": "CHILD",
+      "locator": "Jira ISOP-2192/2193/2194/2195/2196/2197；evidence/jira-delivery-source.json",
+      "revision": "10-12当前状态与返回changelog；2192/2193 FAT10-09，2194 FAT10-12，2195 FAT10-10，2197完成10-12，2196进行中10-12",
+      "status": "READ",
+      "coverage": "六项正文空、评论0、环境及版本字段空；只核职责和提测变迁，不证明部署或验收",
+      "checked_at": "2026-10-12"
+    },
+    {
+      "id": "CF-TRAIN",
+      "locator": "https://alibaba-international.atlassian.net/wiki/pages/viewpage.action?pageId=422772740",
+      "revision": "版本11 / 2026-09-30",
+      "status": "READ",
+      "coverage": "班车页仍写未提测，保留历史日期，不覆盖本轮用户指示或子任务提测状态",
+      "checked_at": "2026-10-12"
+    },
+    {
+      "id": "CF-REQUIREMENT",
+      "locator": "https://alibaba-international.atlassian.net/wiki/spaces/QT/pages/430899213",
+      "revision": "版本1 / 2026-10-07创建",
+      "status": "READ",
+      "coverage": "正文空；本轮页脚及内联评论返回空，没有新增合同",
+      "checked_at": "2026-10-12"
+    },
+    {
+      "id": "LARK06",
+      "locator": "https://qsgpn7a1512s.sg.larksuite.com/wiki/ITOnwma9BiT8xRktp0el1LMQgge",
+      "revision": "页面Modified Sep 24，未带年份",
+      "status": "READ",
+      "coverage": "10-06全文、T&C及评论0；有效已结算和其他奖励排除已定，前端白板未细读",
+      "checked_at": "2026-10-06"
+    },
+    {
+      "id": "VISUAL06",
+      "locator": "Jira附件24124—24128；https://vip-admin-gray.vercel.app/admin/activity-list；Figma node1689-4661",
+      "revision": "10-06日期证据；mock commit452ac45；Figma指定页及3条可见评论",
+      "status": "READ",
+      "coverage": "五附件、三步mock配置及一个封顶明细、指定Figma节点；未遍历全文件或历史评论，不作为FAT身份或业务结果",
+      "checked_at": "2026-10-06"
+    },
+    {
+      "id": "U12",
+      "locator": "questions.md#本轮用户决定；本会话10-12用户指示",
+      "revision": "2026-10-12最新执行决定",
+      "status": "READ",
+      "coverage": "数据库只读、权限不改不撤销其他FAT测试授权；无确认日结命令，今天测其他，10-13对账10-12，不冒充Q答复",
+      "checked_at": "2026-10-12"
+    },
+    {
+      "id": "SOURCE12",
+      "locator": "api/README.md；reports/qa/ISOP-2090/20261012-full/evidence/source/",
+      "revision": "admin umi-d433ca66.js / index-0daee2f9.js / index-3f1ae5ae.js；H5 hov4f2449b7 index-Cucz2P_Y.js",
+      "status": "READ",
+      "coverage": "ty41保存/日报/导出和H5真实合同；POST拦截器证明JSON标头、CBOR body；早期错ty40片段退出，HTML fallback不算JS；源码不证明后端计算正确",
+      "checked_at": "2026-10-12"
+    },
+    {
+      "id": "OBS12",
+      "locator": "verification-20261012.md；reports/qa/ISOP-2090/20261012-full/api-readonly-20261012T163441594814/result.json；client-readonly-20261012T165048784316/result.json",
+      "revision": "10-12原采集；离线复评保留source_time/source_run_id和0新请求",
+      "status": "READ",
+      "coverage": "日报结构、实际已测筛选分页、历史行算术、后台页面和H5部分证据；C08/C09/C14/C18明确失败子项整卡FAIL，其他未完成卡不因子项通过升级PASS",
+      "checked_at": "2026-10-12"
+    },
+    {
+      "id": "DB12",
+      "locator": "reports/qa/ISOP-2090/20261012-full/evidence/db-summary.md；db-same-value-save-summary.json；db-first-group-games-summary.json",
+      "revision": "2026-10-12只读独立源核验",
+      "status": "READ",
+      "coverage": "存量礼金、账变、关联活动流水及10-08普通日源集合、同值保存比较、首组合规目录；不证明本轮05:00自动任务或完整样本矩阵",
+      "checked_at": "2026-10-12"
+    },
+    {
+      "id": "CONFIG12",
+      "locator": "reports/qa/ISOP-2090/20261012-full/config-directed-20261012T170840632233/result.json；config-directed-20261012T171159147797/result.json；config-directed-20261012T171326673083/result.json",
+      "revision": "2026-10-12原校验、独立清理、独立summary marker三批",
+      "status": "READ",
+      "coverage": "重复组名接受且精确改变候选，停止后续负例；候选归属及fresh CAS恢复独立记录，C18 FAIL不改；marker动态同步和精确恢复只覆盖C15 API子项，原中断保留",
+      "checked_at": "2026-10-12"
+    },
+    {
+      "id": "LARK12",
+      "locator": "LARK06及前端UI白板",
+      "revision": "未取得或本轮未刷新",
+      "status": "PENDING",
+      "coverage": "10-12未刷新Lark/白板，保留10-06已读边界，不声明远端无变化",
+      "checked_at": null
+    },
+    {
+      "id": "VISUAL12",
+      "locator": "VISUAL06及Jira附件、原型、Figma全文件/历史评论",
+      "revision": "未取得或本轮未刷新",
+      "status": "PENDING",
+      "coverage": "10-12未重新视觉查看；全文件/历史评论未完整遍历",
+      "checked_at": null
+    },
+    {
+      "id": "Q-ANSWER",
+      "locator": "questions.md#q-01；questions.md#q-02；questions.md#q-03",
+      "revision": "未取得或本轮未刷新",
+      "status": "PENDING",
+      "coverage": "JP/奖励映射，VIP/配置快照、跨日归属/迟到/撤销/更正/重跑，停用组计算与推荐均未答",
+      "checked_at": null
+    },
+    {
+      "id": "DELIVERY-CONTRACT",
+      "locator": "六子任务环境/版本字段；C10/C17/C19/C21/C22前置",
+      "revision": "未取得或本轮未刷新",
+      "status": "PENDING",
+      "coverage": "后端部署、金额精度/最小派发、低权限角色/隔离、通知/App版本、安全任务触发/失败注入/重试、回归影响合同未齐",
+      "checked_at": null
+    },
+    {
+      "id": "REMAINING-EVIDENCE",
+      "locator": "verification-20261012.md#10-13的接续顺序；test-cases.md；execution-order.md",
+      "revision": "未取得或本轮未刷新",
+      "status": "PENDING",
+      "coverage": "新日05:00闭环及完整门槛/负NL/上限0/唯一归属/VIP/有效无效样本、真实CSV、推荐条件对齐、App/通知、权限/异常恢复/回归及停止后配置负例未完成",
+      "checked_at": null
+    }
+  ],
+  "changes": [
+    {
+      "id": "S01",
+      "source_ids": [
+        "J",
+        "JC"
+      ],
+      "case_ids": [
+        "ISOP-2090-C01",
+        "ISOP-2090-C02",
+        "ISOP-2090-C03",
+        "ISOP-2090-C04",
+        "ISOP-2090-C05",
+        "ISOP-2090-C06",
+        "ISOP-2090-C07",
+        "ISOP-2090-C08",
+        "ISOP-2090-C09",
+        "ISOP-2090-C10",
+        "ISOP-2090-C11",
+        "ISOP-2090-C12",
+        "ISOP-2090-C14"
+      ],
+      "status": "SYNCED",
+      "action": "按v2.0同步统一门槛/上限、负NL抵门槛、严格大于、整笔计算、唯一归属、日结05:00和封顶前/实派；旧C01-C11语义纠正且不继承旧结果",
+      "verification": "逐卡独立预期与金额矩阵已复核；设计或本地fixture不代表未执行金额组合业务PASS"
+    },
+    {
+      "id": "S02",
+      "source_ids": [
+        "J",
+        "LARK06",
+        "VISUAL06",
+        "LARK12",
+        "VISUAL12"
+      ],
+      "case_ids": [
+        "ISOP-2090-C09",
+        "ISOP-2090-C15",
+        "ISOP-2090-C16",
+        "ISOP-2090-C17"
+      ],
+      "status": "SYNCED",
+      "action": "保留动态Slot比例、富文本、第一组/合规/More Games合同，说明占位T&C冲突及10-06视觉日期边界",
+      "verification": "实际部分H5/API证据另记；10-12远端视觉来源未刷新，不把mock或源码当全面客户端验收"
+    },
+    {
+      "id": "S03",
+      "source_ids": [
+        "J",
+        "JC",
+        "CHILD",
+        "CF-REQUIREMENT",
+        "Q-ANSWER"
+      ],
+      "case_ids": [
+        "ISOP-2090-C10",
+        "ISOP-2090-C11",
+        "ISOP-2090-C20",
+        "ISOP-2090-C21",
+        "ISOP-2090-C23"
+      ],
+      "status": "PENDING",
+      "action": "待Q-01—Q-03明确答复后补字段映射、版本/跨日/更正/恢复和停用组预期；普通无JP冻结日保持可独立",
+      "verification": "本轮正文和完整评论未取得答案，依赖卡BLOCKED；用户执行授权不冒充产品答复"
+    },
+    {
+      "id": "S04",
+      "source_ids": [
+        "CHILD",
+        "CF-TRAIN",
+        "CF-REQUIREMENT"
+      ],
+      "case_ids": [
+        "ISOP-2090-C01",
+        "ISOP-2090-C02",
+        "ISOP-2090-C03",
+        "ISOP-2090-C04",
+        "ISOP-2090-C05",
+        "ISOP-2090-C06",
+        "ISOP-2090-C07",
+        "ISOP-2090-C08",
+        "ISOP-2090-C09",
+        "ISOP-2090-C10",
+        "ISOP-2090-C11",
+        "ISOP-2090-C12",
+        "ISOP-2090-C13",
+        "ISOP-2090-C14",
+        "ISOP-2090-C15",
+        "ISOP-2090-C16",
+        "ISOP-2090-C17",
+        "ISOP-2090-C18",
+        "ISOP-2090-C19",
+        "ISOP-2090-C20",
+        "ISOP-2090-C21",
+        "ISOP-2090-C22",
+        "ISOP-2090-C23"
+      ],
+      "status": "SYNCED",
+      "action": "更新提测来源日期及状态，旧班车未提测声明归历史；记录环境/版本空值",
+      "verification": "来源/changelog已核，状态不证明部署或业务通过"
+    },
+    {
+      "id": "S05",
+      "source_ids": [
+        "U12"
+      ],
+      "case_ids": [
+        "ISOP-2090-C08",
+        "ISOP-2090-C10",
+        "ISOP-2090-C11",
+        "ISOP-2090-C18",
+        "ISOP-2090-C19",
+        "ISOP-2090-C20",
+        "ISOP-2090-C21",
+        "ISOP-2090-C22"
+      ],
+      "status": "SYNCED",
+      "action": "同步数据库只读、权限不改及10-13对账10-12安排，其他已授权独立FAT项继续；不猜任务或调用成功标记替代派发",
+      "verification": "执行顺序与前置已核，次日闭环未完成，本地登记不新增请求"
+    },
+    {
+      "id": "S06",
+      "source_ids": [
+        "SOURCE12",
+        "OBS12",
+        "DB12"
+      ],
+      "case_ids": [
+        "ISOP-2090-C01",
+        "ISOP-2090-C02",
+        "ISOP-2090-C03",
+        "ISOP-2090-C04",
+        "ISOP-2090-C08",
+        "ISOP-2090-C13",
+        "ISOP-2090-C14",
+        "ISOP-2090-C15",
+        "ISOP-2090-C16",
+        "ISOP-2090-C19"
+      ],
+      "status": "SYNCED",
+      "action": "同步真实结构与独立存量对账边界，稳定check_key/覆盖特征/空集NOT_RUN，离线复评保留原时间/批次/失败；明细错误归C14，未测负NL不映射C04失败",
+      "verification": "共享helper及renderer定向fixture已验；已测子项与整卡分开，存量不替代新日派发/CSV/App/完整矩阵"
+    },
+    {
+      "id": "S07",
+      "source_ids": [
+        "SOURCE12",
+        "CONFIG12",
+        "OBS12"
+      ],
+      "case_ids": [
+        "ISOP-2090-C07",
+        "ISOP-2090-C09",
+        "ISOP-2090-C15",
+        "ISOP-2090-C18"
+      ],
+      "status": "SYNCED",
+      "action": "同步实际ty41保存/CBOR合同、精确候选归属及fresh CAS恢复；重复组名原FAIL保留，清理/marker独立报告，首次异常停止余负例",
+      "verification": "原校验、独立恢复、marker真实证据分别复核；恢复不表示缺陷修复，未执行负例不判拒绝通过；CAS非原子边界保留"
+    },
+    {
+      "id": "S08",
+      "source_ids": [
+        "DELIVERY-CONTRACT",
+        "REMAINING-EVIDENCE",
+        "Q-ANSWER"
+      ],
+      "case_ids": [
+        "ISOP-2090-C01",
+        "ISOP-2090-C02",
+        "ISOP-2090-C03",
+        "ISOP-2090-C04",
+        "ISOP-2090-C05",
+        "ISOP-2090-C06",
+        "ISOP-2090-C07",
+        "ISOP-2090-C08",
+        "ISOP-2090-C09",
+        "ISOP-2090-C10",
+        "ISOP-2090-C11",
+        "ISOP-2090-C12",
+        "ISOP-2090-C13",
+        "ISOP-2090-C14",
+        "ISOP-2090-C15",
+        "ISOP-2090-C16",
+        "ISOP-2090-C17",
+        "ISOP-2090-C18",
+        "ISOP-2090-C19",
+        "ISOP-2090-C20",
+        "ISOP-2090-C21",
+        "ISOP-2090-C22",
+        "ISOP-2090-C23"
+      ],
+      "status": "PENDING",
+      "action": "补齐实际部署/契约与缺失样本及执行证据，按明天对账顺序继续，不为消除缺口强行保存非法重叠配置或改库/权限",
+      "verification": "C08/C09/C14/C18的已知失败不掩盖余组合未测，其他已验证子项仍不提升完整功能卡PASS；统一plan/P0/UAT入口未宣称就绪"
+    }
+  ],
+  "files": {
+    "design.md": "62ecff5bb3cfb5fd3b240766aa87501497930a0bdc156ceee89b10f0a678dd2b",
+    "questions.md": "338f8c32c7942b35f730fb89f749df6373ccae7588f15cae52dcb547f32610da",
+    "test-cases.md": "743459dce3fa558cfe797abcb25da77e0c9355d467c5baa507f0d36145b0c2f9",
+    "cases.csv": "7959297c5c76c01fae5ff1fa668bacf77d02e7667f8597ef9b3b8a2823b318f7",
+    "evidence-sync.md": "6cddad82a45bc80be06f0e4419e7a2e25f0c19139749f7b9c44cd685c19b17f5",
+    "execution-order.md": "1b22ddc9430a68aa091657d7ced9a9bec3e319ae07bbe046ed7cda9e9c22c0f8",
+    "api/README.md": "337d921c4d3ad57a191f210c91afbdfeeaf7dc147243bcefb6e9e329fb169d1d",
+    "api/initial-read.py": "2a07a91dc2a1b62c0da61254923f66a515edbaccc1cd49e8fca7832143db801f",
+    "api/run-readonly.py": "2762c14d305237a3cd53d9345d910bc4504c5d223541b1a48427b04247087283",
+    "api/run-client-readonly.py": "055f1d457af0c96bed9ee106d578ade94a23e17ef30bd26fde1f7b8a89e10a0d",
+    "api/run-config.py": "7f993441f8e831361eb6c02ba93f4631703839e2559ca4a05cf6e1a832cf2327",
+    "api/static-sources.py": "e3fcf0c2751c335d8cd6e89dd9bffec81e428e1a094dd5dcd78cc0d72145cea0"
+  },
+  "boundary": "仅绑定需求目录内稳定设计/卡片/生成视图/顺序/API说明与CLI；动态实测汇总、bug review、AI-HANDOFF不绑定，目录外helper/renderer另行语义复核与本地测试；来源hash不证明远端新鲜度或业务PASS",
+  "file_review_updates": [
+    {
+      "file": "api/README.md",
+      "reviewed_at": "2026-10-12T18:36:14.859692+08:00",
+      "reviewer": "Codex / coverage_review 独立语义复核",
+      "reason": "只复核客户端退出码新增说明：真实采集error或FAIL退出1，成功0仍保留子项/未测边界；recorded分类完成0仅代表离线分析成功。",
+      "verification": "已比对loss_rebate_client.run_client_readonly返回逻辑、analyse_recorded的0请求/原时间及返回逻辑，与新增成功/失败两分支mock fixture一致；根代理最终npm run check 439项通过。未重发业务请求、未改业务结果。",
+      "boundary": "仅更新本README绑定与本条复核metadata；其他11项既有hash、sources、changes、原reviewed_at及PARTIAL缺口保持原值。"
+    }
+  ]
+}

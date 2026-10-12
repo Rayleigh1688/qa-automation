@@ -134,6 +134,14 @@ def write_views(folder, cases, report, *, extra_views=True):
     summary.update(total=len(rows), executed=counts['PASS'] + counts['FAIL'],
                    run_id=report.get('run_id', ''), environment=report.get('environment', ''),
                    source_time=report.get('source_time', ''), mode=report.get('mode', 'execution'))
+    # These are display-only scope fields, independent of result counts. Keep
+    # the original collection time when presenting an offline reassessment.
+    summary.update(scope=report.get('scope', ''),
+                   boundaries=report.get('boundaries', []),
+                   source_run_id=report.get('source_run_id', ''))
+    classification = report.get('classification')
+    if isinstance(classification, dict):
+        summary['reviewed_at'] = classification.get('reviewed_at', '')
     if 'deployment' in report:
         summary['deployment'] = report['deployment']
         summary['deployment_verification'] = report.get('deployment_verification',{}).get('status','declared')
@@ -152,6 +160,40 @@ def write_views(folder, cases, report, *, extra_views=True):
     return summary
 
 
+def context_html(summary):
+    """Show evidence provenance and partial scope without changing statuses."""
+    mode = summary.get('mode')
+    paragraphs = []
+    if mode == 'recorded-readonly-reassessment':
+        original = str(summary.get('source_run_id') or '未提供')
+        paragraphs.append('<p>离线重分类，本次未重新测试；新请求0次。原采集批次：' +
+                          escape(original) + '；原采集时间：' +
+                          escape(str(display_time(summary.get('source_time') or '未提供'))) + '。</p>')
+        if summary.get('reviewed_at'):
+            paragraphs.append('<p>重分类复核时间：' +
+                              escape(str(display_time(summary['reviewed_at']))) + '。</p>')
+        paragraphs.append('<p>下列结果只覆盖原证据的明确子项，不能自动代表复合功能用例整体通过。</p>')
+    elif mode in {'directed-readonly', 'directed-client-readonly'}:
+        paragraphs.append('<p>定向只读实测，下列结果仅覆盖已列明的子项，不能自动代表复合功能用例整体通过。</p>')
+    elif mode == 'historical-summary':
+        paragraphs.append('<p>历史证据整理，本次未重新测试；仅统计此用例表。</p>')
+    elif mode == 'evidence-summary':
+        paragraphs.append('<p>人工回填与自动证据汇总；来源可能为不同批次，本次导入未执行测试。</p>')
+    elif mode == 'manual-preparation':
+        paragraphs.append('<p>执行准备清单，尚未执行测试；人工用例等待回填。</p>')
+    scope = summary.get('scope')
+    if isinstance(scope, str) and scope.strip():
+        paragraphs.append('<p>本报告范围：' + escape(scope) + '</p>')
+    boundaries = summary.get('boundaries')
+    if isinstance(boundaries, list):
+        items = [value for value in boundaries if isinstance(value, str) and value.strip()]
+        if items:
+            paragraphs.append('<details open><summary>证据与未验证边界</summary><ul>' +
+                              ''.join('<li>' + escape(value) + '</li>' for value in items) +
+                              '</ul></details>')
+    return ''.join(paragraphs)
+
+
 def render_html(rows, summary, folder, *, extra_views=True):
     groups = defaultdict(list)
     for row in rows:
@@ -165,12 +207,17 @@ def render_html(rows, summary, folder, *, extra_views=True):
             status = row['执行结果']
             evidence = escape(row['证据'])
             # Only local existing files become links; arbitrary schemes are plain text.
-            source = Path(row['证据'])
-            if row['证据'] and not re.match(r'^[a-zA-Z]+:', row['证据']) and source.is_file():
-                import os
-                from urllib.parse import quote
-                href = quote(os.path.relpath(source.resolve(), folder.resolve()), safe='/')
-                evidence = f'<a href="{escape(href, quote=True)}">查看证据</a>'
+            try:
+                source = Path(row['证据'])
+                if row['证据'] and not re.match(r'^[a-zA-Z]+:', row['证据']) and source.is_file():
+                    import os
+                    from urllib.parse import quote
+                    href = quote(os.path.relpath(source.resolve(), folder.resolve()), safe='/')
+                    evidence = f'<a href="{escape(href, quote=True)}">查看证据</a>'
+            except (OSError, ValueError):
+                # Multiple references, unavailable files or invalid/overlong
+                # paths remain escaped text; report rendering must still finish.
+                pass
             actual = f'<span class="actual">{escape(row["实际结果/失败点"])}</span>' if status != 'PASS' else ''
             body.append(f'<details class="case" data-status="{status}"><summary><b class="{status}">{STATUS_LABELS[status]}</b> '
                         f'{escape(row["用例名称"])}{actual}</summary><dl><dt>用例编号</dt><dd>{escape(row["用例编号"])}</dd>' +
@@ -187,7 +234,7 @@ b{display:inline-block;min-width:76px}.PASS{color:#147d43}.FAIL{color:#bf2635}.E
 .technical{margin:0 24px 16px}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#f5f6f8;padding:12px}input,select{padding:10px;border:1px solid #aaa;border-radius:5px}nav{display:flex;gap:12px;flex-wrap:wrap}.hidden{display:none}
 </style><h1>测试结果</h1>''' + f'<p>{escape(summary["run_id"])} · {escape(summary["environment"])} · {escape(display_time(summary["source_time"]))}</p>' + (
         '<p>部署版本：'+escape(str(summary['deployment']))+' · '+escape({'declared':'声明版本，未远程核验','not_provided':'未提供版本','verified':'已由执行流程核验','incomplete':'版本核验未完成'}.get(summary.get('deployment_verification'),'未核验'))+'</p>' if 'deployment' in summary else '') + (
-        '<p>历史证据整理，本次未重新测试；仅统计此用例表。</p>' if summary['mode'] == 'historical-summary' else '<p>人工回填与自动证据汇总；来源可能为不同批次，本次导入未执行测试。</p>' if summary['mode']=='evidence-summary' else '<p>执行准备清单，尚未执行测试；人工用例等待回填。</p>' if summary['mode']=='manual-preparation' else '') + \
+        context_html(summary)) + \
         '<p>' + '　'.join(f'{STATUS_LABELS[key]} <strong>{summary[key]}</strong>' for key in STATUSES) + \
         f'　总用例 {summary["total"]}（执行错误和未执行不计入已执行）</p>' + '''
 <nav><input id="search" aria-label="搜索用例" placeholder="搜索编号、名称、失败点">
