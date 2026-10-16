@@ -6,7 +6,7 @@ try {
   await page.goto(process.env.QA_STATUS_URL);
   await page.getByText('本地状态已载入。', {exact: false}).waitFor();
   if (await page.locator('#filter').inputValue() !== 'active') throw new Error('Current requirements are not the default view');
-  await page.getByText('ISOP-2100 代理後台重整', {exact: true}).waitFor();
+  await page.getByText('ISOP-2090 输值返利活动', {exact: true}).waitFor();
   await page.locator('#filter').selectOption('all');
   const row = page.locator('tr').filter({has: page.getByText('ISOP-2028 合规统计调整', {exact: true})});
   await row.locator('[data-channel="ui"]').click();

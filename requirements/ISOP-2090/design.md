@@ -26,8 +26,8 @@
 ## 影响与依赖
 
 - 2026-10-12回读：2192、2193、2194、2195为FAT测试，2197已完成，2196进行中；六子任务正文为空、评论均为0，环境与版本字段为空，没有新增计算合同。各自变迁及日期见下方来源表；状态不证明部署、接口或验收结果。
-- 若[ISOP-2183](../ISOP-2183/design.md)改变公共注单／流水，需回归本活动的已结算和跨日样本；不能未经合同确认共用同一种归日规则。
-- 本活动净输与[ISOP-2190](../ISOP-2190/design.md)的GGR不是已证明相同的指标；JP口径不得跨项移植。返利指定组也不改变首页游戏类型分类。以上是测试影响推断，不新增产品规则。
+- 若[ISOP-2183](../history/archived-20261016/ISOP-2183/design.md)改变公共注单／流水，需回归本活动的已结算和跨日样本；不能未经合同确认共用同一种归日规则。
+- 本活动净输与[ISOP-2190](../history/archived-20261016/ISOP-2190/design.md)的GGR不是已证明相同的指标；JP口径不得跨项移植。返利指定组也不改变首页游戏类型分类。以上是测试影响推断，不新增产品规则。
 - 仅依赖未决问题的场景暂不能定案，普通日、冻结配置及其他已明确场景继续测试。已有定向只读suite及受控配置能力，未接入统一`plan.json`或默认P0门禁；范围与命令见[API能力](api/README.md)。
 
 ## 本轮执行决定
@@ -36,7 +36,7 @@
 
 ## 来源与读取边界
 
-本轮Jira与Confluence实际读取日期为2026-10-12，来源更新时间另记。复核依据保留在忽略目录`reports/qa/ISOP-2090/20261012-full/evidence/`的`source-review.md`、`jira-source.json`和`jira-delivery-source.json`及两份Confluence快照。Lark、原型、Figma和附件保留2026-10-06读取范围，本轮未刷新；来源同步为部分完成，不能由本地hash推出远端无变化。
+本轮Jira与Confluence实际读取日期为2026-10-12，来源更新时间另记。复核依据的原定位为忽略目录`reports/qa/ISOP-2090/20261012-full/evidence/`的`source-review.md`、`jira-source.json`和`jira-delivery-source.json`及两份Confluence快照。Lark、原型、Figma和附件保留2026-10-06读取范围，本轮未刷新；来源同步为部分完成，不能由本地hash推出远端无变化。
 
 | 来源 | 定位与实际读取范围 |
 | --- | --- |
@@ -50,8 +50,10 @@
 | [活动33原型](https://vip-admin-gray.vercel.app/admin/activity-list) | 仅2026-10-06三步配置、覆盖tooltip、启停、日报和一个封顶明细；未保存配置。commit `452ac45`为mock，10-12未重开，不等于真实FAT活动身份。 |
 | [Figma Section 2](https://www.figma.com/design/XE9elEs82OqiFpHl0V66vm/FB_Invite-to-Earn_Design_Summary?node-id=1689-4661) | 仅2026-10-06已读375×1622完整页、375×812首屏及3条可见评论；其他页面／全历史未遍历。10-12未刷新。 |
 
-10-06原始附件及脱敏快照留`reports/qa/W26/20261006-requirement-review/evidence/`；10-12新增来源与实测留本批目录，不复制原始附件或旧规则。源文档、公开前端SDK和实际业务结果分别提供规则、契约及执行证据，不互相替代。
+10-06原始附件及脱敏快照的原定位为`reports/qa/W26/20261006-requirement-review/evidence/`；10-12新增来源与实测的原定位为`reports/qa/ISOP-2090/20261012-full/`，不复制原始附件或旧规则。源文档、公开前端SDK和实际业务结果分别提供规则、契约及执行证据，不互相替代。
 
 ## 历史日期资料
 
-[10-05旧版资料](../history/archived-20261005/snapshots/ISOP-2090/design.md) · [旧问题与决定](../history/archived-20261005/snapshots/ISOP-2090/questions.md)。旧规则、问题状态与用例保留为日期快照，不自动作为W26预期；当前问题答复只维护在本单文件。
+2026-10-16按用户授权删除本单10-05重复旧快照；原规则、问题与用例不再作为本地副本保留。旧版按[Jira ISOP-2090](https://alibaba-international.atlassian.net/browse/ISOP-2090)及Git历史回查，不将本单后续规则冒充旧版；问题答复继续在本单维护。
+
+2026-10-16合并本地整理与远端10-12提交后核对：上述W26原始附件／工作稿及10-12批次原始报告／来源证据在本机整理前已缺失，不计作本轮删除。保留的是10-06／10-12日期记录、正式用例及定向实现，原业务结论与失败保持；缺失原件不能作为当前可直接复验的证据。需要重查时按Jira及原文定位，实际执行前另核本轮环境与样本，本次维护未刷新远端或新增业务采集。

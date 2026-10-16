@@ -339,11 +339,11 @@
     }
   ],
   "files": {
-    "design.md": "62ecff5bb3cfb5fd3b240766aa87501497930a0bdc156ceee89b10f0a678dd2b",
+    "design.md": "c7ef40c4d4b7c27c31eb4dc3cb1da5dc3a6945a08ead9f5a65f63ff9eaff10cf",
     "questions.md": "338f8c32c7942b35f730fb89f749df6373ccae7588f15cae52dcb547f32610da",
-    "test-cases.md": "743459dce3fa558cfe797abcb25da77e0c9355d467c5baa507f0d36145b0c2f9",
+    "test-cases.md": "3bf143c6a7e310333ff073ec6c2e23bcd8cc3a996196dd39182b03d381514a73",
     "cases.csv": "7959297c5c76c01fae5ff1fa668bacf77d02e7667f8597ef9b3b8a2823b318f7",
-    "evidence-sync.md": "6cddad82a45bc80be06f0e4419e7a2e25f0c19139749f7b9c44cd685c19b17f5",
+    "evidence-sync.md": "eae333fa186f144aa9b55180bcfaffcb24e373092a5ee3d586a9d536d752f99b",
     "execution-order.md": "1b22ddc9430a68aa091657d7ced9a9bec3e319ae07bbe046ed7cda9e9c22c0f8",
     "api/README.md": "337d921c4d3ad57a191f210c91afbdfeeaf7dc147243bcefb6e9e329fb169d1d",
     "api/initial-read.py": "2a07a91dc2a1b62c0da61254923f66a515edbaccc1cd49e8fca7832143db801f",
@@ -362,5 +362,18 @@
       "verification": "已比对loss_rebate_client.run_client_readonly返回逻辑、analyse_recorded的0请求/原时间及返回逻辑，与新增成功/失败两分支mock fixture一致；根代理最终npm run check 439项通过。未重发业务请求、未改业务结果。",
       "boundary": "仅更新本README绑定与本条复核metadata；其他11项既有hash、sources、changes、原reviewed_at及PARTIAL缺口保持原值。"
     }
-  ]
+  ],
+  "local_maintenance": {
+    "updated_at": "2026-10-16",
+    "reviewer": "Codex / prepush_review",
+    "scope": "合并远端10-12定向测试资产与用户授权的本地归档清理；仅核对导航、旧快照退出及本机原始证据可用性，不刷新远端或改变业务结论",
+    "files": [
+      "design.md",
+      "test-cases.md",
+      "evidence-sync.md"
+    ],
+    "verification": "先按检查器UTF-8-SIG及换行归一化规则核验HEAD中12个绑定文件均与原hash一致；逐项diff确认仅归档peer链接、旧快照退出、原件本机缺失说明，test-cases.md只改一处旧快照导航，正式用例卡片和CSV未改。其余9项hash、sources、changes、file_review_updates及原reviewed_at均保持。",
+    "source_availability": "reports/qa/W26/20261006-requirement-review/evidence/与reports/qa/ISOP-2090/20261012-full/在本机整理前已缺失，不计为本次删除；保留日期摘要和实现，不能凭hash将缺失原件视为可直接复验。",
+    "boundary": "PARTIAL及全部PENDING缺口保持；10-12实际采集日期、原失败及未测边界不改，没有新增业务或数据库请求。"
+  }
 }

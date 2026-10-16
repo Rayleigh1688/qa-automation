@@ -98,7 +98,7 @@ npm run qa:requirement -- ISOP-2027 --export-cases
 
 ```bash
 # 只检查用例结构；不登录、不运行测试
-npm run qa:report -- --cases requirements/ISOP-2100/cases.csv
+npm run qa:report -- --cases requirements/history/archived-20261016/ISOP-2100/cases.csv
 ```
 
 `qa:requirement -- <Story> --rebuild <实测目录>`可从仍存在的原始结果及冻结用例离线重建视图；已退出的历史目录不能重建或充当最新证据。

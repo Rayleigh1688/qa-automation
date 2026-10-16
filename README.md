@@ -99,7 +99,9 @@ npm run test:ui:business -- --env .env.ui-p0.fat --execute --new-kyc-account --b
 | 独立核对业务源数据 | [数据库只读取数参考](docs/database/README.md) |
 | 快速获取日／周／月范围的毫秒时间戳 | [Time小工具](tools/time/README.md)，`npm run qa:time`或本机`Time`；`npm run qa:time:package`生成Mac分享包 |
 
-功能/API用例卡片与总表导出已有实现；通用新模板仍待用户首稿，JMeter／Postman导出与测试空间简体需求副本尚未落地，不能据讨论记录当作现成功能。当前需求与评审从[任务单目录索引](requirements/README.md#当前需求)进入；W26按任务单独立维护问题、设计与测试重点，尚无执行计划。历史归档保留查询与显式回归入口，不自动恢复执行。
+功能/API用例卡片与总表导出已有实现；通用新模板仍待用户首稿，JMeter／Postman导出与测试空间简体需求副本尚未落地，不能据讨论记录当作现成功能。2026-10-16按用户决定，当前只保留[ISOP-2090输值返利](requirements/README.md#当前需求)，已有23张正式功能卡、总表和定向API能力，尚无统一执行计划。10-12测试及候选结论随本次Git合并带入，未在10-16重新执行业务测试。其余需求从[历史索引](requirements/history/README.md)查询，归档不代表完成、上线或PASS，也不自动恢复执行。
+
+反复使用的执行逻辑维护在共享模块，长期方法和模块规则分别进入`skills/`、`modules/`；低频专项保留Jira／文档定位，按需读取。生成报告、截图和原始抓取按当前工作及恢复依赖及时清理，保留边界见[资产保留规则](docs/architecture.md#常用能力与资料保留)。
 
 ## 项目结构
 
@@ -133,7 +135,7 @@ npm run test:ui:business -- --env .env.ui-p0.fat --execute --new-kyc-account --b
 
 ## 结果与业务边界
 
-API 结果及跨 API/UI 主流程报告写入 `api/results/`；UI 原始结果写 `ui/results/`，可读报告写 `ui/reports/`，Playwright 附件写 `test-results/` 和 `playwright-report/`。这些P0运行目录保留最近一次结果；需求结果按批次放在`reports/qa/`，留存边界见[CI状态](docs/ci.md)。用户授权清理的静态历史证据已退出，当前需求依赖、账号预留与活动状态保留，范围见[整理记录](docs/project-cleanup-2026-10-05.md)。
+API 结果及跨 API/UI 主流程报告写入 `api/results/`；UI 原始结果写 `ui/results/`，可读报告写 `ui/reports/`，Playwright 附件写 `test-results/` 和 `playwright-report/`。这些P0运行目录保留最近一次结果；需求结果按批次放在`reports/qa/`，输出路径保持兼容。历史证据清理、原已缺失资料及保留依赖见[2026-10-16整理记录](docs/project-cleanup-2026-10-16.md)。保留的日期摘要不替代已退出原始证据，也不证明当前业务状态；账号预留与活动状态单独保护。
 
 每个 runner fresh login，跨进程通过本轮 uid、订单号与时间窗口关联证据。数据库仅只读诊断；业务步骤失败时停止后续成功动作。真实凭据与未脱敏个人资料只留本地忽略配置或 CI 凭据。环境接受标准见 [环境手册](api/runbooks/ENVIRONMENTS.md)，不能把待审建单表述为最终出款成功。
 

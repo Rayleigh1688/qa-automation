@@ -13,7 +13,7 @@
 npm run qa:xmind -- template --out reports/qa/xmind-demo/template.xmind --title 测试用例
 
 # 从已有总表导出导图；读新版总表时只提取用例定义，不继承登记状态
-npm run qa:xmind -- export --cases requirements/ISOP-2100/cases.csv --out reports/qa/xmind-demo/ISOP-2100.xmind --title ISOP-2100
+npm run qa:xmind -- export --cases requirements/history/archived-20261016/ISOP-2100/cases.csv --out reports/qa/xmind-demo/ISOP-2100.xmind --title ISOP-2100
 
 # 导入人工编写的导图，目标为新的目录
 npm run qa:xmind -- import --input reports/qa/xmind-demo/template.xmind --out reports/qa/xmind-demo/imported

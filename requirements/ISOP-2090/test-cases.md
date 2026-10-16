@@ -608,7 +608,7 @@ C01—C11沿用10-05历史编号，按评论17491的v2.0纠正语义；不继承
 
 ## 门槛与版本
 
-当前规则以[设计](design.md#当前规则)为准；C01、C02、C04对应统一门槛与严格大于。C09核v2.0配置和条款，C10、C11分别依赖[Q-02](questions.md#q-02)。历史旧版仅从[日期快照](../history/archived-20261005/snapshots/ISOP-2090/test-cases.md)追溯，不恢复旧规则。
+当前规则以[设计](design.md#当前规则)为准；C01、C02、C04对应统一门槛与严格大于。C09核v2.0配置和条款，C10、C11分别依赖[Q-02](questions.md#q-02)。2026-10-16按用户授权退出10-05重复旧快照；历史旧版从[Jira ISOP-2090](https://alibaba-international.atlassian.net/browse/ISOP-2090)及Git历史追溯，不恢复旧规则。
 
 ## 规则唯一归属
 

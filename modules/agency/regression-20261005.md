@@ -1,6 +1,6 @@
 # 代理系统：10-05 BUG回归
 
-[模块入口](README.md) · [初轮摸底与数据准备](verification-20261005.md) · [本机回归报告](../../reports/qa/agency-overall/20261005/regression/views/report.html) · [2100规则](../../requirements/ISOP-2100/questions.md)
+[模块入口](README.md) · [初轮摸底与数据准备](verification-20261005.md) · [本机回归报告](../../reports/qa/agency-overall/20261005/regression/views/report.html) · [2100规则](../../requirements/history/archived-20261016/ISOP-2100/questions.md)
 
 本轮按用户“整体回归一下BUG”执行。**独立代理管理后台首页已按用户最新决定排除，首页数据不在那里展示；不再检查其首页／BI／图表数据。** 代理自己的首页仍属于2100范围。现有账号、直属关系、普通资金与投注作为样本，本轮未注册、改KYC、充值、投注、提现、改域名、重算或写数据库；正常登录后只读查询，Jira只读回读，不改工单或发通知。
 
