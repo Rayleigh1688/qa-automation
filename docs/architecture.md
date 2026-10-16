@@ -66,7 +66,7 @@ UI 用例依赖 `ui/elements/` 和 `ui/framework/`，页面、弹窗、游戏点
 
 旧扫描脚本、快照、截图与manifest已于2026-09-11按用户授权删除；[退出索引](../archive/interface-scans/README.md)保留原导航路径。当前接口资产在api/inventory、api/catalog与api/p0，构建器不依赖已删除扫描。`check:archive`保留CLI名称，现检查旧扫描目录只含退出说明。
 
-2026-10-16按用户决定，顶层只保留ISOP-2090输值返利，其余10个需求移入`requirements/history/archived-20261016/`。W26评审按单保留来源和决定，整批不再列当前待办；被新资料替代的旧快照及生成证据按下述规则清理。本轮实际删除、整理前已缺失资料和保留项分别见[整理记录](project-cleanup-2026-10-16.md)，不把历史原始证据缺失写成当前实测。早期抽取与清理见[2026-09-11记录](project-cleanup-2026-09-11.md)及[2026-10-05记录](project-cleanup-2026-10-05.md)。
+2026-10-16先按用户决定保留ISOP-2090输值返利，其余10个需求移入`requirements/history/archived-20261016/`；随后按新要求加入[W27八项评审](../requirements/reviews/2026W27-20261016.md)，未恢复旧归档需求。W26评审按单保留来源和决定，整批不再列当前待办；被新资料替代的旧快照及生成证据按下述规则清理。本轮实际删除、整理前已缺失资料和保留项分别见[整理记录](project-cleanup-2026-10-16.md)，不把历史原始证据缺失写成当前实测。早期抽取与清理见[2026-09-11记录](project-cleanup-2026-09-11.md)及[2026-10-05记录](project-cleanup-2026-10-05.md)。
 
 后续工作以 [新需求设计](../requirements/README.md) 为入口，按变更影响补用例并评估是否纳入 P0，不要求全接口自动化后再做需求测试。
 

@@ -99,7 +99,7 @@ npm run test:ui:business -- --env .env.ui-p0.fat --execute --new-kyc-account --b
 | 独立核对业务源数据 | [数据库只读取数参考](docs/database/README.md) |
 | 快速获取日／周／月范围的毫秒时间戳 | [Time小工具](tools/time/README.md)，`npm run qa:time`或本机`Time`；`npm run qa:time:package`生成Mac分享包 |
 
-功能/API用例卡片与总表导出已有实现；通用新模板仍待用户首稿，JMeter／Postman导出与测试空间简体需求副本尚未落地，不能据讨论记录当作现成功能。2026-10-16按用户决定，当前只保留[ISOP-2090输值返利](requirements/README.md#当前需求)，已有23张正式功能卡、总表和定向API能力，尚无统一执行计划。10-12测试及候选结论随本次Git合并带入，未在10-16重新执行业务测试。其余需求从[历史索引](requirements/history/README.md)查询，归档不代表完成、上线或PASS，也不自动恢复执行。
+功能/API用例卡片与总表导出已有实现；通用新模板仍待用户首稿，JMeter／Postman导出与测试空间简体需求副本尚未落地，不能据讨论记录当作现成功能。2026-10-16旧需求归档后，保留[ISOP-2090输值返利](requirements/README.md#当前需求)，并按新要求加入[W27八项评审](requirements/reviews/2026W27-20261016.md)；W27仅完成来源扫描和测试重点整理。2090已有23张正式功能卡、总表和定向API能力，尚无统一执行计划。10-12测试及候选结论随本次Git合并带入，未在10-16重新执行业务测试。其余旧需求从[历史索引](requirements/history/README.md)查询，归档不代表完成、上线或PASS，也不自动恢复执行。
 
 反复使用的执行逻辑维护在共享模块，长期方法和模块规则分别进入`skills/`、`modules/`；低频专项保留Jira／文档定位，按需读取。生成报告、截图和原始抓取按当前工作及恢复依赖及时清理，保留边界见[资产保留规则](docs/architecture.md#常用能力与资料保留)。
 

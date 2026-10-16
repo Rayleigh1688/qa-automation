@@ -1,6 +1,6 @@
 # 需求设计与测试入口
 
-2026-10-16按用户决定，当前只保留 **ISOP-2090 输值返利活动**。其余10个顶层需求移入`history/archived-20261016/`；更早资料继续从[历史索引](history/README.md)查阅。归档表示退出当前工作范围，不代表完成、上线、问题已修复或PASS，也不恢复旧任务执行。
+2026-10-16先按用户决定归档旧需求，仅保留 **ISOP-2090 输值返利活动**；随后按新要求加入[2026W27的8项需求评审](reviews/2026W27-20261016.md)。当前为2090执行接续与W27评审，后者尚未形成正式执行计划。原10个顶层需求仍在`history/archived-20261016/`，更早资料继续从[历史索引](history/README.md)查阅。归档表示退出当前工作范围，不代表完成、上线、问题已修复或PASS，也不恢复旧任务执行。
 
 输值返利已有23张正式功能卡与`cases.csv`、日报／客户端只读及受控配置定向能力，尚无`plan.json`或`api/cases.json`，未接入默认P0或统一需求执行器。2026-10-16合并Git带入[10-12测试记录](ISOP-2090/verification-20261012.md)：含已测范围、缺陷候选及未完成项，不是本次新测；来源基线为PARTIAL。W26[批次评审](reviews/2026W26-20261006.md)保留为日期来源与定位，不再作为整批当前待办。已清理或已缺失的原始证据不能用旧结论替代，重新验证时需取得本轮证据。
 
@@ -11,6 +11,7 @@
 | 当前规则与来源 | [输值返利设计](ISOP-2090/design.md)，已定v2.0规则与来源读取边界 |
 | 正式用例与待确认 | [23张功能卡](ISOP-2090/test-cases.md) · [总表](ISOP-2090/cases.csv) · [问题与决定](ISOP-2090/questions.md)，未决场景不补造预期 |
 | 输值返利执行与日期证据 | [测试顺序](ISOP-2090/execution-order.md) · [定向API能力](ISOP-2090/api/README.md) · [10-12记录](ISOP-2090/verification-20261012.md) · [缺陷候选](ISOP-2090/bug-review.md)，API子项不能升级整卡PASS |
+| W27需求扫描与评审顺序 | [2026W27评审](reviews/2026W27-20261016.md)，8个主项、21个子任务；问题与测试重点按单维护 |
 | 历史需求及BUG定位 | [历史索引](history/README.md)，从本单保留的Jira、评论和文档链接查对应资料 |
 | 需求状态 | [状态列表](status.html)，自动证据与人工修订独立保存 |
 
@@ -42,6 +43,14 @@
 | Jira 编号 | 需求名称 | 分离文档 |
 | --- | --- | --- |
 | ISOP-2090 | 輸值返利活動 | [设计](ISOP-2090/design.md) · [问题](ISOP-2090/questions.md) · [正式用例](ISOP-2090/test-cases.md) · [总表](ISOP-2090/cases.csv) · [顺序](ISOP-2090/execution-order.md) · [API能力](ISOP-2090/api/README.md) · [10-12记录](ISOP-2090/verification-20261012.md) |
+| ISOP-2123 | FILPLAY合规后台调整（W27评审） | [设计](ISOP-2123/design.md) · [问题](ISOP-2123/questions.md) · [测试重点](ISOP-2123/test-cases.md) |
+| ISOP-2124 | FILPLAY合规项目盘点（W27评审） | [设计](ISOP-2124/design.md) · [问题](ISOP-2124/questions.md) · [测试重点](ISOP-2124/test-cases.md) |
+| ISOP-2214 | 过审礼金无法导出（W27评审） | [设计](ISOP-2214/design.md) · [问题](ISOP-2214/questions.md) · [测试重点](ISOP-2214/test-cases.md) |
+| ISOP-2230 | 厂商排行榜活动优化（W27评审） | [设计](ISOP-2230/design.md) · [问题](ISOP-2230/questions.md) · [测试重点](ISOP-2230/test-cases.md) |
+| ISOP-2232 | PT免费旋转串接（W27评审） | [设计](ISOP-2232/design.md) · [问题](ISOP-2232/questions.md) · [测试重点](ISOP-2232/test-cases.md) |
+| ISOP-2234 | 代理后台新增推广链接（W27评审） | [设计](ISOP-2234/design.md) · [问题](ISOP-2234/questions.md) · [测试重点](ISOP-2234/test-cases.md) |
+| ISOP-2238 | 图表Y轴展示不全（W27评审） | [设计](ISOP-2238/design.md) · [问题](ISOP-2238/questions.md) · [测试重点](ISOP-2238/test-cases.md) |
+| ISOP-2239 | VCAT问题调整（W27评审） | [设计](ISOP-2239/design.md) · [问题](ISOP-2239/questions.md) · [测试重点](ISOP-2239/test-cases.md) |
 
 ### 文档组织
 
@@ -57,7 +66,7 @@
 
 有自动执行资产时，`api/data-cases.csv`独立保存具体数据组合、请求和断言，供AI核对和执行接口测试；与总表通过稳定用例编号关联，一条总用例可对应多组数据。JSON仍是执行器输入，CSV由它生成，不手工双向维护。旧宽表导出保留原九列CSV及API/UI/FLOW类型；执行报告和人工回填格式不变。没有执行配置的需求不生成API数据表。
 
-`npm run qa:cases -- <Story>`更新已具备正式设计的单需求，`npm run qa:cases -- --all`更新当前需求；增加`--include-history`才覆盖历史需求，均不登录。当前2090可从正式卡片导出总表；因没有统一API执行源，不生成API数据组合表，也不据此宣称统一执行就绪。API表包含未具备前提的执行项，不把“有数据表”当作可全量运行；来源和编号规则见[测试流程](../docs/testing-workflow.md#文件与执行入口)。
+`npm run qa:cases -- <Story>`更新已具备正式设计的单需求，`npm run qa:cases -- --all`更新当前需求；增加`--include-history`才覆盖历史需求，均不登录。当前2090可从正式卡片导出总表；W27八项仍是评审重点，不为批量导出补建空CSV。2090因没有统一API执行源，不生成API数据组合表，也不据此宣称统一执行就绪。API表包含未具备前提的执行项，不把“有数据表”当作可全量运行；来源和编号规则见[测试流程](../docs/testing-workflow.md#文件与执行入口)。
 
 ## 常规需求目录
 

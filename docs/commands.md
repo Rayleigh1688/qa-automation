@@ -4,7 +4,7 @@
 
 这里维护公开命令的语义；具体参数由 `package.json` 与脚本定义，环境契约见 [环境手册](../api/runbooks/ENVIRONMENTS.md)。
 
-2026-10-16起当前需求仅ISOP-2090输值返利，已有23张正式功能卡、`cases.csv`及定向API能力，尚无`plan.json`或`api/cases.json`；不接入默认P0或统一需求执行器。10-12实测与来源PARTIAL按Git合并带入的[日期记录](../requirements/ISOP-2090/verification-20261012.md)查阅，本次未重新执行业务测试。本文的2027／2032命令保留为历史兼容示例，不构成当前续跑任务；默认发现范围以[需求索引](../requirements/README.md)为准。
+2026-10-16当前范围为ISOP-2090输值返利与[W27八项评审](../requirements/reviews/2026W27-20261016.md)。W27只有评审资料，未创建空CSV或执行计划。2090已有23张正式功能卡、`cases.csv`及定向API能力，尚无`plan.json`或`api/cases.json`；不接入默认P0或统一需求执行器。10-12实测与来源PARTIAL按Git合并带入的[日期记录](../requirements/ISOP-2090/verification-20261012.md)查阅，本次未重新执行业务测试。本文的2027／2032命令保留为历史兼容示例，不构成当前续跑任务；默认发现范围以[需求索引](../requirements/README.md)为准。
 
 | 命令 | 执行范围 | 业务写入与证据边界 |
 | --- | --- | --- |
@@ -142,7 +142,7 @@ ISOP-2090当前使用[定向命令](../requirements/ISOP-2090/api/README.md)：�
 
 `npm run qa -- evidence [ISOP-2090]`只读检查需求证据同步基线，无需凭据、不初始化状态库；省略编号检查当前需求。退出0为登记范围完整、1为文件变化/无效关联、2为未登记/部分来源未核；`--allow-pending`允许明确列出的缺口但不忽略错误。流程及边界见[证据同步计划](../requirements/evidence-sync-plan.md)。
 
-`npm run qa -- status --serve`打开持久保存的本地需求状态页；`npm run qa -- run --execute`只对通过当前配置、授权及计划检查的需求编排接口同步、提测扫描、AI用例草稿和就绪API执行。单独的sync/generate/check/scan与离线模式见[统一命令手册](requirement-workflow-cli.md)。当前仅2090，有定向测试能力但尚无统一执行计划；归档与暂停检查继续阻止旧需求自动续跑。目录存在不代表已有可执行计划。该自动编排仍限FAT且不建单、不发群；独立旧CLI的UAT能力及已实际使用的定向BUG交付不因此被判为未实现。
+`npm run qa -- status --serve`打开持久保存的本地需求状态页；`npm run qa -- run --execute`只对通过当前配置、授权及计划检查的需求编排接口同步、提测扫描、AI用例草稿和就绪API执行。单独的sync/generate/check/scan与离线模式见[统一命令手册](requirement-workflow-cli.md)。当前2090有定向测试能力但尚无统一执行计划，W27八项只处于评审阶段；归档与暂停检查继续阻止旧需求自动续跑。目录存在不代表已有可执行计划。该自动编排仍限FAT且不建单、不发群；独立旧CLI的UAT能力及已实际使用的定向BUG交付不因此被判为未实现。
 
 ### 2027修正回归范围与报告保留（2026-09-14）
 
