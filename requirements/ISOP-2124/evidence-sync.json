@@ -1,0 +1,253 @@
+{
+  "schema_version": 1,
+  "story": "ISOP-2124",
+  "reviewed_at": "2026-10-20",
+  "reviewer": "Codex",
+  "sources": [
+    {
+      "id": "J",
+      "locator": "https://alibaba-international.atlassian.net/browse/ISOP-2124",
+      "revision": "2026-10-16T15:01:22.479+08:00",
+      "status": "READ",
+      "coverage": "完整正文共用及§1—9；两项未决规则未变；主单待办；不含图片视觉验收",
+      "checked_at": "2026-10-20"
+    },
+    {
+      "id": "JC",
+      "locator": "https://alibaba-international.atlassian.net/browse/ISOP-2124",
+      "revision": "2026-10-20 returned=0 total=0 startAt=0",
+      "status": "READ",
+      "coverage": "完整当前评论范围0条，无待续页；未取得Q-01/Q-02答复",
+      "checked_at": "2026-10-20"
+    },
+    {
+      "id": "CHILD",
+      "locator": "Jira ISOP-2241 / ISOP-2242 / ISOP-2243",
+      "revision": "2241 2026-10-16T14:05:59.513+08:00; 2242 2026-10-20T10:06:35.915+08:00; 2243 2026-10-16T14:06:04.361+08:00",
+      "status": "READ",
+      "coverage": "parent查询3项且isLast=true；正文空、评论均0/total 0，附件/关联为空；2242进行中，其他待办，不证明可测",
+      "checked_at": "2026-10-20"
+    },
+    {
+      "id": "LINKS",
+      "locator": "https://alibaba-international.atlassian.net/browse/ISOP-2124",
+      "revision": "2026-10-20 issuelinks=[] remoteLinks=[]",
+      "status": "READ",
+      "coverage": "两类关联均空；正文外部链接已单列，不能因此省略",
+      "checked_at": "2026-10-20"
+    },
+    {
+      "id": "ATTACH-META",
+      "locator": "https://alibaba-international.atlassian.net/browse/ISOP-2124",
+      "revision": "2026-10-20 returned=30 attachments",
+      "status": "READ",
+      "coverage": "仅30项PDF/图片元信息；不包括视觉内容和版本优先级确认",
+      "checked_at": "2026-10-20"
+    },
+    {
+      "id": "FIGMA",
+      "locator": "https://www.figma.com/design/5Y2Qpf6qxGWBwAIwkkqxDY/260428_FilPlay_Redesign?node-id=1599-15276",
+      "revision": "2026-10-20 direct read unavailable",
+      "status": "PENDING",
+      "coverage": "本次不可访问；10-16仅整体分组/部分评论/Bag局部，逐屏视觉和字段细节未补读",
+      "checked_at": "2026-10-20"
+    },
+    {
+      "id": "ANIMATION",
+      "locator": "https://drive.google.com/drive/folders/1406NAVosGdphg8XiS6yGVXRmdyN1Ma2v",
+      "revision": "2026-10-20 direct read unavailable",
+      "status": "PENDING",
+      "coverage": "直接读取不可访问，未遍历或播放动画",
+      "checked_at": "2026-10-20"
+    },
+    {
+      "id": "CLAUDE",
+      "locator": "https://claude.ai/artifact/Qt85akXxDtLzuESAMYjzu5",
+      "revision": "2026-10-20 direct read unavailable",
+      "status": "PENDING",
+      "coverage": "未取得关联产物正文",
+      "checked_at": "2026-10-20"
+    },
+    {
+      "id": "VISUAL",
+      "locator": "https://alibaba-international.atlassian.net/browse/ISOP-2124 attachments",
+      "revision": "未完整视觉读取",
+      "status": "PENDING",
+      "coverage": "PDF与附件图片未视觉核对，不将元信息或旧加载预览算已读",
+      "checked_at": null
+    },
+    {
+      "id": "CROSS",
+      "locator": "https://alibaba-international.atlassian.net/browse/ISOP-2123",
+      "revision": "2026-10-16T14:08:05.777+08:00",
+      "status": "READ",
+      "coverage": "本次定向读取前提与§1—3，评论0/total 0；只采用共享UID/KYC和分站余额、存提款、交易、游戏列表规则",
+      "checked_at": "2026-10-20"
+    }
+  ],
+  "changes": [
+    {
+      "id": "S01",
+      "source_ids": [
+        "J",
+        "JC",
+        "CHILD",
+        "LINKS"
+      ],
+      "case_ids": [
+        "ISOP-2124-C01",
+        "ISOP-2124-C02",
+        "ISOP-2124-C03",
+        "ISOP-2124-C04",
+        "ISOP-2124-C05",
+        "ISOP-2124-C06",
+        "ISOP-2124-C07",
+        "ISOP-2124-C08",
+        "ISOP-2124-C09",
+        "ISOP-2124-C10",
+        "ISOP-2124-C11",
+        "ISOP-2124-C12",
+        "ISOP-2124-C13",
+        "ISOP-2124-C14",
+        "ISOP-2124-C15",
+        "ISOP-2124-C16",
+        "ISOP-2124-C17",
+        "ISOP-2124-C18",
+        "ISOP-2124-C19",
+        "ISOP-2124-C20",
+        "ISOP-2124-C21",
+        "ISOP-2124-C22",
+        "ISOP-2124-C26",
+        "ISOP-2124-C27",
+        "ISOP-2124-C28",
+        "ISOP-2124-C29",
+        "ISOP-2124-C31",
+        "ISOP-2124-C32",
+        "ISOP-2124-C33",
+        "ISOP-2124-C34",
+        "ISOP-2124-C35",
+        "ISOP-2124-C36",
+        "ISOP-2124-C37",
+        "ISOP-2124-C38",
+        "ISOP-2124-C39",
+        "ISOP-2124-C40",
+        "ISOP-2124-C41",
+        "ISOP-2124-C42",
+        "ISOP-2124-C43",
+        "ISOP-2124-C44",
+        "ISOP-2124-C45",
+        "ISOP-2124-C46",
+        "ISOP-2124-C47",
+        "ISOP-2124-C48",
+        "ISOP-2124-C49",
+        "ISOP-2124-C50",
+        "ISOP-2124-C51",
+        "ISOP-2124-C52",
+        "ISOP-2124-C53",
+        "ISOP-2124-C54",
+        "ISOP-2124-C55",
+        "ISOP-2124-C56",
+        "ISOP-2124-C57",
+        "ISOP-2124-C58",
+        "ISOP-2124-C59",
+        "ISOP-2124-C60",
+        "ISOP-2124-C63"
+      ],
+      "status": "SYNCED",
+      "action": "原测试重点编为正式卡片并生成CSV/XMind；正文确定规则按来源逐条映射",
+      "verification": "63条全部NOT_RUN；离线生成及导入往返一致；专用API/UI执行入口未接入，未执行业务"
+    },
+    {
+      "id": "S02",
+      "source_ids": [
+        "J",
+        "JC",
+        "CHILD"
+      ],
+      "case_ids": [
+        "ISOP-2124-C30"
+      ],
+      "status": "PENDING",
+      "action": "Q-01审核中充值允许/禁止仍冲突，C30预期待确认，不得判PASS",
+      "verification": "只登记冲突与两个可能分支，未选择其一当业务预期；未执行业务"
+    },
+    {
+      "id": "S03",
+      "source_ids": [
+        "J",
+        "JC",
+        "CHILD"
+      ],
+      "case_ids": [
+        "ISOP-2124-C23",
+        "ISOP-2124-C24",
+        "ISOP-2124-C25"
+      ],
+      "status": "PENDING",
+      "action": "Q-02三类限制触发后在玩/重进行为待确认，不以设置保存代替执行验收",
+      "verification": "分别拆时长、时段、输额；未规定踢出/禁入/下一注拦截；未执行业务"
+    },
+    {
+      "id": "S04",
+      "source_ids": [
+        "CROSS",
+        "J"
+      ],
+      "case_ids": [
+        "ISOP-2124-C61",
+        "ISOP-2124-C62"
+      ],
+      "status": "SYNCED",
+      "action": "明确共享身份与分站钱包/订单/游戏记录对照，历史2090只作规则回查",
+      "verification": "未登录双品牌、未制造交易或执行跨站业务，不继承历史结果"
+    },
+    {
+      "id": "S05",
+      "source_ids": [
+        "FIGMA",
+        "ANIMATION",
+        "CLAUDE",
+        "VISUAL"
+      ],
+      "case_ids": [
+        "ISOP-2124-C02",
+        "ISOP-2124-C08",
+        "ISOP-2124-C19",
+        "ISOP-2124-C45"
+      ],
+      "status": "PENDING",
+      "action": "补读全量视觉、字段约束和动画后增补相应用例；已读正文明确预期保留",
+      "verification": "未将访问失败等同来源无答案；未做视觉验收"
+    },
+    {
+      "id": "S06",
+      "source_ids": [
+        "J"
+      ],
+      "case_ids": [
+        "ISOP-2124-C36"
+      ],
+      "status": "SYNCED",
+      "action": "独立评审后补齐错误钱包密码和取消的订单、可用/冻结余额、提款账变核对；明确不建单、不扣款/冻结、不产生提款账变",
+      "verification": "仅失败副作用检查完善，成功提交按实际合同核验；未刷新来源、未执行业务；63×9字段最终导入往返一致"
+    }
+  ],
+  "files": {
+    "design.md": "1f917137314d98b2f802dc74ee8b7e2a0e7137cab5493363c510be6e73ddb4f1",
+    "questions.md": "a3787e555589c94c3b50918bf5fab6e81c32cc3d9eb41c21b7f86a3e04a11daf",
+    "test-cases.md": "e0bd5432b394c0fba69c88e3a285024f48ea758c46985218ad5bcc7579bffb3e",
+    "cases.csv": "d1c554db98f23e8c471e1df7e2748dc687cb31185c42cf4a3fe2c8cc39461036",
+    "evidence-sync.md": "d556305c507bed19b47e6d54aee398b92d5f300b0842c727ea0004c0fdd47dfe"
+  },
+  "artifacts": {
+    "ISOP-2124-测试用例.xmind": {
+      "sha256": "4746afd592272439cc1f8113dad83c1a42acce59618b430b5a7d73ec8be2b404",
+      "case_count": 63,
+      "roundtrip": "63 × 9 fields identical to CSV and Markdown; shared XMind import module; ZIP integrity verified; 2026-10-22",
+      "visual_verification": "2026-10-20通过CUA实际在XMind客户端打开当时文件，画布及待确认标签可见；折叠全部模块、展开启动与登录并读取C01—C04前置/步骤/预期，两次Undo恢复折叠；最终窗口无已编辑指示。当次未操作保存，打开前后hash一致，仅对应当时文件。2026-10-22离线复核当前包，13模块与4条待确认依赖保留；未重新做视觉验收，未做63条逐条视觉核验；业务未执行。",
+      "previous_sha256": "79f08be2664c66750f10519d0f4a82eaff5388fd4d801411d4072adc419aed85",
+      "verified_at": "2026-10-22",
+      "provenance": "2026-10-22提交前发现当前包字节不同于2026-10-20登记版本，新增缩略图、content.xml及Vana 26.03.04129创建者元数据，符合客户端重存格式；具体重写时间与操作者未证实。保留当前文件，未重新生成或修改二进制；本次未重演客户端保存流程。"
+    }
+  }
+}

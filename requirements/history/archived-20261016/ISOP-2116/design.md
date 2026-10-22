@@ -39,8 +39,8 @@
 | --- | --- |
 | [ISOP-2116](https://alibaba-international.atlassian.net/browse/ISOP-2116)正文 | 2026-10-06已读完整正文；来源更新快照为2026-10-05，评论总数0。依据为单款范围、Pagcor分类和JP seed／contribution要求；配置及凭据不迁入文档。 |
 | ISOP-2198、ISOP-2199 | 2026-10-06已读，正文及评论为空；状态不证明接入或测试完成。 |
-| [附件23973.pdf](../../../../reports/qa/W26/20261006-requirement-review/evidence/attachments/23973.pdf) | 2026-10-06读取相关合同章节，并视觉核对p2、p17、p21、p33、p35、p37。关键定位：p1—2／p38钱包模式，p11—12幂等，p13—17／p21投付与JP，p27—28响应，p31—37退款／通知，p40—42奖池，p53—54终态。不是全页视觉验收。 |
-| [附件23974.xlsx](../../../../reports/qa/W26/20261006-requirement-review/evidence/attachments/23974.xlsx) | 2026-10-06已读`Game List`全部非空行；目标候选定位`A19:F19`。 |
+| 附件23973.pdf（原文件在本轮清理前已缺失；历史路径：`../../../../reports/qa/W26/20261006-requirement-review/evidence/attachments/23973.pdf`） | 2026-10-06读取相关合同章节，并视觉核对p2、p17、p21、p33、p35、p37。关键定位：p1—2／p38钱包模式，p11—12幂等，p13—17／p21投付与JP，p27—28响应，p31—37退款／通知，p40—42奖池，p53—54终态。不是全页视觉验收。 |
+| 附件23974.xlsx（原文件在本轮清理前已缺失；历史路径：`../../../../reports/qa/W26/20261006-requirement-review/evidence/attachments/23974.xlsx`） | 2026-10-06已读`Game List`全部非空行；目标候选定位`A19:F19`。 |
 | [SG Drive](https://drive.google.com/file/d/180Ct1MVXogGgyGZMVlYUOKCOJlxbg0wF/view?usp=sharing) | 2026-10-06已核文件为“平台入口.zip”，过大无法预览，ZIP成员未读；不能据此否定已经提供的PDF合同。未登录厂商后台。 |
 | [W26评审](../../../reviews/2026W26-20261006.md) | 本次迁移依据，沿用5项问题；旧`SG-Q01`—`SG-Q05`别名与小写锚点保留在`questions.md`。 |
 

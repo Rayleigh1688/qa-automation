@@ -1,6 +1,6 @@
 # 新需求测试优化计划
 
-更新：2026-10-16。当前保留[ISOP-2090输值返利](../requirements/README.md#当前需求)，并按新要求加入[W27八项评审](../requirements/reviews/2026W27-20261016.md)，后者尚无执行计划。2090已有23张正式功能卡、总表及定向API能力，尚无统一执行计划；10-12测试与来源PARTIAL来自本次Git合并的[日期记录](../requirements/ISOP-2090/verification-20261012.md)，非10-16新测；2100及其余W26工作项已归档，不再列日常复验待办。本文件维护已有能力与待落实事项；归档不表示验收通过或恢复自动执行。P0继续维护API与核心UI自动化，新需求API自动执行、UI人工验收，旧专项UI仅保留兼容。
+更新：2026-10-20。当前为[W27八项需求](../requirements/reviews/2026W27-20261016.md)，各单设计、用例及就绪情况见[需求索引](../requirements/README.md)。[ISOP-2090输值返利](../requirements/history/archived-20261020/README.md)按用户决定归档，保留定向API能力及10-16 FAT失败和未完成验收；没有统一执行计划，不列日常复验待办。本文件维护已有能力与待落实事项；归档不表示验收通过或恢复自动执行。P0继续维护API与核心UI自动化，新需求API自动执行、UI人工验收，旧专项UI仅保留兼容。
 
 ## 已有实现
 
@@ -12,12 +12,12 @@
 | 2 API完整可执行 | 显式账号会话、JSON/CBOR/multipart、查询/受控写入、准备、前后对账、权限恢复、两请求竞争 | 固定契约及命名业务方法；前提不齐逐条NOT_RUN，框架完成不等于产品全部通过 |
 | 3 固定UI能力 | 固定定位、真实交互、响应关联、失败取证及API准备/UI操作/API对账 | [阶段3实现及当前实测](new-requirement-stage3.md)；既有能力仅保留兼容，不作为新需求后续建设项 |
 | 团队执行包 | api-auto.csv、manual.csv、冻结快照、合成图片、严格回填导入 | 自动/手动是执行方式，API/UI/FLOW是验证层级；旧UI自动结果不能替代人工PASS |
-| 输值返利定向能力 | 日报／客户端只读采集、离线重分类及受控配置保存／精确恢复 | [本单CLI与共享实现](../requirements/ISOP-2090/api/README.md)；10-12有定向实测与候选，未接入默认P0、统一执行器或UAT，不将API子项升级整卡PASS |
+| 输值返利定向能力 | 日报／客户端只读采集、离线重分类及受控配置保存／精确恢复 | [本单CLI与共享实现](../requirements/history/archived-20261020/ISOP-2090/api/README.md)；10-16有定向实测失败与候选，未接入默认P0、统一执行器或UAT，不将API子项升级整卡PASS |
 | 项目整理 | 删除旧扫描、结果目录临时脚本、旧报告/归并演示，默认精简视图 | [清理记录](project-cleanup-2026-09-11.md)；旧P0/npm/CLI及活动状态保留 |
 
 ## 当前结构
 
-具备执行资产的需求使用`requirements/<Story>/plan.json`维护用例、验收点、契约、参数集、actor、步骤、预期及delivery分工。总用例在test-cases.md维护并生成cases.csv；API数据驱动组合从执行源生成api/data-cases.csv，完整参数不进入总表。兼容查询数据仍由plan生成。复杂KYC准备、权限恢复、并发竞争与对账放在`scripts/filbet/`的小型业务模块，通用执行和报告放在`scripts/qa_core/`。当前2090共享实现位于`scripts/filbet/loss_rebate*.py`，本单CLI只编排；没有`plan.json`／`api/cases.json`，不为满足结构预建空计划；结果目录不新增可执行脚本，也不作为公共代码导入来源。
+具备执行资产的需求使用`requirements/<Story>/plan.json`维护用例、验收点、契约、参数集、actor、步骤、预期及delivery分工。总用例在test-cases.md维护并生成cases.csv；API数据驱动组合从执行源生成api/data-cases.csv，完整参数不进入总表。兼容查询数据仍由plan生成。复杂KYC准备、权限恢复、并发竞争与对账放在`scripts/filbet/`的小型业务模块，通用执行和报告放在`scripts/qa_core/`。已归档2090共享实现位于`scripts/filbet/loss_rebate*.py`，本单CLI只编排；没有`plan.json`／`api/cases.json`，不为满足结构预建空计划；结果目录不新增可执行脚本，也不作为公共代码导入来源。
 
 常用逻辑沿已有模块维护，确认有重复需求后再提炼；长期方法、模块规则分别落在`skills/`和`modules/`。低频专项保留Jira／文档定位和必要决定，使用时核对原资料，不为归档需求扩建常驻脚本。日常保留判断见[资产规则](architecture.md#常用能力与资料保留)。
 
@@ -38,7 +38,6 @@ API覆盖规则、边界、权限、状态和数据正确性；手动覆盖展�
 | 顺序 | 待落实事项 | 当前状态与完成条件 |
 | --- | --- | --- |
 | 评审并行项 | W27规则与来源核对 | 按[批次结论](../requirements/reviews/2026W27-20261016.md)先处理FILPLAY状态／站点隔离、PT资金协议、安全调整和导出缺陷前置；各单答复后同步设计与测试预期，不用当前实现反推需求 |
-| 1 | 输值返利未完成项与缺陷复验准备 | 沿[10-12记录](../requirements/ISOP-2090/verification-20261012.md)、[测试顺序](../requirements/ISOP-2090/execution-order.md)及[问题清单](../requirements/ISOP-2090/questions.md)核当前环境与源证据后续接；05:00／新日结对账、真实CSV、权限与App等未测范围分开维护，JP、日内版本／跨日／更正和停用组取得明确合同后同步预期。日期候选未当作本次新测，不把mock或离线重分类当实测 |
 | 2 | 通用BUG交付CLI适配 | 尚未实现TEST项目、QA／开发负责人、开发任务关联及`submission_chat_id`目标群；先补离线验证，再用新获确认的批次验收。已完成的定向交付不重发，旧APPROVED队列不能借适配重放；详见[交付缺口](telegram-qa.md#bug-delivery) |
 | 3 | 功能首稿与模板 | 等待用户功能首稿，再共同补齐模板；现有卡片格式与总表导出已实现，不能把新模板讨论当作已交付 |
 | 4 | 可人工审阅的API断言与导出 | 当前JSON配置、数据CSV和执行器已有；JMeter／Postman导出仍未选型或实现，须先明确所需格式与断言语义，保留现有执行入口 |

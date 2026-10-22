@@ -2,6 +2,8 @@
 
 FILBET 的 Python API 与 Playwright UI 自动化项目。API 验证接口契约和订单关联，UI 提供真实页面及三方游戏交互证据。当前需求、报告与历史查询从[需求入口](requirements/README.md)进入；接续工作看[当前交接](AI-HANDOFF.md)。
 
+2026-10-22已按最新要求清退历史执行产物，保留需求／纯用例、有效规则与必要本机身份／恢复资料。范围及证据退出见[瘦身记录](docs/project-cleanup-2026-10-22.md)，提交文件规则见[文件检查](docs/repository-files.md)。保留的日期失败摘要不作为当前实测。
+
 ## 开始使用
 
 需要 Python 3.10+、Node.js/npm；Node 版本应满足锁定的 Playwright 依赖。Python 核心 runner 使用标准库；FAT 数据库诊断另需本地 MySQL 客户端。
@@ -93,13 +95,14 @@ npm run test:ui:business -- --env .env.ui-p0.fat --execute --new-kyc-account --b
 | 评审功能预期、API断言及生成用例总表 | [用例与结果流程](docs/testing-workflow.md)；[文档格式](requirements/document-style.md) |
 | 人工编写Xmind向右逻辑图、导入用例并回填结果 | [Xmind测试用例](docs/xmind-test-cases.md)，`npm run qa:xmind`纯离线处理 |
 | 配置API自动执行、准备人工UI清单及合并结果 | [团队测试](docs/team-testing.md)；[命令范围](docs/commands.md) |
-| 输值返利2090正式测试与次日对账接续 | [测试顺序](requirements/ISOP-2090/execution-order.md)；[本单验证与边界](requirements/ISOP-2090/verification-20261012.md) |
+| 归档输值返利2090测试资料 | [测试顺序](requirements/history/archived-20261020/ISOP-2090/execution-order.md)；[本单验证与边界（历史摘要）](requirements/history/archived-20261020/ISOP-2090/questions.md#history-results-20261022) |
+| FILPLAY用例评审 | [2123后台XMind](requirements/ISOP-2123/ISOP-2123-测试用例.xmind) · [2124客户端XMind](requirements/ISOP-2124/ISOP-2124-测试用例.xmind)；设计源、CSV及待确认项见[需求入口](requirements/README.md#当前需求) |
 | 查需求状态、人工修订、归档与自动执行门槛 | [需求工作流](docs/requirement-workflow-cli.md) |
 | 提交BUG、关联负责人、同步提测发布群及回归通知 | [Jira／Telegram交付](docs/telegram-qa.md#bug-delivery) |
 | 独立核对业务源数据 | [数据库只读取数参考](docs/database/README.md) |
 | 快速获取日／周／月范围的毫秒时间戳 | [Time小工具](tools/time/README.md)，`npm run qa:time`或本机`Time`；`npm run qa:time:package`生成Mac分享包 |
 
-功能/API用例卡片与总表导出已有实现；通用新模板仍待用户首稿，JMeter／Postman导出与测试空间简体需求副本尚未落地，不能据讨论记录当作现成功能。2026-10-16旧需求归档后，保留[ISOP-2090输值返利](requirements/README.md#当前需求)，并按新要求加入[W27八项评审](requirements/reviews/2026W27-20261016.md)；W27仅完成来源扫描和测试重点整理。2090已有23张正式功能卡、总表和定向API能力，尚无统一执行计划。10-12测试及候选结论随本次Git合并带入，未在10-16重新执行业务测试。其余旧需求从[历史索引](requirements/history/README.md)查询，归档不代表完成、上线或PASS，也不自动恢复执行。
+功能/API用例卡片与总表导出已有实现；通用新模板仍待用户首稿，JMeter／Postman导出与测试空间简体需求副本尚未落地。2026-10-20按用户决定将[ISOP-2090输值返利](requirements/history/archived-20261020/README.md)归档，当前为[W27八项需求](requirements/reviews/2026W27-20261016.md)。2090定向能力及10-16 FAT失败、未完成验收和PARTIAL来源继续保留，未接入默认P0或统一执行计划。旧需求从[历史索引](requirements/history/README.md)查询，归档不代表完成、上线或PASS，也不自动恢复执行。
 
 反复使用的执行逻辑维护在共享模块，长期方法和模块规则分别进入`skills/`、`modules/`；低频专项保留Jira／文档定位，按需读取。生成报告、截图和原始抓取按当前工作及恢复依赖及时清理，保留边界见[资产保留规则](docs/architecture.md#常用能力与资料保留)。
 
@@ -135,7 +138,7 @@ npm run test:ui:business -- --env .env.ui-p0.fat --execute --new-kyc-account --b
 
 ## 结果与业务边界
 
-API 结果及跨 API/UI 主流程报告写入 `api/results/`；UI 原始结果写 `ui/results/`，可读报告写 `ui/reports/`，Playwright 附件写 `test-results/` 和 `playwright-report/`。这些P0运行目录保留最近一次结果；需求结果按批次放在`reports/qa/`，输出路径保持兼容。历史证据清理、原已缺失资料及保留依赖见[2026-10-16整理记录](docs/project-cleanup-2026-10-16.md)。保留的日期摘要不替代已退出原始证据，也不证明当前业务状态；账号预留与活动状态单独保护。
+API 结果及跨 API/UI 主流程报告写入 `api/results/`；UI 原始结果写 `ui/results/`，可读报告写 `ui/reports/`，Playwright 附件写 `test-results/` 和 `playwright-report/`。这些P0运行目录保留最近一次结果；需求结果按批次放在`reports/qa/`，输出路径保持兼容。历史证据清理、原已缺失资料及保留依赖见[2026-10-16整理记录](docs/project-cleanup-2026-10-16.md)与[10-20图片清理](docs/project-cleanup-2026-10-20.md)。保留的日期摘要不替代已退出原始证据，也不证明当前业务状态；账号预留与活动状态单独保护。
 
 每个 runner fresh login，跨进程通过本轮 uid、订单号与时间窗口关联证据。数据库仅只读诊断；业务步骤失败时停止后续成功动作。真实凭据与未脱敏个人资料只留本地忽略配置或 CI 凭据。环境接受标准见 [环境手册](api/runbooks/ENVIRONMENTS.md)，不能把待审建单表述为最终出款成功。
 

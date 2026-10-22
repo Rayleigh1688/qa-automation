@@ -1,6 +1,6 @@
 # Telegram 自动测试续接
 
-2026-10-16范围更新：当前仅[ISOP-2090](../requirements/ISOP-2090/design.md)，2100及其他需求已归档；下文旧批次复验退出当前待办，不自动续跑或补发。本机未发现下文所列旧队列SQLite、报告及账号状态文件，原文“保留”是各日期处理记录，不能证明当前可用。恢复前先核实际配置、状态与授权，缺失时不从空库重建历史或重放业务；本轮未清理运行状态，见[整理记录](project-cleanup-2026-10-16.md)。
+2026-10-20范围更新：ISOP-2090也已[归档](../requirements/history/archived-20261020/README.md)，当前为[W27八项需求](../requirements/README.md#当前需求)；下文旧批次复验均退出当前待办，不自动续跑或补发。本机未发现下文所列旧队列SQLite、报告及账号状态文件，原文“保留”是各日期处理记录，不能证明当前可用。恢复前先核实际配置、状态与授权，缺失时不从空库重建历史或重放业务；本轮未清理运行状态。
 
 2026-10-05证据退出：本文引用的非2100静态测试结果已按用户授权清理，日期结论保留为当时记录，不代表当前实测；范围见[整理记录](project-cleanup-2026-10-05.md)。
 
@@ -8,8 +8,8 @@
 
 ## 当前交付能力与续接边界（2026-10-05）
 
-- [09-27/28交付](../requirements/history/archived-20261005/ISOP-2092/bug-delivery-20260927.md)和[09-29交付](../requirements/history/archived-20261005/ISOP-2092/bug-delivery-20260929.md)已完成真实TEST建单、QA/指派、主需求及开发任务关联、回读及提测群短清单，开发负责人按组各提及一次；其历史事实保留，早期原始产物已退出。
-- [10-05交付](../requirements/history/archived-20261016/ISOP-2100/bug-delivery-20261005.md)完成F01复用TEST-3221、F05新增TEST-3227、F08新增TEST-3228、F09新增TEST-3226，四单均经回读。用户已确认一条汇总成功发至提测发布群；发送后本地断言失败，消息ID未保存，不补造也不重发。本批使用定向连接器，没有经过旧队列`approve/submit`。
+- [09-27/28交付（历史摘要）](../requirements/history/archived-20261005/ISOP-2092/questions.md#history-results-20261022)和[09-29交付（历史摘要）](../requirements/history/archived-20261005/ISOP-2092/questions.md#history-results-20261022)已完成真实TEST建单、QA/指派、主需求及开发任务关联、回读及提测群短清单，开发负责人按组各提及一次；其历史事实保留，早期原始产物已退出。
+- [10-05交付（历史摘要）](../requirements/history/archived-20261016/ISOP-2100/questions.md#history-results-20261022)完成F01复用TEST-3221、F05新增TEST-3227、F08新增TEST-3228、F09新增TEST-3226，四单均经回读。用户已确认一条汇总成功发至提测发布群；发送后本地断言失败，消息ID未保存，不补造也不重发。本批使用定向连接器，没有经过旧队列`approve/submit`。
 - 线上“Jira提醒”已保存QA优先、空QA才按报告人、多人去重和未知映射提示；用户提供的三条真实已解决消息已证明QA优先正文及送达。提及实体、客户端提醒以及空QA/多QA/未知映射的真实事件仍未验证，详见[回归通知边界](telegram-qa.md#resolved-notification)。这条远端规则继续投递既有测试群，不随提单汇总路由变更。
 - 通用CLI仍待适配：`Jira.find/create`仍取Story项目，未接TEST/QA/开发指派及开发任务关联；`deliver_one`仍向测试部发消息和附件、仅提及测试负责人。没有任意既有Jira key单独同步入口。`submit`会扫描、处理全部APPROVED队列和待发摘要，不能拿它补发本批四单或触发其他旧队列。
 - 10-05当时建议跟进本批缺陷修复及对应范围复验，该待办已随10-16归档退出。通用CLI完整交付、超长附件及上述回归通知分支仍待接入或验证；发生发送超时或本地回执异常时先对账，以平台回执或用户确认记录送达，不盲目重发。本次文档同步没有联网、发消息、修改代码、配置或队列。
@@ -55,7 +55,7 @@
 ## 旧任务证据与后续使用限制
 
 - 2026-09-11团队执行包为`reports/qa/ISOP-2027/team-ready-20260911/`，当时人工未回填；实测入口为`reports/qa/ISOP-2027/latest.html`。两者已于2026-10-05退出，队列和修订历史保留；不从旧包继续或导入。使用规则见[团队流程](team-testing.md)。
-- 后续API/UI专项的旧结果、阶段汇总及结果目录临时脚本已删除，不再从旧路径继续或导入。业务规则与日期结论保留；候选统一从[BUG清单](../requirements/history/through-ISOP-2072/ISOP-2027/api/BUG-review-2026-09-10.md)确认。旧API候选提交前需重新取当前版本证据，不能以旧Telegram空PRODUCT清单推断后续没有候选。
+- 后续API/UI专项的旧结果、阶段汇总及结果目录临时脚本已删除，不再从旧路径继续或导入。业务规则与日期结论保留；候选统一从[BUG清单（历史摘要）](../requirements/history/through-ISOP-2072/ISOP-2027/questions.md#history-results-20261022)确认。旧API候选提交前需重新取当前版本证据，不能以旧Telegram空PRODUCT清单推断后续没有候选。
 - 异常会员/申请的最小定位索引保存在忽略且0600的`api/local-state/requirement-records-fat.json`，属于历史状态，不是实时查询。不要复用旧会员或核准分行异常草稿来补成功；本次没有清理业务数据。
 - 账号A/B和reviewer本地配置保留；普通角色新增复核权限节点、完整UI权限矩阵、状态1/4、精确原因最大长度、第三复核身份及故障恢复缺口见[准备清单](../requirements/history/through-ISOP-2072/ISOP-2027/preparation.csv)。已实现范围见[API阶段](new-requirement-stage1-2.md)、[可选UI阶段](new-requirement-stage3.md)。
 - 团队继续按当前需求范围执行API、使用人工清单并导入明确来源。09-11当时“真实建单、关联、整批群清单尚未验收”的结论已被后续定向交付补充；通用CLI及超长附件仍未完成线上验收，不据此恢复或批准这个旧任务。

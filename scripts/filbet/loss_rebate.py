@@ -2,7 +2,7 @@
 from __future__ import annotations
 
 from collections import Counter
-from datetime import datetime
+from datetime import date, datetime, timedelta
 from decimal import Decimal, InvalidOperation
 import hashlib
 import json
@@ -178,12 +178,30 @@ def private_json(path, value):
         stream.write("\n")
 
 
+def selected_dates(args):
+    """Use one explicit bounded window for the reference and every filter probe."""
+    start, end = getattr(args, "start_date", None), getattr(args, "end_date", None)
+    if not start and not end:
+        return {}, [f"2026-10-{day:02d}" for day in range(7, 12)]
+    if not start or not end:
+        raise ValueError("--start-date and --end-date must be supplied together")
+    if any(not re.fullmatch(r"\d{4}-\d{2}-\d{2}", value) for value in (start, end)):
+        raise ValueError("statistics window dates must use YYYY-MM-DD")
+    first, last = date.fromisoformat(start), date.fromisoformat(end)
+    span = (last - first).days
+    if not 0 <= span < 31:
+        raise ValueError("statistics window must contain 1 to 31 inclusive days")
+    return {"stime": start, "etime": end}, [(first + timedelta(days=i)).isoformat() for i in range(span + 1)]
+
+
 def run_readonly(args):
     if Path(args.env).name != ".env.fat":
         raise ValueError("directed 2090 collector only supports explicit .env.fat")
+    date_query, filter_days = selected_dates(args)
     if not args.execute:
         print(json.dumps({"requirement": "ISOP-2090", "path": REPORT_PATH,
-                          "scope": "one fresh admin login; GET nl/list only", "execute": False}))
+                          "scope": "one fresh admin login; GET nl/list only", "execute": False,
+                          "date_window": date_query, "date_filter_days": filter_days}))
         return 0
     config = load_environment(args.env)
     if (config.get("ADMIN_URL"), config.get("API_URL")) != (
@@ -199,6 +217,7 @@ def run_readonly(args):
     report = {"requirement": "ISOP-2090", "run_id": folder.name, "environment": "FAT",
               "source_time": datetime.now(TZ).isoformat(), "deployment": "未提供",
               "mode": "directed-readonly", "results": results, "requests": requests,
+              "date_window": date_query, "date_filter_days": filter_days,
               "scope": "GET nl/list; frozen conf internal arithmetic, filtering, pagination and auth only",
               "boundaries": ["子项结果不覆盖整条复合功能用例", "未以当前活动配置校验历史比例",
                              "未读取独立注单/奖金钱包/账变/流水源", "未调用导出或业务写接口"]}
@@ -224,6 +243,7 @@ def run_readonly(args):
     def request(label, query, *, auth="valid"):
         nonlocal serial
         serial += 1
+        query = {**date_query, **query}
         response = session.request("GET", REPORT_PATH, query=query, auth=auth)
         target = evidence / f"{serial:03d}-{label}-private.json"
         private_json(target, {"method": "GET", "path": REPORT_PATH, "query": query,
@@ -252,8 +272,10 @@ def run_readonly(args):
         baseline, total, summary = parse_page(response)
         if total != len(baseline) or total > 100:
             raise ContractError("bounded baseline not complete; no dependent assertions")
+        if date_query and any(not date_query["stime"] <= stat_date(row.get("stats_day")) <= date_query["etime"] for row in baseline):
+            raise ContractError("baseline contains rows outside the requested statistics window")
         row_set(baseline)
-        record("全量行结构与总条数", ["C14"], "PASS", f"data.data为列表；全量{len(baseline)}行；data.t={total}", [base_ref])
+        record("全量行结构与总条数", ["C14"], "PASS", f"data.data为列表；所选范围全量{len(baseline)}行；data.t={total}", [base_ref])
         aliases = {row_key(row): f"R{index + 1:02d}" for index, row in enumerate(baseline)}
         users = sorted({str(row.get("uid", "")) for row in baseline})
         members = {uid: f"M{index + 1:02d}" for index, uid in enumerate(users)}
@@ -272,7 +294,7 @@ def run_readonly(args):
             page_refs.append(ref)
         compare("10条分页完整集合与100条参考一致", ["C14"], [] if pages_equal(pages, baseline) else ["行集合/数量不一致"], [base_ref, *page_refs], detail=f"已采集{len(pages)}页，共{sum(map(len,pages))}行", samples=baseline)
         filter_results = []
-        for day in ("2026-10-07", "2026-10-08", "2026-10-09", "2026-10-10", "2026-10-11"):
+        for day in filter_days:
             current, ref = request("date-" + day, {"page": 1, "page_size": 100, "stime": day, "etime": day})
             rows, found, _ = parse_page(current)
             wanted = [row for row in baseline if stat_date(row.get("stats_day")) == day]

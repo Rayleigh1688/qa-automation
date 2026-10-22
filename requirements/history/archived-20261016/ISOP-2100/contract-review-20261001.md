@@ -2,9 +2,9 @@
 
 > 2026-10-16已归档：[范围与证据说明](../README.md)。下文按原日期理解，不代表当前复验或继续执行。
 
-[当前测试记录](verification-20261001-execution.md) · [逐点报告](../../../../reports/qa/ISOP-2100/20261001-execution/views/results.html) · [问题与决定](questions.md)
+[当前测试记录（原记录已退出）](questions.md#history-results-20261022) · 逐点报告（原文件在本轮清理前已缺失；历史路径：`../../../../reports/qa/ISOP-2100/20261001-execution/views/results.html`） · [问题与决定](questions.md)
 
-后续已按用户要求执行[现有链路闭环复核](verification-20261001-closure.md)：工具栏、组合筛选、四份导出和双向日期独立已有新证据；管理缺项收窄至页面/下钻及会员导出代理UID。下方13项分类保留拉取FB时的判断，新增执行与源核进展以该复核为准。
+后续已按用户要求执行[现有链路闭环复核（原记录已退出）](questions.md#history-results-20261022)：工具栏、组合筛选、四份导出和双向日期独立已有新证据；管理缺项收窄至页面/下钻及会员导出代理UID。下方13项分类保留拉取FB时的判断，新增执行与源核进展以该复核为准。
 
 用户随后要求定位“新账号→成为代理→创建下线”的接口，已整理[候选链路与执行前缺口](chain-api-20261001.md)。找到申请/审批及邀请码注册契约，不代表已执行或当前代理管理路由已验证。
 
@@ -27,7 +27,7 @@
 
 ## 已定位的支付与奖励源入口
 
-已审查33份相关契约，路径/字段/时间来源类型及SHA256见[财务契约摘要](../../../../reports/qa/ISOP-2100/20261001-fb-refresh/payment-contracts.json)。以下均为查询用途；此轮没有调用这些业务接口。
+已审查33份相关契约，路径/字段/时间来源类型及SHA256见财务契约摘要（原文件在本轮清理前已缺失；历史路径：`../../../../reports/qa/ISOP-2100/20261001-fb-refresh/payment-contracts.json`）。以下均为查询用途；此轮没有调用这些业务接口。
 
 | 用途 | 方法及路径 | 仍须核实 |
 | --- | --- | --- |
@@ -61,7 +61,7 @@
 
 ## 来源与验证边界
 
-[管理与更新指纹](../../../../reports/qa/ISOP-2100/20261001-fb-refresh/source-and-admin-contracts.json)保存版本、变更路径、已读文件hash和字段摘要。代理开关文档的`agency_sys_switch`、`agency_backend_switch`、`agency_client_switch`不能自行解释为佣金调度开关；活跃会员配置给出的是周/月存款及有效投注门槛。“任务管理/业绩管理”的`/admin/reports/gnode`为游戏节点业绩，不能当作佣金调度运行日志。
+管理与更新指纹（原文件在本轮清理前已缺失；历史路径：`../../../../reports/qa/ISOP-2100/20261001-fb-refresh/source-and-admin-contracts.json`）保存版本、变更路径、已读文件hash和字段摘要。代理开关文档的`agency_sys_switch`、`agency_backend_switch`、`agency_client_switch`不能自行解释为佣金调度开关；活跃会员配置给出的是周/月存款及有效投注门槛。“任务管理/业绩管理”的`/admin/reports/gnode`为游戏节点业绩，不能当作佣金调度运行日志。
 
 本轮为Git同步、契约审查与报告分类修正，未重新执行业务查询、修改业务数据或改变已有实测结果；不新增接口扫描/门禁，不将文档样例作为测试数据。原始逐点JSON/CSV及首版HTML继续保留，当前HTML显示复核后的依赖说明。
 

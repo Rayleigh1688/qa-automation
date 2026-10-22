@@ -1,6 +1,7 @@
 # 代理三套后台整体摸底（2026-10-05）
 
-[模块与来源](README.md) · [本机HTML报告](../../reports/qa/agency-overall/20261005/views/report.html) · [2100需求结论](../../requirements/history/archived-20261016/ISOP-2100/acceptance-20261005.md)
+2026-10-22可用性说明：本页保留有效规则、日期观察与禁止重放的业务边界；所述原始执行报告／响应当前已退出（其中更早批次在本次整理前已缺失，不计本轮删除量），不可作为当前可读取附件或实测。必要身份／恢复资料仅按[本轮整理记录](../../docs/project-cleanup-2026-10-22.md)保留，不能因缺证据重新注册或交易。
+[模块与来源](README.md) · 本机HTML报告（原路径已退出：`../../reports/qa/agency-overall/20261005/views/report.html`） · [2100需求结论（历史摘要）](../../requirements/history/archived-20261016/ISOP-2100/questions.md#history-results-20261022)
 
 **最新BUG状态与页面／导出回归见[10-05晚批回归](regression-20261005.md)。** 本页初轮O-01—O-05及金额仅代表各自采集时刻，不能当晚批实时复现。用户最新排除独立代理管理后台首页，后续不以该首页历史数据观察判缺陷；代理自己的首页仍核对。
 

@@ -68,9 +68,13 @@ UI 用例依赖 `ui/elements/` 和 `ui/framework/`，页面、弹窗、游戏点
 
 2026-10-16先按用户决定保留ISOP-2090输值返利，其余10个需求移入`requirements/history/archived-20261016/`；随后按新要求加入[W27八项评审](../requirements/reviews/2026W27-20261016.md)，未恢复旧归档需求。W26评审按单保留来源和决定，整批不再列当前待办；被新资料替代的旧快照及生成证据按下述规则清理。本轮实际删除、整理前已缺失资料和保留项分别见[整理记录](project-cleanup-2026-10-16.md)，不把历史原始证据缺失写成当前实测。早期抽取与清理见[2026-09-11记录](project-cleanup-2026-09-11.md)及[2026-10-05记录](project-cleanup-2026-10-05.md)。
 
+2026-10-20按用户最新决定将ISOP-2090移入[本批归档](../requirements/history/archived-20261020/README.md)，当前8项W27、历史39项。10-16失败及未完成验收保留；本轮图片按有效依赖清理，见[清理记录](project-cleanup-2026-10-20.md)。
+
 后续工作以 [新需求设计](../requirements/README.md) 为入口，按变更影响补用例并评估是否纳入 P0，不要求全接口自动化后再做需求测试。
 
 受控 runner 已拆分至 `filbet/`；后续按实际需求扩展相应模块。公共核心仍在本仓库内维护，尚未发布为独立安装包；可通过白名单工具导出源码快照，能力清单、接入示例及验证边界见 [跨项目运行核心](runtime-reuse.md)。不直接复制业务目录。
+
+2026-10-22按最新授权清退历史API／功能执行产物及重复日期报告；必要恢复与身份资料先迁到忽略的`api/local-state/retained/`，原文件核验后退出。需求设计、有效规则、用例和兼容执行配置保留，详见[瘦身记录](project-cleanup-2026-10-22.md)。暂存区／推送／CI文件检查复用[文件规则](repository-files.md)，不重写Git历史。
 
 ## 常用能力与资料保留
 
@@ -83,7 +87,7 @@ UI 用例依赖 `ui/elements/` 和 `ui/framework/`，页面、弹窗、游戏点
 
 ## 本地校验
 
-`npm run check` 依次执行当前文档引用/npm 命令检查、旧扫描退出检查、API 资产与时间单位检查、Python/JavaScript 语法检查和 runner 单元测试。它不连接业务服务，也不能证明线上渠道、账号或 CI 当前可用。
+`npm run check` 执行当前已跟踪文件规则、文档引用/npm命令、当前需求来源、旧扫描退出、API资产与时间单位、Python/JavaScript语法和本地单元测试检查。显式历史设计审查保留；部分兼容单测仍以历史计划作为输入，不读取历史执行结果。它不连接业务服务，也不能证明线上渠道、账号或 CI 当前可用。
 
 历史交接不作为当前导航或命令校验对象；旧扫描内容已删除，不再校验manifest。普通文档链接会校验目标文件是否存在；Markdown 锚点、自然语言规则一致性和业务有效性仍需人工审查。
 
@@ -127,4 +131,4 @@ Xmind交换由`qa_core/xmind_archive.py`处理ZIP及现代JSON／经典XML主题
 
 `scripts/run-qa.py`是薄CLI，`qa_workflow/cli.py`编排有限批次。`documents.py`固定Git提交并复用Bruno资产构建器；`generation.py`复用既有AI只读适配并校验草稿来源；`service.py`复用计划、业务adapter及delivery pipeline，检查授权/暂停/计划hash并去重触发。`state.py`追加保存自动证据和独立人工修订；`web.py`提供本地HTML及带版本检查的状态保存接口，不提供业务执行接口。
 
-状态权威为本机SQLite及各轮来源证据，HTML是视图；仓库seed仅用于初始化。旧Markdown完整保留为迁移历史，操作与备份边界见[统一命令手册](requirement-workflow-cli.md)。上述模块是本项目工作流，不进入通用qa_core导出白名单。
+状态自动收集只读取真实顶层当前需求且seed未归档的已完成结果；归档、缺目录或重复编号不读报告，不清空既有人工／自动／工作流及历史事件。显式历史资料查询仍兼容。状态权威为本机SQLite及各轮来源证据，HTML是视图；仓库seed仅用于初始化。旧Markdown完整保留为迁移历史，操作与备份边界见[统一命令手册](requirement-workflow-cli.md)。上述模块是本项目工作流，不进入通用qa_core导出白名单。

@@ -37,7 +37,7 @@
 | [ISOP-2122](https://alibaba-international.atlassian.net/browse/ISOP-2122)正文 | 2026-10-06已读完整正文，评论总数0。定位：需求／实作方式、说明1入口扩展码、说明2大厅降级、说明3原统计／回调／注单不变。 |
 | ISOP-2200、ISOP-2201 | 2026-10-06已读，正文及评论为空；状态不证明实现或测试完成。 |
 | [SANATECH公开API](https://sanatechinfo.com/api-doc/single-wallet/SANATECH#operation/doLoginAndLaunchGame) | 2026-10-06经浏览器读取相关章节，发布表v1.0.06（2026-09-29）。定位：§5.3启动参数与URL、§5.10状态、§7.4错误、§7.6桌号、§7.8类型、§7.10频率。不是所有章节完整验收，未登录厂商后台。 |
-| [附件24200.png](../../../../reports/qa/W26/20261006-requirement-review/evidence/attachments/24200.png) | 2026-10-06已视觉读取，新增游戏表单中厂商游戏码上限50字符；截图未提供实际桌号清单或直入结果。 |
+| 附件24200.png（原文件在本轮清理前已缺失；历史路径：`../../../../reports/qa/W26/20261006-requirement-review/evidence/attachments/24200.png`） | 2026-10-06已视觉读取，新增游戏表单中厂商游戏码上限50字符；截图未提供实际桌号清单或直入结果。 |
 | [W26评审](../../../reviews/2026W26-20261006.md) | 本次迁移依据，沿用4项问题及其顺序；旧`SEXY-Q01`—`SEXY-Q04`别名与小写锚点保留在`questions.md`。 |
 
 本次未重新联网或重跑业务；未读来源不写成“产品未说明”，进入大厅也不能充当目标桌台直入成功的证据。

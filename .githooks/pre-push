@@ -1,0 +1,6 @@
+#!/bin/sh
+set -eu
+root=$(git rev-parse --show-toplevel)
+cd "$root"
+# Leave stdin intact: Git supplies every local/remote ref update there.
+exec node scripts/python-launcher.mjs scripts/check-repository-files.py push --remote "$1"

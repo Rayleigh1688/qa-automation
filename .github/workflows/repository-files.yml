@@ -1,0 +1,25 @@
+name: Repository files
+
+on:
+  pull_request:
+  push:
+
+permissions:
+  contents: read
+
+jobs:
+  repository-files:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Test the file policy without application dependencies
+        run: python -m unittest discover -s tests/unit -p test_repository_files.py
+      - name: Check committed file scope (offline, no business login)
+        run: python scripts/check-repository-files.py ci

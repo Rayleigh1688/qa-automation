@@ -37,7 +37,7 @@
 | [ISOP-2177](https://alibaba-international.atlassian.net/browse/ISOP-2177)正文 | 2026-10-06已读完整正文；来源更新快照为2026-10-05。依据包括REQUEST／RESPONSE、“这个情境是”、重发处理要求及历史报表说明。 |
 | [评论17487](https://alibaba-international.atlassian.net/browse/ISOP-2177?focusedCommentId=17487) | 2026-10-06已读，评论日期2026-09-28；总数1，已返回1，补充余额足够时重复扣款。 |
 | ISOP-2216 | 2026-10-06已读，正文及评论为空；子任务状态不能证明实现或测试完成。 |
-| [附件24102.jpg](../../../../reports/qa/W26/20261006-requirement-review/evidence/attachments/24102.jpg) | 2026-10-06已视觉读取，是9月27日主管理BNG注单历史截图；不是API幂等协议图，不能单独证明厂商取消、完整重发时序或当前修复。原始账号与号码不迁入文档。 |
+| 附件24102.jpg（原文件在本轮清理前已缺失；历史路径：`../../../../reports/qa/W26/20261006-requirement-review/evidence/attachments/24102.jpg`） | 2026-10-06已视觉读取，是9月27日主管理BNG注单历史截图；不是API幂等协议图，不能单独证明厂商取消、完整重发时序或当前修复。原始账号与号码不迁入文档。 |
 | [W26评审](../../../reviews/2026W26-20261006.md) | 本次迁移依据；问题沿用其4项范围，旧`BNG-Q01`—`BNG-Q04`别名与小写锚点保留在`questions.md`。 |
 
 本次未重新联网或重跑业务。正文提及API截图不等于已取得完整厂商协议，未读范围不写成“产品未说明”。

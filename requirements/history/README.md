@@ -6,15 +6,19 @@
 
 需求实体已移入`requirements/history/through-ISOP-2072/ISOP-编号/`。CLI显式传需求编号可查找归档目录；默认扫描、批量用例导出与工作流检查只关注顶层当前需求，归档不再自动触发测试。统一报告仍在`reports/qa/<编号>/`；旧查询报告在2026-09-18随目录迁移，当时未删；2026-10-05按本次授权已清理。
 
+## 2026-10-20范围归档
+
+[ISOP-2090输值返利](archived-20261020/README.md)按用户最新决定退出当前范围；当前历史实体共39条，当前需求为8项W27。10-16 FAT的失败、未完成验收及PARTIAL来源继续保留，没有新增业务复测。静态图片按有效依赖清理，保留与退出范围见[10-20整理记录](../../docs/project-cleanup-2026-10-20.md)。
+
 ## 2026-10-16范围归档
 
-[本批10条需求](archived-20261016/README.md)退出当前范围；顶层仅保留ISOP-2090。当前历史实体共38条，原日期结论与未决问题保留，归档不新增完成／上线／PASS。常用能力与实际清理见[整理记录](../../docs/project-cleanup-2026-10-16.md)。
+[本批10条需求](archived-20261016/README.md)当日退出当前范围，随后加入8项W27；当日保留的ISOP-2090于10-20另行归档。原日期结论与未决问题保留，归档不新增完成／上线／PASS。常用能力与当日实际清理见[整理记录](../../docs/project-cleanup-2026-10-16.md)。
 
 ## 2026-10-05范围归档
 
 [本批19条需求索引](archived-20261005/README.md)：来源为用户2026-10-05“除2100都归档”决定，当时历史需求合计32条，未新增完成或上线确认。
 
-2026-10-06曾将ISOP-2090、ISOP-2103、ISOP-2116、ISOP-2120重新纳入W26评审；本批其余15项继续归档。四组旧快照已于2026-10-16退出，旧版本按本批索引中的Jira或Git历史回查。2090仍为当前需求，其余三项已归入10-16批次。
+2026-10-06曾将ISOP-2090、ISOP-2103、ISOP-2116、ISOP-2120重新纳入W26评审；本批其余15项继续归档。四组旧快照已于2026-10-16退出，旧版本按本批索引中的Jira或Git历史回查。2090已归入10-20批次，其余三项已归入10-16批次。
 
 本批及既有历史需求的静态测试产物已同次清理，原始证据已退出；保留的日期结论来自原文记录，不代表当前部署实测。配置、设计、问题和用例保留，具体清理与2100依赖保留范围见[整理记录](../../docs/project-cleanup-2026-10-05.md)。
 
@@ -34,7 +38,7 @@
 | ISOP-2029 | 用戶端 - 免費旋轉領取文案調整 | [设计](through-ISOP-2072/ISOP-2029/design.md) · [问题](through-ISOP-2072/ISOP-2029/questions.md) · [总用例](through-ISOP-2072/ISOP-2029/cases.csv) · [用例设计](through-ISOP-2072/ISOP-2029/test-cases.md) |
 | ISOP-2028 | 合規後台 - 統計數據時間調整 | [设计](through-ISOP-2072/ISOP-2028/design.md) · [问题](through-ISOP-2072/ISOP-2028/questions.md) · [总用例](through-ISOP-2072/ISOP-2028/cases.csv) · [用例设计](through-ISOP-2072/ISOP-2028/test-cases.md) · [API数据](through-ISOP-2072/ISOP-2028/api/data-cases.csv) |
 | ISOP-2027 | 管理後台 - KYC 複核功能 | [设计](through-ISOP-2072/ISOP-2027/design.md) · [问题](through-ISOP-2072/ISOP-2027/questions.md) · [总用例](through-ISOP-2072/ISOP-2027/cases.csv) · [用例设计](through-ISOP-2072/ISOP-2027/test-cases.md) · [API数据](through-ISOP-2072/ISOP-2027/api/data-cases.csv) |
-| ISOP-2022 | 管理后台统计数据时间调整 | [设计](through-ISOP-2072/ISOP-2022/design.md) · [问题](through-ISOP-2072/ISOP-2022/questions.md) · [总用例](through-ISOP-2072/ISOP-2022/cases.csv) · [用例设计](through-ISOP-2072/ISOP-2022/test-cases.md) · [API数据](through-ISOP-2072/ISOP-2022/api/data-cases.csv) · [问题评审](through-ISOP-2072/ISOP-2022/bug-review.md) |
+| ISOP-2022 | 管理后台统计数据时间调整 | [设计](through-ISOP-2072/ISOP-2022/design.md) · [问题](through-ISOP-2072/ISOP-2022/questions.md) · [总用例](through-ISOP-2072/ISOP-2022/cases.csv) · [用例设计](through-ISOP-2072/ISOP-2022/test-cases.md) · [API数据](through-ISOP-2072/ISOP-2022/api/data-cases.csv) · [问题评审（原记录已退出）](through-ISOP-2072/ISOP-2022/questions.md#history-results-20261022) |
 
 ## 历史批次与交接
 
@@ -42,9 +46,15 @@
 - [2026-09-24 Sprint提测与产品确认快照](records-through-20261005/sprint-2026w25-20260924.md)
 - [2026-09-15班车状态](records-through-20261005/status.md) · [2026-09-14迁移基线](records-through-20261005/status-history-20260914.md)
 
-- [2026-09-14七需求测试记录](records-through-20261005/test-round-20260914-seven.md)
+- [2026-09-14七需求测试记录（原记录已退出）](README.md#history-results-20261022)
 - [2026-09-16提测时间核对](records-through-20261005/submission-history-20260916.md)
 - [2026-09-07—11历史评审与测试记录](../../docs/history/requirement-records-20260907-11.md)
 - [当前交接](../../AI-HANDOFF.md)：仍有效的阻塞、用户决定与下一步。
 
 上述报告按各自日期理解，不作为本次复测。新需求引用历史需求规则时保留明确来源与适用差异，历史缺陷及待确认记录保留原结论；该完成批次的归档依据为用户2026-09-18完成确认；10-05和10-16归档仅依据各日范围决定。
+
+
+<a id="history-results-20261022"></a>
+## 历史执行记录退出（2026-10-22）
+
+用户授权清除历史API／功能执行结果。2026-09-14七需求批次和各单日期执行、复测及BUG交付报告已退出，失败、已接受规则和未测范围收敛到各单questions的“历史执行记录退出”段；需求设计、纯用例、来源评审及有用计划保留。09-14仅为FAT，未提供部署版本，未测人工UI、独立源金额、真实导出等不得继承通过。历史归档与完成确认仍按各批原依据理解，清理不恢复旧业务、通知或改判PASS。

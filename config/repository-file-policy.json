@@ -1,0 +1,8 @@
+{
+  "version": 1,
+  "file_warning_bytes": 1048576,
+  "file_block_bytes": 5242880,
+  "batch_warning_bytes": 26214400,
+  "batch_warning_files": 500,
+  "source_csv_size_exceptions": []
+}

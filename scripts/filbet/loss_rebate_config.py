@@ -28,6 +28,7 @@ VIP_LEVELS = ("bronze", "silver", "gold", "platinum", "diamond")
 NEGATIVE_KEYS = ("duplicate-game", "empty-group-name", "duplicate-group-name", "long-group-name",
                  "negative-lower-limit", "negative-upper-limit", "negative-multiple",
                  "negative-group-rate", "negative-vip-ratio")
+CONFIG_CHECK_KEYS = ("same-value",) + NEGATIVE_KEYS
 
 
 class ContractError(ValueError):
@@ -36,6 +37,17 @@ class ContractError(ValueError):
 
 class ConcurrentChange(RuntimeError):
     pass
+
+
+def select_checks(requested=None):
+    """Keep the existing order, but never add checks to an explicit selection."""
+    if requested is None:
+        return CONFIG_CHECK_KEYS
+    if (not isinstance(requested, (list, tuple)) or not requested
+            or any(not isinstance(key, str) or key not in CONFIG_CHECK_KEYS for key in requested)
+            or len(set(requested)) != len(requested)):
+        raise ContractError("checks must be a nonempty, unique selection from the config check allowlist")
+    return tuple(key for key in CONFIG_CHECK_KEYS if key in requested)
 
 
 def private_json(path, data):
@@ -295,14 +307,18 @@ class GuardedChecks:
             self.report["restoration"] = {"status": "UNKNOWN", "error_type": type(error).__name__, "no_post_retry": True}
             return False
 
-    def run(self, marker=False, client=None, marker_only=False):
+    def run(self, marker=False, client=None, marker_only=False, selected=None):
+        keys = select_checks(selected)
+        if selected is not None and (marker or marker_only):
+            raise ContractError("selected checks cannot combine with marker modes")
+        self.report["selected_checks"] = [] if marker_only else list(keys)
         self.baseline = self.read("baseline")
         private_json(self.evidence / "baseline-activity41-private.json", self.baseline)
         body = save_body(self.baseline)
         if marker_only:
             self.marker(body, client)
             return
-        for key in ("same-value",) + NEGATIVE_KEYS:
+        for key in keys:
             candidate = body if key == "same-value" else negative_body(body, key)
             attempts_before = self.post_attempts
             try:
@@ -348,9 +364,10 @@ class GuardedChecks:
                     self.report["restoration"] = {"status": "NOT_NEEDED", "reason": "no POST issued"}
                 break
         finished = {item["check_key"] for item in self.report["results"]}
-        for key in ("same-value",) + NEGATIVE_KEYS:
+        for key in CONFIG_CHECK_KEYS:
             if key not in finished:
-                self.result(key, "NOT_RUN", "stopped after prior failure/external change", "C07" if key == "duplicate-game" else "C18")
+                reason = "not selected in this directed batch" if key not in keys else "stopped after prior failure/external change"
+                self.result(key, "NOT_RUN", reason, "C07" if key == "duplicate-game" else "C18")
         if marker and not self.report.get("stopped"):
             self.marker(body, client)
         else:
@@ -431,10 +448,14 @@ def finish(folder, report):
 def run_config(args):
     if Path(args.env).name != ".env.fat":
         raise ValueError("config lane requires .env.fat")
+    requested = getattr(args, "checks", None)
+    keys = select_checks(requested)
+    if requested is not None and (args.marker or args.marker_only or args.restore_from):
+        raise ContractError("selected checks cannot combine with marker or restoration modes")
     if not args.execute:
         print(json.dumps({"execute": False, "environment": "FAT", "activity": 41,
                           "steps": ["single baseline", "reversible summary marker"] if args.marker_only else
-                          ["single baseline", "same-value save"] + list(NEGATIVE_KEYS) + (["reversible summary marker"] if args.marker else []),
+                          ["single baseline"] + list(keys) + (["reversible summary marker"] if args.marker else []),
                           "guards": ["exact FAT hosts", "CAS before every POST", "one POST attempt", "stop and restore on failure"],
                           "restore_from": str(args.restore_from) if args.restore_from else None,
                           "network_requests": 0}, ensure_ascii=False))
@@ -492,7 +513,7 @@ def run_config(args):
             ok = checks.restore(current, candidate, "cleanup-restore")
             checks.result("cleanup-restore", "PASS" if ok else "FAIL", "independent cleanup; original negative remains FAIL; exact baseline restored=" + str(ok))
         else:
-            checks.run(args.marker, client, args.marker_only)
+            checks.run(args.marker, client, args.marker_only, selected=requested)
     except (Exception, KeyboardInterrupt) as error:
         report["error_type"] = type(error).__name__
     finally:

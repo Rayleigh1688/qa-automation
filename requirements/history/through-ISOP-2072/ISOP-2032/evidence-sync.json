@@ -94,11 +94,17 @@
     },
     {
       "id": "UI16",
-      "locator": "../../../../reports/qa/ISOP-2032/backend-20260916/results.html",
+      "locator": "questions.md#history-results-20261022",
       "revision": "2026-09-16 FAT后台UI与只读API",
       "status": "READ",
       "coverage": "基础/规则/弹窗配置，报表筛选统计分页明细，保存恢复；非全量业务闭环",
-      "checked_at": "2026-09-16"
+      "checked_at": "2026-09-16",
+      "historical_locator": "../../../../reports/qa/ISOP-2032/backend-20260916/results.html",
+      "artifact_availability": {
+        "verified_at": "2026-10-22",
+        "status": "RETIRED_OR_ALREADY_MISSING",
+        "boundary": "原路径只保留来源追溯；本轮已退出或此前已缺失。READ仍为原日期已读，未重新采集。必要恢复／最小定位资料单独保留不代表原完整报告可读。"
+      }
     }
   ],
   "changes": [
@@ -231,10 +237,10 @@
   ],
   "files": {
     "design.md": "b4ebb74409b05fce89b2cfdbf840710eec56d23ba00b92af96958d35bbaf9d12",
-    "questions.md": "000165d48819246a109db8d11b194dfeabe1aadd9b6458b1c6ffb16d2d4b39d4",
+    "questions.md": "98280218cd8646bfa64a80890ae156b6c7cb408788fd8f6f93a7d6976de28944",
     "test-cases.md": "f8c62ae8379a58253804948903c5fa74833b08ebc61af7a91ff20aa93ce0af67",
     "cases.csv": "e872ac878eea28775a5124f39d76881584bfdce49d8185288fe6cca60533df7d",
-    "evidence-sync.md": "98199d2fc806aa16eb2bbee27a455dea87a87238638e4b56bf6d7be3708090e4",
+    "evidence-sync.md": "31af7aec2fec16b14e1495d4d2ceff491ce2e41d184bbab65eaee291568fdae1",
     "api/contract-review.md": "7e13780996ab101505cb50de8dd315c10d2420de7e3038b2801b5d88b4ad4db6",
     "api/README.md": "c79938c95d5fb9eec2a26a7824059196830db13b9b4ae72b1aadc630ff68c6a5",
     "api/cases.json": "0cd5ddf02af5b59fae2f4a1fe7a4a86dd1b3d39901d4b8bb9cee345aa5799e40",
@@ -253,5 +259,22 @@
       "api/README.md"
     ],
     "verification": "原基线hash及迁移前文件hash均与Git正文一致；逐项diff仅路径、链接退出与维护说明；保留来源日期及pending范围"
+  },
+  "file_review_updates": [
+    {
+      "file": "questions.md、evidence-sync.md",
+      "reviewed_at": "2026-10-22",
+      "reviewer": "Codex / archive_2090",
+      "reason": "用户授权清除历史API／功能执行结果；复核日期摘要、原件退出声明及内部链接后更新本地文本基线。",
+      "verification": "已比对删除清单与保留规则、失败、未完成边界；旧报告链接改至日期摘要，恢复／身份与来源最小资料先校验SHA再迁入忽略目录。未改正式卡片编号、状态、CSV及可执行代码；未刷新来源或执行业务。",
+      "boundary": "原reviewed_at、source checked_at/revision/status、PENDING与SYNCED范围保持。READ仅记录历史已读，不证明原件可用、当前部署或新增PASS。"
+    }
+  ],
+  "artifact_retirement": {
+    "date": "2026-10-22",
+    "summary": "questions.md#history-results-20261022",
+    "raw_evidence_available": false,
+    "business_results_changed": false,
+    "remote_refreshed": false
   }
 }

@@ -1,16 +1,18 @@
 # 需求设计与测试入口
 
-2026-10-16先按用户决定归档旧需求，仅保留 **ISOP-2090 输值返利活动**；随后按新要求加入[2026W27的8项需求评审](reviews/2026W27-20261016.md)。当前为2090执行接续与W27评审，后者尚未形成正式执行计划。原10个顶层需求仍在`history/archived-20261016/`，更早资料继续从[历史索引](history/README.md)查阅。归档表示退出当前工作范围，不代表完成、上线、问题已修复或PASS，也不恢复旧任务执行。
+2026-10-20按用户决定归档 **ISOP-2090 输值返利活动**，当前为[2026W27的8项需求](reviews/2026W27-20261016.md)。2090实体与原有修改完整保留在[10-20归档](history/archived-20261020/README.md)，其余旧资料从[历史索引](history/README.md)查阅。归档表示退出当前工作范围，不代表完成、上线、问题已修复或PASS，也不恢复旧任务执行。
 
-输值返利已有23张正式功能卡与`cases.csv`、日报／客户端只读及受控配置定向能力，尚无`plan.json`或`api/cases.json`，未接入默认P0或统一需求执行器。2026-10-16合并Git带入[10-12测试记录](ISOP-2090/verification-20261012.md)：含已测范围、缺陷候选及未完成项，不是本次新测；来源基线为PARTIAL。W26[批次评审](reviews/2026W26-20261006.md)保留为日期来源与定位，不再作为整批当前待办。已清理或已缺失的原始证据不能用旧结论替代，重新验证时需取得本轮证据。
+2090保留23张正式功能卡、总表和定向API能力。[10-16 FAT复测（历史摘要）](history/archived-20261020/ISOP-2090/questions.md#history-results-20261022)存在金额／配置等失败及完整验收缺口，来源仍为PARTIAL；归档不改变原结论。显式编号仍可查历史，默认批量不处理该单。静态图片按有效依赖清理，已退出与保留项见[清理记录](../docs/project-cleanup-2026-10-20.md)。W26[批次评审](reviews/2026W26-20261006.md)保留为日期来源，不列当前待办。
+
+2026-10-22进一步清退历史API／功能执行报告与原始结果，必要失败／未决摘要留各单问题文档，身份和恢复资料迁至忽略目录；见[本轮瘦身](../docs/project-cleanup-2026-10-22.md)。正式设计、用例及有效契约保留，当前默认索引与来源检查不读取旧执行目录。
 
 当前工作从下面的入口阅读：
 
 | 内容 | 入口与用途 |
 | --- | --- |
-| 当前规则与来源 | [输值返利设计](ISOP-2090/design.md)，已定v2.0规则与来源读取边界 |
-| 正式用例与待确认 | [23张功能卡](ISOP-2090/test-cases.md) · [总表](ISOP-2090/cases.csv) · [问题与决定](ISOP-2090/questions.md)，未决场景不补造预期 |
-| 输值返利执行与日期证据 | [测试顺序](ISOP-2090/execution-order.md) · [定向API能力](ISOP-2090/api/README.md) · [10-12记录](ISOP-2090/verification-20261012.md) · [缺陷候选](ISOP-2090/bug-review.md)，API子项不能升级整卡PASS |
+| FILPLAY后台测试用例 | [2123正式用例](ISOP-2123/test-cases.md) · [总表](ISOP-2123/cases.csv) · [XMind](ISOP-2123/ISOP-2123-测试用例.xmind)，覆盖分站隔离与总合报表 |
+| FILPLAY客户端测试用例 | [2124正式用例](ISOP-2124/test-cases.md) · [总表](ISOP-2124/cases.csv) · [XMind](ISOP-2124/ISOP-2124-测试用例.xmind)，覆盖H5／App，保留两项未决规则 |
+| 2090历史资料 | [归档入口](history/archived-20261020/README.md) · [10-16复测记录（历史摘要）](history/archived-20261020/ISOP-2090/questions.md#history-results-20261022)，历史缺陷和未验证范围继续保留 |
 | W27需求扫描与评审顺序 | [2026W27评审](reviews/2026W27-20261016.md)，8个主项、21个子任务；问题与测试重点按单维护 |
 | 历史需求及BUG定位 | [历史索引](history/README.md)，从本单保留的Jira、评论和文档链接查对应资料 |
 | 需求状态 | [状态列表](status.html)，自动证据与人工修订独立保存 |
@@ -42,9 +44,8 @@
 
 | Jira 编号 | 需求名称 | 分离文档 |
 | --- | --- | --- |
-| ISOP-2090 | 輸值返利活動 | [设计](ISOP-2090/design.md) · [问题](ISOP-2090/questions.md) · [正式用例](ISOP-2090/test-cases.md) · [总表](ISOP-2090/cases.csv) · [顺序](ISOP-2090/execution-order.md) · [API能力](ISOP-2090/api/README.md) · [10-12记录](ISOP-2090/verification-20261012.md) |
-| ISOP-2123 | FILPLAY合规后台调整（W27评审） | [设计](ISOP-2123/design.md) · [问题](ISOP-2123/questions.md) · [测试重点](ISOP-2123/test-cases.md) |
-| ISOP-2124 | FILPLAY合规项目盘点（W27评审） | [设计](ISOP-2124/design.md) · [问题](ISOP-2124/questions.md) · [测试重点](ISOP-2124/test-cases.md) |
+| ISOP-2123 | FILPLAY合规后台调整（正式用例待评审） | [设计](ISOP-2123/design.md) · [问题](ISOP-2123/questions.md) · [36条用例](ISOP-2123/test-cases.md) · [CSV](ISOP-2123/cases.csv) · [XMind](ISOP-2123/ISOP-2123-测试用例.xmind) |
+| ISOP-2124 | FILPLAY合规项目盘点（正式用例待评审） | [设计](ISOP-2124/design.md) · [问题](ISOP-2124/questions.md) · [63条用例](ISOP-2124/test-cases.md) · [CSV](ISOP-2124/cases.csv) · [XMind](ISOP-2124/ISOP-2124-测试用例.xmind) |
 | ISOP-2214 | 过审礼金无法导出（W27评审） | [设计](ISOP-2214/design.md) · [问题](ISOP-2214/questions.md) · [测试重点](ISOP-2214/test-cases.md) |
 | ISOP-2230 | 厂商排行榜活动优化（W27评审） | [设计](ISOP-2230/design.md) · [问题](ISOP-2230/questions.md) · [测试重点](ISOP-2230/test-cases.md) |
 | ISOP-2232 | PT免费旋转串接（W27评审） | [设计](ISOP-2232/design.md) · [问题](ISOP-2232/questions.md) · [测试重点](ISOP-2232/test-cases.md) |
@@ -66,7 +67,7 @@
 
 有自动执行资产时，`api/data-cases.csv`独立保存具体数据组合、请求和断言，供AI核对和执行接口测试；与总表通过稳定用例编号关联，一条总用例可对应多组数据。JSON仍是执行器输入，CSV由它生成，不手工双向维护。旧宽表导出保留原九列CSV及API/UI/FLOW类型；执行报告和人工回填格式不变。没有执行配置的需求不生成API数据表。
 
-`npm run qa:cases -- <Story>`更新已具备正式设计的单需求，`npm run qa:cases -- --all`更新当前需求；增加`--include-history`才覆盖历史需求，均不登录。当前2090可从正式卡片导出总表；W27八项仍是评审重点，不为批量导出补建空CSV。2090因没有统一API执行源，不生成API数据组合表，也不据此宣称统一执行就绪。API表包含未具备前提的执行项，不把“有数据表”当作可全量运行；来源和编号规则见[测试流程](../docs/testing-workflow.md#文件与执行入口)。
+`npm run qa:cases -- <Story>`更新已具备正式设计的单需求，`npm run qa:cases -- --all`更新当前需求；增加`--include-history`才覆盖历史需求，均不登录。2123／2124已有正式卡片与CSV、XMind，全部为未执行设计用例；其余六项W27仍为评审重点，不补建空CSV。已归档2090可显式指定编号导出总表。上述三单尚无统一API执行源，不生成API数据组合表，也不据此宣称执行就绪。API表包含未具备前提的执行项，不把“有数据表”当作可全量运行；来源和编号规则见[测试流程](../docs/testing-workflow.md#文件与执行入口)。
 
 ## 常规需求目录
 

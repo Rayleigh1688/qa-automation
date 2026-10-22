@@ -1,0 +1,627 @@
+{
+  "schema_version": 1,
+  "story": "ISOP-2090",
+  "reviewed_at": "2026-10-16T20:12:46.831498+08:00",
+  "reviewer": "Codex / root、rebate_execution_review、rebate_runtime、rebate_source_refresh 独立语义与实际证据复核",
+  "sources": [
+    {
+      "id": "J",
+      "locator": "https://alibaba-international.atlassian.net/browse/ISOP-2090",
+      "revision": "updated 2026-10-15 23:37:26.286 GMT+8；主单UAT验收；完整24条changelog",
+      "status": "READ",
+      "coverage": "正文配置、公式、结算、日报和前台；10-12后仅状态变更，附件视觉仅10-06范围",
+      "checked_at": "2026-10-16"
+    },
+    {
+      "id": "JC",
+      "locator": "https://alibaba-international.atlassian.net/browse/ISOP-2090?focusedCommentId=17491",
+      "revision": "17355发布09-16；17491发布09-28；startAt0/maxResults2/total2",
+      "status": "READ",
+      "coverage": "完整两评论重读，17491 v2.0明确取代17355；没有新增Q答复，不推断未来无新评论",
+      "checked_at": "2026-10-16"
+    },
+    {
+      "id": "CHILD",
+      "locator": "questions.md#history-results-20261022",
+      "revision": "10-16完整状态/changelog：2192/2193/2194 FAT、2195于10-14转UAT、2196于10-13转FAT、2197完成",
+      "status": "READ",
+      "coverage": "六项正文空、完整评论0、环境及版本字段空；状态不证明实际部署或验收",
+      "checked_at": "2026-10-16",
+      "historical_locator": "Jira ISOP-2192/2193/2194/2195/2196/2197；reports/qa/ISOP-2090/20261016-retest/evidence/source-refresh.json",
+      "artifact_availability": {
+        "verified_at": "2026-10-22",
+        "status": "RETIRED_OR_ALREADY_MISSING",
+        "boundary": "原路径只保留来源追溯；本轮已退出或此前已缺失。READ仍为原日期已读，未重新采集。必要恢复／最小定位资料单独保留不代表原完整报告可读。"
+      }
+    },
+    {
+      "id": "CF-TRAIN",
+      "locator": "https://alibaba-international.atlassian.net/wiki/pages/viewpage.action?pageId=422772740",
+      "revision": "版本11 / 2026-09-30",
+      "status": "READ",
+      "coverage": "全文、页脚及内联评论完整已读，评论0且无下一页；班车页仍写未提测，保留旧日期，不覆盖最新Jira状态",
+      "checked_at": "2026-10-16"
+    },
+    {
+      "id": "CF-REQUIREMENT",
+      "locator": "https://alibaba-international.atlassian.net/wiki/spaces/QT/pages/430899213",
+      "revision": "版本1 / 2026-10-07创建",
+      "status": "READ",
+      "coverage": "正文空；页脚及内联评论0且无下一页，没有新增合同",
+      "checked_at": "2026-10-16"
+    },
+    {
+      "id": "LARK06",
+      "locator": "https://qsgpn7a1512s.sg.larksuite.com/wiki/ITOnwma9BiT8xRktp0el1LMQgge",
+      "revision": "页面Modified Sep 24，未带年份",
+      "status": "READ",
+      "coverage": "10-06全文、T&C及评论0；有效已结算和其他奖励排除已定，前端白板未细读",
+      "checked_at": "2026-10-06"
+    },
+    {
+      "id": "VISUAL06",
+      "locator": "Jira附件24124—24128；https://vip-admin-gray.vercel.app/admin/activity-list；Figma node1689-4661",
+      "revision": "10-06日期证据；mock commit452ac45；Figma指定页及3条可见评论",
+      "status": "READ",
+      "coverage": "五附件、三步mock配置及一个封顶明细、指定Figma节点；未遍历全文件或历史评论，不作为FAT身份或业务结果",
+      "checked_at": "2026-10-06"
+    },
+    {
+      "id": "U12",
+      "locator": "questions.md#本轮用户决定；本会话10-12用户指示",
+      "revision": "2026-10-12最新执行决定",
+      "status": "READ",
+      "coverage": "数据库只读、权限不改不撤销其他FAT测试授权；无确认日结命令，今天测其他，10-13对账10-12，不冒充Q答复",
+      "checked_at": "2026-10-12"
+    },
+    {
+      "id": "SOURCE12",
+      "locator": "questions.md#history-results-20261022；api/README.md",
+      "revision": "admin umi-d433ca66.js / index-0daee2f9.js / index-3f1ae5ae.js；H5 hov4f2449b7 index-Cucz2P_Y.js",
+      "status": "READ",
+      "coverage": "ty41保存/日报/导出和H5真实合同；POST拦截器证明JSON标头、CBOR body；早期错ty40片段退出，HTML fallback不算JS；源码不证明后端计算正确",
+      "checked_at": "2026-10-12",
+      "historical_locator": "api/README.md；reports/qa/ISOP-2090/20261012-full/evidence/source/",
+      "artifact_availability": {
+        "verified_at": "2026-10-22",
+        "status": "RETIRED_OR_ALREADY_MISSING",
+        "boundary": "原路径只保留来源追溯；本轮已退出或此前已缺失。READ仍为原日期已读，未重新采集。必要恢复／最小定位资料单独保留不代表原完整报告可读。"
+      }
+    },
+    {
+      "id": "OBS12",
+      "locator": "questions.md#history-results-20261022",
+      "revision": "10-12原采集；离线复评保留source_time/source_run_id和0新请求",
+      "status": "READ",
+      "coverage": "日报结构、实际已测筛选分页、历史行算术、后台页面和H5部分证据；C08/C09/C14/C18明确失败子项整卡FAIL，其他未完成卡不因子项通过升级PASS",
+      "checked_at": "2026-10-12",
+      "historical_locator": "verification-20261012.md；reports/qa/ISOP-2090/20261012-full/api-readonly-20261012T163441594814/result.json；client-readonly-20261012T165048784316/result.json",
+      "artifact_availability": {
+        "verified_at": "2026-10-22",
+        "status": "RETIRED_OR_ALREADY_MISSING",
+        "boundary": "原路径只保留来源追溯；本轮已退出或此前已缺失。READ仍为原日期已读，未重新采集。必要恢复／最小定位资料单独保留不代表原完整报告可读。"
+      }
+    },
+    {
+      "id": "DB12",
+      "locator": "questions.md#history-results-20261022",
+      "revision": "2026-10-12只读独立源核验",
+      "status": "READ",
+      "coverage": "存量礼金、账变、关联活动流水及10-08普通日源集合、同值保存比较、首组合规目录；不证明本轮05:00自动任务或完整样本矩阵",
+      "checked_at": "2026-10-12",
+      "historical_locator": "reports/qa/ISOP-2090/20261012-full/evidence/db-summary.md；db-same-value-save-summary.json；db-first-group-games-summary.json",
+      "artifact_availability": {
+        "verified_at": "2026-10-22",
+        "status": "RETIRED_OR_ALREADY_MISSING",
+        "boundary": "原路径只保留来源追溯；本轮已退出或此前已缺失。READ仍为原日期已读，未重新采集。必要恢复／最小定位资料单独保留不代表原完整报告可读。"
+      }
+    },
+    {
+      "id": "CONFIG12",
+      "locator": "questions.md#history-results-20261022",
+      "revision": "2026-10-12原校验、独立清理、独立summary marker三批",
+      "status": "READ",
+      "coverage": "重复组名接受且精确改变候选，停止后续负例；候选归属及fresh CAS恢复独立记录，C18 FAIL不改；marker动态同步和精确恢复只覆盖C15 API子项，原中断保留",
+      "checked_at": "2026-10-12",
+      "historical_locator": "reports/qa/ISOP-2090/20261012-full/config-directed-20261012T170840632233/result.json；config-directed-20261012T171159147797/result.json；config-directed-20261012T171326673083/result.json",
+      "artifact_availability": {
+        "verified_at": "2026-10-22",
+        "status": "RETIRED_OR_ALREADY_MISSING",
+        "boundary": "原路径只保留来源追溯；本轮已退出或此前已缺失。READ仍为原日期已读，未重新采集。必要恢复／最小定位资料单独保留不代表原完整报告可读。"
+      }
+    },
+    {
+      "id": "LARK12",
+      "locator": "LARK06及前端UI白板",
+      "revision": "未取得或本轮未刷新",
+      "status": "PENDING",
+      "coverage": "10-12及10-16未刷新Lark/白板，保留10-06已读边界，不声明远端无变化",
+      "checked_at": null
+    },
+    {
+      "id": "VISUAL12",
+      "locator": "VISUAL06及Jira附件、原型、Figma全文件/历史评论",
+      "revision": "未取得或本轮未刷新",
+      "status": "PENDING",
+      "coverage": "10-12及10-16未重新视觉查看；全文件/历史评论未完整遍历",
+      "checked_at": null
+    },
+    {
+      "id": "Q-ANSWER",
+      "locator": "questions.md#q-01；questions.md#q-02；questions.md#q-03",
+      "revision": "未取得或本轮未刷新",
+      "status": "PENDING",
+      "coverage": "JP/奖励映射，VIP/配置快照、跨日归属/迟到/撤销/更正/重跑，停用组计算与推荐均未答",
+      "checked_at": null
+    },
+    {
+      "id": "DELIVERY-CONTRACT",
+      "locator": "六子任务环境/版本字段；C10/C17/C19/C21/C22前置",
+      "revision": "未取得或本轮未刷新",
+      "status": "PENDING",
+      "coverage": "后端部署、金额精度/最小派发、低权限角色/隔离、通知/App版本、安全任务触发/失败注入/重试、回归影响合同未齐",
+      "checked_at": null
+    },
+    {
+      "id": "REMAINING-EVIDENCE",
+      "locator": "questions.md#history-results-20261022",
+      "revision": "2026-10-16定向实测后仍未完成的范围",
+      "status": "PENDING",
+      "coverage": "负NL已有部分正负例及失败、真实CSV、10个定向配置检查及当前H5展示/条款折叠/Slot跳转已执行；仍缺新日05:00闭环、完整严格门槛/负NL/上限0/唯一归属/VIP/有效无效与撤销未结算矩阵、H5动态改配/缓存及完整合规/fallback/停用组分支、App/通知、低权限与跨会员隔离、受控异常恢复/回归。最终v2 Slot页Popular排序未独立核验；素材异常归属待确认，不新增正式FAIL",
+      "checked_at": null,
+      "historical_locator": "verification-20261016.md；test-cases.md；execution-order.md",
+      "artifact_availability": {
+        "verified_at": "2026-10-22",
+        "status": "RETIRED_OR_ALREADY_MISSING",
+        "boundary": "原路径只保留来源追溯；本轮已退出或此前已缺失。READ仍为原日期已读，未重新采集。必要恢复／最小定位资料单独保留不代表原完整报告可读。"
+      }
+    },
+    {
+      "id": "LOCAL16",
+      "locator": "questions.md#history-results-20261022",
+      "revision": "2026-10-16明确FAT并完成定向复测；本地检查450项通过",
+      "status": "READ",
+      "coverage": "用户明确FAT先复验旧问题并补测，配置恢复后doctor通过并实际执行；数据库只读及权限不改继续。450项本地检查不等同业务PASS。H5更新、首次页面条款及独立登录条款/隐私/年龄确认均已逐项获准，已完成fresh登录和定向H5展示/交互；先前审批阻塞为历史阶段。用户表示18:50没有已知其他操作，重复入账触发仍未知",
+      "checked_at": "2026-10-16",
+      "historical_locator": "verification-20261016.md；本会话2026-10-16用户回复",
+      "artifact_availability": {
+        "verified_at": "2026-10-22",
+        "status": "RETIRED_OR_ALREADY_MISSING",
+        "boundary": "原路径只保留来源追溯；本轮已退出或此前已缺失。READ仍为原日期已读，未重新采集。必要恢复／最小定位资料单独保留不代表原完整报告可读。"
+      }
+    },
+    {
+      "id": "SOURCE16",
+      "locator": "questions.md#history-results-20261022；api/README.md",
+      "revision": "umi-bb0e614e.js / index-bdb1860d.js / H5 hov c9154c15 index-DEwwLKRI.js",
+      "status": "READ",
+      "coverage": "本轮公开源码重读ty41、CBOR拦截器、日报明细、H5动态字段及推荐；保存合同仍一致；源码不证明后端正确或实际部署，导出共享stream/MQTT chunk本轮未重读",
+      "checked_at": "2026-10-16",
+      "historical_locator": "reports/qa/ISOP-2090/20261016-retest/evidence/source/source-contract-20261016.md",
+      "artifact_availability": {
+        "verified_at": "2026-10-22",
+        "status": "RETIRED_OR_ALREADY_MISSING",
+        "boundary": "原路径只保留来源追溯；本轮已退出或此前已缺失。READ仍为原日期已读，未重新采集。必要恢复／最小定位资料单独保留不代表原完整报告可读。"
+      }
+    },
+    {
+      "id": "OBS16",
+      "locator": "questions.md#history-results-20261022",
+      "revision": "2026-10-16 18:44新日期批及18:51扩展日期批；客户端18:44批",
+      "status": "READ",
+      "coverage": "FAT日报10-12—15共5行/4会员及10-08—15共19行/17会员；两批间2条记录替换，分开保留。负NL已有部分正负例、主明细不符与替换后缺行；旧封顶明细仍错，新10-14封顶前明细恢复但流水仍错。客户端C15/C16仅部分API子项，不升级整卡PASS",
+      "checked_at": "2026-10-16",
+      "historical_locator": "reports/qa/ISOP-2090/20261016-retest/api-readonly-20261016T184428442856/result.json；reports/qa/ISOP-2090/20261016-retest/api-readonly-20261016T185106953173/result.json；reports/qa/ISOP-2090/20261016-retest/client-readonly-20261016T184458731286/result.json",
+      "artifact_availability": {
+        "verified_at": "2026-10-22",
+        "status": "RETIRED_OR_ALREADY_MISSING",
+        "boundary": "原路径只保留来源追溯；本轮已退出或此前已缺失。READ仍为原日期已读，未重新采集。必要恢复／最小定位资料单独保留不代表原完整报告可读。"
+      }
+    },
+    {
+      "id": "DB16",
+      "locator": "questions.md#history-results-20261022",
+      "revision": "2026-10-16独立数据库只读核验及替换后追踪",
+      "status": "READ",
+      "coverage": "按真实返利ID分别关联源注单、礼金、钱包账变和活动流水；普通同日已结算源集合中JP为0且无奖励类型注单，支持NL算术错误及部分净赢不计奖正例；未遍历所有奖励链。两会员同统计日旧记录替换后再次真实到账95.01和100，合计195.01；触发及完整补偿链未知，不归因已验证自动任务或主动重试，不证明05:00闭环；不拿当前配置替代历史冻结值",
+      "checked_at": "2026-10-16",
+      "historical_locator": "reports/qa/ISOP-2090/20261016-retest/evidence/db/summary-sanitized.md；reports/qa/ISOP-2090/20261016-retest/evidence/db/reconciliation-summary-sanitized.json；reports/qa/ISOP-2090/20261016-retest/evidence/db/followup-summary-sanitized.json",
+      "artifact_availability": {
+        "verified_at": "2026-10-22",
+        "status": "RETIRED_OR_ALREADY_MISSING",
+        "boundary": "原路径只保留来源追溯；本轮已退出或此前已缺失。READ仍为原日期已读，未重新采集。必要恢复／最小定位资料单独保留不代表原完整报告可读。"
+      }
+    },
+    {
+      "id": "CONFIG16",
+      "locator": "questions.md#history-results-20261022",
+      "revision": "2026-10-16五个定向批次，10个唯一已选检查",
+      "status": "READ",
+      "coverage": "10项7PASS/3FAIL；重复组名、21字符组名及负打码倍数被接受并改变配置，三个失败批次均停依赖检查且精确恢复，后续独立项另批执行，最终完整业务字段与初始基线一致。恢复不关闭FAIL，不据负倍数被接受推断已发生负金额派发；本轮未做summary marker",
+      "checked_at": "2026-10-16",
+      "historical_locator": "reports/qa/ISOP-2090/20261016-retest/config-directed-20261016T184547626722/result.json；config-directed-20261016T184619275509/result.json；config-directed-20261016T184701679699/result.json；config-directed-20261016T184859372676/result.json；config-directed-20261016T184945261569/result.json",
+      "artifact_availability": {
+        "verified_at": "2026-10-22",
+        "status": "RETIRED_OR_ALREADY_MISSING",
+        "boundary": "原路径只保留来源追溯；本轮已退出或此前已缺失。READ仍为原日期已读，未重新采集。必要恢复／最小定位资料单独保留不代表原完整报告可读。"
+      }
+    },
+    {
+      "id": "UI16",
+      "locator": "questions.md#history-results-20261022",
+      "revision": "2026-10-16后台及真实CSV已验；当前H5 c9154c15已登录并定向复测，H5脱敏汇总20:07:35 GMT+8",
+      "status": "READ",
+      "coverage": "后台复验旧401.75明细仍150、新161.58明细恢复但100×3却484.75。真实产品CSV为UTF-8 BOM、19行14列，按UID与统计日精确匹配18:51快照，266格含114金额格全一致，仅证明导出，不证明业务金额/05:00；10-15为空日，导出后筛选复核不冒充导出前额外采集。H5三层许可均完成并成功登录，五级VIP比例和五款推荐名称与18:44已采配置/客户端基线一致，本次未同时重读配置；八条T&C及折叠交互已验，旧有效投注额1%与页首净输仍冲突。推荐可见封面均为playstar/crazy 777，仅第一原图落盘确认，未声称五张原图hash相同；素材归属待确认，未启动游戏，不新增正式FAIL。More Games实际落地/s-game-category-v2/gameType/3并显示Slot，旧路径等待超时非产品失败，Popular排序未独立核验。C15/C16仅新增H5子项，App、动态改配/缓存及完整推荐分支未完成",
+      "checked_at": "2026-10-16",
+      "historical_locator": "reports/qa/ISOP-2090/20261016-retest/evidence/ui/；reports/qa/ISOP-2090/20261016-retest/evidence/ui/csv-review.md；reports/qa/ISOP-2090/20261016-retest/evidence/ui/csv-review.json；reports/qa/ISOP-2090/20261016-retest/evidence/ui/csv-filter-followup.json；reports/qa/ISOP-2090/20261016-retest/evidence/ui/h5-review-summary.json",
+      "artifact_availability": {
+        "verified_at": "2026-10-22",
+        "status": "RETIRED_OR_ALREADY_MISSING",
+        "boundary": "原路径只保留来源追溯；本轮已退出或此前已缺失。READ仍为原日期已读，未重新采集。必要恢复／最小定位资料单独保留不代表原完整报告可读。"
+      }
+    }
+  ],
+  "changes": [
+    {
+      "id": "S01",
+      "source_ids": [
+        "J",
+        "JC"
+      ],
+      "case_ids": [
+        "ISOP-2090-C01",
+        "ISOP-2090-C02",
+        "ISOP-2090-C03",
+        "ISOP-2090-C04",
+        "ISOP-2090-C05",
+        "ISOP-2090-C06",
+        "ISOP-2090-C07",
+        "ISOP-2090-C08",
+        "ISOP-2090-C09",
+        "ISOP-2090-C10",
+        "ISOP-2090-C11",
+        "ISOP-2090-C12",
+        "ISOP-2090-C14"
+      ],
+      "status": "SYNCED",
+      "action": "按v2.0同步统一门槛/上限、负NL抵门槛、严格大于、整笔计算、唯一归属、日结05:00和封顶前/实派；旧C01-C11语义纠正且不继承旧结果",
+      "verification": "逐卡独立预期与金额矩阵已复核；设计或本地fixture不代表未执行金额组合业务PASS"
+    },
+    {
+      "id": "S02",
+      "source_ids": [
+        "J",
+        "LARK06",
+        "VISUAL06",
+        "LARK12",
+        "VISUAL12"
+      ],
+      "case_ids": [
+        "ISOP-2090-C09",
+        "ISOP-2090-C15",
+        "ISOP-2090-C16",
+        "ISOP-2090-C17"
+      ],
+      "status": "SYNCED",
+      "action": "保留动态Slot比例、富文本、第一组/合规/More Games合同，说明占位T&C冲突及10-06视觉日期边界",
+      "verification": "实际部分H5/API证据另记；10-12远端视觉来源未刷新，不把mock或源码当全面客户端验收"
+    },
+    {
+      "id": "S03",
+      "source_ids": [
+        "J",
+        "JC",
+        "CHILD",
+        "CF-REQUIREMENT",
+        "Q-ANSWER"
+      ],
+      "case_ids": [
+        "ISOP-2090-C10",
+        "ISOP-2090-C11",
+        "ISOP-2090-C20",
+        "ISOP-2090-C21",
+        "ISOP-2090-C23"
+      ],
+      "status": "PENDING",
+      "action": "待Q-01—Q-03明确答复后补字段映射、版本/跨日/更正/恢复和停用组预期；普通无JP冻结日保持可独立",
+      "verification": "本轮正文和完整评论未取得Q答复，依赖合同的子场景仍有缺口；C21因S11观察到同日再次真实入账已FAIL，不泛称整卡BLOCKED。触发/更正/重试合同未知不影响保留观察失败，用户执行授权不冒充产品答复"
+    },
+    {
+      "id": "S04",
+      "source_ids": [
+        "J",
+        "CHILD",
+        "CF-TRAIN",
+        "CF-REQUIREMENT",
+        "LOCAL16"
+      ],
+      "case_ids": [
+        "ISOP-2090-C01",
+        "ISOP-2090-C02",
+        "ISOP-2090-C03",
+        "ISOP-2090-C04",
+        "ISOP-2090-C05",
+        "ISOP-2090-C06",
+        "ISOP-2090-C07",
+        "ISOP-2090-C08",
+        "ISOP-2090-C09",
+        "ISOP-2090-C10",
+        "ISOP-2090-C11",
+        "ISOP-2090-C12",
+        "ISOP-2090-C13",
+        "ISOP-2090-C14",
+        "ISOP-2090-C15",
+        "ISOP-2090-C16",
+        "ISOP-2090-C17",
+        "ISOP-2090-C18",
+        "ISOP-2090-C19",
+        "ISOP-2090-C20",
+        "ISOP-2090-C21",
+        "ISOP-2090-C22",
+        "ISOP-2090-C23"
+      ],
+      "status": "SYNCED",
+      "action": "主单及App进入UAT、QA转FAT的最新变迁已同步；用户本轮仍明确FAT。实际部署未知，旧班车未提测保留历史日期",
+      "verification": "来源/changelog已核，状态不证明部署或业务通过"
+    },
+    {
+      "id": "S05",
+      "source_ids": [
+        "U12"
+      ],
+      "case_ids": [
+        "ISOP-2090-C08",
+        "ISOP-2090-C10",
+        "ISOP-2090-C11",
+        "ISOP-2090-C18",
+        "ISOP-2090-C19",
+        "ISOP-2090-C20",
+        "ISOP-2090-C21",
+        "ISOP-2090-C22"
+      ],
+      "status": "SYNCED",
+      "action": "保留10-12数据库只读、权限不改及原10-13对账10-12安排，其他已授权独立FAT项继续；不猜任务或调用成功标记替代派发",
+      "verification": "原执行顺序与前置已核，次日05:00闭环未完成；本条历史安排的登记不新增请求，不描述10-16随后已执行的采集"
+    },
+    {
+      "id": "S06",
+      "source_ids": [
+        "SOURCE12",
+        "OBS12",
+        "DB12"
+      ],
+      "case_ids": [
+        "ISOP-2090-C01",
+        "ISOP-2090-C02",
+        "ISOP-2090-C03",
+        "ISOP-2090-C04",
+        "ISOP-2090-C08",
+        "ISOP-2090-C13",
+        "ISOP-2090-C14",
+        "ISOP-2090-C15",
+        "ISOP-2090-C16",
+        "ISOP-2090-C19"
+      ],
+      "status": "SYNCED",
+      "action": "同步10-12真实结构与独立存量对账边界，稳定check_key/覆盖特征/空集NOT_RUN，离线复评保留原时间/批次/失败；当批明细错误归C14，当时未测负NL不映射当批C04失败，10-16新增C04失败见S11",
+      "verification": "10-12相关共享helper及renderer定向fixture已验；当批已测子项与整卡分开，存量不替代新日派发/CSV/App/完整矩阵；10-16真实CSV及新增负NL证据独立记录"
+    },
+    {
+      "id": "S07",
+      "source_ids": [
+        "SOURCE12",
+        "CONFIG12",
+        "OBS12"
+      ],
+      "case_ids": [
+        "ISOP-2090-C07",
+        "ISOP-2090-C09",
+        "ISOP-2090-C15",
+        "ISOP-2090-C18"
+      ],
+      "status": "SYNCED",
+      "action": "同步实际ty41保存/CBOR合同、精确候选归属及fresh CAS恢复；重复组名原FAIL保留，清理/marker独立报告，首次异常停止余负例",
+      "verification": "原校验、独立恢复、marker真实证据分别复核；恢复不表示缺陷修复，未执行负例不判拒绝通过；CAS非原子边界保留"
+    },
+    {
+      "id": "S08",
+      "source_ids": [
+        "DELIVERY-CONTRACT",
+        "REMAINING-EVIDENCE",
+        "Q-ANSWER"
+      ],
+      "case_ids": [
+        "ISOP-2090-C01",
+        "ISOP-2090-C02",
+        "ISOP-2090-C03",
+        "ISOP-2090-C04",
+        "ISOP-2090-C05",
+        "ISOP-2090-C06",
+        "ISOP-2090-C07",
+        "ISOP-2090-C08",
+        "ISOP-2090-C09",
+        "ISOP-2090-C10",
+        "ISOP-2090-C11",
+        "ISOP-2090-C12",
+        "ISOP-2090-C13",
+        "ISOP-2090-C14",
+        "ISOP-2090-C15",
+        "ISOP-2090-C16",
+        "ISOP-2090-C17",
+        "ISOP-2090-C18",
+        "ISOP-2090-C19",
+        "ISOP-2090-C20",
+        "ISOP-2090-C21",
+        "ISOP-2090-C22",
+        "ISOP-2090-C23"
+      ],
+      "status": "PENDING",
+      "action": "补齐实际部署/契约与缺失样本及执行证据，按本轮FAT复验及补测顺序继续，不为消除缺口强行保存非法重叠配置或改库/权限",
+      "verification": "C04/C08/C09/C14/C18/C21观察失败已映射整卡FAIL，不代表每张卡全部组合均已测；C15/C16等已验证子项仍不提升完整卡PASS。真实CSV与定向配置已测，不继续列为全未测；完整矩阵/05:00/App/权限/异常等缺口保留，统一plan/P0/UAT入口未宣称就绪"
+    },
+    {
+      "id": "S09",
+      "source_ids": [
+        "LOCAL16",
+        "SOURCE12",
+        "CONFIG12"
+      ],
+      "case_ids": [
+        "ISOP-2090-C14",
+        "ISOP-2090-C18"
+      ],
+      "status": "SYNCED",
+      "action": "日报新增成对统计日窗口，配置新增明确白名单检查选择；同步CLI、日常说明和接续顺序，默认兼容与FAT/完整性/恢复守卫保持",
+      "verification": "独立代码复核及准备阶段30项相关离线测试通过；新参数覆盖全部查询和最终复读，未选择检查不写入。最终450项本地检查另见LOCAL16，实际业务执行另见S11，不据fixture判活动业务PASS"
+    },
+    {
+      "id": "S10",
+      "source_ids": [
+        "LOCAL16",
+        "SOURCE16"
+      ],
+      "case_ids": [
+        "ISOP-2090-C14",
+        "ISOP-2090-C15",
+        "ISOP-2090-C18"
+      ],
+      "status": "SYNCED",
+      "action": "5个定向CLI在参数解析时归一化相对--out，仓库外/符号链接逃逸提前拒绝；原业务守卫与默认目录不改",
+      "verification": "初采已发生的登录/只读GET成功后本地路径错误保留为ERROR；修正绝对路径后采集完成。4项离线回归覆盖5CLI参数边界及mock初采，阶段相关34项通过，最终450项本地检查另记；编排修复不等于产品修复"
+    },
+    {
+      "id": "S11",
+      "source_ids": [
+        "OBS16",
+        "DB16",
+        "CONFIG16",
+        "UI16",
+        "SOURCE16",
+        "LOCAL16"
+      ],
+      "case_ids": [
+        "ISOP-2090-C04",
+        "ISOP-2090-C08",
+        "ISOP-2090-C09",
+        "ISOP-2090-C14",
+        "ISOP-2090-C18",
+        "ISOP-2090-C21",
+        "ISOP-2090-C15",
+        "ISOP-2090-C16"
+      ],
+      "status": "SYNCED",
+      "action": "将10-16实际FAT观察同步到正式23张卡片及生成CSV：C04/C08/C09/C14/C18/C21为FAIL，总计6FAIL、12NOT_RUN、5BLOCKED；负NL错误、流水差异、T&C、历史封顶/新缺行、配置校验和再次入账分别归类，C15/C16现有部分API及S12当前H5子项，整卡仍NOT_RUN",
+      "verification": "两批日报按实际范围及时间分开，DB独立关联源注单与新旧入账。真实CSV19行14列、266格含114金额格与18:51快照一致，仅判导出；10配置7PASS/3FAIL且全部恢复，恢复不关闭FAIL。C21触发未知、Q02仍未答，不冒充受控重试/05:00闭环。H5成功登录后的定向展示/交互见S12，完整卡范围仍未齐；450本地通过不等同业务通过"
+    },
+    {
+      "id": "S12",
+      "source_ids": [
+        "UI16",
+        "OBS16",
+        "SOURCE16",
+        "LOCAL16"
+      ],
+      "case_ids": [
+        "ISOP-2090-C09",
+        "ISOP-2090-C15",
+        "ISOP-2090-C16"
+      ],
+      "status": "SYNCED",
+      "action": "同步用户逐项许可后已完成的H5 fresh登录和真实活动页子项：五级VIP比例、八条富文本呈现/折叠、五款第一组推荐名称以及More Games实际v2 Slot跳转；C09旧1%有效投注口径冲突持续，C15/C16整卡仍NOT_RUN",
+      "verification": "比例2.1/4.1/6.1/8.1/10.1及五款名称匹配18:44已采配置/客户端快照，非同时新读后台。八条T&C收起消失、展开恢复，3X匹配已采multiple3，05:00文案不证明派发。封面可见playstar/crazy777与名称不符，仅第一原图下载确认；其他下载超时不算产品失败，未声称五图hash相同，未启动游戏，素材归属待确认不新增正式FAIL。More Games落地/s-game-category-v2/gameType/3且Slot可见，旧路径等待过窄不判失败，Popular排序未验。App、受控动态改配/缓存、合规正反分支/无组fallback/停用组等仍缺；重进活动页不替代动态改配验证"
+    }
+  ],
+  "files": {
+    "design.md": "eb96f02099e812cacf12cee94ac9196f3fbc738ed629369e410c4d163129ac2d",
+    "questions.md": "8dad226eeb12c961044d7ebcfdde42756eb85878818f82562981a912ae266b48",
+    "test-cases.md": "92735ea4596eff249f36072170c71c933fa2f3f005eaeb47270162afa4a9df4d",
+    "cases.csv": "3eb1930ca33655776efd8353d7092fb0d5131a02acf7a407ca1f6910d35657c0",
+    "evidence-sync.md": "8436f3db48a0b67e798e649d1f1fca66b13dd0d49d4c4f595ac0c81bececbc7d",
+    "execution-order.md": "50d67a32387cfea1f3d5c2aaeb28ec7db3568c2cf6c64983daf5d19865406ed1",
+    "api/README.md": "ecdf4eb245dacd1e19da38e042780b88bbcaba3421facd86f12b9481c815fb38",
+    "api/initial-read.py": "379f6d0b19888b7c60620f412992561524f32cc16e5e1c4ff93cd3def5e05609",
+    "api/run-readonly.py": "26dec5bdabf66876f6bcb39d0c21e911ff7b578cfc90945799add90e79039eac",
+    "api/run-client-readonly.py": "252ac7aca6de1309cef09827e723c0a6fc2aa01ee86a888e83a24377e79b4e75",
+    "api/run-config.py": "e4ac580537c6b9eceecb05d53aded8a0be3ba1d32968ecad56406e569422631e",
+    "api/static-sources.py": "0bd175a1683033127579874c47f18f5b18fb1ee4f2784b1660dce5b254ec9f08"
+  },
+  "boundary": "仅绑定需求目录内稳定设计/卡片/生成视图/顺序/API说明与CLI；动态实测汇总、bug review、AI-HANDOFF不绑定，目录外helper/renderer另行语义复核与本地测试；来源hash不证明远端新鲜度或业务PASS",
+  "file_review_updates": [
+    {
+      "file": "api/README.md",
+      "reviewed_at": "2026-10-12T18:36:14.859692+08:00",
+      "reviewer": "Codex / coverage_review 独立语义复核",
+      "reason": "只复核客户端退出码新增说明：真实采集error或FAIL退出1，成功0仍保留子项/未测边界；recorded分类完成0仅代表离线分析成功。",
+      "verification": "已比对loss_rebate_client.run_client_readonly返回逻辑、analyse_recorded的0请求/原时间及返回逻辑，与新增成功/失败两分支mock fixture一致；根代理最终npm run check 439项通过。未重发业务请求、未改业务结果。",
+      "boundary": "仅更新本README绑定与本条复核metadata；其他11项既有hash、sources、changes、原reviewed_at及PARTIAL缺口保持原值。"
+    },
+    {
+      "file": "本轮12项绑定文件",
+      "reviewed_at": "2026-10-16T19:11:30.347208+08:00",
+      "reviewer": "Codex / root、rebate_execution_review、rebate_runtime、rebate_source_refresh 独立语义与实际证据复核",
+      "reason": "10-16 FAT复测、C04/C21新增失败状态、日期窗口/配置检查选择/5CLI输出路径与当前执行边界同步后，逐文件重新核验绑定。",
+      "verification": "独立检查代码守卫、实际批次结果、三批精确恢复、DB资金/源字段、真实CSV字段一致性、23卡状态及450项全量本地检查日志。历史10-12日期和未知合同/触发边界保持；仅在语义核对后更新12项hash，最终文档与证据检查另记。",
+      "boundary": "本条记录19:11历史复核范围，PARTIAL继续；该次文档复核没有新业务请求，不将旧证据当当前采集，不将CSV同源一致或本地测试升级业务PASS。当时首次H5条款待确认；后续已逐项获准并成功登录、补测H5，当前状态见UI16/S12，不将旧阻塞当当前状态。"
+    },
+    {
+      "file": "questions.md、execution-order.md、evidence-sync.md",
+      "reviewed_at": "2026-10-16T19:58:44.121699+08:00",
+      "reviewer": "Codex / root、rebate_source_refresh",
+      "reason": "用户授权接受首次页面条款后的实际UI续接与独立登录审批边界更新。",
+      "verification": "本条为19:58历史续接复核：当时首次勾选Proceed后原门禁消失并进入登录，独立Agree and Continue被自动审批拒绝，已请求具体许可。截图及DOM为忽略的0600原件；当时未将过渡态、版本识别或Login提交当作登录成功/活动内容通过。日常入口同步；业务卡及旧7组问题不变。",
+      "boundary": "该历史时点仅首次页面条款前置完成，独立登录条款/隐私/年龄确认当时待许可、活动内容未验。用户随后已明确授权并成功登录、完成定向H5复测，现状见UI16/S12；保留本条原日期，PARTIAL及既有业务失败保持。"
+    },
+    {
+      "file": "design.md、questions.md、test-cases.md、execution-order.md、evidence-sync.md；其余7项绑定复核未变",
+      "reviewed_at": "2026-10-16T20:12:46.831498+08:00",
+      "reviewer": "Codex / root、rebate_runtime、rebate_source_refresh、rebate_execution_review 分工语义复核",
+      "reason": "H5三层许可均完成后，补入当前页面真实展示与交互，更新旧审批状态和测试边界；正式卡片状态与CSV不变。",
+      "verification": "核对实际登录/活动DOM、五级比例截图、T&C收起展开、推荐名称与原图观察及More Games最终v2 Slot落地。比例对照18:44旧快照，未称同时重读；仅首张原图落盘，素材异常未升级正式FAIL。C15/C16整卡仍NOT_RUN，C09旧条款失败持续。日常入口与状态页同步；修正正式用例说明中仍指10-12当前批次及真实CSV未取得的旧表述。",
+      "boundary": "PARTIAL继续，App、动态改配/缓存、完整推荐分支、Popular排序、05:00及其他合同/矩阵缺口仍保留。450项全量本地检查为本轮先前代码验证；本次文档变更另跑文档和证据检查。未追加业务/数据库请求、写入或通知。"
+    },
+    {
+      "file": "design.md、questions.md、test-cases.md、evidence-sync.md、execution-order.md、api/README.md、api/initial-read.py、api/run-readonly.py、api/run-client-readonly.py、api/run-config.py、api/static-sources.py",
+      "reviewed_at": "2026-10-20",
+      "reviewer": "Codex / archive_2090",
+      "reason": "用户明确将2090归档；实体迁移并修正相对导航、直接CLI仓库根路径及归档说明，保留原工作区修改和业务结论。",
+      "verification": "逐项验证迁移前12个绑定文件与既有hash一致；迁移只改导航、归档说明及5个CLI的parents[3]→parents[5]。cases.csv逐字节保持，业务实现与参数／报告输出路径未改。离线发现及CLI路径测试另记；未刷新远端、登录或执行业务请求。",
+      "boundary": "PARTIAL与原全部PENDING来源／场景保持；10-16实际读取时间及FAIL／NOT_RUN未改。4张过渡／重复图片退出不改变历史结果，关键证据继续留存，详见10-20清理记录。"
+    },
+    {
+      "file": "design.md、questions.md、test-cases.md、evidence-sync.md、execution-order.md、api/README.md",
+      "reviewed_at": "2026-10-22",
+      "reviewer": "Codex / archive_2090",
+      "reason": "用户授权清除历史API／功能执行结果；复核日期摘要、原件退出声明及内部链接后更新本地文本基线。",
+      "verification": "已比对删除清单与保留规则、失败、未完成边界；旧报告链接改至日期摘要，恢复／身份与来源最小资料先校验SHA再迁入忽略目录。未改正式卡片编号、状态、CSV及可执行代码；未刷新来源或执行业务。",
+      "boundary": "原reviewed_at、source checked_at/revision/status、PENDING与SYNCED范围保持。READ仅记录历史已读，不证明原件可用、当前部署或新增PASS。"
+    }
+  ],
+  "local_maintenance": {
+    "updated_at": "2026-10-16",
+    "reviewer": "Codex / prepush_review",
+    "scope": "复测前历史阶段：合并远端10-12定向测试资产与用户授权的本地归档清理；当时仅核对导航、旧快照退出及本机原始证据可用性，不刷新远端或改变业务结论；不描述随后10-16实际复测后的当前状态",
+    "files": [
+      "design.md",
+      "test-cases.md",
+      "evidence-sync.md"
+    ],
+    "verification": "先按检查器UTF-8-SIG及换行归一化规则核验HEAD中12个绑定文件均与原hash一致；逐项diff确认仅归档peer链接、旧快照退出、原件本机缺失说明，test-cases.md只改一处旧快照导航，正式用例卡片和CSV未改。其余9项hash、sources、changes、file_review_updates及原reviewed_at均保持。",
+    "source_availability": "reports/qa/W26/20261006-requirement-review/evidence/与reports/qa/ISOP-2090/20261012-full/在本机整理前已缺失，不计为本次删除；保留日期摘要和实现，不能凭hash将缺失原件视为可直接复验。",
+    "boundary": "本条仅记复测前合并阶段：当时PARTIAL及全部PENDING缺口保持，10-12实际采集日期、原失败及未测边界不改，该阶段没有新增业务或数据库请求。10-16后续执行及正式卡片/CSV变更见OBS16/DB16/CONFIG16/UI16和S11。"
+  },
+  "archive_maintenance": {
+    "date": "2026-10-20",
+    "source": "用户明确2090可以归档",
+    "directory": "requirements/history/archived-20261020/ISOP-2090",
+    "previous_directory": "requirements/ISOP-2090",
+    "business_results_changed": false,
+    "remote_refreshed": false
+  },
+  "artifact_retirement": {
+    "date": "2026-10-22",
+    "summary": "questions.md#history-results-20261022",
+    "raw_evidence_available": false,
+    "business_results_changed": false,
+    "remote_refreshed": false
+  }
+}

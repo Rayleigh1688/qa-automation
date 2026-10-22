@@ -1,8 +1,8 @@
 # ISOP-2124：FILPLAY合规客户端设计
 
-[设计](design.md) · [问题](questions.md) · [测试重点](test-cases.md) · [W27批次评审](../reviews/2026W27-20261016.md)
+[设计](design.md) · [问题](questions.md) · [测试用例](test-cases.md) · [总表](cases.csv) · [XMind](ISOP-2124-测试用例.xmind) · [W27批次评审](../reviews/2026W27-20261016.md)
 
-2026-10-16已读主项完整正文、评论和三子任务。范围覆盖H5与App的登录、游戏、KYC、资金、背包和活动流转，不能仅作为换皮验收。正文中KYC审核中能否充值存在直接冲突；责任博彩达到限制后的处理引用了未提供的待确认事项。其余明确流程可继续准备，当前未执行业务测试。
+2026-10-20重新读取主项完整正文、评论和三子任务，已形成63条正式功能卡片及XMind。范围覆盖H5与App的登录、游戏、KYC、资金、背包和活动流转，不能仅作为换皮验收。正文中KYC审核中能否充值存在直接冲突；责任博彩达到限制后的处理引用了未提供的待确认事项。其余明确流程已写入可评审用例；全部NOT_RUN，当前未执行业务测试。
 
 ## 已明确范围
 
@@ -22,16 +22,16 @@
 
 - 先准备账号状态与关键准入组合，再走登录→KYC→资金／游戏→奖励／记录的完整返回路径。客户端关键拒绝需核实际结果，按钮隐藏和页面跳转不足以证明服务端限制。
 - [ISOP-2123](../ISOP-2123/design.md)明确两品牌共享UID／KYC、分站钱包与记录。涉及相同会员时核身份共享与金额隔离，不把Filbet余额或测试结果带作Filplay预期；这是跨需求影响检查。
-- 输返客户端与[ISOP-2090](../ISOP-2090/design.md)共用规则时核具体品牌、配置及版本；2090既有定向能力和10-12结论不构成本单已覆盖。Free Spin与旧[ISOP-2103](../history/archived-20261016/ISOP-2103/design.md)、客户端调整与旧[ISOP-2171](../history/archived-20261016/ISOP-2171/design.md)仅作为来源回查，不自动恢复归档任务。
+- 输返客户端与[ISOP-2090](../history/archived-20261020/ISOP-2090/design.md)共用规则时核具体品牌、配置及版本；2090已于2026-10-20按用户决定归档，既有定向能力和历史结论不构成本单已覆盖。Free Spin与旧[ISOP-2103](../history/archived-20261016/ISOP-2103/design.md)、客户端调整与旧[ISOP-2171](../history/archived-20261016/ISOP-2171/design.md)仅作为来源回查，不自动恢复归档任务。
 
 ## 来源与读取边界
 
-| 来源 | 本轮实际读取 |
+| 来源 | 实际读取与限制 |
 | --- | --- |
-| [Jira主项](https://alibaba-international.atlassian.net/browse/ISOP-2124) | 2026-10-16完整正文；updated为2026-10-16 15:01:22.479（UTC+8），待办，评论0。正文末尾到§9，没有“待确认事项”清单 |
-| 子任务[2241 H5](https://alibaba-international.atlassian.net/browse/ISOP-2241)、[2242 App](https://alibaba-international.atlassian.net/browse/ISOP-2242)、[2243 QA](https://alibaba-international.atlassian.net/browse/ISOP-2243) | 三项待办，正文空、评论0；状态不证明提测或部署 |
-| [Figma指定节点](https://www.figma.com/design/5Y2Qpf6qxGWBwAIwkkqxDY/260428_FilPlay_Redesign?node-id=1599-15276)、[动画目录](https://drive.google.com/drive/folders/1406NAVosGdphg8XiS6yGVXRmdyN1Ma2v)、[Claude产物](https://claude.ai/artifact/Qt85akXxDtLzuESAMYjzu5) | Figma已打开指定链接，看到All_Design_New的整体分组、部分评论及Bag局部画面；尚未逐屏读取，不足以解决KYC充值或限制行为。动画目录与Claude产物的直接读取未取得内容，未遍历文件或动画 |
-| Jira附件 | 已取得30项元信息，含`Filplay 子品牌架構設計.pdf`及多组原图／v2图片；浏览器正文明确引用充值`ISOP2124_09_deposit_v2.png`，已打开预览但恢复连接后仍停加载，未读到图像。PDF及其余图片未视觉读取，不凭附件文件名判断全部版本优先级 |
-| Sprint 215 | 名称`ISOP面板 2026W27 10/29`，future、日期未设置；10/29是名称内容，不当已确认上线日 |
+| [Jira主项](https://alibaba-international.atlassian.net/browse/ISOP-2124) | 2026-10-20重读完整正文；updated仍为2026-10-16 15:01:22.479（UTC+8），待办。评论返回0／total 0，无待续页；正文末尾到§9，仍没有“待确认事项”清单。关联工作项与remote links为空 |
+| 子任务[2241 H5](https://alibaba-international.atlassian.net/browse/ISOP-2241)、[2242 App](https://alibaba-international.atlassian.net/browse/ISOP-2242)、[2243 QA](https://alibaba-international.atlassian.net/browse/ISOP-2243) | 2026-10-20按parent查询至末页共3项，三项正文空、评论均0／total 0、无附件或关联项。2241与2243待办（updated分别为2026-10-16 14:05:59.513、14:06:04.361）；2242已进行中，updated为2026-10-20 10:06:35.915（均UTC+8）。状态不证明提测或部署 |
+| [Figma指定节点](https://www.figma.com/design/5Y2Qpf6qxGWBwAIwkkqxDY/260428_FilPlay_Redesign?node-id=1599-15276)、[动画目录](https://drive.google.com/drive/folders/1406NAVosGdphg8XiS6yGVXRmdyN1Ma2v)、[Claude产物](https://claude.ai/artifact/Qt85akXxDtLzuESAMYjzu5) | 2026-10-16 Figma仅看过All_Design_New整体分组、部分评论及Bag局部画面，未逐屏读取；动画目录与Claude未取得内容。2026-10-20重新尝试三条直接链接均返回不可访问，本次未新增视觉内容，不能据此解决KYC充值或限制行为 |
+| Jira附件 | 2026-10-20重新取得30项元信息，含`Filplay 子品牌架構設計.pdf`及多组原图／v2图片；2026-10-16浏览器正文明确引用充值`ISOP2124_09_deposit_v2.png`，已打开预览但恢复连接后仍停加载，未读到图像。PDF及其余图片未视觉读取，不凭附件文件名判断全部版本优先级 |
+| Sprint 215 | 2026-10-16快照名称`ISOP面板 2026W27 10/29`，future、日期未设置；本次未刷新Sprint，10/29不当已确认上线日 |
 
-脱敏来源快照在忽略目录`reports/qa/W27/20261016-requirement-review/evidence/jira-sanitized.json`。本轮只做来源评审；未登录业务系统、未改配置、未注册／发奖／交易，没有正式CSV、执行计划或机器来源基线。
+2026-10-16脱敏来源快照原在忽略目录`reports/qa/W27/20261016-requirement-review/evidence/jira-sanitized.json`，仅是当日缓存。本次刷新范围、用例映射和未读项见[来源同步](evidence-sync.md)，机器基线保留PARTIAL；正式卡片、CSV和XMind已生成，执行计划尚未接入。未登录业务系统、未改配置、未注册／发奖／交易。
