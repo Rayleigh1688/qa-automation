@@ -1,15 +1,17 @@
-import unittest
-from contextlib import redirect_stdout
-from decimal import Decimal
-from io import StringIO
+import io
+import importlib.util
 import json
+import unittest
+from contextlib import redirect_stderr, redirect_stdout
+from decimal import Decimal
 from pathlib import Path
 from tempfile import TemporaryDirectory
 from types import SimpleNamespace
 from unittest.mock import patch
 
 from filbet.loss_rebate import (ROOT, ContractError, auth_denied, check_key, coverage_features, evidence_status, pages_equal,
-                                parse_page, precision_result, public_observation, run_readonly, scoped_query, validate_stats_day)
+                                parse_page, precision_result, public_observation, run_readonly, scoped_query,
+                                selected_dates, validate_stats_day)
 
 
 class LossRebateChecks(unittest.TestCase):
@@ -97,7 +99,7 @@ class LossRebateChecks(unittest.TestCase):
         config = {"ADMIN_URL": "https://admin-fat.filbet2025.com", "API_URL": "https://client-fat.filbet2025.com"}
         with TemporaryDirectory(dir=ROOT / "reports") as temporary:
             args = SimpleNamespace(env=".env.fat", stats_day="2026-10-12", execute=True, insecure=False, out=Path(temporary).relative_to(ROOT))
-            with patch("filbet.loss_rebate.Session", return_value=session), patch("filbet.loss_rebate.load_environment", return_value=config), redirect_stdout(StringIO()):
+            with patch("filbet.loss_rebate.Session", return_value=session), patch("filbet.loss_rebate.load_environment", return_value=config), redirect_stdout(io.StringIO()):
                 self.assertEqual(run_readonly(args), 0)
             report = json.loads(next(Path(temporary).glob("api-readonly-*/result.json")).read_text())
             business_keys = {"main-nl", "rule-nl", "nl-sum", "rule-bonus", "before-cap", "formula-before-cap", "actual-cap", "turnover", "threshold", "uid-day", "pagination", "summary"}
@@ -107,6 +109,121 @@ class LossRebateChecks(unittest.TestCase):
             self.assertEqual({auth for _, _, _, auth in session.requests}, {"valid", "missing", "invalid"})
             self.assertEqual(len([row for row in report["requests"] if row["label"].startswith("date-")]), 1)
             self.assertEqual(session.token, "")
+
+    def test_requested_window_is_inclusive_and_bounded(self):
+        query, days = selected_dates(SimpleNamespace(start_date="2026-10-12", end_date="2026-10-15"))
+        self.assertEqual(query, {"stime": "2026-10-12", "etime": "2026-10-15"})
+        self.assertEqual(days, ["2026-10-12", "2026-10-13", "2026-10-14", "2026-10-15"])
+        self.assertEqual(selected_dates(SimpleNamespace())[0], {})
+        self.assertEqual(selected_dates(SimpleNamespace(stats_day="2026-10-12")),
+                         ({"stime": "2026-10-12", "etime": "2026-10-12"}, ["2026-10-12"]))
+        for start, end in [("2026-10-12", None), (None, "2026-10-15"),
+                           ("2026-10-15", "2026-10-12"), ("2026-02-30", "2026-03-01"),
+                           ("2026-10-01", "2026-11-01"), ("20261012", "20261015")]:
+            with self.subTest(start=start, end=end), self.assertRaises(ValueError):
+                selected_dates(SimpleNamespace(start_date=start, end_date=end))
+
+    def test_day_and_window_are_rejected_before_loading_credentials_or_login(self):
+        for window in ({"start_date": "2026-10-12"}, {"end_date": "2026-10-12"},
+                       {"start_date": "2026-10-12", "end_date": "2026-10-12"}):
+            args = SimpleNamespace(env=".env.fat", execute=True, stats_day="2026-10-12", **window)
+            with self.subTest(window=window), patch("filbet.loss_rebate.load_environment") as load, \
+                    patch("filbet.loss_rebate.Session") as session:
+                with self.assertRaisesRegex(ValueError, "--stats-day cannot combine"):
+                    run_readonly(args)
+                load.assert_not_called()
+                session.assert_not_called()
+
+    def test_archived_cli_rejects_day_window_and_reassessment_combinations(self):
+        path = ROOT / "requirements/history/archived-20261020/ISOP-2090/api/run-readonly.py"
+        spec = importlib.util.spec_from_file_location("loss_rebate_readonly_combination_cli", path)
+        module = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(module)
+        combinations = [
+            ["--stats-day", "2026-10-12", "--start-date", "2026-10-12"],
+            ["--stats-day", "2026-10-12", "--end-date", "2026-10-12"],
+            ["--reassess", "unused.json", "--stats-day", "2026-10-12"],
+            ["--reassess", "unused.json", "--start-date", "2026-10-12", "--end-date", "2026-10-12"],
+            ["--reassess", "unused.json", "--execute"],
+        ]
+        for options in combinations:
+            with self.subTest(options=options), patch("sys.argv", [str(path), *options]), \
+                    patch.object(module, "run_readonly") as collect, \
+                    patch.object(module, "reassess_recorded") as reassess, \
+                    redirect_stderr(io.StringIO()), self.assertRaises(SystemExit) as raised:
+                module.main()
+            self.assertEqual(raised.exception.code, 2)
+            collect.assert_not_called()
+            reassess.assert_not_called()
+
+    def test_bad_window_stops_before_loading_credentials_or_login(self):
+        args = SimpleNamespace(env=".env.fat", execute=True, start_date="2026-10-12", end_date=None)
+        with patch("filbet.loss_rebate.load_environment") as load, patch("filbet.loss_rebate.Session") as session:
+            with self.assertRaises(ValueError):
+                run_readonly(args)
+        load.assert_not_called()
+        session.assert_not_called()
+
+    def test_collection_applies_window_to_all_filters_and_final_reference(self):
+        calls = []
+        records = []
+        for ident, day in enumerate(("2026-10-01", "2026-10-12", "2026-10-15"), 1):
+            records.append({"id": str(ident), "uid": "fixture-member", "username": "fixture-user",
+                            "phone": "fixture-phone", "vip": "1", "level": "bronze", "stats_day": day,
+                            "valid_bet_amount": "500", "payout_amount": "0", "net_loss_amount": "500",
+                            "capped_amount": "5", "bonus": "5", "lower_limit": "100", "upper_limit": "150",
+                            "multiple": "2", "multiple_amount": "10",
+                            "conf": [{"valid_bet_amount": "500", "payout_amount": "0", "net_loss_amount": "500",
+                                      "rate": "1", "bonus": "5"}]})
+
+        class FakeSession:
+            def __init__(self, *args, **kwargs): self.token = ""
+            def login(self): pass
+            def request(self, method, path, *, query, auth="valid"):
+                calls.append((dict(query), auth))
+                if auth != "valid":
+                    return {"http": 401, "body": {"status": False, "data": None}}
+                selected = [row for row in records if query.get("stime", "") <= row["stats_day"] <= query.get("etime", "9999")]
+                for key in ("uid", "username", "phone", "vip", "level"):
+                    if key in query:
+                        selected = [row for row in selected if row[key] == query[key]]
+                page, size = query["page"], query["page_size"]
+                summary = {"num": len({r['uid'] for r in selected}),
+                           **{key: str(sum(Decimal(r[key]) for r in selected))
+                              for key in ("net_loss_amount", "bonus", "multiple_amount")}}
+                return {"http": 200, "body": {"status": True, "data": {
+                    "data": selected[(page - 1) * size:page * size], "t": len(selected), "s": summary}}}
+
+        scopes = [
+            ({"start_date": "2026-10-12", "end_date": "2026-10-15"},
+             ["2026-10-12", "2026-10-15"], ["2026-10-12", "2026-10-13", "2026-10-14", "2026-10-15"]),
+            ({"stats_day": "2026-10-12"}, ["2026-10-12"], ["2026-10-12"]),
+        ]
+        for scope, expected_dates, filter_days in scopes:
+            calls.clear()
+            with self.subTest(scope=scope), TemporaryDirectory() as tmp:
+                root = Path(tmp).resolve()
+                args = SimpleNamespace(env=".env.fat", execute=True, insecure=False, out=root / "reports", **scope)
+                config = {"ADMIN_URL": "https://admin-fat.filbet2025.com", "API_URL": "https://client-fat.filbet2025.com"}
+                with patch("filbet.loss_rebate.ROOT", root), patch("filbet.loss_rebate.Session", FakeSession), \
+                     patch("filbet.loss_rebate.load_environment", return_value=config), \
+                     patch("filbet.loss_rebate.write_views"), redirect_stdout(io.StringIO()):
+                    self.assertEqual(run_readonly(args), 0)
+                report = json.loads(next(args.out.glob("api-readonly-*/result.json")).read_text())
+                self.assertEqual(report["baseline"]["dates"], expected_dates)
+                self.assertEqual(report["baseline"]["rows"], len(expected_dates))
+                self.assertEqual(report["date_filter_days"], filter_days)
+                if "stats_day" in scope:
+                    self.assertEqual(report["stats_day"], scope["stats_day"])
+                self.assertTrue(all(row["status"] == "PASS" for row in report["results"]))
+            for query, _ in calls:
+                self.assertGreaterEqual(query["stime"], filter_days[0])
+                self.assertLessEqual(query["etime"], filter_days[-1])
+            self.assertEqual(calls[0][0], calls[-1][0])
+            self.assertTrue(any(query["page_size"] == 10 and auth == "valid" for query, auth in calls))
+            self.assertEqual({key for query, _ in calls for key in ("uid", "username", "phone", "vip", "level") if key in query},
+                             {"uid", "username", "phone", "vip", "level"})
+            self.assertEqual({auth for _, auth in calls}, {"valid", "missing", "invalid"})
 
 
 if __name__ == "__main__":

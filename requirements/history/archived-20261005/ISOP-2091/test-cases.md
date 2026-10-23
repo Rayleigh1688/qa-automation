@@ -2,7 +2,7 @@
 
 [设计](design.md) · [问题与决定](questions.md) · [测试用例](test-cases.md) · [总用例](cases.csv) · [来源同步](evidence-sync.md)
 
-09-29已执行只读查新：C04排名失败，其余仅部分取证/未执行，见[本轮检查](verification-20260929-investigation.md)。
+09-29已执行只读查新：C04排名失败，其余仅部分取证/未执行，见[本轮检查（原记录已退出）](questions.md#history-results-20261022)。
 
 先看用例总览，再逐条查看前置条件、操作步骤、预期结果和待确认项。验收点、验证方式及实现说明放在文末。
 
@@ -279,4 +279,4 @@
 
 ## 执行边界
 
-开测准备阶段已核对Jira/Lark/FB和既有Bug并离线生成CSV；随后新增24项只读API及DB证据，见[09-29查新](verification-20260929-investigation.md)，不构成全量验收或上线结论。既有问题与补测顺序见[开测与去重基线](readiness-20260929.md)。后续结果放到本需求reports/qa批次；明确规则、准备就绪、执行通过分别记录。
+开测准备阶段已核对Jira/Lark/FB和既有Bug并离线生成CSV；随后新增24项只读API及DB证据，见[09-29查新（原记录已退出）](questions.md#history-results-20261022)，不构成全量验收或上线结论。既有问题与补测顺序见[开测与去重基线](readiness-20260929.md)。后续结果放到本需求reports/qa批次；明确规则、准备就绪、执行通过分别记录。

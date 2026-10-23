@@ -4,19 +4,28 @@
 
 ## 后续需求复用入口（2026-09-29）
 
-2026-10-03最新纠正见[2092 Q-04](../../../requirements/history/archived-20261005/ISOP-2092/questions.md#q-04)：用户指出原产品文档GGR规则有误，已确认总量扣JP派彩及各游戏类型独立计算原则。相关物理源字段和分类断言待人工核定，新口径尚未回归；历史总分类内部一致性不能证明公式正确。原标题保留既有导航锚点，最新决定日期以本段及questions为准。
+2026-10-16整理常用规则；本次未刷新远端或复测业务。以下摘要采用已留存的2092用户决定和10-06的2190需求评审，原标题保留既有导航锚点。规则来源、接口实现和当时测试结果分开使用；归档不表示验收通过。
 
-后续涉及首页报表、BI指标、统计日期、GGR/派彩、充值人群或导出的需求，先读取[ISOP-2092设计](../../../requirements/history/archived-20261005/ISOP-2092/design.md)及[最新问题与决定](../../../requirements/history/archived-20261005/ISOP-2092/questions.md)，再选读对应[测试用例](../../../requirements/history/archived-20261005/ISOP-2092/test-cases.md)和[来源记录](../../../requirements/history/archived-20261005/ISOP-2092/evidence-sync.md)。新需求在自己的design中记录引用的验收点、日期及差异，不复用旧测试结果作为新版本通过证据。
+| 常用口径 | 已确认内容 | 来源日期与边界 |
+| --- | --- | --- |
+| 充值金额 | Completed、会员提交的充值订单取`fb_deposits.amount`，不取`paid_amount` | 2026-09-29用户更正，[2092 Q-05](../../../requirements/history/archived-20261005/ISOP-2092/questions.md#q-05)；不由金额字段推定分日时间字段或提现口径 |
+| 复充金额 | 同时满足Completed、会员提交、首充时间为统计当日及`gt>1`；排除`gt=0/1` | 2026-09-29用户核定，[2092 Q-02](../../../requirements/history/archived-20261005/ISOP-2092/questions.md#q-02)；覆盖旧`gt!=1`解释，不能扩大为复充人数已确认或已通过 |
+| 跨日人均 | ARPU／ARPPU仅提供单日数据，超过一天显示`--`，快捷日期和自定义日期一致 | 2026-09-28用户答复，[2092 Q-03](../../../requirements/history/archived-20261005/ISOP-2092/questions.md#q-03)；不在多日结果累加或平均每日人均值 |
+| 展示精度 | 先按原始精度汇总和计算，金额、人均、百分比展示向零截断两位；零金额显示`0`，2092比例默认`0.00%` | 2026-09-28至09-29决定，[2092 Q-06](../../../requirements/history/archived-20261005/ISOP-2092/questions.md#q-06)；不降低API／数据库原始精度，不覆盖跨日`--`或未经确认的新接口除零合同 |
+| GGR | 总GGR＝真实GGR－JP派彩；各游戏类型从本类型数据独立计算，不能从整体分摊 | 2026-10-03用户纠正，[2092 Q-04](../../../requirements/history/archived-20261005/ISOP-2092/questions.md#q-04)；物理源字段、正负号、JP映射及分类断言待人工核定，未按新口径回归；总分类相等不能替代独立预期 |
+| 分类GGR% | 每类GGR除以同类`bet_amount`，不共用全部游戏投注额 | 2026-10-06读取[ISOP-2190](https://alibaba-international.atlassian.net/browse/ISOP-2190)，[本地评审](../../../requirements/history/archived-20261016/ISOP-2190/design.md)；仅改分类分母，不改GGR分子、JP公式或其他报表。分类分母为0的接口／页面合同仍见[2190 Q-01](../../../requirements/history/archived-20261016/ISOP-2190/questions.md#q-01)，无修复后实测 |
 
-下文20卡片、旧GGR分类、图表免测及未指定舍入的描述均为09-16整理快照；2092对首页的新版布局与明确规则优先见上述入口，不将旧快照当作当前完整定义。
+后续涉及这些指标，先采用上表适用规则，再按需要查[ISOP-2092设计](../../../requirements/history/archived-20261005/ISOP-2092/design.md)、[问题与决定](../../../requirements/history/archived-20261005/ISOP-2092/questions.md)、[测试用例](../../../requirements/history/archived-20261005/ISOP-2092/test-cases.md)和[来源记录](../../../requirements/history/archived-20261005/ISOP-2092/evidence-sync.md)。低频交互及最新变更可按[ISOP-2092](https://alibaba-international.atlassian.net/browse/ISOP-2092)／[ISOP-2190](https://alibaba-international.atlassian.net/browse/ISOP-2190)回查Jira正文、评论和关联资料，不要求恢复历史采集脚本。新需求记下引用的日期、范围及差异，不继承历史PASS。
+
+下文20卡片、旧GGR分类、图表免测及未指定舍入的描述均为09-16整理快照；与上表及来源中的新决定冲突时采用新决定。首页、代理报表及输值返利的同名金额不自动共用公式。现有源单核验为日期定向操作，尚未形成覆盖这些规则的通用首页对账入口。
 
 | 关联内容 | 读取位置 | 复用边界 |
 | --- | --- | --- |
 | 首页统计日期、趋势图、两位截断、零值和跨日人均 | [2092 Q-01—Q-06](../../../requirements/history/archived-20261005/ISOP-2092/questions.md) | 属于首页规则；其他报表不得只因名称相似套用90/180天、精度或跨日隐藏规则 |
-| 派彩回推、投注/GGR与充值统计 | 同上及[源单与边界补验](../../../requirements/history/archived-20261005/ISOP-2092/verification-20260928-followup.md) | GGR按10-03人工纠正优先，派彩及充值沿09-29各自决定；源状态、时间归属、JP重复及Doris差额需按新需求核验 |
-| 充值gt状态变化、GCash造数经验 | [09-29GCash实测](../../../requirements/history/archived-20261005/ISOP-2092/verification-20260929-gcash.md) | gt=1/2及gt=0观察有具体样本；通道可用性为FAT日期证据，重新核前置，不复用旧token或审批旧单 |
+| 派彩回推、投注/GGR与充值统计 | 同上及[源单与边界补验（历史摘要）](../../../requirements/history/archived-20261005/ISOP-2092/questions.md#history-results-20261022) | GGR按10-03人工纠正优先，派彩及充值沿09-29各自决定；源状态、时间归属、JP重复及Doris差额需按新需求核验 |
+| 充值gt状态变化、GCash造数经验 | [09-29GCash实测（历史摘要）](../../../requirements/history/archived-20261005/ISOP-2092/questions.md#history-results-20261022) | gt=1/2及gt=0观察有具体样本；通道可用性为FAT日期证据，重新核前置，不复用旧token或审批旧单 |
 | 导出原生保存窗口、文件落盘及内容核验 | [通用UI操作手册](../../../ui/README.md#export-save) | 可跨报表复用方法；每次仍按实际浏览器/系统窗口验证 |
-| 失败场景及回归候选 | [最新复测](../../../requirements/history/archived-20261005/ISOP-2092/verification-20260929-full.md)、[缺陷交付](../../../requirements/history/archived-20261005/ISOP-2092/bug-delivery-20260929.md) | 先看顶部最新纠正；BUG状态需重新查，历史失败/通过均不代表当前部署 |
+| 失败场景及回归候选 | [最新复测（历史摘要）](../../../requirements/history/archived-20261005/ISOP-2092/questions.md#history-results-20261022)、[缺陷交付（历史摘要）](../../../requirements/history/archived-20261005/ISOP-2092/questions.md#history-results-20261022) | 先看顶部最新纠正；BUG状态需重新查，历史失败/通过均不代表当前部署 |
 
 本模块通过[模块总索引](../../README.md)连接会员列表、会员详情、KYC等资料；只有新需求确实涉及相应字段、状态或流程时才继续加载。月初/跨年暂不测、早期登录日志缺源待核是2092归档前的执行安排，不自动继承为新需求免测条件。2026-10-05该需求已归档、原始静态报告已清理；日期结论保留为历史，不能假定原始证据仍可用。
 

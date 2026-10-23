@@ -2,7 +2,7 @@
 
 [设计](design.md) · [问题与决定](questions.md) · [测试用例](test-cases.md) · [总用例](cases.csv) · [来源同步](evidence-sync.md)
 
-当前阶段：已开始FAT查询与只读对账。09-29取得FB契约及独立源注单/派奖/钱包样本；历史5条展示差异沿TEST-3166去重，无确认新增Bug。详见[首轮核对](verification-20260929-investigation.md)。页面非零两日样本与UI仍待补。
+当前阶段：已开始FAT查询与只读对账。09-29取得FB契约及独立源注单/派奖/钱包样本；历史5条展示差异沿TEST-3166去重，无确认新增Bug。详见[首轮核对（原记录已退出）](questions.md#history-results-20261022)。页面非零两日样本与UI仍待补。
 
 ## 需求与验收依据
 

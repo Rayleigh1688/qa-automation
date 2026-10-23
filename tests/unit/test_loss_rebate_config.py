@@ -2,11 +2,16 @@ import json
 import stat
 import tempfile
 import unittest
+from contextlib import redirect_stdout
+import io
 from copy import deepcopy
 from pathlib import Path
+from types import SimpleNamespace
+from unittest.mock import patch
 
 from filbet.loss_rebate_config import (
-    ROOT, ContractError, GuardedChecks, NEGATIVE_KEYS, business, candidate_state, differences, finish, negative_body, private_json, save_body,
+    ROOT, CONFIG_CHECK_KEYS, ContractError, GuardedChecks, NEGATIVE_KEYS, business, candidate_state, differences,
+    finish, negative_body, private_json, run_config, save_body, select_checks,
 )
 
 
@@ -24,12 +29,13 @@ def baseline():
 
 
 class FakeSession:
-    def __init__(self, *, accept_duplicate=False, drift=False, timeout=False):
+    def __init__(self, *, accept_duplicate=False, drift=False, timeout=False, accept_key=None):
         self.row = baseline()
         self.original = deepcopy(self.row)
         self.posted = []
         self.gets = 0
         self.accept_duplicate, self.drift, self.timeout = accept_duplicate, drift, timeout
+        self.accept_key = accept_key
 
     def request(self, method, path, **kwargs):
         if method == "GET":
@@ -44,6 +50,9 @@ class FakeSession:
         conf = json.loads(body["config"])
         valid = body["summary"] != self.original["summary"] or conf == business(self.original)["config"] and body["multiple"] == "2"
         accepted = valid or self.accept_duplicate and len(self.posted) == 2
+        if self.accept_key:
+            candidate = {key: value for key, value in body.items() if key != "google_code"}
+            accepted = accepted or candidate == negative_body(save_body(self.original), self.accept_key)
         if accepted:
             for key in ("name", "state", "summary", "multiple", "config"):
                 self.row[key] = body[key]
@@ -102,15 +111,72 @@ class ConfigurationContract(unittest.TestCase):
             self.assertEqual(len(delta), 0 if key == "negative-multiple" else 1)
         self.assertEqual(len(json.loads(negative_body(body, "long-group-name")["config"])["games"][0]["name"]), 21)
 
-    def execute(self, fake, marker=False):
-        temporary = tempfile.TemporaryDirectory(dir=ROOT / "reports")
+    def execute(self, fake, marker=False, selected=None):
+        temporary = tempfile.TemporaryDirectory(prefix=".unit-loss-rebate-", dir=ROOT)
         self.addCleanup(temporary.cleanup)
         folder = Path(temporary.name)
         report = {"requests": [], "results": [], "run_id": "unit"}
         checks = GuardedChecks(fake, lambda: 123456, folder, report)
         client = FakeClient(fake) if marker else None
-        checks.run(marker, client)
+        checks.run(marker, client, selected=selected)
         return report, folder, client
+
+    def test_selection_allowlist_preserves_order_and_rejects_invalid_before_requests(self):
+        self.assertEqual(select_checks(), CONFIG_CHECK_KEYS)
+        self.assertEqual(select_checks(["negative-multiple", "long-group-name"]),
+                         ("long-group-name", "negative-multiple"))
+        for requested in ([], "duplicate-group-name", ["unknown"], ["same-value", "same-value"], [{}]):
+            with self.subTest(requested=requested):
+                fake = FakeSession()
+                with self.assertRaises(ContractError):
+                    self.execute(fake, selected=requested)
+                self.assertEqual(fake.gets, 0)
+                self.assertEqual(fake.posted, [])
+
+    def test_selected_negatives_do_not_replay_unselected_checks_or_same_value(self):
+        fake = FakeSession()
+        report, _, _ = self.execute(fake, selected=["negative-multiple", "long-group-name"])
+        self.assertEqual(report["selected_checks"], ["long-group-name", "negative-multiple"])
+        self.assertEqual(len(fake.posted), 2)
+        first = json.loads(fake.posted[0]["config"])
+        self.assertEqual(len(first["games"][0]["name"]), 21)
+        self.assertEqual(fake.posted[1]["multiple"], "-1")
+        for item in report["results"]:
+            if item["check_key"] in report["selected_checks"]:
+                self.assertEqual(item["status"], "PASS")
+            elif item["check_key"] in CONFIG_CHECK_KEYS:
+                self.assertEqual(item["status"], "NOT_RUN")
+                self.assertIn("not selected", item["actual"])
+        self.assertFalse(differences(fake.original, fake.row))
+
+    def test_selected_acceptance_stops_remaining_and_restores_exact_candidate(self):
+        fake = FakeSession(accept_key="duplicate-group-name")
+        report, _, _ = self.execute(fake, selected=["negative-lower-limit", "duplicate-group-name"])
+        results = {item["check_key"]: item for item in report["results"]}
+        self.assertEqual(results["duplicate-group-name"]["status"], "FAIL")
+        self.assertEqual(results["negative-lower-limit"]["status"], "NOT_RUN")
+        self.assertIn("stopped", results["negative-lower-limit"]["actual"])
+        self.assertIn("not selected", results["same-value"]["actual"])
+        self.assertEqual(len(fake.posted), 2)  # selected negative and one exact cleanup
+        self.assertEqual(report["restoration"]["status"], "RESTORED")
+        self.assertFalse(differences(fake.original, fake.row))
+
+    def test_selected_dryrun_and_invalid_modes_never_load_environment_or_create_session(self):
+        args = SimpleNamespace(env=".env.fat", execute=False, checks=["duplicate-group-name"],
+                               marker=False, marker_only=False, restore_from=None)
+        with patch("filbet.loss_rebate_config.load_environment") as load, \
+                patch("filbet.loss_rebate_config.Session") as session, redirect_stdout(io.StringIO()) as output:
+            self.assertEqual(run_config(args), 0)
+            self.assertEqual(json.loads(output.getvalue())["steps"], ["single baseline", "duplicate-group-name"])
+            for option in ("marker", "marker_only", "restore_from"):
+                with self.subTest(option=option):
+                    values = {**vars(args), "execute": True, option: True}
+                    with self.assertRaises(ContractError):
+                        run_config(SimpleNamespace(**values))
+            with self.assertRaises(ContractError):
+                run_config(SimpleNamespace(**{**vars(args), "execute": True, "checks": ["unknown"]}))
+        load.assert_not_called()
+        session.assert_not_called()
 
     def test_first_unexpected_accept_stops_and_restores_without_hiding_failure(self):
         fake = FakeSession(accept_duplicate=True)
@@ -161,7 +227,7 @@ class ConfigurationContract(unittest.TestCase):
 
     def test_restore_never_adopts_extra_external_fields_after_own_post(self):
         fake = FakeSession()
-        with tempfile.TemporaryDirectory(dir=ROOT / "reports") as temporary:
+        with tempfile.TemporaryDirectory(prefix=".unit-loss-rebate-", dir=ROOT) as temporary:
             report = {"requests": [], "results": [], "run_id": "unit"}
             checks = GuardedChecks(fake, lambda: 123456, Path(temporary), report)
             checks.baseline = baseline()
@@ -174,7 +240,7 @@ class ConfigurationContract(unittest.TestCase):
 
     def test_marker_only_has_no_negative_or_same_value_post(self):
         fake = FakeSession()
-        with tempfile.TemporaryDirectory(dir=ROOT / "reports") as temporary:
+        with tempfile.TemporaryDirectory(prefix=".unit-loss-rebate-", dir=ROOT) as temporary:
             report = {"requests": [], "results": [], "run_id": "unit"}
             checks = GuardedChecks(fake, lambda: 123456, Path(temporary), report)
             client = FakeClient(fake)
@@ -186,7 +252,7 @@ class ConfigurationContract(unittest.TestCase):
 
     def test_restore_timeout_allows_no_second_restore_post(self):
         fake = FakeSession(timeout=True)
-        with tempfile.TemporaryDirectory(dir=ROOT / "reports") as temporary:
+        with tempfile.TemporaryDirectory(prefix=".unit-loss-rebate-", dir=ROOT) as temporary:
             report = {"requests": [], "results": [], "run_id": "unit"}
             checks = GuardedChecks(fake, lambda: 123456, Path(temporary), report)
             checks.baseline = baseline()
@@ -199,7 +265,7 @@ class ConfigurationContract(unittest.TestCase):
 
     def test_interrupt_during_cleanup_preserves_one_failure_and_renders_unknown_restore(self):
         for marker_only in (False, True):
-            with self.subTest(marker_only=marker_only), tempfile.TemporaryDirectory(dir=ROOT / "reports") as temporary:
+            with self.subTest(marker_only=marker_only), tempfile.TemporaryDirectory(prefix=".unit-loss-rebate-", dir=ROOT) as temporary:
                 fake = FakeSession(accept_duplicate=not marker_only)
                 report = {"requests": [], "results": [], "run_id": "unit"}
                 calls = 0

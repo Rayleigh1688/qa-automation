@@ -1,0 +1,5 @@
+#!/bin/sh
+set -eu
+root=$(git rev-parse --show-toplevel)
+cd "$root"
+exec node scripts/python-launcher.mjs scripts/check-repository-files.py staged

@@ -96,6 +96,6 @@ python3 scripts/run-requirement.py ISOP-2022 --export-cases
 python3 scripts/run-requirement.py ISOP-2022 --env .env.fat --execute --insecure
 ```
 
-首轮执行后对异常做固定历史窗口与短时间复核，批次、真实计数与候选问题集中见[问题评审](../bug-review.md)。当前计划已补page_size=5、10分钟窗口及结算毫秒邻域；最新完整计划未全量重跑，不能拿限定复核冒充全量结果。此前投注端点组合映射现修正为R16/R30，R04由新结算邻域组合覆盖；各批冻结快照不修改。
+首轮执行后对异常做固定历史窗口与短时间复核，批次、真实计数与候选问题集中见[问题评审（原记录已退出）](../questions.md#history-results-20261022)。当前计划已补page_size=5、10分钟窗口及结算毫秒邻域；最新完整计划未全量重跑，不能拿限定复核冒充全量结果。此前投注端点组合映射现修正为R16/R30，R04由新结算邻域组合覆盖；各批冻结快照不修改。
 
 本轮`npm run check`通过（298项单测），离线计划导出通过；首次沙箱单测因本地监听限制失败，允许离线测试端口后通过。结果已写入`reports/qa/ISOP-2022/<批次>/results.csv`和`results.html`。只读诊断补充源表汇总和协议计数，无响应身份字段落盘。测试过程未发群，未提交BUG，提交仍需确认清单。

@@ -2,7 +2,7 @@
 
 2026-09-15按用户授权集中整理。本文保留原日期的评审、失败依据和执行边界，原位置的6份零散Markdown已移除；相对链接已调整。正文中的“当前/本轮/未测”仅指所属历史日期，不作为当前状态。
 
-当前入口：[需求索引](../../requirements/README.md) · [2026-09-14班车报告](../../requirements/history/records-through-20261005/test-round-20260914-seven.md)。原始测试JSON、冻结计划和报告未在本次清理中删除；2026-09-10原始结果已在此前清理退出，以下文字不恢复其可复核性。
+当前入口：[需求索引](../../requirements/README.md) · [2026-09-14班车报告（历史摘要）](../../requirements/history/README.md#history-results-20261022)。原始测试JSON、冻结计划和报告未在本次清理中删除；2026-09-10原始结果已在此前清理退出，以下文字不恢复其可复核性。
 
 ## 原记录索引
 
@@ -154,7 +154,7 @@ ORDER BY created DESC, key DESC
 
 | 需求 | 本次分类 | 说明/依据 |
 | --- | --- | --- |
-| 2022 | 已部分实测，等待修复 | 两处注单查询已有首轮和限定复核；按用户最新要求暂停复测。[问题与报告](../../requirements/history/through-ISOP-2072/ISOP-2022/bug-review.md)；不列为从未测 |
+| 2022 | 已部分实测，等待修复 | 两处注单查询已有首轮和限定复核；按用户最新要求暂停复测。[问题与报告（历史摘要）](../../requirements/history/through-ISOP-2072/ISOP-2022/questions.md#history-results-20261022)；不列为从未测 |
 | 2027 | 已部分实测，仍有覆盖缺口 | KYC复核已有历史API及当前固定UI批次中的API步骤；C18分行联动游戏限制等尚未实现。UAT消息仅请求更新，不等于部署完成；不把准备包算实测。[契约评审](../../requirements/history/through-ISOP-2072/ISOP-2027/api/contract-review.md) |
 | 2028 | 新接口字段已提交，未测 | 见上方5处报表/导出 |
 | 2029 | 未定位明确的新API交付 | 主范围为免费旋转领取文案；notify/list字段变化仅相关线索，不据此新增整套接口范围 |

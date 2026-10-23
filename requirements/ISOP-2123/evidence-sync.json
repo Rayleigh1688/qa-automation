@@ -1,0 +1,187 @@
+{
+  "schema_version": 1,
+  "story": "ISOP-2123",
+  "reviewed_at": "2026-10-20",
+  "reviewer": "Codex",
+  "sources": [
+    {
+      "id": "J",
+      "locator": "https://alibaba-international.atlassian.net/browse/ISOP-2123",
+      "revision": "2026-10-16T14:08:05.777+08:00",
+      "status": "READ",
+      "coverage": "完整正文§1—3及图注；评论0/0、startAt=0、total=0；子任务清单、37项附件元信息；关联工作项及remote links空，正文无Lark链接",
+      "checked_at": "2026-10-20"
+    },
+    {
+      "id": "CHILD",
+      "locator": "Jira ISOP-2244、ISOP-2245、ISOP-2246",
+      "revision": "2244 2026-10-20T10:06:27.979+08:00；2245/2246 2026-10-16T14:06:08.614/14:06:10.922+08:00",
+      "status": "READ",
+      "coverage": "三项完整正文均空、评论均0/0；2244进行中，其他待办，无新增业务规则",
+      "checked_at": "2026-10-20"
+    },
+    {
+      "id": "DEMO",
+      "locator": "https://vip-admin-gray.vercel.app/pagcor-admin",
+      "revision": "2026-10-20页面；未提供发布号",
+      "status": "READ",
+      "coverage": "只读总合菜单、Filplay税收分页及字段、会员列表字段及交叉注册品牌、门店列表域名和编辑入口；非业务数据验证",
+      "checked_at": "2026-10-20"
+    },
+    {
+      "id": "VISUAL",
+      "locator": "Jira ISOP-2123 37项图片附件及剩余Demo页面",
+      "revision": "未完整读取",
+      "status": "PENDING",
+      "coverage": "37项附件像素未逐张核对，其余原型页面及交互未完整读取",
+      "checked_at": null
+    },
+    {
+      "id": "API",
+      "locator": "合规后台提测版本、站点参数合同、既有报表字段公式与精度",
+      "revision": "未刷新",
+      "status": "PENDING",
+      "coverage": "当前部署和接口合同未核；独立业务样本与原公式需执行前确认",
+      "checked_at": null
+    }
+  ],
+  "changes": [
+    {
+      "id": "S01",
+      "source_ids": [
+        "J",
+        "CHILD"
+      ],
+      "case_ids": [
+        "ISOP-2123-C01",
+        "ISOP-2123-C02",
+        "ISOP-2123-C03",
+        "ISOP-2123-C04",
+        "ISOP-2123-C05",
+        "ISOP-2123-C06",
+        "ISOP-2123-C07",
+        "ISOP-2123-C08"
+      ],
+      "status": "SYNCED",
+      "action": "正式编排Header、记忆、切站、在线人数与总合导航",
+      "verification": "仅设计与导图离线核验，全部NOT_RUN；未执行业务，视觉与接口缺口保留"
+    },
+    {
+      "id": "S02",
+      "source_ids": [
+        "J",
+        "DEMO"
+      ],
+      "case_ids": [
+        "ISOP-2123-C09",
+        "ISOP-2123-C10",
+        "ISOP-2123-C11",
+        "ISOP-2123-C12",
+        "ISOP-2123-C13"
+      ],
+      "status": "SYNCED",
+      "action": "编排钱包入选、UID/KYC共享、分站资金与注册品牌",
+      "verification": "仅设计与导图离线核验，全部NOT_RUN；未执行业务，视觉与接口缺口保留"
+    },
+    {
+      "id": "S03",
+      "source_ids": [
+        "J",
+        "DEMO"
+      ],
+      "case_ids": [
+        "ISOP-2123-C14",
+        "ISOP-2123-C15",
+        "ISOP-2123-C16",
+        "ISOP-2123-C17",
+        "ISOP-2123-C18",
+        "ISOP-2123-C19"
+      ],
+      "status": "SYNCED",
+      "action": "编排分站域名新增、编辑、重复拒绝与取消",
+      "verification": "仅设计与导图离线核验，全部NOT_RUN；未执行业务，视觉与接口缺口保留"
+    },
+    {
+      "id": "S04",
+      "source_ids": [
+        "J"
+      ],
+      "case_ids": [
+        "ISOP-2123-C20",
+        "ISOP-2123-C21",
+        "ISOP-2123-C22",
+        "ISOP-2123-C23",
+        "ISOP-2123-C24"
+      ],
+      "status": "SYNCED",
+      "action": "编排资金、通道、交易、注单与真实导出分站",
+      "verification": "仅设计与导图离线核验，全部NOT_RUN；未执行业务，视觉与接口缺口保留"
+    },
+    {
+      "id": "S05",
+      "source_ids": [
+        "J"
+      ],
+      "case_ids": [
+        "ISOP-2123-C25",
+        "ISOP-2123-C26",
+        "ISOP-2123-C27",
+        "ISOP-2123-C28"
+      ],
+      "status": "SYNCED",
+      "action": "编排游戏清单、单个/批量确认及取消",
+      "verification": "仅设计与导图离线核验，全部NOT_RUN；未执行业务，视觉与接口缺口保留"
+    },
+    {
+      "id": "S06",
+      "source_ids": [
+        "J"
+      ],
+      "case_ids": [
+        "ISOP-2123-C29",
+        "ISOP-2123-C30",
+        "ISOP-2123-C31",
+        "ISOP-2123-C32",
+        "ISOP-2123-C33",
+        "ISOP-2123-C34",
+        "ISOP-2123-C35",
+        "ISOP-2123-C36"
+      ],
+      "status": "SYNCED",
+      "action": "编排报表合计、UID去重、分页、筛选、导出与空集",
+      "verification": "仅设计与导图离线核验，全部NOT_RUN；未执行业务，视觉与接口缺口保留"
+    },
+    {
+      "id": "S07",
+      "source_ids": [
+        "J"
+      ],
+      "case_ids": [
+        "ISOP-2123-C15",
+        "ISOP-2123-C24",
+        "ISOP-2123-C26",
+        "ISOP-2123-C27",
+        "ISOP-2123-C35"
+      ],
+      "status": "SYNCED",
+      "action": "交叉复核：导出范围按各入口既有合同核完整集合；配置操作补授权恢复及两站/非目标后态检查，异常先保留失败证据",
+      "verification": "已同步卡片/CSV/XMind，36条×9字段往返一致；全部未执行"
+    }
+  ],
+  "files": {
+    "design.md": "658171852b8c1d827ff0afa84fdb5adba10fad6a2bda2dff66910718e04dc715",
+    "questions.md": "05b52864e699ec0035d43f769948ffe80b68d7253e578fdc0708b2a19bd08c0e",
+    "test-cases.md": "db757ebfadf22b283e970a130edc9dbffb2eb00367bb67baeb567bd4b6dd71fc",
+    "cases.csv": "e65f42778c6c8b816d414f88da13dcc07f156b79e946fe480c7226c82a6f242f",
+    "evidence-sync.md": "f9a4c28f84e7118ccca235ef97063bdc8d4d663b226e667b5dece91161aad2f4"
+  },
+  "artifacts": {
+    "ISOP-2123-测试用例.xmind": {
+      "sha256": "dd95ee899705fcecf4847efbe7acb7819b2ebec6df73bb8a2b315498b24adec9",
+      "verification": "2026-10-22 ZIP完整、36条九字段与CSV及正式卡片一致、7模块及向右结构保留。2026-10-20通过CUA在XMind客户端打开当时文件，画布36条/7模块、中文及向右结构正常；当次未操作保存，打开前后hash一致，仅对应当时文件。未逐条视觉验收；业务未执行。",
+      "previous_sha256": "95ab9695182b902d6a695c710634a273159457c2402e647c8a833091b4f56036",
+      "verified_at": "2026-10-22",
+      "provenance": "2026-10-22提交前发现当前包字节不同于2026-10-20登记版本，新增缩略图、content.xml及Vana 26.03.04129创建者元数据，符合客户端重存格式；具体重写时间与操作者未证实。保留当前文件，未重新生成或修改二进制；本次未重演客户端保存流程。"
+    }
+  }
+}

@@ -4,7 +4,7 @@
 
 ## 需求与历史记录
 
-- 顶层当前需求仅保留[ISOP-2100](../requirements/ISOP-2100/design.md)。其余19条移入[archived-20261005](../requirements/history/archived-20261005/README.md)，与原13条历史需求合计32条。
+- 顶层当前需求仅保留[ISOP-2100](../requirements/history/archived-20261016/ISOP-2100/design.md)。其余19条移入[archived-20261005](../requirements/history/archived-20261005/README.md)，与原13条历史需求合计32条。
 - 六份跨需求日期快照移入`requirements/history/records-through-20261005/`，从[历史索引](../requirements/history/README.md)查阅。
 - 保留原有用户修改、规则、问题、用例状态、来源及日期结论，重算迁移后的引用。归档只表示当前工作范围收敛，不新增完成、上线或测试通过结论。
 - 既有需求解析器支持显式编号查历史；npm/CLI、P0资产及报告输出路径保持兼容。自动扫描与默认批量导出只处理顶层当前需求。状态页面默认显示当前需求，历史可筛选，旧人工修订单独保留。

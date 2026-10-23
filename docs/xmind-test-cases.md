@@ -13,7 +13,7 @@
 npm run qa:xmind -- template --out reports/qa/xmind-demo/template.xmind --title 测试用例
 
 # 从已有总表导出导图；读新版总表时只提取用例定义，不继承登记状态
-npm run qa:xmind -- export --cases requirements/ISOP-2100/cases.csv --out reports/qa/xmind-demo/ISOP-2100.xmind --title ISOP-2100
+npm run qa:xmind -- export --cases requirements/history/archived-20261016/ISOP-2100/cases.csv --out reports/qa/xmind-demo/ISOP-2100.xmind --title ISOP-2100
 
 # 导入人工编写的导图，目标为新的目录
 npm run qa:xmind -- import --input reports/qa/xmind-demo/template.xmind --out reports/qa/xmind-demo/imported
@@ -94,5 +94,9 @@ npm run qa:report -- --cases reports/qa/xmind-demo/imported/cases.csv
 可导入模块为`scripts/qa_core/xmind_archive.py`与`xmind_cases.py`，CLI为`scripts/xmind-test-cases.py`。读取现代`content.json`和经典`content.xml`导图；模板与导出新文件使用现代JSON格式。结果版保留源格式、原主题关系及附件，使用向右结构，移除已过期的预览缩略图，并为用例增加本批结果子树。加密文件和无法安全保存的经典XML结构修改明确拒绝。
 
 2026-10-06本机定向验证：现代JSON模板已在Xmind客户端打开，向右布局正常；通过“当前设备”另存后的副本再次导入，两条用例字段一致。W26评审摘要首版也已在本机核对向右展开及分支折叠，验证文件在`reports/qa/xmind/20261006/`及`reports/qa/W26/20261006-requirement-review/`，未执行业务测试。经典XML、附件保留、多sheet及异常文件边界由离线单测验证；其他客户端版本、人工修改具体用例或折叠状态后保存再导入仍待验。
+
+2026-10-20补充验证：2123／2124两份正式用例从Xmind“打开本地文件”成功加载，未出现权限或损坏错误；2123中文与向右布局可见，2124待确认标签及模块折叠、登录用例字段展开已核。当次未操作保存，打开前后核对字节一致；该结论仅对应当时文件。最初工具访问被拒及客户端许可协议是不同层面的提示，不据此修改文件权限、重建导图或开通订阅。
+
+2026-10-22提交前复核：两份当前文件字节均已不同于10-20登记版本，包内新增缩略图、`content.xml`及Vana 26.03.04129创建者元数据，符合客户端重存格式；具体重写时间和操作者未证实。保留当前文件，重新登记各单`evidence-sync.json`中的交付SHA256。两包ZIP完整，重新经共享导入模块读取，36／63条九字段分别与CSV及正式卡片一致；2124待确认依赖保留。本次是对当前文件的离线复核，没有重演客户端保存流程，也未逐条视觉验收或执行业务测试。
 
 Xmind导入、导出、结果展示已有代码；Xmind直接生成API/UI可运行计划、自动提交业务操作、联动Telegram任务或一键执行业务测试均未接入。当前命令是设计与结果交换入口，不改变已有业务范围及执行门禁。

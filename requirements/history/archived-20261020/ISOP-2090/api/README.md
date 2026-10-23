@@ -1,0 +1,144 @@
+# ISOP-2090定向只读与受控配置能力
+
+> 2026-10-22历史证据退出：本单原始API／UI报告、静态图片、SQL／TSV和导出结果已清理；下文原批次路径仅作日期定位，不表示文件仍可读取。失败与未完成边界见[日期摘要](../questions.md#history-results-20261022)，三次已完成恢复与最小身份／业务定位资料保存在忽略的`api/local-state/retained/ISOP-2090/20261016-retest/`，不据此重放业务。
+
+> 2026-10-20按用户决定[归档](../../README.md)。以下规则、实测和未完成项按原日期保留，不再自动续跑；归档不表示缺陷修复或业务PASS。
+
+[需求设计](../design.md) · [功能用例](../test-cases.md) · [后台契约](../../../../../api/runbooks/ADMIN.md)
+
+2026-10-12已实现活动初采、公开源码取证、日报／客户端定向只读及受控配置保存／精确恢复；10-16补充成对统计日期窗口、配置检查选择及5个CLI的输出路径校验，并已实际用于FAT复测。当前存在净输／流水、同日再次入账、明细和配置校验问题，三个异常配置批均已精确恢复；完整业务结论及本地检查见[10-16记录（原记录已退出）](../questions.md#history-results-20261022)，历史批次见[10-12记录（原记录已退出）](../questions.md#history-results-20261022)。没有本单`plan.json`；命令仍限定FAT，不接入默认P0或`qa:requirement`，API子项通过不提升复合功能卡PASS。
+
+## 顺序与命令
+
+先执行需求证据检查，再核选中FAT配置与本轮后台登录码；已有账号不重建。后台与页面同账号串行接力，执行期间不在另一入口重新登录。命令默认离线，不读取或输出凭据；实际采集需要显式`--execute`。本机采用项目`.venv`的Python 3.12，运行方式见[本地手册](../../../../../docs/local-running.md)。
+
+`initial-read.py`、`static-sources.py`、`run-readonly.py`、`run-client-readonly.py`、`run-config.py`的`--out`统一经[路径校验](../../../../../scripts/qa_core/output_paths.py)：相对路径从当前工作目录解析，先expanduser／resolve为绝对路径，再确认仍在仓库内。仓库外路径及经符号链接解析后越出仓库的路径，在参数解析阶段、读取凭据／创建目录／登录／请求之前拒绝；并非一概禁止指向仓库内的符号链接。报告引用仍写仓库相对路径，避免相对输出目录在已发请求后才触发relative_to错误。新复测显式选新的当日目录，默认10-12路径仅为兼容保留，不代表本次采集属于历史批次。
+
+```bash
+npm run qa -- evidence ISOP-2090
+python3 requirements/history/archived-20261020/ISOP-2090/api/initial-read.py
+python3 requirements/history/archived-20261020/ISOP-2090/api/run-readonly.py
+python3 requirements/history/archived-20261020/ISOP-2090/api/run-readonly.py --env .env.fat --execute --insecure
+```
+
+`initial-read.py --execute --insecure`只fresh后台登录，并查询既有`GET /admin/promo/list`的“输值”名称和全量首100项；不保存配置。日报suite只fresh后台登录一次，随后读取`GET /admin/promo/nl/list`：100条参考、10条完整分页、指定统计日（省略窗口时逐日检查仍为10-07—10-11）、精确会员/VIP/分级筛选、不存在UID、missing/invalid鉴权，以及历史冻结行的内部金额与人数关系。账号、手机与UID在公开结果中用M/R别名；完整参数和响应保存0600私有文件。
+
+新日期复测须显式选择日期窗口或下述单日模式，并使用新的`--out`；窗口模式成对指定`--start-date`与`--end-date`（GMT+8统计日，闭区间1—31天）。同一窗口应用到参考集合、分页、身份／VIP筛选、鉴权及末次稳定复读；逐日检查只缩窄该窗口。参数缺失、格式错误及倒序在读取凭据前拒绝；基线返回越窗行或超过100条时停止依赖断言，后者需按日切分，不把采集上限判成产品失败。省略日期保留10-12兼容行为，不代表覆盖后续日期；离线`--reassess`不能指定新窗口。
+
+合并保留10-13的单日参数`--stats-day YYYY-MM-DD`：等价于起止日期同为指定日，统一约束参考、分页、组合筛选、鉴权及最终复读；日期探针只查询该日，混日行在依赖金额／汇总断言前拒绝。只接受有横线的有效日历日期，时间字符串／非法日期在读取凭据前拒绝。该参数与`--start-date`／`--end-date`互斥，也不能与`--reassess`同时使用；成对窗口的缺参、倒序、31天上限及越窗守卫继续保留。空日金额、门槛、唯一性、分页和人数汇总保持NOT_RUN，结构、空筛选与鉴权可独立核，不以邻日空集替代本日基线。
+
+```bash
+python3 requirements/history/archived-20261020/ISOP-2090/api/run-readonly.py --start-date 2026-10-12 --end-date 2026-10-15 --out reports/qa/ISOP-2090/20261016-retest
+```
+
+单日模式的零请求预览：
+
+```bash
+python3 requirements/history/archived-20261020/ISOP-2090/api/run-readonly.py --stats-day 2026-10-12 --out reports/qa/ISOP-2090/20261023-preview
+```
+
+以上示例均为零请求预览；归档任务不会自动续跑，新的明确测试范围、FAT配置和样本就绪后才加`--env .env.fat --execute --insecure`。Jira处于UAT验收不自动改变这些CLI的FAT守卫；选择UAT时需另核对应环境、活动身份和契约，不能仅替换域名后运行写入。
+
+10-12历史原始证据原在`reports/qa/ISOP-2090/20261012-full/`，原维护阶段本机缺失；10-16当时显式写入忽略的`reports/qa/ISOP-2090/20261016-retest/`，该批原始结果已于2026-10-22退出。新执行仍将公开结果JSON及报告HTML/CSV与私有原件分开。每次采集新建`api-readonly-<timestamp>`，不会清理既有P0或覆盖旧证据。报告子项关联C01/C02/C03/C04/C08/C14/C19；读取报表算术不证明独立注单、奖金入账、账变、流水源、05:00自动派发、恢复重跑或真实CSV通过。未登录保护不替代低权限角色授权与跨会员隔离。
+
+10-13原单日采集及独立礼金／账变／流水的日期摘要见[历史补记](../questions.md#history-results-20261013)。本轮仅合并该日期结论与单日CLI兼容能力：统一封顶150却实派240／流水480的失败继续保留，新日整数实派×倍数一致不表示旧小数差异已修复，04:05／11:24记录时点不证明05:00自动任务。10-16较晚CSV／配置／H5证据及C04／C21失败不被较早缺口覆盖；旧完整报告不恢复为当前入口。本机忽略原件与远端退出记录的区别见[本机可用性](../questions.md#merge-local-availability-20261023)。
+
+公开基线含`coverage_features`，明确是否含负净输、多规则、上限0、正门槛与非正净输样本；金额、门槛、唯一性、汇总和分页在空基线时保持NOT_RUN。稳定`check_key`用于离线重分类，旧报告从原用例名称迁移，不能依赖执行序号。明细金额不符归C14子项；没有负净输样本时不据此判C04整卡失败。
+
+离线重分类既有证据，不再次登录或发送GET：
+
+```bash
+python3 requirements/history/archived-20261020/ISOP-2090/api/run-readonly.py --reassess <原api-readonly目录/result.json>
+```
+
+10-12当时测试上下文将10-07两条记录识别为提测前种子/旧配置版本，100倍比例差异保留为历史不一致待确认，不直接判当前算法BUG。公式产生亚分金额而报表两位显示的差异保持精度未决，不指定舍入算法。已实派×倍数不等于打码金额的候选单独保留，独立入账/流水源证据由实际对账另行提供。重分类生成新目录并保留原目录，仍引用原采集时间和私有响应。
+
+客户端必须与同账号H5页面串行，密码登录会令旧会话失效；只登录客户端、不登录管理员。先传已留的后台活动列表私有快照，再执行详情与真实前端fallback两个GET。`--recorded`只分析已采集两GET，无新登录、无新请求；新报告采用`recorded-readonly-reassessment`，保留原`source_time/source_run_id`，将复核时间记入`classification.reviewed_at`，并明确`network_requests=0`。第一次名称过滤快照为空，应使用包含ty41的全量活动快照，不能补猜业务接口。
+
+```bash
+python3 requirements/history/archived-20261020/ISOP-2090/api/run-client-readonly.py --admin-snapshot <已留admin-promo-list-private.json>
+python3 requirements/history/archived-20261020/ISOP-2090/api/run-client-readonly.py --execute --insecure --admin-snapshot <已留admin-promo-list-private.json>
+python3 requirements/history/archived-20261020/ISOP-2090/api/run-client-readonly.py --recorded <原client-readonly目录/result.json> --admin-snapshot <已留admin-promo-list-private.json>
+```
+
+客户端采集公开响应字段类型、游戏目录ID及合规属性、比例和富文本长度/hash，原始响应仍为0600。旧后台快照与当前客户端的时点差异、合规header变化、目录属性含义未确认时不能定推荐失败。合规校验与推荐来源映射只关联C16 API子项。
+
+真实客户端采集出现脚本错误或业务断言FAIL时退出1；成功退出0仍须查看各子项及未测边界。离线`--recorded`成功完成分类时退出0，仅表示分析完成，不表示原业务结果通过。
+
+## 受控配置与恢复
+
+`run-config.py`默认只输出dryrun合同。执行限定`.env.fat`的两端FAT主机，必须同时指定`--execute --fat-guard ISOP-2090-activity41`；本环境按已接受的TLS例外加`--insecure`。同账号后台页面与API仍串行。10-16重复组名、超长组名和负倍数均出现异常接受，三个独立批已停止依赖检查并精确恢复；其余7项符合本轮断言。后续复验另建当日批次并显式限定范围，不因恢复成功重放默认整批；未将本能力扩为UAT。
+
+```bash
+python3 requirements/history/archived-20261020/ISOP-2090/api/run-config.py
+python3 requirements/history/archived-20261020/ISOP-2090/api/run-config.py --env .env.fat --execute --fat-guard ISOP-2090-activity41 --out <本次批次根目录> --restore-from <本次失败批次/result.json> --insecure
+python3 requirements/history/archived-20261020/ISOP-2090/api/run-config.py --env .env.fat --execute --fat-guard ISOP-2090-activity41 --marker-only --insecure
+```
+
+2026-10-16新增`--checks <key> [...]`，只执行所选检查，不隐式重放同值保存或其他负例；省略时保留原执行顺序。白名单为`same-value`、`duplicate-game`、`empty-group-name`、`duplicate-group-name`、`long-group-name`、`negative-lower-limit`、`negative-upper-limit`、`negative-multiple`、`negative-group-rate`及`negative-vip-ratio`。选择按原顺序执行，空值、重复项或未知项在请求前拒绝；不能与`--marker`、`--marker-only`或`--restore-from`组合。以下均为零请求预览，执行时仍须核当前FAT环境、对象与恢复前置后显式加执行参数：
+
+```bash
+python3 requirements/history/archived-20261020/ISOP-2090/api/run-config.py --checks duplicate-group-name --out reports/qa/ISOP-2090/20261016-retest
+python3 requirements/history/archived-20261020/ISOP-2090/api/run-config.py --checks long-group-name negative-lower-limit negative-upper-limit negative-multiple negative-group-rate negative-vip-ratio --out reports/qa/ISOP-2090/20261016-retest
+```
+
+未选择项记NOT_RUN／本轮未选；所选项首次异常后停止后续检查并按原守卫恢复。原失败保留，确认恢复且场景独立后才另开定向批次，不用选择参数绕过失败依赖。恢复时`--out`必须指向原批次根目录，`--restore-from`引用该根目录下本次记录，不跨批套用10-12基线。
+
+每次POST前fresh GET核CAS；恢复只允许当前完整业务状态精确匹配本次记录的候选，或已等于原基线，仅忽略`updated_at/updated_uid/updated_name`。未知额外字段或外部更改不覆盖；后端未提供原子版本锁，读取到写入之间的竞态仍是边界。POST异常不重试，最多尝试一次恢复。登录码、token不落盘，证据请求body省略`google_code`，完整响应0600。
+
+下表仅保留10-12历史操作；原始报告本机缺失，不能直接执行其旧恢复路径。10-16配置10项及三批恢复见[本轮记录（原记录已退出）](../questions.md#history-results-20261022)。
+
+| 10-12操作 | 原始证据原定位 | 当时已证实范围与边界 |
+| --- | --- | --- |
+| 配置校验 | `config-directed-20261012T170840632233/result.json` | 同值保存读回、跨组重复游戏与空组名拒绝已核；重复组名HTTP200／status true且读回只有`config.games`精确变成候选，保留C18 FAIL／BR-04。首次异常接受后停止，超20字组名及负门槛／上限／倍数／组比例／VIP比例未执行，原marker也跳过 |
+| 单独恢复 | `config-directed-20261012T171159147797/result.json` | candidate归属与fresh CAS成立后，一次POST恢复，全部业务字段回到原基线；这是清理成功，原负例FAIL及缺陷不变 |
+| 独立summary marker | `config-directed-20261012T171326673083/result.json` | 仅原基线→唯一marker→单次fresh client三GET→精确恢复，无负例；验证C15 API富文本动态同步，管理员及客户端恢复后与17:08基线一致，不提升H5／App整卡结果 |
+
+原配置批首次在恢复等待码时中断，原`result-interrupted-original.json`保留；加强候选归属守卫后另批清理。marker已完成并恢复，随后本地HTML渲染长证据串异常；只使用留存0600响应离线重建，未补打业务请求。
+
+## 2026-10-16公开源码复核
+
+已匿名读取当前FAT后台`umi-bb0e614e.js`、ty41路由`index-bdb1860d.js`及H5 `hov c9154c15 / index-DEwwLKRI.js`，核实列表／日报／导出SDK路径、ty41保存映射与JSON标头／CBOR body、明细bonus优先、动态VIP／富文本及推荐fallback。组state在当前UI编码为0启用、1停用，与活动顶层state1有效分开；前端组名长度按20个UTF-16单位校验，服务端拒绝结果须看业务实测。
+
+原件、完整hash和片段定位在新批`evidence/source/source-contract-20261016.json`及同名Markdown，范围与版本边界见[10-16记录（原记录已退出）](../questions.md#history-results-20261022)。这是对当前片段和保留旧合同的核对，不是10-12源码字节diff，旧源码原件本机缺失；后端发布号仍未取得。导出共享stream／MQTT新chunk本轮未重读，下方10-12导出内部实现继续标为历史观察。
+
+10-16已从真实后台原生保存窗口取得产品CSV，19行／14列共266格与18:51同筛选API集合及字段一致；该一致性仍携带错误净输／打码，不判金额算法通过，也不由本CLI生成报告CSV替代产品CSV。H5 Update Now已获用户授权，更新后的页面范围见本轮记录，不以旧缓存或公开源码代替UI验收。
+
+## 2026-10-12前端合同历史依据
+
+| 操作 | 方法与路径 | 已读参数/响应 |
+| --- | --- | --- |
+| 活动列表 | GET `/admin/promo/list` | `page/page_size/activity_name`；本轮已定向采集ty41活动；初采全量只取首100项 |
+| 配置保存 | POST `/admin/promo/update` | ty41映射`kn`组件，提交首步表单+`ty/multiple(string)/google_code(number)/config(JSON string)/summary`；只读suite不调用，受控保存见上节 |
+| 输值日报 | GET `/admin/promo/nl/list` | `page/page_size/username/uid/phone/vip/level/stime/etime`；日期为`YYYY-MM-DD`，VIP为字符串数值，level为bronze/silver/gold/platinum/diamond；组件不附加activity_id/pid |
+| 日报导出 | GET `/admin/promo/nl/export` | 同表单筛选加`page=1/page_size=1000/topic_id`；此suite不调用、不代替真实UI CSV |
+| 明细 | 主行`conf`解析 | JSON字符串或数组，不存在本页独立detail请求；页面规则返利优先读`bonus`，否则`capped_amount` |
+| H5活动详情 | GET `/promo/net/loss/detail` | 无pid/query；`data`含`start_time/end_time/cur_time/state/conf/detail/game_list`，本轮`conf`为数组、`game_list=null` |
+| H5推荐fallback | GET `/member/game/listRw` | `game_types=3/page=1/page_size=10/sort=Popular/query=''`；目录行在`data.d` |
+
+日报响应必须解码为业务成功对象：`body.data.data`是行数组，`body.data.t`是总条数，`body.data.s`是汇总对象。空集支持`data=null/t=0`；`data.d`不属于本页合同。主行字段为`stats_day/created_at/valid_bet_amount/payout_amount/net_loss_amount/capped_amount/bonus/lower_limit/upper_limit/multiple/multiple_amount/conf`及身份字段；汇总核`num/net_loss_amount/bonus/multiple_amount`。明细字段为`game_id/group_name/name/valid_bet_amount/payout_amount/net_loss_amount/rate/bonus/capped_amount`；空game_id按基准规则展示，非空按指定游戏展示。
+
+导出共享组件先等待`openStream(fileName)`的原生保存窗口，再调用导出调度并通过MQTT写流。若窗口被取消出现`AbortError`，此时导出API尚未调用，不能判后端导出失败。完整CSV必须由页面实际保存并复核。
+
+ty41配置序列化`zc`保留其余原配置并重写：`venue[{name,game_class,rebate_ratio:[{level,ratio}]}]`、`games[{name,list,rate,state}]`、去重`exclude_games`、第三步`lower_limit/upper_limit`、展开`turnover_limit`、`activity_range/user_list/source_rule/popup_text`，固定`order_review=1/received_type=2`。倍数在活动顶层，删除历史config.multiple。名称trim≤20、比例/金额转字符串、level小写、state为0/1、全会员范围清空名单均属于实际归一化；同值保存必须独立核前后，不能假设完全字节不变。有效片段为`ty41-loss-rebate-save-contract-verified.txt`。早期`ty41-save-contract-snippet.txt`实际是同chunk的ty40 Cashback `nc/sc`，已明确标错，不作为2090写入合同。
+
+实际保存传输以本轮admin主bundle拦截器为准：`umi-d433ca66.js`的`pqr()`在POST且`!notEncode`时执行`e.data=b2(e.data)`，`To=yqr(...pqr(),gqr())`将该拦截器挂到请求；`promoUpdate`仍声明`Be.Json`，所以本请求保留`application/json`标头而body实际为CBOR。证据为`evidence/source/ty41-admin-transport-verified.txt`，对应`20261012T162401424064-umi-d433ca66.js`的offset 3481318；不能单从标头推断JSON编码。
+
+客户端资源`hov 4f2449b7`：详情`game_list`经normalizer后要求非空code和img；有有效详情游戏时最多取前10，不补齐；无有效游戏或详情失败时请求Slot Popular前10。组件不直接读取后台第一组/state，也不在组件层按compliance过滤。More Games固定到`/s-game/category/3?sort=Popular`。VIP表读取详情conf并按五级排序；T&C优先读取详情detail，有文本清理但不根据最新比例自动改写旧正文。
+
+## 源快照与实现
+
+公开源码采集器为`static-sources.py`，仅GET选定FAT域的`/`、`/assets/*.js`、`/_nuxt/*.js`；client还允许HTML已观察的固定`pwa.filbet.com/filbet/dev/v20260129/assets|modules/*.js`。不登录或携带token，用`NoRedirect`在发送跳转目标请求前拒绝重定向，默认有数量/大小上限。显式`--asset`可下载已观察的静态chunk；HTML fallback不视为有效JS。首次引用解析存在`assets/assets/`路径重复，所得HTML保留在证据中，后续修正并以真实有效JS为合同来源。
+
+| 2026-10-12有效公开源 | SHA256 |
+| --- | --- |
+| `umi-d433ca66.js`：SDK nl/list、nl/export、promo/update | `03797e50187548d918f78a0adbee4a6e06e6586a11e86579f1f6190ead0440fd` |
+| `index-0daee2f9.js`：ty41配置/日报/明细/筛选 | `acc738da5bbea8fb79d861710940cd385c43df7f013e361cae28158db92093c1` |
+| `index-3f1ae5ae.js`：导出窗口与调度 | `27a17b4530753676d06c0983c6a7035131e273985d237f46f6f2a0ee765c6c9a` |
+| `index-Cucz2P_Y.js`：hov4f2449b7 H5详情、VIP、T&C、推荐与More Games | `1ac40d83556d29199e266439ebd1876c48c5634c34c0eb7dff0a1df143fca9d8` |
+
+上表为10-12历史hash及原定位，旧快照当前本机缺失；10-16快照原在`reports/qa/ISOP-2090/20261016-retest/evidence/source/`，2026-10-22已退出，仅保留日期合同摘要，不冒充恢复旧源码。源码证明请求/展示实现，不证明业务规则正确或实际取数通过。共享逻辑在[`scripts/filbet/loss_rebate.py`](../../../../../scripts/filbet/loss_rebate.py)、[`loss_rebate_client.py`](../../../../../scripts/filbet/loss_rebate_client.py)及[`loss_rebate_config.py`](../../../../../scripts/filbet/loss_rebate_config.py)，本目录CLI只负责参数。定向离线fixture验证真实结构、Decimal精度、鉴权不泄露、分页去重、空基线未测、覆盖缺口、公开脱敏、客户端code/img资格、离线采集来源及配置恢复守卫。
+
+```bash
+env PYTHONPATH=scripts python3 -m unittest discover -s tests/unit -p 'test_loss_rebate*.py'
+```

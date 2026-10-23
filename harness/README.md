@@ -11,6 +11,7 @@ Harness 记录测试为什么失败、如何定位以及哪些现象属于已知
 | 账号前置、KYC/流水/钱包/充值/提现落库状态 | [`database-debug.md`](database-debug.md) | [`api/p0/README.md`](../api/p0/README.md) |
 | 已确认重复出现的产品或 FAT 环境异常 | [`known-errors.md`](known-errors.md) | 对应 API/UI/DB 调试页 |
 | 偶发失败、重试后恢复、需要统计触发条件 | [`flaky-tests.md`](flaky-tests.md) | 稳定复现后移入 `known-errors.md` |
+| 流量上涨容量准备、生产监控／日志、接口或报表定位 | [分模块 HTML 报告](../testing-plan/observability-capacity-report-2026-10-19.html) | 固定七天排17。已收敛首批补监控对象，未闭合全部根因：Game资金链／登录优先补span，再覆盖高频与既有错误路径、后台查询；全请求指标与采样trace分开，真实Game handler及服务映射待核。新增RW局部约束：15日七compute Pod同刻CPU最高约51.36核，compute-2受限CFS周期采样约59%—95%，18:05—18:17采样已高，不当算力损失比例或回填致因。先核每Pod配额／节流、任务阶段与最终新鲜度；同名BI sink已区分内部dev／uat，不据此判重复浪费。HTTP错误、CPU聚合与Game分母等边界见[技术记录及计划](../testing-plan/07-可观测性与性能定位.md#七天排17的跨平台均衡分析2026-10-19)。不据全群均值保证3倍容量或换算报价；生产只读、账号调查暂停、监控未部署 |
 
 ## 记录规则
 

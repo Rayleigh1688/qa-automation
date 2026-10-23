@@ -196,6 +196,9 @@ class WorkflowTests(unittest.TestCase):
 
     def test_result_import_excludes_manual_and_partial_checkpoints(self):
         from qa_core.execution_plan import expand
+        seed = self.state.seed()
+        next(row for row in seed if row['story']==self.story)['archived'] = False
+        (self.root/'requirements/status-seed.json').write_text(json.dumps(seed))
         plan = json.loads((self.root/'requirements'/self.story/'plan.json').read_text())
         case = next(c for c in expand(plan) if c.get('steps') and c['review']['类型']=='API')
         folder = self.root/'reports/qa'/self.story/'run';folder.mkdir(parents=True)
@@ -216,6 +219,59 @@ class WorkflowTests(unittest.TestCase):
         collect_results(self.state)
         row = next(r for r in self.state.view()['requirements'] if r['story']==self.story)
         self.assertEqual(len(row['automatic']),1)
+
+    def test_archived_results_are_not_read_and_existing_events_remain(self):
+        from qa_core.case_report import FIELDS
+        from qa_core.execution_plan import validate
+        # The collection scenario uses a small synthetic plan and report.
+        story = 'ISOP-1'
+        current = self.root/'requirements'/story;current.mkdir()
+        seed_path = self.root/'requirements/status-seed.json'
+        seed_path.write_text(json.dumps([{'story':story,'archived':False}]))
+        folder = self.root/'reports/qa'/story/'current-run';folder.mkdir(parents=True)
+        case = {'id':'C1','review':dict(zip(FIELDS,['C1','API','fixture','只读查询',
+                '本地合成样本','查询列表','业务成功','高','C01'])),
+                'steps':[{'id':'query','actor':'A','action':'api','contract':'read','expect':[
+                    {'path':'http','op':'eq','value':200},{'path':'body.status','op':'eq','value':True}]}]}
+        plan = {'schema_version':2,'requirement':story,'acceptance_ids':['C01'],
+                'services':{'admin':{'env':'ADMIN_URL'}},'actors':{'A':{'services':['admin']}},
+                'contracts':{'read':{'service':'admin','method':'GET','path':'/fixture/list',
+                                     'encoding':'json','write':False}},'cases':[case]}
+        cases = validate(plan)
+        (folder/'cases.snapshot.json').write_text(json.dumps([c['review'] for c in cases]))
+        (folder/'plan.snapshot.json').write_text(json.dumps(plan))
+        result = {'mode':'execution','requirement':story,'run_id':'current-run',
+                  'source_time':'2026-10-22T01:00:00Z','cases_sha256':'fixture',
+                  'timings_ms':{'report':1},'results':[{'id':'C1','status':'FAIL'}]}
+        (folder/'result.json').write_text(json.dumps(result))
+        collect_results(self.state)
+        self.state.manual(story,self.edit())
+        self.state.append(story,'preflight',{'status':'BLOCKED','source':'fixture'})
+        before = self.state.view()['requirements'][0]
+        self.assertEqual(len(before['automatic']),1)
+        self.assertEqual(before['automatic'][0]['status'],'FAIL')
+        restored = folder.with_name('restored-old-run');restored.mkdir()
+        for name in ('cases.snapshot.json','plan.snapshot.json'):
+            (restored/name).write_bytes((folder/name).read_bytes())
+        (restored/'result.json').write_text(json.dumps({**result,'run_id':'restored-old-run',
+                                                       'results':[{'id':'C1','status':'PASS'}]}))
+        archive = self.root/'requirements/history/fixture'/story
+        for state in ('seed-archived','directory-archived','missing','ambiguous'):
+            with self.subTest(state=state):
+                seed_path.write_text(json.dumps([{'story':story,'archived':state=='seed-archived'}]))
+                if state=='directory-archived':
+                    archive.parent.mkdir(parents=True)
+                    current.rename(archive)
+                elif state=='missing':
+                    archive.rmdir()
+                elif state=='ambiguous':
+                    current.mkdir();archive.mkdir()
+                with patch('qa_workflow.state.automatic_evidence') as read_report:
+                    collect_results(self.state)
+                    read_report.assert_not_called()
+                after = self.state.view()['requirements'][0]
+                for key in ('automatic','manual','workflow','history'):
+                    self.assertEqual(after[key],before[key])
 
     def test_browser_manual_edit_reload_keeps_api_failure(self):
         self.state.append(self.story,'automatic',{'status':'FAIL','time':'2026-09-14','case_ids':['case-1'],'report':'reports/qa/test/results.html'})

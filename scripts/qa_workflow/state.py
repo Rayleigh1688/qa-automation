@@ -3,6 +3,7 @@ import json
 import sqlite3
 from datetime import datetime, timezone
 from pathlib import Path
+from requirement_paths import requirement_dir
 from qa_delivery.state import digest
 from qa_core.execution_plan import expand
 from qa_core.team_delivery import mode
@@ -133,9 +134,18 @@ def automatic_evidence(root, path, story):
 
 
 def collect_results(state):
-    """Only completed execution reports become automatic evidence; never import manual merges."""
+    """Collect completed current-story reports without changing retained history."""
     for seed in state.seed():
         story = seed['story']
+        if seed.get('archived'):
+            continue
+        try:
+            folder = requirement_dir(state.root, story)
+        except ValueError:
+            # An invalid or ambiguous location cannot establish current scope.
+            continue
+        if not folder.is_dir() or folder.parent != state.root/'requirements':
+            continue
         for path in sorted((state.root/'reports/qa'/story).glob('*/result.json')):
             try:
                 payload = automatic_evidence(state.root,path,story)

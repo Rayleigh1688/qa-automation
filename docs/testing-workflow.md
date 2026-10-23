@@ -1,6 +1,6 @@
 # 用例与结果流程
 
-2026-10-05证据退出：本文引用的非2100静态测试结果已按用户授权清理，日期结论保留为当时记录，不代表当前实测；范围见[整理记录](project-cleanup-2026-10-05.md)。
+2026-10-22证据退出：历史API／功能执行结果及重复日期报告已按用户授权清理，必要失败与未决摘要保留在各单问题文档，身份／恢复资料另存忽略目录。见[瘦身记录](project-cleanup-2026-10-22.md)；日期结论不代表当前实测，已退出结果不可用于重建报告。
 
 适用：新需求专项；2026-09-11起按此流程组织。原P0、资金链和CLI继续兼容。ISOP-2027为历史试点；10-05归档／清理范围见[整理记录](project-cleanup-2026-10-05.md)，当前任务单见[需求索引](../requirements/README.md#当前需求)。W26各单的规则、待确认问题及初步测试重点分别放在本单`design.md`、`questions.md`、`test-cases.md`，批次总页只维护整体结论与导航。
 
@@ -98,7 +98,7 @@ npm run qa:requirement -- ISOP-2027 --export-cases
 
 ```bash
 # 只检查用例结构；不登录、不运行测试
-npm run qa:report -- --cases requirements/ISOP-2100/cases.csv
+npm run qa:report -- --cases requirements/history/archived-20261016/ISOP-2100/cases.csv
 ```
 
 `qa:requirement -- <Story> --rebuild <实测目录>`可从仍存在的原始结果及冻结用例离线重建视图；已退出的历史目录不能重建或充当最新证据。
