@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "story": "ISOP-2090",
-  "reviewed_at": "2026-10-12T17:28:50.524877+08:00",
+  "reviewed_at": "2026-10-13T12:42:43.329627+08:00",
   "reviewer": "Codex / coverage_review 独立语义复核",
   "sources": [
     {
@@ -9,40 +9,40 @@
       "locator": "https://alibaba-international.atlassian.net/browse/ISOP-2090",
       "revision": "updated 2026-10-05 10:06:14 GMT+8",
       "status": "READ",
-      "coverage": "正文配置、公式、结算、日报和前台；附件视觉仅10-06范围",
-      "checked_at": "2026-10-12"
+      "coverage": "2026-10-13完整正文及19条changelog已读；没有10-12后新增修复或任务说明；附件视觉仅10-06范围",
+      "checked_at": "2026-10-13"
     },
     {
       "id": "JC",
       "locator": "https://alibaba-international.atlassian.net/browse/ISOP-2090?focusedCommentId=17491",
       "revision": "17355发布09-16；17491发布09-28；startAt0/maxResults2/total2",
       "status": "READ",
-      "coverage": "完整两评论重读，17491 v2.0明确取代17355；没有新增Q答复，不推断未来无新评论",
-      "checked_at": "2026-10-12"
+      "coverage": "2026-10-13完整两评论全文重读，17491 v2.0明确取代17355；没有新增Q答复；ADF与旧markdown序列化格式差异不作为规则变更，不推断未来无新评论",
+      "checked_at": "2026-10-13"
     },
     {
       "id": "CHILD",
-      "locator": "Jira ISOP-2192/2193/2194/2195/2196/2197；evidence/jira-delivery-source.json",
-      "revision": "10-12当前状态与返回changelog；2192/2193 FAT10-09，2194 FAT10-12，2195 FAT10-10，2197完成10-12，2196进行中10-12",
+      "locator": "Jira ISOP-2192/2193/2194/2195/2196/2197；reports/qa/ISOP-2090/20261013-rebate/evidence/jira-source-20261013.json",
+      "revision": "10-13当前状态与完整changelog；2192/2193 FAT10-09，2194 FAT10-12，2195 FAT10-10，2197完成10-12，2196由10-12进行中转10-13 10:06:40 FAT",
       "status": "READ",
-      "coverage": "六项正文空、评论0、环境及版本字段空；只核职责和提测变迁，不证明部署或验收",
-      "checked_at": "2026-10-12"
+      "coverage": "六项完整正文空、评论0、环境及版本字段空；无新Q、修复或任务合同；只核提测变迁，不证明部署或验收",
+      "checked_at": "2026-10-13"
     },
     {
       "id": "CF-TRAIN",
       "locator": "https://alibaba-international.atlassian.net/wiki/pages/viewpage.action?pageId=422772740",
       "revision": "版本11 / 2026-09-30",
       "status": "READ",
-      "coverage": "班车页仍写未提测，保留历史日期，不覆盖本轮用户指示或子任务提测状态",
-      "checked_at": "2026-10-12"
+      "coverage": "2026-10-13正文及当前页脚/内联评论重读，版本11仍为09-30旧班车未提测资料，评论空；不覆盖本轮用户指示或子任务提测状态",
+      "checked_at": "2026-10-13"
     },
     {
       "id": "CF-REQUIREMENT",
       "locator": "https://alibaba-international.atlassian.net/wiki/spaces/QT/pages/430899213",
       "revision": "版本1 / 2026-10-07创建",
       "status": "READ",
-      "coverage": "正文空；本轮页脚及内联评论返回空，没有新增合同",
-      "checked_at": "2026-10-12"
+      "coverage": "2026-10-13正文仍空，当前页脚/内联评论均空；另读主项远端链接及相关搜索，未见新合同，不宣称全部相关空间已遍历",
+      "checked_at": "2026-10-13"
     },
     {
       "id": "LARK06",
@@ -105,7 +105,7 @@
       "locator": "LARK06及前端UI白板",
       "revision": "未取得或本轮未刷新",
       "status": "PENDING",
-      "coverage": "10-12未刷新Lark/白板，保留10-06已读边界，不声明远端无变化",
+      "coverage": "10-12、10-13均未刷新Lark/白板，保留10-06已读边界，不声明远端无变化；沿用来源别名不改变未读状态",
       "checked_at": null
     },
     {
@@ -113,7 +113,7 @@
       "locator": "VISUAL06及Jira附件、原型、Figma全文件/历史评论",
       "revision": "未取得或本轮未刷新",
       "status": "PENDING",
-      "coverage": "10-12未重新视觉查看；全文件/历史评论未完整遍历",
+      "coverage": "10-12、10-13均未重新视觉查看；Figma全文件/历史评论未完整遍历；沿用来源别名不改变未读状态",
       "checked_at": null
     },
     {
@@ -129,16 +129,48 @@
       "locator": "六子任务环境/版本字段；C10/C17/C19/C21/C22前置",
       "revision": "未取得或本轮未刷新",
       "status": "PENDING",
-      "coverage": "后端部署、金额精度/最小派发、低权限角色/隔离、通知/App版本、安全任务触发/失败注入/重试、回归影响合同未齐",
+      "coverage": "后端部署、金额精度/最小派发、低权限角色/隔离、通知/App版本、安全任务触发/失败注入/重试、回归影响合同未齐；4001 Bonus字典不证明专用奖金钱包类别",
       "checked_at": null
     },
     {
       "id": "REMAINING-EVIDENCE",
-      "locator": "verification-20261012.md#10-13的接续顺序；test-cases.md；execution-order.md",
+      "locator": "verification-20261013.md#派发时点与剩余边界；test-cases.md；execution-order.md",
       "revision": "未取得或本轮未刷新",
       "status": "PENDING",
-      "coverage": "新日05:00闭环及完整门槛/负NL/上限0/唯一归属/VIP/有效无效样本、真实CSV、推荐条件对齐、App/通知、权限/异常恢复/回归及停止后配置负例未完成",
+      "coverage": "已有目标日礼金/基础Bonus账变/流水独立对账；仍缺05:00任务来源、服务时钟及前置余额、全日配置/资格版本，完整门槛/负NL/上限0/唯一归属/VIP/有效无效样本、真实CSV、推荐条件对齐、App/通知、权限/异常恢复/回归及停止后配置负例",
       "checked_at": null
+    },
+    {
+      "id": "U13",
+      "locator": "questions.md#本轮用户决定；本会话10-13用户指示",
+      "revision": "2026-10-13目标日复验及无人手工触发/造样本说明",
+      "status": "READ",
+      "coverage": "只读复验统计日10-12，数据库只读、权限不改，没有配置/资金/任务写入；用户无人手工触发/造样本声明不替代独立任务调度证据，也不作为Q答复",
+      "checked_at": "2026-10-13"
+    },
+    {
+      "id": "SOURCE13",
+      "locator": "api/README.md；reports/qa/ISOP-2090/20261013-rebate/evidence/source/",
+      "revision": "admin umi-24487e02.js、index-d1380e3f.js、wallet detail-a7608baa.js；实际字典4001 Bonus",
+      "status": "READ",
+      "coverage": "7次钱包相关公开GET，其中2个旧资源返回HTML未用；仅当前admin资源变化和钱包字段/字典定位，未刷新返利当前报表/导出业务实现，不以昨日源码证明今日导出请求数，不证明奖金专用钱包归类或后端部署",
+      "checked_at": "2026-10-13"
+    },
+    {
+      "id": "OBS13",
+      "locator": "verification-20261013.md；reports/qa/ISOP-2090/20261013-rebate/api-readonly-20261013T120013654424/result.json；evidence/admin-detail-cap-final-private.txt；evidence/admin-groups-current-private.txt",
+      "revision": "2026-10-13统计日2026-10-12实际采集；每个日报GET固定stime/etime同日",
+      "status": "READ",
+      "coverage": "实际目标日结构/筛选/鉴权/稳定性和当前后台明细；BR01仍复现、BR05多规则超全活动上限；当前3组state0显示启用仅证明采集时UI语义，今日CSV保存Abort无文件、不继承昨日实现断言今日请求；C18未重新写入，原FAIL保留",
+      "checked_at": "2026-10-13"
+    },
+    {
+      "id": "DB13",
+      "locator": "reports/qa/ISOP-2090/20261013-rebate/db-reconciliation-summary.md；evidence/db-complete-private.json；evidence/db-whole-day-cohort-private.json；evidence/db-source-times-private.json",
+      "revision": "2026-10-13独立只读源/礼金/账变/活动流水对账",
+      "status": "READ",
+      "coverage": "精确关联基础Bonus账变，base/cmpl仅并行关联账变不叠加；多规则应150/300而真实240/480确认超发90/流水多180。今日实派乘倍数一致不解除历史BR02；源1999/日报2000及jili负规则资格未有历史版本，C04只留BR06线索；04:05/11:24为返利等记录时点，不推定基础账变同刻，也不替代调度/全日运行快照，BR07待核",
+      "checked_at": "2026-10-13"
     }
   ],
   "changes": [
@@ -184,7 +216,7 @@
       ],
       "status": "SYNCED",
       "action": "保留动态Slot比例、富文本、第一组/合规/More Games合同，说明占位T&C冲突及10-06视觉日期边界",
-      "verification": "实际部分H5/API证据另记；10-12远端视觉来源未刷新，不把mock或源码当全面客户端验收"
+      "verification": "实际部分H5/API证据另记；10-12、10-13远端视觉来源均未刷新，不把mock或源码当全面客户端验收"
     },
     {
       "id": "S03",
@@ -204,7 +236,7 @@
       ],
       "status": "PENDING",
       "action": "待Q-01—Q-03明确答复后补字段映射、版本/跨日/更正/恢复和停用组预期；普通无JP冻结日保持可独立",
-      "verification": "本轮正文和完整评论未取得答案，依赖卡BLOCKED；用户执行授权不冒充产品答复"
+      "verification": "10-13完整正文和两评论仍未取得答案，依赖卡BLOCKED；当前state0启用显示及用户执行说明不冒充Q答复"
     },
     {
       "id": "S04",
@@ -259,7 +291,7 @@
       ],
       "status": "SYNCED",
       "action": "同步数据库只读、权限不改及10-13对账10-12安排，其他已授权独立FAT项继续；不猜任务或调用成功标记替代派发",
-      "verification": "执行顺序与前置已核，次日闭环未完成，本地登记不新增请求"
+      "verification": "10-12执行安排保留原日期；10-13现有记录资金链已另核，05:00调度来源/前置余额仍未齐。本地登记不新增请求"
     },
     {
       "id": "S06",
@@ -334,20 +366,45 @@
         "ISOP-2090-C23"
       ],
       "status": "PENDING",
-      "action": "补齐实际部署/契约与缺失样本及执行证据，按明天对账顺序继续，不为消除缺口强行保存非法重叠配置或改库/权限",
-      "verification": "C08/C09/C14/C18的已知失败不掩盖余组合未测，其他已验证子项仍不提升完整功能卡PASS；统一plan/P0/UAT入口未宣称就绪"
+      "action": "继续补齐实际部署/契约、历史配置/资格与调度来源、缺失区分性样本及执行证据，不为消除缺口强行保存非法重叠配置或改库/权限",
+      "verification": "C03新增已确认统一封顶失败，C08/C09/C14/C18原日期失败保留；C04资格差异及04:05/11:24调度时点只待核，其他已验证子项不提升整卡PASS；统一plan/P0/UAT入口未宣称就绪"
+    },
+    {
+      "id": "S09",
+      "source_ids": [
+        "J",
+        "JC",
+        "CHILD",
+        "CF-TRAIN",
+        "CF-REQUIREMENT",
+        "U13",
+        "SOURCE13",
+        "OBS13",
+        "DB13"
+      ],
+      "case_ids": [
+        "ISOP-2090-C01",
+        "ISOP-2090-C03",
+        "ISOP-2090-C04",
+        "ISOP-2090-C08",
+        "ISOP-2090-C14",
+        "ISOP-2090-C20"
+      ],
+      "status": "SYNCED",
+      "action": "同步10-13来源/用户决定、目标日隔离查询和独立财务边界；BR05使C03 FAIL，C04历史规则资格待核不FAIL，C18不冒充今日重测，当前组启用不回答停用规则；旧失败及批次保留",
+      "verification": "逐文件核对设计/问题/23卡/CSV/顺序/API说明与本轮公开记录；目标日日期/混日/空日fixture与真实请求范围一致。局部金额和实际到账不扩成05:00或完整卡PASS；来源依旧PARTIAL，业务请求由原批报告计，本登记0新请求"
     }
   ],
   "files": {
-    "design.md": "62ecff5bb3cfb5fd3b240766aa87501497930a0bdc156ceee89b10f0a678dd2b",
-    "questions.md": "338f8c32c7942b35f730fb89f749df6373ccae7588f15cae52dcb547f32610da",
-    "test-cases.md": "743459dce3fa558cfe797abcb25da77e0c9355d467c5baa507f0d36145b0c2f9",
-    "cases.csv": "7959297c5c76c01fae5ff1fa668bacf77d02e7667f8597ef9b3b8a2823b318f7",
-    "evidence-sync.md": "6cddad82a45bc80be06f0e4419e7a2e25f0c19139749f7b9c44cd685c19b17f5",
-    "execution-order.md": "1b22ddc9430a68aa091657d7ced9a9bec3e319ae07bbe046ed7cda9e9c22c0f8",
-    "api/README.md": "337d921c4d3ad57a191f210c91afbdfeeaf7dc147243bcefb6e9e329fb169d1d",
+    "design.md": "da5ab8ab3a152ba62638ffad9f8eb09cc12a6ef95fb13a7c4fa1fa45c4503cd9",
+    "questions.md": "a9c73203ea4c13d10ea4078a200cbd96be1fc3f3280abc06ebe5c5f768042ff6",
+    "test-cases.md": "9d4bab1ef595b50f9603bddb329e41fbbdadfa1fbf56aa7a21dc8846fa1a1583",
+    "cases.csv": "3badc3e8568cc00701a977aa93b94f670e29ab4d863b663f3ded623d17adca99",
+    "evidence-sync.md": "3e6ea1a21edd028f58b8fc280cec00f1a1c0bf647e730a11b43e1c0c8baad13a",
+    "execution-order.md": "a653a044ecebd45714eb477318e1b6326b51fab1285c6dde4bf9bcc8e74e9ee6",
+    "api/README.md": "0780d4f491cb3408be40f4a6ccf33e9b5d75f2f0e8805608bd96bb32658e7c40",
     "api/initial-read.py": "2a07a91dc2a1b62c0da61254923f66a515edbaccc1cd49e8fca7832143db801f",
-    "api/run-readonly.py": "2762c14d305237a3cd53d9345d910bc4504c5d223541b1a48427b04247087283",
+    "api/run-readonly.py": "9509b30fbf6a4abb5033282a87c5a23e5645b505672dca3b191f2325c4b5b413",
     "api/run-client-readonly.py": "055f1d457af0c96bed9ee106d578ade94a23e17ef30bd26fde1f7b8a89e10a0d",
     "api/run-config.py": "7f993441f8e831361eb6c02ba93f4631703839e2559ca4a05cf6e1a832cf2327",
     "api/static-sources.py": "e3fcf0c2751c335d8cd6e89dd9bffec81e428e1a094dd5dcd78cc0d72145cea0"
@@ -361,6 +418,78 @@
       "reason": "只复核客户端退出码新增说明：真实采集error或FAIL退出1，成功0仍保留子项/未测边界；recorded分类完成0仅代表离线分析成功。",
       "verification": "已比对loss_rebate_client.run_client_readonly返回逻辑、analyse_recorded的0请求/原时间及返回逻辑，与新增成功/失败两分支mock fixture一致；根代理最终npm run check 439项通过。未重发业务请求、未改业务结果。",
       "boundary": "仅更新本README绑定与本条复核metadata；其他11项既有hash、sources、changes、原reviewed_at及PARTIAL缺口保持原值。"
+    },
+    {
+      "file": "api/run-readonly.py",
+      "reviewed_at": "2026-10-13T11:59:20.273523+08:00",
+      "reviewer": "Codex / coverage_review 独立语义复核",
+      "reason": "新增--stats-day指定既有统计日的只读采集范围；不改变v2.0业务规则，且不能与--reassess混用。",
+      "verification": "已比对CLI、共享helper、README及3项新增fixture：每个GET统一附同日stime/etime，成功分页逐行校验stat_date，混日拒绝，空日金额/封顶/唯一性等依赖真实样本的检查保留NOT_RUN；日期格式和真实日历日期校验在请求前完成，相对out解析兼容。API代理定向26项fixture通过，dryrun无凭据；本复核未发认证或业务请求。",
+      "boundary": "本轮仅重绑定api/run-readonly.py和api/README.md；其他10项既有hash、sources、changes、原reviewed_at及PARTIAL缺口保持原值。10-13来源及实测结果待根代理单独归并，不以限定日期或本地fixture代替业务通过。"
+    },
+    {
+      "file": "api/README.md",
+      "reviewed_at": "2026-10-13T11:59:20.273523+08:00",
+      "reviewer": "Codex / coverage_review 独立语义复核",
+      "reason": "新增--stats-day指定既有统计日的只读采集范围；不改变v2.0业务规则，且不能与--reassess混用。",
+      "verification": "已比对CLI、共享helper、README及3项新增fixture：每个GET统一附同日stime/etime，成功分页逐行校验stat_date，混日拒绝，空日金额/封顶/唯一性等依赖真实样本的检查保留NOT_RUN；日期格式和真实日历日期校验在请求前完成，相对out解析兼容。API代理定向26项fixture通过，dryrun无凭据；本复核未发认证或业务请求。",
+      "boundary": "本轮仅重绑定api/run-readonly.py和api/README.md；其他10项既有hash、sources、changes、原reviewed_at及PARTIAL缺口保持原值。10-13来源及实测结果待根代理单独归并，不以限定日期或本地fixture代替业务通过。"
+    },
+    {
+      "file": "design.md",
+      "reviewed_at": "2026-10-13T12:42:43.329627+08:00",
+      "reviewer": "Codex / coverage_review 独立语义复核",
+      "reason": "10-13已读来源、用户决定与目标日实际证据同步；v2.0规则不变，保留历史失败及未答/未测边界。",
+      "verification": "已逐项复核来源、日期、依赖和当前卡片/生成CSV；新增C03统一封顶FAIL，C04待资格/版本不FAIL，旧C08/C09/C14/C18保留原日期结果。未将资金链或局部子项一致当整卡PASS，未用昨日导出源码推定今日请求。CLI薄编排及来源边界已核；本登记未发业务请求。",
+      "boundary": "仅更新已审受影响文件绑定；动态verification/bug-review/AI-HANDOFF和结果报告不绑定，目录外helper另验；来源、Q/合同及剩余证据缺口继续PARTIAL。"
+    },
+    {
+      "file": "questions.md",
+      "reviewed_at": "2026-10-13T12:42:43.329627+08:00",
+      "reviewer": "Codex / coverage_review 独立语义复核",
+      "reason": "10-13已读来源、用户决定与目标日实际证据同步；v2.0规则不变，保留历史失败及未答/未测边界。",
+      "verification": "已逐项复核来源、日期、依赖和当前卡片/生成CSV；新增C03统一封顶FAIL，C04待资格/版本不FAIL，旧C08/C09/C14/C18保留原日期结果。未将资金链或局部子项一致当整卡PASS，未用昨日导出源码推定今日请求。CLI薄编排及来源边界已核；本登记未发业务请求。",
+      "boundary": "仅更新已审受影响文件绑定；动态verification/bug-review/AI-HANDOFF和结果报告不绑定，目录外helper另验；来源、Q/合同及剩余证据缺口继续PARTIAL。"
+    },
+    {
+      "file": "test-cases.md",
+      "reviewed_at": "2026-10-13T12:42:43.329627+08:00",
+      "reviewer": "Codex / coverage_review 独立语义复核",
+      "reason": "10-13已读来源、用户决定与目标日实际证据同步；v2.0规则不变，保留历史失败及未答/未测边界。",
+      "verification": "已逐项复核来源、日期、依赖和当前卡片/生成CSV；新增C03统一封顶FAIL，C04待资格/版本不FAIL，旧C08/C09/C14/C18保留原日期结果。未将资金链或局部子项一致当整卡PASS，未用昨日导出源码推定今日请求。CLI薄编排及来源边界已核；本登记未发业务请求。",
+      "boundary": "仅更新已审受影响文件绑定；动态verification/bug-review/AI-HANDOFF和结果报告不绑定，目录外helper另验；来源、Q/合同及剩余证据缺口继续PARTIAL。"
+    },
+    {
+      "file": "cases.csv",
+      "reviewed_at": "2026-10-13T12:42:43.329627+08:00",
+      "reviewer": "Codex / coverage_review 独立语义复核",
+      "reason": "10-13已读来源、用户决定与目标日实际证据同步；v2.0规则不变，保留历史失败及未答/未测边界。",
+      "verification": "已逐项复核来源、日期、依赖和当前卡片/生成CSV；新增C03统一封顶FAIL，C04待资格/版本不FAIL，旧C08/C09/C14/C18保留原日期结果。未将资金链或局部子项一致当整卡PASS，未用昨日导出源码推定今日请求。CLI薄编排及来源边界已核；本登记未发业务请求。",
+      "boundary": "仅更新已审受影响文件绑定；动态verification/bug-review/AI-HANDOFF和结果报告不绑定，目录外helper另验；来源、Q/合同及剩余证据缺口继续PARTIAL。"
+    },
+    {
+      "file": "evidence-sync.md",
+      "reviewed_at": "2026-10-13T12:42:43.329627+08:00",
+      "reviewer": "Codex / coverage_review 独立语义复核",
+      "reason": "10-13已读来源、用户决定与目标日实际证据同步；v2.0规则不变，保留历史失败及未答/未测边界。",
+      "verification": "已逐项复核来源、日期、依赖和当前卡片/生成CSV；新增C03统一封顶FAIL，C04待资格/版本不FAIL，旧C08/C09/C14/C18保留原日期结果。未将资金链或局部子项一致当整卡PASS，未用昨日导出源码推定今日请求。CLI薄编排及来源边界已核；本登记未发业务请求。",
+      "boundary": "仅更新已审受影响文件绑定；动态verification/bug-review/AI-HANDOFF和结果报告不绑定，目录外helper另验；来源、Q/合同及剩余证据缺口继续PARTIAL。"
+    },
+    {
+      "file": "execution-order.md",
+      "reviewed_at": "2026-10-13T12:42:43.329627+08:00",
+      "reviewer": "Codex / coverage_review 独立语义复核",
+      "reason": "10-13已读来源、用户决定与目标日实际证据同步；v2.0规则不变，保留历史失败及未答/未测边界。",
+      "verification": "已逐项复核来源、日期、依赖和当前卡片/生成CSV；新增C03统一封顶FAIL，C04待资格/版本不FAIL，旧C08/C09/C14/C18保留原日期结果。未将资金链或局部子项一致当整卡PASS，未用昨日导出源码推定今日请求。CLI薄编排及来源边界已核；本登记未发业务请求。",
+      "boundary": "仅更新已审受影响文件绑定；动态verification/bug-review/AI-HANDOFF和结果报告不绑定，目录外helper另验；来源、Q/合同及剩余证据缺口继续PARTIAL。"
+    },
+    {
+      "file": "api/README.md",
+      "reviewed_at": "2026-10-13T12:42:43.329627+08:00",
+      "reviewer": "Codex / coverage_review 独立语义复核",
+      "reason": "10-13已读来源、用户决定与目标日实际证据同步；v2.0规则不变，保留历史失败及未答/未测边界。",
+      "verification": "已逐项复核来源、日期、依赖和当前卡片/生成CSV；新增C03统一封顶FAIL，C04待资格/版本不FAIL，旧C08/C09/C14/C18保留原日期结果。未将资金链或局部子项一致当整卡PASS，未用昨日导出源码推定今日请求。CLI薄编排及来源边界已核；本登记未发业务请求。",
+      "boundary": "仅更新已审受影响文件绑定；动态verification/bug-review/AI-HANDOFF和结果报告不绑定，目录外helper另验；来源、Q/合同及剩余证据缺口继续PARTIAL。"
     }
   ]
 }

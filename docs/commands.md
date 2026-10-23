@@ -113,7 +113,7 @@ ENV_FILE=.env.fat ENV_FILE_PRECEDENCE=shell EXECUTE_WITHDRAW_UI=true CLIENT_WITH
 
 ## 团队执行包与回填
 
-ISOP-2090当前使用[定向命令](../requirements/ISOP-2090/api/README.md)：只读日报与客户端采集、离线重分类分别留批次；受控配置校验独立执行并核恢复。不接入默认P0或`qa:requirement`，不推定已有完整`plan.json`或UAT能力；实际覆盖和未测范围以[本单记录](../requirements/ISOP-2090/verification-20261012.md)为准。
+ISOP-2090当前使用[定向命令](../requirements/ISOP-2090/api/README.md)：只读日报支持`--stats-day YYYY-MM-DD`固定每次查询及返回行的统计日，默认历史全量模式兼容；客户端采集、离线重分类分别留批次，指定日不与`--reassess`混用。受控配置校验独立执行并核恢复。不接入默认P0或`qa:requirement`，不推定已有完整`plan.json`或UAT能力；实际覆盖和未测范围以[当前复测](../requirements/ISOP-2090/verification-20261013.md)为准。
 
 `npm run qa:delivery -- prepare <Story> --environment FAT --out <新目录>`离线生成API自动表与人工清单；`import --packet <执行包> --manual <回填CSV> --out <新报告目录>`导入人工结果，可重复提供`--auto-results <原始结果JSON>`。细节见[团队流程](team-testing.md)。ISOP-2027默认qa:requirement执行自动分配项；`--include-ui-automation`恢复包含既有UI脚本的范围，`--only/--layer UI`仍可显式选择。
 

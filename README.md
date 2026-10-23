@@ -93,7 +93,7 @@ npm run test:ui:business -- --env .env.ui-p0.fat --execute --new-kyc-account --b
 | 评审功能预期、API断言及生成用例总表 | [用例与结果流程](docs/testing-workflow.md)；[文档格式](requirements/document-style.md) |
 | 人工编写Xmind向右逻辑图、导入用例并回填结果 | [Xmind测试用例](docs/xmind-test-cases.md)，`npm run qa:xmind`纯离线处理 |
 | 配置API自动执行、准备人工UI清单及合并结果 | [团队测试](docs/team-testing.md)；[命令范围](docs/commands.md) |
-| 输值返利2090正式测试与次日对账接续 | [测试顺序](requirements/ISOP-2090/execution-order.md)；[本单验证与边界](requirements/ISOP-2090/verification-20261012.md) |
+| 输值返利2090正式测试与新日对账 | [测试顺序](requirements/ISOP-2090/execution-order.md)；[当前返利复测与边界](requirements/ISOP-2090/verification-20261013.md) |
 | 查需求状态、人工修订、归档与自动执行门槛 | [需求工作流](docs/requirement-workflow-cli.md) |
 | 提交BUG、关联负责人、同步提测发布群及回归通知 | [Jira／Telegram交付](docs/telegram-qa.md#bug-delivery) |
 | 独立核对业务源数据 | [数据库只读取数参考](docs/database/README.md) |

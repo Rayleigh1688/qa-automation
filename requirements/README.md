@@ -45,7 +45,7 @@ W26的10-06评审结论和逐单导航见[批次评审](reviews/2026W26-20261006
 | Jira 编号 | 需求名称 | 分离文档 |
 | --- | --- | --- |
 | ISOP-2100 | 代理後台調整 | [设计](ISOP-2100/design.md) · [问题](ISOP-2100/questions.md) · [总用例](ISOP-2100/cases.csv) · [用例设计](ISOP-2100/test-cases.md) |
-| ISOP-2090 | 輸值返利活動 | [设计](ISOP-2090/design.md) · [问题](ISOP-2090/questions.md) · [正式用例](ISOP-2090/test-cases.md) · [总表](ISOP-2090/cases.csv) · [顺序](ISOP-2090/execution-order.md) · [API能力](ISOP-2090/api/README.md) · [10-12记录](ISOP-2090/verification-20261012.md) |
+| ISOP-2090 | 輸值返利活動 | [设计](ISOP-2090/design.md) · [问题](ISOP-2090/questions.md) · [正式用例](ISOP-2090/test-cases.md) · [总表](ISOP-2090/cases.csv) · [顺序](ISOP-2090/execution-order.md) · [API能力](ISOP-2090/api/README.md) · [10-13对账](ISOP-2090/verification-20261013.md) · [10-12记录](ISOP-2090/verification-20261012.md) |
 | ISOP-2120 | 金幣派發效果二期 | [设计](ISOP-2120/design.md) · [问题](ISOP-2120/questions.md) · [测试重点](ISOP-2120/test-cases.md) |
 | ISOP-2103 | 免費旋轉派發彈窗 | [设计](ISOP-2103/design.md) · [问题](ISOP-2103/questions.md) · [测试重点](ISOP-2103/test-cases.md) |
 | ISOP-2177 | BNG注單排查 | [设计](ISOP-2177/design.md) · [问题](ISOP-2177/questions.md) · [测试重点](ISOP-2177/test-cases.md) |

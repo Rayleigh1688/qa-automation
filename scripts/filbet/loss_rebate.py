@@ -2,7 +2,7 @@
 from __future__ import annotations
 
 from collections import Counter
-from datetime import datetime
+from datetime import date, datetime
 from decimal import Decimal, InvalidOperation
 import hashlib
 import json
@@ -85,7 +85,27 @@ def amount(value):
     return result
 
 
-def parse_page(response):
+def validate_stats_day(value):
+    if value is None:
+        return None
+    if not isinstance(value, str) or not re.fullmatch(r"\d{4}-\d{2}-\d{2}", value):
+        raise ValueError("statistics day must be YYYY-MM-DD")
+    date.fromisoformat(value)
+    return value
+
+
+def scoped_query(query, stats_day=None):
+    """Keep every request in the selected day, including auth/filter probes."""
+    day = validate_stats_day(stats_day)
+    result = dict(query)
+    if day:
+        if any(result.get(key, day) != day for key in ("stime", "etime")):
+            raise ValueError("query dates conflict with selected statistics day")
+        result.update(stime=day, etime=day)
+    return result
+
+
+def parse_page(response, *, stats_day=None):
     body = response.get("body")
     if response.get("http") != 200 or not isinstance(body, dict) or body.get("status") is not True:
         raise ContractError("expected HTTP 200 and business success")
@@ -100,6 +120,9 @@ def parse_page(response):
     summary = data.get("s")
     if summary is not None and not isinstance(summary, dict):
         raise ContractError("nl/list summary must be an object or null")
+    day = validate_stats_day(stats_day)
+    if day and any(stat_date(row.get("stats_day")) != day for row in rows):
+        raise ContractError("report contains rows outside selected statistics day")
     return rows, data["t"], summary
 
 
@@ -181,10 +204,13 @@ def private_json(path, value):
 def run_readonly(args):
     if Path(args.env).name != ".env.fat":
         raise ValueError("directed 2090 collector only supports explicit .env.fat")
+    stats_day = validate_stats_day(getattr(args, "stats_day", None))
     if not args.execute:
         print(json.dumps({"requirement": "ISOP-2090", "path": REPORT_PATH,
-                          "scope": "one fresh admin login; GET nl/list only", "execute": False}))
+                          "scope": "one fresh admin login; GET nl/list only", "execute": False,
+                          "stats_day": stats_day, "baseline_query": scoped_query({"page": 1, "page_size": 100}, stats_day)}, ensure_ascii=False))
         return 0
+    args.out = Path(args.out).resolve()
     config = load_environment(args.env)
     if (config.get("ADMIN_URL"), config.get("API_URL")) != (
         "https://admin-fat.filbet2025.com", "https://client-fat.filbet2025.com"
@@ -202,6 +228,10 @@ def run_readonly(args):
               "scope": "GET nl/list; frozen conf internal arithmetic, filtering, pagination and auth only",
               "boundaries": ["子项结果不覆盖整条复合功能用例", "未以当前活动配置校验历史比例",
                              "未读取独立注单/奖金钱包/账变/流水源", "未调用导出或业务写接口"]}
+    if stats_day:
+        report["stats_day"] = stats_day
+        report["scope"] += "; fixed statistics day " + stats_day + " on every GET"
+        report["boundaries"].append("仅验证指定统计日响应行；旧日失败不纳入本批金额结果，不代表历史缺陷已修复")
     serial = 0
 
     def record(title, cases, status, actual, refs, *, observation=None):
@@ -224,6 +254,7 @@ def run_readonly(args):
     def request(label, query, *, auth="valid"):
         nonlocal serial
         serial += 1
+        query = scoped_query(query, stats_day)
         response = session.request("GET", REPORT_PATH, query=query, auth=auth)
         target = evidence / f"{serial:03d}-{label}-private.json"
         private_json(target, {"method": "GET", "path": REPORT_PATH, "query": query,
@@ -249,7 +280,7 @@ def run_readonly(args):
         session.login()
         report["login"] = "success; token in memory only"
         response, base_ref = request("baseline-100", {"page": 1, "page_size": 100})
-        baseline, total, summary = parse_page(response)
+        baseline, total, summary = parse_page(response, stats_day=stats_day)
         if total != len(baseline) or total > 100:
             raise ContractError("bounded baseline not complete; no dependent assertions")
         row_set(baseline)
@@ -261,20 +292,23 @@ def run_readonly(args):
         report["baseline"] = {"rows": total, "members": len(users),
                               "dates": sorted({stat_date(row.get("stats_day")) for row in baseline}),
                               "coverage_features": coverage_features(baseline)}
+        if stats_day:
+            report["baseline"]["stats_day"] = stats_day
         report["boundaries"].extend(coverage_boundaries(report["baseline"]["coverage_features"]))
         pages, page_refs = [], []
         for page in range(1, (total + 9) // 10 + 1):
             current, ref = request(f"page10-{page}", {"page": page, "page_size": 10})
-            rows, current_total, _ = parse_page(current)
+            rows, current_total, _ = parse_page(current, stats_day=stats_day)
             if current_total != total or len(rows) > 10:
                 raise ContractError("pagination total or page limit changed")
             pages.append(rows)
             page_refs.append(ref)
         compare("10条分页完整集合与100条参考一致", ["C14"], [] if pages_equal(pages, baseline) else ["行集合/数量不一致"], [base_ref, *page_refs], detail=f"已采集{len(pages)}页，共{sum(map(len,pages))}行", samples=baseline)
         filter_results = []
-        for day in ("2026-10-07", "2026-10-08", "2026-10-09", "2026-10-10", "2026-10-11"):
+        date_probes = (stats_day,) if stats_day else ("2026-10-07", "2026-10-08", "2026-10-09", "2026-10-10", "2026-10-11")
+        for day in date_probes:
             current, ref = request("date-" + day, {"page": 1, "page_size": 100, "stime": day, "etime": day})
-            rows, found, _ = parse_page(current)
+            rows, found, _ = parse_page(current, stats_day=stats_day)
             wanted = [row for row in baseline if stat_date(row.get("stats_day")) == day]
             ok = found == len(rows) and row_set(rows) == row_set(wanted)
             filter_results.append((len(results), ok))
@@ -287,14 +321,14 @@ def run_readonly(args):
                 continue
             value = str(sample[key])
             current, ref = request("filter-" + key, {"page": 1, "page_size": 100, key: value})
-            rows, found, _ = parse_page(current)
+            rows, found, _ = parse_page(current, stats_day=stats_day)
             wanted = [row for row in baseline if str(row.get(key, "")) == value]
             ok = found == len(rows) and row_set(rows) == row_set(wanted)
             filter_results.append((len(results), ok))
             record(key + "精确筛选", ["C14"], "PASS" if ok else "FAIL",
                    f"样本{members[str(sample.get('uid',''))]}；冻结参考{len(wanted)}行；实际{len(rows)}行；不公开筛选值", [base_ref, ref])
         current, ref = request("nonexistent-uid", {"page": 1, "page_size": 100, "uid": "999999999999999999"})
-        rows, found, _ = parse_page(current)
+        rows, found, _ = parse_page(current, stats_day=stats_day)
         record("不存在UID返回空集", ["C14"], "PASS" if not rows and found == 0 else "FAIL", f"实际{len(rows)}行；total={found}", [ref])
         for auth in ("missing", "invalid"):
             current, ref = request("auth-" + auth, {"page": 1, "page_size": 10}, auth=auth)
@@ -363,7 +397,7 @@ def run_readonly(args):
                     summary_failures.append(f"{key} 实际{summary.get(key)}/应为{value}")
             compare("全量汇总去重人数与行金额", ["C14"], summary_failures, [base_ref], detail="行数与UID人数分别核；汇总=" + json.dumps({k: str(v) for k,v in expected.items()}, ensure_ascii=False), samples=baseline)
         current, stable_ref = request("baseline-final-100", {"page": 1, "page_size": 100})
-        final_rows, final_total, _ = parse_page(current)
+        final_rows, final_total, _ = parse_page(current, stats_day=stats_day)
         stable = final_total == total and sorted(map(lambda row: json.dumps(row, sort_keys=True), final_rows)) == sorted(map(lambda row: json.dumps(row, sort_keys=True), baseline))
         record("筛选采集前后冻结集合稳定", ["C14"], "PASS" if stable else "NOT_RUN", "首末完整行值一致" if stable else "首末数据变化；本批筛选差异须重采稳定窗口", [base_ref, stable_ref])
         if not stable:

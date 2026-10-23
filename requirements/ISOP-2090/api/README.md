@@ -2,7 +2,7 @@
 
 [需求设计](../design.md) · [功能用例](../test-cases.md) · [后台契约](../../../api/runbooks/ADMIN.md)
 
-2026-10-12已实现活动初采、公开源码取证、输值返利日报、客户端定向只读采集及受控配置保存／精确恢复。当前没有本单`plan.json`；这些命令不接入默认P0或`qa:requirement`，结果只覆盖关联C用例的API子项，不将复合功能用例整体判PASS。实际结论及未测边界见[10-12记录](../verification-20261012.md)。
+2026-10-12已实现活动初采、公开源码取证、输值返利日报、客户端定向只读采集及受控配置保存／精确恢复。当前没有本单`plan.json`；这些命令不接入默认P0或`qa:requirement`，结果只覆盖关联C用例的API子项，不将复合功能用例整体判PASS。10-13指定统计日复验从[当前记录](../verification-20261013.md)进入；昨日实际结论及未测边界保留在[10-12记录](../verification-20261012.md)。
 
 ## 顺序与命令
 
@@ -17,7 +17,18 @@ python3 requirements/ISOP-2090/api/run-readonly.py --env .env.fat --execute --in
 
 `initial-read.py --execute --insecure`只fresh后台登录，并查询既有`GET /admin/promo/list`的“输值”名称和全量首100项；不保存配置。日报suite只fresh后台登录一次，随后读取`GET /admin/promo/nl/list`：100条参考、10条完整分页、10-07—10-11日期、精确会员/VIP/分级筛选、不存在UID、missing/invalid鉴权，以及历史冻结行的内部金额与人数关系。账号、手机与UID在公开结果中用M/R别名；完整参数和响应保存0600私有文件。
 
-原始证据、公开JSON与HTML/CSV在忽略的`reports/qa/ISOP-2090/20261012-full/`。每次采集新建`api-readonly-<timestamp>`，不会清理既有P0或覆盖旧证据。报告子项关联C01/C02/C03/C04/C08/C14/C19；读取报表算术不证明独立注单、奖金入账、账变、流水源、05:00自动派发、恢复重跑或真实CSV通过。未登录保护不替代低权限角色授权与跨会员隔离。
+次日复验使用显式`--stats-day YYYY-MM-DD`，只接受有横线的有效日历日期，非法日期或时间字符串在登录前拒绝。该模式给基线、分页、日期／会员组合筛选、不存在UID、鉴权及末次GET统一加`stime=etime=指定日`，所有成功分页的行日期必须属于指定日；混日响应立即停止依赖断言。日期探针只查询指定日，保留统计日与UID／账号／手机／VIP／分级组合，不以未采参考的邻日空集推定通过。没有此参数仍沿用旧全量及10-07—10-11探针，不能直接当新日结果。`--out`在执行入口先转为绝对路径，支持仓库reports内的相对或绝对目录，避免首次留证时路径比较失败。
+
+```bash
+python3 requirements/ISOP-2090/api/run-readonly.py --stats-day 2026-10-12 --out reports/qa/ISOP-2090/20261013-rebate
+python3 requirements/ISOP-2090/api/run-readonly.py --env .env.fat --execute --insecure --stats-day 2026-10-12 --out reports/qa/ISOP-2090/20261013-rebate
+```
+
+本模式新建日期批次，报告记录指定统计日及实际采集时间，金额只核本日行的冻结`conf/upper_limit/lower_limit/multiple`，不拿当前活动配置或旧日上限代替。空日金额、门槛、唯一性、分页和人数汇总保持NOT_RUN；结构、空筛选与鉴权可独立核。旧10-07—10-09明细／流水失败留在原日期证据中，不计为新日失败，也不由新日通过推定历史缺陷修复。`created_at`只表示本轮返回字段，不证明05:00调度、自动执行或覆盖全天任务；这些需要独立任务时点及资金源对账。指定日不能与保留原范围的`--reassess`同时使用。
+
+10-13目标日只读采集已取得独立礼金、账变余额差及关联活动流水，完整结论见[当天记录](../verification-20261013.md)。财务链匹配错误的实派金额不能覆盖全活动封顶失败；本日实派×倍数一致不声明历史分差修复。当前编辑器三组均显示“启用”，只证明采集时`state=0`的UI语义；源净输1999／日报2000及缺负规则保留历史配置／归属待核线索，不据此判C04失败。用户确认无人手工触发或造样本，仍未取得05:00任务来源和派发前余额。
+
+10-12原始证据、公开JSON与HTML/CSV在忽略的`reports/qa/ISOP-2090/20261012-full/`；10-13指定统计日复验统一用`reports/qa/ISOP-2090/20261013-rebate/`。每次采集新建`api-readonly-<timestamp>`，不会清理既有P0或覆盖旧证据。报告子项关联C01/C02/C03/C08/C14/C19；读取报表算术不证明独立注单、奖金入账、账变、流水源、05:00自动派发、恢复重跑或真实CSV通过。未登录保护不替代低权限角色授权与跨会员隔离。
 
 公开基线含`coverage_features`，明确是否含负净输、多规则、上限0、正门槛与非正净输样本；金额、门槛、唯一性、汇总和分页在空基线时保持NOT_RUN。稳定`check_key`用于离线重分类，旧报告从原用例名称迁移，不能依赖执行序号。明细金额不符归C14子项；没有负净输样本时不据此判C04整卡失败。
 
@@ -75,7 +86,7 @@ python3 requirements/ISOP-2090/api/run-config.py --env .env.fat --execute --fat-
 
 日报响应必须解码为业务成功对象：`body.data.data`是行数组，`body.data.t`是总条数，`body.data.s`是汇总对象。空集支持`data=null/t=0`；`data.d`不属于本页合同。主行字段为`stats_day/created_at/valid_bet_amount/payout_amount/net_loss_amount/capped_amount/bonus/lower_limit/upper_limit/multiple/multiple_amount/conf`及身份字段；汇总核`num/net_loss_amount/bonus/multiple_amount`。明细字段为`game_id/group_name/name/valid_bet_amount/payout_amount/net_loss_amount/rate/bonus/capped_amount`；空game_id按基准规则展示，非空按指定游戏展示。
 
-导出共享组件先等待`openStream(fileName)`的原生保存窗口，再调用导出调度并通过MQTT写流。若窗口被取消出现`AbortError`，此时导出API尚未调用，不能判后端导出失败。完整CSV必须由页面实际保存并复核。
+10-12已读导出共享组件先等待`openStream(fileName)`的原生保存窗口，再调用导出调度并通过MQTT写流；该版本窗口取消的`AbortError`发生在调度前，不能判后端导出失败。10-13未刷新返利当前报表／导出bundle，今日导出范围以实际页面、日志和保存文件为准，不以昨日源码证明今日请求数。完整CSV必须由页面实际保存并复核。
 
 ty41配置序列化`zc`保留其余原配置并重写：`venue[{name,game_class,rebate_ratio:[{level,ratio}]}]`、`games[{name,list,rate,state}]`、去重`exclude_games`、第三步`lower_limit/upper_limit`、展开`turnover_limit`、`activity_range/user_list/source_rule/popup_text`，固定`order_review=1/received_type=2`。倍数在活动顶层，删除历史config.multiple。名称trim≤20、比例/金额转字符串、level小写、state为0/1、全会员范围清空名单均属于实际归一化；同值保存必须独立核前后，不能假设完全字节不变。有效片段为`ty41-loss-rebate-save-contract-verified.txt`。早期`ty41-save-contract-snippet.txt`实际是同chunk的ty40 Cashback `nc/sc`，已明确标错，不作为2090写入合同。
 
@@ -93,6 +104,8 @@ ty41配置序列化`zc`保留其余原配置并重写：`venue[{name,game_class,
 | `index-0daee2f9.js`：ty41配置/日报/明细/筛选 | `acc738da5bbea8fb79d861710940cd385c43df7f013e361cae28158db92093c1` |
 | `index-3f1ae5ae.js`：导出窗口与调度 | `27a17b4530753676d06c0983c6a7035131e273985d237f46f6f2a0ee765c6c9a` |
 | `index-Cucz2P_Y.js`：hov4f2449b7 H5详情、VIP、T&C、推荐与More Games | `1ac40d83556d29199e266439ebd1876c48c5634c34c0eb7dff0a1df143fca9d8` |
+
+10-13另有7次钱包相关公共GET，两个旧资源返回HTML，未作为JS合同；已读当前`umi-24487e02.js`、`index-d1380e3f.js`、钱包`detail-a7608baa.js`及实际字典`4001 Bonus`。原始文件与manifest留`reports/qa/ISOP-2090/20261013-rebate/evidence/source/`。本次只证明当前admin bundle已变化及钱包字段／字典定位，不证明返利报表／导出实现与昨日相同、奖金专用钱包归类或后端部署；上表保留10-12来源日期，不冒充今日版本。
 
 完整快照在`evidence/source/`，公开报告保存来源路径与hash；源码证明请求/展示实现，不证明业务规则正确或实际取数通过。共享逻辑在[`scripts/filbet/loss_rebate.py`](../../../scripts/filbet/loss_rebate.py)、[`loss_rebate_client.py`](../../../scripts/filbet/loss_rebate_client.py)及[`loss_rebate_config.py`](../../../scripts/filbet/loss_rebate_config.py)，本目录CLI只负责参数。定向离线fixture验证真实结构、Decimal精度、鉴权不泄露、分页去重、空基线未测、覆盖缺口、公开脱敏、客户端code/img资格、离线采集来源及配置恢复守卫。
 

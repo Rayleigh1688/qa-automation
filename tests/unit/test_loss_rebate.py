@@ -1,8 +1,15 @@
 import unittest
+from contextlib import redirect_stdout
 from decimal import Decimal
+from io import StringIO
+import json
+from pathlib import Path
+from tempfile import TemporaryDirectory
+from types import SimpleNamespace
+from unittest.mock import patch
 
-from filbet.loss_rebate import (ContractError, auth_denied, check_key, coverage_features, evidence_status, pages_equal,
-                                parse_page, precision_result, public_observation)
+from filbet.loss_rebate import (ROOT, ContractError, auth_denied, check_key, coverage_features, evidence_status, pages_equal,
+                                parse_page, precision_result, public_observation, run_readonly, scoped_query, validate_stats_day)
 
 
 class LossRebateChecks(unittest.TestCase):
@@ -55,6 +62,51 @@ class LossRebateChecks(unittest.TestCase):
         self.assertEqual(features["negative_rule_rows"], 0)
         self.assertEqual(features["zero_cap_rows"], 0)
         self.assertEqual(features["zero_gate_rows"], 1)
+
+    def test_stats_day_rejects_invalid_dates_and_conflicting_queries(self):
+        for invalid in ("20261012", "2026-02-30", "2026-10-12T00:00:00", "2026-1-2"):
+            with self.assertRaises(ValueError):
+                validate_stats_day(invalid)
+        query = {"page": 1, "uid": "fixture"}
+        self.assertEqual(scoped_query(query), query)
+        self.assertEqual(scoped_query(query, "2026-10-12"), {**query, "stime": "2026-10-12", "etime": "2026-10-12"})
+        self.assertNotIn("stime", query)
+        with self.assertRaises(ValueError):
+            scoped_query({"stime": "2026-10-09"}, "2026-10-12")
+
+    def test_selected_day_rejects_mixed_rows_instead_of_hiding_old_failure(self):
+        response = {"http": 200, "body": {"status": True, "data": {"data": [
+            {"id": "old-failed-row", "stats_day": "2026-10-09"},
+            {"id": "new-row", "stats_day": "20261012"}], "t": 2, "s": None}}}
+        self.assertEqual(len(parse_page(response)[0]), 2)  # Existing unscoped contract stays compatible.
+        with self.assertRaises(ContractError):
+            parse_page(response, stats_day="2026-10-12")
+
+    def test_scoped_empty_suite_stays_unverified_and_constrains_every_get(self):
+        class EmptySession:
+            def __init__(self):
+                self.token, self.requests = "", []
+            def login(self):
+                self.token = "fixture-memory-only"
+            def request(self, method, path, *, query, auth):
+                self.requests.append((method, path, query, auth))
+                if auth != "valid":
+                    return {"http": 200, "body": {"status": False, "data": "token"}}
+                return {"http": 200, "body": {"status": True, "data": {"data": None, "t": 0, "s": {"num": 0, "net_loss_amount": 0, "bonus": 0, "multiple_amount": 0}}}}
+        session = EmptySession()
+        config = {"ADMIN_URL": "https://admin-fat.filbet2025.com", "API_URL": "https://client-fat.filbet2025.com"}
+        with TemporaryDirectory(dir=ROOT / "reports") as temporary:
+            args = SimpleNamespace(env=".env.fat", stats_day="2026-10-12", execute=True, insecure=False, out=Path(temporary).relative_to(ROOT))
+            with patch("filbet.loss_rebate.Session", return_value=session), patch("filbet.loss_rebate.load_environment", return_value=config), redirect_stdout(StringIO()):
+                self.assertEqual(run_readonly(args), 0)
+            report = json.loads(next(Path(temporary).glob("api-readonly-*/result.json")).read_text())
+            business_keys = {"main-nl", "rule-nl", "nl-sum", "rule-bonus", "before-cap", "formula-before-cap", "actual-cap", "turnover", "threshold", "uid-day", "pagination", "summary"}
+            self.assertTrue(all(row["status"] == "NOT_RUN" for row in report["results"] if row["check_key"] in business_keys))
+            self.assertEqual(report["stats_day"], "2026-10-12")
+            self.assertTrue(all(query["stime"] == query["etime"] == "2026-10-12" for _, _, query, _ in session.requests))
+            self.assertEqual({auth for _, _, _, auth in session.requests}, {"valid", "missing", "invalid"})
+            self.assertEqual(len([row for row in report["requests"] if row["label"].startswith("date-")]), 1)
+            self.assertEqual(session.token, "")
 
 
 if __name__ == "__main__":
