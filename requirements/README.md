@@ -1,6 +1,8 @@
 # 需求设计与测试入口
 
-2026-10-20按用户决定归档 **ISOP-2090 输值返利活动**，当前为[2026W27的8项需求](reviews/2026W27-20261016.md)。2090实体与原有修改完整保留在[10-20归档](history/archived-20261020/README.md)，其余旧资料从[历史索引](history/README.md)查阅。归档表示退出当前工作范围，不代表完成、上线、问题已修复或PASS，也不恢复旧任务执行。
+2026-10-28已补录W27的6项新建Story，当前为原8项加新增6项，共14项；新增名单、筛选依据及待评审重点见[W27增量](reviews/2026W27-20261028.md)。新增均为只读初评、待人工评审，没有执行业务测试。
+
+2026-10-20按用户决定归档 **ISOP-2090 输值返利活动**。2090实体与原有修改完整保留在[10-20归档](history/archived-20261020/README.md)，其余旧资料从[历史索引](history/README.md)查阅。归档表示退出当前工作范围，不代表完成、上线、问题已修复或PASS，也不恢复旧任务执行。
 
 2090保留23张正式功能卡、总表和定向API能力。[10-16 FAT复测（历史摘要）](history/archived-20261020/ISOP-2090/questions.md#history-results-20261022)存在金额／配置等失败及完整验收缺口，来源仍为PARTIAL；归档不改变原结论。显式编号仍可查历史，默认批量不处理该单。静态图片按有效依赖清理，已退出与保留项见[清理记录](../docs/project-cleanup-2026-10-20.md)。W26[批次评审](reviews/2026W26-20261006.md)保留为日期来源，不列当前待办。
 
@@ -10,10 +12,10 @@
 
 | 内容 | 入口与用途 |
 | --- | --- |
-| FILPLAY后台测试用例 | [2123正式用例](ISOP-2123/test-cases.md) · [总表](ISOP-2123/cases.csv) · [XMind](ISOP-2123/ISOP-2123-测试用例.xmind)，覆盖分站隔离与总合报表 |
-| FILPLAY客户端测试用例 | [2124正式用例](ISOP-2124/test-cases.md) · [总表](ISOP-2124/cases.csv) · [XMind](ISOP-2124/ISOP-2124-测试用例.xmind)，覆盖H5／App，保留两项未决规则 |
+| FILPLAY后台测试用例 | [2123正式用例](ISOP-2123/test-cases.md) · [总表](ISOP-2123/cases.csv) · [XMind](ISOP-2123/ISOP-2123-测试用例.xmind)；旧UID／门店及人数预期需按[2286差异](ISOP-2286/design.md#与既有需求的差异)重评，尚未同步新机制 |
+| FILPLAY客户端测试用例 | [2124正式用例](ISOP-2124/test-cases.md) · [总表](ISOP-2124/cases.csv) · [XMind](ISOP-2124/ISOP-2124-测试用例.xmind)；保留两项未决规则，并需承接2286 KYC及2289支付对接 |
 | 2090历史资料 | [归档入口](history/archived-20261020/README.md) · [10-16复测记录（历史摘要）](history/archived-20261020/ISOP-2090/questions.md#history-results-20261022)，历史缺陷和未验证范围继续保留 |
-| W27需求扫描与评审顺序 | [2026W27评审](reviews/2026W27-20261016.md)，8个主项、21个子任务；问题与测试重点按单维护 |
+| W27需求扫描与评审顺序 | [10-28增量](reviews/2026W27-20261028.md)，新增6 Story及7子任务；[10-16原8项评审](reviews/2026W27-20261016.md)保留日期快照，问题与测试重点按单维护 |
 | 历史需求及BUG定位 | [历史索引](history/README.md)，从本单保留的Jira、评论和文档链接查对应资料 |
 | 需求状态 | [状态列表](status.html)，自动证据与人工修订独立保存 |
 
@@ -44,14 +46,20 @@
 
 | Jira 编号 | 需求名称 | 分离文档 |
 | --- | --- | --- |
-| ISOP-2123 | FILPLAY合规后台调整（正式用例待评审） | [设计](ISOP-2123/design.md) · [问题](ISOP-2123/questions.md) · [36条用例](ISOP-2123/test-cases.md) · [CSV](ISOP-2123/cases.csv) · [XMind](ISOP-2123/ISOP-2123-测试用例.xmind) |
-| ISOP-2124 | FILPLAY合规项目盘点（正式用例待评审） | [设计](ISOP-2124/design.md) · [问题](ISOP-2124/questions.md) · [63条用例](ISOP-2124/test-cases.md) · [CSV](ISOP-2124/cases.csv) · [XMind](ISOP-2124/ISOP-2124-测试用例.xmind) |
+| ISOP-2123 | FILPLAY合规后台调整（旧样本与人数预期需重评） | [设计](ISOP-2123/design.md) · [问题](ISOP-2123/questions.md) · [36条用例](ISOP-2123/test-cases.md) · [CSV](ISOP-2123/cases.csv) · [XMind](ISOP-2123/ISOP-2123-测试用例.xmind) · [新规则影响](ISOP-2286/design.md#与既有需求的差异) |
+| ISOP-2124 | FILPLAY合规项目盘点（正式用例需承接新KYC） | [设计](ISOP-2124/design.md) · [问题](ISOP-2124/questions.md) · [63条用例](ISOP-2124/test-cases.md) · [CSV](ISOP-2124/cases.csv) · [XMind](ISOP-2124/ISOP-2124-测试用例.xmind) · [新规则影响](ISOP-2286/design.md#与既有需求的差异) |
 | ISOP-2214 | 过审礼金无法导出（W27评审） | [设计](ISOP-2214/design.md) · [问题](ISOP-2214/questions.md) · [测试重点](ISOP-2214/test-cases.md) |
 | ISOP-2230 | 厂商排行榜活动优化（W27评审） | [设计](ISOP-2230/design.md) · [问题](ISOP-2230/questions.md) · [测试重点](ISOP-2230/test-cases.md) |
 | ISOP-2232 | PT免费旋转串接（W27评审） | [设计](ISOP-2232/design.md) · [问题](ISOP-2232/questions.md) · [测试重点](ISOP-2232/test-cases.md) |
 | ISOP-2234 | 代理后台新增推广链接（W27评审） | [设计](ISOP-2234/design.md) · [问题](ISOP-2234/questions.md) · [测试重点](ISOP-2234/test-cases.md) |
 | ISOP-2238 | 图表Y轴展示不全（W27评审） | [设计](ISOP-2238/design.md) · [问题](ISOP-2238/questions.md) · [测试重点](ISOP-2238/test-cases.md) |
 | ISOP-2239 | VCAT问题调整（W27评审） | [设计](ISOP-2239/design.md) · [问题](ISOP-2239/questions.md) · [测试重点](ISOP-2239/test-cases.md) |
+| ISOP-2278 | [FILPLAY] 测试环境游戏对接（新建初评） | [设计](ISOP-2278/design.md) · [问题](ISOP-2278/questions.md) · [测试重点](ISOP-2278/test-cases.md) |
+| ISOP-2281 | [FILPLAY] 功能测试走通（新建初评） | [设计](ISOP-2281/design.md) · [问题](ISOP-2281/questions.md) · [测试重点](ISOP-2281/test-cases.md) |
+| ISOP-2286 | [FILPLAY] KYC调整（新建初评） | [设计](ISOP-2286/design.md) · [问题](ISOP-2286/questions.md) · [测试重点](ISOP-2286/test-cases.md) |
+| ISOP-2289 | [FILPLAY] 充值、提现功能（新建初评） | [设计](ISOP-2289/design.md) · [问题](ISOP-2289/questions.md) · [测试重点](ISOP-2289/test-cases.md) |
+| ISOP-2294 | [FILPLAY] 活动（待补正文） | [设计](ISOP-2294/design.md) · [问题](ISOP-2294/questions.md) · [测试重点](ISOP-2294/test-cases.md) |
+| ISOP-2297 | [FILPLAY] 首页版面（待补正文） | [设计](ISOP-2297/design.md) · [问题](ISOP-2297/questions.md) · [测试重点](ISOP-2297/test-cases.md) |
 
 ### 文档组织
 
@@ -67,7 +75,7 @@
 
 有自动执行资产时，`api/data-cases.csv`独立保存具体数据组合、请求和断言，供AI核对和执行接口测试；与总表通过稳定用例编号关联，一条总用例可对应多组数据。JSON仍是执行器输入，CSV由它生成，不手工双向维护。旧宽表导出保留原九列CSV及API/UI/FLOW类型；执行报告和人工回填格式不变。没有执行配置的需求不生成API数据表。
 
-`npm run qa:cases -- <Story>`更新已具备正式设计的单需求，`npm run qa:cases -- --all`更新当前需求；增加`--include-history`才覆盖历史需求，均不登录。2123／2124已有正式卡片与CSV、XMind，全部为未执行设计用例；其余六项W27仍为评审重点，不补建空CSV。已归档2090可显式指定编号导出总表。上述三单尚无统一API执行源，不生成API数据组合表，也不据此宣称执行就绪。API表包含未具备前提的执行项，不把“有数据表”当作可全量运行；来源和编号规则见[测试流程](../docs/testing-workflow.md#文件与执行入口)。
+`npm run qa:cases -- <Story>`更新已具备正式设计的单需求，`npm run qa:cases -- --all`更新当前需求；增加`--include-history`才覆盖历史需求，均不登录。2123／2124已有正式卡片与CSV、XMind，全部为未执行设计用例，且需按[10-28新规则影响](ISOP-2286/design.md#与既有需求的差异)重评；其余12项仅维护评审重点，不补建空CSV。已归档2090可显式指定编号导出总表。上述三单尚无统一API执行源，不生成API数据组合表，也不据此宣称执行就绪。API表包含未具备前提的执行项，不把“有数据表”当作可全量运行；来源和编号规则见[测试流程](../docs/testing-workflow.md#文件与执行入口)。
 
 ## 常规需求目录
 
