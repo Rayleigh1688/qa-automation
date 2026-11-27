@@ -1048,5 +1048,37 @@
     "review_batch": "2026W27",
     "review_date": "2026-10-28",
     "scope_source": "2026-10-28用户要求核对W27新建且此前未评审需求；本轮补录6项，不恢复旧归档需求或旧执行任务"
+  },
+  {
+    "story": "ISOP-2233",
+    "title": "ISOP-2233 Pagcor 調整",
+    "stage": "需求评审，待人工收口",
+    "submission": "2026-11-23 Jira快照：待办；未据此判断提测、实现或部署完成",
+    "api_baseline": "NOT_RUN；仅需求初评，未取得接口/NDRP契约或正式执行资产",
+    "ui_baseline": "NOT_RUN；未下载官方附件或执行H5页面验收",
+    "release": "未核验发布；Jira目标为2026-12-09前上線，Sprint为2026W28",
+    "next": "先收口客服信息、NDRP判断、页尾范围、App范围、白条版本和时段控管；下载并核对PAGCOR附件后再准备正式执行；答复写回questions并同步用例",
+    "source": "[设计](ISOP-2233/design.md) · [问题与决定](ISOP-2233/questions.md) · [功能用例](ISOP-2233/test-cases.md) · [只读采集](reviews/2026-11-23-ISOP-2233.md)",
+    "baseline_source": "2026-11-23 只读读取Jira正文、附件清单及详情栏；未下载附件、读取评论/子任务或执行业务，未建立完整证据hash基线",
+    "archived": false,
+    "review_batch": "2026W28",
+    "review_date": "2026-11-23",
+    "scope_source": "2026-11-23用户提供ISOP-2233 Jira链接；本轮只补本地需求资料，不恢复旧结果或修改Jira"
+  },
+  {
+    "story": "ISOP-2375",
+    "title": "ISOP-2375 VACT 驗證調整",
+    "stage": "Jira已修复，待确认FAT部署并执行QA验证",
+    "submission": "2026-11-27 Jira快照：状态已修復（子任务ISOP-2386 QA-VACT 驗證調整为待办，经办人ukr）；页面无评论说明release合入与FAT部署状态",
+    "api_baseline": "NOT_RUN；已按A01—A06整理接口清理验证用例，尚未建立plan.json或执行FAT/正式站接口核验",
+    "ui_baseline": "NOT_RUN；已按A07—A08整理后台与会员端回归用例，尚未执行",
+    "release": "未核验发布；Jira目标分支release、合并后部署FAT，Sprint为2026W28",
+    "next": "确认release合入与FAT部署（含fat 10cbcd5及日志删除）、MessageListV2额外字段与Game json tag改法后，按A01—A08执行API/后台/会员端回归并记录证据",
+    "source": "[设计](ISOP-2375/design.md) · [问题与决定](ISOP-2375/questions.md) · [测试用例](ISOP-2375/test-cases.md) · [只读采集](reviews/2026-11-27-ISOP-2375.md)",
+    "baseline_source": "2026-11-27 只读读取Jira正文、字段栏及子任务摘要；未点入子任务详情、未查代码仓或执行业务测试，未建立完整证据hash基线",
+    "archived": false,
+    "review_batch": "2026W28",
+    "review_date": "2026-11-27",
+    "scope_source": "2026-11-27用户要求更新ISOP-2375到本地；本轮只补本地需求资料，不恢复旧结果或修改Jira"
   }
 ]

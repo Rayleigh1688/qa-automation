@@ -1,6 +1,12 @@
 # 需求设计与测试入口
 
+2026-11-27只读补录[ISOP-2375](ISOP-2375/design.md) VACT 驗證調整；已读取Jira正文、字段、子任务摘要和验收项A01—A08，未执行API/UI业务测试或核验FAT部署，采集见[当日快照](reviews/2026-11-27-ISOP-2375.md)。
+
+2026-11-23只读补录[ISOP-2233](ISOP-2233/design.md) Pagcor责任博彩调整；已读取Jira正文、附件清单和待确认项，未下载附件或执行业务测试，采集见[当日快照](reviews/2026-11-23-ISOP-2233.md)。
+
 2026-10-28已补录W27的6项新建Story，当前为原8项加新增6项，共14项；新增名单、筛选依据及待评审重点见[W27增量](reviews/2026W27-20261028.md)。新增均为只读初评、待人工评审，没有执行业务测试。
+
+2026-11-10只读补录[ISOP-2320](ISOP-2320/design.md)与[ISOP-2341](ISOP-2341/design.md)两项FILPLAY Story；父单正文、页面可见评论及子任务状态快照见[当日增量](reviews/2026-11-10-ISOP-2320-2341.md)。来源未覆盖的设计稿、子任务评论及业务环境均不视为已验证。
 
 2026-10-20按用户决定归档 **ISOP-2090 输值返利活动**。2090实体与原有修改完整保留在[10-20归档](history/archived-20261020/README.md)，其余旧资料从[历史索引](history/README.md)查阅。归档表示退出当前工作范围，不代表完成、上线、问题已修复或PASS，也不恢复旧任务执行。
 
@@ -60,6 +66,10 @@
 | ISOP-2289 | [FILPLAY] 充值、提现功能（新建初评） | [设计](ISOP-2289/design.md) · [问题](ISOP-2289/questions.md) · [测试重点](ISOP-2289/test-cases.md) |
 | ISOP-2294 | [FILPLAY] 活动（待补正文） | [设计](ISOP-2294/design.md) · [问题](ISOP-2294/questions.md) · [测试重点](ISOP-2294/test-cases.md) |
 | ISOP-2297 | [FILPLAY] 首页版面（待补正文） | [设计](ISOP-2297/design.md) · [问题](ISOP-2297/questions.md) · [测试重点](ISOP-2297/test-cases.md) |
+| ISOP-2320 | [FILPLAY] 遊戲列表加上投注返水、輸返選項 | [设计](ISOP-2320/design.md) · [问题](ISOP-2320/questions.md) · [用例](ISOP-2320/test-cases.md) |
+| ISOP-2341 | [FILPLAY] 遊戲橫豎屏優化 | [设计](ISOP-2341/design.md) · [问题](ISOP-2341/questions.md) · [用例](ISOP-2341/test-cases.md) |
+| ISOP-2233 | Pagcor責任博彩調整 | [设计](ISOP-2233/design.md) · [问题](ISOP-2233/questions.md) · [测试重点](ISOP-2233/test-cases.md) |
+| ISOP-2375 | VACT 驗證調整（17项API敏感字段清理） | [设计](ISOP-2375/design.md) · [问题](ISOP-2375/questions.md) · [用例](ISOP-2375/test-cases.md) |
 
 ### 文档组织
 
