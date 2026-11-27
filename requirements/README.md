@@ -1,5 +1,7 @@
 # 需求设计与测试入口
 
+2026-11-27只读补录[ISOP-2393](ISOP-2393/design.md) 每日投注限制功能；已读取Jira正文、附件清单和子任务摘要，未下载附件、访问原型或执行业务测试，采集见[当日快照](reviews/2026-11-27-ISOP-2393.md)。
+
 2026-11-27只读补录[ISOP-2375](ISOP-2375/design.md) VACT 驗證調整；已读取Jira正文、字段、子任务摘要和验收项A01—A08，未执行API/UI业务测试或核验FAT部署，采集见[当日快照](reviews/2026-11-27-ISOP-2375.md)。
 
 2026-11-23只读补录[ISOP-2233](ISOP-2233/design.md) Pagcor责任博彩调整；已读取Jira正文、附件清单和待确认项，未下载附件或执行业务测试，采集见[当日快照](reviews/2026-11-23-ISOP-2233.md)。
@@ -70,6 +72,7 @@
 | ISOP-2341 | [FILPLAY] 遊戲橫豎屏優化 | [设计](ISOP-2341/design.md) · [问题](ISOP-2341/questions.md) · [用例](ISOP-2341/test-cases.md) |
 | ISOP-2233 | Pagcor責任博彩調整 | [设计](ISOP-2233/design.md) · [问题](ISOP-2233/questions.md) · [测试重点](ISOP-2233/test-cases.md) |
 | ISOP-2375 | VACT 驗證調整（17项API敏感字段清理） | [设计](ISOP-2375/design.md) · [问题](ISOP-2375/questions.md) · [用例](ISOP-2375/test-cases.md) |
+| ISOP-2393 | 每日投注限制功能（新建初评） | [设计](ISOP-2393/design.md) · [问题](ISOP-2393/questions.md) · [用例](ISOP-2393/test-cases.md) |
 
 ### 文档组织
 

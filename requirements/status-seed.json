@@ -1080,5 +1080,21 @@
     "review_batch": "2026W28",
     "review_date": "2026-11-27",
     "scope_source": "2026-11-27用户要求更新ISOP-2375到本地；本轮只补本地需求资料，不恢复旧结果或修改Jira"
+  },
+  {
+    "story": "ISOP-2393",
+    "title": "ISOP-2393 每日投注限制功能",
+    "stage": "需求评审，待人工收口",
+    "submission": "2026-11-27 Jira快照：待办（子任务ISOP-2398 FilPlay H5、ISOP-2399 FilPlay App均为待办）；未据此判断提测、实现或部署完成",
+    "api_baseline": "NOT_RUN；仅需求初评，未取得前后端接口契约或执行资产",
+    "ui_baseline": "NOT_RUN；未下载附件截图、未访问原型或执行H5/App/后台验收",
+    "release": "未核验发布；父单未分配Sprint与经办人，子任务ISOP-2398目标为2026-12-01前上线",
+    "next": "收口会员端小数精度与文案、存量Daily loss limit兼容、进游戏阻挡入口与文案差异(Q-07)、次日修改/移除交互差异(Q-08)及Filbet/后端排期；下载附件并核对原型与Figma后再准备执行",
+    "source": "[设计](ISOP-2393/design.md) · [问题与决定](ISOP-2393/questions.md) · [功能用例](ISOP-2393/test-cases.md) · [只读采集](reviews/2026-11-27-ISOP-2393.md)",
+    "baseline_source": "2026-11-27 只读读取父单ISOP-2393与子任务ISOP-2398正文、附件清单、字段栏及关联摘要；未下载附件、打开原型/Figma、点入ISOP-2399详情或执行业务，未建立完整证据hash基线",
+    "archived": false,
+    "review_batch": "待定",
+    "review_date": "2026-11-27",
+    "scope_source": "2026-11-27用户提供ISOP-2393 Jira链接；本轮只补本地需求资料，不恢复旧结果或修改Jira"
   }
 ]
