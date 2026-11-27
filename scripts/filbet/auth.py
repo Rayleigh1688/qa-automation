@@ -3,6 +3,7 @@ from __future__ import annotations
 import argparse
 import os
 from .constants import OPERATION_FLAGS, CLIENT_OPERATION_LANES
+from .smoke import login_observation
 
 
 class AuthOperations:
@@ -14,7 +15,7 @@ class AuthOperations:
                 args.insecure,
             )
             if self.business_ok(probe):
-                return [self.result_record("admin_token_reuse", probe)]
+                return [self.result_record("admin_token_reuse", login_observation(probe))]
             os.environ.pop("ADMIN_TOKEN", None)
         login_results, token = self.smoke.admin_login(args)
         if not token:
@@ -36,7 +37,7 @@ class AuthOperations:
                 args.insecure,
             )
             if self.business_ok(probe):
-                return [self.result_record("client_token_reuse", probe)]
+                return [self.result_record("client_token_reuse", login_observation(probe))]
             os.environ.pop("API_TOKEN", None)
 
         login_results, token = self.smoke.client_login(args)

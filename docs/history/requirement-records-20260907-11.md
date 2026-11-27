@@ -1,8 +1,8 @@
-# 需求历史评审与测试记录（2026-09-07—2026-09-11）
+# 需求历史评审与接口盘点（2026-09-07—2026-09-11）
 
-2026-09-15按用户授权集中整理。本文保留原日期的评审、失败依据和执行边界，原位置的6份零散Markdown已移除；相对链接已调整。正文中的“当前/本轮/未测”仅指所属历史日期，不作为当前状态。
+2026-09-15集中整理早期评审。2026-11-27按用户授权退出旧日期报告、执行明细和判定。保留需求来源、接口盘点与原章节定位。
 
-当前入口：[需求索引](../../requirements/README.md) · [2026-09-14班车报告（历史摘要）](../../requirements/history/README.md#history-results-20261022)。原始测试JSON、冻结计划和报告未在本次清理中删除；2026-09-10原始结果已在此前清理退出，以下文字不恢复其可复核性。
+[需求索引](../../requirements/README.md) · [历史归档](../../requirements/history/README.md)
 
 ## 原记录索引
 
@@ -10,16 +10,12 @@
 | --- | --- | --- |
 | `requirements/review-summary.md` | [历史章节](#review-20260907) | `6ec36562693b9b55a831c6d1063d7dd03e54e01bd28a67758a2aa001bc70f633` |
 | `requirements/api-coverage-review-20260911.md` | [历史章节](#coverage-20260911) | `79150fd43d0d5ef06f81852f31ff36a049b0c64f329cbdfa89f73457a5060092` |
-| `requirements/api-test-round-20260911.md` | [历史章节](#test-20260911) | `65f47edd1880e7eb6a5a489644b33318062ae069eb64ba4e9d2650445f25d860` |
-| `requirements/history/through-ISOP-2072/ISOP-2032/api/execution-2026-09-10.md` | [历史章节](#isop-2032-20260910) | `9ebb4272c38f2f1f3d6244f24bacf0b4b958a10a795b6c6a1e87beaf84b96a28` |
-| `requirements/history/through-ISOP-2072/ISOP-2037/api/execution-2026-09-10.md` | [历史章节](#isop-2037-20260910) | `cb4ce196ea7026aecd0a7c0184f7b71d447df8e246c7d04a7dae09d6fc493cab` |
-| `requirements/history/through-ISOP-2072/ISOP-2043/api/execution-2026-09-10.md` | [历史章节](#isop-2043-20260910) | `b4ccafb2071881f6ad7b69f57760e24af5c6b68c5ee96d6c61b05696fc8d8b15` |
 
 <a id="review-20260907"></a>
 
 ## ISOP-2022 之后的新 Story：评审与分派
 
-首轮评审快照：2026-09-07（UTC+8）；ISOP-2031/2032于2026-09-08复审，更新见下。本批为需求梳理和测试设计，不是业务验收报告。逐条可分派用例见 [需求索引](../../requirements/README.md)，当前执行状态只维护在各自用例文件。
+首轮评审快照：2026-09-07（UTC+8）；ISOP-2031/2032于2026-09-08复审，更新见下。本批为需求梳理和测试设计，不是业务验收报告。逐条可分派用例见 [需求索引](../../requirements/README.md)，用例设计和前置条件维护在各需求目录。
 
 <a id="review-20260907-查询范围与完整性"></a>
 
@@ -124,212 +120,80 @@ ORDER BY created DESC, key DESC
 
 <a id="coverage-20260911"></a>
 
-## 2022—2072：已提交接口与未测范围核对
+## 2022—2072：已提交接口与范围核对
 
-本文保留开测前盘点快照；随后已按顺序执行2031、2043、2028，当前结果和2032/2037的剩余缺口见[首轮测试](requirement-records-20260907-11.md#test-20260911)。下文“未测”均指盘点时点。
-
-核对日期：2026-09-11。按requirements现有13个需求目录核对，子任务归父需求；不将编号区间中的所有数字虚构为需求。接口来源为backend_api `365c785..b8daa7d`（沿用本期评审基线，最新远端在上一轮已只读核对），对照当前plan.json/api/cases.json、留存执行记录、reports/qa真实批次和旧api/results目录。提交与需求关联以内容对应为依据，不等同于后端代码已部署或正式提测。
-
-结论：**有，重点是2028、2031、2043的新范围，以及2032、2037尚未执行的编辑/导出范围。** 下表“未测”指本仓库未见该变更对应执行证据，不代表其他测试人员一定没有测过。旧结果删除不抹去已测历史，也不把旧文字结论算成当前复测。
+来源为 2026-09-11 对 13 项需求及 Bruno `backend_api` 的静态盘点，接口基线为 `365c785..b8daa7d`。提交与需求的关联依据文档内容。
 
 <a id="coverage-20260911-已提交但未见对应实测"></a>
 
-### 已提交但未见对应实测
+### 接口文档增量
 
-| 需求 | 接口/变更 | 提交依据 | 当前证据与测试缺口 |
+| 需求 | 接口/变更 | 提交依据 | 验收关注 |
 | --- | --- | --- | --- |
-| 2028 合规报表 | POST /cmpl/report/pagcor/list、/cmpl/report/pagcor/export、/cmpl/report/shop/list、/cmpl/report/shop/export、/cmpl/report/summary/list | cddc218，合并于b8daa7d | 5处新增总GGR/JP贡献，摘要另增JP派奖；无执行计划、无实测报告。[契约评审](../../requirements/history/through-ISOP-2072/ISOP-2028/api/contract-review.md)已列完整路径及公式缺口 |
-| 2031 金额动画/到账通知 | GET /promo/notify/change/balance；POST /promo/notify/read/balance | 3797cae、cea06b1、9b03edc、ca3c1c2 | 2处HTTP接口未实现需求执行配置、无实测证据；通知GET及MQTT已给id/ty/sub_ty/balance等结构。已读会消费通知，需本轮专用事件；HTTP通过也不能替代MQTT去重、消费和到期验证 |
-| 2043 管理后台JP统计 | GET /admin/reports/venue/node、/admin/reports/game/node、/admin/reports/gameclass/node、/admin/reports/member、/admin/reports/member-daily-game/aggregate | 12311df（2026-09-11） | 5处新增jp_winning，当前cases.json只覆盖两条record查询，不含这5条统计。9月10日测试早于该提交；2022的9月11日查询也未断言这些统计JP字段 |
-| 2032 投注返利 | /admin/promo/update；GET /admin/promo/betting/rebate/export | 0bdec54、59844d4 | 编辑和导出未执行；编辑请求块GET与正文POST冲突，导出异步文件获取契约未完整。已测report查询不能证明配置编辑、T+1计算/入账或导出正确 |
-| 2037 合规投注明细 | POST /cmpl/record/export | 9e323bb | 列表查询已测，导出未执行；尚缺实际24列文件、顺序/金额/跨页完整性证据 |
+| 2028 合规报表 | POST /cmpl/report/pagcor/list、/cmpl/report/pagcor/export、/cmpl/report/shop/list、/cmpl/report/shop/export、/cmpl/report/summary/list | cddc218，合并于b8daa7d | 总GGR、JP贡献、摘要JP派奖、独立计算和导出。见[契约评审](../../requirements/history/through-ISOP-2072/ISOP-2028/api/contract-review.md)。 |
+| 2031 金额动画/到账通知 | GET /promo/notify/change/balance、POST /promo/notify/read/balance | 3797cae、cea06b1、9b03edc、ca3c1c2 | 事件字段、通知消费、MQTT去重和到期。已读接口的正文与请求块路径冲突，消费前先复核。 |
+| 2043 管理后台JP统计 | GET /admin/reports/venue/node、/admin/reports/game/node、/admin/reports/gameclass/node、/admin/reports/member、/admin/reports/member-daily-game/aggregate | 12311df | `jp_winning` 字段及与注单源数据的独立对账。 |
+| 2032 投注返利 | /admin/promo/update、GET /admin/promo/betting/rebate/export | 0bdec54、59844d4 | 编辑请求块与正文方法冲突。补配置生效、派发、导出取文件契约。 |
+| 2037 合规投注明细 | POST /cmpl/record/export | 9e323bb | 核对24列要求、文件接收、排序及跨页金额。 |
 
-2028完整路径统一在其契约评审维护。上述共15个主要HTTP接口的变更/功能范围未见对应实测（5+2+5+2+1），不是15个BUG，也不是15个全部新增的路由。
-
-补充1处关联待确认：3797cae将GET `/promo/notify/list`响应字段`Id`改为`id`；当前未见该字段改动的专项验证。该接口是既有活动通知，可影响2031通知排队及2029免费旋转提示，但没有明确需求编号，不能直接计入任一需求已提测范围。已读接口文档还把正文URL写成`/promo/notify/change/balance`，请求块实际为`/promo/notify/read/balance`，后续先核对路径再消费专用通知。
+补充关联线索：3797cae 将活动通知 `GET /promo/notify/list` 的 `Id` 改为 `id`，与2031和2029的关联仍需按实际调用确认。
 
 <a id="coverage-20260911-13个需求逐项结论"></a>
 
-### 13个需求逐项结论
+### 13个需求逐项范围
 
-| 需求 | 本次分类 | 说明/依据 |
-| --- | --- | --- |
-| 2022 | 已部分实测，等待修复 | 两处注单查询已有首轮和限定复核；按用户最新要求暂停复测。[问题与报告（历史摘要）](../../requirements/history/through-ISOP-2072/ISOP-2022/questions.md#history-results-20261022)；不列为从未测 |
-| 2027 | 已部分实测，仍有覆盖缺口 | KYC复核已有历史API及当前固定UI批次中的API步骤；C18分行联动游戏限制等尚未实现。UAT消息仅请求更新，不等于部署完成；不把准备包算实测。[契约评审](../../requirements/history/through-ISOP-2072/ISOP-2027/api/contract-review.md) |
-| 2028 | 新接口字段已提交，未测 | 见上方5处报表/导出 |
-| 2029 | 未定位明确的新API交付 | 主范围为免费旋转领取文案；notify/list字段变化仅相关线索，不据此新增整套接口范围 |
-| 2030 | 当前限人工UI | 用户已确定H5改版按人工UI，未见本期明确API变更；不因扫描默认API范围重复列待测接口 |
-| 2031 | HTTP/MQTT契约已有，未测 | 见上方通知读取、已读及消息结构；动画本身仍人工UI |
-| 2032 | 查询历史已测，编辑/导出及闭环未测 | [9月10日记录](requirement-records-20260907-11.md#isop-2032-20260910)保留报表查询/鉴权与金额精度差异；旧原始结果已清理，不能导入当前批次 |
-| 2037 | 列表历史已测，导出等未测 | [9月10日记录](requirement-records-20260907-11.md#isop-2037-20260910)保留Multi金额、空值/时间参数问题；旧原始结果已清理，不能说列表从未执行 |
-| 2038 | 无本期新接口交付依据 | 范围为删除独立Jackpot菜单，保留投注列表及JP数据；主要人工UI，不因删菜单推断删API |
-| 2041 | 后端数据改动，未定位独立验收接口提交 | JP拆分写入/历史回填需源数据与处理证据。2037/2043读到字段不等于2041已完成验收 |
-| 2043 | 两处列表历史已测，新增5处统计未测 | [9月10日记录](requirement-records-20260907-11.md#isop-2043-20260910)仅覆盖record/bet和record/game；不能代替9月11日新增JP报表断言 |
-| 2070 | 未定位本期相关接口文档提交 | Funky Statement Date出站日期格式需厂商沙箱/脱敏报文与实现证据；不是普通后台列表接口 |
-| 2072 | 需求要求重算API，尚未定位新契约 | 本期提交清单及全文关键词未匹配指定表/日期重算新接口；已有报表查询不等于排程/重算已交付。不能把任意旧adjust接口当它的新API |
-
-当前保留的reports/qa实际执行主要为2022两批、2027一批；2027 team-ready为manual-preparation。2032/2037/2043的旧api/results中无原始批次，历史已测事实依据各自日期记录，证据退出边界保持。
+| 需求 | 范围 |
+| --- | --- |
+| 2022 | 注单统计时间、体育切表及查询契约。 |
+| 2027 | KYC复核、权限边界和分行联动。 |
+| 2028 | 合规查询、导出及独立公式。 |
+| 2029 | 免费旋转领取文案与通知。 |
+| 2030 | H5改版人工UI范围。 |
+| 2031 | 通知读取、已读、MQTT与动画。 |
+| 2032 | 返利配置、计算、入账、报表和导出。 |
+| 2037 | 投注明细、JP类型和文件导出。 |
+| 2038 | 删除独立Jackpot菜单，保留注单的JP数据。 |
+| 2041 | JP拆分写入与历史回填。 |
+| 2043 | 注单与统计的JP字段、独立金额对账。 |
+| 2070 | Funky出站日期格式和厂商对照。 |
+| 2072 | 排程与指定表、日期重算，使用当前专用契约。 |
 
 <a id="coverage-20260911-后续测试顺序"></a>
 
-### 后续测试顺序
+### 接口执行前置
 
-优先补2031通知读取、2043五处JP统计、2028三处报表查询的结构/明确字段断言；写入已读、配置编辑和导出任务按各自作用准备本轮数据和文件获取流程。未知金额公式或缺少独立样本只影响对应断言，不把全部接口都拦住。2032/2037已有查询可按当前版本补证据，但需与首次未测的编辑/导出分开报告。2022继续等修复。
-
-本次仅核对资产与证据，未登录业务、未执行业务API/UI、未发Telegram或提交BUG。文档检查与差异检查通过，不计业务测试结果。
-
+写入已读、配置编辑和导出按要求准备独立样本、对应的契约和证据来源。查询结构、金额公式和真实文件按各自用例验证。冻结环境版本后按各需求用例执行。
 
 <a id="test-20260911"></a>
-
-## 新交付接口首轮测试：2026-09-11
-
-按用户“一个一个开始测”指令，依次执行2031、2043、2028，随后核对2032、2037尚未测的编辑/导出条件。FAT每个需求独立登录；接口文档基线b8daa7d，部署版本未提供，不能视为已核验部署。2022按用户要求等待修复。
-
 <a id="test-20260911-实际结果"></a>
-
-### 实际结果
-
-| 需求 | 通过 | 失败 | 未执行 | 本轮结论与中文报告 |
-| --- | --- | --- | --- | --- |
-| 2031 到账通知 | 2 | 2 | 2 | 报告（原始证据已于2026-09-16清理；仅保留历史结论）：未登录/无效登录凭据均被拒绝；正常查询成功，但通知列表为null，事件字段和金额无法验证 |
-| 2043 JP统计 | 18 | 2 | 1 | 报告（原始证据已于2026-09-16清理；仅保留历史结论）：五处统计鉴权通过，四处的列表与JP金额字段通过；会员统计列表为null；独立金额对账未执行 |
-| 2028 合规报表 | 12 | 0 | 3 | 报告（原始证据已于2026-09-16清理；仅保留历史结论）：三处报表结构、新增字段与鉴权通过；两个导出及独立公式未执行 |
-
-以上均无执行错误。计数按测试组合，不是BUG数量；部分接口通过不代表需求整体验收。原始result.json与冻结计划在各批次同目录。中文展示调整未修改原始结果或快照。
-
 <a id="test-20260911-需要看的问题"></a>
-
-### 需要看的问题
-
-1. **2031通知列表为空值**：`GET /promo/notify/change/balance`返回HTTP 200、业务成功，但`data.list=null`，与文档数组类型不符。当前没有已冻结的本轮通知样本，不能据此认定到账通知丢失；事件字段检查失败是同一无列表前置导致，不能当成第二个独立BUG。
-2. **2043会员统计列表为空值**：`GET /admin/reports/member`在9月8日至10日固定窗口返回HTTP 200、业务成功、`data.d=null`。列表结构和JP字段检查因此失败。未做会员源数据独立对账，不能直接断言记录漏查或JP算错。其他四处列表分别取得19、20、20、9条记录并验证`jp_winning`为有限十进制字符串；未验证跨页、非零样本与源数据金额一致性。
-3. **2028当前仅证实字段已返回**：Pagcor/门店报表检查总GGR与JP贡献，摘要检查总GGR、JP贡献、JP派奖的字符串类型。列表金额额外检查可解析为有限十进制；摘要本轮没有检查两位小数格式。税率、舍入、独立源金额未冻结，未验证计算正确性。Pagcor文档表格写code=0，示例写status=true，本轮按示例断言并实测通过，文档内部差异仍在。
-
 <a id="test-20260911-尚未执行的具体范围"></a>
-
-### 尚未执行的具体范围
-
-| 需求 | 未执行范围 | 缺少的条件 |
-| --- | --- | --- |
-| 2031 | 已读消费、MQTT重复/过期与动画联动 | 本轮专用到账事件、订阅/重放条件；已读正文路径与请求块还存在冲突。本轮未消费通知 |
-| 2043 | JP独立聚合对账 | 冻结源记录、截止点和独立预期金额；字段存在不能代替对账 |
-| 2028 | Pagcor/门店实际导出、GGR和税额公式 | 导出topic订阅与分片完成/文件组装契约，以及源金额/税率/舍入基准 |
-| 2032 | 配置编辑、返利实际导出 | 编辑GET/POST冲突及活动32/40映射尚未消除，缺少本轮专用活动；导出只提供topic_id和ok响应，缺少文件获取流程。详见[问题](../../requirements/history/through-ISOP-2072/ISOP-2032/questions.md)Q-11、Q-13 |
-| 2037 | 实际导出24栏、顺序/金额/跨页完整性 | 异步topic文件获取条件不足；最新文档CSV表头实际为23项，与需求C10的24栏不一致，需先明确缺少的列。详见[问题](../../requirements/history/through-ISOP-2072/ISOP-2037/questions.md)Q-04 |
-
-2032、2037本轮完成契约复核，**没有发送其编辑/导出请求，也没有新执行批次**。现有查询的9月10日历史记录不能填充这次未测导出结果。全仓文档可找到部分MQTT导出分片说明，但尚未找到本环境订阅鉴权/连接与这两项文件完成判定的完整契约；不猜topic或借用他人任务。
-
 <a id="test-20260911-执行资产与验证"></a>
 
-### 执行资产与验证
+## 2026-09-11首轮报告退出
 
-2031、2043新增统计、2028查询已纳入各自plan.json和api/data-cases.csv，使用统一`run-requirement.py`执行。2043旧record查询保留在legacy_acceptance，旧API CLI资产不删除；本轮计划只覆盖新增统计。共享只读探针有固定路由白名单，客户端和合规后台分别fresh登录，登录失败不重复尝试。未扩展P0写范围。
-
-本轮没有投注、配置修改、通知消费、导出任务、数据库写入、BUG提交或群消息。候选问题留本地，BUG建单仍需用户确认。后续先补专用通知和导出取文件条件，再执行相应组合；空列表问题结合独立样本复核，2022保持暂停。
-
-本地验证：三个计划离线导出通过；`npm run check`通过（303项单测及文档/资产/语法检查）。首次沙箱执行有三项localhost监听受限，提升执行权限后通过。三个中文报告证据链接已检查，原始JSON和冻结快照保持。上述本地检查不替代业务实测。
-
+2026-09-11 的 2031、2043、2028 执行报告、实际结果与明细于 2026-11-27 全部退出当前文档。
 
 <a id="isop-2032-20260910"></a>
-
-## ISOP-2032：2026-09-10 FAT 接口测试记录
-
-> 留存说明（2026-09-11）：本文是原日期的文字结论。用户已授权删除旧结果、扫描和临时脚本，文内旧路径只表示历史来源，不能作为当前可复核/可导入证据；当前入口与保留范围见[清理记录](../project-cleanup-2026-09-11.md)。
-
-[正反例数据](../../requirements/history/through-ISOP-2072/ISOP-2032/api/cases.json) · [契约评审](../../requirements/history/through-ISOP-2072/ISOP-2032/api/contract-review.md) · [验收用例](../../requirements/history/through-ISOP-2072/ISOP-2032/test-cases.md)
-
-执行环境沿用设计FAT；部署版本未提供。先生成数据，完成本地断言校验，再执行真实API。复用本轮新登录，未使用旧token；未编辑配置、审批会员、创建投注、派奖或导出任务。
-
-按组合ID取本轮最新结果：**8个已调用组合，PASS 7，FAIL 1**。FAIL表示当前断言不满足，分类见下表；不能全部视为已确认产品缺陷。另有21条验收闭环因契约/样本/UI未完成保留BLOCKED，未用查询PASS完成整单。
-
 <a id="isop-2032-20260910-发现与处理"></a>
-
-### 发现与处理
-
-| 编号 | 分类 | 组合ID | 实际证据 | 后续处理 |
-| --- | --- | --- | --- | --- |
-| F-01 | 精度/契约待确认，非已确认产品缺陷 | rebate-detail-sums | 同一报表行bonus=0.4000、multiple_amount=0.40；conf对应金额均为0.405，严格相等断言失败，其余7行本次诊断相等 | Q-05确认截断/舍入方式及发生层级，再分别断言实派与展示；不能擅加误差将其改PASS |
-| F-02 | 查询通过的边界 | rebate-report-state-0/1/3/4、rebate-detail-fields | 查询结构与明细金额字段通过；请求/响应state定义仍冲突 | 不证明需手动领取，也不证明T+1计算、入账、幂等正确 |
-| F-03 | 已修正测试识别并复测通过 | auth-missing / auth-invalid | HTTP200、status=false、data="token"符合FAT鉴权拒绝 | 不是越权漏洞；保留首次错误识别与复测证据 |
-
 <a id="isop-2032-20260910-执行与复测"></a>
 
-### 执行与复测
+## ISOP-2032 FAT记录退出
 
-| 轮次 | 命令/范围 | 证据 |
-| --- | --- | --- |
-| 首次 | python3 scripts/run-requirement-api.py ISOP-2027 ISOP-2032 ISOP-2037 ISOP-2043 --env .env.fat --execute --insecure | results/20260910T064048360549Z/report.md与result.json |
-| 定向复测 | 同命令增加 --only auth-missing auth-invalid review-list-state-1 rebate-detail-sums；只选本需求命中的组合 | results/20260910T064317776852Z/report.md与result.json |
-
-首次受沙箱网络限制导致登录失败的记录另存于results/20260910T064035891256Z，未发送业务请求；解除网络限制后才是上表真实执行。首次失败未覆盖，复测仅更新相同组合的最新结论。结果目录是本地忽略产物，此文件保存脱敏长期结论，未上传Jira评论或缺陷。
-
+2026-09-10 的 2032 执行报告、实际结果与明细于 2026-11-27 全部退出当前文档。
 
 <a id="isop-2037-20260910"></a>
-
-## ISOP-2037：2026-09-10 FAT 接口测试记录
-
-> 留存说明（2026-09-11）：本文是原日期的文字结论。用户已授权删除旧结果、扫描和临时脚本，文内旧路径只表示历史来源，不能作为当前可复核/可导入证据；当前入口与保留范围见[清理记录](../project-cleanup-2026-09-11.md)。
-
-[正反例数据](../../requirements/history/through-ISOP-2072/ISOP-2037/api/cases.json) · [契约评审](../../requirements/history/through-ISOP-2072/ISOP-2037/api/contract-review.md) · [验收用例](../../requirements/history/through-ISOP-2072/ISOP-2037/test-cases.md)
-
-执行环境沿用设计FAT；部署版本未提供。先生成数据，完成本地断言校验，再执行真实API。复用本轮新登录，未使用旧token；未编辑配置、审批会员、创建投注、派奖或导出任务。
-
-按组合ID取本轮最新结果：**10个已调用组合，PASS 7，FAIL 3**。FAIL表示当前断言不满足，分类见下表；不能全部视为已确认产品缺陷。另有11条验收闭环因契约/样本/UI未完成保留BLOCKED，未用查询PASS完成整单。
-
 <a id="isop-2037-20260910-发现与处理"></a>
-
-### 发现与处理
-
-| 编号 | 分类 | 组合ID | 实际证据 | 后续处理 |
-| --- | --- | --- | --- | --- |
-| F-01 | 金额不一致，待核对样本/部署 | game-jp-99 | 一笔Multi主单jp_winning=4200000.01000000；两明细100000.00000000+500000.00000000=600000.00000000，相差3600000.01。另一笔600000.05与明细相等 | 不修改预期、不调整源数据；核对主单与奖池明细来源/回填 |
-| F-02 | 空结果契约差异 | game-jp-2 | HTTP200/status=true，t=0/s=0，但data.d=null；文档为array | 保留结构FAIL；不能认为Minor筛选业务已验证 |
-| F-03 | 必填参数契约差异 | game-missing-time | 缺少全部时间范围，返回HTTP200/status=true/data=null | 需确认是合法空结果还是缺少必填校验，不把成功包装当明确拒绝 |
-| F-04 | 已修正测试识别并复测通过 | auth-missing / auth-invalid | 精确识别FAT data="token"拒绝标记 | 无数据泄露证据，非权限缺陷 |
-
 <a id="isop-2037-20260910-执行与复测"></a>
 
-### 执行与复测
+## ISOP-2037 FAT记录退出
 
-| 轮次 | 命令/范围 | 证据 |
-| --- | --- | --- |
-| 首次 | python3 scripts/run-requirement-api.py ISOP-2027 ISOP-2032 ISOP-2037 ISOP-2043 --env .env.fat --execute --insecure | results/20260910T064048360549Z/report.md与result.json |
-| 定向复测 | 同命令增加 --only auth-missing auth-invalid review-list-state-1 rebate-detail-sums；只选本需求命中的组合 | results/20260910T064317776852Z/report.md与result.json |
-
-首次受沙箱网络限制导致登录失败的记录另存于results/20260910T064035891256Z，未发送业务请求；解除网络限制后才是上表真实执行。首次失败未覆盖，复测仅更新相同组合的最新结论。结果目录是本地忽略产物，此文件保存脱敏长期结论，未上传Jira评论或缺陷。
-
+2026-09-10 的 2037 执行报告、实际结果与明细于 2026-11-27 全部退出当前文档。
 
 <a id="isop-2043-20260910"></a>
-
-## ISOP-2043：2026-09-10 FAT 接口测试记录
-
-> 留存说明（2026-09-11）：本文是原日期的文字结论。用户已授权删除旧结果、扫描和临时脚本，文内旧路径只表示历史来源，不能作为当前可复核/可导入证据；当前入口与保留范围见[清理记录](../project-cleanup-2026-09-11.md)。
-
-[正反例数据](../../requirements/history/through-ISOP-2072/ISOP-2043/api/cases.json) · [契约评审](../../requirements/history/through-ISOP-2072/ISOP-2043/api/contract-review.md) · [验收用例](../../requirements/history/through-ISOP-2072/ISOP-2043/test-cases.md)
-
-执行环境沿用设计FAT；部署版本未提供。先生成数据，完成本地断言校验，再执行真实API。复用本轮新登录，未使用旧token；未编辑配置、审批会员、创建投注、派奖或导出任务。
-
-按组合ID取本轮最新结果：**22个已调用组合，PASS 16，FAIL 6**。FAIL表示当前断言不满足，分类见下表；不能全部视为已确认产品缺陷。另有9条验收闭环因契约/样本/UI未完成保留BLOCKED，未用查询PASS完成整单。
-
 <a id="isop-2043-20260910-发现与处理"></a>
-
-### 发现与处理
-
-| 编号 | 分类 | 组合ID | 实际证据 | 后续处理 |
-| --- | --- | --- | --- | --- |
-| F-01 | 金额不一致，待核对样本/部署 | bet-jp-99 / game-jp-99 | 财务与游戏投注入口均未通过Multi金额加总断言；关联2037同查询窗口样本 | 两入口共用逻辑，不能当作两个独立数据源验证正确 |
-| F-02 | 空结果契约差异 | bet-jp-2 / game-jp-2 | HTTP200/status=true，data.d不是array | 不放宽结构断言，不将空数据算类型/金额通过 |
-| F-03 | 必填参数契约差异 | bet-missing-time / game-missing-time | 缺少两组时间范围仍业务成功，data=null | 确认时间参数校验契约 |
-| F-04 | 已修正测试识别并复测通过 | auth-missing / auth-invalid | 精确识别FAT data="token"拒绝标记 | 不以首次测试识别失败宣称越权 |
-
 <a id="isop-2043-20260910-执行与复测"></a>
 
-### 执行与复测
+## ISOP-2043 FAT记录退出
 
-| 轮次 | 命令/范围 | 证据 |
-| --- | --- | --- |
-| 首次 | python3 scripts/run-requirement-api.py ISOP-2027 ISOP-2032 ISOP-2037 ISOP-2043 --env .env.fat --execute --insecure | results/20260910T064048360549Z/report.md与result.json |
-| 定向复测 | 同命令增加 --only auth-missing auth-invalid review-list-state-1 rebate-detail-sums；只选本需求命中的组合 | results/20260910T064317776852Z/report.md与result.json |
-
-首次受沙箱网络限制导致登录失败的记录另存于results/20260910T064035891256Z，未发送业务请求；解除网络限制后才是上表真实执行。首次失败未覆盖，复测仅更新相同组合的最新结论。结果目录是本地忽略产物，此文件保存脱敏长期结论，未上传Jira评论或缺陷。
-
+2026-09-10 的 2043 执行报告、实际结果与明细于 2026-11-27 全部退出当前文档。

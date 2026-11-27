@@ -1,127 +1,125 @@
-# ISOP-2375：VACT 驗證調整功能与接口测试用例
+# ISOP-2375：综合验收场景用例
 
-[设计与验收依据](design.md) · [问题与决定](questions.md) · [Jira事项](https://alibaba-international.atlassian.net/browse/ISOP-2375)
+[综合测试计划](test-plan.md) · [原子接口用例](api/test-cases.md) · [设计与验收依据](design.md) · [问题与决定](questions.md)
 
-依据2026-11-27 Jira正文验收项目（A01–A08）建立初评用例。全部未执行；实际测试前需先确认FAT部署状态及Q-01—Q-05待确认项。
+保留 Jira A01—A08 对应的原验收编号。下列用例引用独立接口结果，并核对页面、后台及日志等综合证据。各接口的地址、参数与断言见原子用例。当前均未执行。
 
 <!-- case-cards:v1 -->
+
 ## 用例总览
 
 | 编号 | 用例名称 | 状态 | 负责人 |
 | --- | --- | --- | --- |
-| ISOP-2375-C01 | [无token调用11支公开API敏感字段清理校验（A01）](#c01) | BLOCKED | ukr |
-| ISOP-2375-C02 | [带会员token调用3支需登录API敏感字段清理校验（A02）](#c02) | BLOCKED | ukr |
-| ISOP-2375-C03 | [站内信列表接口隐藏发送人与维护人字段（A03）](#c03) | BLOCKED | ukr |
-| ISOP-2375-C04 | [站内信弹窗接口维持不返回后台人员字段（A04）](#c04) | BLOCKED | ukr |
-| ISOP-2375-C05 | [会员详情钱包密码字段清空与日志脱敏（A05）](#c05) | BLOCKED | ukr |
-| ISOP-2375-C06 | [会员详情三方登录授权字段清空与展示（A06）](#c06) | BLOCKED | ukr |
-| ISOP-2375-C07 | [后台管理端员工操作人字段正常显示回归（A07）](#c07) | BLOCKED | ukr |
-| ISOP-2375-C08 | [会员端相关页面功能与展示回归（A08）](#c08) | BLOCKED | ukr |
+| ISOP-2375-C01 | [匿名接口与会员页面验收](#c01) | BLOCKED | ukr |
+| ISOP-2375-C02 | [登录后银行、游戏推荐和 VIP 验收](#c02) | BLOCKED | ukr |
+| ISOP-2375-C03 | [后台定向站内信与会员列表验收](#c03) | BLOCKED | ukr |
+| ISOP-2375-C04 | [会员站内信弹窗验收](#c04) | BLOCKED | ukr |
+| ISOP-2375-C05 | [已设钱包密码的会员详情与日志验收](#c05) | BLOCKED | ukr |
+| ISOP-2375-C06 | [三方登录后会员资料验收](#c06) | BLOCKED | ukr |
+| ISOP-2375-C07 | [后台操作人展示回归](#c07) | BLOCKED | ukr |
+| ISOP-2375-C08 | [会员端相关页面展示与操作回归](#c08) | BLOCKED | ukr |
 
 ## 用例详情
 
 <a id="c01"></a>
-### ISOP-2375-C01：无token调用11支公开API敏感字段清理校验（A01）
+### ISOP-2375-C01：匿名接口与会员页面验收
 
-**前置条件：** 确认FAT已部署`release`最新修复版本（Q-03）；准备无登录态请求环境。
+**前置条件：** 目标 FAT 服务版本、匿名可见数据和四品牌入口可验证。
 
-**操作步骤：**
-1. 不带Authorization/token依次请求第1–5、7、8、10–12、14项共11支API：`/promo/list`、`/promo/task/newbie/daily`、`/promo/task/daily/task`、`/member/game/list/recommended`、`/member/buriedPoint/detailV2`、`/member/v2/index`（覆盖filgame、filslots、filplay、karakrus版本）、`/member/game/listRw`、`/promo/turntable/detail`、`/promo/task/newbie/list`、`/promo/task/daily/list`、`/member/vip/rule`。
-2. 逐一检查完整JSON/CBOR响应体（含嵌套`list`、`nav`、`Daily`、`rets`等结构）。
+**操作步骤：** 汇总 [C09—C23](api/test-cases.md#c09) 的原子结果。按 C08 打开匿名可访问的首页、活动、任务规则、转盘及 VIP 页面。对应版本上线后按 A01 复核正式站。
 
-**预期结果：** 所有响应中均不存在`created_name`、`updated_name`、`operator_name`、`created_uid`、`updated_uid`、`operator_uid`字段，或对应字段为空值，且原有业务数据正常返回。
+**预期结果：** 匿名接口基础契约及员工字段验收均通过。页面能打开，导航及内容与所选样本一致。
 
-**待确认：** [Q-02](questions.md#q-02)、[Q-03](questions.md#q-03)。
+**待确认：** [Q-03](questions.md#q-03)、[Q-06—Q-08](questions.md#q-06)。
 
 <a id="c02"></a>
-### ISOP-2375-C02：带会员token调用3支需登录API敏感字段清理校验（A02）
+### ISOP-2375-C02：登录后银行、游戏推荐和 VIP 验收
 
-**前置条件：** 确认FAT已部署修复版本；准备已登录普通会员账号与有效token。
+**前置条件：** 普通测试会员和可见银行、推荐游戏及 VIP 配置均准备就绪。后台能定位到同一银行的操作人。
 
-**操作步骤：**
-1. 携带会员token依次调用第6、9、13项API：`/finance/payment/bank/list`、`/member/game/list/recommend`、`/promo/vip/config`。
-2. 检查响应体所有层级字段。
+**操作步骤：** 汇总 [C24—C26](api/test-cases.md#c24) 的原子结果。通过 C07 对照同一银行的后台显示，通过 C08 验证银行选择、推荐和 VIP 的会员端展示。
 
-**预期结果：** 响应中均不存在`created_name`、`updated_name`、`operator_name`、`created_uid`、`updated_uid`、`operator_uid`字段，或对应字段为空值；银行列表、推荐游戏及VIP配置业务字段完整。
+**预期结果：** 三个接口返回可用业务数据，员工字段符合会员端验收。指定银行的后台操作人仍可见，会员端交互正常。
 
 **待确认：** [Q-02](questions.md#q-02)、[Q-03](questions.md#q-03)。
 
 <a id="c03"></a>
-### ISOP-2375-C03：站内信列表接口隐藏发送人与维护人字段（A03）
+### ISOP-2375-C03：后台定向站内信与会员列表验收
 
-**前置条件：** 确认FAT已部署修复版本；准备后台操作账号与测试会员账号；确认`total_send_count`、`read_count`、`target_users`是否一并移除（Q-01）。
+**前置条件：** 准备 FAT 测试会员与对应可读消息。需要新样本时由后台向该测试会员定向发信，记录消息标识、标题和正文。
 
-**操作步骤：**
-1. 在管理后台向测试会员发送一条站内信。
-2. 使用测试会员token调用`/member/message/list`。
-3. 检查返回消息列表中的每条记录字段。
+**操作步骤：** 先在后台确认消息与对应操作人，再取得 [C27](api/test-cases.md#c27) 的会员列表证据，并在会员端打开该消息。
 
-**预期结果：** 响应中不存在`trigger_person`、`maintainer`字段或为空值；若Q-01确认移除统计/目标字段，则`total_send_count`、`read_count`、`target_users`亦不返回。
+**预期结果：** 后台操作人正常，会员列表命中目标消息，`trigger_person`、`maintainer` 缺失或为空。消息可正常打开，标题和正文与样本一致。
 
-**待确认：** [Q-01](questions.md#q-01)、[Q-03](questions.md#q-03)。
+**待确认：** [Q-01](questions.md#q-01) 仅影响额外统计和目标字段。[Q-03](questions.md#q-03)。
 
 <a id="c04"></a>
-### ISOP-2375-C04：站内信弹窗接口维持不返回后台人员字段（A04）
+### ISOP-2375-C04：会员站内信弹窗验收
 
-**前置条件：** 准备存在弹窗站内信的测试会员账号与token。
+**前置条件：** 准备面向测试会员且满足弹窗展示条件的消息。
 
-**操作步骤：**
-1. 使用测试会员token调用`/member/message/popup_list`。
-2. 检查返回体字段。
+**操作步骤：** 取得 [C28](api/test-cases.md#c28) 的证据，用对应会员状态打开应展示弹窗的页面。
 
-**预期结果：** 维持现有行为，响应中不存在`trigger_person`、`maintainer`字段或为空值，弹窗内容正常返回。
+**预期结果：** 接口返回目标消息，`trigger_person`、`maintainer` 缺失、为 `null` 或为空字符串。弹窗能正常展示，并与样本内容一致。
 
 **待确认：** [Q-03](questions.md#q-03)。
 
 <a id="c05"></a>
-### ISOP-2375-C05：会员详情钱包密码字段清空与日志脱敏（A05）
+### ISOP-2375-C05：已设钱包密码的会员详情与日志验收
 
-**前置条件：** 确认FAT已合入`10cbcd5`及日志清理改动；准备已设置6位钱包密码的测试会员账号；具备FAT后端日志查看权限。
+**前置条件：** 使用已设钱包密码的专用测试会员。FAT 部署钱包字段清理与日志修复，日志可按请求关联。
 
-**操作步骤：**
-1. 使用该会员token调用`/member/detail`。
-2. 检查响应体`member_extra.wallet_password`及`has_wallet_password`字段。
-3. 查询调用时刻对应后端服务日志，检索`WalletPassword`或bcrypt哈希特征字符串。
+**操作步骤：** 取得 [C29](api/test-cases.md#c29) 的结果，检查页面仍识别已设置状态。按请求 ID 与时间找到对应服务日志，核对该次响应取数期间的日志输出。
 
-**预期结果：** 响应中`wallet_password`为空、`has_wallet_password`为`true`；后端日志中不输出钱包密码明文或bcrypt哈希。
+**预期结果：** `has_wallet_password` 保持 `true`，钱包密码字段没有值，页面保持已设置状态，命中的日志无钱包密码明文或哈希。
 
 **待确认：** [Q-03](questions.md#q-03)、[Q-04](questions.md#q-04)。
 
 <a id="c06"></a>
-### ISOP-2375-C06：会员详情三方登录授权字段清空与展示（A06）
+### ISOP-2375-C06：三方登录后会员资料验收
 
-**前置条件：** 准备使用三方账号（OAuth）登录的测试会员账号。
+**前置条件：** 准备通过三方登录的测试会员和已知三方账号类型、名称。
 
-**操作步骤：**
-1. 使用三方账号登录并获取会员token，调用`/member/detail`。
-2. 检查`oauth_secrets`、`ThirdPartyTy`、`ThirdPartyName`等字段。
+**操作步骤：** 完成三方登录，取得 [C30](api/test-cases.md#c30) 的证据，核对会员端三方账号展示。
 
-**预期结果：** `oauth_secrets`为空（或未返回），`ThirdPartyTy`与`ThirdPartyName`正常显示。
+**预期结果：** 授权字段没有值，三方账号类型与名称保持正确。
 
 **待确认：** [Q-03](questions.md#q-03)、[Q-04](questions.md#q-04)。
 
 <a id="c07"></a>
-### ISOP-2375-C07：后台管理端员工操作人字段正常显示回归（A07）
+### ISOP-2375-C07：后台操作人展示回归
 
-**前置条件：** 准备管理后台有效账号及权限；FAT已部署修复版本。
+**前置条件：** 用有权限的 FAT 后台账号，并选取有创建、修改或操作人数据的业务样本。
 
-**操作步骤：**
-1. 登录管理后台，依次进入活动列表、任务设定、游戏列表、银行列表、埋点设定、转盘活动、站内信列表页面。
-2. 核对列表及详情中创建人、修改人、操作人字段显示及对应管理接口返回。
+**操作步骤：** 查看活动列表、任务设定、游戏列表、银行列表、埋点设定、转盘活动及站内信。对照样本与列表或详情展示。银行对照可引用 [TC-031](../../api/p0/test-cases.csv) 的后台读取。
 
-**预期结果：** 后台各模块创建人、修改人、操作人字段均正常显示，未受会员端字段清理（特别是共用model或结构体调整）影响。
+**预期结果：** 各模块的创建人、修改人、操作人按原有规则显示，银行与 C24 指向同一条记录。
 
 **待确认：** [Q-02](questions.md#q-02)、[Q-03](questions.md#q-03)。
 
 <a id="c08"></a>
-### ISOP-2375-C08：会员端相关页面功能与展示回归（A08）
+### ISOP-2375-C08：会员端相关页面展示与操作回归
 
-**前置条件：** 准备FAT会员端（H5/Web）测试环境与测试会员账号。
+**前置条件：** FAT 会员端已有对应活动、任务、VIP、银行和站内信样本，具备匿名和会员会话。
 
-**操作步骤：**
-1. 在未登录与已登录状态下依次访问会员端首页、活动页、签到、任务、VIP、转盘、充值/银行选择、站内信及个人中心/钱包密码相关页面。
-2. 检查页面渲染、接口报错及核心交互操作（领取/跳转/银行选择/查看站内信等）。
+**操作步骤：** 按对应会话访问首页、活动、签到、任务、VIP、转盘、银行选择、站内信。验证导航、详情、选择和消息展示，按各样本核对有数据时的核心交互。
 
-**预期结果：** 上述页面展示正常，交互操作无报错或字段缺失异常。
+**预期结果：** 样本正确展示、可正常操作。页面没有因字段清理出现空白、内容缺失或交互报错。
 
 **待确认：** [Q-03](questions.md#q-03)。
+
+## 验收关联与检查方式
+
+| 编号 | 优先级/验收点 | 方式 |
+| --- | --- | --- |
+| ISOP-2375-C01 | 高 / A01、A08 | API + UI |
+| ISOP-2375-C02 | 高 / A02、A07、A08 | API + UI |
+| ISOP-2375-C03 | 高 / A03、A07、A08 | API + UI |
+| ISOP-2375-C04 | 高 / A04、A08 | API + UI |
+| ISOP-2375-C05 | 高 / A05 | API + UI + 日志 |
+| ISOP-2375-C06 | 高 / A06 | API + UI |
+| ISOP-2375-C07 | 高 / A07 | UI |
+| ISOP-2375-C08 | 高 / A08 | UI |
+
+<!-- /case-cards -->

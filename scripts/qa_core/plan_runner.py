@@ -3,9 +3,10 @@ import copy
 import json
 import time
 from qa_core.execution_plan import at, MISSING, resolve, assertions
+from qa_core.api_response_evidence import request_evidence, response_evidence
 
 
-def execute(cases, adapter, run_id, checkpoint=None):
+def execute(cases, adapter, run_id, checkpoint=None, *, response_bodies=None):
     results = []
     for case in cases:
         item = {'id':case['id'], 'status':'NOT_RUN', 'actual':case.get('blocked',''), 'steps':[]}
@@ -29,6 +30,10 @@ def execute(cases, adapter, run_id, checkpoint=None):
             started = time.monotonic()
             try:
                 step = resolve(source, variables)
+                if source.get('action') == 'api':
+                    route = getattr(adapter, 'plan', {}).get('contracts', {}).get(source.get('contract'))
+                    if route:
+                        step_result['request'] = request_evidence(route, source, step)
                 response = adapter.execute(step, case['id'])
                 for key in ['evidence','error_category']:
                     if key in response: step_result[key] = response[key]
@@ -36,7 +41,12 @@ def execute(cases, adapter, run_id, checkpoint=None):
                 if 'http' in response:
                     body = response.get('body')
                     step_result['observation'] = {'http':response['http'], 'business_status':body.get('status') if isinstance(body,dict) and type(body.get('status')) is bool else None}
-                checks = assertions(step.get('expect', []), response)
+                    if source.get('action') == 'api':
+                        step_result['response'] = response_evidence(response, source, step.get('expect', ()))
+                        if (response_bodies is not None and 'body' in response
+                                and response.get('decode_status') not in {'empty', 'undecodable'}):
+                            response_bodies[case['id'], source['id']] = body
+                checks = assertions(step.get('expect', []), response, source_checks=source.get('expect', []))
                 step_result['assertions'] = checks
                 failed = [c for c in checks if c['status'] == 'FAIL']
                 if failed:

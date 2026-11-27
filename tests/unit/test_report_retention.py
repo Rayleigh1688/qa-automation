@@ -2,7 +2,7 @@ import json
 from pathlib import Path
 import tempfile
 import unittest
-from qa_core.report_retention import retain_latest
+from qa_core.report_retention import remove_previous_api_views, retain_latest
 from filbet.normal_profile import prepare_cases,reuse_ui
 from types import SimpleNamespace
 from unittest.mock import patch
@@ -10,6 +10,71 @@ from support import ROOT
 from requirement_paths import requirement_dir, requirement_dirs
 
 class ReportRetentionTests(unittest.TestCase):
+    def api_run(self, base, serial, *, env='FAT', case_type='API', complete=True, **metadata):
+        folder = base / f'20261127T090000Z-{serial:08x}'
+        folder.mkdir(parents=True)
+        report = {'schema_version': 2, 'requirement': base.name, 'run_id': folder.name,
+                  'mode': 'execution', 'environment': env, 'timings_ms': {'report': 2} if complete else {},
+                  **metadata}
+        (folder / 'result.json').write_text(json.dumps(report), encoding='utf-8')
+        (folder / 'cases.snapshot.json').write_text(json.dumps([{'类型': case_type}]), encoding='utf-8')
+        (folder / 'plan.snapshot.json').write_text('{}', encoding='utf-8')
+        for name in ('results.html', 'results.csv', 'cases.csv', 'failures.csv', 'pending.csv', 'summary.json'):
+            (folder / name).write_text('view', encoding='utf-8')
+        return folder
+
+    def test_retires_only_previous_unindexed_api_views_for_same_story_and_environment(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            base = root / 'reports/qa/ISOP-2375'
+            old = self.api_run(base, 1)
+            current = self.api_run(base, 2)
+            legacy_indexed = self.api_run(base, 3)
+            index = root / 'reports/telegram/runs/job/api-result-index.json'
+            index.parent.mkdir(parents=True)
+            index.write_text(json.dumps({'raw': str(legacy_indexed / 'result.json'),
+                                         'run_id': legacy_indexed.name}), encoding='utf-8')
+            protected = [
+                current, legacy_indexed,
+                self.api_run(base, 4, env='UAT'),
+                self.api_run(base, 5, case_type='UI'),
+                self.api_run(base, 6, report_owner='orchestration'),
+                self.api_run(base, 7, complete=False),
+                self.api_run(base, 8, profile='regression'),
+                self.api_run(base, 9, execution_methods=['manual']),
+                self.api_run(root / 'reports/qa/ISOP-9999', 1),
+            ]
+            team = self.api_run(base, 10)
+            (team / 'team-packet').mkdir()
+            protected.append(team)
+            rebuilt = base / (old.name + '-views-1234abcd')
+            rebuilt.mkdir()
+            (rebuilt / 'results.html').write_text('offline', encoding='utf-8')
+            (old / 'service-observations.json').write_text('{}', encoding='utf-8')
+
+            removed = remove_previous_api_views(current, index_paths=[index])
+
+            self.assertEqual({p.name for p in removed}, {
+                'results.html', 'results.csv', 'cases.csv', 'failures.csv', 'pending.csv', 'summary.json',
+            })
+            self.assertEqual({p.parent for p in removed}, {old})
+            self.assertEqual({p.name for p in old.iterdir()}, {
+                'result.json', 'cases.snapshot.json', 'plan.snapshot.json', 'service-observations.json',
+            })
+            self.assertTrue((rebuilt / 'results.html').is_file())
+            self.assertTrue(all((p / 'results.html').is_file() for p in protected))
+            self.assertEqual(remove_previous_api_views(current, index_paths=[index]), [])
+
+    def test_api_cleanup_waits_for_complete_new_view(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            base = Path(tmp) / 'reports/qa/ISOP-2375'
+            old = self.api_run(base, 1)
+            current = self.api_run(base, 2)
+            (current / 'results.csv').unlink()
+            with self.assertRaisesRegex(ValueError, 'publish a completed API report'):
+                remove_previous_api_views(current)
+            self.assertTrue((old / 'results.html').is_file())
+
     def test_keeps_latest_per_environment_and_identifiers(self):
         with tempfile.TemporaryDirectory() as tmp:
             base=Path(tmp)/'ISOP-2027';base.mkdir()

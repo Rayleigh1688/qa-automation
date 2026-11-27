@@ -58,3 +58,38 @@ class ExecutionPlanTests(unittest.TestCase):
         p = copy.deepcopy(self.plan)
         p['datasets']['kyc-state-3']['status'] = 'unconfirmed'
         with self.assertRaises(ValueError): validate(p, METHODS)
+
+    def test_sample_assertion_requires_typed_fields_in_the_same_row(self):
+        check = {'path': 'body.data', 'op': 'any_row_matches', 'value': {'id': 17, 'bank.code': 'TEST'}}
+        for rows, expected in (
+            ([{'id': 17, 'bank': {'code': 'TEST'}, 'name': 'fixture'}], 'PASS'),
+            ([{'id': '17', 'bank': {'code': 'TEST'}}], 'FAIL'),
+            ([{'id': 17}, {'bank': {'code': 'TEST'}}], 'FAIL'),
+            ([], 'FAIL'),
+        ):
+            with self.subTest(rows=rows):
+                self.assertEqual(assertions([check], {'body': {'data': rows}})[0]['status'], expected)
+
+    def test_recursive_field_assertion_distinguishes_missing_blank_and_wrong_type(self):
+        check = {'path': 'body.data', 'op': 'fields_absent_or', 'value': {'updated_uid': [0], 'maintainer': []}}
+        body = {'data': {'list': [{'updated_uid': 0}, {}]}}
+        self.assertEqual(assertions([check], {'body': body})[0]['status'], 'PASS')
+        body['data']['list'].append({'extra': [{'updated_uid': False, 'maintainer': 'private-fixture'}]})
+        result = assertions([check], {'body': body})[0]
+        self.assertEqual(result['status'], 'FAIL')
+        self.assertEqual(result['unexpected_fields'], ['maintainer', 'updated_uid'])
+        self.assertNotIn('private-fixture', str(result))
+        self.assertEqual(assertions([check], {'body': {'data': None}})[0]['status'], 'FAIL')
+        self.assertEqual(assertions([check], {'body': {}})[0]['status'], 'FAIL')
+
+    def test_decimal_delta_uses_exact_amount_and_rejects_invalid_types(self):
+        before = '20000000000000000000000000000.01'
+        check = {'path': 'body.balance', 'op': 'decimal_delta', 'value': {'before': before, 'change': '0.02'}}
+        for actual, expected in (
+            ('20000000000000000000000000000.03', 'PASS'),
+            ('20000000000000000000000000000.04', 'FAIL'),
+            (True, 'FAIL'),
+            ('NaN', 'FAIL'),
+        ):
+            with self.subTest(actual=actual):
+                self.assertEqual(assertions([check], {'body': {'balance': actual}})[0]['status'], expected)

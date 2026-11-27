@@ -6,6 +6,7 @@ import re
 from pathlib import Path
 
 from qa_core.case_catalogue import design_rows
+from qa_core.execution_plan import plan_sources
 
 
 def file_hash(path):
@@ -35,6 +36,10 @@ def review(root, story):
         required = {'design.md', 'questions.md', 'test-cases.md', 'cases.csv', 'evidence-sync.md'}
         required.update(name for name in ('plan.json', 'api/cases.json', 'api/data-cases.csv', 'api/contract-review.md', 'api/test-cases.md')
                         if (folder / name).is_file())
+        plan_path = folder / 'plan.json'
+        if plan_path.is_file():
+            sources = plan_sources(plan_path, json.loads(plan_path.read_bytes()))
+            required.update(source.relative_to(folder.resolve()).as_posix() for source in sources.values())
         if not required <= files.keys():
             raise ValueError('同步基线遗漏现有设计、执行源或生成视图')
         for name, expected in files.items():

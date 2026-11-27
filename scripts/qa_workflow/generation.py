@@ -6,6 +6,7 @@ from pathlib import Path
 from qa_delivery.pipeline import ai, obj, STRING, STRINGS, write_json, redact_value
 from qa_delivery.state import digest
 from qa_core.case_report import csv_text
+from qa_core.execution_plan import plan_sources
 
 CASE_SCHEMA = obj({'id':STRING, 'layer':{'type':'string','enum':['API','UI','FLOW']},
     'title':STRING,'preconditions':STRING,'steps':STRINGS,'expected':STRING,
@@ -22,6 +23,11 @@ def context(root, story):
         if path.is_file():
             text = path.read_text(encoding='utf-8-sig')
             sources[name] = {'sha256':digest(text),'text':text}
+    if 'plan.json' in sources:
+        plan_path = directory / 'plan.json'
+        for source in plan_sources(plan_path, json.loads(sources['plan.json']['text'])).values():
+            text = source.read_text(encoding='utf-8-sig')
+            sources[source.relative_to(directory.resolve()).as_posix()] = {'sha256':digest(text),'text':text}
     if not {'design.md','test-cases.md'} <= sources.keys(): raise ValueError('缺少需求设计或业务用例来源')
     return {'story':story,'sources':sources}
 

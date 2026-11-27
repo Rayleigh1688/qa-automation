@@ -1,0 +1,516 @@
+{
+  "contracts": {
+    "member_bank_list": {
+      "service": "client",
+      "method": "GET",
+      "path": "/finance/payment/bank/list",
+      "encoding": "cbor",
+      "write": false
+    },
+    "newbie_daily": {
+      "service": "client",
+      "method": "GET",
+      "path": "/promo/task/newbie/daily",
+      "encoding": "cbor",
+      "write": false
+    },
+    "daily": {
+      "service": "client",
+      "method": "GET",
+      "path": "/promo/task/daily/task",
+      "encoding": "cbor",
+      "write": false
+    },
+    "recommended": {
+      "service": "client",
+      "method": "GET",
+      "path": "/member/game/list/recommended",
+      "encoding": "cbor",
+      "write": false
+    },
+    "index": {
+      "service": "client",
+      "method": "GET",
+      "path": "/member/v2/index",
+      "encoding": "cbor",
+      "write": false
+    },
+    "list_rw": {
+      "service": "client",
+      "method": "GET",
+      "path": "/member/game/listRw",
+      "encoding": "cbor",
+      "write": false
+    },
+    "newbie_list": {
+      "service": "client",
+      "method": "GET",
+      "path": "/promo/task/newbie/list",
+      "encoding": "cbor",
+      "write": false
+    },
+    "daily_list": {
+      "service": "client",
+      "method": "GET",
+      "path": "/promo/task/daily/list",
+      "encoding": "cbor",
+      "write": false
+    },
+    "vip_rule": {
+      "service": "client",
+      "method": "GET",
+      "path": "/member/vip/rule",
+      "encoding": "cbor",
+      "write": false
+    },
+    "vip_config": {
+      "service": "client",
+      "method": "GET",
+      "path": "/promo/vip/config",
+      "encoding": "cbor",
+      "write": false
+    },
+    "member_messages": {
+      "service": "client",
+      "method": "GET",
+      "path": "/member/message/list",
+      "encoding": "cbor",
+      "write": false
+    },
+    "member_popup": {
+      "service": "client",
+      "method": "GET",
+      "path": "/member/message/popup_list",
+      "encoding": "cbor",
+      "write": false
+    },
+    "member_detail": {
+      "service": "client",
+      "method": "GET",
+      "path": "/member/detail",
+      "encoding": "cbor",
+      "write": false
+    }
+  },
+  "cases": [
+    {
+      "id": "ISOP-2375-C10-RESP",
+      "review": {
+        "用例编号": "ISOP-2375-C10-RESP",
+        "类型": "API",
+        "模块/接口": "/promo/task/newbie/daily",
+        "用例名称": "新人签到详情响应及员工字段",
+        "前置条件": "通过当前 FAT 只读会话取得有业务数据的响应。",
+        "参数/步骤": "按当前 FAT 的正式接口参数执行本用例。",
+        "预期结果": "成功响应有正常业务数据，清理员工字段。指定业务样本的关联单独核验。",
+        "级别": "高",
+        "验收点": "ISOP-2375-C10"
+      },
+      "steps": [
+        {
+          "id": "newbie_daily",
+          "action": "api",
+          "actor": "guest",
+          "contract": "newbie_daily",
+          "expect": [
+            {"path":"http","op":"eq","value":200},
+            {"path":"body.status","op":"eq","value":true},
+            {"path":"body.data.d.id","op":"nonempty"},
+            {"path":"body","op":"fields_absent_or","value":"${staff_empty_values}"}
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ISOP-2375-DAILY-BASE",
+      "review": {
+        "用例编号": "ISOP-2375-DAILY-BASE",
+        "类型": "API",
+        "模块/接口": "/promo/task/daily/task",
+        "用例名称": "日常签到详情基础响应及员工字段",
+        "前置条件": "通过当前 FAT 只读会话取得有业务数据的响应。",
+        "参数/步骤": "按当前 FAT 的正式接口参数执行本用例。",
+        "预期结果": "本次检查基础入口返回的任务及员工字段。两个分支各自的覆盖见 C11、C12。",
+        "级别": "高",
+        "验收点": "ISOP-2375-C11,ISOP-2375-C12"
+      },
+      "steps": [
+        {
+          "id": "daily",
+          "action": "api",
+          "actor": "guest",
+          "contract": "daily",
+          "expect": [
+            {"path":"http","op":"eq","value":200},
+            {"path":"body.status","op":"eq","value":true},
+            {"path":"body.data.d.id","op":"nonempty"},
+            {"path":"body","op":"fields_absent_or","value":"${staff_empty_values}"}
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ISOP-2375-C13-RESP",
+      "review": {
+        "用例编号": "ISOP-2375-C13-RESP",
+        "类型": "API",
+        "模块/接口": "/member/game/list/recommended",
+        "用例名称": "匿名推荐游戏列表响应及员工字段",
+        "前置条件": "通过当前 FAT 只读会话取得有业务数据的响应。",
+        "参数/步骤": "按当前 FAT 的正式接口参数执行本用例。",
+        "预期结果": "成功响应有正常业务数据，清理员工字段。指定业务样本的关联单独核验。",
+        "级别": "高",
+        "验收点": "ISOP-2375-C13"
+      },
+      "datasets": [
+        "fat-page-1"
+      ],
+      "steps": [
+        {
+          "id": "recommended",
+          "action": "api",
+          "actor": "guest",
+          "contract": "recommended",
+          "query": {
+            "page": "${data.page}",
+            "page_size": "${data.page_size}"
+          },
+          "expect": [
+            {"path":"http","op":"eq","value":200},
+            {"path":"body.status","op":"eq","value":true},
+            {"path":"body.data.d","op":"rows_have_keys","value":["game_id"]},
+            {"path":"body.data.t","op":"type","value":"integer"},
+            {"path":"body.data.s","op":"type","value":"integer"},
+            {"path":"body","op":"fields_absent_or","value":"${staff_empty_values}"}
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ISOP-2375-INDEX-BASE",
+      "review": {
+        "用例编号": "ISOP-2375-INDEX-BASE",
+        "类型": "API",
+        "模块/接口": "/member/v2/index",
+        "用例名称": "基础首页响应及员工字段",
+        "前置条件": "通过当前 FAT 只读会话取得有业务数据的响应。",
+        "参数/步骤": "按当前 FAT 的正式接口参数执行本用例。",
+        "预期结果": "基础 FAT 入口。四品牌分别的覆盖见 C15—C18。",
+        "级别": "高",
+        "验收点": "ISOP-2375-C15,ISOP-2375-C16,ISOP-2375-C17,ISOP-2375-C18"
+      },
+      "steps": [
+        {
+          "id": "index",
+          "action": "api",
+          "actor": "guest",
+          "contract": "index",
+          "expect": [
+            {"path":"http","op":"eq","value":200},
+            {"path":"body.status","op":"eq","value":true},
+            {"path":"body.data.list","op":"rows_have_keys","value":["game_class","en_name"]},
+            {"path":"body.data.nav","op":"rows_have_keys","value":["game_class","en_name"]},
+            {"path":"body","op":"fields_absent_or","value":"${staff_empty_values}"}
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ISOP-2375-C19-RESP",
+      "review": {
+        "用例编号": "ISOP-2375-C19-RESP",
+        "类型": "API",
+        "模块/接口": "/member/game/listRw",
+        "用例名称": "组合游戏列表响应及员工字段",
+        "前置条件": "通过当前 FAT 只读会话取得有业务数据的响应。",
+        "参数/步骤": "按当前 FAT 的正式接口参数执行本用例。",
+        "预期结果": "成功响应有正常业务数据，清理员工字段。指定业务样本的关联单独核验。",
+        "级别": "高",
+        "验收点": "ISOP-2375-C19"
+      },
+      "datasets": [
+        "fat-venue-op"
+      ],
+      "steps": [
+        {
+          "id": "list_rw",
+          "action": "api",
+          "actor": "guest",
+          "contract": "list_rw",
+          "query": {
+            "page": "${data.page}",
+            "page_size": "${data.page_size}",
+            "venues": "${data.venues}",
+            "sort": "${data.sort}"
+          },
+          "expect": [
+            {"path":"http","op":"eq","value":200},
+            {"path":"body.status","op":"eq","value":true},
+            {"path":"body.data.d","op":"rows_have_keys","value":["game_id"]},
+            {"path":"body.data.t","op":"type","value":"integer"},
+            {"path":"body.data.s","op":"type","value":"integer"},
+            {"path":"body","op":"fields_absent_or","value":"${staff_empty_values}"}
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ISOP-2375-C21-RESP",
+      "review": {
+        "用例编号": "ISOP-2375-C21-RESP",
+        "类型": "API",
+        "模块/接口": "/promo/task/newbie/list",
+        "用例名称": "新人任务列表响应及员工字段",
+        "前置条件": "通过当前 FAT 只读会话取得有业务数据的响应。",
+        "参数/步骤": "按当前 FAT 的正式接口参数执行本用例。",
+        "预期结果": "成功响应有正常业务数据，清理员工字段。指定业务样本的关联单独核验。",
+        "级别": "高",
+        "验收点": "ISOP-2375-C21"
+      },
+      "steps": [
+        {
+          "id": "newbie_list",
+          "action": "api",
+          "actor": "guest",
+          "contract": "newbie_list",
+          "expect": [
+            {"path":"http","op":"eq","value":200},
+            {"path":"body.status","op":"eq","value":true},
+            {"path":"body.data.d","op":"rows_have_keys","value":["id"]},
+            {"path":"body","op":"fields_absent_or","value":"${staff_empty_values}"}
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ISOP-2375-C22-RESP",
+      "review": {
+        "用例编号": "ISOP-2375-C22-RESP",
+        "类型": "API",
+        "模块/接口": "/promo/task/daily/list",
+        "用例名称": "日常任务列表响应及员工字段",
+        "前置条件": "通过当前 FAT 只读会话取得有业务数据的响应。",
+        "参数/步骤": "按当前 FAT 的正式接口参数执行本用例。",
+        "预期结果": "成功响应有正常业务数据，清理员工字段。指定业务样本的关联单独核验。",
+        "级别": "高",
+        "验收点": "ISOP-2375-C22"
+      },
+      "steps": [
+        {
+          "id": "daily_list",
+          "action": "api",
+          "actor": "guest",
+          "contract": "daily_list",
+          "expect": [
+            {"path":"http","op":"eq","value":200},
+            {"path":"body.status","op":"eq","value":true},
+            {"path":"body.data.d","op":"rows_have_keys","value":["id"]},
+            {"path":"body","op":"fields_absent_or","value":"${staff_empty_values}"}
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ISOP-2375-C23-RESP",
+      "review": {
+        "用例编号": "ISOP-2375-C23-RESP",
+        "类型": "API",
+        "模块/接口": "/member/vip/rule",
+        "用例名称": "VIP 规则响应及员工字段",
+        "前置条件": "通过当前 FAT 只读会话取得有业务数据的响应。",
+        "参数/步骤": "按当前 FAT 的正式接口参数执行本用例。",
+        "预期结果": "成功响应有正常业务数据，清理员工字段。按 FAT 实测，updated_uid 的空值包含整数 0。指定规则样本另行核验。",
+        "级别": "高",
+        "验收点": "ISOP-2375-C23"
+      },
+      "steps": [
+        {
+          "id": "vip_rule",
+          "action": "api",
+          "actor": "guest",
+          "contract": "vip_rule",
+          "expect": [
+            {"path":"http","op":"eq","value":200},
+            {"path":"body.status","op":"eq","value":true},
+            {"path":"body.data","op":"type","value":"object"},
+            {"path":"body.data","op":"nonempty"},
+            {"path":"body","op":"fields_absent_or","value":{
+              "created_name":"${staff_empty_values.created_name}",
+              "updated_name":"${staff_empty_values.updated_name}",
+              "operator_name":"${staff_empty_values.operator_name}",
+              "created_uid":"${staff_empty_values.created_uid}",
+              "updated_uid":[null,"",0],
+              "operator_uid":"${staff_empty_values.operator_uid}"
+            }}
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ISOP-2375-C24-RESP",
+      "review": {
+        "用例编号": "ISOP-2375-C24-RESP",
+        "类型": "API",
+        "模块/接口": "/finance/payment/bank/list",
+        "用例名称": "会员银行列表响应及员工字段",
+        "前置条件": "通过当前 FAT 只读会话取得有业务数据的响应。",
+        "参数/步骤": "按当前 FAT 的正式接口参数执行本用例。",
+        "预期结果": "只验证本页业务数据与员工字段。待确认带操作人记录的指定银行样本。",
+        "级别": "高",
+        "验收点": "ISOP-2375-C24"
+      },
+      "datasets": [
+        "fat-page-1"
+      ],
+      "steps": [
+        {
+          "id": "member_bank_list",
+          "action": "api",
+          "actor": "member",
+          "contract": "member_bank_list",
+          "query": {
+            "page": "${data.page}",
+            "page_size": "${data.page_size}"
+          },
+          "expect": [
+            {"path":"http","op":"eq","value":200},
+            {"path":"body.status","op":"eq","value":true},
+            {"path":"body.data.d","op":"rows_have_keys","value":["id","code","name"]},
+            {"path":"body.data.t","op":"type","value":"integer"},
+            {"path":"body.data.s","op":"type","value":"integer"},
+            {"path":"body","op":"fields_absent_or","value":"${staff_empty_values}"}
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ISOP-2375-C26-RESP",
+      "review": {
+        "用例编号": "ISOP-2375-C26-RESP",
+        "类型": "API",
+        "模块/接口": "/promo/vip/config",
+        "用例名称": "VIP 配置响应及员工字段",
+        "前置条件": "通过当前 FAT 只读会话取得有业务数据的响应。",
+        "参数/步骤": "按当前 FAT 的正式接口参数执行本用例。",
+        "预期结果": "成功响应有正常业务数据，清理员工字段。按 VIP 配置接口文档，updated_uid 的空值包含整数 0。指定配置样本另行核验。",
+        "级别": "高",
+        "验收点": "ISOP-2375-C26"
+      },
+      "steps": [
+        {
+          "id": "vip_config",
+          "action": "api",
+          "actor": "member",
+          "contract": "vip_config",
+          "expect": [
+            {"path":"http","op":"eq","value":200},
+            {"path":"body.status","op":"eq","value":true},
+            {"path":"body.data","op":"type","value":"object"},
+            {"path":"body.data","op":"nonempty"},
+            {"path":"body","op":"fields_absent_or","value":{
+              "created_name":"${staff_empty_values.created_name}",
+              "updated_name":"${staff_empty_values.updated_name}",
+              "operator_name":"${staff_empty_values.operator_name}",
+              "created_uid":"${staff_empty_values.created_uid}",
+              "updated_uid":[null,"",0],
+              "operator_uid":"${staff_empty_values.operator_uid}"
+            }}
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ISOP-2375-C27-RESP",
+      "review": {
+        "用例编号": "ISOP-2375-C27-RESP",
+        "类型": "API",
+        "模块/接口": "/member/message/list",
+        "用例名称": "现有站内信列表响应及人员字段",
+        "前置条件": "通过当前 FAT 只读会话取得有业务数据的响应。",
+        "参数/步骤": "按当前 FAT 的正式接口参数执行本用例。",
+        "预期结果": "只读本次会员现有消息。需另确认指定消息的样本关联。",
+        "级别": "高",
+        "验收点": "ISOP-2375-C27"
+      },
+      "datasets": [
+        "fat-page-1"
+      ],
+      "steps": [
+        {
+          "id": "member_messages",
+          "action": "api",
+          "actor": "member",
+          "contract": "member_messages",
+          "query": {
+            "page": "${data.page}",
+            "page_size": "${data.page_size}"
+          },
+          "expect": [
+            {"path":"http","op":"eq","value":200},
+            {"path":"body.status","op":"eq","value":true},
+            {"path":"body.data.d","op":"rows_have_keys","value":["id","title","body_text"]},
+            {"path":"body","op":"fields_absent_or","value":{"trigger_person":[null,""],"maintainer":[null,""]}}
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ISOP-2375-C28-RESP",
+      "review": {
+        "用例编号": "ISOP-2375-C28-RESP",
+        "类型": "API",
+        "模块/接口": "/member/message/popup_list",
+        "用例名称": "现有站内信弹窗响应及人员字段",
+        "前置条件": "通过当前 FAT 只读会话取得有业务数据的响应。",
+        "参数/步骤": "按当前 FAT 的正式接口参数执行本用例。",
+        "预期结果": "只读本次会员现有弹窗。trigger_person、maintainer 缺失或为空。需另确认指定消息的样本关联。",
+        "级别": "高",
+        "验收点": "ISOP-2375-C28"
+      },
+      "steps": [
+        {
+          "id": "member_popup",
+          "action": "api",
+          "actor": "member",
+          "contract": "member_popup",
+          "expect": [
+            {"path":"http","op":"eq","value":200},
+            {"path":"body.status","op":"eq","value":true},
+            {"path":"body.data","op":"rows_have_keys","value":["id","title","body_text"]},
+            {"path":"body","op":"fields_absent_or","value":{"trigger_person":[null,""],"maintainer":[null,""]}}
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ISOP-2375-C29-RESP",
+      "review": {
+        "用例编号": "ISOP-2375-C29-RESP",
+        "类型": "API",
+        "模块/接口": "/member/detail",
+        "用例名称": "钱包密码已设置会员的详情响应",
+        "前置条件": "FAT 提现测试会员已设置钱包密码，使用已有 WITHDRAW_CLIENT 凭据。",
+        "参数/步骤": "按当前 FAT 的正式接口参数执行本用例。",
+        "预期结果": "会员详情中的密码字段按契约清空，保留已设置状态。服务日志另行核验。",
+        "级别": "高",
+        "验收点": "ISOP-2375-C29"
+      },
+      "steps": [
+        {
+          "id": "member_detail",
+          "action": "api",
+          "actor": "wallet_member",
+          "contract": "member_detail",
+          "expect": [
+            {"path":"http","op":"eq","value":200},
+            {"path":"body.status","op":"eq","value":true},
+            {"path":"body.data.uid","op":"nonempty"},
+            {"path":"body.data.has_wallet_password","op":"eq","value":true},
+            {"path":"body.data.member_extra","op":"type","value":"object"},
+            {"path":"body.data.member_extra","op":"fields_absent_or","value":{"wallet_password":[null,""]}}
+          ]
+        }
+      ]
+    }
+  ]
+}

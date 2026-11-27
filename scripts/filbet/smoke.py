@@ -119,7 +119,7 @@ def request_body_for(row: dict[str, str]) -> dict[str, object] | None:
 def assertion_result(result: dict[str, object], assertions: str) -> tuple[bool, list[str]]:
     failures = []
     body = result.get("decoded_body")
-    rules = [item for item in assertions.split(",") if item]
+    rules = [item.strip() for item in assertions.split(",") if item.strip()]
 
     for rule in rules:
         if rule == "http_200":
@@ -140,15 +140,23 @@ def assertion_result(result: dict[str, object], assertions: str) -> tuple[bool, 
             if not isinstance(data, list):
                 failures.append("data is not list")
         elif rule.startswith("keys:"):
-            keys = [item for item in rule.removeprefix("keys:").split("|") if item]
+            keys = [item.strip() for item in rule.removeprefix("keys:").split("|")]
+            if not all(keys):
+                failures.append("keys assertion requires nonempty key paths")
+                continue
             for key in keys:
                 if not has_nested(body, key):
                     failures.append(f"missing key {key}")
         elif rule.startswith("non_empty:"):
-            key = rule.removeprefix("non_empty:")
+            key = rule.removeprefix("non_empty:").strip()
+            if not key:
+                failures.append("non_empty assertion requires a key path")
+                continue
             value = get_nested(body, key)
             if value is None or value == "" or value == [] or value == {}:
                 failures.append(f"empty value {key}")
+        else:
+            failures.append(f"unsupported assertion {rule.split(':', 1)[0]}")
 
     return not failures, failures
 
@@ -244,6 +252,17 @@ def extract_token(result: dict[str, object]) -> str:
     return ""
 
 
+def login_observation(result: dict[str, object]) -> dict[str, object]:
+    """Keep report metadata and business status without authentication payloads."""
+    body = result.get("decoded_body")
+    status = body.get("status") if isinstance(body, dict) else None
+    return {
+        **{key: result[key] for key in ("priority", "case_id", "method", "url", "status", "elapsed_ms", "ok") if key in result},
+        "decoded_body": {"status": status} if isinstance(status, bool) else None,
+        "body_sample": "",
+    }
+
+
 def admin_sms_otp(args: argparse.Namespace, otp_id: str) -> str:
     if not otp_id.isdigit():
         return ""
@@ -310,7 +329,7 @@ def client_login(args: argparse.Namespace) -> tuple[list[dict[str, object]], str
         token = extract_token(password_result)
         if token:
             os.environ["API_TOKEN"] = token
-        return [password_result], token
+        return [login_observation(password_result)], token
 
     if not otp and otp_source != "admin_sms":
         raise SystemExit("CLIENT_OTP or CLIENT_OTP_SOURCE=admin_sms is required when CLIENT_AUTH_MODE=otp")
@@ -343,10 +362,10 @@ def client_login(args: argparse.Namespace) -> tuple[list[dict[str, object]], str
                 os.environ["API_TOKEN"] = token
 
     token = ""
-    results = [sms_result]
+    results = [login_observation(sms_result)]
     if login_result:
         token = extract_token(login_result)
-        results.append(login_result)
+        results.append(login_observation(login_result))
     return results, token
 
 
@@ -395,7 +414,7 @@ def admin_login(args: argparse.Namespace) -> tuple[list[dict[str, object]], str]
     if token:
         os.environ["ADMIN_TOKEN"] = token
 
-    results = [auth_result, login_result]
+    results = [login_observation(auth_result), login_observation(login_result)]
     return results, token
 
 

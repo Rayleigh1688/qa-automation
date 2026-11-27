@@ -57,8 +57,14 @@ class Session:
         except HTTPError as error:
             response = error
         with response:
-            decoded, _ = decode_body_sample(response.read())
-            return {'http':response.code, 'body':decoded, 'elapsed_ms':round((time.monotonic()-started)*1000)}
+            raw = response.read()
+            decoded, sample = decode_body_sample(raw)
+            if not raw:
+                decode_status = 'empty'
+            else:
+                decode_status = 'decoded' if decoded is not None or sample == 'null' else 'undecodable'
+            return {'http':response.code, 'body':decoded, 'decode_status':decode_status,
+                    'body_bytes':len(raw), 'elapsed_ms':round((time.monotonic()-started)*1000)}
 
     def login(self):
         conf = self.config

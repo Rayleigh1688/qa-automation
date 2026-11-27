@@ -4,7 +4,7 @@
 
 ## Python 虚拟环境与 Windows
 
-每台电脑自行创建 `.venv`（已被 Git 忽略），不要复制其他电脑的环境目录。团队建议统一 Python 3.12；代码要求 Python 3.10+。当前核心 runner 仅使用标准库，没有额外 pip 依赖；Node/Playwright 仍由 `npm ci` 根据 `package-lock.json` 安装，MySQL、ImageMagick、Tesseract 是独立系统工具。
+每台电脑自行创建 `.venv`（已被 Git 忽略），不要复制其他电脑的环境目录。团队建议统一 Python 3.12。代码要求 Python 3.10+。默认 JSON 计划使用标准库。给需求计划启用 YAML 数据集的团队成员，在自己的解释器中运行 `python -m pip install -r config/requirements-yaml.txt`。Node/Playwright 由 `npm ci` 根据 `package-lock.json` 安装，MySQL、ImageMagick、Tesseract 是独立系统工具。
 
 Mac/Linux：
 
@@ -30,6 +30,8 @@ npm run check
 ```
 
 Windows cmd 可用 `.venv\Scripts\activate.bat` 激活。npm 启动器依次使用显式 `QA_PYTHON_EXECUTABLE`、已激活的 `VIRTUAL_ENV`，否则探测系统 Python（Windows 为 `py -3` / `python` / `python3`，Mac/Linux 为 `python3` / `python`）。虚拟环境选择失败时停止，不静默切换到系统解释器。Python 子脚本使用 `sys.executable`；Python → Node → Python 通过内部解释器路径沿用同一环境。直接 CLI 应使用虚拟环境中的 `python`。
+
+`qa:api` 在未显式选择或激活解释器时，优先使用仓库根目录已有的 `.venv`。使用 YAML 数据集时，在选中的解释器里安装本节所列依赖。 [需求只读 API 短命令](commands.md#fat-只读-api-短命令)
 
 Windows 配置示例（模板只在文件尚不存在时复制，勿覆盖已有凭据）：
 

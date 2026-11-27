@@ -1,0 +1,81 @@
+﻿执行用例编号,总用例编号,用例名称,接口/流程,前置条件,数据集,输入变量,请求/步骤,预期/断言,就绪情况
+ISOP-2375-C10-RESP,ISOP-2375-C10,新人签到详情响应及员工字段,/promo/task/newbie/daily,通过当前 FAT 只读会话取得有业务数据的响应。,固定组合,"{""staff_empty_values"":{""created_name"":[null,""""],""updated_name"":[null,""""],""operator_name"":[null,""""],""created_uid"":[null,""""],""updated_uid"":[null,""""],""operator_uid"":[null,""""]}}",newbie_daily [guest] GET /promo/task/newbie/daily {},"成功响应有正常业务数据，清理员工字段。指定业务样本的关联单独核验。
+newbie_daily: http eq 200
+newbie_daily: body.status eq true
+newbie_daily: body.data.d.id nonempty ""非空""
+newbie_daily: body fields_absent_or ""${staff_empty_values}""",可执行
+ISOP-2375-DAILY-BASE,"ISOP-2375-C11,ISOP-2375-C12",日常签到详情基础响应及员工字段,/promo/task/daily/task,通过当前 FAT 只读会话取得有业务数据的响应。,固定组合,"{""staff_empty_values"":{""created_name"":[null,""""],""updated_name"":[null,""""],""operator_name"":[null,""""],""created_uid"":[null,""""],""updated_uid"":[null,""""],""operator_uid"":[null,""""]}}",daily [guest] GET /promo/task/daily/task {},"本次检查基础入口返回的任务及员工字段。两个分支各自的覆盖见 C11、C12。
+daily: http eq 200
+daily: body.status eq true
+daily: body.data.d.id nonempty ""非空""
+daily: body fields_absent_or ""${staff_empty_values}""",可执行
+ISOP-2375-C13-RESP:fat-page-1,ISOP-2375-C13,匿名推荐游戏列表响应及员工字段,/member/game/list/recommended,通过当前 FAT 只读会话取得有业务数据的响应。,fat-page-1,"{""staff_empty_values"":{""created_name"":[null,""""],""updated_name"":[null,""""],""operator_name"":[null,""""],""created_uid"":[null,""""],""updated_uid"":[null,""""],""operator_uid"":[null,""""]},""data"":{""page"":1,""page_size"":10}}","recommended [guest] GET /member/game/list/recommended {""query"":{""page"":""${data.page}"",""page_size"":""${data.page_size}""}}
+数据集 fat-page-1: {""page"": 1, ""page_size"": 10}","成功响应有正常业务数据，清理员工字段。指定业务样本的关联单独核验。
+recommended: http eq 200
+recommended: body.status eq true
+recommended: body.data.d rows_have_keys [""game_id""]
+recommended: body.data.t type ""integer""
+recommended: body.data.s type ""integer""
+recommended: body fields_absent_or ""${staff_empty_values}""",可执行
+ISOP-2375-INDEX-BASE,"ISOP-2375-C15,ISOP-2375-C16,ISOP-2375-C17,ISOP-2375-C18",基础首页响应及员工字段,/member/v2/index,通过当前 FAT 只读会话取得有业务数据的响应。,固定组合,"{""staff_empty_values"":{""created_name"":[null,""""],""updated_name"":[null,""""],""operator_name"":[null,""""],""created_uid"":[null,""""],""updated_uid"":[null,""""],""operator_uid"":[null,""""]}}",index [guest] GET /member/v2/index {},"基础 FAT 入口。四品牌分别的覆盖见 C15—C18。
+index: http eq 200
+index: body.status eq true
+index: body.data.list rows_have_keys [""game_class"", ""en_name""]
+index: body.data.nav rows_have_keys [""game_class"", ""en_name""]
+index: body fields_absent_or ""${staff_empty_values}""",可执行
+ISOP-2375-C19-RESP:fat-venue-op,ISOP-2375-C19,组合游戏列表响应及员工字段,/member/game/listRw,通过当前 FAT 只读会话取得有业务数据的响应。,fat-venue-op,"{""staff_empty_values"":{""created_name"":[null,""""],""updated_name"":[null,""""],""operator_name"":[null,""""],""created_uid"":[null,""""],""updated_uid"":[null,""""],""operator_uid"":[null,""""]},""data"":{""page"":1,""page_size"":10,""venues"":""op"",""sort"":4}}","list_rw [guest] GET /member/game/listRw {""query"":{""page"":""${data.page}"",""page_size"":""${data.page_size}"",""venues"":""${data.venues}"",""sort"":""${data.sort}""}}
+数据集 fat-venue-op: {""page"": 1, ""page_size"": 10, ""venues"": ""op"", ""sort"": 4}","成功响应有正常业务数据，清理员工字段。指定业务样本的关联单独核验。
+list_rw: http eq 200
+list_rw: body.status eq true
+list_rw: body.data.d rows_have_keys [""game_id""]
+list_rw: body.data.t type ""integer""
+list_rw: body.data.s type ""integer""
+list_rw: body fields_absent_or ""${staff_empty_values}""",可执行
+ISOP-2375-C21-RESP,ISOP-2375-C21,新人任务列表响应及员工字段,/promo/task/newbie/list,通过当前 FAT 只读会话取得有业务数据的响应。,固定组合,"{""staff_empty_values"":{""created_name"":[null,""""],""updated_name"":[null,""""],""operator_name"":[null,""""],""created_uid"":[null,""""],""updated_uid"":[null,""""],""operator_uid"":[null,""""]}}",newbie_list [guest] GET /promo/task/newbie/list {},"成功响应有正常业务数据，清理员工字段。指定业务样本的关联单独核验。
+newbie_list: http eq 200
+newbie_list: body.status eq true
+newbie_list: body.data.d rows_have_keys [""id""]
+newbie_list: body fields_absent_or ""${staff_empty_values}""",可执行
+ISOP-2375-C22-RESP,ISOP-2375-C22,日常任务列表响应及员工字段,/promo/task/daily/list,通过当前 FAT 只读会话取得有业务数据的响应。,固定组合,"{""staff_empty_values"":{""created_name"":[null,""""],""updated_name"":[null,""""],""operator_name"":[null,""""],""created_uid"":[null,""""],""updated_uid"":[null,""""],""operator_uid"":[null,""""]}}",daily_list [guest] GET /promo/task/daily/list {},"成功响应有正常业务数据，清理员工字段。指定业务样本的关联单独核验。
+daily_list: http eq 200
+daily_list: body.status eq true
+daily_list: body.data.d rows_have_keys [""id""]
+daily_list: body fields_absent_or ""${staff_empty_values}""",可执行
+ISOP-2375-C23-RESP,ISOP-2375-C23,VIP 规则响应及员工字段,/member/vip/rule,通过当前 FAT 只读会话取得有业务数据的响应。,固定组合,"{""staff_empty_values"":{""created_name"":[null,""""],""updated_name"":[null,""""],""operator_name"":[null,""""],""created_uid"":[null,""""],""updated_uid"":[null,""""],""operator_uid"":[null,""""]}}",vip_rule [guest] GET /member/vip/rule {},"成功响应有正常业务数据，清理员工字段。按 FAT 实测，updated_uid 的空值包含整数 0。指定规则样本另行核验。
+vip_rule: http eq 200
+vip_rule: body.status eq true
+vip_rule: body.data type ""object""
+vip_rule: body.data nonempty ""非空""
+vip_rule: body fields_absent_or {""created_name"": ""${staff_empty_values.created_name}"", ""updated_name"": ""${staff_empty_values.updated_name}"", ""operator_name"": ""${staff_empty_values.operator_name}"", ""created_uid"": ""${staff_empty_values.created_uid}"", ""updated_uid"": [null, """", 0], ""operator_uid"": ""${staff_empty_values.operator_uid}""}",可执行
+ISOP-2375-C24-RESP:fat-page-1,ISOP-2375-C24,会员银行列表响应及员工字段,/finance/payment/bank/list,通过当前 FAT 只读会话取得有业务数据的响应。,fat-page-1,"{""staff_empty_values"":{""created_name"":[null,""""],""updated_name"":[null,""""],""operator_name"":[null,""""],""created_uid"":[null,""""],""updated_uid"":[null,""""],""operator_uid"":[null,""""]},""data"":{""page"":1,""page_size"":10}}","member_bank_list [member] GET /finance/payment/bank/list {""query"":{""page"":""${data.page}"",""page_size"":""${data.page_size}""}}
+数据集 fat-page-1: {""page"": 1, ""page_size"": 10}","只验证本页业务数据与员工字段。待确认带操作人记录的指定银行样本。
+member_bank_list: http eq 200
+member_bank_list: body.status eq true
+member_bank_list: body.data.d rows_have_keys [""id"", ""code"", ""name""]
+member_bank_list: body.data.t type ""integer""
+member_bank_list: body.data.s type ""integer""
+member_bank_list: body fields_absent_or ""${staff_empty_values}""",可执行
+ISOP-2375-C26-RESP,ISOP-2375-C26,VIP 配置响应及员工字段,/promo/vip/config,通过当前 FAT 只读会话取得有业务数据的响应。,固定组合,"{""staff_empty_values"":{""created_name"":[null,""""],""updated_name"":[null,""""],""operator_name"":[null,""""],""created_uid"":[null,""""],""updated_uid"":[null,""""],""operator_uid"":[null,""""]}}",vip_config [member] GET /promo/vip/config {},"成功响应有正常业务数据，清理员工字段。按 VIP 配置接口文档，updated_uid 的空值包含整数 0。指定配置样本另行核验。
+vip_config: http eq 200
+vip_config: body.status eq true
+vip_config: body.data type ""object""
+vip_config: body.data nonempty ""非空""
+vip_config: body fields_absent_or {""created_name"": ""${staff_empty_values.created_name}"", ""updated_name"": ""${staff_empty_values.updated_name}"", ""operator_name"": ""${staff_empty_values.operator_name}"", ""created_uid"": ""${staff_empty_values.created_uid}"", ""updated_uid"": [null, """", 0], ""operator_uid"": ""${staff_empty_values.operator_uid}""}",可执行
+ISOP-2375-C27-RESP:fat-page-1,ISOP-2375-C27,现有站内信列表响应及人员字段,/member/message/list,通过当前 FAT 只读会话取得有业务数据的响应。,fat-page-1,"{""staff_empty_values"":{""created_name"":[null,""""],""updated_name"":[null,""""],""operator_name"":[null,""""],""created_uid"":[null,""""],""updated_uid"":[null,""""],""operator_uid"":[null,""""]},""data"":{""page"":1,""page_size"":10}}","member_messages [member] GET /member/message/list {""query"":{""page"":""${data.page}"",""page_size"":""${data.page_size}""}}
+数据集 fat-page-1: {""page"": 1, ""page_size"": 10}","只读本次会员现有消息。需另确认指定消息的样本关联。
+member_messages: http eq 200
+member_messages: body.status eq true
+member_messages: body.data.d rows_have_keys [""id"", ""title"", ""body_text""]
+member_messages: body fields_absent_or {""trigger_person"": [null, """"], ""maintainer"": [null, """"]}",可执行
+ISOP-2375-C28-RESP,ISOP-2375-C28,现有站内信弹窗响应及人员字段,/member/message/popup_list,通过当前 FAT 只读会话取得有业务数据的响应。,固定组合,"{""staff_empty_values"":{""created_name"":[null,""""],""updated_name"":[null,""""],""operator_name"":[null,""""],""created_uid"":[null,""""],""updated_uid"":[null,""""],""operator_uid"":[null,""""]}}",member_popup [member] GET /member/message/popup_list {},"只读本次会员现有弹窗。trigger_person、maintainer 缺失或为空。需另确认指定消息的样本关联。
+member_popup: http eq 200
+member_popup: body.status eq true
+member_popup: body.data rows_have_keys [""id"", ""title"", ""body_text""]
+member_popup: body fields_absent_or {""trigger_person"": [null, """"], ""maintainer"": [null, """"]}",可执行
+ISOP-2375-C29-RESP,ISOP-2375-C29,钱包密码已设置会员的详情响应,/member/detail,FAT 提现测试会员已设置钱包密码，使用已有 WITHDRAW_CLIENT 凭据。,固定组合,"{""staff_empty_values"":{""created_name"":[null,""""],""updated_name"":[null,""""],""operator_name"":[null,""""],""created_uid"":[null,""""],""updated_uid"":[null,""""],""operator_uid"":[null,""""]}}",member_detail [wallet_member] GET /member/detail {},"会员详情中的密码字段按契约清空，保留已设置状态。服务日志另行核验。
+member_detail: http eq 200
+member_detail: body.status eq true
+member_detail: body.data.uid nonempty ""非空""
+member_detail: body.data.has_wallet_password eq true
+member_detail: body.data.member_extra type ""object""
+member_detail: body.data.member_extra fields_absent_or {""wallet_password"": [null, """"]}",可执行

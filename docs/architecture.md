@@ -68,7 +68,9 @@ UI 用例依赖 `ui/elements/` 和 `ui/framework/`，页面、弹窗、游戏点
 
 2026-10-16先按用户决定保留ISOP-2090输值返利，其余10个需求移入`requirements/history/archived-20261016/`；随后按新要求加入[W27八项评审](../requirements/reviews/2026W27-20261016.md)，未恢复旧归档需求。W26评审按单保留来源和决定，整批不再列当前待办；被新资料替代的旧快照及生成证据按下述规则清理。本轮实际删除、整理前已缺失资料和保留项分别见[整理记录](project-cleanup-2026-10-16.md)，不把历史原始证据缺失写成当前实测。早期抽取与清理见[2026-09-11记录](project-cleanup-2026-09-11.md)及[2026-10-05记录](project-cleanup-2026-10-05.md)。
 
-2026-10-20按用户最新决定将ISOP-2090移入[本批归档](../requirements/history/archived-20261020/README.md)，当前8项W27、历史39项。10-16失败及未完成验收保留；本轮图片按有效依赖清理，见[清理记录](project-cleanup-2026-10-20.md)。
+2026-10-20按用户当时决定将ISOP-2090移入[本批归档](../requirements/history/archived-20261020/README.md)，当日活跃需求为8项W27、历史39项。10-16失败及未完成验收保留。本轮图片按有效依赖清理，见[清理记录](project-cleanup-2026-10-20.md)。
+
+2026-11-27 将 ISOP-2375 之前的 17 项当前需求移入历史。顶层仅保留 ISOP-2375 和 ISOP-2393，历史需求实体共 56 项。 [本批归档](../requirements/history/archived-20261127/README.md) · [当前需求](../requirements/README.md#当前需求)
 
 后续工作以 [新需求设计](../requirements/README.md) 为入口，按变更影响补用例并评估是否纳入 P0，不要求全接口自动化后再做需求测试。
 
@@ -93,7 +95,9 @@ UI 用例依赖 `ui/elements/` 和 `ui/framework/`，页面、弹窗、游戏点
 
 ## 新需求接口组合
 
-`requirements/<编号>/api/cases.json`持有本需求参数与断言并引用验收Case；`scripts/run-requirement-api.py`负责CLI，`filbet/requirement_api.py`校验、编排和生成脱敏报告，复用`filbet/smoke.py`的认证/CBOR请求及公共本机锁。当前执行器只允许明确的查询路由；未知契约或需专用写入样本的闭环保留BLOCKED。报告按需求/运行时间隔离，P0入口与清理范围保持原定义。
+新需求将请求契约和可执行用例放在 `requirements/<编号>/api/test-cases.json`，YAML 存数据组合，根目录 `plan.json` 引用二者并声明环境与角色。审阅中的接口规则放在同一 `api/` 目录。P0 接口定义继续集中于 `api/p0/`。需求实测保存在 `reports/qa/<编号>/`。
+
+旧查询计划仍可从 `api/cases.json` 使用 `scripts/run-requirement-api.py`。统一入口兼容内联 `contracts`、`cases` 的历史计划，缺样本或契约的用例继续标记阻塞。执行细节见[接口流程](testing-workflow.md#数据驱动与参数传递)。
 
 ## 提测消息编排
 

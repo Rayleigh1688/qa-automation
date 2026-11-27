@@ -17,12 +17,23 @@ from qa_core.local_lock import local_run_lock
 ROOT = Path(__file__).resolve().parents[1]
 
 
+def api_only_report(cases, report):
+    return (report.get('mode', 'execution') == 'execution' and not report.get('profile')
+            and not report.get('execution_methods') and all(case['类型'] == 'API' for case in cases))
+
+
+def write_run_views(folder, cases, report, *, extra_views, response_bodies=None):
+    write_views(folder, cases, report, extra_views=extra_views, api_outcomes_only=api_only_report(cases, report),
+                response_bodies=response_bodies)
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('story')
     parser.add_argument('--execute', action='store_true')
     parser.add_argument('--env', default='.env.fat')
     parser.add_argument('--insecure', action='store_true')
+    parser.add_argument('--fat-api', action='store_true', help='Use the FAT read-only API preset and its existing TLS compatibility setting')
     parser.add_argument('--timeout', type=float, default=15)
     parser.add_argument('--version', default='未提供', help='Declared deployment version; does not claim remote verification')
     parser.add_argument('--expected-plan-sha256', help='Reject a plan changed since task confirmation')
@@ -31,11 +42,17 @@ def main():
     parser.add_argument('--profile', choices=['normal','regression'], help='ISOP-2027 explicit scope; regression retains security/state/concurrency and lists deferred cases')
     parser.add_argument('--layer', choices=['API','UI','FLOW'])
     parser.add_argument('--export-cases', action='store_true')
-    parser.add_argument('--extra-views', action='store_true', help='Also export cases/failures/pending CSV and summary JSON')
+    parser.add_argument('--extra-views', action='store_true', help='Also export cases/failures CSV, summary JSON and pending CSV for mixed or non-API views')
     parser.add_argument('--include-ui-automation', action='store_true', help='Opt into retained UI automation; default api-first policy excludes manual assignments')
     parser.add_argument('--allow-write', action='append', default=[])
     parser.add_argument('--rebuild', type=Path, help='Rebuild views from an existing raw result into a new sibling directory')
     args = parser.parse_args()
+    if args.fat_api:
+        if (Path(args.env).resolve() != Path('.env.fat').resolve() or args.layer not in (None, 'API')
+                or args.profile or args.allow_write or args.include_ui_automation or args.rebuild):
+            raise ValueError('--fat-api requires .env.fat and read-only API execution; use the full command for other modes')
+        args.layer = 'API'
+        args.insecure = True
     if not args.version.strip() or len(args.version)>200 or any(ord(ch)<32 for ch in args.version):
         raise ValueError('invalid declared deployment version')
     args.version = args.version.strip()
@@ -49,7 +66,9 @@ def main():
         if report.get('requirement') == 'ISOP-2022':
             from filbet.record_report import display_cases
             snapshot = display_cases(snapshot)
-        write_views(args.rebuild.parent/(args.rebuild.name+'-views-'+uuid.uuid4().hex[:8]), snapshot, report, extra_views=args.extra_views)
+        folder = args.rebuild.parent/(args.rebuild.name+'-views-'+uuid.uuid4().hex[:8])
+        write_run_views(folder, snapshot, report, extra_views=args.extra_views)
+        print('Results:',folder/'results.html')
         return 0
     from filbet.requirement_adapter import Adapter, METHODS
     path = requirement_dir(ROOT, args.story)/'plan.json'
@@ -74,6 +93,8 @@ def main():
     if args.only:
         if not set(args.only) <= {c['id'] for c in cases}: raise ValueError('unknown case selection')
         cases = [c for c in cases if c['id'] in args.only]
+        if args.fat_api and any(case['review']['类型'] != 'API' for case in cases):
+            raise ValueError('--fat-api --only requires API case IDs')
     if args.layer: cases = [c for c in cases if c['review']['类型'] == args.layer]
     if profile:
         from filbet.normal_profile import UI_READ_CASES
@@ -84,6 +105,16 @@ def main():
         from qa_core.team_delivery import select_automatic
         cases = select_automatic(cases)
     if not cases: raise ValueError('empty selection')
+    if args.fat_api:
+        unsupported = [
+            case['id'] for case in cases
+            if any(
+                step['action'] != 'api' or plan['contracts'][step['contract']]['write']
+                for step in case.get('steps', [])
+            )
+        ]
+        if unsupported:
+            raise ValueError('--fat-api requires read-only API steps; unsupported cases: ' + ', '.join(unsupported))
     if not args.execute:
         print(f"{args.story}: validated {len(cases)} cases; executable {sum(bool(c.get('steps')) for c in cases)}; no login")
         return 0
@@ -99,16 +130,19 @@ def main():
         if profile:
             from filbet.normal_profile import after_case
             adapter.after_case = lambda case, item: after_case(adapter,case,item)
-        folder.mkdir(parents=True,exist_ok=False)
         report = {'schema_version':2,'requirement':args.story,'run_id':run_id,'environment':adapter.environment,'source_time':datetime.now(timezone.utc).isoformat(),'mode':'execution','cases_sha256':digest,'deployment':args.version,
                   'deployment_verification':{'status':'not_provided' if args.version=='未提供' else 'declared','source':'cli'}}
+        snapshot = [c['review'] for c in cases]
+        response_bodies = {} if not (profile or args.result_index) and api_only_report(snapshot, report) else None
+        folder.mkdir(mode=0o700 if response_bodies is not None else 0o777, parents=True, exist_ok=False)
+        if args.result_index:
+            report['report_owner'] = 'orchestration'
         if role_preconditions is not None: report['role_preconditions'] = role_preconditions
         if getattr(adapter,'ui_assets',None):
             import hashlib
             asset_text = json.dumps(adapter.ui_assets,ensure_ascii=False,indent=2)+'\n'
             (folder/'ui-assets.snapshot.json').write_text(asset_text)
             report['ui_assets_sha256'] = hashlib.sha256(asset_text.encode()).hexdigest()
-        snapshot = [c['review'] for c in cases]
         (folder/'plan.snapshot.json').write_text(json.dumps(plan,ensure_ascii=False,indent=2)+'\n')
         if profile:
             (folder/'execution-cases.snapshot.json').write_text(json.dumps(cases,ensure_ascii=False,indent=2)+'\n')
@@ -120,7 +154,7 @@ def main():
             temp.write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n')
             temp.replace(folder/'result.json')
         try:
-            report['results'] = execute(cases,adapter,run_id,checkpoint)
+            report['results'] = execute(cases, adapter, run_id, checkpoint, response_bodies=response_bodies)
         finally:
             if getattr(adapter,'ui_worker',None): adapter.ui_worker.close()
         for item in report['results']: item['evidence'] = str(folder/'result.json')
@@ -148,25 +182,30 @@ def main():
             from filbet.requirement_report import write_reviewed_views
             write_reviewed_views(folder,display_snapshot,report,extra_views=args.extra_views)
         else:
-            write_views(folder,display_snapshot,report,extra_views=args.extra_views)
+            write_run_views(folder, display_snapshot, report, extra_views=args.extra_views, response_bodies=response_bodies)
         if profile:
             from filbet.requirement_report import write_assessment
             write_assessment(folder,snapshot,report,profile)
         report['timings_ms']['report'] = round((time.monotonic()-report_started)*1000)
         (folder/'result.json').write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n')
         if any(item.get('steps') for item in report['results']):
+            if args.story != 'ISOP-2027' and not args.result_index and api_only_report(snapshot, report):
+                from qa_core.report_retention import remove_previous_api_views
+                indexes = (ROOT/'reports/telegram/runs').glob('*/api-result-index.json')
+                remove_previous_api_views(folder, index_paths=indexes)
             latest = folder.parent/'latest.json'
             temp = folder.parent/('latest-'+uuid.uuid4().hex+'.tmp')
             temp.write_text(json.dumps({'run_id':run_id,'results':run_id+'/results.html','raw':run_id+'/result.json'})+'\n')
             temp.replace(latest)
-            (folder.parent/'latest.html').write_text('<!doctype html><meta charset="utf-8"><title>最近一次实测</title><a href="'+run_id+'/results.html">打开最近一次实测结果</a>')
-        print('Results:',folder/'results.html')
+            temp.write_text('<!doctype html><meta charset="utf-8"><title>最近一次实测</title><a href="'+run_id+'/results.html">打开最近一次实测结果</a>', encoding='utf-8')
+            temp.replace(folder.parent/'latest.html')
         if args.story == 'ISOP-2027':
             from qa_core.report_retention import retain_latest
             retain_latest(folder,state_dir=ROOT/'api/local-state')
         if args.result_index:
             with args.result_index.open('x',encoding='utf-8') as index:
                 json.dump({'raw':str((folder/'result.json').resolve()),'run_id':run_id},index)
+        print('Results:',folder/'results.html')
         print({s:sum(r['status']==s for r in report['results']) for s in ['PASS','FAIL','NOT_RUN','ERROR']})
         if any(r['status'] in {'FAIL','ERROR'} for r in report['results']): return 1
         return 2 if any(r['status']=='NOT_RUN' for r in report['results']) else 0

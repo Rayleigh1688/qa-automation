@@ -23,7 +23,3 @@
 ## 2026-09-11 增量与未测核对
 
 12311df已给venue/node、game/node、gameclass/node、member、member-daily-game/aggregate五处统计查询补jp_winning；此前“未找到其他报表新契约”的结论仅适用于9月10日基线。本需求旧cases.json与旧执行记录均未覆盖这5处，2022列表测试也不能替代。完整路径和证据边界见[范围核对](../../../../../docs/history/requirement-records-20260907-11.md#coverage-20260911)。同批invite统计仍按用户决定排除，不恢复邀请功能；jp_winning与需求原jackpot_payout名称映射仍须核对。
-
-## 2026-09-11 逐项开测续接
-
-当前实测及未执行边界见[2026-09-11历史结果](../../../../../docs/history/requirement-records-20260907-11.md#test-20260911)。此前日期结论按原基线保留，不充当当前实测。

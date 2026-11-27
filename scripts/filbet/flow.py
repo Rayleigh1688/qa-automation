@@ -294,6 +294,7 @@ class FlowOperations:
             and "".join(filter(str.isdigit, withdraw_phone)) != "".join(filter(str.isdigit, current_phone))
         )
 
+        wallet_before: dict[str, object] = {}
         if (
             args.deposit
             or args.clear_turnover
@@ -302,9 +303,24 @@ class FlowOperations:
         ):
             records.extend(self.client_login(args))
             if args.deposit or args.clear_turnover or args.withdraw:
-                records.append(self.query_wallet(args, "wallet_before"))
+                wallet_before = self.query_wallet(args, "wallet_before")
+                records.append(wallet_before)
         elif args.check_client_deposit_list or args.check_client_withdraw_list:
             records.extend(self.client_login(args))
+        if args.deposit and args.approve_deposit:
+            wallet_data = wallet_before.get("data")
+            if (
+                wallet_before.get("http_status") != 200
+                or wallet_before.get("business_status") is not True
+                or not isinstance(wallet_data, dict)
+                or self.decimal_value(wallet_data.get("balance")) is None
+            ):
+                wallet_before.update(
+                    business_status=False,
+                    reason="valid wallet balance required before creating and approving a deposit",
+                )
+                self.finish(args, records)
+                return
         if (
             args.approve_deposit
             or args.check_admin_deposit_list
@@ -314,18 +330,23 @@ class FlowOperations:
         ):
             records.extend(self.admin_login(args))
         if args.deposit:
+            deposit_start = len(records)
             if not self.run_deposit_stage(args, records):
                 self.finish(args, records)
                 return
             if args.approve_deposit:
-                wallet_before = next(
-                    (item for item in records if item.get("name") == "wallet_before"),
-                    {},
+                selected_amount = next(
+                    (
+                        str(item.get("amount", ""))
+                        for item in records[deposit_start:]
+                        if item.get("name") == "deposit_create"
+                    ),
+                    "",
                 )
                 wallet_after_deposit = self.wait_for_deposit_credit(
                     args,
                     wallet_before,
-                    args.deposit_amount,
+                    selected_amount,
                 )
                 records.append(wallet_after_deposit)
                 if wallet_after_deposit.get("business_status") is not True:

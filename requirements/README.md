@@ -1,27 +1,16 @@
 # 需求设计与测试入口
 
-2026-11-27只读补录[ISOP-2375](ISOP-2375/design.md) VACT 驗證調整；已读取Jira正文、字段、子任务摘要和验收项A01—A08，未执行API/UI业务测试或核验FAT部署，采集见[当日快照](reviews/2026-11-27-ISOP-2375.md)。
+2026-11-27 当前仅维护 ISOP-2375 和 ISOP-2393。此前 17 项仍可按编号查阅，见[本批历史归档](history/archived-20261127/README.md)。
 
-2026-11-23只读补录[ISOP-2233](ISOP-2233/design.md) Pagcor责任博彩调整；已读取Jira正文、附件清单和待确认项，未下载附件或执行业务测试，采集见[当日快照](reviews/2026-11-23-ISOP-2233.md)。
+2026-11-27 完成 ISOP-2375 测试计划与原子接口设计，已做 FAT 定向验证，部署版本和综合验收仍待确认。 [测试计划与实测范围](ISOP-2375/test-plan.md) · [原子接口设计](ISOP-2375/api/test-cases.md) · [FB 提交核对](ISOP-2375/design.md#接口文档提交核对) · [初次采集快照](reviews/2026-11-27-ISOP-2375.md)
 
-2026-10-28已补录W27的6项新建Story，当前为原8项加新增6项，共14项；新增名单、筛选依据及待评审重点见[W27增量](reviews/2026W27-20261028.md)。新增均为只读初评、待人工评审，没有执行业务测试。
-
-2026-11-10只读补录[ISOP-2320](ISOP-2320/design.md)与[ISOP-2341](ISOP-2341/design.md)两项FILPLAY Story；父单正文、页面可见评论及子任务状态快照见[当日增量](reviews/2026-11-10-ISOP-2320-2341.md)。来源未覆盖的设计稿、子任务评论及业务环境均不视为已验证。
-
-2026-10-20按用户决定归档 **ISOP-2090 输值返利活动**。2090实体与原有修改完整保留在[10-20归档](history/archived-20261020/README.md)，其余旧资料从[历史索引](history/README.md)查阅。归档表示退出当前工作范围，不代表完成、上线、问题已修复或PASS，也不恢复旧任务执行。
-
-2090保留23张正式功能卡、总表和定向API能力。[10-16 FAT复测（历史摘要）](history/archived-20261020/ISOP-2090/questions.md#history-results-20261022)存在金额／配置等失败及完整验收缺口，来源仍为PARTIAL；归档不改变原结论。显式编号仍可查历史，默认批量不处理该单。静态图片按有效依赖清理，已退出与保留项见[清理记录](../docs/project-cleanup-2026-10-20.md)。W26[批次评审](reviews/2026W26-20261006.md)保留为日期来源，不列当前待办。
-
-2026-10-22进一步清退历史API／功能执行报告与原始结果，必要失败／未决摘要留各单问题文档，身份和恢复资料迁至忽略目录；见[本轮瘦身](../docs/project-cleanup-2026-10-22.md)。正式设计、用例及有效契约保留，当前默认索引与来源检查不读取旧执行目录。
+2026-11-27 整合 ISOP-2393 每日投注上限的只读采集、功能用例和 API 评审。首批待验证两条只读接口，后台写入契约和两站游戏准入仍待核对。 [初次采集快照](reviews/2026-11-27-ISOP-2393.md) · [接口测试草案](ISOP-2393/api/test-plan.md)
 
 当前工作从下面的入口阅读：
 
 | 内容 | 入口与用途 |
 | --- | --- |
-| FILPLAY后台测试用例 | [2123正式用例](ISOP-2123/test-cases.md) · [总表](ISOP-2123/cases.csv) · [XMind](ISOP-2123/ISOP-2123-测试用例.xmind)；旧UID／门店及人数预期需按[2286差异](ISOP-2286/design.md#与既有需求的差异)重评，尚未同步新机制 |
-| FILPLAY客户端测试用例 | [2124正式用例](ISOP-2124/test-cases.md) · [总表](ISOP-2124/cases.csv) · [XMind](ISOP-2124/ISOP-2124-测试用例.xmind)；保留两项未决规则，并需承接2286 KYC及2289支付对接 |
 | 2090历史资料 | [归档入口](history/archived-20261020/README.md) · [10-16复测记录（历史摘要）](history/archived-20261020/ISOP-2090/questions.md#history-results-20261022)，历史缺陷和未验证范围继续保留 |
-| W27需求扫描与评审顺序 | [10-28增量](reviews/2026W27-20261028.md)，新增6 Story及7子任务；[10-16原8项评审](reviews/2026W27-20261016.md)保留日期快照，问题与测试重点按单维护 |
 | 历史需求及BUG定位 | [历史索引](history/README.md)，从本单保留的Jira、评论和文档链接查对应资料 |
 | 需求状态 | [状态列表](status.html)，自动证据与人工修订独立保存 |
 
@@ -52,24 +41,8 @@
 
 | Jira 编号 | 需求名称 | 分离文档 |
 | --- | --- | --- |
-| ISOP-2123 | FILPLAY合规后台调整（旧样本与人数预期需重评） | [设计](ISOP-2123/design.md) · [问题](ISOP-2123/questions.md) · [36条用例](ISOP-2123/test-cases.md) · [CSV](ISOP-2123/cases.csv) · [XMind](ISOP-2123/ISOP-2123-测试用例.xmind) · [新规则影响](ISOP-2286/design.md#与既有需求的差异) |
-| ISOP-2124 | FILPLAY合规项目盘点（正式用例需承接新KYC） | [设计](ISOP-2124/design.md) · [问题](ISOP-2124/questions.md) · [63条用例](ISOP-2124/test-cases.md) · [CSV](ISOP-2124/cases.csv) · [XMind](ISOP-2124/ISOP-2124-测试用例.xmind) · [新规则影响](ISOP-2286/design.md#与既有需求的差异) |
-| ISOP-2214 | 过审礼金无法导出（W27评审） | [设计](ISOP-2214/design.md) · [问题](ISOP-2214/questions.md) · [测试重点](ISOP-2214/test-cases.md) |
-| ISOP-2230 | 厂商排行榜活动优化（W27评审） | [设计](ISOP-2230/design.md) · [问题](ISOP-2230/questions.md) · [测试重点](ISOP-2230/test-cases.md) |
-| ISOP-2232 | PT免费旋转串接（W27评审） | [设计](ISOP-2232/design.md) · [问题](ISOP-2232/questions.md) · [测试重点](ISOP-2232/test-cases.md) |
-| ISOP-2234 | 代理后台新增推广链接（W27评审） | [设计](ISOP-2234/design.md) · [问题](ISOP-2234/questions.md) · [测试重点](ISOP-2234/test-cases.md) |
-| ISOP-2238 | 图表Y轴展示不全（W27评审） | [设计](ISOP-2238/design.md) · [问题](ISOP-2238/questions.md) · [测试重点](ISOP-2238/test-cases.md) |
-| ISOP-2239 | VCAT问题调整（W27评审） | [设计](ISOP-2239/design.md) · [问题](ISOP-2239/questions.md) · [测试重点](ISOP-2239/test-cases.md) |
-| ISOP-2278 | [FILPLAY] 测试环境游戏对接（新建初评） | [设计](ISOP-2278/design.md) · [问题](ISOP-2278/questions.md) · [测试重点](ISOP-2278/test-cases.md) |
-| ISOP-2281 | [FILPLAY] 功能测试走通（新建初评） | [设计](ISOP-2281/design.md) · [问题](ISOP-2281/questions.md) · [测试重点](ISOP-2281/test-cases.md) |
-| ISOP-2286 | [FILPLAY] KYC调整（新建初评） | [设计](ISOP-2286/design.md) · [问题](ISOP-2286/questions.md) · [测试重点](ISOP-2286/test-cases.md) |
-| ISOP-2289 | [FILPLAY] 充值、提现功能（新建初评） | [设计](ISOP-2289/design.md) · [问题](ISOP-2289/questions.md) · [测试重点](ISOP-2289/test-cases.md) |
-| ISOP-2294 | [FILPLAY] 活动（待补正文） | [设计](ISOP-2294/design.md) · [问题](ISOP-2294/questions.md) · [测试重点](ISOP-2294/test-cases.md) |
-| ISOP-2297 | [FILPLAY] 首页版面（待补正文） | [设计](ISOP-2297/design.md) · [问题](ISOP-2297/questions.md) · [测试重点](ISOP-2297/test-cases.md) |
-| ISOP-2320 | [FILPLAY] 遊戲列表加上投注返水、輸返選項 | [设计](ISOP-2320/design.md) · [问题](ISOP-2320/questions.md) · [用例](ISOP-2320/test-cases.md) |
-| ISOP-2341 | [FILPLAY] 遊戲橫豎屏優化 | [设计](ISOP-2341/design.md) · [问题](ISOP-2341/questions.md) · [用例](ISOP-2341/test-cases.md) |
-| ISOP-2233 | Pagcor責任博彩調整 | [设计](ISOP-2233/design.md) · [问题](ISOP-2233/questions.md) · [测试重点](ISOP-2233/test-cases.md) |
-| ISOP-2375 | VACT 驗證調整（17项API敏感字段清理） | [设计](ISOP-2375/design.md) · [问题](ISOP-2375/questions.md) · [用例](ISOP-2375/test-cases.md) |
+| ISOP-2375 | VACT 驗證調整（17项API敏感字段清理） | [测试计划](ISOP-2375/test-plan.md) · [原子接口用例](ISOP-2375/api/test-cases.md) · [设计](ISOP-2375/design.md) · [问题](ISOP-2375/questions.md) |
+| ISOP-2393 | 每日投注上限（待测试） | [设计](ISOP-2393/design.md) · [问题](ISOP-2393/questions.md) · [功能用例](ISOP-2393/test-cases.md) · [接口测试草案](ISOP-2393/api/test-plan.md) · [契约评审](ISOP-2393/api/contract-review.md) |
 
 ### 文档组织
 
@@ -77,15 +50,17 @@
 
 排版统一：`questions.md`沿用[问题写法](document-style.md#问题文档的阅读顺序)。`test-cases.md`新版采用短名称索引和“前置条件→操作步骤→预期结果→待确认”卡片，优先级/验收点/方式及实现说明后置，见[功能用例写法](document-style.md#功能用例的阅读顺序)。历史归档的旧宽表保持兼容。保留编号、历史决定和来源定位；原始执行证据按有效依赖清理，退出情况须标明，不能把旧结论当作当前实测。未提供的信息明确标注，不为统一格式补造结论。
 
-需求文档、专项 API 数据和场景代码集中在 `requirements/<Jira编号>/`，优先保持单个需求内容清晰。`api/contract-review.md` 记录接口与验收点的对照；接口契约确认后再增加 `api/cases.json` 和必要的场景代码。请求、登录、编码及报告复用 `scripts/filbet/`、`scripts/qa_core/` 的已有能力，不复制底层框架。新需求独立于 P0 门禁；当前API自动执行，UI人工验收，暂不建设新需求UI自动化。P0的API与核心UI自动化继续维护；已有新需求UI专项实现仅保留兼容，Telegram统一API／人工包编排继续使用[日常流程](../docs/telegram-qa.md)。阶段分工见 [测试流程](workflow.md)。
+需求文档、专项 API 数据和场景代码集中在 `requirements/<Jira编号>/`，优先保持单个需求内容清晰。`api/contract-review.md` 记录接口与验收点的对照。接口契约确认后，在 `api/test-cases.json` 定义用例，由 `plan.json` 引用，按需配置数据集。请求、登录、编码、断言及报告复用 `scripts/filbet/`、`scripts/qa_core/` 的已有能力。新需求独立于 P0 门禁；当前API自动执行，UI人工验收，暂不建设新需求UI自动化。P0的API与核心UI自动化继续维护；已有新需求UI专项实现仅保留兼容，Telegram统一API／人工包编排继续使用[日常流程](../docs/telegram-qa.md)。阶段分工见 [测试流程](workflow.md)。
 
 ## 总用例与API数据分开
 
+新接口执行配置按[数据驱动与参数传递](../docs/testing-workflow.md#数据驱动与参数传递)组织。`api/test-cases.json` 定义请求和断言，`plan.json` 声明环境、角色和文件引用，数据可存于同需求的 YAML。每条接口用例一个目标请求和一个业务结果。FAT 只读用例准备好后，按需求号使用[同一个执行入口](../docs/commands.md#fat-只读-api-短命令)。
+
 每个需求的`cases.csv`是总用例表，合并`test-cases.md`中的功能用例及存在时的`api/test-cases.md`中的API用例；功能在前、API在后。新版总表保留状态、负责人和验证方式，便于查看覆盖与登记进度；功能包含原UI及跨API/UI场景。状态来自用例登记，不会把“已实现”或某一接口组合通过自动算成功能通过，实际结果仍须查看对应批次报告。
 
-有自动执行资产时，`api/data-cases.csv`独立保存具体数据组合、请求和断言，供AI核对和执行接口测试；与总表通过稳定用例编号关联，一条总用例可对应多组数据。JSON仍是执行器输入，CSV由它生成，不手工双向维护。旧宽表导出保留原九列CSV及API/UI/FLOW类型；执行报告和人工回填格式不变。没有执行配置的需求不生成API数据表。
+有自动执行资产时，从计划导出 `api/data-cases.csv`，供核对具体数据组合、请求和断言，以及选择执行编号。一条总用例可对应多组数据。执行源为 JSON 计划及其引用的数据，CSV 由执行源生成。旧宽表导出保留原九列 CSV 及 API/UI/FLOW 类型，执行报告和人工回填沿用现有格式。
 
-`npm run qa:cases -- <Story>`更新已具备正式设计的单需求，`npm run qa:cases -- --all`更新当前需求；增加`--include-history`才覆盖历史需求，均不登录。2123／2124已有正式卡片与CSV、XMind，全部为未执行设计用例，且需按[10-28新规则影响](ISOP-2286/design.md#与既有需求的差异)重评；其余12项仅维护评审重点，不补建空CSV。已归档2090可显式指定编号导出总表。上述三单尚无统一API执行源，不生成API数据组合表，也不据此宣称执行就绪。API表包含未具备前提的执行项，不把“有数据表”当作可全量运行；来源和编号规则见[测试流程](../docs/testing-workflow.md#文件与执行入口)。
+`npm run qa:cases -- <Story>`更新已具备正式设计的单需求，`npm run qa:cases -- --all`更新当前需求；增加`--include-history`才覆盖历史需求，均不登录。当前 ISOP-2375 有 API 执行计划，ISOP-2393 的可执行接口资产待接入。准备条件不足的用例可在 API 数据表中登记；执行编号与总表用例编号的规则见[测试流程](../docs/testing-workflow.md#文件与执行入口)。
 
 ## 常规需求目录
 
@@ -97,15 +72,17 @@ requirements/<需求编号>/
 ├── questions.md           # 待确认问题及决定
 ├── test-cases.md          # 供人评审的功能用例，短索引与详情卡片
 ├── cases.csv              # 功能在前/API在后的总表，含登记状态与负责人
-├── plan.json              # 接入统一执行器时的配置，包含人工交付说明
+├── plan.json              # 统一执行入口，声明环境、角色及文件引用
 ├── api/
+│   ├── test-cases.json     # 接口请求、执行步骤与结构化断言
+│   ├── datasets.yaml      # 可选数据组合
 │   ├── contract-review.md # 接口契约对照
 │   ├── test-cases.md      # 有独立API设计时才创建，合并进入总表
 │   └── data-cases.csv     # 实现API执行配置后生成的数据组合表
 └── bug-review.md           # 有实际候选后整理，API与人工UI问题合并评审
 ```
 
-新接入统一执行器以`plan.json`维护执行配置；旧查询执行器的`api/cases.json`入口仍兼容，不要求同一数据维护两遍。需要独立准备清单时再增加`preparation.csv`。候选BUG清单关联本轮结果和证据，确认后补充Jira编号；文件存在不代表已获提交批准，该文件约定也不代表执行器会自动完成BUG评审。
+新接入统一执行器以 `plan.json` 引用 `api/test-cases.json`；旧内联计划和旧查询执行器的 `api/cases.json` 入口仍兼容。需要独立准备清单时再增加`preparation.csv`。候选BUG清单关联本轮结果和证据，确认后补充Jira编号；文件存在不代表已获提交批准，该文件约定也不代表执行器会自动完成BUG评审。
 
 独立执行的新结果和人工回填放在`reports/qa/<需求编号>/<执行批次或交付包>/`，按用途生成`results.csv`/`results.html`、`manual.csv`及必要证据，详见[团队流程](../docs/team-testing.md)。从Telegram任务执行时，原始API结果仍在reports/qa，团队包、人工导入和统一BUG评审位于`reports/telegram/runs/<job>/`，与活动任务绑定。新需求不再建立UI自动化目录；人工UI场景保留在总用例和人工执行清单中。
 

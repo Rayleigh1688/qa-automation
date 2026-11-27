@@ -1,13 +1,18 @@
 import { spawnSync } from 'node:child_process';
+import { existsSync } from 'node:fs';
 import path from 'node:path';
 
 // ASCII JSON avoids Windows console-codepage corruption in non-ASCII install paths.
 const probe = 'import json,sys; print(json.dumps({"executable":sys.executable,"supported":sys.version_info >= (3,10)},ensure_ascii=True))';
 
-export function pythonExecutable(env = process.env) {
+export function pythonExecutable(env = process.env, { preferProjectVenv = false } = {}) {
   const explicit = env.QA_PYTHON_EXECUTABLE;
-  const venvPython = env.VIRTUAL_ENV && path.join(env.VIRTUAL_ENV, process.platform === 'win32' ? 'Scripts/python.exe' : 'bin/python');
-  const source = explicit ? 'QA_PYTHON_EXECUTABLE' : venvPython ? 'VIRTUAL_ENV' : 'system Python';
+  const venvExecutable = process.platform === 'win32' ? 'Scripts/python.exe' : 'bin/python';
+  const projectPython = preferProjectVenv && path.resolve('.venv', venvExecutable);
+  const venvPython = env.VIRTUAL_ENV ? path.join(env.VIRTUAL_ENV, venvExecutable)
+    : projectPython && existsSync(projectPython) ? projectPython : undefined;
+  const source = explicit ? 'QA_PYTHON_EXECUTABLE' : env.VIRTUAL_ENV ? 'VIRTUAL_ENV'
+    : venvPython ? 'project .venv' : 'system Python';
   const candidates = explicit ? [[explicit]] : venvPython ? [[venvPython]] : process.platform === 'win32' ? [['py', '-3'], ['python'], ['python3']] : [['python3'], ['python']];
   const failures = [];
   for (const [command, ...prefix] of candidates) {

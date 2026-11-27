@@ -59,6 +59,7 @@
     "run:local": "node scripts/python-launcher.mjs scripts/run-local.py --",
     "qa:telegram": "node scripts/python-launcher.mjs scripts/run-telegram-qa.py",
     "qa:report": "node scripts/python-launcher.mjs scripts/build-case-report.py",
+    "qa:api": "node scripts/python-launcher.mjs --prefer-project-venv scripts/run-requirement.py --fat-api",
     "qa:requirement": "node scripts/python-launcher.mjs scripts/run-requirement.py",
     "qa:delivery": "node scripts/python-launcher.mjs scripts/prepare-test-delivery.py",
     "qa:cases": "node scripts/python-launcher.mjs scripts/export-requirement-cases.py",

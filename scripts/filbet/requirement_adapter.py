@@ -6,6 +6,8 @@ from qa_core.environment import load_environment, read_values
 from filbet.requirement_session import Session
 
 METHODS = {}  # Populated by explicitly imported, fixed business methods below.
+FAT_CLIENT_URL = 'https://client-fat.filbet2025.com'
+FAT_ADMIN_URL = 'https://admin-fat.filbet2025.com'
 
 
 class Adapter:
@@ -25,8 +27,10 @@ class Adapter:
         methods = {s.get('method') for s in case.get('steps', [])}
         if self.recovery_failed:
             return '本轮权限恢复尚未验证，暂停后续检查；需先核对原配置与账号身份'
-        if self.login_failed_actors and ('kyc_fixture' in methods or any(s.get('actor') in self.login_failed_actors for s in case.get('steps', []))):
-            return '本轮管理员登录前置已失败，暂停依赖检查；不重复尝试登录'
+        failed_actor = any(s.get('actor') in self.login_failed_actors for s in case.get('steps', []))
+        failed_fixture_login = 'kyc_fixture' in methods and self.login_failed_actors & {'A', 'B'}
+        if failed_actor or failed_fixture_login:
+            return '本轮登录前置已失败，暂停依赖检查；不重复尝试登录'
         if self.fixture_preparation_failed and methods & {'kyc_fixture','kyc_reuse_processed_ui'}:
             return '本轮会员注册前置已失败，暂停依赖造数的检查；需定位原始失败后明确续测范围'
         if 'kyc_reuse_processed_ui' in methods and not getattr(self, 'normal_ui_pool', None):
@@ -37,8 +41,23 @@ class Adapter:
         if any(s['action']=='ui' for c in cases for s in c.get('steps',[])):
             from qa_core.ui_contract import load_assets
             self.ui_assets = load_assets(self.plan)
+        steps = [step for case in cases for step in case.get('steps', [])]
+        services = self.plan.get('services', {})
+        client_only = (
+            set(services) == {'client'} and services['client']['env'] == 'API_URL'
+            and all(
+                step['action'] == 'api'
+                and self.plan['actors'][step['actor']].get('session') in {'anonymous', 'client_password'}
+                and not self.plan['contracts'][step['contract']]['write']
+                for step in steps
+            )
+        )
+        if client_only and not self.config.get('API_URL'):
+            self.config['API_URL'] = FAT_CLIENT_URL
         endpoints = (self.config.get('ADMIN_URL'), self.config.get('API_URL'))
-        if endpoints == ('https://admin-fat.filbet2025.com', 'https://client-fat.filbet2025.com'):
+        if endpoints == (FAT_ADMIN_URL, FAT_CLIENT_URL) or (
+            client_only and not endpoints[0] and endpoints[1] == FAT_CLIENT_URL
+        ):
             if Path(self.args.env).name == '.env.uat':
                 raise ValueError('UAT selection cannot use FAT endpoints')
             self.environment = 'FAT'
@@ -73,6 +92,33 @@ class Adapter:
     def session(self, actor):
         if actor in self.login_failed_actors:
             raise RuntimeError('earlier actor login failed; no repeated login attempts')
+        actor_config = self.plan.get('actors', {}).get(actor, {})
+        mode = actor_config.get('session')
+        if mode:
+            if actor not in self.sessions:
+                conf = self.config
+                if actor_config.get('credentials') == 'withdraw_client':
+                    phone = conf.get('WITHDRAW_CLIENT_PHONE')
+                    password = conf.get('WITHDRAW_CLIENT_PASSWORD')
+                    if not phone or not password:
+                        self.login_failed_actors.add(actor)
+                        raise ValueError('withdraw_client requires WITHDRAW_CLIENT_PHONE and WITHDRAW_CLIENT_PASSWORD')
+                    conf = {**conf, 'CLIENT_PHONE': phone, 'CLIENT_PASSWORD': password}
+                session = Session(conf['API_URL'], conf, admin=False,
+                                  timeout=self.args.timeout, insecure=self.args.insecure)
+                if mode == 'client_password':
+                    if self.environment != 'FAT':
+                        raise ValueError('client password session requires FAT')
+                    started = time.monotonic()
+                    try:
+                        session.login_client_password()
+                    except Exception:
+                        self.login_failed_actors.add(actor)
+                        raise
+                    finally:
+                        self.login_ms += round((time.monotonic() - started) * 1000)
+                self.sessions[actor] = session
+            return self.sessions[actor]
         if actor not in self.sessions:
             if actor == 'client': raise ValueError('client fixture not prepared')
             conf = self.reviewer if actor == 'B' else self.config
@@ -121,7 +167,9 @@ class Adapter:
             from filbet.requirement_kyc import png_bytes
             spec = step['upload']
             upload = (png_bytes(spec['size'],spec.get('corrupt',False)), 'qa.png','image/png')
-        response = session.request(route['method'],route['path'],body=step.get('body'),query=step.get('query'),headers=step.get('headers'),encoding=route['encoding'],auth=step.get('auth','valid'),upload=upload)
+        mode = self.plan.get('actors', {}).get(step['actor'], {}).get('session')
+        auth = step.get('auth', 'missing' if mode == 'anonymous' else 'valid')
+        response = session.request(route['method'],route['path'],body=step.get('body'),query=step.get('query'),headers=step.get('headers'),encoding=route['encoding'],auth=auth,upload=upload)
         if route['write']:
             body = response.get('body')
             marker = body.get('data') if isinstance(body,dict) else None

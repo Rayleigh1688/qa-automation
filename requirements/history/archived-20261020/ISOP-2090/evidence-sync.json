@@ -93,7 +93,7 @@
       "locator": "questions.md#history-results-20261022",
       "revision": "10-12原采集；离线复评保留source_time/source_run_id和0新请求",
       "status": "READ",
-      "coverage": "日报结构、实际已测筛选分页、历史行算术、后台页面和H5部分证据；C08/C09/C14/C18明确失败子项整卡FAIL，其他未完成卡不因子项通过升级PASS",
+      "coverage": "2026-10-12日报与页面执行；逐点结果已退出。现行批次独立验证结构、筛选与业务。",
       "checked_at": "2026-10-12",
       "historical_locator": "verification-20261012.md；reports/qa/ISOP-2090/20261012-full/api-readonly-20261012T163441594814/result.json；client-readonly-20261012T165048784316/result.json",
       "artifact_availability": {
@@ -107,7 +107,7 @@
       "locator": "questions.md#history-results-20261022",
       "revision": "2026-10-12只读独立源核验",
       "status": "READ",
-      "coverage": "存量礼金、账变、关联活动流水及10-08普通日源集合、同值保存比较、首组合规目录；不证明本轮05:00自动任务或完整样本矩阵",
+      "coverage": "2026-10-12保存和只读独立源定位；原执行记录已退出，不证明现行任务执行。",
       "checked_at": "2026-10-12",
       "historical_locator": "reports/qa/ISOP-2090/20261012-full/evidence/db-summary.md；db-same-value-save-summary.json；db-first-group-games-summary.json",
       "artifact_availability": {
@@ -121,7 +121,7 @@
       "locator": "questions.md#history-results-20261022",
       "revision": "2026-10-12原校验、独立清理、独立summary marker三批",
       "status": "READ",
-      "coverage": "重复组名接受且精确改变候选，停止后续负例；候选归属及fresh CAS恢复独立记录，C18 FAIL不改；marker动态同步和精确恢复只覆盖C15 API子项，原中断保留",
+      "coverage": "2026-10-12配置定向批和精确恢复；原执行记录已退出，禁止据旧基线续跑。",
       "checked_at": "2026-10-12",
       "historical_locator": "reports/qa/ISOP-2090/20261012-full/config-directed-20261012T170840632233/result.json；config-directed-20261012T171159147797/result.json；config-directed-20261012T171326673083/result.json",
       "artifact_availability": {
@@ -167,7 +167,7 @@
       "locator": "questions.md#history-results-20261022",
       "revision": "2026-10-16定向实测后仍未完成的范围",
       "status": "PENDING",
-      "coverage": "负NL已有部分正负例及失败、真实CSV、10个定向配置检查及当前H5展示/条款折叠/Slot跳转已执行；仍缺新日05:00闭环、完整严格门槛/负NL/上限0/唯一归属/VIP/有效无效与撤销未结算矩阵、H5动态改配/缓存及完整合规/fallback/停用组分支、App/通知、低权限与跨会员隔离、受控异常恢复/回归。最终v2 Slot页Popular排序未独立核验；素材异常归属待确认，不新增正式FAIL",
+      "coverage": "需重新取得05:00独立闭环、完整规则组合、H5动态配置和所有推荐分支、App／通知、权限隔离及受控异常恢复／回归的证据。",
       "checked_at": null,
       "historical_locator": "verification-20261016.md；test-cases.md；execution-order.md",
       "artifact_availability": {
@@ -181,7 +181,7 @@
       "locator": "questions.md#history-results-20261022",
       "revision": "2026-10-16明确FAT并完成定向复测；本地检查450项通过",
       "status": "READ",
-      "coverage": "用户明确FAT先复验旧问题并补测，配置恢复后doctor通过并实际执行；数据库只读及权限不改继续。450项本地检查不等同业务PASS。H5更新、首次页面条款及独立登录条款/隐私/年龄确认均已逐项获准，已完成fresh登录和定向H5展示/交互；先前审批阻塞为历史阶段。用户表示18:50没有已知其他操作，重复入账触发仍未知",
+      "coverage": "用户历史限定FAT，数据库只读、权限不改，并逐项允许当时的H5更新及条款确认；原实际运行明细已退出。",
       "checked_at": "2026-10-16",
       "historical_locator": "verification-20261016.md；本会话2026-10-16用户回复",
       "artifact_availability": {
@@ -209,7 +209,7 @@
       "locator": "questions.md#history-results-20261022",
       "revision": "2026-10-16 18:44新日期批及18:51扩展日期批；客户端18:44批",
       "status": "READ",
-      "coverage": "FAT日报10-12—15共5行/4会员及10-08—15共19行/17会员；两批间2条记录替换，分开保留。负NL已有部分正负例、主明细不符与替换后缺行；旧封顶明细仍错，新10-14封顶前明细恢复但流水仍错。客户端C15/C16仅部分API子项，不升级整卡PASS",
+      "coverage": "2026-10-16日报和会员端定向批；原响应及结果已退出。",
       "checked_at": "2026-10-16",
       "historical_locator": "reports/qa/ISOP-2090/20261016-retest/api-readonly-20261016T184428442856/result.json；reports/qa/ISOP-2090/20261016-retest/api-readonly-20261016T185106953173/result.json；reports/qa/ISOP-2090/20261016-retest/client-readonly-20261016T184458731286/result.json",
       "artifact_availability": {
@@ -223,7 +223,7 @@
       "locator": "questions.md#history-results-20261022",
       "revision": "2026-10-16独立数据库只读核验及替换后追踪",
       "status": "READ",
-      "coverage": "按真实返利ID分别关联源注单、礼金、钱包账变和活动流水；普通同日已结算源集合中JP为0且无奖励类型注单，支持NL算术错误及部分净赢不计奖正例；未遍历所有奖励链。两会员同统计日旧记录替换后再次真实到账95.01和100，合计195.01；触发及完整补偿链未知，不归因已验证自动任务或主动重试，不证明05:00闭环；不拿当前配置替代历史冻结值",
+      "coverage": "2026-10-16同日入账及独立源批次；原逐笔对账已退出，任务触发仍未确定。",
       "checked_at": "2026-10-16",
       "historical_locator": "reports/qa/ISOP-2090/20261016-retest/evidence/db/summary-sanitized.md；reports/qa/ISOP-2090/20261016-retest/evidence/db/reconciliation-summary-sanitized.json；reports/qa/ISOP-2090/20261016-retest/evidence/db/followup-summary-sanitized.json",
       "artifact_availability": {
@@ -237,7 +237,7 @@
       "locator": "questions.md#history-results-20261022",
       "revision": "2026-10-16五个定向批次，10个唯一已选检查",
       "status": "READ",
-      "coverage": "10项7PASS/3FAIL；重复组名、21字符组名及负打码倍数被接受并改变配置，三个失败批次均停依赖检查且精确恢复，后续独立项另批执行，最终完整业务字段与初始基线一致。恢复不关闭FAIL，不据负倍数被接受推断已发生负金额派发；本轮未做summary marker",
+      "coverage": "2026-10-16配置批及历史恢复结案；原执行记录已退出，禁止重放。",
       "checked_at": "2026-10-16",
       "historical_locator": "reports/qa/ISOP-2090/20261016-retest/config-directed-20261016T184547626722/result.json；config-directed-20261016T184619275509/result.json；config-directed-20261016T184701679699/result.json；config-directed-20261016T184859372676/result.json；config-directed-20261016T184945261569/result.json",
       "artifact_availability": {
@@ -251,7 +251,7 @@
       "locator": "questions.md#history-results-20261022",
       "revision": "2026-10-16后台及真实CSV已验；当前H5 c9154c15已登录并定向复测，H5脱敏汇总20:07:35 GMT+8",
       "status": "READ",
-      "coverage": "后台复验旧401.75明细仍150、新161.58明细恢复但100×3却484.75。真实产品CSV为UTF-8 BOM、19行14列，按UID与统计日精确匹配18:51快照，266格含114金额格全一致，仅证明导出，不证明业务金额/05:00；10-15为空日，导出后筛选复核不冒充导出前额外采集。H5三层许可均完成并成功登录，五级VIP比例和五款推荐名称与18:44已采配置/客户端基线一致，本次未同时重读配置；八条T&C及折叠交互已验，旧有效投注额1%与页首净输仍冲突。推荐可见封面均为playstar/crazy 777，仅第一原图落盘确认，未声称五张原图hash相同；素材归属待确认，未启动游戏，不新增正式FAIL。More Games实际落地/s-game-category-v2/gameType/3并显示Slot，旧路径等待超时非产品失败，Popular排序未独立核验。C15/C16仅新增H5子项，App、动态改配/缓存及完整推荐分支未完成",
+      "coverage": "2026-10-16后台导出与H5定向批；原结果已退出，不据此验收当前页面。",
       "checked_at": "2026-10-16",
       "historical_locator": "reports/qa/ISOP-2090/20261016-retest/evidence/ui/；reports/qa/ISOP-2090/20261016-retest/evidence/ui/csv-review.md；reports/qa/ISOP-2090/20261016-retest/evidence/ui/csv-review.json；reports/qa/ISOP-2090/20261016-retest/evidence/ui/csv-filter-followup.json；reports/qa/ISOP-2090/20261016-retest/evidence/ui/h5-review-summary.json",
       "artifact_availability": {
@@ -281,7 +281,7 @@
       "locator": "questions.md#history-results-20261013",
       "revision": "2026-10-13指定统计日2026-10-12的日报API与真实后台明细",
       "status": "READ",
-      "coverage": "合并前日期记录确认统一上限150却实派240／流水480及封顶明细显示实派问题；04:05／11:24仅记录时点，不补齐05:00任务；当天CSV／H5／非法配置缺口不覆盖10-16后续已测范围",
+      "coverage": "2026-10-13对账针对统计日10-12；原执行记录已退出。",
       "checked_at": "2026-10-13",
       "historical_locator": "reports/qa/ISOP-2090/20261013-rebate/"
     },
@@ -290,7 +290,7 @@
       "locator": "questions.md#history-results-20261013",
       "revision": "2026-10-13独立只读注单／礼金／基础Bonus账变／活动流水对账的分支日期记录",
       "status": "READ",
-      "coverage": "多规则应150／300而真实240／480，超发90／流水多180；base/cmpl并行不叠加。整数新样本不关闭旧小数差异，源1999／日报2000及负规则历史资格待核；不降级10-16 C04/C21已定失败，本轮未重新查库",
+      "coverage": "2026-10-13只读财务源定位；逐笔对账已退出，不证明05:00自动派发。",
       "checked_at": "2026-10-13",
       "historical_locator": "reports/qa/ISOP-2090/20261013-rebate/db-reconciliation-summary.md"
     },
@@ -446,7 +446,7 @@
       ],
       "status": "SYNCED",
       "action": "同步10-12真实结构与独立存量对账边界，稳定check_key/覆盖特征/空集NOT_RUN，离线复评保留原时间/批次/失败；当批明细错误归C14，当时未测负NL不映射当批C04失败，10-16新增C04失败见S11",
-      "verification": "10-12相关共享helper及renderer定向fixture已验；当批已测子项与整卡分开，存量不替代新日派发/CSV/App/完整矩阵；10-16真实CSV及新增负NL证据独立记录"
+      "verification": "历史执行明细已退出。来源日期保留，本次未刷新远端或重新执行业务。"
     },
     {
       "id": "S07",
@@ -463,7 +463,7 @@
       ],
       "status": "SYNCED",
       "action": "同步实际ty41保存/CBOR合同、精确候选归属及fresh CAS恢复；重复组名原FAIL保留，清理/marker独立报告，首次异常停止余负例",
-      "verification": "原校验、独立恢复、marker真实证据分别复核；恢复不表示缺陷修复，未执行负例不判拒绝通过；CAS非原子边界保留"
+      "verification": "历史执行明细已退出。来源日期保留，本次未刷新远端或重新执行业务。"
     },
     {
       "id": "S08",
@@ -552,8 +552,8 @@
         "ISOP-2090-C16"
       ],
       "status": "SYNCED",
-      "action": "将10-16实际FAT观察同步到正式23张卡片及生成CSV：C04/C08/C09/C14/C18/C21为FAIL，总计6FAIL、12NOT_RUN、5BLOCKED；负NL错误、流水差异、T&C、历史封顶/新缺行、配置校验和再次入账分别归类，C15/C16现有部分API及S12当前H5子项，整卡仍NOT_RUN",
-      "verification": "两批日报按实际范围及时间分开，DB独立关联源注单与新旧入账。真实CSV19行14列、266格含114金额格与18:51快照一致，仅判导出；10配置7PASS/3FAIL且全部恢复，恢复不关闭FAIL。C21触发未知、Q02仍未答，不冒充受控重试/05:00闭环。H5成功登录后的定向展示/交互见S12，完整卡范围仍未齐；450本地通过不等同业务通过"
+      "action": "保留来源、用例关联和执行规则；历史回归细节已按用户要求退出。",
+      "verification": "历史执行明细已退出。来源日期保留，本次未刷新远端或重新执行业务。"
     },
     {
       "id": "S12",
@@ -569,8 +569,8 @@
         "ISOP-2090-C16"
       ],
       "status": "SYNCED",
-      "action": "同步用户逐项许可后已完成的H5 fresh登录和真实活动页子项：五级VIP比例、八条富文本呈现/折叠、五款第一组推荐名称以及More Games实际v2 Slot跳转；C09旧1%有效投注口径冲突持续，C15/C16整卡仍NOT_RUN",
-      "verification": "比例2.1/4.1/6.1/8.1/10.1及五款名称匹配18:44已采配置/客户端快照，非同时新读后台。八条T&C收起消失、展开恢复，3X匹配已采multiple3，05:00文案不证明派发。封面可见playstar/crazy777与名称不符，仅第一原图下载确认；其他下载超时不算产品失败，未声称五图hash相同，未启动游戏，素材归属待确认不新增正式FAIL。More Games落地/s-game-category-v2/gameType/3且Slot可见，旧路径等待过窄不判失败，Popular排序未验。App、受控动态改配/缓存、合规正反分支/无组fallback/停用组等仍缺；重进活动页不替代动态改配验证"
+      "action": "保留来源、用例关联和执行规则；历史回归细节已按用户要求退出。",
+      "verification": "历史执行明细已退出。来源日期保留，本次未刷新远端或重新执行业务。"
     },
     {
       "id": "S13",
@@ -587,8 +587,8 @@
         "ISOP-2090-C14"
       ],
       "status": "SYNCED",
-      "action": "提取10-13独有历史封顶财务失败、明细复现及负规则／任务来源待核；C03已定子项FAIL同步正式卡片与CSV，不恢复完整历史报告，不覆盖10-16 C04/C21后续失败或其较晚CSV／H5／配置证据",
-      "verification": "比对合并前10-13设计／卡片／原日期摘要与808aa0f归档版；240应统一封顶150、真实礼金／基础账变240、流水480，差额90／180；本轮只合并历史记录未业务重测。旧小数差异不关闭，04:05／11:24与源1999／日报2000保留待核，Q及05:00缺口不提升PASS"
+      "action": "保留来源、用例关联和执行规则；历史回归细节已按用户要求退出。",
+      "verification": "历史执行明细已退出。来源日期保留，本次未刷新远端或重新执行业务。"
     },
     {
       "id": "S14",
@@ -604,13 +604,13 @@
     }
   ],
   "files": {
-    "design.md": "7cc1a54af0b6e0d65c9137d76361d792c3bfb041f65b5ca7d1ae1170424e7432",
-    "questions.md": "a9a37db8e32d7bae512e1dda003bc1b4877bcc9fc588b0598213c7ed509482f5",
-    "test-cases.md": "43d984cbee6421439aef37a34811dbe8ac7584a0aacdceda67a87124415c661a",
+    "design.md": "b40be42ece82851d49161141fa12a3665c4f6623003d725376db3cd61503f396",
+    "questions.md": "f8c7573d6723a3f84441cea25a74b71c8e2221a5e0fa82abe93bd0653cf6e0c7",
+    "test-cases.md": "77809c967cf24b1d1a02e26b8e4e1636c69997a46b91868e14869752b0e9fe7e",
     "cases.csv": "51df5bec7d7dd2f1d19bc4ae941f28472daf91c3631354dc82a65b64501397dd",
-    "evidence-sync.md": "ae9b476d83a3a53526996ecfdfa732a75cd3dfed394129178081e76013a2ee33",
-    "execution-order.md": "39da52094f8d00032ef3800e01a0e9b1e1c14c329ff422099c78889c5742083c",
-    "api/README.md": "675aea16012ae794fc3ab4879dfb7765c90d30b33ecec6d8a09afb8ee2568bb7",
+    "evidence-sync.md": "42baf60cf3e34d56c60f8b385fd6fd1722124889195e2ea13265457d68038f4e",
+    "execution-order.md": "de4d86a257f3423fe5dc0e87b298c35772a992ca1d7dbaa69b5cf5d2a856bd12",
+    "api/README.md": "04714fc4782b9502015b27b6329202b9c9c25f2c3acba6bb315801aee43b6eec",
     "api/initial-read.py": "379f6d0b19888b7c60620f412992561524f32cc16e5e1c4ff93cd3def5e05609",
     "api/run-readonly.py": "c5056b157e5f2b67b450492864f04f0d8b4f9ecf398d4852ea1255bfb52d3ce4",
     "api/run-client-readonly.py": "252ac7aca6de1309cef09827e723c0a6fc2aa01ee86a888e83a24377e79b4e75",
@@ -674,6 +674,54 @@
       "reason": "合并10-13分支独有C03封顶失败及日期边界，并保留较晚归档／历史退出／FAT复测版本；单日与成对日期窗口兼容。",
       "verification": "本轮逐文件复核历史归属、金额与卡片/CSV状态、API说明和CLI/helper/fixture；C03 FAIL，10-16 C04/C21等失败不降级，来源J/JC/CHILD等checked_at保持10-16。仅重绑列出的8项，其他4项hash保持；代码代理19项定向离线检查通过，单单证据检查另记。",
       "boundary": "来源和Q缺口继续PARTIAL，无新远端读取、登录、API/UI/数据库业务请求或清理；不恢复已退出报告。目录外共享模块只有本轮审查hash元数据，需求证据检查不能自动检测其变化，完整本地检查由主代理运行。"
+    },
+    {
+      "file": "design.md",
+      "reviewed_at": "2026-11-27",
+      "reviewer": "Codex",
+      "reason": "按用户要求退出已归档的执行报告和逐点结果",
+      "verification": "对照原文保留来源、规则、用例／接口定义及安全约束，更新受影响文档的绑定。",
+      "boundary": "未刷新远端、未重新执行业务、未改变现有归档用例登记或未读缺口。"
+    },
+    {
+      "file": "questions.md",
+      "reviewed_at": "2026-11-27",
+      "reviewer": "Codex",
+      "reason": "按用户要求退出已归档的执行报告和逐点结果",
+      "verification": "对照原文保留来源、规则、用例／接口定义及安全约束，更新受影响文档的绑定。",
+      "boundary": "未刷新远端、未重新执行业务、未改变现有归档用例登记或未读缺口。"
+    },
+    {
+      "file": "test-cases.md",
+      "reviewed_at": "2026-11-27",
+      "reviewer": "Codex",
+      "reason": "按用户要求退出已归档的执行报告和逐点结果",
+      "verification": "对照原文保留来源、规则、用例／接口定义及安全约束，更新受影响文档的绑定。",
+      "boundary": "未刷新远端、未重新执行业务、未改变现有归档用例登记或未读缺口。"
+    },
+    {
+      "file": "evidence-sync.md",
+      "reviewed_at": "2026-11-27",
+      "reviewer": "Codex",
+      "reason": "按用户要求退出已归档的执行报告和逐点结果",
+      "verification": "对照原文保留来源、规则、用例／接口定义及安全约束，更新受影响文档的绑定。",
+      "boundary": "未刷新远端、未重新执行业务、未改变现有归档用例登记或未读缺口。"
+    },
+    {
+      "file": "execution-order.md",
+      "reviewed_at": "2026-11-27",
+      "reviewer": "Codex",
+      "reason": "按用户要求退出已归档的执行报告和逐点结果",
+      "verification": "对照原文保留来源、规则、用例／接口定义及安全约束，更新受影响文档的绑定。",
+      "boundary": "未刷新远端、未重新执行业务、未改变现有归档用例登记或未读缺口。"
+    },
+    {
+      "file": "api/README.md",
+      "reviewed_at": "2026-11-27",
+      "reviewer": "Codex",
+      "reason": "按用户要求退出已归档的执行报告和逐点结果",
+      "verification": "对照原文保留来源、规则、用例／接口定义及安全约束，更新受影响文档的绑定。",
+      "boundary": "未刷新远端、未重新执行业务、未改变现有归档用例登记或未读缺口。"
     }
   ],
   "local_maintenance": {

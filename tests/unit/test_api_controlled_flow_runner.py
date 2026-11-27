@@ -75,6 +75,69 @@ class DepositChannelTests(unittest.TestCase):
 
 
 class DepositFailFastTests(unittest.TestCase):
+    def test_deposit_flow_waits_for_the_amount_selected_by_the_channel(self):
+        flow = ControlledFlow()
+        argv = ["runner", "--deposit", "--approve-deposit", "--wallet-settlement-interval", "0"]
+        responses = [
+            {"status": 200, "decoded_body": {"status": True, "data": {"balance": "10"}}},
+            {"status": 200, "decoded_body": {"status": True, "data": [
+                {"id": "channel-1", "min_amount": "20", "amount_limit": ["40.25"]},
+            ]}},
+            {"status": 200, "decoded_body": {"status": True, "data": {
+                "order_id": "deposit-1", "external_order_id": "external-1",
+            }}},
+            {"status": 200, "decoded_body": {"status": True, "data": {"d": [{"id": "deposit-1"}]}}},
+            {"status": 200, "decoded_body": {"status": True}},
+            {"status": 200, "decoded_body": {"status": True, "data": {"balance": "10"}}},
+            {"status": 200, "decoded_body": {"status": True, "data": {"balance": "51"}}},
+            {"status": 200, "decoded_body": {"status": True, "data": {"balance": "51"}}},
+        ]
+        with (
+            patch.dict(os.environ, {}, clear=True),
+            patch("sys.argv", argv),
+            patch.object(flow.smoke, "load_env_file"),
+            patch.object(flow.smoke, "request_once", side_effect=responses) as request,
+            patch.object(flow, "client_login", return_value=[]),
+            patch.object(flow, "admin_login", return_value=[]),
+            patch.object(flow, "finish") as finish,
+        ):
+            flow.main()
+
+        self.assertIn("amount=40.25", request.call_args_list[2].args[0]["clean_url"])
+        result = next(record for record in finish.call_args.args[1] if record["name"] == "wallet_after_deposit")
+        self.assertTrue(result["business_status"])
+        self.assertEqual(result["expected_balance_delta"], "40.25")
+        self.assertEqual(result["actual_balance_delta"], "41")
+        self.assertEqual(result["poll_attempts"], 2)
+
+    def test_deposit_with_approval_requires_valid_wallet_baseline_before_writes(self):
+        for http, status, data in (
+            (503, True, {"balance": "10"}),
+            (200, False, {"balance": "10"}),
+            (200, True, {"balance": "NaN"}),
+            (200, True, {}),
+        ):
+            with self.subTest(http=http, status=status, data=data):
+                flow = ControlledFlow()
+                with (
+                    patch.dict(os.environ, {}, clear=True),
+                    patch("sys.argv", ["runner", "--deposit", "--approve-deposit"]),
+                    patch.object(flow.smoke, "load_env_file"),
+                    patch.object(flow.smoke, "request_once", return_value={
+                        "status": http, "decoded_body": {"status": status, "data": data},
+                    }) as request,
+                    patch.object(flow, "client_login", return_value=[]),
+                    patch.object(flow, "admin_login") as admin_login,
+                    patch.object(flow, "finish") as finish,
+                ):
+                    flow.main()
+
+                request.assert_called_once()
+                admin_login.assert_not_called()
+                baseline = finish.call_args.args[1][-1]
+                self.assertEqual(baseline["name"], "wallet_before")
+                self.assertFalse(baseline["business_status"])
+
     def test_wallet_credit_poll_waits_for_expected_deposit_delta(self):
         args = argparse.Namespace(wallet_settlement_attempts=3, wallet_settlement_interval=0)
         before = {"data": {"balance": "10"}}

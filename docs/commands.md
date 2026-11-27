@@ -4,7 +4,7 @@
 
 这里维护公开命令的语义；具体参数由 `package.json` 与脚本定义，环境契约见 [环境手册](../api/runbooks/ENVIRONMENTS.md)。
 
-2026-10-20按用户决定归档ISOP-2090，当前范围以[需求索引](../requirements/README.md#当前需求)及[10-28 W27增量](../requirements/reviews/2026W27-20261028.md)为准。2090的23张正式功能卡、总表和定向API能力保留在[历史目录](../requirements/history/archived-20261020/README.md)，显式编号可查；没有统一执行计划，不接入默认P0或统一需求执行器。[10-16 FAT复测（历史摘要）](../requirements/history/archived-20261020/ISOP-2090/questions.md#history-results-20261022)的失败及完整验收缺口保持，归档不新增业务结论。本文2027／2032命令为历史兼容示例；默认发现范围以[需求索引](../requirements/README.md)为准。
+默认需求发现范围以[需求索引](../requirements/README.md#当前需求)为准。2026-11-27 归档 ISOP-2375 之前的 17 项需求，显式编号仍可查阅。2027／2032 命令为历史兼容示例。2090 的 23 张正式功能卡、总表和定向 API 能力保留在历史目录，未接入默认 P0 或统一需求执行器。 [本批归档](../requirements/history/archived-20261127/README.md) · [2090 归档](../requirements/history/archived-20261020/README.md)
 
 | 命令 | 执行范围 | 业务写入与证据边界 |
 | --- | --- | --- |
@@ -107,11 +107,19 @@ ENV_FILE=.env.fat ENV_FILE_PRECEDENCE=shell EXECUTE_WITHDRAW_UI=true CLIENT_WITH
 
 `npm run qa:xmind -- template --out <新.xmind>`生成向右逻辑图模板；`export --cases <cases.csv> --out <新.xmind>`从已有总表导出，二者可加`--title <标题>`。`import --input <人工.xmind> --out <新目录>`生成九列CSV、JSON定义和来源定位；`fill-results --input <用例.xmind> --results <本批结果.json> --out <新结果.xmind>`按精确编号回填，可加`--cases <本批冻结.csv或.json>`核对。均为离线文件操作，不生成`plan.json`或执行API/UI；写法及边界见[Xmind说明](xmind-test-cases.md)。
 
-2123／2124已交付[后台导图](../requirements/ISOP-2123/ISOP-2123-测试用例.xmind)与[客户端导图](../requirements/ISOP-2124/ISOP-2124-测试用例.xmind)。设计源为各单`test-cases.md`，`qa:cases`生成CSV后导出XMind；全部未执行，来源仍PARTIAL，未接统一执行器。后续版本导出到新文件，人工改图后先导入新目录并复核回写设计源。
+已归档的 2123／2124 保留交付导图。设计源为各单 `test-cases.md`，用 `qa:cases` 显式指定编号生成 CSV 后可导出 XMind。既有用例均未执行，来源仍为 PARTIAL，未接统一执行器。后续版本导出到新文件，人工改图后先导入新目录并复核回写设计源。 [后台导图](../requirements/history/archived-20261127/ISOP-2123/ISOP-2123-测试用例.xmind) · [客户端导图](../requirements/history/archived-20261127/ISOP-2124/ISOP-2124-测试用例.xmind)
 
 ## 新需求统一执行入口（ISOP-2027试点）
 
 `python3 scripts/run-requirement.py ISOP-2027`默认离线校验；`--export-cases`从plan.json生成CSV；`--only <id...>`、`--layer API`选择范围；`--rebuild <run目录>`离线重建到新视图目录。实施与验证见[阶段记录](new-requirement-stage1-2.md)。旧run-requirement-api.py与P0入口保持兼容。
+
+新需求可在 `plan.json` 引用 `api/test-cases.json` 和 YAML 数据集。仍使用 `qa:requirement` 校验或执行，`qa:cases` 导出用例和数据组合。`--expected-plan-sha256` 绑定计划与所引用的接口定义、数据。配置及跨步骤传值见[用例流程](testing-workflow.md#数据驱动与参数传递)。
+
+### FAT 只读 API 短命令
+
+`npm run qa:api -- <Story>` 离线校验。加 `--execute` 在 FAT 运行，加 `--only <执行编号...>` 可选具体用例。短命令预设 `.env.fat`、API 用例范围和原 FAT 的 `--insecure` 参数。目标步骤须为已标记只读的 API，包含写入或其他步骤的用例会在登录前拒绝。受控写、UI、UAT 和离线重建使用完整 `qa:requirement` 入口。
+
+直接调用 Python 时，从仓库根目录运行 `python scripts/run-requirement.py <Story> --fat-api --execute`。两种入口使用同一个执行器和报告路径，具体示例见 [ISOP-2375](../requirements/ISOP-2375/api/README.md)。
 
 `npm run qa:requirement -- ISOP-2027 --env .env.fat --execute --insecure --allow-write kyc-review --allow-write kyc-permissions`按当前策略执行FAT自动分配计划（默认排除人工分配的UI/FLOW；显式选择可运行旧UI脚本），注册/KYC/编辑/复核仅作用于本轮独立会员；权限步骤仅对B独占的当前Codex角色撤权并finally恢复。省略`--execute`不登录；省略所需写范围在前置校验阶段拒绝。BUG和群投递不在此命令中。可加`--version <发布标识>`写入声明版本，默认未提供；`--expected-plan-sha256 <hash>`拒绝计划变化，`--result-index <新文件>`供编排方获取本次完成结果，不读latest挑选证据。
 
@@ -131,7 +139,9 @@ ENV_FILE=.env.fat ENV_FILE_PRECEDENCE=shell EXECUTE_WITHDRAW_UI=true CLIENT_WITH
 
 `qa:requirement`（执行和`--rebuild`）、`qa:delivery prepare/import`默认只导出results.csv/results.html；加`--extra-views`才额外导出cases/failures/pending CSV和summary.json。原始结果、快照、必要证据及团队API/人工表按[有效依赖](architecture.md#常用能力与资料保留)保留；旧qa:report、查询CLI、P0的路径和产物契约不变。缺失原始结果或冻结快照时不能用日期摘要冒充输入重建当前报告。
 
-`check:archive`名称保留，现检查旧扫描目录只留退出索引，不再读取已删除的manifest。当前归档与生成物整理见[2026-10-22记录](project-cleanup-2026-10-22.md)，区分本轮删除和此前已缺失的证据；未增加自动删除运行历史的任务。现有P0清理命令仍只处理原API/UI生成目录，不清理Telegram状态或新需求包。历史需求归档、删除生成物不改变业务状态，也不构成执行旧命令的授权。
+直接用 `qa:api`、`qa:requirement` 或等价 Python 命令实测纯 API 用例且本轮有步骤结果时，先写完本轮结果与报告，再清理同一需求、同一环境下此前已完成的独立纯 API 批次视图，随后更新最近报告入口并打印本轮路径。清理范围为 `results.html`、`results.csv` 及可选的 `cases.csv`、`failures.csv`、`pending.csv` 和 `summary.json`。完整解码响应随本机 HTML 视图展示。各批保留 `result.json` 中的脱敏预览、断言和冻结快照，可用 `qa:requirement -- <Story> --rebuild <批次目录>` 重建历史视图。离线校验、重建、团队交付、带 `--result-index` 的编排执行、其他需求及环境继续沿用各自的入口与保留规则。ISOP-2027 按本页的专项规则保留。 [API 测试报告模板](testing-workflow.md#api-测试报告模板)
+
+`check:archive`名称保留，现检查旧扫描目录只留退出索引，不再读取已删除的manifest。当前归档与生成物整理见[2026-10-22记录](project-cleanup-2026-10-22.md)，区分本轮删除和此前已缺失的证据。现有P0清理命令仍只处理原API/UI生成目录，不清理Telegram状态或新需求包。业务状态和执行授权按原流程维护。
 
 ## 分离总用例与API数据
 
@@ -150,7 +160,7 @@ ENV_FILE=.env.fat ENV_FILE_PRECEDENCE=shell EXECUTE_WITHDRAW_UI=true CLIENT_WITH
 
 `npm run qa -- evidence [ISOP-2090]`只读检查需求证据同步基线，无需凭据、不初始化状态库；省略编号检查当前需求。退出0为登记范围完整、1为文件变化/无效关联、2为未登记/部分来源未核；`--allow-pending`允许明确列出的缺口但不忽略错误。流程及边界见[证据同步计划](../requirements/evidence-sync-plan.md)。
 
-`npm run qa -- status --serve`打开持久保存的本地需求状态页；`npm run qa -- run --execute`只对通过当前配置、授权及计划检查的需求编排接口同步、提测扫描、AI用例草稿和就绪API执行。单独的sync/generate/check/scan与离线模式见[统一命令手册](requirement-workflow-cli.md)。2090已归档且尚无统一执行计划，当前W27按[需求索引](../requirements/README.md#当前需求)及各单设计维护；新增初评目录没有正式执行源，2123／2124旧UID及KYC前提需按[新规则影响](../requirements/ISOP-2286/design.md#与既有需求的差异)重评；归档与暂停检查继续阻止旧需求自动续跑。目录存在不代表已有可执行计划。该自动编排仍限FAT且不建单、不发群；独立旧CLI的UAT能力及已实际使用的定向BUG交付不因此被判为未实现。
+`npm run qa -- status --serve`打开持久保存的本地需求状态页；`npm run qa -- run --execute`只对通过当前配置、授权及计划检查的需求编排接口同步、提测扫描、AI用例草稿和就绪API执行。归档与暂停检查继续阻止旧需求自动续跑；当前需求按各自执行计划或设计维护。自动编排限 FAT，定向 BUG 交付和兼容 UAT 执行沿各自入口。 [统一命令手册](requirement-workflow-cli.md) · [当前需求](../requirements/README.md#当前需求)
 
 ### 2027修正回归范围与报告保留（2026-09-14）
 

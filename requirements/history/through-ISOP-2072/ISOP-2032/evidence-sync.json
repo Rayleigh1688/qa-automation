@@ -91,20 +91,6 @@
       "status": "READ",
       "coverage": "只读配置和活动定位；非完整接口刷新或业务验收",
       "checked_at": "2026-09-16"
-    },
-    {
-      "id": "UI16",
-      "locator": "questions.md#history-results-20261022",
-      "revision": "2026-09-16 FAT后台UI与只读API",
-      "status": "READ",
-      "coverage": "基础/规则/弹窗配置，报表筛选统计分页明细，保存恢复；非全量业务闭环",
-      "checked_at": "2026-09-16",
-      "historical_locator": "../../../../reports/qa/ISOP-2032/backend-20260916/results.html",
-      "artifact_availability": {
-        "verified_at": "2026-10-22",
-        "status": "RETIRED_OR_ALREADY_MISSING",
-        "boundary": "原路径只保留来源追溯；本轮已退出或此前已缺失。READ仍为原日期已读，未重新采集。必要恢复／最小定位资料单独保留不代表原完整报告可读。"
-      }
     }
   ],
   "changes": [
@@ -214,35 +200,16 @@
       "status": "SYNCED",
       "action": "同步用户决定，删除已解决阻塞，读取后台配置作为样本；更新9月15日Q01/Q09缺口",
       "verification": "只读查询成功；随后用户明确0.005不返，已同步C02与API前置；未执行派发或UI，其他舍入/汇总精度仍待确认"
-    },
-    {
-      "id": "S08",
-      "source_ids": [
-        "UI16"
-      ],
-      "case_ids": [
-        "ISOP-2032-C04",
-        "ISOP-2032-C05",
-        "ISOP-2032-C12",
-        "ISOP-2032-C13",
-        "ISOP-2032-C16",
-        "ISOP-2032-C17",
-        "ISOP-2032-C20",
-        "ISOP-2032-C21"
-      ],
-      "status": "SYNCED",
-      "action": "同步实际后台检查和复用会员前置；C12/C13/C16记录失败，其他仅局部验证",
-      "verification": "详见本轮独立报告；原8项查询报告保留，不混算通过率"
     }
   ],
   "files": {
-    "design.md": "b4ebb74409b05fce89b2cfdbf840710eec56d23ba00b92af96958d35bbaf9d12",
-    "questions.md": "98280218cd8646bfa64a80890ae156b6c7cb408788fd8f6f93a7d6976de28944",
-    "test-cases.md": "f8c62ae8379a58253804948903c5fa74833b08ebc61af7a91ff20aa93ce0af67",
+    "design.md": "be4d9809dc39c2355cc76359fcde15e52b741366636949709c68654082ab8369",
+    "questions.md": "21f167da51c845f0154a538099bd23b1fa1b277b000b8623e2657ecff41c3a97",
+    "test-cases.md": "1a8b4a276a1f76d4665c0c88d220e2811cfcf3f14cc7cbf255605512e4dc8a29",
     "cases.csv": "e872ac878eea28775a5124f39d76881584bfdce49d8185288fe6cca60533df7d",
-    "evidence-sync.md": "31af7aec2fec16b14e1495d4d2ceff491ce2e41d184bbab65eaee291568fdae1",
-    "api/contract-review.md": "7e13780996ab101505cb50de8dd315c10d2420de7e3038b2801b5d88b4ad4db6",
-    "api/README.md": "c79938c95d5fb9eec2a26a7824059196830db13b9b4ae72b1aadc630ff68c6a5",
+    "evidence-sync.md": "d22ecccf1bc08d9367cc9d228cc17962be7faca938c5cd58f0c141df9b21afe8",
+    "api/contract-review.md": "a59682ca46cb744907231cd489caf30a500531779d5ae70280af3480511d6b1d",
+    "api/README.md": "044f89411a0c65821335d81f2c72a08d1481656dafd95e1cd69a7a7b189e1c1d",
     "api/cases.json": "0cd5ddf02af5b59fae2f4a1fe7a4a86dd1b3d39901d4b8bb9cee345aa5799e40",
     "api/data-cases.csv": "b86ad5a913d3888db5f03cf758c88f095940f2c19e88e96177740d8d4b8ca622"
   },
@@ -268,10 +235,18 @@
       "reason": "用户授权清除历史API／功能执行结果；复核日期摘要、原件退出声明及内部链接后更新本地文本基线。",
       "verification": "已比对删除清单与保留规则、失败、未完成边界；旧报告链接改至日期摘要，恢复／身份与来源最小资料先校验SHA再迁入忽略目录。未改正式卡片编号、状态、CSV及可执行代码；未刷新来源或执行业务。",
       "boundary": "原reviewed_at、source checked_at/revision/status、PENDING与SYNCED范围保持。READ仅记录历史已读，不证明原件可用、当前部署或新增PASS。"
+    },
+    {
+      "file": "design.md、questions.md、test-cases.md、evidence-sync.md、api/contract-review.md、api/README.md",
+      "reviewed_at": "2026-11-27",
+      "reviewer": "Codex",
+      "reason": "用户授权退出历史执行明细、判定和旧结果入口。",
+      "verification": "逐项对照原文件。原业务规则、用例预期、执行JSON和CSV保持。结果专用来源及同步条目退出。",
+      "boundary": "保留原来源日期、未读范围和PARTIAL。仅核对本地变动。"
     }
   ],
   "artifact_retirement": {
-    "date": "2026-10-22",
+    "date": "2026-11-27",
     "summary": "questions.md#history-results-20261022",
     "raw_evidence_available": false,
     "business_results_changed": false,

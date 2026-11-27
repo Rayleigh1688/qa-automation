@@ -1,0 +1,423 @@
+{
+  "requirement": "ISOP-2375",
+  "purpose": "22 条接口验收用例审阅",
+  "base_url": "https://client-fat.filbet2025.com",
+  "completed_pilot": {
+    "id": "ISOP-2375-BANK-BASE:fat-page-1",
+    "run_id": "20261127T075142Z-7214b6ed",
+    "method": "GET",
+    "path": "/finance/payment/bank/list",
+    "query": {
+      "page": 1,
+      "page_size": 10
+    },
+    "result": "PASS",
+    "scope": "银行列表基础契约，包括成功状态、非空列表、id/code/name 及分页类型。"
+  },
+  "variables": {
+    "staff_empty_values": {
+      "created_name": [
+        null,
+        ""
+      ],
+      "updated_name": [
+        null,
+        ""
+      ],
+      "operator_name": [
+        null,
+        ""
+      ],
+      "created_uid": [
+        null,
+        ""
+      ],
+      "updated_uid": [
+        null,
+        ""
+      ],
+      "operator_uid": [
+        null,
+        ""
+      ]
+    }
+  },
+  "review_notes": [
+    "expect 使用现有执行器的 path、op 和 value。description 是中文说明。",
+    "${data.*} 指向待准备的测试样本。VIP 规则及配置的 UID 零值依据分别见 C23 和 C26。"
+  ],
+  "cases": [
+    {
+      "id": "ISOP-2375-C09",
+      "auth": "anonymous",
+      "method": null,
+      "path": "/promo/list",
+      "query": null,
+      "pending": "确认请求方法、参数、请求体和列表字段路径。",
+      "description": "活动列表返回指定活动，员工字段清理。",
+      "expect": null
+    },
+    {
+      "id": "ISOP-2375-C10",
+      "auth": "anonymous",
+      "method": "GET",
+      "path": "/promo/task/newbie/daily",
+      "query": {},
+      "description": "data.d.id 是指定新人签到任务，员工字段清理。",
+      "expect": [
+        {"path":"http","op":"eq","value":200},
+        {"path":"body.status","op":"eq","value":true},
+        {"path":"body.data.d.id","op":"eq","value":"${data.task_id}"},
+        {"path":"body","op":"fields_absent_or","value":"${staff_empty_values}"}
+      ]
+    },
+    {
+      "id": "ISOP-2375-C11",
+      "auth": "anonymous",
+      "method": "GET",
+      "path": "/promo/task/daily/task",
+      "query": {},
+      "pending": "确认能触发第一处返回分支的任务样本。",
+      "description": "命中第一处分支，data.d.id 是指定日常签到任务，员工字段清理。",
+      "expect": [
+        {"path":"http","op":"eq","value":200},
+        {"path":"body.status","op":"eq","value":true},
+        {"path":"body.data.d.id","op":"eq","value":"${data.task_id}"},
+        {"path":"body","op":"fields_absent_or","value":"${staff_empty_values}"}
+      ]
+    },
+    {
+      "id": "ISOP-2375-C12",
+      "auth": "anonymous",
+      "method": "GET",
+      "path": "/promo/task/daily/task",
+      "query": {},
+      "pending": "确认能触发第二处返回分支的任务样本。",
+      "description": "命中第二处分支，data.d.id 是指定日常签到任务，员工字段清理。",
+      "expect": [
+        {"path":"http","op":"eq","value":200},
+        {"path":"body.status","op":"eq","value":true},
+        {"path":"body.data.d.id","op":"eq","value":"${data.task_id}"},
+        {"path":"body","op":"fields_absent_or","value":"${staff_empty_values}"}
+      ]
+    },
+    {
+      "id": "ISOP-2375-C13",
+      "auth": "anonymous",
+      "method": "GET",
+      "path": "/member/game/list/recommended",
+      "query": {
+        "page": 1,
+        "page_size": 10
+      },
+      "description": "data.d 命中指定 game_id，分页字段 data.t 和 data.s 保留，员工字段清理。",
+      "expect": [
+        {"path":"http","op":"eq","value":200},
+        {"path":"body.status","op":"eq","value":true},
+        {"path":"body.data.d","op":"any_row_matches","value":{"game_id":"${data.game_id}"}},
+        {"path":"body.data.t","op":"type","value":"integer"},
+        {"path":"body.data.s","op":"type","value":"integer"},
+        {"path":"body","op":"fields_absent_or","value":"${staff_empty_values}"}
+      ]
+    },
+    {
+      "id": "ISOP-2375-C14",
+      "auth": "anonymous",
+      "method": "GET",
+      "path": "/member/buriedPoint/detailV2",
+      "query": {
+        "ad_id": "${data.ad_id}"
+      },
+      "description": "CBOR 解码后，data 数组命中指定 ad_id，员工字段清理。",
+      "expect": [
+        {"path":"http","op":"eq","value":200},
+        {"path":"body.status","op":"eq","value":true},
+        {"path":"body.data","op":"any_row_matches","value":{"ad_id":"${data.ad_id}"}},
+        {"path":"body","op":"fields_absent_or","value":"${staff_empty_values}"}
+      ]
+    },
+    {
+      "id": "ISOP-2375-C15",
+      "auth": "anonymous",
+      "method": "GET",
+      "path": "/member/v2/index",
+      "query": null,
+      "brand": "filgame",
+      "base_url": null,
+      "pending": "确认该品牌的实际地址、客户端请求头和路由参数。",
+      "description": "data.list 和 data.nav 命中该品牌的样本，员工字段清理。",
+      "expect": [
+        {"path":"http","op":"eq","value":200},
+        {"path":"body.status","op":"eq","value":true},
+        {"path":"body.data.list","op":"any_row_matches","value":{"game_class":"${data.list_game_class}","en_name":"${data.list_en_name}"}},
+        {"path":"body.data.nav","op":"any_row_matches","value":{"game_class":"${data.nav_game_class}","en_name":"${data.nav_en_name}"}},
+        {"path":"body","op":"fields_absent_or","value":"${staff_empty_values}"}
+      ]
+    },
+    {
+      "id": "ISOP-2375-C16",
+      "auth": "anonymous",
+      "method": "GET",
+      "path": "/member/v2/index",
+      "query": null,
+      "brand": "filslots",
+      "base_url": null,
+      "pending": "确认该品牌的实际地址、客户端请求头和路由参数。",
+      "description": "data.list 和 data.nav 命中该品牌的样本，员工字段清理。",
+      "expect": [
+        {"path":"http","op":"eq","value":200},
+        {"path":"body.status","op":"eq","value":true},
+        {"path":"body.data.list","op":"any_row_matches","value":{"game_class":"${data.list_game_class}","en_name":"${data.list_en_name}"}},
+        {"path":"body.data.nav","op":"any_row_matches","value":{"game_class":"${data.nav_game_class}","en_name":"${data.nav_en_name}"}},
+        {"path":"body","op":"fields_absent_or","value":"${staff_empty_values}"}
+      ]
+    },
+    {
+      "id": "ISOP-2375-C17",
+      "auth": "anonymous",
+      "method": "GET",
+      "path": "/member/v2/index",
+      "query": null,
+      "brand": "filplay",
+      "base_url": null,
+      "pending": "确认该品牌的实际地址、客户端请求头和路由参数。",
+      "description": "data.list 和 data.nav 命中该品牌的样本，员工字段清理。",
+      "expect": [
+        {"path":"http","op":"eq","value":200},
+        {"path":"body.status","op":"eq","value":true},
+        {"path":"body.data.list","op":"any_row_matches","value":{"game_class":"${data.list_game_class}","en_name":"${data.list_en_name}"}},
+        {"path":"body.data.nav","op":"any_row_matches","value":{"game_class":"${data.nav_game_class}","en_name":"${data.nav_en_name}"}},
+        {"path":"body","op":"fields_absent_or","value":"${staff_empty_values}"}
+      ]
+    },
+    {
+      "id": "ISOP-2375-C18",
+      "auth": "anonymous",
+      "method": "GET",
+      "path": "/member/v2/index",
+      "query": null,
+      "brand": "karakrus",
+      "base_url": null,
+      "pending": "确认该品牌的实际地址、客户端请求头和路由参数。",
+      "description": "data.list 和 data.nav 命中该品牌的样本，员工字段清理。",
+      "expect": [
+        {"path":"http","op":"eq","value":200},
+        {"path":"body.status","op":"eq","value":true},
+        {"path":"body.data.list","op":"any_row_matches","value":{"game_class":"${data.list_game_class}","en_name":"${data.list_en_name}"}},
+        {"path":"body.data.nav","op":"any_row_matches","value":{"game_class":"${data.nav_game_class}","en_name":"${data.nav_en_name}"}},
+        {"path":"body","op":"fields_absent_or","value":"${staff_empty_values}"}
+      ]
+    },
+    {
+      "id": "ISOP-2375-C19",
+      "auth": "anonymous",
+      "method": "GET",
+      "path": "/member/game/listRw",
+      "query": {
+        "page": 1,
+        "page_size": 10,
+        "venues": "op",
+        "sort": 4
+      },
+      "description": "data.d 命中场馆的指定 game_id，分页字段 data.t 和 data.s 保留，员工字段清理。",
+      "expect": [
+        {"path":"http","op":"eq","value":200},
+        {"path":"body.status","op":"eq","value":true},
+        {"path":"body.data.d","op":"any_row_matches","value":{"game_id":"${data.game_id}"}},
+        {"path":"body.data.t","op":"type","value":"integer"},
+        {"path":"body.data.s","op":"type","value":"integer"},
+        {"path":"body","op":"fields_absent_or","value":"${staff_empty_values}"}
+      ]
+    },
+    {
+      "id": "ISOP-2375-C20",
+      "auth": "anonymous",
+      "method": "GET",
+      "path": "/promo/turntable/detail",
+      "query": {
+        "pid": "${data.turntable_pid}"
+      },
+      "description": "data 返回该活动的指定奖项，员工字段清理，重点核对 operator_name 和 operator_uid。",
+      "expect": [
+        {"path":"http","op":"eq","value":200},
+        {"path":"body.status","op":"eq","value":true},
+        {"path":"body.data.${data.prize_group}.list","op":"any_row_matches","value":{"id":"${data.prize_id}","goods_name":"${data.prize_name}"}},
+        {"path":"body","op":"fields_absent_or","value":"${staff_empty_values}"}
+      ]
+    },
+    {
+      "id": "ISOP-2375-C21",
+      "auth": "anonymous",
+      "method": "GET",
+      "path": "/promo/task/newbie/list",
+      "query": {},
+      "description": "data.d 命中指定新人任务 id，员工字段清理。",
+      "expect": [
+        {"path":"http","op":"eq","value":200},
+        {"path":"body.status","op":"eq","value":true},
+        {"path":"body.data.d","op":"any_row_matches","value":{"id":"${data.task_id}"}},
+        {"path":"body","op":"fields_absent_or","value":"${staff_empty_values}"}
+      ]
+    },
+    {
+      "id": "ISOP-2375-C22",
+      "auth": "anonymous",
+      "method": "GET",
+      "path": "/promo/task/daily/list",
+      "query": {},
+      "description": "data.d 命中指定日常任务 id，员工字段清理。",
+      "expect": [
+        {"path":"http","op":"eq","value":200},
+        {"path":"body.status","op":"eq","value":true},
+        {"path":"body.data.d","op":"any_row_matches","value":{"id":"${data.task_id}"}},
+        {"path":"body","op":"fields_absent_or","value":"${staff_empty_values}"}
+      ]
+    },
+    {
+      "id": "ISOP-2375-C23",
+      "auth": "anonymous",
+      "method": "GET",
+      "path": "/member/vip/rule",
+      "query": {},
+      "description": "data 返回指定等级的有效 VIP 规则，员工字段清理。按 FAT 实测，updated_uid 的空值包含整数 0。",
+      "expect": [
+        {"path":"http","op":"eq","value":200},
+        {"path":"body.status","op":"eq","value":true},
+        {"path":"body.data.${data.vip_level_name}","op":"any_row_matches","value":{"level":"${data.vip_level}","ty":"${data.vip_rule_type}"}},
+        {"path":"body","op":"fields_absent_or","value":{
+          "created_name":"${staff_empty_values.created_name}",
+          "updated_name":"${staff_empty_values.updated_name}",
+          "operator_name":"${staff_empty_values.operator_name}",
+          "created_uid":"${staff_empty_values.created_uid}",
+          "updated_uid":[null,"",0],
+          "operator_uid":"${staff_empty_values.operator_uid}"
+        }}
+      ]
+    },
+    {
+      "id": "ISOP-2375-C24",
+      "auth": "member",
+      "method": "GET",
+      "path": "/finance/payment/bank/list",
+      "query": {
+        "page": "${data.bank_page}",
+        "page_size": 10
+      },
+      "pending": "确认带后台操作人记录的银行样本及其所在页。",
+      "description": "data.d 命中指定银行 id 和 code，保留 name 及分页字段，员工字段清理。",
+      "expect": [
+        {"path":"http","op":"eq","value":200},
+        {"path":"body.status","op":"eq","value":true},
+        {"path":"body.data.d","op":"any_row_matches","value":{"id":"${data.bank_id}","code":"${data.bank_code}","name":"${data.bank_name}"}},
+        {"path":"body.data.t","op":"type","value":"integer"},
+        {"path":"body.data.s","op":"type","value":"integer"},
+        {"path":"body","op":"fields_absent_or","value":"${staff_empty_values}"}
+      ]
+    },
+    {
+      "id": "ISOP-2375-C25",
+      "auth": "member",
+      "method": "GET",
+      "path": "/member/game/list/recommend",
+      "query": {},
+      "pending": "补齐登录推荐列表中能识别指定游戏的字段，再加入样本命中断言。",
+      "description": "data.d 命中指定推荐游戏，分页字段 data.t 和 data.s 保留，员工字段清理。",
+      "expect": [
+        {"path":"http","op":"eq","value":200},
+        {"path":"body.status","op":"eq","value":true},
+        {"path":"body.data.d","op":"type","value":"array"},
+        {"path":"body.data.d","op":"nonempty"},
+        {"path":"body.data.t","op":"type","value":"integer"},
+        {"path":"body.data.s","op":"type","value":"integer"},
+        {"path":"body","op":"fields_absent_or","value":"${staff_empty_values}"}
+      ]
+    },
+    {
+      "id": "ISOP-2375-C26",
+      "auth": "member",
+      "method": "GET",
+      "path": "/promo/vip/config",
+      "query": {},
+      "description": "data 有指定 VIP 等级的 level 和 ty，员工字段清理。按 VIP 配置接口文档，updated_uid 的空值包含整数 0。",
+      "expect": [
+        {"path":"http","op":"eq","value":200},
+        {"path":"body.status","op":"eq","value":true},
+        {"path":"body.data.${data.vip_level_key}.level","op":"eq","value":"${data.vip_level}"},
+        {"path":"body.data.${data.vip_level_key}.ty","op":"eq","value":"${data.vip_type}"},
+        {"path":"body","op":"fields_absent_or","value":{
+          "created_name":"${staff_empty_values.created_name}",
+          "updated_name":"${staff_empty_values.updated_name}",
+          "operator_name":"${staff_empty_values.operator_name}",
+          "created_uid":"${staff_empty_values.created_uid}",
+          "updated_uid":[null,"",0],
+          "operator_uid":"${staff_empty_values.operator_uid}"
+        }}
+      ]
+    },
+    {
+      "id": "ISOP-2375-C27",
+      "auth": "member",
+      "method": "GET",
+      "path": "/member/message/list",
+      "query": {
+        "page": "${data.message_page}",
+        "page_size": 10
+      },
+      "description": "data.d 命中指定站内信且标题、正文正确，trigger_person 和 maintainer 缺失或为契约空值。",
+      "expect": [
+        {"path":"http","op":"eq","value":200},
+        {"path":"body.status","op":"eq","value":true},
+        {"path":"body.data.d","op":"any_row_matches","value":{"id":"${data.message_id}","title":"${data.message_title}","body_text":"${data.message_body_text}"}},
+        {"path":"body","op":"fields_absent_or","value":{"trigger_person":[null,""],"maintainer":[null,""]}}
+      ]
+    },
+    {
+      "id": "ISOP-2375-C28",
+      "auth": "member",
+      "method": "GET",
+      "path": "/member/message/popup_list",
+      "query": {},
+      "description": "data 命中指定弹窗消息且标题、正文正确，trigger_person 和 maintainer 缺失或为空。",
+      "expect": [
+        {"path":"http","op":"eq","value":200},
+        {"path":"body.status","op":"eq","value":true},
+        {"path":"body.data","op":"any_row_matches","value":{"id":"${data.message_id}","title":"${data.message_title}","body_text":"${data.message_body_text}"}},
+        {"path":"body","op":"fields_absent_or","value":{"trigger_person":[null,""],"maintainer":[null,""]}}
+      ]
+    },
+    {
+      "id": "ISOP-2375-C29",
+      "auth": "member",
+      "method": "GET",
+      "path": "/member/detail",
+      "query": {},
+      "sample": "已设置钱包密码的测试会员。",
+      "description": "data.uid 命中指定会员，data.has_wallet_password 为布尔 true，data.member_extra.wallet_password 缺失或为契约空值。",
+      "expect": [
+        {"path":"http","op":"eq","value":200},
+        {"path":"body.status","op":"eq","value":true},
+        {"path":"body.data.uid","op":"eq","value":"${data.member_uid}"},
+        {"path":"body.data.has_wallet_password","op":"eq","value":true},
+        {"path":"body.data.member_extra","op":"type","value":"object"},
+        {"path":"body.data.member_extra","op":"fields_absent_or","value":{"wallet_password":[null,""]}}
+      ]
+    },
+    {
+      "id": "ISOP-2375-C30",
+      "auth": "member",
+      "method": "GET",
+      "path": "/member/detail",
+      "query": {},
+      "sample": "通过三方登录的测试会员。",
+      "description": "data.uid 命中指定会员，data.oauth_secrets 缺失或为契约空值，data.third_party_ty 和 data.third_party_name 与样本一致。",
+      "expect": [
+        {"path":"http","op":"eq","value":200},
+        {"path":"body.status","op":"eq","value":true},
+        {"path":"body.data.uid","op":"eq","value":"${data.member_uid}"},
+        {"path":"body.data.third_party_ty","op":"eq","value":"${data.third_party_ty}"},
+        {"path":"body.data.third_party_name","op":"eq","value":"${data.third_party_name}"},
+        {"path":"body.data","op":"fields_absent_or","value":{"oauth_secrets":[null,""]}}
+      ]
+    }
+  ]
+}

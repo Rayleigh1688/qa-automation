@@ -1,0 +1,2 @@
+# Optional for plans declaring datasets_file.
+PyYAML==6.0.4

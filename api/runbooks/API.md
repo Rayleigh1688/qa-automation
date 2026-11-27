@@ -152,6 +152,8 @@ python3 scripts/api-controlled-flow-runner.py \
 
 P0 资金主流程阶段 B 调试，只执行客户端登录、充值下单、后台补单和钱包检查：
 
+充值并审批前先取得 HTTP 和业务均成功、余额有效的钱包基线。到账轮询读取本次建单实际选定的金额，覆盖自动选档。精确资金对账使用同一订单的已入账金额与余额差，见[用例流程](../../docs/testing-workflow.md#数据驱动与参数传递)。
+
 ```bash
 CLIENT_PHONE=<client phone> CLIENT_PASSWORD=<client password> \
 ADMIN_EMAIL=<admin email> ADMIN_PASSWORD=<admin password> ADMIN_GOOGLE_CODE=111111 ADMIN_DEVICE_ID=<x-device-id> \

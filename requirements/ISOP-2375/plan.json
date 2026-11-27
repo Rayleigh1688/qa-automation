@@ -1,0 +1,79 @@
+{
+  "schema_version": 2,
+  "requirement": "ISOP-2375",
+  "services": {
+    "client": {
+      "env": "API_URL"
+    }
+  },
+  "actors": {
+    "member": {
+      "services": [
+        "client"
+      ],
+      "session": "client_password"
+    },
+    "guest": {
+      "services": [
+        "client"
+      ],
+      "session": "anonymous"
+    },
+    "wallet_member": {
+      "services": [
+        "client"
+      ],
+      "session": "client_password",
+      "credentials": "withdraw_client"
+    }
+  },
+  "acceptance_ids": [
+    "C10",
+    "C11",
+    "C12",
+    "C13",
+    "C15",
+    "C16",
+    "C17",
+    "C18",
+    "C19",
+    "C21",
+    "C22",
+    "C23",
+    "C24",
+    "C26",
+    "C27",
+    "C28",
+    "C29"
+  ],
+  "datasets_file": "api/datasets.yaml",
+  "variables": {
+    "staff_empty_values": {
+      "created_name": [
+        null,
+        ""
+      ],
+      "updated_name": [
+        null,
+        ""
+      ],
+      "operator_name": [
+        null,
+        ""
+      ],
+      "created_uid": [
+        null,
+        ""
+      ],
+      "updated_uid": [
+        null,
+        ""
+      ],
+      "operator_uid": [
+        null,
+        ""
+      ]
+    }
+  },
+  "cases_file": "api/test-cases.json"
+}

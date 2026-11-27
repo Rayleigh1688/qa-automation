@@ -2,6 +2,7 @@ import csv
 import io
 import json
 from pathlib import Path
+import subprocess
 import sys
 import tempfile
 import unittest
@@ -79,6 +80,101 @@ class CaseReportTests(unittest.TestCase):
             self.assertIn('id="search"', html)
             with (target / 'results.csv').open(encoding='utf-8-sig') as stream:
                 self.assertEqual(next(csv.DictReader(stream))['执行结果'], 'NOT_RUN')
+
+    def test_api_outcome_view_shows_only_actual_pass_and_fail(self):
+        cases = [case(key) for key in ('A', 'B', 'C', 'D', 'E')]
+        report = {'results': [
+            {'id': 'A', 'status': 'PASS', 'actual': '请求符合预期', 'evidence': 'x'},
+            {'id': 'B', 'status': 'FAIL', 'actual': '响应不符合预期', 'evidence': 'x'},
+            {'id': 'C', 'status': 'ERROR', 'actual': '登录失败', 'evidence': 'x'},
+            {'id': 'D', 'status': 'NOT_RUN', 'actual': '样本未准备'},
+        ]}
+        original = json.dumps(report)
+        with tempfile.TemporaryDirectory() as folder:
+            target = Path(folder)
+            summary = write_views(target, cases, report, api_outcomes_only=True)
+            self.assertEqual([summary[s] for s in ('PASS', 'FAIL', 'total', 'executed')], [1, 1, 2, 2])
+            self.assertTrue({'NOT_RUN', 'ERROR'}.isdisjoint(summary))
+            self.assertFalse((target / 'pending.csv').exists())
+            html = (target / 'results.html').read_text()
+            for omitted in ('NOT_RUN', 'ERROR', '前置条件', '登录失败', '样本未准备', 'pending.csv'):
+                self.assertNotIn(omitted, html)
+            with (target / 'results.csv').open(encoding='utf-8-sig') as stream:
+                reader = csv.DictReader(stream)
+                self.assertNotIn('前置条件', reader.fieldnames)
+                self.assertEqual([(r['用例编号'], r['执行结果']) for r in reader], [('A', 'PASS'), ('B', 'FAIL')])
+        self.assertEqual(json.dumps(report), original)
+
+    def test_api_outcome_view_with_no_outcomes_has_empty_report(self):
+        with tempfile.TemporaryDirectory() as folder:
+            target = Path(folder)
+            summary = write_views(target, [case('A')], {'results': []}, extra_views=False, api_outcomes_only=True)
+            self.assertEqual([summary[s] for s in ('PASS', 'FAIL', 'total')], [0, 0, 0])
+            html = (target / 'results.html').read_text()
+            self.assertIn('本批没有可展示的接口判定', html)
+            self.assertNotIn('data-status=', html)
+            with (target / 'results.csv').open(encoding='utf-8-sig') as stream:
+                self.assertEqual(list(csv.DictReader(stream)), [])
+
+    def test_api_report_renders_step_exchange_and_assertion_values(self):
+        step = {
+            'id': 'vip_config', 'status': 'FAIL', 'elapsed_ms': 128,
+            'request': {'method': 'GET', 'path': '/promo/vip/config', 'query': {'page': 1}},
+            'observation': {'http': 200, 'business_status': True},
+            'response': {
+                'body': {'message': 'Success', 'data': {'updated_name': '<script>alert(1)</script>'}},
+                'decode_status': 'decoded', 'truncated': True, 'redacted': True, 'omitted_fields': 12,
+            },
+            'assertions': [
+                {'path': 'http', 'op': 'eq', 'expected': 200, 'actual': 200, 'status': 'PASS'},
+                {'path': 'body', 'op': 'fields_absent_or', 'status': 'FAIL',
+                 'expected': {'updated_uid': [None, '', 0], 'updated_name': []}, 'actual': '<redacted>',
+                 'field_observations': {'updated_uid': {'integer_zero': 31}, 'updated_name': {'nonempty_string': 1}},
+                 'unexpected_fields': ['updated_name']},
+            ],
+        }
+        report = {'requirement': 'ISOP-2375', 'environment': 'FAT', 'run_id': 'fixture',
+                  'source_time': '2026-11-27T09:00:00+00:00',
+                  'results': [{'id': 'A', 'status': 'FAIL', 'actual': '员工名称未清空',
+                               'evidence': 'result.json', 'steps': [step]}]}
+        with tempfile.TemporaryDirectory() as folder:
+            target = Path(folder)
+            (target / 'result.json').write_text(json.dumps(report), encoding='utf-8')
+            write_views(target, [case('A')], report, extra_views=False, api_outcomes_only=True)
+            html = (target / 'results.html').read_text(encoding='utf-8')
+        for token in ('ISOP-2375 API 测试报告', '2026-11-27 17:00:00', '断言对照',
+                      'GET /promo/vip/config', 'HTTP 200', '128 ms', 'Success', '预览已截断',
+                      '样本中省略 12 个其他字段', '整数 0 × 31', '预期字段缺失 · 实际 非空字符串 × 1',
+                      '不符合的字段 updated_name', 'href="result.json"'):
+            self.assertIn(token, html)
+        self.assertLess(html.index('失败字段（完整响应统计）'), html.index('响应预览（已脱敏）'))
+        self.assertIn('&lt;script&gt;alert(1)&lt;/script&gt;', html)
+        self.assertNotIn('<script>alert(1)</script>', html)
+
+    def test_unified_rebuild_projects_api_only_runs_and_preserves_other_views(self):
+        runner = Path(__file__).resolve().parents[2] / 'scripts' / 'run-requirement.py'
+        for other_type, profile, statuses in (
+            ('API', None, ['PASS']), ('FLOW', None, ['PASS', 'NOT_RUN']),
+            ('API', 'regression', ['PASS', 'NOT_RUN']),
+        ):
+            with self.subTest(other_type=other_type, profile=profile), tempfile.TemporaryDirectory() as folder:
+                source = Path(folder) / 'source'
+                source.mkdir()
+                cases = [case('A'), {**case('B'), '类型': other_type}]
+                raw = {'requirement': 'ISOP-9999', 'mode': 'execution', 'profile': profile, 'results': [
+                    {'id': 'A', 'status': 'PASS', 'actual': '通过', 'evidence': 'fake'},
+                    {'id': 'B', 'status': 'NOT_RUN', 'actual': '样本未准备'},
+                ]}
+                raw_text = json.dumps(raw)
+                (source / 'result.json').write_text(raw_text)
+                (source / 'cases.snapshot.json').write_text(json.dumps(cases))
+                finished = subprocess.run([sys.executable, str(runner), 'ISOP-9999', '--rebuild', str(source)],
+                                          check=True, capture_output=True, text=True, timeout=10)
+                target, = source.parent.glob('source-views-*')
+                self.assertIn(str(target / 'results.html'), finished.stdout)
+                with (target / 'results.csv').open(encoding='utf-8-sig') as stream:
+                    self.assertEqual([row['执行结果'] for row in csv.DictReader(stream)], statuses)
+                self.assertEqual((source / 'result.json').read_text(), raw_text)
 
     def test_readonly_reassessment_shows_original_provenance_and_partial_scope(self):
         report = {'results': [{'id': 'A', 'status': 'PASS', 'actual': '已核只读子项', 'evidence': 'x'}],

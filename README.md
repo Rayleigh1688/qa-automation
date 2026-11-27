@@ -96,13 +96,13 @@ npm run test:ui:business -- --env .env.ui-p0.fat --execute --new-kyc-account --b
 | 人工编写Xmind向右逻辑图、导入用例并回填结果 | [Xmind测试用例](docs/xmind-test-cases.md)，`npm run qa:xmind`纯离线处理 |
 | 配置API自动执行、准备人工UI清单及合并结果 | [团队测试](docs/team-testing.md)；[命令范围](docs/commands.md) |
 | 归档输值返利2090测试资料 | [测试顺序](requirements/history/archived-20261020/ISOP-2090/execution-order.md)；[本单验证与边界（历史摘要）](requirements/history/archived-20261020/ISOP-2090/questions.md#history-results-20261022) |
-| FILPLAY用例评审 | [2123后台XMind](requirements/ISOP-2123/ISOP-2123-测试用例.xmind) · [2124客户端XMind](requirements/ISOP-2124/ISOP-2124-测试用例.xmind)；设计源、CSV及待确认项见[需求入口](requirements/README.md#当前需求) |
+| 历史 FILPLAY 用例 | [2123后台XMind](requirements/history/archived-20261127/ISOP-2123/ISOP-2123-测试用例.xmind) · [2124客户端XMind](requirements/history/archived-20261127/ISOP-2124/ISOP-2124-测试用例.xmind)，设计源和 CSV 见[本批归档](requirements/history/archived-20261127/README.md) |
 | 查需求状态、人工修订、归档与自动执行门槛 | [需求工作流](docs/requirement-workflow-cli.md) |
 | 提交BUG、关联负责人、同步提测发布群及回归通知 | [Jira／Telegram交付](docs/telegram-qa.md#bug-delivery) |
 | 独立核对业务源数据 | [数据库只读取数参考](docs/database/README.md) |
 | 快速获取日／周／月范围的毫秒时间戳 | [Time小工具](tools/time/README.md)，`npm run qa:time`或本机`Time`；`npm run qa:time:package`生成Mac分享包 |
 
-功能/API用例卡片与总表导出已有实现；通用新模板仍待用户首稿，JMeter／Postman导出与测试空间简体需求副本尚未落地。2026-10-20按用户决定将[ISOP-2090输值返利](requirements/history/archived-20261020/README.md)归档，当前范围见[需求索引](requirements/README.md)，2026-10-28新增6项Story的初评及旧KYC模型影响见[W27增量](requirements/reviews/2026W27-20261028.md)。2090定向能力及10-16 FAT失败、未完成验收和PARTIAL来源继续保留，未接入默认P0或统一执行计划。旧需求从[历史索引](requirements/history/README.md)查询，归档不代表完成、上线或PASS，也不自动恢复执行。
+功能/API用例卡片与总表导出已有实现。通用新模板仍待用户首稿，JMeter／Postman 导出与测试空间简体需求副本尚待落地。2026-11-27 归档 ISOP-2375 之前的 17 项当前任务，当前入口只保留 ISOP-2375 和 ISOP-2393。历史需求仍可显式查询，原验收和执行边界按日期保留。 [当前需求](requirements/README.md#当前需求) · [历史索引](requirements/history/README.md)
 
 反复使用的执行逻辑维护在共享模块，长期方法和模块规则分别进入`skills/`、`modules/`；低频专项保留Jira／文档定位，按需读取。生成报告、截图和原始抓取按当前工作及恢复依赖及时清理，保留边界见[资产保留规则](docs/architecture.md#常用能力与资料保留)。
 

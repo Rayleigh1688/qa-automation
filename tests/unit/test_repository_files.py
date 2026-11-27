@@ -45,7 +45,7 @@ class FilePolicyTests(unittest.TestCase):
             with self.subTest(path=path):
                 self.assertIsNotNone(forbidden_reason(path))
         good = ['requirements/history/old/plan.json', 'requirements/history/old/cases.csv',
-                'requirements/ISOP-2124/ISOP-2124-测试用例.xmind',
+                'requirements/history/archived-20261127/ISOP-2124/ISOP-2124-测试用例.xmind',
                 'api/inventory/interfaces.csv', 'archive/interface-scans/README.md',
                 'scripts/qa_core/process.py', '.env.example']
         for path in good:
